@@ -1,0 +1,31 @@
+name: daily-content
+on:
+  schedule:
+    - cron: "10 20 * * *" # 07:10 AEST / 08:10 AEDT approx (runs at 20:10 UTC)
+  workflow_dispatch: {}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: Generate posts
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          TIMEZONE: Australia/Melbourne
+          ITEMS_PER_SECTION: "4"
+          MODEL: gpt-4o-mini
+          TEMP: "0.25"
+        run: python -m src.generate_posts
+      - name: Commit outputs
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "content-bot"
+            git config user.email "content-bot@example.com"
+            git add -A
+            git commit -m "auto: signals $(date -u +'%Y-%m-%d')"
+            git push
+          fi
