@@ -1,0 +1,6 @@
+feedparser
+trafilatura
+python-dotenv
+pydantic
+pyyaml
+requests
