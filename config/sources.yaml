@@ -1,0 +1,31 @@
+# You can add/remove sources without touching code.
+sections:
+  Policy Pulse:
+    # RSS feeds first (fast); plain pages will be fetched via HTML
+    rss:
+      - https://www.dcceew.gov.au/news-media/media-releases/rss.xml
+    html:
+      - https://ec.europa.eu/commission/presscorner/home/en
+      - https://www.ifrs.org/news-and-events/news/
+      - https://www.efrag.org/News
+  Strategic Signals:
+    rss: []
+    html:
+      - https://www.aemo.com.au/newsroom
+      - https://arena.gov.au/news/
+      - https://www.cefc.com.au/news-insights/media-releases/
+  KPI Watch:
+    rss: []
+    html:
+      - https://www.ifrs.org/news-and-events/news/
+      - https://www.efrag.org/News
+  Investor Radar:
+    rss: []
+    html:
+      - https://arena.gov.au/funding/   # calls / updates appear here
+      - https://www.cefc.com.au/news-insights/media-releases/
+  Tech Moves:
+    rss: []
+    html:
+      - https://arena.gov.au/news/
+      - https://www.cefc.com.au/news-insights/media-releases/
