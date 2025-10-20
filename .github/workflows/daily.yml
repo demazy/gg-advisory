@@ -1,17 +1,47 @@
 name: daily-content
 on:
   schedule:
-    - cron: "10 20 * * *" # 07:10 AEST / 08:10 AEDT approx (runs at 20:10 UTC)
+    - cron: "10 20 * * *"   # runs 20:10 UTC daily (morning/evening AU time depending on DST)
   workflow_dispatch: {}
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install -r requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Persist the state/seen URLs across runs so we don't repost
+      - name: Restore state cache
+        uses: actions/cache@v4
+        with:
+          path: state
+          key: state-${{ github.ref_name }}
+
+      # Ensure state file exists & is valid JSON (safe no-op if already valid)
+      - name: Prime/validate state
+        run: |
+          mkdir -p state
+          python - <<'PY'
+          import json, pathlib
+          p = pathlib.Path("state/seen_urls.json")
+          try:
+              if not p.exists() or p.stat().st_size == 0:
+                  p.write_text(json.dumps({"seen":[]}, indent=2), encoding="utf-8")
+              else:
+                  json.loads(p.read_text(encoding="utf-8"))
+          except Exception:
+              p.write_text(json.dumps({"seen":[]}, indent=2), encoding="utf-8")
+          PY
+
       - name: Generate posts
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -19,7 +49,10 @@ jobs:
           ITEMS_PER_SECTION: "4"
           MODEL: gpt-4o-mini
           TEMP: "0.25"
+          SLEEP_BETWEEN_SECTIONS: "5.0"   # bump up if you still see 429
+          MAX_TEXT_CHARS: "2000"           # keep payloads lean
         run: python -m src.generate_posts
+
       - name: Commit outputs
         run: |
           if [ -n "$(git status --porcelain)" ]; then
