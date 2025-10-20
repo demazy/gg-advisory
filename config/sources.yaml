@@ -2,7 +2,7 @@ sections:
   Policy Pulse:
     rss:
       # Australian policy and regulator announcements
-      - https://www.dcceew.gov.au/about/news/stay-informed/rss
+      - https://www.dcceew.gov.au/rss-feed
     html:
       # Australian regulators
       - https://www.aemc.gov.au/news-centre
