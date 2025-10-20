@@ -68,6 +68,9 @@ jobs:
           commit_user_email: content-bot@example.com
           branch: ${{ github.ref_name }}
       
+      - name: Set DATE_SLUG
+        run: echo "DATE_SLUG=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
       - name: Email outputs (iCloud)
         if: success()
         uses: dawidd6/action-send-mail@v3
@@ -76,7 +79,7 @@ jobs:
           server_port: 587
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
-          subject: "GG Advisory | Signals — $(date +'%Y-%m-%d')"
+          subject: "GG Advisory | Signals — ${{ env.DATE_SLUG }}"
           from: "content-bot@gg-advisory.org"
           to: "a.demazy_de_fortet@icloud.com"
           body: |
@@ -86,5 +89,5 @@ jobs:
 
             —
             GG Advisory Content Bot
-          attachments: out/signals-*.md
+          attachments: out/signals-${{ env.DATE_SLUG }}.md
 
