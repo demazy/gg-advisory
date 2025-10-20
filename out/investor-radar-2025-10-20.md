@@ -1,2 +1,2 @@
 ### Investor Radar — 2025-10-20
-_Skipped: OpenAI quota exceeded today._
+_No new high-quality items today._
