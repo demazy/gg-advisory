@@ -1,11 +1,14 @@
-import os, json, time, yaml
+import os, json, yaml
 from dotenv import load_dotenv
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Set
 from .fetch import fetch_rss, fetch_html_index, fetch_full_text, Item
 from .summarise import call_openai, SYSTEMS
 from .utils import sha1, normalize_whitespace, today_iso
 
+# --------------------
+# Env & constants
+# --------------------
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 MODEL = os.getenv("MODEL", "gpt-4o-mini")
@@ -19,15 +22,38 @@ CFG = ROOT / "config" / "sources.yaml"
 
 OUTDIR.mkdir(parents=True, exist_ok=True)
 STATE.parent.mkdir(parents=True, exist_ok=True)
-if not STATE.exists():
-    STATE.write_text(json.dumps({"seen": []}, indent=2))
 
-def load_seen() -> set:
-    return set(json.loads(STATE.read_text())["seen"])
+# --------------------
+# State helpers (robust)
+# --------------------
+def load_seen() -> Set[str]:
+    """
+    Be forgiving: if file missing/empty/invalid, return empty set.
+    """
+    try:
+        if not STATE.exists() or STATE.stat().st_size == 0:
+            return set()
+        data = json.loads(STATE.read_text(encoding="utf-8"))
+        seen = data.get("seen", [])
+        if isinstance(seen, list):
+            return set(str(x) for x in seen)
+    except Exception as e:
+        # Log to stderr-like behavior without importing sys; harmless print
+        print(f"[warn] seen_urls.json invalid or unreadable: {e}. Starting fresh.")
+    return set()
 
-def save_seen(seen: set):
-    STATE.write_text(json.dumps({"seen": list(seen)}, indent=2))
+def save_seen(seen: Set[str]) -> None:
+    """
+    Atomic write: prevents truncated files on sudden job cancellation.
+    """
+    tmp = STATE.with_suffix(".tmp")
+    payload = {"seen": sorted(seen)}
+    tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    tmp.replace(STATE)
 
+# --------------------
+# Data collection
+# --------------------
 def collect_items(s: Dict) -> List[Item]:
     rss_urls = s.get("rss", []) or []
     html_urls = s.get("html", []) or []
@@ -40,10 +66,21 @@ def collect_items(s: Dict) -> List[Item]:
     items.sort(key=lambda x: x.published_ts, reverse=True)
     return items
 
+# --------------------
+# Main
+# --------------------
 def main():
-    cfg = yaml.safe_load(CFG.read_text())
+    if not OPENAI_API_KEY:
+        raise RuntimeError(
+            "OPENAI_API_KEY is not set. Provide it via env or .env for summarisation."
+        )
+
+    cfg = yaml.safe_load(CFG.read_text(encoding="utf-8"))
+    if not cfg or "sections" not in cfg or not isinstance(cfg["sections"], dict):
+        raise RuntimeError("Invalid config: expected a top-level 'sections' mapping.")
+
     seen = load_seen()
-    outputs = {}
+    outputs: Dict[str, str] = {}
 
     for section, sources in cfg["sections"].items():
         pool = collect_items(sources)
@@ -54,9 +91,9 @@ def main():
                 continue
             # Try fetch full text (skip if page is trivial)
             txt = fetch_full_text(it.url)
-            it.text = normalize_whitespace(txt)
+            it.text = normalize_whitespace(txt or "")
             # Minimal quality guard
-            if len(it.text) < 400 and len(it.summary) < 120:
+            if len(it.text) < 400 and len((it.summary or "")) < 120:
                 continue
             # Title fallback
             if not it.title:
@@ -71,14 +108,22 @@ def main():
             if len(batch) >= ITEMS_PER_SECTION:
                 break
 
+        date_tag = today_iso()
         if not batch:
-            outputs[section] = f"### {section} — {today_iso()}\n_No new high-quality items today._"
+            outputs[section] = f"### {section} — {date_tag}\n_No new high-quality items today._"
             continue
 
+        # Pick system prompt; fall back to a generic one if missing
+        system_prompt = SYSTEMS.get(section) or (
+            "You are a concise analyst. Summarise items for a professional audience, "
+            "grouping logically, adding brief bullets with links, dates, and sources."
+        )
+
+        # Call OpenAI once per section
         md = call_openai(
             model=MODEL,
             api_key=OPENAI_API_KEY,
-            system=SYSTEMS[section],
+            system=system_prompt,
             user=section,
             items=batch,
             temp=TEMP
@@ -97,10 +142,10 @@ def main():
     for section, md in outputs.items():
         # individual
         p = OUTDIR / f"{section.lower().replace(' ', '-')}-{date_slug}.md"
-        p.write_text(md)
+        p.write_text(md, encoding="utf-8")
         combined.append(f"\n\n## {section}\n\n{md}\n")
 
-    (OUTDIR / f"signals-{date_slug}.md").write_text("\n".join(combined))
+    (OUTDIR / f"signals-{date_slug}.md").write_text("\n".join(combined), encoding="utf-8")
 
 if __name__ == "__main__":
     main()
