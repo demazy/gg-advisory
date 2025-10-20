@@ -3,6 +3,8 @@ on:
   schedule:
     - cron: "10 20 * * *"   # runs 20:10 UTC daily
   workflow_dispatch: {}
+  permissions:
+    contents: write
 
 jobs:
   build:
@@ -53,13 +55,13 @@ jobs:
           MAX_TEXT_CHARS: "1200"          # smaller payload
           FAIL_ON_OPENAI_ERRORS: "false"  # keep workflow green if quota hits
         run: python -m src.generate_posts
+      
+      - name: Commit & push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "auto: signals $(date -u +'%Y-%m-%d')"
+          commit_user_name: content-bot
+          commit_user_email: content-bot@example.com
+          branch: ${{ github.ref_name }}
+      
 
-      - name: Commit outputs
-        run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            git config user.name "content-bot"
-            git config user.email "content-bot@example.com"
-            git add -A
-            git commit -m "auto: signals $(date -u +'%Y-%m-%d')"
-            git push
-          fi
