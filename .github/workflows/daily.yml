@@ -51,10 +51,12 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           TIMEZONE: Australia/Melbourne
           ITEMS_PER_SECTION: "3"          # reduce while testing
+          FRESH_DAYS: "45"           # tighten to 30 if needed
           MODEL: gpt-4o-mini
           TEMP: "0.25"
           SLEEP_BETWEEN_SECTIONS: "8.0"   # more spacing
-          MAX_TEXT_CHARS: "1200"          # smaller payload
+          MIN_TEXT_CHARS: "600"      # raise to 800 if you want denser articles
+          MAX_TEXT_CHARS: "3600"          # smaller payload
           FAIL_ON_OPENAI_ERRORS: "false"  # keep workflow green if quota hits
         run: python -m src.generate_posts
       
