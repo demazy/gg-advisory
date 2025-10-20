@@ -2,8 +2,8 @@
 sections:
   Policy Pulse:
     # RSS feeds first (fast); plain pages will be fetched via HTML
-    rss:
-      - https://www.dcceew.gov.au/news-media/media-releases/rss.xml
+    rss: []
+     # - https://www.dcceew.gov.au/news-media/media-releases/rss.xml
     html:
       - https://ec.europa.eu/commission/presscorner/home/en
       - https://www.ifrs.org/news-and-events/news/
