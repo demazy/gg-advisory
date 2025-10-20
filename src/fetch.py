@@ -78,8 +78,24 @@ SELECTORS = {
 
 def fetch_rss(url: str) -> List[Item]:
     out = []
-    parsed = feedparser.parse(url)
-    for e in parsed.entries:
+    # Fetch via requests to control headers + retry, then parse bytes with feedparser
+    headers = {"User-Agent": "gg-advisory-bot/1.0 (+https://www.gg-advisory.org)"}
+    attempts = 0
+    data = None
+    while attempts < 3:
+        attempts += 1
+        try:
+            resp = requests.get(url, headers=headers, timeout=30)
+            resp.raise_for_status()
+            data = resp.content
+            break
+        except Exception:
+            time.sleep(1.5 * attempts)  # simple backoff
+    if data is None:
+        return out  # return empty list instead of crashing
+
+    parsed = feedparser.parse(data)
+    for e in parsed.entries or []:
         link = e.get("link") or e.get("id")
         if not link:
             continue
@@ -92,6 +108,7 @@ def fetch_rss(url: str) -> List[Item]:
             summary=(e.get("summary") or "").strip()
         ))
     return out
+
 
 def fetch_html_index(url: str) -> List[Item]:
     """Fetch an index/news page and extract likely article links using CSS selectors."""
