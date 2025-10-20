@@ -1,24 +1,24 @@
 # Strategic Signals — 2025-10-20
 
-## Grid Adequacy
-- **Market Signal**: The increasing integration of renewable energy sources is necessitating advancements in grid infrastructure to ensure reliability and stability. 
-- **Source**: [Australian Renewable Energy Agency (ARENA)](https://arena.gov.au/news/)
-- **Insight**: As more intermittent resources like solar and wind come online, grid operators must enhance their capabilities to manage fluctuations in supply and demand effectively.
+## 1. Grid Adequacy
+- **Signal**: The increasing integration of renewable energy sources into the grid is leading to concerns about grid stability and adequacy. As more intermittent resources like wind and solar are deployed, grid operators must enhance their capacity to manage fluctuations.
+- **Source**: [IRENA](https://www.irena.org/news)
 
-## Resource Adequacy
-- **Market Signal**: There is a growing emphasis on resource adequacy, particularly in the context of energy storage solutions such as batteries and pumped hydro.
-- **Source**: [ARENA News](https://arena.gov.au/news)
-- **Insight**: The need for reliable backup resources is critical as the share of renewables increases, ensuring that energy supply meets demand even during low generation periods.
+## 2. Resource Adequacy
+- **Signal**: The demand for critical materials, such as lithium and cobalt, is projected to surge due to the electrification of transport and the expansion of renewable energy technologies. Countries rich in these resources are becoming increasingly geopolitically significant.
+- **Source**: [IRENA](https://www.irena.org/news)
 
-## Project Pipelines
-- **Market Signal**: Significant investments are being made in project pipelines for renewable energy technologies, including solar, wind, and hydrogen projects.
-- **Source**: [ARENA News](https://arena.gov.au/news/page/2/)
-- **Insight**: The expansion of project pipelines indicates a robust commitment to transitioning towards a sustainable energy future, with a focus on scaling up capacity and diversifying energy sources.
+## 3. Project Pipelines
+- **Signal**: There is a robust pipeline of renewable energy projects, particularly in solar and wind sectors, as governments and private sectors ramp up investments to meet climate targets. However, delays in permitting and supply chain issues could hinder progress.
+- **Source**: [IRENA](https://www.irena.org/news)
 
-## Market Risks
-- **Market Signal**: The transition to renewable energy is accompanied by various market risks, including regulatory changes, technological advancements, and financial uncertainties.
-- **Source**: [ARENA News](https://arena.gov.au/news/)
-- **Insight**: Stakeholders must navigate these risks carefully to ensure that investments in renewable energy projects remain viable and attractive, particularly in a rapidly evolving market landscape.
+## 4. Market Risks
+- **Signal**: Geopolitical tensions and trade policies are creating uncertainties in the supply chains for critical materials. This could lead to price volatility and affect the feasibility of renewable energy projects.
+- **Source**: [IRENA](https://www.irena.org/news)
 
-### Summary
-The energy transition landscape is characterized by a pressing need for grid and resource adequacy, a robust project pipeline, and an awareness of market risks. Stakeholders must strategically align their efforts to address these signals to ensure a successful transition to a sustainable energy future.
+## Visual Resources
+- **Geopolitics of Critical Materials**: ![Geopolitics Critical materials](https://www.irena.org/-/media/Images/IRENA/Infographics/2023/Geopolitics-Critical-materials-are-fundamentally-different-from-fossil-fuels.jpg?h=937&w=1667&la=en&hash=6E2FB9DB48FDF3B38A2189261BE73C49)
+- **Key Mining Countries for Select Minerals**: ![Key mining countries](https://www.irena.org/-/media/Images/IRENA/Infographics/2023/Geopolitics-Key-mining-countries-for-select-minerals-2022.jpg?h=937&w=1667&la=en&hash=A89DB280E739E6A73890122488806042)
+- **Energy-Related Technology Applications**: ![Energy related technology](https://www.irena.org/-/media/Images/IRENA/Infographics/2023/Geopolitics-Energy-related-technology-applications-for-selected-critical-materials.jpg?h=937&w=1667&la=en&hash=411574AB0EDDA484C6FD9C15C4D96C00) 
+
+These signals indicate a complex landscape for energy transition strategies, emphasizing the need for careful planning and risk management in the face of evolving market dynamics.

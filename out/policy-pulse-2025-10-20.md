@@ -1,50 +1,63 @@
 # Policy Pulse — 2025-10-20
 
-This edition of Policy Pulse highlights key developments in financial reporting and sustainability initiatives from EFRAG. Stay informed on upcoming consultations and endorsement advice that may impact your business.
+This edition of Policy Pulse highlights key developments in geopolitics affecting trade, supply chains, and mineral value chains. Understanding these dynamics is crucial for businesses and policymakers in the AU/EU context.
 
 ---
 
-## EFRAG Endorsement Status Update
+## Geopolitics: Bilateral Trade Flows for Select Materials
 
-**Summary:**  
-On September 30, 2025, EFRAG released its latest endorsement status report, detailing the ARC's written procedure vote on IFRS 18 regarding presentation and disclosure in financial statements. Additionally, EFRAG has recommended IFRS 19, which pertains to subsidiaries without public accountability, for endorsement in the EU. Stakeholders are invited to comment on the draft endorsement advice for amendments to this standard by November 28, 2025.
+Bilateral trade flows for critical materials in 2022 reveal significant geopolitical trends. Major economies are increasingly reliant on specific countries for essential materials, which can create vulnerabilities in supply chains. The data illustrates how geopolitical tensions can disrupt trade and affect market stability.
 
-*Why it matters:*  
-- Businesses must prepare for compliance with new IFRS standards, impacting financial reporting practices.  
-- Timely engagement in the consultation process can influence the final endorsement decisions.
+*Why it matters:*
+- Businesses must assess supply chain risks linked to geopolitical dependencies.
+- Compliance with emerging trade regulations may require adjustments in sourcing strategies.
 
-*Signals to watch:*  
-- **November 28, 2025:** Deadline for stakeholder comments on draft endorsement advice.  
-- **October 14, 2025:** EFRAG joint webcast meetings discussing financial reporting updates.
+*Signals to watch:*
+- Upcoming trade policy reviews in 2025.
+- Consultations on material sourcing regulations expected in Q1 2026.
 
-*Tags:*  
-#efrag #ifrs #financialreporting #eu #consultation
+*Tags:* geopolitics, trade, supplychains, materials, eu, au
 
-*Sources:*  
-- [EFRAG Endorsement Status Report](https://www.efrag.org/en/financial-reporting/news)  
-- [EFRAG News](https://www.efrag.org/en/news-and-calendar/news)
+*Sources:*
+- [IRENA News](https://www.irena.org/news)
 
 ---
 
-## EFRAG Update Podcast and Community Expansion
+## Geopolitics: Supply Chains and Geopolitical Risks
 
-**Summary:**  
-The latest EFRAG Update podcast for September 2025 is now available, summarizing recent discussions and decisions in sustainability and financial reporting. Notably, four new companies have joined the Friends of EFRAG community, enhancing collaboration in shaping future sustainability and corporate reporting standards. The update also highlights an upcoming EFRAG conference on December 4, 2025, focusing on the simplified draft ESRS.
+The interplay between supply chains and geopolitical risks is increasingly critical for businesses. Disruptions caused by geopolitical tensions can lead to significant delays and increased costs. Companies are urged to diversify their supply sources to mitigate these risks.
 
-*Why it matters:*  
-- Engaging with the EFRAG community can provide insights into upcoming regulatory changes and best practices.  
-- The December conference will be crucial for businesses to understand the implications of the ESRS on reporting requirements.
+*Why it matters:*
+- Businesses face potential operational disruptions due to geopolitical conflicts.
+- Compliance with international trade agreements may necessitate supply chain adjustments.
 
-*Signals to watch:*  
-- **December 4, 2025:** EFRAG Conference on simplified draft ESRS.  
-- **Ongoing:** Registration for workshops on intangibles reporting.
+*Signals to watch:*
+- Key international trade summits scheduled for late 2025.
+- New risk assessment frameworks expected to be released in early 2026.
 
-*Tags:*  
-#efrag #sustainability #podcast #esrs #eu
+*Tags:* geopolitics, supplychains, risks, eu, au
 
-*Sources:*  
-- [EFRAG Update September Edition](https://www.efrag.org/en/news-and-calendar/news/efrag-update-september-edition-now-available)  
-- [EFRAG Community News](https://www.efrag.org/en/news-and-calendar/news)
+*Sources:*
+- [IRENA News](https://www.irena.org/news)
+
+---
+
+## Geopolitics: Mineral and Metal Value Chains
+
+The value chains for minerals and metals are heavily influenced by geopolitical factors. Countries are re-evaluating their dependencies on foreign sources for critical minerals, which could lead to shifts in global supply dynamics and pricing.
+
+*Why it matters:*
+- Businesses must adapt to potential shifts in mineral sourcing and pricing.
+- Compliance with sustainability and sourcing regulations may require strategic pivots.
+
+*Signals to watch:*
+- Legislative changes regarding mineral sourcing expected in mid-2026.
+- Industry consultations on sustainable sourcing practices in early 2026.
+
+*Tags:* geopolitics, minerals, metals, valuechains, eu, au
+
+*Sources:*
+- [IRENA News](https://www.irena.org/news)
 
 ---
 
