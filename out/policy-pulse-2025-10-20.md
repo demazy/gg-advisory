@@ -1,63 +1,66 @@
 # Policy Pulse — 2025-10-20
 
-This edition of Policy Pulse highlights key developments in geopolitics affecting trade, supply chains, and mineral value chains. Understanding these dynamics is crucial for businesses and policymakers in the AU/EU context.
+This edition of Policy Pulse highlights key developments in sustainability and financial reporting from the European Financial Reporting Advisory Group (EFRAG) and the International Forum of Accounting Standard Setters (IFASS). 
 
 ---
 
-## Geopolitics: Bilateral Trade Flows for Select Materials
+## EFRAG Update Podcast Highlights New Initiatives
 
-Bilateral trade flows for critical materials in 2022 reveal significant geopolitical trends. Major economies are increasingly reliant on specific countries for essential materials, which can create vulnerabilities in supply chains. The data illustrates how geopolitical tensions can disrupt trade and affect market stability.
+The latest EFRAG Update podcast features discussions on the EU Voluntary Reporting Template for SMEs, upcoming workshops on intangibles reporting, and a public consultation on amendments to the Reduced Disclosure Standard. Additionally, the sustainability reporting segment covers the release of Exposure Drafts for revised European Sustainability Reporting Standards (ESRS) and educational materials on the VSME market study. The podcast emphasizes the importance of stakeholder engagement in shaping future reporting standards.
 
 *Why it matters:*
-- Businesses must assess supply chain risks linked to geopolitical dependencies.
-- Compliance with emerging trade regulations may require adjustments in sourcing strategies.
+- Businesses must adapt to evolving reporting standards to ensure compliance and maintain investor confidence.
+- Timely participation in consultations can influence the development of standards that affect operational practices.
 
 *Signals to watch:*
-- Upcoming trade policy reviews in 2025.
-- Consultations on material sourcing regulations expected in Q1 2026.
+- Upcoming EFRAG Conference on December 4, 2025.
+- Public consultations on ESRS revisions are ongoing.
 
-*Tags:* geopolitics, trade, supplychains, materials, eu, au
+*Tags:* esrs, efrag, sustainability, reporting, compliance
 
 *Sources:*
-- [IRENA News](https://www.irena.org/news)
+- [EFRAG Update Podcast](https://open.spotify.com/show/1Z2azSsMnoSYJLXlJG4GJz)
+- [EFRAG News](https://www.efrag.org/en/news-and-calendar/news)
 
 ---
 
-## Geopolitics: Supply Chains and Geopolitical Risks
+## IFASS Meetings Foster Global Reporting Dialogue
 
-The interplay between supply chains and geopolitical risks is increasingly critical for businesses. Disruptions caused by geopolitical tensions can lead to significant delays and increased costs. Companies are urged to diversify their supply sources to mitigate these risks.
+The International Forum of Accounting Standard Setters (IFASS) serves as a platform for national accounting standard setters and organizations to discuss financial and sustainability reporting issues. Recent meetings have included participation from the IASB and ISSB, ensuring a collaborative approach to standard-setting. EFRAG's Chiara Del Prete chairs IFASS until March 2025, highlighting the ongoing commitment to enhancing global reporting practices.
 
 *Why it matters:*
-- Businesses face potential operational disruptions due to geopolitical conflicts.
-- Compliance with international trade agreements may necessitate supply chain adjustments.
+- Engaging in IFASS discussions allows businesses to stay informed about international reporting trends and standards.
+- Collaboration among standard setters can lead to more harmonized reporting frameworks, reducing compliance burdens.
 
 *Signals to watch:*
-- Key international trade summits scheduled for late 2025.
-- New risk assessment frameworks expected to be released in early 2026.
+- Next IFASS meeting scheduled for March 2025 in Naples, Italy.
+- Reports from past meetings are available for review.
 
-*Tags:* geopolitics, supplychains, risks, eu, au
+*Tags:* ifass, global, reporting, standards, collaboration
 
 *Sources:*
-- [IRENA News](https://www.irena.org/news)
+- [IFASS Meetings](https://www.efrag.org/en/news-and-calendar/efrag-and-ifass)
+- [EFRAG News](https://www.efrag.org/en/news-and-calendar/news)
 
 ---
 
-## Geopolitics: Mineral and Metal Value Chains
+## EFRAG Meetings Calendar for Stakeholder Engagement
 
-The value chains for minerals and metals are heavily influenced by geopolitical factors. Countries are re-evaluating their dependencies on foreign sources for critical minerals, which could lead to shifts in global supply dynamics and pricing.
+EFRAG has organized a comprehensive meetings calendar that categorizes sessions by governance, financial reporting, and sustainability reporting. This calendar facilitates stakeholder participation in public meetings, allowing access to agendas and recordings. The structured approach enhances transparency and encourages broader engagement in the standard-setting process.
 
 *Why it matters:*
-- Businesses must adapt to potential shifts in mineral sourcing and pricing.
-- Compliance with sustainability and sourcing regulations may require strategic pivots.
+- Businesses can leverage these meetings to gain insights into upcoming regulatory changes and reporting requirements.
+- Active participation in EFRAG meetings can influence the development of standards that directly impact business operations.
 
 *Signals to watch:*
-- Legislative changes regarding mineral sourcing expected in mid-2026.
-- Industry consultations on sustainable sourcing practices in early 2026.
+- Regular updates to the meetings calendar; check for new sessions.
+- Registration links for live webcasts are available for all public meetings.
 
-*Tags:* geopolitics, minerals, metals, valuechains, eu, au
+*Tags:* efrag, meetings, governance, sustainability, reporting
 
 *Sources:*
-- [IRENA News](https://www.irena.org/news)
+- [EFRAG Meetings Calendar](https://www.efrag.org/en/news-and-calendar/meetings-calendar)
+- [EFRAG News](https://www.efrag.org/en/news-and-calendar/news)
 
 ---
 
