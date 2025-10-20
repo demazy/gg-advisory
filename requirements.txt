@@ -4,3 +4,4 @@ python-dotenv
 pydantic
 pyyaml
 requests
+beautifulsoup4
