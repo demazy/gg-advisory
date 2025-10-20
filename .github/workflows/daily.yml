@@ -68,4 +68,23 @@ jobs:
           commit_user_email: content-bot@example.com
           branch: ${{ github.ref_name }}
       
+      - name: Email outputs (iCloud)
+        if: success()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.mail.me.com
+          server_port: 587
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "GG Advisory | Signals — $(date +'%Y-%m-%d')"
+          from: "content-bot@gg-advisory.org"
+          to: "a.demazy_de_fortet@icloud.com"
+          body: |
+            ✅ GG Advisory auto-content run succeeded.
+
+            The combined Markdown report for today is attached.
+
+            —
+            GG Advisory Content Bot
+          attachments: out/signals-*.md
 
