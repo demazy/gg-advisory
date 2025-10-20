@@ -1,7 +1,7 @@
-feedparser
-trafilatura
-python-dotenv
-pydantic
-pyyaml
-requests
-beautifulsoup4
+requests>=2.31
+feedparser>=6.0
+beautifulsoup4>=4.12
+trafilatura>=1.8
+python-dotenv>=1.0
+pydantic>=2.0
+PyYAML>=6.0
