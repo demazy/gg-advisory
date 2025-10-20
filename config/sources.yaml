@@ -1,31 +1,69 @@
-# You can add/remove sources without touching code.
 sections:
   Policy Pulse:
-    # RSS feeds first (fast); plain pages will be fetched via HTML
-    rss: []
-     # - https://www.dcceew.gov.au/news-media/media-releases/rss.xml
+    rss:
+      # Australian policy and regulator announcements
+      - https://www.dcceew.gov.au/about/news/stay-informed/rss
     html:
+      # Australian regulators
+      - https://www.aemc.gov.au/news-centre
+      - https://www.aer.gov.au/news
+      - https://www.cer.gov.au/news-and-media/news
+      # European / International policy and standards
       - https://ec.europa.eu/commission/presscorner/home/en
       - https://www.ifrs.org/news-and-events/news/
-      - https://www.efrag.org/News
+      - https://www.efrag.org/en/news-and-calendar/news
+      - https://www.iea.org/news
+      - https://www.irena.org/news
+
   Strategic Signals:
     rss: []
     html:
+      # Australian system & energy-market signals
       - https://www.aemo.com.au/newsroom
+      - https://www.aemo.com.au/newsroom/media-release
       - https://arena.gov.au/news/
-      - https://www.cefc.com.au/news-insights/media-releases/
+      - https://www.cefc.com.au/media/?type=media+release
+      - https://www.energynetworks.com.au/news/
+      - https://www.infrastructureaustralia.gov.au/news-media
+      # Global transition signals
+      - https://www.iea.org/news
+      - https://www.irena.org/news
+
   KPI Watch:
     rss: []
     html:
+      # Sustainability disclosure frameworks and regulators
+      - https://www.ifrs.org/news-and-events/updates/issb/
       - https://www.ifrs.org/news-and-events/news/
-      - https://www.efrag.org/News
+      - https://www.efrag.org/en/updates
+      - https://www.globalreporting.org/news/
+      - https://www.fsb-tcfd.org/publications/
+      - https://asic.gov.au/about-asic/news-centre/find-a-media-release/
+      - https://www.dcceew.gov.au/about/news
+
   Investor Radar:
     rss: []
     html:
-      - https://arena.gov.au/funding/   # calls / updates appear here
-      - https://www.cefc.com.au/news-insights/media-releases/
+      # Public investment agencies and finance programs
+      - https://arena.gov.au/funding/
+      - https://arena.gov.au/news/
+      - https://www.cefc.com.au/media/?type=media+release
+      - https://www.australianinvestmentcouncil.com.au/news
+      - https://www.cleanenergyfinancecorp.com.au/media/?type=in+the+news
+      # Global/sector investment updates
+      - https://about.bnef.com/blog/
+      - https://www.irena.org/Newsroom/Articles
+
   Tech Moves:
     rss: []
     html:
+      # Australian innovation and R&D
       - https://arena.gov.au/news/
-      - https://www.cefc.com.au/news-insights/media-releases/
+      - https://www.cefc.com.au/media/?type=media+release
+      - https://www.csiro.au/en/news
+      - https://research.csiro.au/energy/news/
+      # Global cleantech developments
+      - https://www.irena.org/news
+      - https://www.hydrogeneurope.eu/news/
+      - https://www.energy-storage.news/category/news/
+
