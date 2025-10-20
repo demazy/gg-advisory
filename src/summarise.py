@@ -26,61 +26,16 @@ Add a 2-line intro and a closing CTA: "Have a policy, ESG, or transition questio
   "Tech Moves": """Create **Tech Moves — %s**. For each item: Headline; 100–140-word summary; *TRL & readiness* — 1–2 bullets; *Commercial path* — 1–2 bullets; Tags; Sources."""
 }
 
-def _post_with_retry(url: str, json_payload: dict, headers: dict, *, max_retries: int = 6, base_delay: float = 2.0):
+
+def _post_with_retry(url: str, json_payload: dict, headers: dict, *, max_retries: int = 6, base_delay: float = 2.0) -> requests.Response:
+    """Retry on 429/5xx with exponential backoff+jitter. Returns the final Response."""
     delay = base_delay
     last_exc = None
-    for _ in range(max_retries):
+    last_resp: requests.Response | None = None
+    for attempt in range(1, max_retries + 1):
         try:
             resp = requests.post(url, json=json_payload, headers=headers, timeout=90)
+            last_resp = resp
             if resp.status_code == 429:
                 ra = resp.headers.get("Retry-After")
-                sleep_s = float(ra) if ra else delay + random.uniform(0, 0.7)
-                time.sleep(sleep_s)
-                delay = min(delay * 2, 30)
-                continue
-            if 500 <= resp.status_code < 600:
-                time.sleep(delay + random.uniform(0, 0.7))
-                delay = min(delay * 2, 30)
-                continue
-            resp.raise_for_status()
-            return resp.json()
-        except requests.RequestException as e:
-            last_exc = e
-            time.sleep(delay + random.uniform(0, 0.7))
-            delay = min(delay * 2, 30)
-    if last_exc:
-        raise last_exc
-    raise RuntimeError("OpenAI API failed without a requests exception.")
 
-def call_openai(model: str, api_key: str, system: str, user: str, items: List[Dict], temp: float) -> str:
-    # Compact item block to save tokens
-    blocks = []
-    for i, it in enumerate(items, 1):
-        snippet = (it.get("text") or it.get("summary") or "")
-        snippet = textwrap.shorten(snippet, width=1600, placeholder=" …")
-        blocks.append(f"""[{i}]
-TITLE: {it.get('title','').strip() or '(no title)'}
-URL: {it['url']}
-SOURCE: {it['source']}
-TEXT_SNIPPET:
-{snippet}
-""")
-    content = "\n\n".join(blocks)
-
-    org = os.getenv("OPENAI_ORG") or os.getenv("OPENAI_ORGANIZATION")
-    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
-    if org:
-        headers["OpenAI-Organization"] = org
-
-    payload = {
-        "model": model,
-        "temperature": temp,
-        "messages": [
-            {"role": "system", "content": system},
-            {"role": "user", "content": USERS[user] % today_iso()},
-            {"role": "user", "content": f"Items:\n{content}"},
-        ],
-    }
-
-    data = _post_with_retry("https://api.openai.com/v1/chat/completions", payload, headers)
-    return data["choices"][0]["message"]["content"]
