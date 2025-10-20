@@ -26,6 +26,8 @@ Add a 2-line intro and a closing CTA: "Have a policy, ESG, or transition questio
   "Tech Moves": """Create **Tech Moves — %s**. For each item: Headline; 100–140-word summary; *TRL & readiness* — 1–2 bullets; *Commercial path* — 1–2 bullets; Tags; Sources."""
 }
 
+class QuotaExceeded(Exception):
+  """Raised when OpenAI returns a 429 quota-exceeded message."""
 
 def _post_with_retry(url: str, json_payload: dict, headers: dict, *, max_retries: int = 6, base_delay: float = 2.0) -> requests.Response:
     """Retry on 429/5xx with exponential backoff+jitter. Returns the final Response."""
@@ -37,6 +39,10 @@ def _post_with_retry(url: str, json_payload: dict, headers: dict, *, max_retries
             resp = requests.post(url, json=json_payload, headers=headers, timeout=90)
             last_resp = resp
             if resp.status_code == 429:
+                # If it's a pure quota error, no point retrying forever — let caller decide.
+                txt = (resp.text or "").lower()
+                if "exceeded your current quota" in txt:
+                    raise QuotaExceeded("OpenAI quota exceeded")
                 ra = resp.headers.get("Retry-After")
                 sleep_s = float(ra) if ra else delay + random.uniform(0, 0.7)
                 time.sleep(sleep_s)
@@ -48,6 +54,8 @@ def _post_with_retry(url: str, json_payload: dict, headers: dict, *, max_retries
                 continue
             resp.raise_for_status()
             return resp
+        except QuotaExceeded:
+            raise
         except requests.RequestException as e:
             last_exc = e
             time.sleep(delay + random.uniform(0, 0.7))
@@ -68,12 +76,13 @@ def _post_with_retry(url: str, json_payload: dict, headers: dict, *, max_retries
 
     raise RuntimeError("OpenAI API exhausted retries without response/exception.")
 
-
 def call_openai(model: str, api_key: str, system: str, user: str, items: List[Dict], temp: float) -> str:
+    # Compact item block to save tokens
+    import textwrap as _tw
     blocks = []
     for i, it in enumerate(items, 1):
         snippet = (it.get("text") or it.get("summary") or "")
-        snippet = textwrap.shorten(snippet, width=1600, placeholder=" …")
+        snippet = _tw.shorten(snippet, width=1600, placeholder=" …")
         blocks.append(f"""[{i}]
 TITLE: {it.get('title','').strip() or '(no title)'}
 URL: {it['url']}
@@ -98,7 +107,8 @@ TEXT_SNIPPET:
         ],
     }
 
-    for jtry in range(2):
+    # Retry wrapper with JSON decode resilience
+    for _ in range(2):
         resp = _post_with_retry("https://api.openai.com/v1/chat/completions", payload, headers)
         try:
             data = resp.json()
