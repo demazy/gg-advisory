@@ -87,14 +87,20 @@ def main():
             h = sha1(it.url)
             if h in seen:
                 continue
+
             txt = fetch_full_text(it.url)
             it.text = normalize_whitespace(txt or "")
             if len(it.text) > MAX_TEXT_CHARS:
                 it.text = it.text[:MAX_TEXT_CHARS]
+
+            # Minimal quality guard
             if len(it.text) < 400 and len((it.summary or "")) < 120:
                 continue
+
+            # Title fallback
             if not it.title:
                 it.title = it.url.split("/")[-1].replace("-", " ")[:100]
+
             batch.append({
                 "title": it.title,
                 "url": it.url,
@@ -125,14 +131,16 @@ def main():
         )
         outputs[section] = md
 
+        # mark seen
         for b in batch:
             seen.add(sha1(b["url"]))
 
-        # Throttle to avoid 429 if multiple sections
+        # Throttle to avoid OpenAI 429s when multiple sections
         time.sleep(SLEEP_BETWEEN_SECTIONS)
 
     save_seen(seen)
 
+    # write one file per section and a combined digest
     date_slug = today_iso()
     combined = [f"# Signals — {date_slug}\n"]
     for section, md in outputs.items():
