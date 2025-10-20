@@ -1,22 +1,22 @@
 # Policy Pulse — 2025-10-20
 
-This edition of Policy Pulse highlights key developments in sustainability and financial reporting from the European Financial Reporting Advisory Group (EFRAG) and the International Forum of Accounting Standard Setters (IFASS). 
+This edition of Policy Pulse highlights recent developments in financial and sustainability reporting, including new initiatives and upcoming events from EFRAG and IFASS.
 
 ---
 
-## EFRAG Update Podcast Highlights New Initiatives
+## EFRAG Update Podcast Highlights New Reporting Initiatives
 
-The latest EFRAG Update podcast features discussions on the EU Voluntary Reporting Template for SMEs, upcoming workshops on intangibles reporting, and a public consultation on amendments to the Reduced Disclosure Standard. Additionally, the sustainability reporting segment covers the release of Exposure Drafts for revised European Sustainability Reporting Standards (ESRS) and educational materials on the VSME market study. The podcast emphasizes the importance of stakeholder engagement in shaping future reporting standards.
+The latest EFRAG Update podcast discusses significant developments in financial and sustainability reporting. Key topics include the launch of the EU Voluntary Reporting Template for SMEs and Start-Ups, a public consultation on the Draft Endorsement Advice for Amendments to the Reduced Disclosure Standard, and the release of Exposure Drafts for revised European Sustainability Reporting Standards (ESRS). Additionally, the podcast announces an upcoming EFRAG Conference on December 4, 2025, to celebrate the simplified draft ESRS.
 
 *Why it matters:*
-- Businesses must adapt to evolving reporting standards to ensure compliance and maintain investor confidence.
-- Timely participation in consultations can influence the development of standards that affect operational practices.
+- Businesses must stay informed to ensure compliance with evolving reporting standards.
+- The new ESRS could impact how SMEs and Start-Ups report sustainability metrics.
 
 *Signals to watch:*
-- Upcoming EFRAG Conference on December 4, 2025.
-- Public consultations on ESRS revisions are ongoing.
+- EFRAG Conference on December 4, 2025.
+- Public consultation deadlines for the Draft Endorsement Advice.
 
-*Tags:* esrs, efrag, sustainability, reporting, compliance
+*Tags:* esrs, efrag, sustainability, reporting, compliance, eu
 
 *Sources:*
 - [EFRAG Update Podcast](https://open.spotify.com/show/1Z2azSsMnoSYJLXlJG4GJz)
@@ -24,19 +24,19 @@ The latest EFRAG Update podcast features discussions on the EU Voluntary Reporti
 
 ---
 
-## IFASS Meetings Foster Global Reporting Dialogue
+## IFASS Meetings Foster Global Reporting Standards Discussion
 
-The International Forum of Accounting Standard Setters (IFASS) serves as a platform for national accounting standard setters and organizations to discuss financial and sustainability reporting issues. Recent meetings have included participation from the IASB and ISSB, ensuring a collaborative approach to standard-setting. EFRAG's Chiara Del Prete chairs IFASS until March 2025, highlighting the ongoing commitment to enhancing global reporting practices.
+The International Forum of Accounting Standard Setters (IFASS) serves as a platform for national accounting standard setters and organizations to discuss developments in corporate reporting. The forum includes participation from the IASB and ISSB, ensuring a collaborative approach to financial and sustainability reporting issues. EFRAG's Chiara Del Prete chairs IFASS until March 2025, facilitating discussions on current challenges and advancements in reporting standards.
 
 *Why it matters:*
-- Engaging in IFASS discussions allows businesses to stay informed about international reporting trends and standards.
-- Collaboration among standard setters can lead to more harmonized reporting frameworks, reducing compliance burdens.
+- Engagement in IFASS meetings can influence future accounting standards and practices.
+- Businesses should monitor discussions to align their reporting strategies with global standards.
 
 *Signals to watch:*
 - Next IFASS meeting scheduled for March 2025 in Naples, Italy.
-- Reports from past meetings are available for review.
+- Reports from past meetings available for insights into ongoing discussions.
 
-*Tags:* ifass, global, reporting, standards, collaboration
+*Tags:* ifass, accounting, standards, global, reporting, compliance
 
 *Sources:*
 - [IFASS Meetings](https://www.efrag.org/en/news-and-calendar/efrag-and-ifass)
@@ -44,19 +44,19 @@ The International Forum of Accounting Standard Setters (IFASS) serves as a platf
 
 ---
 
-## EFRAG Meetings Calendar for Stakeholder Engagement
+## EFRAG Meetings Calendar: Upcoming Events and Webcasts
 
-EFRAG has organized a comprehensive meetings calendar that categorizes sessions by governance, financial reporting, and sustainability reporting. This calendar facilitates stakeholder participation in public meetings, allowing access to agendas and recordings. The structured approach enhances transparency and encourages broader engagement in the standard-setting process.
+The EFRAG Meetings Calendar provides a comprehensive overview of upcoming meetings related to governance, financial reporting, and sustainability reporting. Meetings are color-coded for easy identification, and public meetings are accessible via live webcasts. This transparency allows stakeholders to stay informed about discussions that may impact reporting standards and practices.
 
 *Why it matters:*
-- Businesses can leverage these meetings to gain insights into upcoming regulatory changes and reporting requirements.
-- Active participation in EFRAG meetings can influence the development of standards that directly impact business operations.
+- Regular participation in EFRAG meetings can enhance understanding of evolving reporting requirements.
+- Businesses can leverage insights from meetings to improve their compliance strategies.
 
 *Signals to watch:*
-- Regular updates to the meetings calendar; check for new sessions.
-- Registration links for live webcasts are available for all public meetings.
+- Access to live webcasts and recordings of public meetings.
+- Ongoing updates to the calendar as new meetings are scheduled.
 
-*Tags:* efrag, meetings, governance, sustainability, reporting
+*Tags:* efrag, meetings, calendar, governance, reporting, compliance
 
 *Sources:*
 - [EFRAG Meetings Calendar](https://www.efrag.org/en/news-and-calendar/meetings-calendar)
