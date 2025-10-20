@@ -46,11 +46,12 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           TIMEZONE: Australia/Melbourne
-          ITEMS_PER_SECTION: "4"      # tune to 2–3 if you still hit 429s
+          ITEMS_PER_SECTION: "3"          # reduce while testing
           MODEL: gpt-4o-mini
           TEMP: "0.25"
-          SLEEP_BETWEEN_SECTIONS: "5.0"  # increase to 8–10 if rate-limiting persists
-          MAX_TEXT_CHARS: "2000"         # reduce to 1200 to cut tokens
+          SLEEP_BETWEEN_SECTIONS: "8.0"   # more spacing
+          MAX_TEXT_CHARS: "1200"          # smaller payload
+          FAIL_ON_OPENAI_ERRORS: "false"  # keep workflow green if quota hits
         run: python -m src.generate_posts
 
       - name: Commit outputs
