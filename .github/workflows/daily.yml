@@ -1,10 +1,12 @@
 name: daily-content
+
 on:
   schedule:
-    - cron: "10 20 * * *"   # runs 20:10 UTC daily
+    - cron: "10 20 * * *"
   workflow_dispatch: {}
-  permissions:
-    contents: write
+
+permissions:
+  contents: write
 
 jobs:
   build:
