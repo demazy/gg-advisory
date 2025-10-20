@@ -1,11 +1,12 @@
-# src/fetch.py
 import time
 import logging
+import re
 from dataclasses import dataclass
 from typing import List, Optional
 import requests
 import feedparser
-from bs4 import BeautifulSoup  # fallback HTML parser
+from bs4 import BeautifulSoup
+import trafilatura
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
@@ -16,18 +17,14 @@ BACKOFF = 1.6  # seconds multiplier
 
 @dataclass
 class Item:
-    url: str
     title: str
-    summary: str
-    text: str
+    url: str
     source: str
-    published_ts: float  # epoch seconds
+    published_ts: float
+    summary: str
+    text: str = ""
 
 def _fetch_bytes(url: str, timeout: int = DEFAULT_TIMEOUT) -> Optional[bytes]:
-    """
-    GET with retries/backoff. Returns bytes or None.
-    Never raises to callers.
-    """
     delay = 1.0
     for attempt in range(1, MAX_RETRIES + 1):
         try:
@@ -43,11 +40,13 @@ def _fetch_bytes(url: str, timeout: int = DEFAULT_TIMEOUT) -> Optional[bytes]:
             delay *= BACKOFF
     return None
 
+def _ts_or_now(entry) -> float:
+    try:
+        return time.mktime(getattr(entry, "published_parsed", None) or getattr(entry, "updated_parsed"))
+    except Exception:
+        return time.time()
+
 def fetch_rss(url: str) -> List[Item]:
-    """
-    Fetch and parse an RSS/Atom feed into Items.
-    Returns [] on any error.
-    """
     data = _fetch_bytes(url)
     if not data:
         return []
@@ -58,21 +57,12 @@ def fetch_rss(url: str) -> List[Item]:
             link = getattr(e, "link", None) or getattr(e, "id", None)
             if not link:
                 continue
-            title = getattr(e, "title", "") or ""
-            summary = getattr(e, "summary", "") or ""
-            # published_parsed may be None; default to 0 for sorting
-            ts = 0.0
-            pp = getattr(e, "published_parsed", None) or getattr(e, "updated_parsed", None)
-            if pp:
-                # time.mktime handles struct_time
-                ts = time.mktime(pp)
             out.append(Item(
+                title=(getattr(e, "title", "") or "").strip(),
                 url=link,
-                title=title,
-                summary=summary,
-                text="",
                 source=url,
-                published_ts=ts
+                published_ts=_ts_or_now(e),
+                summary=(getattr(e, "summary", "") or "").strip()
             ))
         return out
     except Exception as e:
@@ -80,58 +70,47 @@ def fetch_rss(url: str) -> List[Item]:
         return []
 
 def fetch_html_index(url: str) -> List[Item]:
-    """
-    Fetch an HTML listing page and extract article links/titles.
-    Keep this conservative — return [] if we can't confidently parse.
-    """
     data = _fetch_bytes(url)
     if not data:
         return []
     try:
-        soup = BeautifulSoup(data, "html.parser")
-        # naive: collect <a> tags that look like articles
+        html = data.decode("utf-8", errors="ignore")
+        links = re.findall(r'href="([^"]+)"', html)
         items: List[Item] = []
-        for a in soup.find_all("a", href=True):
-            href = a["href"]
+        for href in links[:150]:
             if href.startswith("#") or href.startswith("javascript:"):
                 continue
-            # build absolute URL if necessary
             if href.startswith("/"):
                 from urllib.parse import urljoin
                 href = urljoin(url, href)
-            title = (a.get_text() or "").strip()
-            if not title:
-                continue
-            items.append(Item(
-                url=href,
-                title=title[:140],
-                summary="",
-                text="",
-                source=url,
-                published_ts=0.0
-            ))
-        return items
+            if re.search(r"(news|press|media|article|release)", href, re.I):
+                items.append(Item(title="", url=href, source=url, published_ts=time.time(), summary=""))
+        uniq = {it.url: it for it in items}
+        return list(uniq.values())
     except Exception as e:
         logging.warning(f"[html-index] parse failed for {url}: {e}")
         return []
 
-def fetch_full_text(url: str) -> str:
-    """
-    Fetch article page and extract readable text.
-    Returns '' on error.
-    """
-    data = _fetch_bytes(url)
+def fetch_full_text(u: str) -> str:
+    """Try trafilatura first; fall back to BeautifulSoup text."""
+    try:
+        downloaded = trafilatura.fetch_url(u, no_ssl=True)
+        if downloaded:
+            text = trafilatura.extract(downloaded, include_formatting=False, include_links=False) or ""
+            if text:
+                return " ".join(text.split())
+    except Exception:
+        pass
+    # fallback
+    data = _fetch_bytes(u)
     if not data:
         return ""
     try:
         soup = BeautifulSoup(data, "html.parser")
-        # Prefer article/main; fallback to body text
         container = soup.find("article") or soup.find("main") or soup.body or soup
-        # Strip script/style/nav
-        for tag in container.find_all(["script", "style", "nav", "footer", "header", "noscript"]):
-            tag.decompose()
-        text = " ".join(container.get_text(separator=" ").split())
-        return text
-    except Exception as e:
-        logging.warning(f"[full-text] extract failed for {url}: {e}")
+        for t in container.find_all(["script", "style", "nav", "footer", "header", "noscript"]):
+            t.decompose()
+        return " ".join(container.get_text(separator=" ").split())
+    except Exception:
         return ""
+
