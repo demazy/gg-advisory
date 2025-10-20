@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from pathlib import Path
 from typing import List, Dict, Set
 from .fetch import fetch_rss, fetch_html_index, fetch_full_text, Item
-from .summarise import call_openai, SYSTEMS
+from .summarise import call_openai, SYSTEMS, QuotaExceeded
 from .utils import sha1, normalize_whitespace, today_iso
 
 # --------------------
@@ -16,6 +16,7 @@ TEMP = float(os.getenv("TEMP", "0.25"))
 ITEMS_PER_SECTION = int(os.getenv("ITEMS_PER_SECTION", "4"))
 SLEEP_BETWEEN_SECTIONS = float(os.getenv("SLEEP_BETWEEN_SECTIONS", "3.0"))
 MAX_TEXT_CHARS = int(os.getenv("MAX_TEXT_CHARS", "2500"))
+FAIL_ON_OPENAI_ERRORS = os.getenv("FAIL_ON_OPENAI_ERRORS", "false").lower() == "true"
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE = ROOT / "state" / "seen_urls.json"
@@ -79,6 +80,7 @@ def main():
 
     seen = load_seen()
     outputs: Dict[str, str] = {}
+    wrote_any_section = False
 
     for section, sources in cfg["sections"].items():
         pool = collect_items(sources)
@@ -93,11 +95,9 @@ def main():
             if len(it.text) > MAX_TEXT_CHARS:
                 it.text = it.text[:MAX_TEXT_CHARS]
 
-            # Minimal quality guard
             if len(it.text) < 400 and len((it.summary or "")) < 120:
                 continue
 
-            # Title fallback
             if not it.title:
                 it.title = it.url.split("/")[-1].replace("-", " ")[:100]
 
@@ -121,26 +121,36 @@ def main():
             "grouping logically, adding brief bullets with links, dates, and sources."
         )
 
-        md = call_openai(
-            model=MODEL,
-            api_key=OPENAI_API_KEY,
-            system=system_prompt,
-            user=section,
-            items=batch,
-            temp=TEMP
-        )
-        outputs[section] = md
+        try:
+            md = call_openai(
+                model=MODEL,
+                api_key=OPENAI_API_KEY,
+                system=system_prompt,
+                user=section,
+                items=batch,
+                temp=TEMP
+            )
+            outputs[section] = md
+            wrote_any_section = True
 
-        # mark seen
-        for b in batch:
-            seen.add(sha1(b["url"]))
+            for b in batch:
+                seen.add(sha1(b["url"]))
 
-        # Throttle to avoid OpenAI 429s when multiple sections
+        except QuotaExceeded:
+            outputs[section] = f"### {section} — {date_tag}\n_Skipped: OpenAI quota exceeded today._"
+            print("[warn] Skipped section due to OpenAI quota.")
+            if FAIL_ON_OPENAI_ERRORS:
+                raise
+        except Exception as e:
+            outputs[section] = f"### {section} — {date_tag}\n_Skipped due to error: {e}_"
+            print(f"[warn] Skipped section due to error: {e}")
+            if FAIL_ON_OPENAI_ERRORS:
+                raise
+
         time.sleep(SLEEP_BETWEEN_SECTIONS)
 
     save_seen(seen)
 
-    # write one file per section and a combined digest
     date_slug = today_iso()
     combined = [f"# Signals — {date_slug}\n"]
     for section, md in outputs.items():
