@@ -1,7 +1,7 @@
 name: daily-content
 on:
   schedule:
-    - cron: "10 20 * * *"   # runs 20:10 UTC daily (morning/evening AU time depending on DST)
+    - cron: "10 20 * * *"   # runs 20:10 UTC daily
   workflow_dispatch: {}
 
 jobs:
@@ -46,11 +46,11 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           TIMEZONE: Australia/Melbourne
-          ITEMS_PER_SECTION: "4"
+          ITEMS_PER_SECTION: "4"      # tune to 2–3 if you still hit 429s
           MODEL: gpt-4o-mini
           TEMP: "0.25"
-          SLEEP_BETWEEN_SECTIONS: "5.0"   # bump up if you still see 429
-          MAX_TEXT_CHARS: "2000"           # keep payloads lean
+          SLEEP_BETWEEN_SECTIONS: "5.0"  # increase to 8–10 if rate-limiting persists
+          MAX_TEXT_CHARS: "2000"         # reduce to 1200 to cut tokens
         run: python -m src.generate_posts
 
       - name: Commit outputs
