@@ -1,19 +1,8 @@
-import time
-import logging
-import re
+import time, feedparser, trafilatura, requests, re, urllib.parse
 from dataclasses import dataclass
 from typing import List, Optional
-import requests
-import feedparser
 from bs4 import BeautifulSoup
-import trafilatura
-
-logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
-
-UA = "gg-advisory-bot/1.0 (+https://www.gg-advisory.org)"
-DEFAULT_TIMEOUT = 20
-MAX_RETRIES = 4
-BACKOFF = 1.6  # seconds multiplier
+from dateutil import parser as dateparse
 
 @dataclass
 class Item:
@@ -24,93 +13,151 @@ class Item:
     summary: str
     text: str = ""
 
-def _fetch_bytes(url: str, timeout: int = DEFAULT_TIMEOUT) -> Optional[bytes]:
-    delay = 1.0
-    for attempt in range(1, MAX_RETRIES + 1):
-        try:
-            resp = requests.get(url, headers={"User-Agent": UA}, timeout=timeout)
-            resp.raise_for_status()
-            return resp.content
-        except Exception as e:
-            if attempt == MAX_RETRIES:
-                logging.warning(f"[fetch] giving up on {url}: {e}")
-                return None
-            logging.warning(f"[fetch] attempt {attempt} failed for {url}: {e} — retrying in {delay:.1f}s")
-            time.sleep(delay)
-            delay *= BACKOFF
-    return None
-
 def _ts_or_now(entry) -> float:
     try:
-        return time.mktime(getattr(entry, "published_parsed", None) or getattr(entry, "updated_parsed"))
+        return time.mktime(entry.published_parsed)
     except Exception:
         return time.time()
 
-def fetch_rss(url: str) -> List[Item]:
-    data = _fetch_bytes(url)
-    if not data:
-        return []
+def _normalize_url(u: str) -> str:
+    """Remove utm_* and fragments for clean dedupe + canonical comparison."""
     try:
-        parsed = feedparser.parse(data)
-        out: List[Item] = []
-        for e in parsed.entries:
-            link = getattr(e, "link", None) or getattr(e, "id", None)
-            if not link:
-                continue
-            out.append(Item(
-                title=(getattr(e, "title", "") or "").strip(),
-                url=link,
-                source=url,
-                published_ts=_ts_or_now(e),
-                summary=(getattr(e, "summary", "") or "").strip()
-            ))
-        return out
-    except Exception as e:
-        logging.warning(f"[rss] parse failed for {url}: {e}")
-        return []
+        p = urllib.parse.urlparse(u)
+        q = urllib.parse.parse_qsl(p.query, keep_blank_values=True)
+        q = [(k, v) for (k, v) in q if not k.lower().startswith("utm_")]
+        new_q = urllib.parse.urlencode(q)
+        p = p._replace(query=new_q, fragment="")
+        return urllib.parse.urlunparse(p)
+    except Exception:
+        return u
+
+def _guess_published_ts(soup: BeautifulSoup) -> Optional[float]:
+    """Try to find a publish date in common meta/time locations."""
+    for sel, attr in [
+        ("meta[property='article:published_time']", "content"),
+        ("meta[name='pubdate']", "content"),
+        ("meta[name='date']", "content"),
+        ("time[datetime]", "datetime"),
+        ("meta[itemprop='datePublished']", "content"),
+    ]:
+        tag = soup.select_one(sel)
+        if tag and tag.get(attr):
+            try:
+                dt = dateparse.parse(tag.get(attr))
+                return dt.timestamp()
+            except Exception:
+                pass
+    for t in soup.find_all("time"):
+        try:
+            dt = dateparse.parse(t.get_text(strip=True))
+            return dt.timestamp()
+        except Exception:
+            continue
+    return None
+
+# Domain-specific CSS selectors to capture real article links
+SELECTORS = {
+    "ec.europa.eu": "a[href*='/presscorner/']",
+    "ifrs.org": "a[href*='/news-and-events/news/']",
+    "efrag.org": "a[href*='/news']",
+    "aemo.com.au": ".newsroom a, a[href*='/newsroom/']",
+    "arena.gov.au": "a.card, a[href*='/news/'], a[href*='/funding/']",
+    "cefc.com.au": "a[href*='/media/'], a[href*='news']",
+    "dcceew.gov.au": "a[href*='/news-media/'], a[href*='/news/']",
+    "aemc.gov.au": "a[href*='/news-centre/'], a[href*='/news/']",
+    "aer.gov.au": "a[href*='/news']",
+    "cer.gov.au": "a[href*='/news-and-media/news']",
+    "energynetworks.com.au": "a[href*='/news/']",
+    "infrastructureaustralia.gov.au": "a[href*='/news-media/']",
+    "csiro.au": "a[href*='/news']",
+    "irena.org": "a[href*='/news'], a[href*='/Newsroom/Articles']",
+    "fsb-tcfd.org": "a[href*='/publications']",
+    "globalreporting.org": "a[href*='/news/']",
+    "asic.gov.au": "a[href*='/news-centre']",
+}
+
+def fetch_rss(url: str) -> List[Item]:
+    out = []
+    parsed = feedparser.parse(url)
+    for e in parsed.entries:
+        link = e.get("link") or e.get("id")
+        if not link:
+            continue
+        link = _normalize_url(link)
+        out.append(Item(
+            title=(e.get("title") or "").strip(),
+            url=link,
+            source=url,
+            published_ts=_ts_or_now(e),
+            summary=(e.get("summary") or "").strip()
+        ))
+    return out
 
 def fetch_html_index(url: str) -> List[Item]:
-    data = _fetch_bytes(url)
-    if not data:
-        return []
+    """Fetch an index/news page and extract likely article links using CSS selectors."""
     try:
-        html = data.decode("utf-8", errors="ignore")
-        links = re.findall(r'href="([^"]+)"', html)
-        items: List[Item] = []
-        for href in links[:150]:
-            if href.startswith("#") or href.startswith("javascript:"):
-                continue
-            if href.startswith("/"):
-                from urllib.parse import urljoin
-                href = urljoin(url, href)
-            if re.search(r"(news|press|media|article|release)", href, re.I):
-                items.append(Item(title="", url=href, source=url, published_ts=time.time(), summary=""))
-        uniq = {it.url: it for it in items}
-        return list(uniq.values())
-    except Exception as e:
-        logging.warning(f"[html-index] parse failed for {url}: {e}")
+        r = requests.get(url, timeout=30, allow_redirects=True)
+        r.raise_for_status()
+    except Exception:
         return []
+    soup = BeautifulSoup(r.text, "html.parser")
+
+    domain = urllib.parse.urlparse(url).netloc.lower()
+    sel = SELECTORS.get(domain, "article a, .news a, a[href*='news'], a[href*='press']")
+
+    candidates = []
+    for a in soup.select(sel):
+        href = a.get("href")
+        if not href:
+            continue
+        if href.startswith("/"):
+            base = f"{urllib.parse.urlparse(url).scheme}://{domain}"
+            href = urllib.parse.urljoin(base, href)
+        href = _normalize_url(href)
+
+        # Skip obvious listing/category pages
+        if re.search(r"(category|tags|/newsroom$|/news$|/media$|/press$)", href, re.I):
+            continue
+
+        title = (a.get_text(" ", strip=True) or "").strip()
+        candidates.append((title, href))
+
+    uniq = {}
+    for title, href in candidates:
+        if href not in uniq:
+            uniq[href] = title
+
+    items = []
+    for href, title in list(uniq.items())[:60]:
+        try:
+            ar = requests.get(href, timeout=30, allow_redirects=True)
+            ar.raise_for_status()
+        except Exception:
+            continue
+        asoup = BeautifulSoup(ar.text, "html.parser")
+        ts = _guess_published_ts(asoup) or time.time()
+        if not title:
+            page_t = asoup.title.string if asoup.title else ""
+            title = (page_t or href.split("/")[-1].replace("-", " "))[:140]
+
+        items.append(Item(
+            title=title.strip(),
+            url=href,
+            source=url,
+            published_ts=ts,
+            summary=""
+        ))
+    items.sort(key=lambda x: x.published_ts, reverse=True)
+    return items
 
 def fetch_full_text(u: str) -> str:
-    """Try trafilatura first; fall back to BeautifulSoup text."""
     try:
         downloaded = trafilatura.fetch_url(u, no_ssl=True)
-        if downloaded:
-            text = trafilatura.extract(downloaded, include_formatting=False, include_links=False) or ""
-            if text:
-                return " ".join(text.split())
-    except Exception:
-        pass
-    # fallback
-    data = _fetch_bytes(u)
-    if not data:
-        return ""
-    try:
-        soup = BeautifulSoup(data, "html.parser")
-        container = soup.find("article") or soup.find("main") or soup.body or soup
-        for t in container.find_all(["script", "style", "nav", "footer", "header", "noscript"]):
-            t.decompose()
-        return " ".join(container.get_text(separator=" ").split())
+        if not downloaded:
+            return ""
+        text = trafilatura.extract(downloaded, include_formatting=False, include_links=False) or ""
+        return text.strip()
     except Exception:
         return ""
+
 
