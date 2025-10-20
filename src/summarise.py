@@ -38,4 +38,73 @@ def _post_with_retry(url: str, json_payload: dict, headers: dict, *, max_retries
             last_resp = resp
             if resp.status_code == 429:
                 ra = resp.headers.get("Retry-After")
+                sleep_s = float(ra) if ra else delay + random.uniform(0, 0.7)
+                time.sleep(sleep_s)
+                delay = min(delay * 2, 30)
+                continue
+            if 500 <= resp.status_code < 600:
+                time.sleep(delay + random.uniform(0, 0.7))
+                delay = min(delay * 2, 30)
+                continue
+            resp.raise_for_status()
+            return resp
+        except requests.RequestException as e:
+            last_exc = e
+            time.sleep(delay + random.uniform(0, 0.7))
+            delay = min(delay * 2, 30)
 
+    if last_resp is not None:
+        body = ""
+        try:
+            body = (last_resp.text or "")[:180]
+        except Exception:
+            body = ""
+        msg = f"OpenAI API exhausted retries (status {last_resp.status_code}). Body: {body}"
+        http_err = requests.HTTPError(msg, response=last_resp)
+        raise http_err
+
+    if last_exc:
+        raise last_exc
+
+    raise RuntimeError("OpenAI API exhausted retries without response/exception.")
+
+
+def call_openai(model: str, api_key: str, system: str, user: str, items: List[Dict], temp: float) -> str:
+    blocks = []
+    for i, it in enumerate(items, 1):
+        snippet = (it.get("text") or it.get("summary") or "")
+        snippet = textwrap.shorten(snippet, width=1600, placeholder=" …")
+        blocks.append(f"""[{i}]
+TITLE: {it.get('title','').strip() or '(no title)'}
+URL: {it['url']}
+SOURCE: {it['source']}
+TEXT_SNIPPET:
+{snippet}
+""")
+    content = "\n\n".join(blocks)
+
+    org = os.getenv("OPENAI_ORG") or os.getenv("OPENAI_ORGANIZATION")
+    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+    if org:
+        headers["OpenAI-Organization"] = org
+
+    payload = {
+        "model": model,
+        "temperature": temp,
+        "messages": [
+            {"role": "system", "content": system},
+            {"role": "user", "content": USERS[user] % today_iso()},
+            {"role": "user", "content": f"Items:\n{content}"},
+        ],
+    }
+
+    for jtry in range(2):
+        resp = _post_with_retry("https://api.openai.com/v1/chat/completions", payload, headers)
+        try:
+            data = resp.json()
+            return data["choices"][0]["message"]["content"]
+        except ValueError:
+            time.sleep(1.5 + random.uniform(0, 0.5))
+
+    data = resp.json()
+    return data["choices"][0]["message"]["content"]
