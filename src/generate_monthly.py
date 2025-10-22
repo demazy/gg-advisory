@@ -1,129 +1,158 @@
-import os, json, yaml
-from dotenv import load_dotenv
+import os, json, yaml, re, calendar
 from pathlib import Path
-from typing import List, Dict
+from dotenv import load_dotenv
 from datetime import datetime, timezone
+from typing import Dict, List, Tuple
 
 from .fetch import fetch_rss, fetch_html_index, fetch_full_text, Item
-from .summarise import call_openai, SYSTEMS
-from .utils import sha1, normalize_whitespace, today_iso
+from .summarise import build_digest
+from .utils import sha1, normalize_whitespace
 
 load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 MODEL = os.getenv("MODEL", "gpt-4o-mini")
-TEMP = float(os.getenv("TEMP", "0.25"))
+TEMP = float(os.getenv("TEMP", "0.2"))
+MIN_TEXT_CHARS = int(os.getenv("MIN_TEXT_CHARS", "700"))
 ITEMS_PER_SECTION = int(os.getenv("ITEMS_PER_SECTION", "4"))
-FRESH_DAYS = int(os.getenv("FRESH_DAYS", "45"))
-MIN_TEXT_CHARS = int(os.getenv("MIN_TEXT_CHARS", "600"))
 
 ROOT = Path(__file__).resolve().parents[1]
-STATE = ROOT / "state" / "seen_urls.json"
 OUTDIR = ROOT / "out"
 CFG = ROOT / "config" / "sources.yaml"
+FILTERS = ROOT / "config" / "filters.yaml"
 
 OUTDIR.mkdir(parents=True, exist_ok=True)
-STATE.parent.mkdir(parents=True, exist_ok=True)
-if not STATE.exists():
-    STATE.write_text(json.dumps({"seen": []}, indent=2))
 
-def load_seen() -> set:
-    return set(json.loads(STATE.read_text())["seen"])
+def _month_bounds(y: int, m: int) -> Tuple[datetime, datetime]:
+    start = datetime(y, m, 1, tzinfo=timezone.utc)
+    last = calendar.monthrange(y, m)[1]
+    end = datetime(y, m, last, 23, 59, 59, tzinfo=timezone.utc)
+    return start, end
 
-def save_seen(seen: set):
-    STATE.write_text(json.dumps({"seen": list(seen)}, indent=2))
+def _in_range(ts: float, start: datetime, end: datetime) -> bool:
+    if not ts:
+        return False
+    t = datetime.fromtimestamp(ts, tz=timezone.utc)
+    return start <= t <= end
 
 def collect_items(s: Dict) -> List[Item]:
     rss_urls = s.get("rss", []) or []
     html_urls = s.get("html", []) or []
     items: List[Item] = []
     for r in rss_urls:
-        print(f"[fetch] RSS: {r}")
         items.extend(fetch_rss(r))
     for h in html_urls:
-        print(f"[fetch] HTML index: {h}")
         items.extend(fetch_html_index(h))
     items.sort(key=lambda x: x.published_ts, reverse=True)
     return items
 
-def main():
-    if not OPENAI_API_KEY:
-        raise RuntimeError("OPENAI_API_KEY not set")
+def fmt_iso(ts: float) -> str:
+    try:
+        return datetime.fromtimestamp(ts, tz=timezone.utc).date().isoformat()
+    except Exception:
+        return ""
 
+def _load_filters() -> Dict:
+    filters = {"allow_domains": [], "deny_domains": [], "title_deny_regex": []}
+    if FILTERS.exists():
+        filters = yaml.safe_load(FILTERS.read_text()) or filters
+    filters["title_deny_regex"] = [re.compile(p) for p in filters.get("title_deny_regex", [])]
+    return filters
+
+def _passes_filters(it: Item, filters: Dict) -> bool:
+    from urllib.parse import urlparse
+    dom = urlparse(it.url).netloc.lower()
+    allow = set(filters.get("allow_domains", []))
+    deny = set(filters.get("deny_domains", []))
+    deny_title = filters.get("title_deny_regex", [])
+    if allow and not any(dom.endswith(d) for d in allow):
+        return False
+    if any(dom.endswith(d) for d in deny):
+        return False
+    title = (it.title or "")
+    if any(rx.search(title) for rx in deny_title):
+        return False
+    return True
+
+def _generate_for_range(start: datetime, end: datetime, items_per_section: int) -> str:
     cfg = yaml.safe_load(CFG.read_text())
-    seen = load_seen()
-    outputs = {}
+    filters = _load_filters()
 
-    now_ts = datetime.now(timezone.utc).timestamp()
-    fresh_cutoff = now_ts - FRESH_DAYS * 86400
+    chosen: List[Dict] = []
+    seen_urls: set = set()
 
     for section, sources in cfg["sections"].items():
         print(f"\n[section] {section}")
         pool = collect_items(sources)
         print(f"[pool] candidates: {len(pool)}")
-        batch = []
-
+        selected = []
         for it in pool:
-            if it.published_ts and it.published_ts < fresh_cutoff:
+            if not _in_range(it.published_ts, start, end):
+                continue
+            if not _passes_filters(it, filters):
                 continue
             h = sha1(it.url)
-            if h in seen:
+            if h in seen_urls:
                 continue
 
             txt = fetch_full_text(it.url)
-            it.text = normalize_whitespace(txt)
-
-            # Minimal quality guard
-            if len(it.text) < MIN_TEXT_CHARS and len(it.summary) < 160:
+            txt = normalize_whitespace(txt)
+            if len(txt) < MIN_TEXT_CHARS and len(it.summary or "") < 160:
                 continue
 
-            # Title fallback
-            if not it.title:
-                it.title = it.url.split("/")[-1].replace("-", " ")[:100]
-
-            batch.append({
-                "title": it.title,
+            title = it.title or it.url.split("/")[-1].replace("-", " ")[:100]
+            row = {
+                "section": section,
+                "title": title,
                 "url": it.url,
-                "source": it.source,
-                "summary": it.summary,
-                "text": it.text
-            })
-            if len(batch) >= ITEMS_PER_SECTION:
+                "source": sources.get("rss", [])[:1] or sources.get("html", [])[:1] or ["manual"],
+                "summary": it.summary or "",
+                "text": txt,
+                "published": fmt_iso(it.published_ts)
+            }
+            selected.append(row)
+            seen_urls.add(h)
+            if len(selected) >= items_per_section:
                 break
 
-        print(f"[batch] selected: {len(batch)} (limit {ITEMS_PER_SECTION})")
+        print(f"[selected] {len(selected)} from {section}")
+        chosen.extend(selected)
 
-        if not batch:
-            outputs[section] = f"### {section} — {today_iso()}\n_No new high-quality items today._"
-            continue
+    # newest first; cap to a manageable digest size
+    chosen = sorted(chosen, key=lambda x: (x.get("published",""), x.get("section","")), reverse=True)[:12]
+    return build_digest(model=MODEL, api_key=OPENAI_API_KEY, items=chosen, temp=TEMP)
 
-        md = call_openai(
-            model=MODEL,
-            api_key=OPENAI_API_KEY,
-            system=SYSTEMS[section],
-            user=section,
-            items=batch,
-            temp=TEMP
-        )
-        outputs[section] = md
+def main():
+    if not OPENAI_API_KEY:
+        raise RuntimeError("OPENAI_API_KEY not set")
 
-        # mark seen
-        for b in batch:
-            seen.add(sha1(b["url"]))
+    mode = os.getenv("MODE", "single")  # 'single' | 'backfill-months'
+    if mode == "backfill-months":
+        start_ym = os.getenv("START_YM", "2025-01")
+        end_ym   = os.getenv("END_YM",   "2025-10")
+        sy, sm = map(int, start_ym.split("-"))
+        ey, em = map(int, end_ym.split("-"))
+        y, m = sy, sm
+        while (y < ey) or (y == ey and m <= em):
+            start, end = _month_bounds(y, m)
+            md = _generate_for_range(start, end, items_per_section=ITEMS_PER_SECTION)
+            OUT = OUTDIR / f"monthly-digest-{y:04d}-{m:02d}.md"
+            OUT.write_text(md)
+            print(f"[done] {OUT}")
+            m = 1 if m == 12 else m + 1
+            if m == 1:
+                y += 1
+        return
 
-    save_seen(seen)
-
-    # write one file per section and a combined digest
-    date_slug = today_iso()
-    combined = [f"# Signals — {date_slug}\n"]
-
-    for section, md in outputs.items():
-        p = OUTDIR / f"{section.lower().replace(' ', '-')}-{date_slug}.md"
-        p.write_text(md)
-        combined.append(f"\n\n## {section}\n\n{md}\n")
-
-    (OUTDIR / f"signals-{date_slug}.md").write_text("\n".join(combined))
-    print(f"\n[done] wrote outputs for {date_slug} → {OUTDIR}")
+    # single-range (e.g., monthly run for last month)
+    start_date = os.getenv("START_DATE", "2025-11-01")
+    end_date   = os.getenv("END_DATE",   "2025-11-30")
+    start = datetime.fromisoformat(start_date).replace(tzinfo=timezone.utc)
+    end   = datetime.fromisoformat(end_date).replace(hour=23, minute=59, second=59, tzinfo=timezone.utc)
+    md = _generate_for_range(start, end, items_per_section=ITEMS_PER_SECTION)
+    OUT = OUTDIR / f"monthly-digest-{start.date().isoformat()}_{end.date().isoformat()}.md"
+    OUT.write_text(md)
+    print(f"[done] {OUT}")
 
 if __name__ == "__main__":
     main()
