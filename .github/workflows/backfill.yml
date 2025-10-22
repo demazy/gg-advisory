@@ -1,0 +1,71 @@
+name: backfill-2025-jan-to-oct
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate monthly digests (Jan→Oct 2025)
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MODE: backfill-months
+          START_YM: "2025-01"
+          END_YM:   "2025-10"
+          ITEMS_PER_SECTION: "5"     # more thorough baseline capture
+          MIN_TEXT_CHARS: "700"
+          MODEL: gpt-4o-mini
+          TEMP: "0.2"
+          MAX_PDF_BYTES: "5242880"
+          PDF_TRUSTED: "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org"
+        run: python -m src.generate_monthly
+
+      - name: Commit outputs
+        run: |
+          git config user.name "content-bot"
+          git config user.email "content-bot@example.com"
+          git add -f out/monthly-digest-2025-*.md
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "backfill: monthly digests Jan–Oct 2025"
+            git push
+          fi
+
+      # --- Email the generated backfill files via iCloud SMTP ---
+      # Set repo secrets: MAIL_USERNAME (your iCloud address), MAIL_PASSWORD (app-specific password)
+      - name: Email backfill outputs (iCloud)
+        if: success()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.mail.me.com
+          server_port: 587
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "GG Advisory | Backfill digests (Jan–Oct 2025)"
+          from: "content-bot@gg-advisory.org"
+          to: "you@icloud.com"
+          body: |
+            ✅ Backfill complete.
+
+            This message includes monthly digests for Jan–Oct 2025 as attachments.
+            You can also browse them here:
+            https://github.com/${{ github.repository }}/tree/main/out
+          attachments: out/monthly-digest-2025-*.md
