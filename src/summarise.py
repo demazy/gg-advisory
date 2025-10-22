@@ -1,120 +1,69 @@
-import os, requests, textwrap, time, random
+import os, requests, textwrap
 from typing import List, Dict
 from .utils import today_iso
 
-SYSTEMS = {
-  "Policy Pulse": """You are GG Advisory’s policy analyst. Write neutral, concise, executive-ready policy briefs for AU/EU readers. Use Markdown and include a short Sources list with URLs per item.""",
-  "Strategic Signals": """You are an energy-transition strategist. Summarise system/market signals. Use Markdown with sources.""",
-  "KPI Watch": """You are a sustainability reporting specialist. Explain disclosure rules and metrics succinctly. Use Markdown and sources.""",
-  "Investor Radar": """You advise investors and founders on climate-tech capital. Be factual, avoid hype. Use Markdown with sources.""",
-  "Tech Moves": """You are a cleantech analyst. Focus on technical substance and readiness levels. Use Markdown with sources."""
-}
+SYSTEM = (
+  "You are an executive editor for GG Advisory. Create a concise **monthly or weekly digest** for senior readers. "
+  "Prefer Australian/EU regulatory and market impacts. Only summarise verifiable facts from the provided text. "
+  "If an item is too short or unrelated to its URL, output exactly: SKIP <URL>. "
+  "Do not invent dates; omit if unclear. Use clean Markdown. "
+  "Each item must include a short Sources list with URLs."
+)
 
-USERS = {
-  "Policy Pulse": """Create **Policy Pulse — %s**. For each item provide:
+USER_TMPL = """Create **Signals Digest — {date}** across three sections:
+- **Energy Transition**
+- **ESG Reporting**
+- **Sustainable Finance & Investment**
+
+Start with **Top Lines** — 3 bullets (macro takeaways).
+
+Then **Top Items** (6–12 items total across all sections):
 - **Headline** (≤10 words)
-- 120–160-word summary (plain facts)
-- *Why it matters* — 2 bullets (business/compliance/timing)
-- **Signals to watch** — 2 bullets (dates, consultations, thresholds)
-- **Tags** — 3–6 (e.g., csrd, issb, cer, nger, vcm, eu, au)
-- **Sources** — bullet list with URLs
-Add a 2-line intro and a closing CTA: "Have a policy, ESG, or transition question? Contact GG Advisory."
-""",
-  "Strategic Signals": """Create **Strategic Signals — %s** with the same schema; emphasise grid adequacy, resource adequacy, project pipelines, and market risks.""",
-  "KPI Watch": """Create **KPI Watch — %s**. For each item: Headline; 120–180-word summary; *What changes for reporters* — 2 bullets; *Data & controls* — 2 bullets; Tags; Sources.""",
-  "Investor Radar": """Create **Investor Radar — %s**. For each deal/funding item: deal summary; *Why it matters*; *Risks/unknowns*; Tags; Sources.""",
-  "Tech Moves": """Create **Tech Moves — %s**. For each item: Headline; 100–140-word summary; *TRL & readiness* — 1–2 bullets; *Commercial path* — 1–2 bullets; Tags; Sources."""
-}
+- **SECTION:** one of the three above
+- **PUBLISHED:** `<ISO date>` if provided
+- **Summary:** 120–160 words, factual, with numbers/dates/jurisdictions
+- *Why it matters* — 2 bullets (implications for AU/EU businesses, investors, or compliance)
+- **Signals to watch** — 1–2 bullets (deadlines, thresholds, capacity, consultations)
+- **Sources** — bullet list with 1–2 URLs
 
-class QuotaExceeded(Exception):
-  """Raised when OpenAI returns a 429 quota-exceeded message."""
+Style: Australian audience; neutral and concise; expand acronyms on first mention.
+If any item was marked SKIP, omit it entirely.
 
-def _post_with_retry(url: str, json_payload: dict, headers: dict, *, max_retries: int = 6, base_delay: float = 2.0) -> requests.Response:
-    """Retry on 429/5xx with exponential backoff+jitter. Returns the final Response."""
-    delay = base_delay
-    last_exc = None
-    last_resp: requests.Response | None = None
-    for attempt in range(1, max_retries + 1):
-        try:
-            resp = requests.post(url, json=json_payload, headers=headers, timeout=90)
-            last_resp = resp
-            if resp.status_code == 429:
-                # If it's a pure quota error, no point retrying forever — let caller decide.
-                txt = (resp.text or "").lower()
-                if "exceeded your current quota" in txt:
-                    raise QuotaExceeded("OpenAI quota exceeded")
-                ra = resp.headers.get("Retry-After")
-                sleep_s = float(ra) if ra else delay + random.uniform(0, 0.7)
-                time.sleep(sleep_s)
-                delay = min(delay * 2, 30)
-                continue
-            if 500 <= resp.status_code < 600:
-                time.sleep(delay + random.uniform(0, 0.7))
-                delay = min(delay * 2, 30)
-                continue
-            resp.raise_for_status()
-            return resp
-        except QuotaExceeded:
-            raise
-        except requests.RequestException as e:
-            last_exc = e
-            time.sleep(delay + random.uniform(0, 0.7))
-            delay = min(delay * 2, 30)
+Items (raw material follows; each block contains SECTION, TITLE, URL, PUBLISHED (if known), SOURCE, and TEXT_SNIPPET):
 
-    if last_resp is not None:
-        body = ""
-        try:
-            body = (last_resp.text or "")[:180]
-        except Exception:
-            body = ""
-        msg = f"OpenAI API exhausted retries (status {last_resp.status_code}). Body: {body}"
-        http_err = requests.HTTPError(msg, response=last_resp)
-        raise http_err
+{items}
+"""
 
-    if last_exc:
-        raise last_exc
-
-    raise RuntimeError("OpenAI API exhausted retries without response/exception.")
-
-def call_openai(model: str, api_key: str, system: str, user: str, items: List[Dict], temp: float) -> str:
-    # Compact item block to save tokens
-    import textwrap as _tw
+def _pack_items(items: List[Dict]) -> str:
     blocks = []
     for i, it in enumerate(items, 1):
         snippet = (it.get("text") or it.get("summary") or "")
-        snippet = _tw.shorten(snippet, width=1600, placeholder=" …")
+        snippet = textwrap.shorten(snippet, width=1700, placeholder=" …")
         blocks.append(f"""[{i}]
+SECTION: {it.get('section','')}
 TITLE: {it.get('title','').strip() or '(no title)'}
 URL: {it['url']}
+PUBLISHED: {it.get('published','')}
 SOURCE: {it['source']}
 TEXT_SNIPPET:
 {snippet}
 """)
-    content = "\n\n".join(blocks)
+    return "\n\n".join(blocks)
 
-    org = os.getenv("OPENAI_ORG") or os.getenv("OPENAI_ORGANIZATION")
-    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
-    if org:
-        headers["OpenAI-Organization"] = org
-
+def build_digest(model: str, api_key: str, items: List[Dict], temp: float) -> str:
     payload = {
         "model": model,
         "temperature": temp,
         "messages": [
-            {"role": "system", "content": system},
-            {"role": "user", "content": USERS[user] % today_iso()},
-            {"role": "user", "content": f"Items:\n{content}"},
-        ],
+            {"role": "system", "content": SYSTEM},
+            {"role": "user", "content": USER_TMPL.format(date=today_iso(), items=_pack_items(items))}
+        ]
     }
-
-    # Retry wrapper with JSON decode resilience
-    for _ in range(2):
-        resp = _post_with_retry("https://api.openai.com/v1/chat/completions", payload, headers)
-        try:
-            data = resp.json()
-            return data["choices"][0]["message"]["content"]
-        except ValueError:
-            time.sleep(1.5 + random.uniform(0, 0.5))
-
-    data = resp.json()
-    return data["choices"][0]["message"]["content"]
+    r = requests.post(
+        "https://api.openai.com/v1/chat/completions",
+        headers={"Authorization": f"Bearer {api_key}"},
+        json=payload,
+        timeout=180
+    )
+    r.raise_for_status()
+    return r.json()["choices"][0]["message"]["content"]
