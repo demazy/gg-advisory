@@ -1,8 +1,22 @@
+# --- Core HTTP & parsing ---
 requests>=2.31
 feedparser>=6.0
 beautifulsoup4>=4.12
 trafilatura>=1.8
+python-dateutil>=2.9
+
+# --- Config & env ---
 python-dotenv>=1.0
-pydantic>=2.0
 PyYAML>=6.0
-python-dateutil
+pydantic>=2.0
+
+# --- PDF extraction (Hybrid mode) ---
+pymupdf>=1.24.9        # provides the fitz module
+
+# --- MIME detection (for safe PDF filtering) ---
+python-magic>=0.4.27
+# On Windows, instead use:
+# python-magic-bin>=0.4.14; sys_platform == 'win32'
+
+# --- Optional: if you ever render HTML summaries ---
+markdown-it-py>=3.0
