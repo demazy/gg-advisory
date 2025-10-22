@@ -1,0 +1,107 @@
+name: monthly-digest
+on:
+  schedule:
+    # Run daily at 20:10 UTC (~07:10 AEST/AEDT).
+    # A guard below ensures we only generate on the 1st in Melbourne and from Nov 2025 onward.
+    - cron: "10 20 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  monthly:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set DATE_SLUG (UTC)
+        run: echo "DATE_SLUG=$(date -u +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: Exit unless it's the 1st in Melbourne AND >= 2025-11-01
+        run: |
+          export TZ=Australia/Melbourne
+          TODAY=$(date +%Y-%m-%d)
+          DAY=$(date +%d)
+          if [ "$DAY" != "01" ]; then
+            echo "Not the 1st in Melbourne → skipping"; exit 0; fi
+          if [ "$(date -d "$TODAY" +%s)" -lt "$(date -d "2025-11-01" +%s)" ]; then
+            echo "Pre-Nov-2025 → skipping"; exit 0; fi
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Compute last month bounds (Melbourne)
+        id: bounds
+        run: |
+          export TZ=Australia/Melbourne
+          START=$(date -d "$(date +%Y-%m-01) -1 month" +%Y-%m-01)
+          END=$(date -d "$(date +%Y-%m-01) -1 day" +%Y-%m-%d)
+          echo "start=$START" >> $GITHUB_OUTPUT
+          echo "end=$END" >> $GITHUB_OUTPUT
+          echo "Generating digest for $START to $END"
+
+      - name: Generate monthly digest
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MODE: single
+          START_DATE: ${{ steps.bounds.outputs.start }}
+          END_DATE:   ${{ steps.bounds.outputs.end }}
+          ITEMS_PER_SECTION: "3"     # tune 2–4 for monthly size
+          MIN_TEXT_CHARS: "700"
+          MODEL: gpt-4o-mini
+          TEMP: "0.2"
+          MAX_PDF_BYTES: "5242880"
+          PDF_TRUSTED: "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org"
+        run: python -m src.generate_monthly
+
+      - name: Rebase & push (safe)
+        run: |
+          git config user.name "content-bot"
+          git config user.email "content-bot@example.com"
+          git fetch origin main
+          git rebase origin/main || (git rebase --abort && exit 1)
+          echo -e "__pycache__/\n*.pyc" >> .gitignore
+          git add -f out/monthly-digest-*.md .gitignore
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            export TZ=Australia/Melbourne
+            git commit -m "auto: monthly digest $(date +%Y-%m)"
+            git push --force-with-lease
+          fi
+
+      - name: Find latest digest file
+        id: latest
+        run: |
+          f=$(ls -1t out/monthly-digest-*.md | head -n 1)
+          echo "file=$f" >> $GITHUB_OUTPUT
+          echo "Found: $f"
+
+      - name: Email monthly digest (iCloud)
+        if: success()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.mail.me.com
+          server_port: 587
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "GG Advisory | Monthly Digest — ${{ env.DATE_SLUG }}"
+          from: "content-bot@gg-advisory.org"
+          to: "you@icloud.com"
+          body: |
+            ✅ Monthly digest generated.
+
+            Attached is the latest digest covering last month.
+            Files are also available here:
+            https://github.com/${{ github.repository }}/tree/main/out
+          attachments: ${{ steps.latest.outputs.file }}
