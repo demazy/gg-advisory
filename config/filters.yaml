@@ -46,4 +46,10 @@ title_deny_regex:
   - "(?i)award|finalist|shortlist|nominee"
   - "(?i)opinion|editorial|blog|insight|commentary"
 
-keep_keywords: []
+keep_keywords:
+  - "consultation"
+  - "final report"
+  - "market notice"
+  - "decision"
+  - "determination"
+
