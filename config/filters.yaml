@@ -1,9 +1,8 @@
-# Optional quality & routing filters used by src/generate_monthly.py
-# If this file exists, it is loaded and applied to ALL sections.
+# Filters for GG Advisory digest automation
+# Applied automatically in src/generate_monthly.py
 
-# 1) Strong allow-list (leave empty for broad intake)
-#    If you set any allow_domains, ONLY these domains (suffix match) are kept.
 allow_domains:
+  # Keep only credible AU/EU policy, energy, ESG, and finance sources
   - aemo.com.au
   - aemc.gov.au
   - aer.gov.au
@@ -23,23 +22,21 @@ allow_domains:
   - australianinvestmentcouncil.com.au
   - bnef.com
 
-# 2) Optional deny-list (suffix match). Use to block mirror sites or low-value distributors.
 deny_domains:
+  # Filter social media, marketing mirrors, and non-official distributors
   - facebook.com
   - x.com
   - twitter.com
   - linkedin.com
   - youtube.com
-  - blogs.google.com
   - medium.com
   - mailchi.mp
   - substack.com
   - eventbrite.com
 
-# 3) Drop items whose TITLE matches any of these regexes (case-insensitive).
-#    Use this to remove noise like events, jobs, podcasts, generic newsletters, etc.
 title_deny_regex:
-  - "(?i)newsletter(?!.*(ifrs|issb|efrag))"    # keep official IFRS/ISSB/EFRAG “newsletter” but drop generic
+  # Exclude low-value categories and non-informative posts
+  - "(?i)newsletter(?!.*(ifrs|issb|efrag))"
   - "(?i)subscribe|sign[- ]?up|mailing list"
   - "(?i)events?\\b|webinar|conference|roundtable|workshop|training"
   - "(?i)careers?|job opening|vacan(cy|cies)|appl(y|ications?)"
@@ -47,9 +44,6 @@ title_deny_regex:
   - "(?i)tender|procurement|request for (tender|proposal)"
   - "(?i)photo gallery|highlights|our people|community update"
   - "(?i)award|finalist|shortlist|nominee"
-  - "(?i)opinion|editorial|blog|insight|commentary"   # drop commentary; we prioritise primary sources
-  # If you find false positives, comment lines out or add (?<!keyword) guards.
+  - "(?i)opinion|editorial|blog|insight|commentary"
 
-# 4) Optional keep-if-in-title (whitelist keywords that can override some “opinion/blog” filters)
-#    Not enforced by code yet; reserve for future use if you want a manual override mechanism.
 keep_keywords: []
