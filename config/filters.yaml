@@ -2,7 +2,6 @@
 # Applied automatically in src/generate_monthly.py
 
 allow_domains:
-  # Keep only credible AU/EU policy, energy, ESG, and finance sources
   - aemo.com.au
   - aemc.gov.au
   - aer.gov.au
@@ -21,6 +20,7 @@ allow_domains:
   - irena.org
   - australianinvestmentcouncil.com.au
   - bnef.com
+  - ec.europa.eu         # ← NEW
 
 deny_domains:
   # Filter social media, marketing mirrors, and non-official distributors
