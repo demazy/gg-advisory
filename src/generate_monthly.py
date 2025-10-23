@@ -3,6 +3,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from datetime import datetime, timezone
 from typing import Dict, List, Tuple
+
 from .fetch import fetch_rss, fetch_html_index, fetch_full_text, Item
 from .summarise import build_digest
 from .utils import sha1, normalize_whitespace
@@ -19,45 +20,83 @@ PER_DOMAIN_CAP = int(os.getenv("PER_DOMAIN_CAP", "3"))
 ROOT = Path(__file__).resolve().parents[1]
 OUTDIR = ROOT / "out"
 CFG = ROOT / "config" / "sources.yaml"
+FILTERS = ROOT / "config" / "filters.yaml"
+
 OUTDIR.mkdir(parents=True, exist_ok=True)
 
-
-def _month_bounds(y, m):
+def _month_bounds(y: int, m: int) -> Tuple[datetime, datetime]:
     start = datetime(y, m, 1, tzinfo=timezone.utc)
-    end = datetime(y, m, calendar.monthrange(y, m)[1], 23, 59, 59, tzinfo=timezone.utc)
+    last = calendar.monthrange(y, m)[1]
+    end = datetime(y, m, last, 23, 59, 59, tzinfo=timezone.utc)
     return start, end
 
-
-def _in_range(ts, start, end):
+def _in_range(ts: float, start: datetime, end: datetime) -> bool:
     if not ts:
         return False
     t = datetime.fromtimestamp(ts, tz=timezone.utc)
     return start <= t <= end
 
-
-def collect_items(sources: Dict) -> List[Item]:
-    rss_urls = sources.get("rss", []) or []
-    html_urls = sources.get("html", []) or []
+def collect_items(s: Dict) -> List[Item]:
+    rss_urls = s.get("rss", []) or []
+    html_urls = s.get("html", []) or []
     items: List[Item] = []
     for r in rss_urls:
         items.extend(fetch_rss(r))
     for h in html_urls:
         items.extend(fetch_html_index(h))
-    items.sort(key=lambda x: x.published_ts or 0, reverse=True)
+    items.sort(key=lambda x: (x.published_ts or 0), reverse=True)
     return items
 
-
-def fmt_iso(ts):
+def fmt_iso(ts: float) -> str:
     try:
         return datetime.fromtimestamp(ts, tz=timezone.utc).date().isoformat()
     except Exception:
         return ""
 
+def _load_filters() -> Dict:
+    """Load filters.yaml (optional). Compile regexes; normalise lists."""
+    if not FILTERS.exists():
+        return {"allow_domains": [], "deny_domains": [], "title_deny_regex": [], "keep_keywords": []}
+    raw = yaml.safe_load(FILTERS.read_text()) or {}
+    allow = list(raw.get("allow_domains", []) or [])
+    deny = list(raw.get("deny_domains", []) or [])
+    deny_pat = [re.compile(p, re.I) for p in (raw.get("title_deny_regex", []) or [])]
+    keep = [str(k).lower() for k in (raw.get("keep_keywords", []) or [])]
+    return {"allow_domains": allow, "deny_domains": deny, "title_deny_regex": deny_pat, "keep_keywords": keep}
 
-def _generate_for_range(start, end, items_per_section):
+def _passes_filters(it: Item, filters: Dict) -> bool:
+    """Domain allow/deny, title deny regex, with keep_keywords override."""
+    from urllib.parse import urlparse
+    dom = urlparse(it.url).netloc.lower()
+    allow = set(filters.get("allow_domains", []))
+    deny = set(filters.get("deny_domains", []))
+    deny_title = filters.get("title_deny_regex", [])
+    keep_keywords = filters.get("keep_keywords", [])
+
+    # domain filters
+    if allow and not any(dom.endswith(d) for d in allow):
+        return False
+    if any(dom.endswith(d) for d in deny):
+        return False
+
+    # title-based filters with keep override
+    title_low = (it.title or "").lower()
+    if any(kw in title_low for kw in keep_keywords):
+        return True
+    for rx in deny_title:
+        try:
+            if rx.search(it.title or ""):
+                return False
+        except Exception:
+            continue
+    return True
+
+def _generate_for_range(start: datetime, end: datetime, items_per_section: int) -> str:
     cfg = yaml.safe_load(CFG.read_text())
+    filters = _load_filters()
+
     chosen: List[Dict] = []
-    seen_urls = set()
+    seen_urls: set = set()
 
     for section, sources in cfg["sections"].items():
         print(f"[section] {section}")
@@ -67,19 +106,23 @@ def _generate_for_range(start, end, items_per_section):
         for it in pool:
             if not _in_range(it.published_ts, start, end):
                 continue
+            if not _passes_filters(it, filters):
+                continue
             h = sha1(it.url)
             if h in seen_urls:
                 continue
+
             txt = fetch_full_text(it.url)
             txt = normalize_whitespace(txt)
             if len(txt) < MIN_TEXT_CHARS and len(it.summary or "") < 160:
                 continue
+
             selected.append({
                 "section": section,
-                "title": it.title,
+                "title": it.title or it.url.split("/")[-1].replace("-", " ")[:100],
                 "url": it.url,
-                "source": it.source,
-                "summary": it.summary,
+                "source": sources.get("rss", [])[:1] or sources.get("html", [])[:1] or ["manual"],
+                "summary": it.summary or "",
                 "text": txt,
                 "published": fmt_iso(it.published_ts),
             })
@@ -89,8 +132,10 @@ def _generate_for_range(start, end, items_per_section):
         print(f"[selected] {len(selected)} from {section}")
         chosen.extend(selected)
 
+    # Sort newest first
     chosen = sorted(chosen, key=lambda x: (x.get("published",""), x.get("section","")), reverse=True)
-    # cap per domain
+
+    # Per-domain cap
     from urllib.parse import urlparse
     per_domain = {}
     filtered = []
@@ -99,40 +144,43 @@ def _generate_for_range(start, end, items_per_section):
         per_domain[dom] = per_domain.get(dom, 0) + 1
         if per_domain[dom] <= PER_DOMAIN_CAP:
             filtered.append(row)
+
+    # Final slice
     chosen = filtered[:12]
 
-    return build_digest(MODEL, OPENAI_API_KEY, chosen, TEMP)
-
+    return build_digest(model=MODEL, api_key=OPENAI_API_KEY, items=chosen, temp=TEMP)
 
 def main():
     if not OPENAI_API_KEY:
         raise RuntimeError("OPENAI_API_KEY not set")
 
-    mode = os.getenv("MODE", "single")
+    mode = os.getenv("MODE", "single")  # 'single' | 'backfill-months'
     if mode == "backfill-months":
         start_ym = os.getenv("START_YM", "2025-01")
-        end_ym = os.getenv("END_YM", "2025-10")
+        end_ym   = os.getenv("END_YM",   "2025-10")
         sy, sm = map(int, start_ym.split("-"))
         ey, em = map(int, end_ym.split("-"))
         y, m = sy, sm
         while (y < ey) or (y == ey and m <= em):
             start, end = _month_bounds(y, m)
-            md = _generate_for_range(start, end, ITEMS_PER_SECTION)
-            path = OUTDIR / f"monthly-digest-{y:04d}-{m:02d}.md"
-            path.write_text(md)
-            print(f"[done] {path}")
+            md = _generate_for_range(start, end, items_per_section=ITEMS_PER_SECTION)
+            OUT = OUTDIR / f"monthly-digest-{y:04d}-{m:02d}.md"
+            OUT.write_text(md)
+            print(f"[done] {OUT}")
             m = 1 if m == 12 else m + 1
             if m == 1:
                 y += 1
         return
 
-    start = datetime.fromisoformat(os.getenv("START_DATE", "2025-11-01")).replace(tzinfo=timezone.utc)
-    end = datetime.fromisoformat(os.getenv("END_DATE", "2025-11-30")).replace(hour=23, minute=59, second=59, tzinfo=timezone.utc)
-    md = _generate_for_range(start, end, ITEMS_PER_SECTION)
-    path = OUTDIR / f"monthly-digest-{start.date()}_{end.date()}.md"
-    path.write_text(md)
-    print(f"[done] {path}")
-
+    # single range (e.g., prior month)
+    start_date = os.getenv("START_DATE", "2025-11-01")
+    end_date   = os.getenv("END_DATE",   "2025-11-30")
+    start = datetime.fromisoformat(start_date).replace(tzinfo=timezone.utc)
+    end   = datetime.fromisoformat(end_date).replace(hour=23, minute=59, second=59, tzinfo=timezone.utc)
+    md = _generate_for_range(start, end, items_per_section=ITEMS_PER_SECTION)
+    OUT = OUTDIR / f"monthly-digest-{start.date().isoformat()}_{end.date().isoformat()}.md"
+    OUT.write_text(md)
+    print(f"[done] {OUT}")
 
 if __name__ == "__main__":
     main()
