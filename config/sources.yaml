@@ -1,3 +1,9 @@
+ sections:
+   Energy Transition:
+     rss:
+-      - https://www.dcceew.gov.au/about/news/stay-informed/rss
++      - https://www.dcceew.gov.au/rss-feed
+
 sections:
   Energy Transition:
     rss:
