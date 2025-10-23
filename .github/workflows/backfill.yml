@@ -30,7 +30,7 @@ jobs:
           START_YM: "2025-01"
           END_YM:   "2025-10"
           ITEMS_PER_SECTION: "5"     # more thorough baseline capture
-          MIN_TEXT_CHARS: "700"
+          MIN_TEXT_CHARS: "500"
           MODEL: gpt-4o-mini
           TEMP: "0.2"
           MAX_PDF_BYTES: "5242880"
