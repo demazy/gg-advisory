@@ -1,4 +1,4 @@
-import os, json, yaml, re, calendar
+import os, yaml, re, calendar
 from pathlib import Path
 from dotenv import load_dotenv
 from datetime import datetime, timezone
@@ -31,6 +31,9 @@ def _month_bounds(y: int, m: int) -> Tuple[datetime, datetime]:
     end = datetime(y, m, last, 23, 59, 59, tzinfo=timezone.utc)
     return start, end
 
+def _month_label(d: datetime) -> str:
+    return d.strftime("%B %Y")  # e.g., "February 2025"
+
 def _in_range(ts: float, start: datetime, end: datetime) -> bool:
     if not ts:
         return False
@@ -38,14 +41,12 @@ def _in_range(ts: float, start: datetime, end: datetime) -> bool:
     return start <= t <= end
 
 def collect_items(s: Dict) -> List[Item]:
-    rss_urls = s.get("rss", []) or []
-    html_urls = s.get("html", []) or []
     items: List[Item] = []
-    for r in rss_urls:
+    for r in (s.get("rss") or []):
         fetched = fetch_rss(r)
         if DEBUG: print(f"[rss] {r}: {len(fetched)}")
         items.extend(fetched)
-    for h in html_urls:
+    for h in (s.get("html") or []):
         fetched = fetch_html_index(h)
         if DEBUG: print(f"[html] {h}: {len(fetched)}")
         items.extend(fetched)
@@ -126,7 +127,8 @@ def _generate_for_range(start: datetime, end: datetime, items_per_section: int) 
                 "section": section,
                 "title": it.title or it.url.split("/")[-1].replace("-", " ")[:100],
                 "url": it.url,
-                "source": sources.get("rss", [])[:1] or sources.get("html", [])[:1] or ["manual"],
+                # CRITICAL: provide only the ARTICLE URL to the model
+                "sources_urls": [it.url],
                 "summary": it.summary or "",
                 "text": txt,
                 "published": fmt_iso(it.published_ts),
@@ -149,28 +151,26 @@ def _generate_for_range(start: datetime, end: datetime, items_per_section: int) 
         per_domain[dom] = per_domain.get(dom, 0) + 1
         if per_domain[dom] <= PER_DOMAIN_CAP:
             filtered.append(row)
-
-    # Final slice
     chosen = filtered[:12]
 
-    # ---- SAFETY GUARD: if no items, do NOT call the model (prevents hallucination) ----
-    if not chosen:
-        print("[warn] No eligible items in range; writing placeholder and exiting.")
-        placeholder = (
-            "# Signals Digest — NO ITEMS IN RANGE\n\n"
-            f"_Date range_ : {start.date().isoformat()} → {end.date().isoformat()}\n\n"
-            "No sources produced eligible items for this period. "
-            "Consider relaxing MIN_TEXT_CHARS, widening sources, or checking filters."
+    # Safety guard: if too few items, return a clear placeholder (no model call)
+    MIN_TOTAL = int(os.getenv("MIN_TOTAL_ITEMS", "2"))
+    if len(chosen) < MIN_TOTAL:
+        print(f"[warn] Few items in range ({len(chosen)}<{MIN_TOTAL}); writing placeholder.")
+        return (
+            f"# Signals Digest — NO ITEMS IN RANGE\n\n"
+            f"_Date range_: {start.date().isoformat()} → {end.date().isoformat()}\n\n"
+            "Insufficient eligible items. Consider relaxing MIN_TEXT_CHARS, checking filters, or widening sources."
         )
-        return placeholder
 
-    return build_digest(model=MODEL, api_key=OPENAI_API_KEY, items=chosen, temp=TEMP)
+    date_label = _month_label(end)  # e.g., "February 2025"
+    return build_digest(model=MODEL, api_key=OPENAI_API_KEY, items=chosen, temp=TEMP, date_label=date_label)
 
 def main():
     if not OPENAI_API_KEY:
         raise RuntimeError("OPENAI_API_KEY not set")
 
-    mode = os.getenv("MODE", "single")  # 'single' | 'backfill-months'
+    mode = os.getenv("MODE", "single")
     if mode == "backfill-months":
         start_ym = os.getenv("START_YM", "2025-01")
         end_ym   = os.getenv("END_YM",   "2025-10")
@@ -188,7 +188,6 @@ def main():
                 y += 1
         return
 
-    # single range (e.g., prior month)
     start_date = os.getenv("START_DATE", "2025-11-01")
     end_date   = os.getenv("END_DATE",   "2025-11-30")
     start = datetime.fromisoformat(start_date).replace(tzinfo=timezone.utc)
