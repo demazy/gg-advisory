@@ -35,6 +35,7 @@ jobs:
           TEMP: "0.2"
           MAX_PDF_BYTES: "5242880"
           PDF_TRUSTED: "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org"
+          PER_DOMAIN_CAP: "3"
         run: python -m src.generate_monthly
 
       - name: Commit outputs
