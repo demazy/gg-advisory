@@ -16,6 +16,7 @@ TEMP = float(os.getenv("TEMP", "0.2"))
 MIN_TEXT_CHARS = int(os.getenv("MIN_TEXT_CHARS", "700"))
 ITEMS_PER_SECTION = int(os.getenv("ITEMS_PER_SECTION", "4"))
 PER_DOMAIN_CAP = int(os.getenv("PER_DOMAIN_CAP", "3"))
+DEBUG = os.getenv("DEBUG", "0") == "1"
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTDIR = ROOT / "out"
@@ -41,9 +42,13 @@ def collect_items(s: Dict) -> List[Item]:
     html_urls = s.get("html", []) or []
     items: List[Item] = []
     for r in rss_urls:
-        items.extend(fetch_rss(r))
+        fetched = fetch_rss(r)
+        if DEBUG: print(f"[rss] {r}: {len(fetched)}")
+        items.extend(fetched)
     for h in html_urls:
-        items.extend(fetch_html_index(h))
+        fetched = fetch_html_index(h)
+        if DEBUG: print(f"[html] {h}: {len(fetched)}")
+        items.extend(fetched)
     items.sort(key=lambda x: (x.published_ts or 0), reverse=True)
     return items
 
@@ -54,7 +59,6 @@ def fmt_iso(ts: float) -> str:
         return ""
 
 def _load_filters() -> Dict:
-    """Load filters.yaml (optional). Compile regexes; normalise lists."""
     if not FILTERS.exists():
         return {"allow_domains": [], "deny_domains": [], "title_deny_regex": [], "keep_keywords": []}
     raw = yaml.safe_load(FILTERS.read_text()) or {}
@@ -65,7 +69,6 @@ def _load_filters() -> Dict:
     return {"allow_domains": allow, "deny_domains": deny, "title_deny_regex": deny_pat, "keep_keywords": keep}
 
 def _passes_filters(it: Item, filters: Dict) -> bool:
-    """Domain allow/deny, title deny regex, with keep_keywords override."""
     from urllib.parse import urlparse
     dom = urlparse(it.url).netloc.lower()
     allow = set(filters.get("allow_domains", []))
@@ -73,19 +76,20 @@ def _passes_filters(it: Item, filters: Dict) -> bool:
     deny_title = filters.get("title_deny_regex", [])
     keep_keywords = filters.get("keep_keywords", [])
 
-    # domain filters
     if allow and not any(dom.endswith(d) for d in allow):
+        if DEBUG: print(f"[drop] domain not allowed: {dom} -> {it.url}")
         return False
     if any(dom.endswith(d) for d in deny):
+        if DEBUG: print(f"[drop] domain denied: {dom} -> {it.url}")
         return False
 
-    # title-based filters with keep override
     title_low = (it.title or "").lower()
     if any(kw in title_low for kw in keep_keywords):
         return True
     for rx in deny_title:
         try:
             if rx.search(it.title or ""):
+                if DEBUG: print(f"[drop] title deny regex: {it.title}")
                 return False
         except Exception:
             continue
@@ -115,6 +119,7 @@ def _generate_for_range(start: datetime, end: datetime, items_per_section: int) 
             txt = fetch_full_text(it.url)
             txt = normalize_whitespace(txt)
             if len(txt) < MIN_TEXT_CHARS and len(it.summary or "") < 160:
+                if DEBUG: print(f"[drop] too short: {it.url}")
                 continue
 
             selected.append({
@@ -147,6 +152,17 @@ def _generate_for_range(start: datetime, end: datetime, items_per_section: int) 
 
     # Final slice
     chosen = filtered[:12]
+
+    # ---- SAFETY GUARD: if no items, do NOT call the model (prevents hallucination) ----
+    if not chosen:
+        print("[warn] No eligible items in range; writing placeholder and exiting.")
+        placeholder = (
+            "# Signals Digest — NO ITEMS IN RANGE\n\n"
+            f"_Date range_ : {start.date().isoformat()} → {end.date().isoformat()}\n\n"
+            "No sources produced eligible items for this period. "
+            "Consider relaxing MIN_TEXT_CHARS, widening sources, or checking filters."
+        )
+        return placeholder
 
     return build_digest(model=MODEL, api_key=OPENAI_API_KEY, items=chosen, temp=TEMP)
 
