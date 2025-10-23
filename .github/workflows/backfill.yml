@@ -27,8 +27,8 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MODE: backfill-months
-          START_YM: "2025-01"
-          END_YM:   "2025-01"
+          START_YM: "2025-02"
+          END_YM:   "2025-02"
           ITEMS_PER_SECTION: "5"     # more thorough baseline capture
           MIN_TEXT_CHARS: "500"
           MODEL: gpt-4o-mini
