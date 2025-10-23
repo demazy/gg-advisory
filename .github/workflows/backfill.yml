@@ -61,7 +61,7 @@ jobs:
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: "GG Advisory | Backfill digests (Jan–Oct 2025)"
           from: "content-bot@gg-advisory.org"
-          to: "you@icloud.com"
+          to: "a.demazy_de_fortet@icloud.com"
           body: |
             ✅ Backfill complete.
 
