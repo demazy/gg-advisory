@@ -1,10 +1,10 @@
 sections:
   Energy Transition:
     rss:
-      - https://www.dcceew.gov.au/about/news/stay-informed/rss
+      - https://www.dcceew.gov.au/rss-feed
     html:
       - https://www.aemo.com.au/newsroom
-      - https://www.aemo.com.au/newsroom/media-release
+      - https://www.aemo.com.au/newsroom/media-release   # ← add
       - https://www.aemc.gov.au/news-centre
       - https://www.aer.gov.au/news
       - https://www.cer.gov.au/news-and-media/news
@@ -14,6 +14,9 @@ sections:
       - https://www.infrastructureaustralia.gov.au/news-media
       - https://www.iea.org/news
       - https://www.irena.org/news
+      - https://www.irena.org/Newsroom/Articles
+      - https://www.dcceew.gov.au/energy/news
+      - https://ec.europa.eu/commission/presscorner/home/en   # ← add (EU press hub)
 
   ESG Reporting:
     rss: []
@@ -25,6 +28,7 @@ sections:
       - https://www.globalreporting.org/news/
       - https://www.fsb-tcfd.org/publications/
       - https://asic.gov.au/about-asic/news-centre/find-a-media-release/
+      - https://www.dcceew.gov.au/environment/climate-change/news
       - https://www.dcceew.gov.au/about/news
 
   Sustainable Finance & Investment:
@@ -37,3 +41,4 @@ sections:
       - https://www.australianinvestmentcouncil.com.au/news
       - https://about.bnef.com/blog/
       - https://www.irena.org/Newsroom/Articles
+      - https://www.ifrs.org/news-and-events/updates/issb/
