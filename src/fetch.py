@@ -1,26 +1,105 @@
-import re, time, requests, trafilatura
+import os
+import re
+import time
+import urllib.parse
+from dataclasses import dataclass
+from typing import List, Optional
+
+import requests
+import feedparser
+import trafilatura
 from bs4 import BeautifulSoup
 from dateutil import parser as dateparse
-from typing import List, Optional
-from dataclasses import dataclass
+
+# Optional MIME check (best-effort)
+try:
+    import magic  # python-magic / libmagic
+except Exception:  # pragma: no cover
+    magic = None
+
+# PDF extraction (PyMuPDF)
+try:
+    import fitz  # PyMuPDF
+except Exception as e:
+    raise RuntimeError(
+        "PyMuPDF (fitz) is required for hybrid PDF extraction. "
+        "Add 'pymupdf' to requirements.txt."
+    ) from e
+
+
+# ---------------- Models ----------------
 
 @dataclass
 class Item:
     title: str
     url: str
-    summary: str
+    source: str          # where we found the link (RSS or index page URL)
     published_ts: Optional[float]
-    source: str
+    summary: str
+    text: str = ""       # filled later by fetch_full_text
+
+
+# -------------- Config / Constants --------------
+
+MAX_PDF_BYTES = int(os.getenv("MAX_PDF_BYTES", "5242880"))  # 5 MB
+PDF_TRUSTED = tuple(d.strip() for d in os.getenv(
+    "PDF_TRUSTED",
+    "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org"
+).split(","))
+
+# Domain → CSS selectors to find likely article cards/links
+SELECTORS = {
+    "aemo.com.au": ".newsroom a, a[href*='/newsroom/'], a[href*='/news/']",
+    "aemc.gov.au": "a[href*='/news-centre/'], a[href*='/news/']",
+    "aer.gov.au": "a[href*='/news']",
+    "cer.gov.au": "a[href*='/news-and-media/news']",
+    "arena.gov.au": "a.card, a[href*='/news/'], a[href*='/funding/']",
+    "cefc.com.au": "a[href*='/media/'], a[href*='news']",
+    "dcceew.gov.au": "a[href*='/news'], a[href*='/news-media/']",
+    "energynetworks.com.au": "a[href*='/news/']",
+    "infrastructureaustralia.gov.au": "a[href*='/news-media/']",
+    "iea.org": "a[href*='/news']",
+    "irena.org": "a[href*='/news'], a[href*='/Newsroom/Articles']",
+    "ifrs.org": "a[href*='/news-and-events/news/'], a[href*='/updates/issb/']",
+    "efrag.org": "a[href*='/news'], a[href*='/updates']",
+    "globalreporting.org": "a[href*='/news/']",
+    "fsb-tcfd.org": "a[href*='/publications']",
+    "asic.gov.au": "a[href*='/news-centre']",
+    "australianinvestmentcouncil.com.au": "a[href*='/news']",
+    "bnef.com": "a[href*='/blog/']",
+}
+
+
+# -------------- Helpers --------------
+
+def _normalize_url(u: str) -> str:
+    """Strip utm_* and fragments for dedupe/canonicalization."""
+    try:
+        p = urllib.parse.urlparse(u)
+        q = urllib.parse.parse_qsl(p.query, keep_blank_values=True)
+        q = [(k, v) for (k, v) in q if not k.lower().startswith("utm_")]
+        new_q = urllib.parse.urlencode(q)
+        p = p._replace(query=new_q, fragment="")
+        return urllib.parse.urlunparse(p)
+    except Exception:
+        return u
 
 def _guess_published_ts(soup: BeautifulSoup) -> Optional[float]:
-    # check meta tags
-    for tag in ["article:published_time", "og:updated_time", "date", "pubdate", "timestamp"]:
-        meta = soup.find("meta", attrs={"property": tag}) or soup.find("meta", attrs={"name": tag})
-        if meta and meta.get("content"):
+    # Common meta tags
+    for sel, attr in [
+        ("meta[property='article:published_time']", "content"),
+        ("meta[name='pubdate']", "content"),
+        ("meta[name='date']", "content"),
+        ("meta[property='og:updated_time']", "content"),
+        ("meta[itemprop='datePublished']", "content"),
+    ]:
+        tag = soup.select_one(sel)
+        if tag and tag.get(attr):
             try:
-                return dateparse.parse(meta["content"]).timestamp()
+                return dateparse.parse(tag.get(attr)).timestamp()
             except Exception:
                 pass
+
     # time tag
     t = soup.find("time")
     if t and (t.get("datetime") or t.text):
@@ -28,56 +107,233 @@ def _guess_published_ts(soup: BeautifulSoup) -> Optional[float]:
             return dateparse.parse(t.get("datetime") or t.text).timestamp()
         except Exception:
             pass
-    # textual pattern
-    m = re.search(r"(20\d{2}[-/](0[1-9]|1[0-2])[-/][0-3]\d)", soup.text)
+
+    # textual YYYY-MM-DD/ YYYY/MM/DD somewhere on page
+    m = re.search(r"(20\d{2}[-/.](0[1-9]|1[0-2])[-/.]([0-2]\d|3[01]))", soup.get_text(" ", strip=True))
     if m:
         try:
             return dateparse.parse(m.group(1)).timestamp()
         except Exception:
             pass
-    # Published/Updated labels
-    label = soup.find(string=re.compile(r"Published|Updated", re.I))
+
+    # Labels like "Published: 12 March 2025"
+    label = soup.find(string=re.compile(r"\b(Published|Updated)\b", re.I))
     if label:
         try:
             return dateparse.parse(str(label)).timestamp()
         except Exception:
             pass
+
     return None
+
+def _download(url: str, headers=None, max_bytes=None) -> Optional[bytes]:
+    try:
+        r = requests.get(url, headers=headers or {"User-Agent": "gg-advisory-bot/1.0"}, timeout=45, stream=True)
+        r.raise_for_status()
+        chunks, size = [], 0
+        for chunk in r.iter_content(1024 * 64):
+            if not chunk:
+                break
+            size += len(chunk)
+            if max_bytes and size > max_bytes:
+                return None
+            chunks.append(chunk)
+        return b"".join(chunks)
+    except Exception:
+        return None
+
+def _is_trusted_pdf(url: str) -> bool:
+    try:
+        u = urllib.parse.urlparse(url)
+        if not (u.scheme and u.netloc):
+            return False
+        if not u.path.lower().endswith(".pdf"):
+            return False
+        return any(u.netloc.endswith(dom) for dom in PDF_TRUSTED)
+    except Exception:
+        return False
+
+def _extract_pdf_bytes(pdf_bytes: bytes, max_pages: int = 5) -> str:
+    try:
+        if magic:
+            kind = magic.from_buffer(pdf_bytes, mime=True)
+            if kind and kind != "application/pdf":
+                return ""
+        with fitz.open(stream=pdf_bytes, filetype="pdf") as doc:
+            pages = min(max_pages, len(doc))
+            text = []
+            for i in range(pages):
+                text.append(doc.load_page(i).get_text("text"))
+            return "\n".join(text).strip()
+    except Exception:
+        return ""
+
+
+# -------------- Fetchers --------------
+
+def fetch_rss(url: str) -> List[Item]:
+    """Robust RSS fetch using requests + feedparser."""
+    out: List[Item] = []
+    headers = {"User-Agent": "gg-advisory-bot/1.0 (+https://www.gg-advisory.org)"}
+    attempts, data = 0, None
+    while attempts < 3:
+        attempts += 1
+        try:
+            resp = requests.get(url, headers=headers, timeout=30)
+            resp.raise_for_status()
+            data = resp.content
+            break
+        except Exception:
+            time.sleep(1.2 * attempts)
+    if data is None:
+        return out
+
+    parsed = feedparser.parse(data)
+    for e in (parsed.entries or []):
+        link = e.get("link") or e.get("id")
+        if not link:
+            continue
+        link = _normalize_url(link)
+        # RSS usually provides published_parsed; if missing, we skip to avoid wrong-month leakage
+        ts = None
+        try:
+            if getattr(e, "published_parsed", None):
+                ts = time.mktime(e.published_parsed)
+            elif getattr(e, "updated_parsed", None):
+                ts = time.mktime(e.updated_parsed)
+        except Exception:
+            ts = None
+        if ts is None:
+            continue
+
+        out.append(Item(
+            title=(e.get("title") or "").strip(),
+            url=link,
+            source=url,
+            published_ts=ts,
+            summary=(e.get("summary") or "").strip()
+        ))
+    return out
 
 
 def fetch_html_index(url: str) -> List[Item]:
-    out: List[Item] = []
-    html = requests.get(url, timeout=30).text
-    soup = BeautifulSoup(html, "html.parser")
+    """Fetch a listing page; extract likely article links; fetch each to capture a reliable date."""
+    try:
+        r = requests.get(url, timeout=30, allow_redirects=True)
+        r.raise_for_status()
+    except Exception:
+        return []
+    soup = BeautifulSoup(r.text, "html.parser")
 
-    # find candidate links
-    links = soup.find_all("a", href=True)
-    for a in links:
-        href = a["href"]
-        if not href.startswith("http"):
+    domain = urllib.parse.urlparse(url).netloc.lower()
+    sel = SELECTORS.get(domain, "article a, .news a, a[href*='news'], a[href*='press'], a[href*='media']")
+
+    candidates = []
+    for a in soup.select(sel):
+        href = a.get("href")
+        if not href:
             continue
-        title = a.get_text(strip=True)
-        if len(title) < 20:
+        # build absolute URL
+        if href.startswith("/"):
+            base = f"{urllib.parse.urlparse(url).scheme}://{domain}"
+            href = urllib.parse.urljoin(base, href)
+        href = _normalize_url(href)
+
+        # skip category/listing endpoints
+        if re.search(r"(category|tags|/newsroom$|/news$|/media$|/press$|/publications$)", href, re.I):
             continue
 
-        asoup = BeautifulSoup(requests.get(href, timeout=20).text, "html.parser")
+        title = (a.get_text(" ", strip=True) or "").strip()
+        candidates.append((title, href))
+
+    # de-dupe by href
+    uniq = {}
+    for title, href in candidates:
+        if href not in uniq:
+            uniq[href] = title
+
+    items: List[Item] = []
+    for href, title in list(uniq.items())[:80]:
+        try:
+            ar = requests.get(href, timeout=30, allow_redirects=True)
+            ar.raise_for_status()
+        except Exception:
+            continue
+        asoup = BeautifulSoup(ar.text, "html.parser")
+
+        # 1) Try meta/time tags
         ts = _guess_published_ts(asoup)
-        # fallback: try date in URL
+
+        # 2) Fallback: parse YYYY/MM/DD in URL
         if ts is None:
             m = re.search(r"/(20\d{2})/(0[1-9]|1[0-2])/(0[1-9]|[12]\d|3[01])/", href)
             if m:
                 from datetime import datetime, timezone
                 try:
-                    ts = datetime(
-                        int(m.group(1)), int(m.group(2)), int(m.group(3))
-                    ).replace(tzinfo=timezone.utc).timestamp()
+                    ts = datetime(int(m.group(1)), int(m.group(2)), int(m.group(3))).replace(
+                        tzinfo=timezone.utc
+                    ).timestamp()
                 except Exception:
                     ts = None
-        if ts is None:
-            continue  # skip undated items
 
-        summary = trafilatura.extract(asoup.prettify(), include_comments=False, include_tables=False)
-        if not summary:
+        # 3) If still None, SKIP (prevents wrong-month leakage)
+        if ts is None:
             continue
-        out.append(Item(title=title, url=href, summary=summary[:600], published_ts=ts, source=url))
-    return out
+
+        if not title:
+            page_t = asoup.title.string if asoup.title else ""
+            title = (page_t or href.split("/")[-1].replace("-", " "))[:140]
+
+        # Light summary from page
+        summary = trafilatura.extract(ar.text, include_formatting=False, include_links=False) or ""
+
+        items.append(Item(
+            title=title.strip(),
+            url=href,
+            source=url,
+            published_ts=ts,
+            summary=(summary or "").strip()
+        ))
+
+    items.sort(key=lambda x: (x.published_ts or 0), reverse=True)
+    return items
+
+
+def fetch_full_text(u: str) -> str:
+    """Pull main-page text, then append first pages of any trusted PDF linked from the page."""
+    base_text = ""
+    try:
+        fetched = trafilatura.fetch_url(u, no_ssl=True)
+        base_text = trafilatura.extract(fetched, include_formatting=False, include_links=False) or ""
+        base_text = (base_text or "").strip()
+    except Exception:
+        base_text = ""
+
+    # Try to find a trusted PDF on the page and append first 3–5 pages of text
+    try:
+        r = requests.get(u, timeout=30)
+        r.raise_for_status()
+        soup = BeautifulSoup(r.text, "html.parser")
+        for a in soup.select("a[href$='.pdf']"):
+            href = a.get("href") or ""
+            if not href:
+                continue
+            if href.startswith("/"):
+                parsed = urllib.parse.urlparse(u)
+                href = f"{parsed.scheme}://{parsed.netloc}{href}"
+            if not _is_trusted_pdf(href):
+                continue
+            pdf_bytes = _download(href, max_bytes=MAX_PDF_BYTES)
+            if not pdf_bytes:
+                continue
+            if magic:
+                kind = magic.from_buffer(pdf_bytes, mime=True)
+                if kind and kind != "application/pdf":
+                    continue
+            snippet = _extract_pdf_bytes(pdf_bytes, max_pages=5)
+            if snippet and len(snippet) > 400:
+                return (base_text + "\n\n[PDF excerpt]\n" + snippet).strip()
+    except Exception:
+        pass
+
+    return base_text
