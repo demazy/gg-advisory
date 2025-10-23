@@ -1,0 +1,42 @@
+name: resend-last-digest
+on:
+  workflow_dispatch:
+    inputs:
+      recipient:
+        description: "Email to send to"
+        required: true
+        default: "a.demazy_de_fortet@icloud.com"
+
+jobs:
+  resend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+
+      - name: Find latest digest file
+        id: latest
+        run: |
+          set -e
+          f=$(ls -1t out/monthly-digest-*.md | head -n 1 || true)
+          if [ -z "$f" ]; then
+            echo "No digest file found in out/." >&2
+            exit 1
+          fi
+          echo "file=$f" >> $GITHUB_OUTPUT
+          echo "Found: $f"
+
+      - name: Email digest (iCloud)
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.mail.me.com
+          server_port: 587
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "GG Advisory | Resent digest: ${{ steps.latest.outputs.file }}"
+          from: ${{ secrets.MAIL_USERNAME }}
+          to: ${{ github.event.inputs.recipient }}
+          body: |
+            Resending the latest digest attached by request.
+            File: ${{ steps.latest.outputs.file }}
+          attachments: ${{ steps.latest.outputs.file }}
