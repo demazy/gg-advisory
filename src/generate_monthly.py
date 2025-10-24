@@ -141,10 +141,18 @@ def collect_items(s: Dict, drop_log) -> List[Item]:
 
 def _mk_drop_logger(drop_path: Path):
     drop_path.parent.mkdir(parents=True, exist_ok=True)
+    # Create/overwrite with a header so the file always exists
+    with drop_path.open("w", encoding="utf-8") as f:
+        f.write("# reason\tmeta\turl\n")
     def _log(line: str):
+        # Append to file
         with drop_path.open("a", encoding="utf-8") as f:
             f.write(line.rstrip() + "\n")
+        # Also echo to stdout when DEBUG so it appears in the job logs
+        if DEBUG:
+            print(line)
     return _log
+
 
 def _dump_json(path: Path, obj):
     path.parent.mkdir(parents=True, exist_ok=True)
