@@ -57,11 +57,9 @@ jobs:
           echo "---- DEBUG DROPS (first 80 lines) ----"
           head -n 80 out/debug-drops-2025-02.txt || echo "no debug-drops file"
           echo "---- DEBUG POOLS ----"
-          ls -lh out/debug-pool-*2025-02*.json || true
+          ls -lh out/debug-pool-*2025-02*.json || echo "no pool snapshots"
           echo "---- DEBUG SELECTED ----"
           cat out/debug-selected-2025-02.json 2>/dev/null || echo "no debug-selected file"
-      
-
 
       - name: Commit outputs
         run: |
