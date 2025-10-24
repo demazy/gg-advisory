@@ -215,9 +215,8 @@ def fetch_rss(url: str) -> List[Item]:
         ))
     return out
 
-
 def fetch_html_index(url: str) -> List[Item]:
-    """Fetch a listing page; extract likely article links; fetch each to capture a reliable date."""
+    """Fetch a listing page; extract likely article links; then fetch each to capture a reliable date."""
     try:
         r = requests.get(url, timeout=30, allow_redirects=True)
         r.raise_for_status()
@@ -228,22 +227,35 @@ def fetch_html_index(url: str) -> List[Item]:
     domain = urllib.parse.urlparse(url).netloc.lower()
     sel = SELECTORS.get(domain, "article a, .news a, a[href*='news'], a[href*='press'], a[href*='media']")
 
-    # Domain-specific guardrails for known listing-heavy sites
+    # Domain-specific guardrails for listing-heavy sites
     LISTING_ENDPOINTS = {
         "/news", "/newsroom", "/media", "/press", "/publications",
-        "/updates", "/news-and-calendar/news"
+        "/updates", "/news-and-calendar/news", "/news-centre",
+        "/about-asic/news-centre", "/publications"
     }
     REQUIRE_DETAIL = {
-        # Require EFRAG detail pages like /en/news-and-calendar/news/<slug>
+        # Require detail pages
         "efrag.org": re.compile(r"/news-and-calendar/news/[^/?#]+", re.I),
+        "ec.europa.eu": re.compile(r"/presscorner/detail/[^/?#]+/[^/?#]+", re.I),
+        "commission.europa.eu": re.compile(r"/presscorner/detail/[^/?#]+/[^/?#]+", re.I),
+        "energynetworks.com.au": re.compile(r"/news/(media-releases|energy-insider)/[^/?#]+", re.I),
+        "aemc.gov.au": re.compile(r"/news-centre/[^/?#]+", re.I),
+        "aemo.com.au": re.compile(r"/news(room|)/[^/?#]+", re.I),
+        "arena.gov.au": re.compile(r"/news/[^/?#]+", re.I),
+        "cefc.com.au": re.compile(r"/media/[^/?#]+", re.I),
+        "asic.gov.au": re.compile(r"/about-asic/news-centre/[^/?#]+", re.I),
     }
-    DROP_QUERIES_ON = {"efrag.org", "irena.org", "energynetworks.com.au", "globalreporting.org"}
+    DROP_QUERIES_ON = {
+        "efrag.org", "irena.org", "energynetworks.com.au",
+        "globalreporting.org", "aemc.gov.au"
+    }
 
     candidates = []
     for a in soup.select(sel):
         href = a.get("href")
         if not href:
             continue
+
         # absolute URL
         if href.startswith("/"):
             base = f"{urllib.parse.urlparse(url).scheme}://{domain}"
@@ -253,31 +265,30 @@ def fetch_html_index(url: str) -> List[Item]:
         parsed = urllib.parse.urlparse(href)
         path = parsed.path or "/"
 
-        # 0) Skip anchors to the same page
+        # 0) Skip same-page anchors
         if parsed.fragment:
             continue
 
-        # 1) Skip listing endpoints exactly (e.g., /news, /updates)
+        # 1) Skip hub endpoints
         if path.rstrip("/") in LISTING_ENDPOINTS:
             continue
 
-        # 2) Skip query-string links on known listing-heavy domains
+        # 2) Drop query links on listing-heavy domains (filters/pagination)
         if parsed.query and domain in DROP_QUERIES_ON:
             continue
 
-        # 3) Domain-specific requirement for detail page shapes
+        # 3) Require detail shape on specific domains
         req = REQUIRE_DETAIL.get(domain)
         if req and not req.search(path):
-            # Likely a hub/listing or filter page: skip early
             continue
 
         title = (a.get_text(" ", strip=True) or "").strip()
-        if len(title) < 20:
+        if len(title) < 12:
             continue
 
         candidates.append((title, href))
 
-    # de-dupe by href
+    # de-dupe
     uniq = {}
     for title, href in candidates:
         if href not in uniq:
@@ -292,7 +303,7 @@ def fetch_html_index(url: str) -> List[Item]:
             continue
         asoup = BeautifulSoup(ar.text, "html.parser")
 
-        # Canonical sanity check: if canonical resolves to a known listing endpoint, skip
+        # Canonical sanity check: if canonical points to a hub, skip
         canon = asoup.find("link", rel=lambda v: v and v.lower() == "canonical")
         if canon and canon.get("href"):
             chref = canon["href"]
@@ -300,15 +311,13 @@ def fetch_html_index(url: str) -> List[Item]:
                 cparsed = urllib.parse.urlparse(chref)
                 if (cparsed.netloc.lower() == domain and
                     (cparsed.path or "/").rstrip("/") in LISTING_ENDPOINTS):
-                    # Canonical is a listing hub -> not an article
                     continue
             except Exception:
                 pass
 
-        # 1) Try meta/time tags
         ts = _guess_published_ts(asoup)
 
-        # 2) Fallback: parse YYYY/MM/DD in URL
+        # Fallback: parse YYYY/MM/DD in URL
         if ts is None:
             m = re.search(r"/(20\d{2})/(0[1-9]|1[0-2])/(0[1-9]|[12]\d|3[01])/", href)
             if m:
@@ -320,7 +329,7 @@ def fetch_html_index(url: str) -> List[Item]:
                 except Exception:
                     ts = None
 
-        # 3) If still None, SKIP (prevents wrong-month leakage)
+        # Still unknown date? skip to avoid wrong-month leakage
         if ts is None:
             continue
 
@@ -328,7 +337,6 @@ def fetch_html_index(url: str) -> List[Item]:
             page_t = asoup.title.string if asoup.title else ""
             title = (page_t or href.split("/")[-1].replace("-", " "))[:140]
 
-        # Light summary from page
         summary = trafilatura.extract(ar.text, include_formatting=False, include_links=False) or ""
 
         items.append(Item(
@@ -341,6 +349,7 @@ def fetch_html_index(url: str) -> List[Item]:
 
     items.sort(key=lambda x: (x.published_ts or 0), reverse=True)
     return items
+
 
 def fetch_full_text(u: str) -> str:
     """Pull main-page text, then append first pages of any trusted PDF linked from the page."""
