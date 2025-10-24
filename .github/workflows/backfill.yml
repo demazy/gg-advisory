@@ -37,6 +37,15 @@ jobs:
           PDF_TRUSTED: "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org"
           PER_DOMAIN_CAP: "3"
         run: python -m src.generate_monthly
+        
+      - name: List debug files
+        if: always()       # always run, even if digest generation fails
+        run: |
+          echo "---- OUT DIR CONTENTS ----"
+          ls -lh out/ | sed -n '1,200p'
+          echo "---- DEBUG DROPS (first 20 lines) ----"
+          head -n 20 out/debug-drops-*.txt || echo "no drop logs found"
+          echo "--------------------------------------"
 
       - name: Commit outputs
         run: |
