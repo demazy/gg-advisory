@@ -1,16 +1,32 @@
 name: monthly-digest
+
 on:
   schedule:
-    # Run daily at 20:10 UTC (~07:10 AEST/AEDT).
-    # A guard below ensures we only generate on the 1st in Melbourne and from Nov 2025 onward.
-    - cron: "10 20 * * *"
-  workflow_dispatch: {}
+    # 00:10 UTC on the 1st of each month
+    # (10:10 or 11:10 in Australia/Melbourne depending on DST)
+    - cron: "10 0 1 * *"
+  workflow_dispatch:
+    inputs:
+      year:
+        description: "Year to backfill (e.g., 2025)"
+        required: false
+        default: ""
+      month:
+        description: "Month to backfill (01..12)"
+        required: false
+        default: ""
+      debug:
+        description: "Enable verbose debug artifacts"
+        required: false
+        default: "false"
+        type: choice
+        options: ["false", "true"]
 
 permissions:
   contents: write
 
 jobs:
-  monthly:
+  run-monthly:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,19 +34,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Set DATE_SLUG (UTC)
-        run: echo "DATE_SLUG=$(date -u +'%Y-%m-%d')" >> $GITHUB_ENV
-
-      - name: Exit unless it's the 1st in Melbourne AND >= 2025-11-01
-        run: |
-          export TZ=Australia/Melbourne
-          TODAY=$(date +%Y-%m-%d)
-          DAY=$(date +%d)
-          if [ "$DAY" != "01" ]; then
-            echo "Not the 1st in Melbourne → skipping"; exit 0; fi
-          if [ "$(date -d "$TODAY" +%s)" -lt "$(date -d "2025-11-01" +%s)" ]; then
-            echo "Pre-Nov-2025 → skipping"; exit 0; fi
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -40,53 +43,87 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Compute last month bounds (Melbourne)
-        id: bounds
+      - name: Compute target month (prev month in Australia/Melbourne, unless inputs provided)
+        id: when
+        shell: bash
         run: |
-          export TZ=Australia/Melbourne
-          START=$(date -d "$(date +%Y-%m-01) -1 month" +%Y-%m-01)
-          END=$(date -d "$(date +%Y-%m-01) -1 day" +%Y-%m-%d)
-          echo "start=$START" >> $GITHUB_OUTPUT
-          echo "end=$END" >> $GITHUB_OUTPUT
-          echo "Generating digest for $START to $END"
+          set -euo pipefail
+
+          IN_YEAR="${{ github.event.inputs.year || '' }}"
+          IN_MONTH="${{ github.event.inputs.month || '' }}"
+
+          if [[ -n "$IN_YEAR" && -n "$IN_MONTH" ]]; then
+            YM="$(printf "%04d-%02d" "$IN_YEAR" "$IN_MONTH")"
+          else
+            # Previous month in Australia/Melbourne
+            # Take the first of the current month, subtract one day -> last day of previous month
+            LAST_PREV=$(TZ=Australia/Melbourne date -d "$(TZ=Australia/Melbourne date +%Y-%m-01) -1 day" +%Y-%m-%d)
+            YM=$(TZ=Australia/Melbourne date -d "$LAST_PREV" +%Y-%m)
+          fi
+
+          echo "ym=$YM" >> "$GITHUB_OUTPUT"
+          echo "Chosen month: $YM"
 
       - name: Generate monthly digest
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          MODE: single
-          START_DATE: ${{ steps.bounds.outputs.start }}
-          END_DATE:   ${{ steps.bounds.outputs.end }}
-          ITEMS_PER_SECTION: "3"     # tune 2–4 for monthly size
-          MIN_TEXT_CHARS: "700"
+          MODE: backfill-months
+          START_YM: ${{ steps.when.outputs.ym }}
+          END_YM:   ${{ steps.when.outputs.ym }}
+
+          # ----- Content tuning -----
+          ITEMS_PER_SECTION: "7"
+          PER_DOMAIN_CAP: "3"
+          MIN_TEXT_CHARS: "300"
+          PRIORITY_MIN_CHARS: "200"
+          MIN_TOTAL_ITEMS: "1"
+
+          PRIORITY_DOMAINS: "aemo.com.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au,ec.europa.eu,commission.europa.eu"
           MODEL: gpt-4o-mini
           TEMP: "0.2"
+
+          # ----- Hybrid PDF capture -----
           MAX_PDF_BYTES: "5242880"
           PDF_TRUSTED: "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org"
+
+          # ----- Debug toggle -----
+          DEBUG: ${{ github.event.inputs.debug == 'true' && '1' || '0' }}
         run: python -m src.generate_monthly
 
-      - name: Rebase & push (safe)
+      - name: List outputs
+        if: always()
         run: |
+          echo "---- OUT ----"
+          ls -lh out/ | sed -n '1,400p' || true
+          echo "---- SELECTED (count) ----"
+          for f in out/debug-selected-${{ steps.when.outputs.ym }}.json; do
+            test -f "$f" && { echo -n "$f: "; jq -r 'length' "$f"; } || true
+          done
+          echo "---- DROPS (first 40 lines) ----"
+          test -f "out/debug-drops-${{ steps.when.outputs.ym }}.txt" && head -n 40 "out/debug-drops-${{ steps.when.outputs.ym }}.txt" || true
+
+      - name: Commit outputs (digest + debug when enabled)
+        run: |
+          set -e
           git config user.name "content-bot"
           git config user.email "content-bot@example.com"
-          git fetch origin main
-          git rebase origin/main || (git rebase --abort && exit 1)
-          echo -e "__pycache__/\n*.pyc" >> .gitignore
-          git add -f out/monthly-digest-*.md .gitignore
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-          else
-            export TZ=Australia/Melbourne
-            git commit -m "auto: monthly digest $(date +%Y-%m)"
-            git push --force-with-lease
+          git add -f "out/monthly-digest-${{ steps.when.outputs.ym }}.md"
+          # If debug ON, commit artifacts too
+          if [[ "${{ github.event.inputs.debug }}" == "true" ]]; then
+            git add -f "out/debug-selected-${{ steps.when.outputs.ym }}.json" || true
+            git add -f "out/debug-drops-${{ steps.when.outputs.ym }}.txt" || true
+            git add -f "out/debug-pool-*" || true
+            git add -f "out/debug-meta-${{ steps.when.outputs.ym }}.txt" || true
           fi
 
-      - name: Find latest digest file
-        id: latest
-        run: |
-          f=$(ls -1t out/monthly-digest-*.md | head -n 1)
-          echo "file=$f" >> $GITHUB_OUTPUT
-          echo "Found: $f"
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "monthly: digest ${{ steps.when.outputs.ym }} (debug=${{ github.event.inputs.debug || 'false' }})"
+            git push
+          fi
 
+      # Email digest (and optionally debug) via iCloud SMTP
       - name: Email monthly digest (iCloud)
         if: success()
         uses: dawidd6/action-send-mail@v3
@@ -95,13 +132,12 @@ jobs:
           server_port: 587
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
-          subject: "GG Advisory | Monthly Digest — ${{ env.DATE_SLUG }}"
-          from: "content-bot@gg-advisory.org"
-          to: "you@icloud.com"
+          subject: "GG Advisory | Monthly Digest (${{ steps.when.outputs.ym }})"
+          from: "GG Advisory <${{ secrets.MAIL_USERNAME }}>"
+          to: "a.demazy_de_fortet@icloud.com"
           body: |
-            ✅ Monthly digest generated.
-
-            Attached is the latest digest covering last month.
-            Files are also available here:
-            https://github.com/${{ github.repository }}/tree/main/out
-          attachments: ${{ steps.latest.outputs.file }}
+            ✅ Monthly digest for ${{ steps.when.outputs.ym }} attached.
+            Repo: https://github.com/${{ github.repository }}/tree/main/out
+          attachments: |
+            out/monthly-digest-${{ steps.when.outputs.ym }}.md
+            ${{ github.event.inputs.debug == 'true' && format('out/debug-selected-{0}.json,out/debug-drops-{0}.txt', steps.when.outputs.ym) || '' }}
