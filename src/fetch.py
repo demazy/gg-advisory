@@ -26,6 +26,24 @@ except Exception as e:
         "Add 'pymupdf' to requirements.txt."
     ) from e
 
+import calendar  # NEW
+
+DEBUG = os.getenv("DEBUG", "0") == "1"           # NEW
+TARGET_YM = os.getenv("TARGET_YM", "")           # NEW, e.g., "2025-02"
+
+# Domains that commonly encode year/month in their URLs
+MONTHY_URL_DOMAINS = {
+    "irena.org",
+    "energynetworks.com.au",
+    "arena.gov.au",
+    "aemc.gov.au",
+    "aemo.com.au",
+    "cefc.com.au",
+    "iea.org",
+    "efrag.org",
+    "ifrs.org",
+}
+
 
 # ---------------- Models ----------------
 
@@ -167,6 +185,44 @@ def _extract_pdf_bytes(pdf_bytes: bytes, max_pages: int = 5) -> str:
             return "\n".join(text).strip()
     except Exception:
         return ""
+def _month_hint_ok(domain: str, path: str, target_ym: str) -> bool:
+    """
+    Cheap URL-based pre-filter to skip links that are obviously outside the
+    target month (based on URL patterns). Conservative:
+      - Only enforces on domains known to embed months in paths
+      - Returns True by default when unsure (lets date extraction enforce final range)
+    """
+    if not target_ym or not path:
+        return True
+
+    domain = (domain or "").lower()
+    if domain not in MONTHY_URL_DOMAINS:
+        return True
+
+    # Parse target year and month
+    try:
+        y_str, m_str = target_ym.split("-")
+        y = int(y_str)
+        m = int(m_str)
+        mon_abbr = calendar.month_abbr[m]  # e.g., "Feb"
+    except Exception:
+        return True
+
+    # Domain-specific pattern: IRENA uses /YYYY/Mon/
+    if domain == "irena.org":
+        ok = f"/{y}/{mon_abbr}/" in path
+        if DEBUG and not ok:
+            print(f"[prefilter-skip-month] {domain}{path} (expected /{y}/{mon_abbr}/)")
+        return ok
+
+    # Generic patterns: /YYYY/MM/ or /YYYY-MM
+    if re.search(rf"/{y}/0?{m}/", path):
+        return True
+    if re.search(rf"/{y}-{m:02d}\b", path):
+        return True
+
+    # Unsure? allow it; final range filter will catch it later.
+    return True
 
 
 # -------------- Fetchers --------------
@@ -265,6 +321,13 @@ def fetch_html_index(url: str) -> List[Item]:
         parsed = urllib.parse.urlparse(href)
         link_domain = parsed.netloc.lower()
         path = (parsed.path or "/")
+        
+        # ✅ Month hint prefilter using the LINK'S domain, not the source page's
+        if not _month_hint_ok(link_domain, path, os.getenv("TARGET_YM", "")):
+            if DEBUG:
+                print(f"[prefilter-skip-month] {href}")
+            continue
+
         
         # ✅ Use LINK domain for the month hint filter
         if not _month_hint_ok(link_domain, path, os.getenv("TARGET_YM","")):
