@@ -1,6 +1,3 @@
-# Filters for GG Advisory digest automation
-# Applied automatically in src/generate_monthly.py
-
 allow_domains:
   - aemo.com.au
   - aemc.gov.au
@@ -9,47 +6,32 @@ allow_domains:
   - arena.gov.au
   - cefc.com.au
   - dcceew.gov.au
-  - infrastructureaustralia.gov.au
   - energynetworks.com.au
-  - ifrs.org
-  - efrag.org
-  - globalreporting.org
-  - fsb-tcfd.org
-  - asic.gov.au
+  - infrastructureaustralia.gov.au
   - iea.org
   - irena.org
-  - australianinvestmentcouncil.com.au
-  - bnef.com
-  - ec.europa.eu         # ← NEW
+  - ifrs.org
+  - efrag.org
+  - ec.europa.eu
+  - commission.europa.eu
 
 deny_domains:
-  # Filter social media, marketing mirrors, and non-official distributors
-  - facebook.com
-  - x.com
-  - twitter.com
-  - linkedin.com
-  - youtube.com
-  - medium.com
-  - mailchi.mp
-  - substack.com
-  - eventbrite.com
+  - bbc.com
+  - bloomberg.com
 
 title_deny_regex:
-  # Exclude low-value categories and non-informative posts
-  - "(?i)newsletter(?!.*(ifrs|issb|efrag))"
-  - "(?i)subscribe|sign[- ]?up|mailing list"
-  - "(?i)events?\\b|webinar|conference|roundtable|workshop|training"
-  - "(?i)careers?|job opening|vacan(cy|cies)|appl(y|ications?)"
-  - "(?i)podcast|video|watch|livestream"
-  - "(?i)tender|procurement|request for (tender|proposal)"
-  - "(?i)photo gallery|highlights|our people|community update"
-  - "(?i)award|finalist|shortlist|nominee"
-  - "(?i)opinion|editorial|blog|insight|commentary"
+  - "(webcast|podcast|register|replay)"      # junky meeting links
+  - "(photo|gallery)"                        # image posts
+  - "(award|awards|nominee|winners)"         # not signals
+  - "(terms? & conditions|privacy|cookies)"  # legal boilerplate
 
 keep_keywords:
-  - "consultation"
-  - "final report"
-  - "market notice"
-  - "decision"
-  - "determination"
+  - standard
+  - decision
+  - guidance
+  - consultation
+  - regulation
+  - investment
+  - funding
+
 
