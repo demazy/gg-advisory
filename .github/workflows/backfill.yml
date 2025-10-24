@@ -26,8 +26,8 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MODE: backfill-months
-          START_YM: "2025-02"
-          END_YM:   "2025-02"
+          START_YM: "2025-01"
+          END_YM:   "2025-09"
 
           # Intake/quality knobs
           ITEMS_PER_SECTION: "6"
