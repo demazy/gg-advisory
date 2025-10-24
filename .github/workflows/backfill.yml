@@ -23,20 +23,31 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Generate monthly digests (Jan→Oct 2025)
+      - name: Generate monthly digest (Feb 2025, DEBUG)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MODE: backfill-months
           START_YM: "2025-02"
           END_YM:   "2025-02"
-          ITEMS_PER_SECTION: "5"     # more thorough baseline capture
-          MIN_TEXT_CHARS: "500"
-          MODEL: gpt-4o-mini
-          TEMP: "0.2"
+      
+          # Make intake a bit more permissive for debugging
+          ITEMS_PER_SECTION: "6"
+          MIN_TEXT_CHARS: "350"
+          PER_DOMAIN_CAP: "3"
+          MIN_TOTAL_ITEMS: "1"            # allow digest when 1+ item survives
+      
+          # Priority-domain leniency (short AU/EU pages that link to PDFs)
+          PRIORITY_MIN_CHARS: "250"
+          PRIORITY_DOMAINS: "aemo.com.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au,ec.europa.eu,commission.europa.eu"
+      
+          # Hybrid PDF extraction
           MAX_PDF_BYTES: "5242880"
           PDF_TRUSTED: "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org"
-          PER_DOMAIN_CAP: "3"
+      
+          # 🔧 Turn on debug to emit drop logs and pool snapshots
+          DEBUG: "1"
         run: python -m src.generate_monthly
+
         
       - name: List debug files
         if: always()       # always run, even if digest generation fails
