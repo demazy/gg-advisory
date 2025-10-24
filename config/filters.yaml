@@ -24,6 +24,8 @@ title_deny_regex:
   - "(photo|gallery)"                        # image posts
   - "(award|awards|nominee|winners)"         # not signals
   - "(terms? & conditions|privacy|cookies)"  # legal boilerplate
+  - "(register|replay|webcast|podcast)"
+  - "(photo|gallery|award|nominee)"
 
 keep_keywords:
   - standard
