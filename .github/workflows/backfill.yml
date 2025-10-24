@@ -48,15 +48,25 @@ jobs:
           DEBUG: "1"
         run: python -m src.generate_monthly
 
-        
+              
       - name: List debug files
-        if: always()       # always run, even if digest generation fails
+        if: always()
         run: |
-          echo "---- OUT DIR CONTENTS ----"
-          ls -lh out/ | sed -n '1,200p'
-          echo "---- DEBUG DROPS (first 20 lines) ----"
-          head -n 20 out/debug-drops-*.txt || echo "no drop logs found"
-          echo "--------------------------------------"
+          echo "---- OUT DIR ----"
+          ls -lh out/ | sed -n '1,200p' || true
+      
+          echo "---- DEBUG DROPS (first 60 lines) ----"
+          head -n 60 out/debug-drops-2025-02*.txt || echo "no debug-drops file"
+      
+          echo "---- DEBUG POOLS ----"
+          ls -lh out/debug-pool-*2025-02*.json || echo "no pool snapshots"
+      
+          echo "---- DEBUG SELECTED ----"
+          cat out/debug-selected-2025-02.json 2>/dev/null || echo "no debug-selected file"
+      
+          echo "---- DIGEST PREVIEW ----"
+          sed -n '1,80p' out/monthly-digest-2025-02.md 2>/dev/null || echo "no digest file for Feb"
+
 
       - name: Commit outputs
         run: |
