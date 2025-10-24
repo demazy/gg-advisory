@@ -141,17 +141,17 @@ def collect_items(s: Dict, drop_log) -> List[Item]:
 
 def _mk_drop_logger(drop_path: Path):
     drop_path.parent.mkdir(parents=True, exist_ok=True)
-    # Create/overwrite with a header so the file always exists
+    # Always (re)create the file with a header so it exists even if no drops happen
     with drop_path.open("w", encoding="utf-8") as f:
         f.write("# reason\tmeta\turl\n")
     def _log(line: str):
-        # Append to file
         with drop_path.open("a", encoding="utf-8") as f:
             f.write(line.rstrip() + "\n")
-        # Also echo to stdout when DEBUG so it appears in the job logs
+        # Also echo to stdout when DEBUG so reasons show in the Actions log
         if DEBUG:
             print(line)
     return _log
+
 
 
 def _dump_json(path: Path, obj):
@@ -164,6 +164,8 @@ def _dump_json(path: Path, obj):
 def _generate_for_range(start: datetime, end: datetime, items_per_section: int) -> str:
     import yaml  # safe import inside function
     cfg = yaml.safe_load(CFG.read_text())
+    # Provide a month hint (YYYY-MM) to fetch.py
+    os.environ["TARGET_YM"] = start.strftime("%Y-%m")
 
     # Debug files
     ym = start.strftime("%Y-%m")
@@ -262,7 +264,7 @@ def _generate_for_range(start: datetime, end: datetime, items_per_section: int) 
     chosen = filtered[:12]
 
     # Debug snapshot of chosen
-    if DEBUG:
+    if True:
         _dump_json(
             OUTDIR / f"debug-selected-{ym}.json",
             [{"title": x["title"], "url": x["url"], "published": x["published"], "section": x["section"]} for x in chosen],
