@@ -1,32 +1,32 @@
-# Signals Digest — 2025-10-22
+**Signals Digest — April 2025**
 
-## Top Lines
+**Top Lines**
 - Global renewable energy capacity reached a record 585 GW in 2024.
-- Early-stage project financing is critical for successful energy transitions.
-- Renewables accounted for over 92% of total power capacity expansion in 2024.
+- Early-stage project financing is crucial for energy transition success.
+- Renewables accounted for over 92% of total power expansion in 2024.
 
-## Top Items
+**Top Items**
 
-### Record Renewable Energy Capacity Growth
-- **SECTION:** Sustainable Finance & Investment
-- **PUBLISHED:** 2025-04-17
-- **Summary:** The International Renewable Energy Agency (IRENA) reported that global renewable energy capacity increased by 585 gigawatts (GW) in 2024, marking a 15.1% annual growth rate. This surpasses the previous year's growth of 14.3%. Renewables now represent 46.4% of the world's total installed power capacity, up from 43% in 2023. The significant expansion underscores the economic competitiveness of renewables, which are becoming the most cost-effective power source globally.
-- *Why it matters*  
-  - Australian and European businesses can leverage this growth for investment opportunities in renewables.  
-  - The trend indicates a shift towards sustainable energy, aligning with regulatory frameworks promoting clean energy transitions.
-- **Signals to watch**  
-  - Monitoring of renewable capacity targets for 2030, aiming to triple global capacity.  
-- **Sources**  
-  - [IRENA News](https://www.irena.org/News/articles/2025/Apr/Renewables-in-2024-5-Key-Facts-Behind-a-Record-Breaking-Year)
+- **Record-Breaking Renewable Capacity in 2024**
+  - **SECTION:** Energy Transition
+  - **PUBLISHED:** 2025-04-17
+  - **Summary:** In 2024, global renewable energy capacity increased by 585 GW, marking a 15.1% growth rate, surpassing 2023's 14.3%. Renewables now represent 92.5% of total power capacity expansion, up from 85.8% in 2023. Solar and wind contributed 96.6% of this growth, with solar power alone accounting for 42% of the global renewable mix. This trend highlights the economic competitiveness of renewables, which are becoming the most cost-effective power sources worldwide.
+  - *Why it matters*
+    - This growth presents investment opportunities for AU/EU businesses in renewable sectors.
+    - Companies may need to adapt to increasing regulatory pressures favoring renewable energy.
+  - *Signals to watch*
+    - The target to triple renewable power capacity by 2030 remains a critical benchmark.
+  - **Sources**
+    - https://www.irena.org/News/articles/2025/Apr/Renewables-in-2024-5-Key-Facts-Behind-a-Record-Breaking-Year
 
-### Importance of Early-Stage Financing
-- **SECTION:** Sustainable Finance & Investment
-- **PUBLISHED:** 2025-04-03
-- **Summary:** Early-stage project financing is crucial for the development of renewable energy projects, which require substantial upfront investments for feasibility studies, environmental assessments, and financial structuring. Without adequate funding during these preparatory phases, many projects remain unbankable, delaying their progress. The IRENA highlights that while well-structured projects can achieve financial closure within 6-15 months, many struggle for years due to insufficient early-stage financing.
-- *Why it matters*  
-  - Australian and European investors should focus on financing solutions for early-stage projects to facilitate energy transitions.  
-  - Addressing funding gaps can accelerate the deployment of renewable energy, aligning with national and international climate goals.
-- **Signals to watch**  
-  - Increased emphasis on financing mechanisms for early-stage renewable projects in upcoming climate finance discussions.  
-- **Sources**  
-  - [IRENA News](https://www.irena.org/News/articles/2025/Apr/The-Success-of-Global-Energy-Transitions-Starts-with-Early-Stage-Project-Financing)
+- **Importance of Early-Stage Financing in Energy Projects**
+  - **SECTION:** Energy Transition
+  - **PUBLISHED:** 2025-04-03
+  - **Summary:** Early-stage financing is essential for renewable energy projects, covering feasibility studies, risk assessments, and financial structuring. Many projects, especially in developing countries, struggle to secure necessary funding, leading to delays in achieving financial close. The Energy Transition Accelerator Financing (ETAF) platform highlights significant disparities, particularly in Sub-Saharan Africa, where local developers face challenges in accessing capital.
+  - *Why it matters*
+    - Investors in AU/EU may find opportunities in financing early-stage renewable projects.
+    - Addressing funding gaps can accelerate the transition to renewable energy, aligning with global climate goals.
+  - *Signals to watch*
+    - The need for tailored funding mechanisms to support early-stage renewable projects is critical.
+  - **Sources**
+    - https://www.irena.org/News/articles/2025/Apr/The-Success-of-Global-Energy-Transitions-Starts-with-Early-Stage-Project-Financing

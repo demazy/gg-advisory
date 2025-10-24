@@ -1,80 +1,82 @@
-# Signals Digest — 2025-10-23
+**Signals Digest — September 2025**
 
-## Top Lines
-- China commits to reducing greenhouse gas emissions by 7-10% by 2035.
-- Global investment in clean energy reached nearly USD 2 trillion in 2024.
-- Offshore wind capacity is projected to grow from 83 GW to 2,000 GW by 2050.
+**Top Lines**
+- Global investment in clean energy reached nearly $2 trillion in 2024.
+- IRENA forecasts 91% of global electricity from renewables by 2050.
+- Australia aims for ambitious emissions reduction targets by 2035.
 
-## Top Items
+---
 
-### China’s Climate Emission Reduction Target
-- **SECTION:** Energy Transition
-- **PUBLISHED:** 2025-09-24
-- **Summary:** China has announced its first absolute target to cut greenhouse gas emissions by 7-10% by 2035. This commitment was made during a UN meeting, emphasizing the urgency for countries to submit updated climate plans ahead of COP30 in Brazil. Critics argue that the target may not be sufficient to meet global climate goals. The deadline for countries to submit their new climate commitments was extended to the end of September 2025.
-- *Why it matters:*
-  - Australian and European businesses may face increased scrutiny regarding their own emissions targets.
-  - Investors may need to reassess portfolios based on the evolving regulatory landscape in major economies like China.
-- **Signals to watch:**
-  - Upcoming COP30 discussions in November 2025.
-- **Sources:**
-  - [BBC](https://www.bbc.com/news/articles/cj4y159190go)
+**Top Items**
 
-### Infrastructure Investment for Renewable Energy
-- **SECTION:** Sustainable Finance & Investment
-- **PUBLISHED:** 2025-09-23
-- **Summary:** The International Renewable Energy Agency (IRENA) highlights the need for USD 670 billion annually from 2025 to 2030 to strengthen electricity grids globally. Despite a record addition of 582 GW of renewable power capacity in 2024, significant infrastructure gaps hinder the energy transition. The Utilities for Net Zero Alliance (UNEZA) has committed over USD 117 billion towards grid infrastructure improvements.
-- *Why it matters:*
-  - Australian utilities may need to align investments with global standards to remain competitive.
-  - Investors should consider infrastructure development as a key area for sustainable investment opportunities.
-- **Signals to watch:**
-  - Target of 11.2 terawatts of renewable capacity by 2030.
-- **Sources:**
-  - [IRENA](https://www.irena.org/News/articles/2025/Sep/Leading-Power-Sector-Companies-Reveal-Blueprint-for-Infrastructure-Upgrade)
+- **Endorsement Status Update**
+  - **SECTION:** ESG Reporting
+  - **PUBLISHED:** 2025-09-30
+  - **Summary:** The EFRAG Update provides an overview of the latest endorsement status for ESG reporting standards. This includes updates on the endorsement process and related discussions. The report is crucial for stakeholders in the EU looking to align with evolving ESG regulations.
+  - *Why it matters*
+    - Ensures compliance with EU regulations for businesses.
+    - Affects investment strategies focused on sustainable practices.
+  - **Signals to watch**
+    - Upcoming deadlines for endorsement submissions.
+  - **Sources**
+    - https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A106
 
-### Commitment to Renewable Energy Abundance
-- **SECTION:** Energy Transition
-- **PUBLISHED:** 2025-09-22
-- **Summary:** During Climate Week NYC, leaders from various sectors committed to accelerating the build-out of zero-emissions infrastructure. The event underscored the need for coordinated action to increase renewable capacity and overcome existing barriers. Notable figures included Ursula von der Leyen, President of the European Commission, and Chris Bowen, Australia's Minister for Climate Change and Energy.
-- *Why it matters:*
-  - This commitment signals a shift towards more aggressive renewable energy policies in Australia and the EU.
-  - Businesses may need to adapt to new policies aimed at enhancing renewable energy infrastructure.
-- **Signals to watch:**
-  - Future policy announcements from participating governments.
-- **Sources:**
-  - [IRENA](https://www.irena.org/News/pressreleases/2025/Sep/Leaders-of-Governments-and-Businesses-Commit-to-Accelerate-Renewable-Energy-Abundance)
+- **Invitation to Comment on Draft Amendments**
+  - **SECTION:** ESG Reporting
+  - **PUBLISHED:** 2025-09-26
+  - **Summary:** EFRAG has launched a consultation inviting comments on the Draft Endorsement Advice for Amendments to the Reduced Disclosure Standard. This initiative aims to refine ESG reporting standards and enhance transparency for stakeholders.
+  - *Why it matters*
+    - Provides an opportunity for businesses to influence ESG reporting standards.
+    - Enhances compliance frameworks for EU companies.
+  - **Signals to watch**
+    - Consultation deadline for feedback submissions.
+  - **Sources**
+    - https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A108
 
-### Support for Sustainable Aviation Fuels
-- **SECTION:** Energy Transition
-- **PUBLISHED:** 2025-09-22
-- **Summary:** The International Renewable Energy Agency (IRENA) and the International Civil Aviation Organization (ICAO) launched the ‘Finvest@ETAF’ portal to connect Sustainable Aviation Fuels (SAF) projects with global financing partners. SAFs are projected to account for 40-65% of aviation sector emission reductions by 2050, highlighting the need for significant investment in this area.
-- *Why it matters:*
-  - Australian aviation companies may benefit from new funding opportunities for SAF projects.
-  - Investors in the aviation sector should monitor developments in SAF technologies and funding mechanisms.
-- **Signals to watch:**
-  - Launch of the Finvest@ETAF portal and its impact on project funding.
-- **Sources:**
-  - [IRENA](https://www.irena.org/News/pressreleases/2025/Sep/Sustainable-Aviation-Fuels-Projects-to-Gain-New-Support-Through-IRENA-ICAO-Collaboration)
+- **Blueprint for Infrastructure Upgrade**
+  - **SECTION:** Energy Transition
+  - **PUBLISHED:** 2025-09-23
+  - **Summary:** IRENA reports that achieving the global target of 11.2 terawatts of renewable capacity by 2030 requires significant investment in grid infrastructure, estimated at $670 billion annually. The Utilities for Net Zero Alliance commits over $117 billion to this cause, emphasizing the urgency of modernizing power grids.
+  - *Why it matters*
+    - Critical for meeting renewable energy targets in Australia and the EU.
+    - Impacts investment opportunities in energy infrastructure.
+  - **Signals to watch**
+    - COP29 Global Energy Storage and Grids Pledge targets for grid expansion.
+  - **Sources**
+    - https://www.irena.org/News/articles/2025/Sep/Leading-Power-Sector-Companies-Reveal-Blueprint-for-Infrastructure-Upgrade
 
-### Emissions Reduction Target Welcomed by Energy Networks
-- **SECTION:** Energy Transition
-- **PUBLISHED:** 2025-09-18
-- **Summary:** Energy Networks Australia (ENA) has expressed support for newly announced emissions reduction targets, viewing them as a significant opportunity for Australia to lead in clean energy. The ENA emphasizes the need for strong policy frameworks and community engagement to achieve these targets effectively.
-- *Why it matters:*
-  - Australian energy companies must align their strategies with these ambitious targets to maintain regulatory compliance.
-  - Investors may see increased confidence in the Australian energy sector as it moves towards cleaner energy solutions.
-- **Signals to watch:**
-  - Development of policies to support the emissions reduction targets.
-- **Sources:**
-  - [Energy Networks Australia](https://www.energynetworks.com.au/news/media-releases/ena-statement-on-2035-emissions-reduction-target/)
+- **Commitment to Renewable Energy Abundance**
+  - **SECTION:** Energy Transition
+  - **PUBLISHED:** 2025-09-22
+  - **Summary:** During Climate Week NYC, leaders from various sectors committed to accelerating renewable energy infrastructure. The event highlighted the need for coordinated action to increase renewable capacity and reduce energy costs, with a significant investment shift towards clean energy.
+  - *Why it matters*
+    - Sets a precedent for international collaboration on energy transition.
+    - Influences policy frameworks in the EU and Australia.
+  - **Signals to watch**
+    - Future policy announcements from participating governments.
+  - **Sources**
+    - https://www.irena.org/News/pressreleases/2025/Sep/Leaders-of-Governments-and-Businesses-Commit-to-Accelerate-Renewable-Energy-Abundance
 
-### Offshore Wind Capacity Growth Projections
-- **SECTION:** Sustainable Finance & Investment
-- **PUBLISHED:** 2025-09-09
-- **Summary:** Global offshore wind capacity is projected to increase from 83 GW in 2024 to 2,000 GW by 2050. The Global Offshore Wind Alliance (GOWA) aims to reach 500 GW by 2030, with advancements in technology driving cost reductions. Public-private partnerships are essential for accelerating deployment.
-- *Why it matters:*
-  - Australian investors should consider offshore wind as a viable investment opportunity given its growth potential.
-  - Energy companies may need to adapt to new technologies and partnerships to capitalize on this expanding market.
-- **Signals to watch:**
-  - Progress towards the 500 GW target by 2030.
-- **Sources:**
-  - [IRENA](https://www.irena.org/News/articles/2025/Sep/Offshore-Wind-From-83-GW-Today-to-2000-GW-by-2050)
+- **Support for Sustainable Aviation Fuels**
+  - **SECTION:** Energy Transition
+  - **PUBLISHED:** 2025-09-22
+  - **Summary:** IRENA and ICAO launched the 'Finvest@ETAF' portal to connect Sustainable Aviation Fuels (SAF) projects with financing partners. This initiative aims to facilitate investment in SAF, which could account for up to 65% of aviation emission reductions by 2050.
+  - *Why it matters*
+    - Enhances investment opportunities in sustainable aviation.
+    - Supports compliance with international aviation emissions targets.
+  - **Signals to watch**
+    - Launch of the Finvest@ETAF portal for project submissions.
+  - **Sources**
+    - https://www.irena.org/News/pressreleases/2025/Sep/Sustainable-Aviation-Fuels-Projects-to-Gain-New-Support-Through-IRENA-ICAO-Collaboration
+
+- **ENA Statement on 2035 Emissions Reduction Target**
+  - **SECTION:** Energy Transition
+  - **PUBLISHED:** 2025-09-18
+  - **Summary:** Energy Networks Australia (ENA) supports the newly released emissions reduction targets for 2035, emphasizing the need for strong policy frameworks and community engagement to achieve these goals. The statement highlights the importance of investment in grid infrastructure.
+  - *Why it matters*
+    - Positions Australia as a leader in the global energy transition.
+    - Influences investor confidence in Australian energy markets.
+  - **Signals to watch**
+    - Future policy developments related to emissions targets.
+  - **Sources**
+    - https://www.energynetworks.com.au/news/media-releases/ena-statement-on-2035-emissions-reduction-target/

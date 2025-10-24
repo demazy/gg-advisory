@@ -1,0 +1,7 @@
+month: 2025-05
+outdir: /home/runner/work/gg-advisory/gg-advisory/out
+drops_file: /home/runner/work/gg-advisory/gg-advisory/out/debug-drops-2025-05.txt
+selected_file: /home/runner/work/gg-advisory/gg-advisory/out/debug-selected-2025-05.json
+counts:
+  selected_total: 5
+  section[Energy Transition]: 5

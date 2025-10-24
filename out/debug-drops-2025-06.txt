@@ -21,11 +21,6 @@ out_of_range	2025-07-29	https://www.irena.org/News/articles/2025/Jul/IRENAs-New-
 out_of_range	2025-07-22	https://www.irena.org/News/articles/2025/Jul/Infographic-Renewable-Power-Generation-Costs-in-2024
 out_of_range	2025-07-10	https://www.energynetworks.com.au/news/energy-insider/2025-energy-insider/what-is-nepki-and-how-can-you-help-shape-its-future/
 out_of_range	2025-07-02	https://www.irena.org/News/articles/2021/Jul/How-Decentralised-Renewables-Transform-Healthcare-Services-in-Rural-Zimbabwe
-out_of_range	2025-06-24	https://www.irena.org/News/articles/2025/Jun/IRENA-Launches-Call-for-Projects-Ahead-of-APRA-Investment-Forum-in-Sierra-Leone
-out_of_range	2025-06-16	https://www.irena.org/News/articles/2025/Jun/Innovation-Week-2025-Wrap-Up
-out_of_range	2025-06-13	https://www.irena.org/News/articles/2025/Jun/Innovation-Week-2025-As-it-Happens-Day-3
-out_of_range	2025-06-12	https://www.irena.org/News/articles/2025/Jun/Innovation-Week-2025-Day2
-out_of_range	2025-06-11	https://www.irena.org/News/articles/2025/Jun/Innovation-Week-2025-Day1
 out_of_range	2025-05-28	https://www.energynetworks.com.au/news/energy-insider/2025-energy-insider/watt-happened-unravelling-the-iberian-power-mystery/
 out_of_range	2025-05-26	https://www.irena.org/News/articles/2025/May/IRENA-Issues-Call-for-Renewable-Energy-Projects-in-Central-Asia
 out_of_range	2025-05-26	https://www.irena.org/News/articles/2025/May/IRENA-Issues-Call-for-Renewable-Energy-Projects-in-Central-Asia-RU
@@ -38,6 +33,7 @@ out_of_range	2025-04-03	https://www.irena.org/News/articles/2025/Apr/The-Success
 out_of_range	2025-03-27	https://www.energynetworks.com.au/news/energy-insider/2025-energy-insider/federal-budget-2025-whats-in-store-for-networks/
 out_of_range	2025-03-14	https://www.irena.org/News/articles/2025/Mar/Impactful-Partnerships-for-Small-Islands-Climate-Resilience-and-Sustainable-Development
 out_of_range	2025-03-04	https://www.irena.org/News/articles/2025/Mar/Transforming-the-Middle-Easts-Renewable-Surge-into-Enduring-Progress
+out_of_range	2025-02-24	https://www.irena.org/News/articles/2025/Feb/Tripling-off-grid-renewables-is-a-catalyst-for-sustainable-development-in-rural-communities
 out_of_range	2025-10-23	https://www.efrag.org/en/news-and-calendar/news
 out_of_range	2025-10-23	https://www.efrag.org/en/news-and-calendar/news?facets_query=
 out_of_range	2025-10-23	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A42
@@ -98,18 +94,19 @@ out_of_range	2025-08-01	https://www.irena.org/News/articles/2025/Aug/Unlocking-t
 out_of_range	2025-07-29	https://www.irena.org/News/articles/2025/Jul/IRENAs-New-Podcast-Series-All-Things-Renewable-Goes-Live
 out_of_range	2025-07-22	https://www.irena.org/News/articles/2025/Jul/Infographic-Renewable-Power-Generation-Costs-in-2024
 out_of_range	2025-07-02	https://www.irena.org/News/articles/2021/Jul/How-Decentralised-Renewables-Transform-Healthcare-Services-in-Rural-Zimbabwe
-out_of_range	2025-06-24	https://www.irena.org/News/articles/2025/Jun/IRENA-Launches-Call-for-Projects-Ahead-of-APRA-Investment-Forum-in-Sierra-Leone
-out_of_range	2025-06-16	https://www.irena.org/News/articles/2025/Jun/Innovation-Week-2025-Wrap-Up
-out_of_range	2025-06-13	https://www.irena.org/News/articles/2025/Jun/Innovation-Week-2025-As-it-Happens-Day-3
-out_of_range	2025-06-12	https://www.irena.org/News/articles/2025/Jun/Innovation-Week-2025-Day2
-out_of_range	2025-06-11	https://www.irena.org/News/articles/2025/Jun/Innovation-Week-2025-Day1
+duplicate_url	-	https://www.irena.org/News/articles/2025/Jun/IRENA-Launches-Call-for-Projects-Ahead-of-APRA-Investment-Forum-in-Sierra-Leone
+duplicate_url	-	https://www.irena.org/News/articles/2025/Jun/Innovation-Week-2025-Wrap-Up
+duplicate_url	-	https://www.irena.org/News/articles/2025/Jun/Innovation-Week-2025-As-it-Happens-Day-3
+duplicate_url	-	https://www.irena.org/News/articles/2025/Jun/Innovation-Week-2025-Day2
+duplicate_url	-	https://www.irena.org/News/articles/2025/Jun/Innovation-Week-2025-Day1
 out_of_range	2025-05-26	https://www.irena.org/News/articles/2025/May/IRENA-Issues-Call-for-Renewable-Energy-Projects-in-Central-Asia-RU
 out_of_range	2025-05-26	https://www.irena.org/News/articles/2025/May/IRENA-Issues-Call-for-Renewable-Energy-Projects-in-Central-Asia
 out_of_range	2025-05-20	https://www.irena.org/News/articles/2025/May/I-ACT-Building-Youths-Capacity-Through-Peer-to-Peer-Learning
 out_of_range	2025-05-12	https://www.irena.org/News/articles/2025/Apr/AFID-Enterprise-Twinning-Platform-Connecting-Businesses-for-Industrial-Decarbonization
 out_of_range	2025-05-08	https://www.irena.org/News/articles/2025/May/Closing-the-Financing-Gap-in-the-Global-South-Requires-a-Multi-Pronged-Approach
 out_of_range	2025-04-17	https://www.irena.org/News/articles/2025/Apr/Renewables-in-2024-5-Key-Facts-Behind-a-Record-Breaking-Year
-out_of_range	2025-04-03	https://www.irena.org/News/articles/2025/Apr/The-Success-of-Global-Energy-Transitions-Starts-with-Early-Stage-Project-Financing
 out_of_range	2025-03-14	https://www.irena.org/News/articles/2025/Mar/Impactful-Partnerships-for-Small-Islands-Climate-Resilience-and-Sustainable-Development
 out_of_range	2025-03-04	https://www.irena.org/News/articles/2025/Mar/Transforming-the-Middle-Easts-Renewable-Surge-into-Enduring-Progress
-duplicate_url	-	https://www.irena.org/News/articles/2025/Feb/Tripling-off-grid-renewables-is-a-catalyst-for-sustainable-development-in-rural-communities
+out_of_range	2025-02-24	https://www.irena.org/News/articles/2025/Feb/Tripling-off-grid-renewables-is-a-catalyst-for-sustainable-development-in-rural-communities
+per_domain_cap	dom=www.irena.org cap=3	https://www.irena.org/News/articles/2025/Jun/Innovation-Week-2025-Day2
+per_domain_cap	dom=www.irena.org cap=3	https://www.irena.org/News/articles/2025/Jun/Innovation-Week-2025-Day1

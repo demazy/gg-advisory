@@ -5,15 +5,10 @@ out_of_range	2025-10-09	https://www.irena.org/News/pressreleases/2025/Oct/IUCN-a
 out_of_range	2025-10-07	https://www.irena.org/News/pressreleases/2025/Oct/Womens-Share-of-the-Renewable-Energy-Workforce-Remains-at-32-percent
 out_of_range	2025-10-02	https://www.irena.org/News/articles/2025/Oct/IRENA-NewGen-2025-More-Youth-Entrepreneurs-Empowered-to-Drive-Clean-Energy-Solutions
 out_of_range	2025-10-01	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-establishment-of-national-energy-cybersecurity-body-nepki/
-out_of_range	2025-09-25	https://www.bloomberg.com/news/articles/2025-09-25/wall-street-is-turning-climate-finance-into-an-energy-security-pitch?embedded-checkout=true
-out_of_range	2025-09-24	https://www.bbc.com/news/articles/cj4y159190go
-out_of_range	2025-09-23	https://www.irena.org/News/articles/2025/Sep/Leading-Power-Sector-Companies-Reveal-Blueprint-for-Infrastructure-Upgrade
-out_of_range	2025-09-22	https://www.irena.org/News/pressreleases/2025/Sep/Leaders-of-Governments-and-Businesses-Commit-to-Accelerate-Renewable-Energy-Abundance
-out_of_range	2025-09-22	https://www.irena.org/News/pressreleases/2025/Sep/Sustainable-Aviation-Fuels-Projects-to-Gain-New-Support-Through-IRENA-ICAO-Collaboration
-out_of_range	2025-09-18	https://www.energynetworks.com.au/news/media-releases/ena-statement-on-2035-emissions-reduction-target/
-out_of_range	2025-09-12	https://www.energynetworks.com.au/news/media-releases/energy-networks-awards-honour-outstanding-sector-contributions/
-out_of_range	2025-09-12	https://www.energynetworks.com.au/news/media-releases/ausgrid-wins-2025-energy-networks-consumer-engagement-award/
-out_of_range	2025-09-09	https://www.irena.org/News/articles/2025/Sep/Offshore-Wind-From-83-GW-Today-to-2000-GW-by-2050
+domain_not_allowed	www.bloomberg.com	https://www.bloomberg.com/news/articles/2025-09-25/wall-street-is-turning-climate-finance-into-an-energy-security-pitch?embedded-checkout=true
+domain_not_allowed	www.bbc.com	https://www.bbc.com/news/articles/cj4y159190go
+title_regex	(award|awards|nominee|winners)	https://www.energynetworks.com.au/news/media-releases/energy-networks-awards-honour-outstanding-sector-contributions/
+title_regex	(award|awards|nominee|winners)	https://www.energynetworks.com.au/news/media-releases/ausgrid-wins-2025-energy-networks-consumer-engagement-award/
 out_of_range	2025-08-27	https://www.irena.org/News/articles/2025/Aug/Battery-energy-storage-systems-key-to-renewable-power-supply-demand-gaps
 out_of_range	2025-08-08	https://www.irena.org/News/articles/2025/Aug/Green-hydrogen-and-derived-commodities-an-opportunity-for-Global-Souths-green-industralisation
 out_of_range	2025-08-01	https://www.irena.org/News/articles/2025/Aug/Unlocking-the-Potential-of-High-Renewable-Power-Systems-with-Digital-Technologies-and-AI
@@ -38,6 +33,7 @@ out_of_range	2025-04-03	https://www.irena.org/News/articles/2025/Apr/The-Success
 out_of_range	2025-03-27	https://www.energynetworks.com.au/news/energy-insider/2025-energy-insider/federal-budget-2025-whats-in-store-for-networks/
 out_of_range	2025-03-14	https://www.irena.org/News/articles/2025/Mar/Impactful-Partnerships-for-Small-Islands-Climate-Resilience-and-Sustainable-Development
 out_of_range	2025-03-04	https://www.irena.org/News/articles/2025/Mar/Transforming-the-Middle-Easts-Renewable-Surge-into-Enduring-Progress
+out_of_range	2025-02-24	https://www.irena.org/News/articles/2025/Feb/Tripling-off-grid-renewables-is-a-catalyst-for-sustainable-development-in-rural-communities
 out_of_range	2025-10-23	https://www.efrag.org/en/news-and-calendar/news
 out_of_range	2025-10-23	https://www.efrag.org/en/news-and-calendar/news?facets_query=
 out_of_range	2025-10-23	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A42
@@ -53,9 +49,7 @@ out_of_range	2025-10-13	https://www.efrag.org/en/news-and-calendar/news/efrag-fr
 out_of_range	2025-10-13	https://www.efrag.org/en/updates?facets_query=
 out_of_range	2025-10-08	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A139
 out_of_range	2025-10-03	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A103
-out_of_range	2025-09-30	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A106
-out_of_range	2025-09-26	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A108
-out_of_range	2025-09-09	https://www.globalreporting.org/media/mgspa4n4/gri-global-website-term-of-use-mpgc-05222025_25-august.pdf
+domain_not_allowed	www.globalreporting.org	https://www.globalreporting.org/media/mgspa4n4/gri-global-website-term-of-use-mpgc-05222025_25-august.pdf
 out_of_range	2024-06-01	https://www.efrag.org/en/news-and-calendar/financial-reporting-publications
 out_of_range	2024-06-01	https://www.efrag.org/en/news-and-calendar/financial-reporting-publications
 out_of_range	2023-03-23	https://assets.bbhub.io/company/sites/60/2023/09/2023-Status-Report.pdf
@@ -90,8 +84,8 @@ out_of_range	2016-09-16	https://assets.bbhub.io/company/sites/60/2021/03/FINAL-T
 out_of_range	2012-02-06	https://assets.bbhub.io/company/sites/60/2020/10/TCFD-Recommendations-Report-Traditional-Chinese-Translation.pdf
 out_of_range	2012-02-06	https://assets.bbhub.io/company/sites/60/2021/12/TCFD-Status-Report-2021-Simplified-Chinese-Translation.pdf
 out_of_range	2025-10-02	https://www.irena.org/News/articles/2025/Oct/IRENA-NewGen-2025-More-Youth-Entrepreneurs-Empowered-to-Drive-Clean-Energy-Solutions
-out_of_range	2025-09-23	https://www.irena.org/News/articles/2025/Sep/Leading-Power-Sector-Companies-Reveal-Blueprint-for-Infrastructure-Upgrade
-out_of_range	2025-09-09	https://www.irena.org/News/articles/2025/Sep/Offshore-Wind-From-83-GW-Today-to-2000-GW-by-2050
+duplicate_url	-	https://www.irena.org/News/articles/2025/Sep/Leading-Power-Sector-Companies-Reveal-Blueprint-for-Infrastructure-Upgrade
+duplicate_url	-	https://www.irena.org/News/articles/2025/Sep/Offshore-Wind-From-83-GW-Today-to-2000-GW-by-2050
 out_of_range	2025-08-27	https://www.irena.org/News/articles/2025/Aug/Battery-energy-storage-systems-key-to-renewable-power-supply-demand-gaps
 out_of_range	2025-08-08	https://www.irena.org/News/articles/2025/Aug/Green-hydrogen-and-derived-commodities-an-opportunity-for-Global-Souths-green-industralisation
 out_of_range	2025-08-01	https://www.irena.org/News/articles/2025/Aug/Unlocking-the-Potential-of-High-Renewable-Power-Systems-with-Digital-Technologies-and-AI
@@ -112,4 +106,5 @@ out_of_range	2025-04-17	https://www.irena.org/News/articles/2025/Apr/Renewables-
 out_of_range	2025-04-03	https://www.irena.org/News/articles/2025/Apr/The-Success-of-Global-Energy-Transitions-Starts-with-Early-Stage-Project-Financing
 out_of_range	2025-03-14	https://www.irena.org/News/articles/2025/Mar/Impactful-Partnerships-for-Small-Islands-Climate-Resilience-and-Sustainable-Development
 out_of_range	2025-03-04	https://www.irena.org/News/articles/2025/Mar/Transforming-the-Middle-Easts-Renewable-Surge-into-Enduring-Progress
-duplicate_url	-	https://www.irena.org/News/articles/2025/Feb/Tripling-off-grid-renewables-is-a-catalyst-for-sustainable-development-in-rural-communities
+out_of_range	2025-02-24	https://www.irena.org/News/articles/2025/Feb/Tripling-off-grid-renewables-is-a-catalyst-for-sustainable-development-in-rural-communities
+per_domain_cap	dom=www.irena.org cap=3	https://www.irena.org/News/articles/2025/Sep/Offshore-Wind-From-83-GW-Today-to-2000-GW-by-2050
