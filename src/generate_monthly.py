@@ -27,7 +27,7 @@ ITEMS_PER_SECTION = int(os.getenv("ITEMS_PER_SECTION", "4"))
 PER_DOMAIN_CAP = int(os.getenv("PER_DOMAIN_CAP", "3"))
 MIN_TOTAL_ITEMS = int(os.getenv("MIN_TOTAL_ITEMS", "2"))  # if fewer than this, we skip model call
 DEBUG = os.getenv("DEBUG", "0") == "1"
-os.environ["TARGET_YM"] = start.strftime("%Y-%m")
+
 
 
 # Trusted short-content domains can have a lower character floor
@@ -171,7 +171,10 @@ def _generate_for_range(start: datetime, end: datetime, items_per_section: int) 
     # Provide a month hint (YYYY-MM) to fetch.py and compute filenames once
     ym = start.strftime("%Y-%m")
     os.environ["TARGET_YM"] = ym
-
+    
+    if DEBUG:
+        print(f"[debug] TARGET_YM set to {ym}")
+        
     # Debug files (compute exact paths and print them)
     drop_file = OUTDIR / f"debug-drops-{ym}.txt"
     pool_hint = OUTDIR / f"debug-pool-<Section>-{ym}.json"  # placeholder pattern
