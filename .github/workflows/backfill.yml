@@ -96,12 +96,7 @@ jobs:
             Monthly digests are attached. Debug artifacts are committed under /out.
             Repo: https://github.com/${{ github.repository }}/tree/main/out
           attachments: |
-            out/monthly-digest-2025-01.md,
-            out/monthly-digest-2025-02.md,
-            out/monthly-digest-2025-03.md,
-            out/monthly-digest-2025-04.md,
-            out/monthly-digest-2025-05.md,
-            out/monthly-digest-2025-06.md,
-            out/monthly-digest-2025-07.md,
-            out/monthly-digest-2025-08.md,
-            out/monthly-digest-2025-09.md
+            out/monthly-digest-2025-*.md
+            out/debug-selected-2025-*.json
+            out/debug-drops-2025-*.txt
+
