@@ -1,4 +1,4 @@
-name: backfill-2025-jan-to-sep
+name: backfill-2025-jan-sep
 on:
   workflow_dispatch: {}
 
@@ -8,6 +8,7 @@ permissions:
 jobs:
   backfill:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout (full history)
         uses: actions/checkout@v4
@@ -22,61 +23,51 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Generate monthly digests (Jan→Sep 2025, DEBUG)
+      - name: Generate monthly digests (Jan→Sep 2025)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MODE: backfill-months
           START_YM: "2025-01"
           END_YM:   "2025-09"
 
-          # Intake/quality knobs
-          ITEMS_PER_SECTION: "6"
-          MIN_TEXT_CHARS: "350"
+          # ----- Content tuning -----
+          ITEMS_PER_SECTION: "7"
           PER_DOMAIN_CAP: "3"
-          MIN_TOTAL_ITEMS: "1"   # keep digest even if few items
+          MIN_TEXT_CHARS: "300"
+          PRIORITY_MIN_CHARS: "200"
+          MIN_TOTAL_ITEMS: "1"
 
-          # Priority-domain leniency
-          PRIORITY_MIN_CHARS: "250"
-          PRIORITY_DOMAINS: "aemo.com.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au,ec.europa.eu,commission.europa.eu"
+          PRIORITY_DOMAINS: "aemo.com.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au"
+          MODEL: gpt-4o-mini
+          TEMP: "0.2"
 
-          # Hybrid PDF extraction
+          # ----- Hybrid PDF capture -----
           MAX_PDF_BYTES: "5242880"
           PDF_TRUSTED: "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org"
 
-          # 🔧 Debug artifacts (drops/selected per month)
+          # ----- Debug -----
           DEBUG: "1"
-        run: python -m src.generate_monthly
 
-      - name: Sanity check workspace & out
-        if: always()
-        run: |
-          echo "PWD = $(pwd)"
-          ls -la out/ 2>/dev/null || echo "no ./out directory"
-          echo "---- FIND debug artifacts ----"
-          find out -maxdepth 1 -type f -name 'debug-*.txt' -o -name 'debug-*.json' -print || true
+        run: python -m src.generate_monthly
 
       - name: List debug files
         if: always()
         run: |
-          echo "---- OUT ----"
-          ls -lh out/ || true
-          echo "---- META ----"
-          cat out/debug-meta-2025-02.txt || true
-          echo "---- DROPS (first 40) ----"
-          head -n 40 out/debug-drops-2025-02.txt || true
-          echo "---- SELECTED ----"
-          cat out/debug-selected-2025-02.json || true
+          echo "---- OUT DIR CONTENTS ----"
+          ls -lh out/ | sed -n '1,200p'
+          echo "---- DEBUG DROPS (first 20 lines) ----"
+          head -n 20 out/debug-drops-*.txt || echo "no drop logs found"
+          echo "--------------------------------------"
 
-
-      - name: Commit outputs (digests + debug)
+      - name: Commit outputs
         run: |
           git config user.name "content-bot"
           git config user.email "content-bot@example.com"
-          git add -f out/monthly-digest-2025-*.md out/debug-*.*
+          git add -f out/monthly-digest-2025-*.md
           if git diff --cached --quiet; then
             echo "No changes."
           else
-            git commit -m "backfill: monthly digests Jan–Sep 2025 (with debug)"
+            git commit -m "backfill: monthly digests Jan–Sep 2025"
             git push
           fi
 
@@ -88,15 +79,15 @@ jobs:
           server_port: 587
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
-          subject: "GG Advisory | Backfill digests (Jan–Sep 2025)"
-          from: "GG Advisory <${{ secrets.MAIL_USERNAME }}>"
+          subject: "GG Advisory | Backfill Digests (Jan–Sep 2025)"
+          from: "content-bot@gg-advisory.org"
           to: "a.demazy_de_fortet@icloud.com"
           body: |
-            ✅ Backfill complete (Jan–Sep 2025).
-            Monthly digests are attached. Debug artifacts are committed under /out.
-            Repo: https://github.com/${{ github.repository }}/tree/main/out
+            ✅ Backfill complete.
+            This message includes monthly digests for Jan–Sep 2025 and debug logs.
+            You can also browse them here:
+            https://github.com/${{ github.repository }}/tree/main/out
           attachments: |
             out/monthly-digest-2025-*.md
             out/debug-selected-2025-*.json
             out/debug-drops-2025-*.txt
-
