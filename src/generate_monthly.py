@@ -141,16 +141,17 @@ def collect_items(s: Dict, drop_log) -> List[Item]:
 
 def _mk_drop_logger(drop_path: Path):
     drop_path.parent.mkdir(parents=True, exist_ok=True)
-    # Always (re)create the file with a header so it exists even if no drops happen
+    # Always (re)create with a header so the file exists even if nothing is dropped
     with drop_path.open("w", encoding="utf-8") as f:
         f.write("# reason\tmeta\turl\n")
     def _log(line: str):
         with drop_path.open("a", encoding="utf-8") as f:
             f.write(line.rstrip() + "\n")
-        # Also echo to stdout when DEBUG so reasons show in the Actions log
+        # Also echo to stdout so reasons appear in the Actions log
         if DEBUG:
             print(line)
     return _log
+
 
 
 
@@ -164,15 +165,31 @@ def _dump_json(path: Path, obj):
 def _generate_for_range(start: datetime, end: datetime, items_per_section: int) -> str:
     import yaml  # safe import inside function
     cfg = yaml.safe_load(CFG.read_text())
+
+    # Provide a month hint (YYYY-MM) to fetch.py and compute filenames once
+    ym = start.strftime("%Y-%m")
+    os.environ["TARGET_YM"] = ym
+
+    # Debug files (compute exact paths and print them)
+    drop_file = OUTDIR / f"debug-drops-{ym}.txt"
+    pool_hint = OUTDIR / f"debug-pool-<Section>-{ym}.json"  # placeholder pattern
+    selected_file = OUTDIR / f"debug-selected-{ym}.json"
+    meta_file = OUTDIR / f"debug-meta-{ym}.txt"
+
+    print(f"[debug] CWD: {Path.cwd()}")
+    print(f"[debug] OUTDIR: {OUTDIR.resolve()}")
+    print(f"[debug] drops: {drop_file.resolve()}")
+    print(f"[debug] pools: {pool_hint}")
+    print(f"[debug] selected: {selected_file.resolve()}")
+    print(f"[debug] meta: {meta_file.resolve()}")
+
+    # (Re)create the drops file immediately so it exists
+    drop_log = _mk_drop_logger(drop_file)
+
+    
     # Provide a month hint (YYYY-MM) to fetch.py
     os.environ["TARGET_YM"] = start.strftime("%Y-%m")
 
-    # Debug files
-    ym = start.strftime("%Y-%m")
-    drop_file = OUTDIR / f"debug-drops-{ym}.txt"
-    if drop_file.exists():
-        drop_file.unlink()
-    drop_log = _mk_drop_logger(drop_file)
 
     filters = _load_filters()
     chosen: List[Dict] = []
@@ -263,12 +280,30 @@ def _generate_for_range(start: datetime, end: datetime, items_per_section: int) 
 
     chosen = filtered[:12]
 
-    # Debug snapshot of chosen
-    if True:
-        _dump_json(
-            OUTDIR / f"debug-selected-{ym}.json",
-            [{"title": x["title"], "url": x["url"], "published": x["published"], "section": x["section"]} for x in chosen],
-        )
+    # ✅ Always write a snapshot of selected items (even if empty)
+    _dump_json(
+        selected_file,
+        [{"title": x["title"], "url": x["url"], "published": x["published"], "section": x["section"]}
+         for x in chosen],
+    )
+
+    # ✅ Write a small meta summary so you can read it in the log
+    try:
+        with meta_file.open("w", encoding="utf-8") as mf:
+            mf.write(f"month: {ym}\n")
+            mf.write(f"outdir: {OUTDIR.resolve()}\n")
+            mf.write(f"drops_file: {drop_file.resolve()}\n")
+            mf.write(f"selected_file: {selected_file.resolve()}\n")
+            mf.write(f"counts:\n")
+            mf.write(f"  selected_total: {len(chosen)}\n")
+            # per-section counts
+            from collections import Counter
+            c = Counter([x.get('section','') for x in chosen])
+            for k,v in c.items():
+                mf.write(f"  section[{k}]: {v}\n")
+    except Exception as e:
+        print(f"[warn] failed to write meta file: {e}")
+
 
     # Safety guard
     if len(chosen) < MIN_TOTAL_ITEMS:
