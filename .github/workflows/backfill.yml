@@ -26,8 +26,8 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MODE: backfill-months
-          START_YM: "2025-01"
-          END_YM:   "2025-09"
+          START_YM: "2025-02"
+          END_YM:   "2025-02"
 
           # Intake/quality knobs
           ITEMS_PER_SECTION: "6"
@@ -55,19 +55,18 @@ jobs:
           echo "---- FIND debug artifacts ----"
           find out -maxdepth 1 -type f -name 'debug-*.txt' -o -name 'debug-*.json' -print || true
 
-      - name: List debug files (per-month)
+      - name: List debug files
         if: always()
         run: |
           echo "---- OUT ----"
-          ls -lh out/ | sed -n '1,400p' || true
-          echo "---- DEBUG DROPS (first 40 lines each) ----"
-          for f in out/debug-drops-2025-*.txt; do
-            echo ">>> $f"; head -n 40 "$f" || true; echo;
-          done
-          echo "---- DEBUG SELECTED (counts) ----"
-          for f in out/debug-selected-2025-*.json; do
-            echo -n ">>> $f  "; jq -r 'length' "$f" 2>/dev/null || echo "?";
-          done
+          ls -lh out/ || true
+          echo "---- META ----"
+          cat out/debug-meta-2025-02.txt || true
+          echo "---- DROPS (first 40) ----"
+          head -n 40 out/debug-drops-2025-02.txt || true
+          echo "---- SELECTED ----"
+          cat out/debug-selected-2025-02.json || true
+
 
       - name: Commit outputs (digests + debug)
         run: |
