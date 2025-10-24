@@ -1,56 +1,70 @@
-# Signals Digest — 2025-10-23
+**Signals Digest — October 2025**
 
-## Top Lines
-- Australia continues to expand its solar battery installations, with over 43,000 units installed since July 2025.
-- The Clean Energy Regulator has suspended multiple companies for non-compliance, highlighting the importance of integrity in renewable energy schemes.
-- The Australian Solar Institute has concluded its operations, marking a significant shift in the management of solar research funding.
+**Top Lines**
+- The energy transition is gaining momentum, but significant investment and policy changes are needed to meet 2030 targets.
+- Recent developments in ESG reporting highlight the importance of corporate sustainability and transparency.
+- Collaborative efforts between organizations are crucial for advancing renewable energy solutions that benefit both nature and communities.
 
-## Top Items
+---
 
-### Solar Battery Installations Surge
-- **SECTION:** Energy Transition
-- **PUBLISHED:** 2025-10-23
-- **Summary:** Since solar batteries became eligible under the Small-scale Renewable Energy Scheme on 1 July 2025, Australia has seen 43,517 installations, contributing a total nominal capacity of 825 MWh. The average battery size installed is 19.0 kWh, with 23,925 installations reported since the last update in July. This growth reflects increasing consumer adoption of renewable energy technologies.
-- *Why it matters:*
-  - Increased installations indicate a growing market for renewable energy solutions, benefiting Australian manufacturers and service providers.
-  - The data supports investment decisions in the renewable sector, influencing policy and funding allocations.
-- **Signals to watch:**
-  - Upcoming data release for August 2025 on solar battery installations.
-- **Sources:**
-  - [Clean Energy Regulator](https://www.cer.gov.au/news-and-media/news/2025/september/solar-battery-installations-rise)
+**Top Items**
 
-### Clean Energy Regulator Suspends Companies
-- **SECTION:** Energy Transition
-- **PUBLISHED:** 2025-10-23
-- **Summary:** The Clean Energy Regulator permanently suspended Hello Solar Pty Ltd on 18 August 2025 for failing to meet compliance standards under the Renewable Energy (Electricity) Act 2000. This decision follows an investigation revealing misleading information provided by the company. The suspension underscores the importance of compliance in maintaining the integrity of renewable energy schemes.
-- *Why it matters:*
-  - Ensures that only compliant entities participate in renewable energy schemes, protecting market integrity.
-  - Highlights the regulatory scrutiny that companies in the renewable sector face, impacting operational practices.
-- **Signals to watch:**
-  - Ongoing monitoring of registered agents by the Clean Energy Regulator.
-- **Sources:**
-  - [Clean Energy Regulator](https://www.cer.gov.au/news-and-media/news/2025/august/clean-energy-regulator-permanently-suspends-registered-person)
+- **Headline:** EFRAG Releases Final Comment Letter on IFRS 16
+  - **SECTION:** ESG Reporting
+  - **PUBLISHED:** 2025-10-23
+  - **Summary:** EFRAG has released its final comment letter regarding the IASB’s Post-Implementation Review of IFRS 16 Leases, concluding that the standard largely functions as intended but requires targeted improvements. This review is significant as it influences corporate financial reporting practices across Europe.
+  - *Why it matters:*
+    - Companies in the EU must adapt to these changes to ensure compliance with evolving financial reporting standards.
+    - Investors will benefit from enhanced transparency and consistency in lease accounting.
+  - **Signals to watch:**
+    - Upcoming EFRAG meetings and consultations on financial reporting standards.
+  - **Sources:** 
+    - https://www.efrag.org/en/news-and-calendar/news
 
-### Australian Solar Institute Operations Concluded
-- **SECTION:** Sustainable Finance & Investment
-- **PUBLISHED:** 2025-10-23
-- **Summary:** The Australian Solar Institute (ASI), which operated from 2009 until its merger into the Australian Renewable Energy Agency (ARENA) in 2012, has officially closed. ASI was instrumental in developing a portfolio worth approximately $450 million, supporting over 350 solar research projects. This closure marks a significant transition in how solar research funding is managed in Australia.
-- *Why it matters:*
-  - The shift may affect ongoing solar research initiatives and funding availability for future projects.
-  - Businesses reliant on ASI's funding may need to adapt to new funding structures under ARENA.
-- **Signals to watch:**
-  - Future funding opportunities under ARENA for solar research and development.
-- **Sources:**
-  - [Australian Renewable Energy Agency](https://arena.gov.au/funding/australian-solar-institute/)
+- **Headline:** IRENA and Sierra Leone Host APRA Investment Forum
+  - **SECTION:** Energy Transition
+  - **PUBLISHED:** 2025-10-22
+  - **Summary:** The second Accelerated Partnership for Renewables in Africa (APRA) Investment Forum, hosted by IRENA and Sierra Leone, aims to mobilize investments for Africa's energy transition. The event gathers stakeholders to discuss financing solutions and showcases regional projects to attract global investors.
+  - *Why it matters:*
+    - Increased investment in renewable energy is essential for meeting Africa's energy needs and achieving SDG 7.
+    - Australian and European investors may find new opportunities in African renewable projects.
+  - **Signals to watch:**
+    - Outcomes from the forum may influence future investment strategies in Africa.
+  - **Sources:** 
+    - https://www.irena.org/News/pressreleases/2025/Oct/IRENA-and-Sierra-Leone-Hold-Second-APRA-Investment-Forum-to-Drive-Finance-in-Africa
 
-### ESG Reporting Podcast Series Launched
-- **SECTION:** ESG Reporting
-- **PUBLISHED:** 2025-10-23
-- **Summary:** A new podcast series titled "SDGs: The Rising Tide" has been launched, focusing on the Sustainable Development Goals (SDGs) and the challenges in achieving them by 2030. The series features insights from sustainability experts across various sectors, emphasizing the importance of effective reporting on SDGs.
-- *Why it matters:*
-  - Provides valuable insights for Australian businesses on integrating sustainability into their reporting frameworks.
-  - Encourages engagement with global sustainability goals, enhancing corporate responsibility and transparency.
-- **Signals to watch:**
-  - Release of new episodes dedicated to each of the 17 Global Goals.
-- **Sources:**
-  - [Global Reporting Initiative](https://www.globalreporting.org/news/podcasts-season-1/)
+- **Headline:** World Breaks Renewable Records but Needs Faster Action
+  - **SECTION:** Energy Transition
+  - **PUBLISHED:** 2025-10-14
+  - **Summary:** A new report from IRENA indicates that while global renewable capacity additions reached 582 GW in 2024, this is insufficient to meet the COP28 target of tripling renewables by 2030. Urgent action is needed to increase annual capacity additions significantly.
+  - *Why it matters:*
+    - Businesses must align their strategies with ambitious renewable targets to remain competitive.
+    - Investors should prepare for increased demand for financing in renewable projects.
+  - **Signals to watch:**
+    - The need for national climate plans (NDC 3.0) ahead of COP30.
+  - **Sources:** 
+    - https://www.irena.org/News/pressreleases/2025/Oct/World-Breaks-Renewable-Records-but-Must-Move-Faster-to-Hit-2030-Tripling-Goal
+
+- **Headline:** IUCN and IRENA Collaborate on Renewable Solutions
+  - **SECTION:** Energy Transition
+  - **PUBLISHED:** 2025-10-09
+  - **Summary:** IUCN and IRENA signed a Memorandum of Understanding to promote renewable energy solutions that are sustainable and beneficial for biodiversity. This partnership aims to ensure that renewable energy projects contribute positively to environmental goals.
+  - *Why it matters:*
+    - This collaboration emphasizes the need for sustainable practices in energy projects, relevant for EU and AU businesses.
+    - Investors may seek projects that align with biodiversity and sustainability goals.
+  - **Signals to watch:**
+    - Development of tools to assess the impact of renewable projects on biodiversity.
+  - **Sources:** 
+    - https://www.irena.org/News/pressreleases/2025/Oct/IUCN-and-IRENA-join-forces-to-advance-renewable-solutions-that-work-for-nature-and-people
+
+- **Headline:** ENA Welcomes National Energy Cybersecurity Body
+  - **SECTION:** Energy Transition
+  - **PUBLISHED:** 2025-10-01
+  - **Summary:** The establishment of the National Energy Public Key Infrastructure (NEPKI) in Australia aims to enhance cybersecurity for the energy sector. Funded by ARENA, NEPKI will provide secure digital identity and encryption services to support the clean energy transition.
+  - *Why it matters:*
+    - Cybersecurity is critical for protecting energy infrastructure, impacting operational reliability for businesses.
+    - Compliance with cybersecurity standards will be essential for energy companies in Australia.
+  - **Signals to watch:**
+    - NEPKI's operational rollout and its impact on energy market participants.
+  - **Sources:** 
+    - https://www.energynetworks.com.au/news/media-releases/ena-welcomes-establishment-of-national-energy-cybersecurity-body-nepki/

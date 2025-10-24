@@ -1,0 +1,20 @@
+# reason	meta	url
+out_of_range	2025-09-25	https://www.bloomberg.com/news/articles/2025-09-25/wall-street-is-turning-climate-finance-into-an-energy-security-pitch?embedded-checkout=true
+out_of_range	2025-09-24	https://www.bbc.com/news/articles/cj4y159190go
+out_of_range	2025-09-22	https://www.irena.org/News/pressreleases/2025/Sep/Leaders-of-Governments-and-Businesses-Commit-to-Accelerate-Renewable-Energy-Abundance
+out_of_range	2025-09-22	https://www.irena.org/News/pressreleases/2025/Sep/Sustainable-Aviation-Fuels-Projects-to-Gain-New-Support-Through-IRENA-ICAO-Collaboration
+out_of_range	2025-09-18	https://www.energynetworks.com.au/news/media-releases/ena-statement-on-2035-emissions-reduction-target/
+out_of_range	2025-09-12	https://www.energynetworks.com.au/news/media-releases/energy-networks-awards-honour-outstanding-sector-contributions/
+out_of_range	2025-09-12	https://www.energynetworks.com.au/news/media-releases/ausgrid-wins-2025-energy-networks-consumer-engagement-award/
+out_of_range	2025-07-10	https://www.energynetworks.com.au/news/energy-insider/2025-energy-insider/what-is-nepki-and-how-can-you-help-shape-its-future/
+out_of_range	2025-05-28	https://www.energynetworks.com.au/news/energy-insider/2025-energy-insider/watt-happened-unravelling-the-iberian-power-mystery/
+out_of_range	2025-05-12	https://www.energynetworks.com.au/news/energy-insider/2025-energy-insider/power-across-the-pacific/
+out_of_range	2025-03-27	https://www.energynetworks.com.au/news/energy-insider/2025-energy-insider/federal-budget-2025-whats-in-store-for-networks/
+duplicate_url	-	https://www.efrag.org/en/news-and-calendar/news
+title_regex	(webcast|podcast|register|replay)	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-webcast-meeting-22-october-2025-0
+title_regex	(webcast|podcast|register|replay)	https://www.efrag.org/en/news-and-calendar/news/new-efrag-update-podcast-episode-now-available-september-edition
+per_domain_cap	dom=www.efrag.org cap=3	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-final-comment-letter-on-iasbs-postimplementation-review-of-ifrs-16-leases
+per_domain_cap	dom=www.efrag.org cap=3	https://www.efrag.org/en/news-and-calendar/news/new-companies-have-joined-the-friends-of-efrag-community
+per_domain_cap	dom=www.efrag.org cap=3	https://www.efrag.org/en/updates
+per_domain_cap	dom=www.efrag.org cap=3	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A9
+per_domain_cap	dom=www.irena.org cap=3	https://www.irena.org/News/pressreleases/2025/Oct/Womens-Share-of-the-Renewable-Energy-Workforce-Remains-at-32-percent

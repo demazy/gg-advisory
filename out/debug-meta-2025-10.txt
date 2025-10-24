@@ -1,0 +1,8 @@
+month: 2025-10
+outdir: /home/runner/work/gg-advisory/gg-advisory/out
+drops_file: /home/runner/work/gg-advisory/gg-advisory/out/debug-drops-2025-10.txt
+selected_file: /home/runner/work/gg-advisory/gg-advisory/out/debug-selected-2025-10.json
+counts:
+  selected_total: 7
+  section[ESG Reporting]: 3
+  section[Energy Transition]: 4
