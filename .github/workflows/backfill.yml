@@ -1,4 +1,4 @@
-name: backfill-2025-jan-to-oct
+name: backfill-2025-jan-to-sep
 on:
   workflow_dispatch: {}
 
@@ -8,7 +8,6 @@ permissions:
 jobs:
   backfill:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout (full history)
         uses: actions/checkout@v4
@@ -23,58 +22,65 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Generate monthly digest (Feb 2025, DEBUG)
+      - name: Generate monthly digests (Jan→Sep 2025, DEBUG)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MODE: backfill-months
-          START_YM: "2025-02"
-          END_YM:   "2025-02"
-      
-          # Make intake a bit more permissive for debugging
+          START_YM: "2025-01"
+          END_YM:   "2025-09"
+
+          # Intake/quality knobs
           ITEMS_PER_SECTION: "6"
           MIN_TEXT_CHARS: "350"
           PER_DOMAIN_CAP: "3"
-          MIN_TOTAL_ITEMS: "1"            # allow digest when 1+ item survives
-      
-          # Priority-domain leniency (short AU/EU pages that link to PDFs)
+          MIN_TOTAL_ITEMS: "1"   # keep digest even if few items
+
+          # Priority-domain leniency
           PRIORITY_MIN_CHARS: "250"
           PRIORITY_DOMAINS: "aemo.com.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au,ec.europa.eu,commission.europa.eu"
-      
+
           # Hybrid PDF extraction
           MAX_PDF_BYTES: "5242880"
           PDF_TRUSTED: "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org"
-      
-          # 🔧 Turn on debug to emit drop logs and pool snapshots
+
+          # 🔧 Debug artifacts (drops/selected per month)
           DEBUG: "1"
         run: python -m src.generate_monthly
 
-                    
-      - name: List debug files
+      - name: Sanity check workspace & out
         if: always()
         run: |
-          echo "---- OUT DIR ----"
-          ls -lh out/ | sed -n '1,200p' || true
-          echo "---- DEBUG DROPS (first 80 lines) ----"
-          head -n 80 out/debug-drops-2025-02.txt || echo "no debug-drops file"
-          echo "---- DEBUG POOLS ----"
-          ls -lh out/debug-pool-*2025-02*.json || echo "no pool snapshots"
-          echo "---- DEBUG SELECTED ----"
-          cat out/debug-selected-2025-02.json 2>/dev/null || echo "no debug-selected file"
+          echo "PWD = $(pwd)"
+          ls -la out/ 2>/dev/null || echo "no ./out directory"
+          echo "---- FIND debug artifacts ----"
+          find out -maxdepth 1 -type f -name 'debug-*.txt' -o -name 'debug-*.json' -print || true
 
-      - name: Commit outputs
+      - name: List debug files (per-month)
+        if: always()
+        run: |
+          echo "---- OUT ----"
+          ls -lh out/ | sed -n '1,400p' || true
+          echo "---- DEBUG DROPS (first 40 lines each) ----"
+          for f in out/debug-drops-2025-*.txt; do
+            echo ">>> $f"; head -n 40 "$f" || true; echo;
+          done
+          echo "---- DEBUG SELECTED (counts) ----"
+          for f in out/debug-selected-2025-*.json; do
+            echo -n ">>> $f  "; jq -r 'length' "$f" 2>/dev/null || echo "?";
+          done
+
+      - name: Commit outputs (digests + debug)
         run: |
           git config user.name "content-bot"
           git config user.email "content-bot@example.com"
-          git add -f out/monthly-digest-2025-*.md
+          git add -f out/monthly-digest-2025-*.md out/debug-*.*
           if git diff --cached --quiet; then
             echo "No changes."
           else
-            git commit -m "backfill: monthly digests Jan–Oct 2025"
+            git commit -m "backfill: monthly digests Jan–Sep 2025 (with debug)"
             git push
           fi
 
-      # --- Email the generated backfill files via iCloud SMTP ---
-      # Set repo secrets: MAIL_USERNAME (your iCloud address), MAIL_PASSWORD (app-specific password)
       - name: Email backfill outputs (iCloud)
         if: success()
         uses: dawidd6/action-send-mail@v3
@@ -83,13 +89,20 @@ jobs:
           server_port: 587
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
-          subject: "GG Advisory | Backfill digests (Jan–Oct 2025)"
-          from: "content-bot@gg-advisory.org"
+          subject: "GG Advisory | Backfill digests (Jan–Sep 2025)"
+          from: "GG Advisory <${{ secrets.MAIL_USERNAME }}>"
           to: "a.demazy_de_fortet@icloud.com"
           body: |
-            ✅ Backfill complete.
-
-            This message includes monthly digests for Jan–Oct 2025 as attachments.
-            You can also browse them here:
-            https://github.com/${{ github.repository }}/tree/main/out
-          attachments: out/monthly-digest-2025-*.md
+            ✅ Backfill complete (Jan–Sep 2025).
+            Monthly digests are attached. Debug artifacts are committed under /out.
+            Repo: https://github.com/${{ github.repository }}/tree/main/out
+          attachments: |
+            out/monthly-digest-2025-01.md,
+            out/monthly-digest-2025-02.md,
+            out/monthly-digest-2025-03.md,
+            out/monthly-digest-2025-04.md,
+            out/monthly-digest-2025-05.md,
+            out/monthly-digest-2025-06.md,
+            out/monthly-digest-2025-07.md,
+            out/monthly-digest-2025-08.md,
+            out/monthly-digest-2025-09.md
