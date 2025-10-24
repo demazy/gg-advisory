@@ -263,7 +263,15 @@ def fetch_html_index(url: str) -> List[Item]:
         href = _normalize_url(href)
 
         parsed = urllib.parse.urlparse(href)
-        path = parsed.path or "/"
+        link_domain = parsed.netloc.lower()
+        path = (parsed.path or "/")
+        
+        # ✅ Use LINK domain for the month hint filter
+        if not _month_hint_ok(link_domain, path, os.getenv("TARGET_YM","")):
+            if DEBUG:
+                print(f"[prefilter-skip-month] {href}")
+            continue
+
 
         # 0) Skip same-page anchors
         if parsed.fragment:
