@@ -228,22 +228,53 @@ def fetch_html_index(url: str) -> List[Item]:
     domain = urllib.parse.urlparse(url).netloc.lower()
     sel = SELECTORS.get(domain, "article a, .news a, a[href*='news'], a[href*='press'], a[href*='media']")
 
+    # Domain-specific guardrails for known listing-heavy sites
+    LISTING_ENDPOINTS = {
+        "/news", "/newsroom", "/media", "/press", "/publications",
+        "/updates", "/news-and-calendar/news"
+    }
+    REQUIRE_DETAIL = {
+        # Require EFRAG detail pages like /en/news-and-calendar/news/<slug>
+        "efrag.org": re.compile(r"/news-and-calendar/news/[^/?#]+", re.I),
+    }
+    DROP_QUERIES_ON = {"efrag.org", "irena.org", "energynetworks.com.au", "globalreporting.org"}
+
     candidates = []
     for a in soup.select(sel):
         href = a.get("href")
         if not href:
             continue
-        # build absolute URL
+        # absolute URL
         if href.startswith("/"):
             base = f"{urllib.parse.urlparse(url).scheme}://{domain}"
             href = urllib.parse.urljoin(base, href)
         href = _normalize_url(href)
 
-        # skip category/listing endpoints
-        if re.search(r"(category|tags|/newsroom$|/news$|/media$|/press$|/publications$)", href, re.I):
+        parsed = urllib.parse.urlparse(href)
+        path = parsed.path or "/"
+
+        # 0) Skip anchors to the same page
+        if parsed.fragment:
+            continue
+
+        # 1) Skip listing endpoints exactly (e.g., /news, /updates)
+        if path.rstrip("/") in LISTING_ENDPOINTS:
+            continue
+
+        # 2) Skip query-string links on known listing-heavy domains
+        if parsed.query and domain in DROP_QUERIES_ON:
+            continue
+
+        # 3) Domain-specific requirement for detail page shapes
+        req = REQUIRE_DETAIL.get(domain)
+        if req and not req.search(path):
+            # Likely a hub/listing or filter page: skip early
             continue
 
         title = (a.get_text(" ", strip=True) or "").strip()
+        if len(title) < 20:
+            continue
+
         candidates.append((title, href))
 
     # de-dupe by href
@@ -253,13 +284,26 @@ def fetch_html_index(url: str) -> List[Item]:
             uniq[href] = title
 
     items: List[Item] = []
-    for href, title in list(uniq.items())[:80]:
+    for href, title in list(uniq.items())[:120]:
         try:
             ar = requests.get(href, timeout=30, allow_redirects=True)
             ar.raise_for_status()
         except Exception:
             continue
         asoup = BeautifulSoup(ar.text, "html.parser")
+
+        # Canonical sanity check: if canonical resolves to a known listing endpoint, skip
+        canon = asoup.find("link", rel=lambda v: v and v.lower() == "canonical")
+        if canon and canon.get("href"):
+            chref = canon["href"]
+            try:
+                cparsed = urllib.parse.urlparse(chref)
+                if (cparsed.netloc.lower() == domain and
+                    (cparsed.path or "/").rstrip("/") in LISTING_ENDPOINTS):
+                    # Canonical is a listing hub -> not an article
+                    continue
+            except Exception:
+                pass
 
         # 1) Try meta/time tags
         ts = _guess_published_ts(asoup)
@@ -297,7 +341,6 @@ def fetch_html_index(url: str) -> List[Item]:
 
     items.sort(key=lambda x: (x.published_ts or 0), reverse=True)
     return items
-
 
 def fetch_full_text(u: str) -> str:
     """Pull main-page text, then append first pages of any trusted PDF linked from the page."""
