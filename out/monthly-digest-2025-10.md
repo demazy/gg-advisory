@@ -1,70 +1,58 @@
 **Signals Digest — October 2025**
 
 **Top Lines**
-- The energy transition is gaining momentum, but significant investment and policy changes are needed to meet 2030 targets.
-- Recent developments in ESG reporting highlight the importance of corporate sustainability and transparency.
-- Collaborative efforts between organizations are crucial for advancing renewable energy solutions that benefit both nature and communities.
+- Digitalisation and AI are pivotal for energy transition.
+- EFRAG seeks contributions for sustainability reporting improvements.
+- Southeast Asia aims for significant renewable energy investment.
 
 ---
 
 **Top Items**
 
-- **Headline:** EFRAG Releases Final Comment Letter on IFRS 16
+- **Headline:** EFRAG Seeks Contributions for Sustainability Reporting
   - **SECTION:** ESG Reporting
-  - **PUBLISHED:** 2025-10-23
-  - **Summary:** EFRAG has released its final comment letter regarding the IASB’s Post-Implementation Review of IFRS 16 Leases, concluding that the standard largely functions as intended but requires targeted improvements. This review is significant as it influences corporate financial reporting practices across Europe.
+  - **PUBLISHED:** 2025-10-31
+  - **Summary:** EFRAG is actively seeking senior contributions and in-kind secondments to support sustainability reporting surveys and research activities. This initiative is part of the 2023 ESRS implementation, with applications open until 30 November 2025. The call for contributions highlights EFRAG's commitment to enhancing sustainability reporting frameworks across Europe.
   - *Why it matters:*
-    - Companies in the EU must adapt to these changes to ensure compliance with evolving financial reporting standards.
-    - Investors will benefit from enhanced transparency and consistency in lease accounting.
+    - Businesses in the EU must align with evolving sustainability reporting standards.
+    - Investors need to be aware of compliance requirements to avoid penalties.
   - **Signals to watch:**
-    - Upcoming EFRAG meetings and consultations on financial reporting standards.
-  - **Sources:** 
+    - Application deadline for contributions is 30 November 2025.
+  - **Sources:**
     - https://www.efrag.org/en/news-and-calendar/news
 
-- **Headline:** IRENA and Sierra Leone Host APRA Investment Forum
+- **Headline:** IRENA Report Highlights Digitalisation in Energy Transition
   - **SECTION:** Energy Transition
-  - **PUBLISHED:** 2025-10-22
-  - **Summary:** The second Accelerated Partnership for Renewables in Africa (APRA) Investment Forum, hosted by IRENA and Sierra Leone, aims to mobilize investments for Africa's energy transition. The event gathers stakeholders to discuss financing solutions and showcases regional projects to attract global investors.
+  - **PUBLISHED:** 2025-10-30
+  - **Summary:** A new IRENA report emphasizes the role of digitalisation and AI in transforming power systems. Released during the G7 Energy and Environment Ministers’ Meeting, the report outlines how these technologies can reduce costs, enhance reliability, and facilitate the integration of renewable energy sources. It suggests that G7 policymakers focus on monitoring, forecasting, and operational optimization to maximize benefits.
   - *Why it matters:*
-    - Increased investment in renewable energy is essential for meeting Africa's energy needs and achieving SDG 7.
-    - Australian and European investors may find new opportunities in African renewable projects.
+    - Australian and European businesses can leverage digital technologies to improve energy efficiency.
+    - Investors should consider the impact of digitalisation on energy sector investments.
   - **Signals to watch:**
-    - Outcomes from the forum may influence future investment strategies in Africa.
-  - **Sources:** 
-    - https://www.irena.org/News/pressreleases/2025/Oct/IRENA-and-Sierra-Leone-Hold-Second-APRA-Investment-Forum-to-Drive-Finance-in-Africa
+    - G7 policymakers are encouraged to assess power systems for better investment decisions.
+  - **Sources:**
+    - https://www.irena.org/News/pressreleases/2025/Oct/Canadian-G7-Presidency-and-IRENA-Seize-Opportunities-for-Power-System-Transformation
 
-- **Headline:** World Breaks Renewable Records but Needs Faster Action
+- **Headline:** IRENA Council Reviews Energy Transition Priorities
   - **SECTION:** Energy Transition
-  - **PUBLISHED:** 2025-10-14
-  - **Summary:** A new report from IRENA indicates that while global renewable capacity additions reached 582 GW in 2024, this is insufficient to meet the COP28 target of tripling renewables by 2030. Urgent action is needed to increase annual capacity additions significantly.
+  - **PUBLISHED:** 2025-10-29
+  - **Summary:** The 30th IRENA Council convened to evaluate progress on global energy transition goals, particularly the target to triple renewable power capacity by 2030. The meeting highlighted the need for enhanced collective ambition and leadership ahead of COP30, with a focus on clean industrialization and sustainable development.
   - *Why it matters:*
-    - Businesses must align their strategies with ambitious renewable targets to remain competitive.
-    - Investors should prepare for increased demand for financing in renewable projects.
+    - EU countries must align their national policies with global renewable energy targets.
+    - Investors should monitor developments leading up to COP30 for potential shifts in policy.
   - **Signals to watch:**
-    - The need for national climate plans (NDC 3.0) ahead of COP30.
-  - **Sources:** 
-    - https://www.irena.org/News/pressreleases/2025/Oct/World-Breaks-Renewable-Records-but-Must-Move-Faster-to-Hit-2030-Tripling-Goal
+    - New NDCs are due ahead of COP30, emphasizing the need for increased ambition.
+  - **Sources:**
+    - https://www.irena.org/News/pressreleases/2025/Oct/30th-IRENA-Council-to-Review-Energy-Transition-Priorities-Ahead-of-COP30
 
-- **Headline:** IUCN and IRENA Collaborate on Renewable Solutions
+- **Headline:** Southeast Asia Advances Renewable Energy Initiatives
   - **SECTION:** Energy Transition
-  - **PUBLISHED:** 2025-10-09
-  - **Summary:** IUCN and IRENA signed a Memorandum of Understanding to promote renewable energy solutions that are sustainable and beneficial for biodiversity. This partnership aims to ensure that renewable energy projects contribute positively to environmental goals.
+  - **PUBLISHED:** 2025-10-28
+  - **Summary:** The Singapore–IRENA High-Level Forum focused on regional cooperation to enhance renewable energy in Southeast Asia. The forum launched the Accelerated Partnership for Renewables in Southeast Asia (APRESA), aiming to drive energy transitions and promote green industrialisation. The region needs an estimated USD 200 billion annually in renewables and energy efficiency investments by 2030.
   - *Why it matters:*
-    - This collaboration emphasizes the need for sustainable practices in energy projects, relevant for EU and AU businesses.
-    - Investors may seek projects that align with biodiversity and sustainability goals.
+    - Australian investors may find opportunities in Southeast Asia's growing renewable market.
+    - EU businesses can explore partnerships to support regional energy initiatives.
   - **Signals to watch:**
-    - Development of tools to assess the impact of renewable projects on biodiversity.
-  - **Sources:** 
-    - https://www.irena.org/News/pressreleases/2025/Oct/IUCN-and-IRENA-join-forces-to-advance-renewable-solutions-that-work-for-nature-and-people
-
-- **Headline:** ENA Welcomes National Energy Cybersecurity Body
-  - **SECTION:** Energy Transition
-  - **PUBLISHED:** 2025-10-01
-  - **Summary:** The establishment of the National Energy Public Key Infrastructure (NEPKI) in Australia aims to enhance cybersecurity for the energy sector. Funded by ARENA, NEPKI will provide secure digital identity and encryption services to support the clean energy transition.
-  - *Why it matters:*
-    - Cybersecurity is critical for protecting energy infrastructure, impacting operational reliability for businesses.
-    - Compliance with cybersecurity standards will be essential for energy companies in Australia.
-  - **Signals to watch:**
-    - NEPKI's operational rollout and its impact on energy market participants.
-  - **Sources:** 
-    - https://www.energynetworks.com.au/news/media-releases/ena-welcomes-establishment-of-national-energy-cybersecurity-body-nepki/
+    - Southeast Asia is projected to account for 25% of global energy demand growth by 2035.
+  - **Sources:**
+    - https://www.irena.org/News/articles/2025/Oct/Southeast-Asia-Rallies-to-Advance-Renewables-in-the-Region
