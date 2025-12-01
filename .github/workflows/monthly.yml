@@ -17,8 +17,8 @@ on:
         default: ""
       debug:
         description: "Enable verbose debug artifacts"
-        required: false
-        default: "false"
+        required: true
+        default: ""
         type: choice
         options: ["false", "true"]
 
