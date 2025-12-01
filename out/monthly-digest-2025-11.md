@@ -1,82 +1,82 @@
 **Signals Digest — November 2025**
 
 **Top Lines**
-- Global renewable energy investments reached USD 807 billion in 2024, but growth slowed.
+- Global renewable energy investment reached USD 807 billion in 2024, but growth is slowing.
 - Utilities announced over USD 1 trillion in energy transition investments at COP30.
-- EFRAG expanded language support for sustainability reporting tools, enhancing accessibility.
+- EFRAG enhances sustainability reporting tools with new language support.
 
 ---
 
 **Top Items**
 
-- **New Languages in VSME Digital Template**
-  - **SECTION:** ESG Reporting
-  - **PUBLISHED:** 2025-11-27
-  - **Summary:** EFRAG has added four new translations to the VSME Digital Template, increasing language support to nine. This initiative aims to enhance accessibility for SMEs in sustainability reporting, introducing new technical FAQs to assist users.
-  - *Why it matters:*
-    - Improved accessibility can facilitate compliance for SMEs across the EU.
-    - Enhanced language support may increase participation in sustainability initiatives.
-  - **Signals to watch:**
-    - Upcoming EFRAG SRB Webcast Meeting on November 28, 2025.
-  - **Sources:**
-    - https://www.efrag.org/en/news-and-calendar/news
-
-- **Sustainability Reporting Award at ISAR 2025**
-  - **SECTION:** ESG Reporting
-  - **PUBLISHED:** 2025-11-27
-  - **Summary:** EFRAG was honored at the ISAR 2025 Ceremony in Geneva for its VSME Sustainability Reporting Initiative, recognizing its role in promoting sustainable practices among SMEs.
-  - *Why it matters:*
-    - Recognition may enhance EFRAG's credibility and influence in sustainability reporting.
-    - Encourages SMEs to adopt sustainable practices, aligning with EU goals.
-  - **Signals to watch:**
-    - EFRAG’s upcoming conference on December 4, 2025, regarding the Draft Simplified ESRS.
-  - **Sources:**
-    - https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A9
-
-- **Five Takeaways from COP30 in Belém**
+- **Headline:** Five Takeaways from COP30 in Belém
   - **SECTION:** Energy Transition
   - **PUBLISHED:** 2025-11-24
-  - **Summary:** At COP30, IRENA highlighted five priority areas to accelerate renewable energy and energy efficiency goals. The report emphasized the need for bolder national targets and identified investment bottlenecks that threaten a just transition.
+  - **Summary:** At COP30 in Belém, IRENA highlighted five priority areas to accelerate renewable energy and energy efficiency goals. The report confirmed the target of 11.2 TW of renewable capacity by 2030 is achievable, but investment bottlenecks remain. Nationally Determined Contributions (NDCs) are crucial for guiding the transition, with a focus on implementation and infrastructure. The event emphasized the need for increased ambition and support for emerging economies.
   - *Why it matters:*
-    - Aligns with EU's commitment to renewable energy and climate goals.
-    - Highlights the importance of national contributions to global sustainability efforts.
+    - EU businesses must align with NDCs to secure funding and support.
+    - Australian investors should monitor global trends to identify opportunities in renewable infrastructure.
   - **Signals to watch:**
-    - Continued emphasis on Nationally Determined Contributions (NDCs) as a guiding framework.
+    - Upcoming deadlines for national renewable energy targets.
   - **Sources:**
     - https://www.irena.org/News/articles/2025/Nov/Five-Takeaways-from-COP30-in-Belem
 
-- **Global Renewable Energy Investment Hits USD 807 Billion**
+- **Headline:** Global Renewable Energy Investment Hit USD 807 Billion in 2024
   - **SECTION:** Energy Transition
   - **PUBLISHED:** 2025-11-17
-  - **Summary:** Global renewable energy investments reached USD 807 billion in 2024, marking a 20% increase from previous years. However, growth slowed to 7.3%, indicating challenges in maintaining momentum.
+  - **Summary:** Global investments in renewable energy reached USD 807 billion in 2024, marking a 20% increase from previous years. However, growth slowed to 7.3%, down from 32% the prior year. Solar PV investments alone hit USD 554 billion, but 90% of funding remains concentrated in advanced economies, highlighting disparities in global investment.
   - *Why it matters:*
-    - Slower growth could impact EU and AU investment strategies in renewables.
-    - Highlights the need for increased funding in emerging markets to ensure equitable transition.
+    - EU firms must adapt to slower growth rates in renewables to remain competitive.
+    - Australian investors should seek opportunities in emerging markets to diversify portfolios.
   - **Signals to watch:**
-    - Focus on scaling finance for emerging economies as discussed at COP30.
+    - Trends in renewable investment distribution across regions.
   - **Sources:**
     - https://www.irena.org/News/pressreleases/2025/Nov/Global-Renewable-Energy-Investment-Hit-USD-807-Billion-in-2024
 
-- **Utilities Announce USD 1 Trillion Investment Plans**
+- **Headline:** Global utilities set out USD 1 trillion investment plans at COP30
   - **SECTION:** Energy Transition
   - **PUBLISHED:** 2025-11-14
-  - **Summary:** At COP30, global utilities committed to over USD 1 trillion in energy transition investments, focusing on grid infrastructure and renewable energy capacity expansion.
+  - **Summary:** At COP30, utilities announced plans to invest over USD 1 trillion in energy transition initiatives, increasing annual commitments to nearly USD 150 billion. This includes a significant focus on grid infrastructure, with a commitment to spend USD 82 billion on grids and storage, reflecting a shift towards enhancing energy networks.
   - *Why it matters:*
-    - Significant investment in grids supports energy transition goals in both AU and EU.
-    - Encourages collaboration between utilities and governments to enhance infrastructure.
+    - EU utilities must align with these investment trends to secure funding and partnerships.
+    - Australian energy companies can leverage these developments to enhance local grid capabilities.
   - **Signals to watch:**
-    - Implementation of new grid financing principles to support emerging economies.
+    - New grid financing principles to be implemented in emerging economies.
   - **Sources:**
     - https://www.irena.org/News/pressreleases/2025/Nov/Global-utilities-set-out-USD-1-trillion-investment-plans-at-COP30-as-grid-spend-grows
 
-- **Energy Networks Australia Welcomes New Leadership**
+- **Headline:** Energy Networks Australia welcomes new Chair and Board Directors
   - **SECTION:** Energy Transition
   - **PUBLISHED:** 2025-11-05
-  - **Summary:** Energy Networks Australia appointed a new Chair and Board Directors, emphasizing the critical role of energy networks in facilitating the energy transition.
+  - **Summary:** Energy Networks Australia (ENA) appointed Andrew Bills as Chair and welcomed new Board Directors to enhance its leadership. The new board aims to strengthen the role of energy networks in facilitating the energy transition, emphasizing collaboration and innovation in the sector.
   - *Why it matters:*
-    - New leadership may drive innovative strategies for energy network development in Australia.
-    - Reinforces the importance of collaboration in achieving energy transition goals.
+    - Australian energy networks must adapt to evolving leadership to drive transition strategies.
+    - Investors should monitor governance changes that may impact energy policy and investment.
   - **Signals to watch:**
-    - Future initiatives and strategies from the newly elected board.
+    - Future initiatives from the ENA under new leadership.
   - **Sources:**
     - https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-new-chair-and-board-directors/
+
+- **Headline:** EFRAG adds new languages to VSME Digital Template
+  - **SECTION:** ESG Reporting
+  - **PUBLISHED:** 2025-11-27
+  - **Summary:** EFRAG has expanded the VSME Digital Template by adding four new languages, enhancing accessibility for SMEs in sustainability reporting. This initiative aims to support a broader range of businesses in meeting sustainability reporting requirements.
+  - *Why it matters:*
+    - EU SMEs can now better comply with sustainability reporting standards.
+    - Australian businesses should consider adopting similar frameworks for reporting.
+  - **Signals to watch:**
+    - Upcoming EFRAG meetings and consultations on sustainability reporting.
+  - **Sources:**
+    - https://www.efrag.org/en/news-and-calendar/news
+
+- **Headline:** EFRAG Honoured at ISAR 2025 Ceremony
+  - **SECTION:** ESG Reporting
+  - **PUBLISHED:** 2025-11-27
+  - **Summary:** EFRAG received recognition at the ISAR 2025 ceremony in Geneva for its VSME Sustainability Reporting Initiative, which aids SMEs in contributing to a sustainable economy. This award underscores the importance of effective sustainability reporting frameworks.
+  - *Why it matters:*
+    - EU businesses can leverage EFRAG's initiatives to enhance their sustainability practices.
+    - Australian firms should consider adopting similar reporting frameworks to improve transparency.
+  - **Signals to watch:**
+    - Future developments in EFRAG's sustainability initiatives.
+  - **Sources:**
+    - https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A9
