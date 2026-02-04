@@ -3,7 +3,6 @@ name: monthly-digest
 on:
   schedule:
     # 00:10 UTC on the 1st of each month
-    # (10:10 or 11:10 in Australia/Melbourne depending on DST)
     - cron: "10 0 1 * *"
   workflow_dispatch:
     inputs:
@@ -17,13 +16,17 @@ on:
         default: ""
       debug:
         description: "Enable verbose debug artifacts"
-        required: true
-        default: ""
+        required: false
+        default: "false"
         type: choice
         options: ["false", "true"]
 
 permissions:
   contents: write
+
+concurrency:
+  group: monthly-digest
+  cancel-in-progress: false
 
 jobs:
   run-monthly:
@@ -35,13 +38,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Python
+      - name: Setup Python (with pip cache)
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: "pip"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Compute target month (prev month in Australia/Melbourne, unless inputs provided)
         id: when
@@ -55,7 +61,7 @@ jobs:
           if [[ -n "$IN_YEAR" && -n "$IN_MONTH" ]]; then
             YM="$(printf "%04d-%02d" "$IN_YEAR" "$IN_MONTH")"
           else
-            # Previous month in Australia/Melbourne
+            # Previous month in Australia/Melbourne:
             # Take the first of the current month, subtract one day -> last day of previous month
             LAST_PREV=$(TZ=Australia/Melbourne date -d "$(TZ=Australia/Melbourne date +%Y-%m-01) -1 day" +%Y-%m-%d)
             YM=$(TZ=Australia/Melbourne date -d "$LAST_PREV" +%Y-%m)
@@ -63,6 +69,21 @@ jobs:
 
           echo "ym=$YM" >> "$GITHUB_OUTPUT"
           echo "Chosen month: $YM"
+
+      - name: Compute debug flag
+        id: flags
+        shell: bash
+        run: |
+          set -euo pipefail
+          # For scheduled runs, inputs are empty -> treat as false
+          DBG="${{ github.event.inputs.debug || 'false' }}"
+          if [[ "$DBG" == "true" ]]; then
+            echo "debug=1" >> "$GITHUB_OUTPUT"
+            echo "debug_bool=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "debug=0" >> "$GITHUB_OUTPUT"
+            echo "debug_bool=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Generate monthly digest
         env:
@@ -87,9 +108,7 @@ jobs:
           PDF_TRUSTED: "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org"
 
           # ----- Debug toggle -----
-          #DEBUG: ${{ github.event.inputs.debug == 'true' && '1' || '0' }}
-          # ----- Debug -----
-          DEBUG: "1"
+          DEBUG: ${{ steps.flags.outputs.debug }}
         run: python -m src.generate_monthly
 
       - name: List outputs
@@ -98,34 +117,46 @@ jobs:
           echo "---- OUT ----"
           ls -lh out/ | sed -n '1,400p' || true
           echo "---- SELECTED (count) ----"
-          for f in out/debug-selected-${{ steps.when.outputs.ym }}.json; do
-            test -f "$f" && { echo -n "$f: "; jq -r 'length' "$f"; } || true
-          done
+          f="out/debug-selected-${{ steps.when.outputs.ym }}.json"
+          test -f "$f" && { echo -n "$f: "; jq -r 'length' "$f"; } || true
           echo "---- DROPS (first 40 lines) ----"
-          test -f "out/debug-drops-${{ steps.when.outputs.ym }}.txt" && head -n 40 "out/debug-drops-${{ steps.when.outputs.ym }}.txt" || true
+          f2="out/debug-drops-${{ steps.when.outputs.ym }}.txt"
+          test -f "$f2" && head -n 40 "$f2" || true
 
-      - name: Commit outputs (digest + debug when enabled)
+      # Commit ONLY the digest by default (keeps repo clean)
+      - name: Commit digest
+        if: github.ref == 'refs/heads/main'
         run: |
-          set -e
+          set -euo pipefail
           git config user.name "content-bot"
           git config user.email "content-bot@example.com"
-          git add -f "out/monthly-digest-${{ steps.when.outputs.ym }}.md"
-          # If debug ON, commit artifacts too
-          if [[ "${{ github.event.inputs.debug }}" == "true" ]]; then
-            git add -f "out/debug-selected-${{ steps.when.outputs.ym }}.json" || true
-            git add -f "out/debug-drops-${{ steps.when.outputs.ym }}.txt" || true
-            git add -f "out/debug-pool-*" || true
-            git add -f "out/debug-meta-${{ steps.when.outputs.ym }}.txt" || true
-          fi
+
+          DIGEST="out/monthly-digest-${{ steps.when.outputs.ym }}.md"
+          git add -f "$DIGEST"
 
           if git diff --cached --quiet; then
             echo "No changes."
-          else
-            git commit -m "monthly: digest ${{ steps.when.outputs.ym }} (debug=${{ github.event.inputs.debug || 'false' }})"
-            git push
+            exit 0
           fi
 
-      # Email digest (and optionally debug) via iCloud SMTP
+          git commit -m "monthly: digest ${{ steps.when.outputs.ym }}"
+          git pull --rebase
+          git push
+
+      # Upload debug artifacts (only when debug=true)
+      - name: Upload debug artifacts
+        if: ${{ steps.flags.outputs.debug_bool == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: monthly-debug-${{ steps.when.outputs.ym }}
+          path: |
+            out/debug-selected-${{ steps.when.outputs.ym }}.json
+            out/debug-drops-${{ steps.when.outputs.ym }}.txt
+            out/debug-pool-*
+            out/debug-meta-${{ steps.when.outputs.ym }}.txt
+          if-no-files-found: warn
+          retention-days: 30
+
       - name: Email monthly digest (iCloud)
         if: success()
         uses: dawidd6/action-send-mail@v3
@@ -140,6 +171,6 @@ jobs:
           body: |
             ✅ Monthly digest for ${{ steps.when.outputs.ym }} attached.
             Repo: https://github.com/${{ github.repository }}/tree/main/out
+            Debug enabled: ${{ steps.flags.outputs.debug_bool }}
           attachments: |
             out/monthly-digest-${{ steps.when.outputs.ym }}.md
-            ${{ github.event.inputs.debug == 'true' && format('out/debug-selected-{0}.json,out/debug-drops-{0}.txt', steps.when.outputs.ym) || '' }}
