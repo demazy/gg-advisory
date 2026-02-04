@@ -14,12 +14,6 @@ on:
         description: "Month to backfill (01..12)"
         required: false
         default: ""
-      debug:
-        description: "Enable verbose debug artifacts"
-        required: false
-        default: "false"
-        type: choice
-        options: ["false", "true"]
 
 permissions:
   contents: write
@@ -70,22 +64,7 @@ jobs:
           echo "ym=$YM" >> "$GITHUB_OUTPUT"
           echo "Chosen month: $YM"
 
-      - name: Compute debug flag
-        id: flags
-        shell: bash
-        run: |
-          set -euo pipefail
-          # For scheduled runs, inputs are empty -> treat as false
-          DBG="${{ github.event.inputs.debug || 'false' }}"
-          if [[ "$DBG" == "true" ]]; then
-            echo "debug=1" >> "$GITHUB_OUTPUT"
-            echo "debug_bool=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "debug=0" >> "$GITHUB_OUTPUT"
-            echo "debug_bool=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Generate monthly digest
+      - name: Generate monthly digest (DEBUG always on)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MODE: backfill-months
@@ -107,45 +86,66 @@ jobs:
           MAX_PDF_BYTES: "5242880"
           PDF_TRUSTED: "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org"
 
-          # ----- Debug toggle -----
-          DEBUG: ${{ steps.flags.outputs.debug }}
+          # ----- Debug always on -----
+          DEBUG: "1"
         run: python -m src.generate_monthly
 
-      - name: List outputs
+      - name: List outputs + git status
         if: always()
         run: |
           echo "---- OUT ----"
           ls -lh out/ | sed -n '1,400p' || true
+
           echo "---- SELECTED (count) ----"
           f="out/debug-selected-${{ steps.when.outputs.ym }}.json"
           test -f "$f" && { echo -n "$f: "; jq -r 'length' "$f"; } || true
+
           echo "---- DROPS (first 40 lines) ----"
           f2="out/debug-drops-${{ steps.when.outputs.ym }}.txt"
           test -f "$f2" && head -n 40 "$f2" || true
 
-      # Commit ONLY the digest by default (keeps repo clean)
-      - name: Commit digest
+          echo "---- GIT STATUS (porcelain) ----"
+          git status --porcelain || true
+
+      # Commit digest + debug (always)
+      - name: Commit outputs (safe CI flow, debug always)
         if: github.ref == 'refs/heads/main'
+        shell: bash
         run: |
           set -euo pipefail
           git config user.name "content-bot"
           git config user.email "content-bot@example.com"
 
-          DIGEST="out/monthly-digest-${{ steps.when.outputs.ym }}.md"
+          # Ensure clean, up-to-date base
+          git fetch origin
+          git reset --hard origin/main
+
+          YM="${{ steps.when.outputs.ym }}"
+          DIGEST="out/monthly-digest-${YM}.md"
+
+          if [[ ! -f "$DIGEST" ]]; then
+            echo "Digest not found: $DIGEST"
+            exit 1
+          fi
+
+          # Always add digest + any debug artifacts produced for this month
           git add -f "$DIGEST"
+          git add -f "out/debug-selected-${YM}.json" 2>/dev/null || true
+          git add -f "out/debug-drops-${YM}.txt" 2>/dev/null || true
+          git add -f "out/debug-meta-${YM}.txt" 2>/dev/null || true
+          git add -f out/debug-pool-* 2>/dev/null || true
 
           if git diff --cached --quiet; then
             echo "No changes."
             exit 0
           fi
 
-          git commit -m "monthly: digest ${{ steps.when.outputs.ym }}"
-          git pull --rebase
+          git commit -m "monthly: digest ${YM} (debug=on)"
           git push
 
-      # Upload debug artifacts (only when debug=true)
+      # Also upload debug artifacts (always) for easy download from Actions UI
       - name: Upload debug artifacts
-        if: ${{ steps.flags.outputs.debug_bool == 'true' }}
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: monthly-debug-${{ steps.when.outputs.ym }}
@@ -171,6 +171,9 @@ jobs:
           body: |
             ✅ Monthly digest for ${{ steps.when.outputs.ym }} attached.
             Repo: https://github.com/${{ github.repository }}/tree/main/out
-            Debug enabled: ${{ steps.flags.outputs.debug_bool }}
+            Debug: always on
           attachments: |
             out/monthly-digest-${{ steps.when.outputs.ym }}.md
+            out/debug-selected-${{ steps.when.outputs.ym }}.json
+            out/debug-drops-${{ steps.when.outputs.ym }}.txt
+            out/debug-meta-${{ steps.when.outputs.ym }}.txt
