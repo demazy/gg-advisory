@@ -190,29 +190,84 @@ def _passes_filters(it: Item, filters: Dict, drop_log) -> bool:
 
 # ----------------------- ITEM COLLECTION -----------------------
 
-def collect_items(sources: List[Dict], drop_log) -> List[Item]:
+def collect_items(sources, drop_log) -> List[Item]:
+    """
+    Accepts sources as:
+      - list[str] (URLs)
+      - list[dict] with keys like {type: rss|html, url: ..., name: ...}
+      - dict forms (rare): {rss: [..], html: [..]}
+    """
+
+    def _infer_type(url: str) -> str:
+        u = (url or "").lower()
+        # crude but effective
+        if any(x in u for x in (".xml", "/rss", "feed", "atom")):
+            return "rss"
+        return "html"
+
+    def _iter_sources(sources_obj):
+        if sources_obj is None:
+            return
+        # If someone used dict-of-lists style
+        if isinstance(sources_obj, dict):
+            for k, v in sources_obj.items():
+                if isinstance(v, list):
+                    for item in v:
+                        yield (k, item)
+                else:
+                    yield (k, v)
+            return
+        # Normal list
+        if isinstance(sources_obj, list):
+            for item in sources_obj:
+                yield (None, item)
+            return
+        # Single scalar
+        yield (None, sources_obj)
+
     pool: List[Item] = []
-    for src in sources:
-        stype = src.get("type")
-        url = src.get("url")
-        if not url:
-            continue
+
+    for forced_type, src in _iter_sources(sources):
         try:
-            if stype == "rss":
-                items = fetch_rss(url, source_name=src.get("name", url))
-            elif stype == "html":
-                items = fetch_html_index(url, source_name=src.get("name", url))
+            # Case 1: src is URL string
+            if isinstance(src, str):
+                url = src.strip()
+                if not url:
+                    continue
+                stype = forced_type or _infer_type(url)
+                name = url
+
+            # Case 2: src is dict
+            elif isinstance(src, dict):
+                url = (src.get("url") or "").strip()
+                if not url:
+                    continue
+                stype = (src.get("type") or forced_type or _infer_type(url)).strip().lower()
+                name = src.get("name") or url
+
             else:
+                drop_log(f"source_bad_type\t{type(src)}\t{src}")
                 continue
+
+            if stype == "rss":
+                items = fetch_rss(url, source_name=name)
+            elif stype == "html":
+                items = fetch_html_index(url, source_name=name)
+            else:
+                drop_log(f"source_bad_stype\t{stype}\t{url}")
+                continue
+
             pool.extend(items)
+
         except Exception as e:
-            drop_log(f"source_error\t{src.get('name', url)}\t{url}\t{e}")
+            drop_log(f"source_error\t{name}\t{url}\t{e}")
             if DEBUG:
-                print(f"[warn] source error: {src.get('name', url)} -> {e}")
+                print(f"[warn] source error: {name} -> {e}")
 
     # Sort candidates by recency (published_ts desc)
     pool.sort(key=lambda x: x.published_ts or 0, reverse=True)
     return pool
+
 
 
 # ----------------------- MONTHLY GENERATION --------------------
