@@ -2,8 +2,7 @@ name: monthly-digest
 
 on:
   schedule:
-    # 00:10 UTC on the 1st of each month
-    - cron: "10 0 1 * *"
+    - cron: "10 0 1 * *" # 00:10 UTC on the 1st of each month
   workflow_dispatch:
     inputs:
       year:
@@ -62,7 +61,6 @@ jobs:
           echo "ym=$YM" >> "$GITHUB_OUTPUT"
           echo "Chosen month: $YM"
 
-      # IMPORTANT: "clean base" must happen BEFORE generation (optional but safe).
       - name: Sync to origin/main (clean base before generation)
         if: github.ref == 'refs/heads/main'
         shell: bash
@@ -76,7 +74,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MODE: backfill-months
           START_YM: ${{ steps.when.outputs.ym }}
-          END_YM:   ${{ steps.when.outputs.ym }}
+          END_YM: ${{ steps.when.outputs.ym }}
 
           ITEMS_PER_SECTION: "7"
           PER_DOMAIN_CAP: "3"
@@ -85,7 +83,7 @@ jobs:
           MIN_TOTAL_ITEMS: "1"
 
           PRIORITY_DOMAINS: "aemo.com.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au,ec.europa.eu,commission.europa.eu"
-          MODEL: gpt-4o-mini
+          MODEL: "gpt-4o-mini"
           TEMP: "0.2"
 
           MAX_PDF_BYTES: "5242880"
@@ -94,33 +92,6 @@ jobs:
           DEBUG: "1"
         run: python -m src.generate_monthly
 
-      - name: List outputs + selection count + git status
-        if: always()
-        shell: bash
-        run: |
-          set -euo pipefail
-          echo "---- OUT ----"
-          ls -lh out/ | sed -n '1,400p' || true
-
-          YM="${{ steps.when.outputs.ym }}"
-          f="out/debug-selected-${YM}.json"
-
-          echo "---- SELECTED (count) ----"
-          if test -f "$f"; then
-            echo -n "$f: "
-            jq -r 'length' "$f"
-          else
-            echo "Missing: $f"
-          fi
-
-          echo "---- DROPS (first 40 lines) ----"
-          f2="out/debug-drops-${YM}.txt"
-          test -f "$f2" && head -n 40 "$f2" || true
-
-          echo "---- GIT STATUS (porcelain) ----"
-          git status --porcelain || true
-
-      # Fail fast: if selected==0 do not commit/email placeholder.
       - name: Guardrail: require at least 1 selected item
         shell: bash
         run: |
@@ -152,17 +123,20 @@ jobs:
           YM="${{ steps.when.outputs.ym }}"
           DIGEST="out/monthly-digest-${YM}.md"
 
-          if [[ ! -f "$DIGEST" ]]; then
-            echo "Digest not found: $DIGEST"
-            exit 1
-          fi
+          test -f "$DIGEST" || { echo "Digest not found: $DIGEST"; exit 1; }
 
-          # Stage ONLY current month artifacts
-          git add -f "$DIGEST"
+          # Stage only THIS month’s artifacts (globbing done in bash, not YAML)
+          git add -f "$DIGEST" || true
           git add -f "out/debug-selected-${YM}.json" 2>/dev/null || true
           git add -f "out/debug-drops-${YM}.txt" 2>/dev/null || true
           git add -f "out/debug-meta-${YM}.txt" 2>/dev/null || true
-          git add -f "out/debug-pool-*-${YM}.json" 2>/dev/null || true
+
+          # Add any debug-pool files for this YM if they exist
+          shopt -s nullglob
+          pool_files=(out/debug-pool-*-"${YM}".json)
+          if (( ${#pool_files[@]} )); then
+            git add -f "${pool_files[@]}" || true
+          fi
 
           # Never stage pycache
           git reset -q -- src/__pycache__ || true
@@ -177,14 +151,30 @@ jobs:
 
       - name: Upload debug artifacts (current month only)
         if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          YM="${{ steps.when.outputs.ym }}"
+
+          mkdir -p _artifact
+          cp -f "out/debug-selected-${YM}.json" _artifact/ 2>/dev/null || true
+          cp -f "out/debug-drops-${YM}.txt" _artifact/ 2>/dev/null || true
+          cp -f "out/debug-meta-${YM}.txt" _artifact/ 2>/dev/null || true
+
+          shopt -s nullglob
+          for f in out/debug-pool-*-"${YM}".json; do
+            cp -f "$f" _artifact/ || true
+          done
+
+          echo "Artifact files:"
+          ls -lah _artifact || true
+
+      - name: Upload debug bundle
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: monthly-debug-${{ steps.when.outputs.ym }}
-          path: |
-            out/debug-selected-${{ steps.when.outputs.ym }}.json
-            out/debug-drops-${{ steps.when.outputs.ym }}.txt
-            out/debug-meta-${{ steps.when.outputs.ym }}.txt
-            out/debug-pool-*-${{ steps.when.outputs.ym }}.json
+          path: _artifact
           if-no-files-found: warn
           retention-days: 30
 
@@ -208,3 +198,4 @@ jobs:
             out/debug-selected-${{ steps.when.outputs.ym }}.json
             out/debug-drops-${{ steps.when.outputs.ym }}.txt
             out/debug-meta-${{ steps.when.outputs.ym }}.txt
+
