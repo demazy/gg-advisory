@@ -22,11 +22,14 @@ load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 MODEL = os.getenv("MODEL", "gpt-4o-mini")
 TEMP = float(os.getenv("TEMP", "0.2"))
+
 MIN_TEXT_CHARS = int(os.getenv("MIN_TEXT_CHARS", "700"))
 ITEMS_PER_SECTION = int(os.getenv("ITEMS_PER_SECTION", "4"))
 PER_DOMAIN_CAP = int(os.getenv("PER_DOMAIN_CAP", "3"))
-MIN_TOTAL_ITEMS = int(os.getenv("MIN_TOTAL_ITEMS", "2"))  # if fewer than this, we skip model call
+MIN_TOTAL_ITEMS = int(os.getenv("MIN_TOTAL_ITEMS", "2"))
 DEBUG = os.getenv("DEBUG", "0") == "1"
+
+# New knobs (safe defaults)
 MIN_SUBSTANCE_SCORE = int(os.getenv("MIN_SUBSTANCE_SCORE", "2"))
 MAX_PER_DOMAIN_PER_SECTION = int(os.getenv("MAX_PER_DOMAIN_PER_SECTION", "1"))
 
@@ -57,7 +60,7 @@ def _month_bounds(y: int, m: int) -> Tuple[datetime, datetime]:
     return start, end
 
 def _month_label(d: datetime) -> str:
-    return d.strftime("%B %Y")  # e.g. "February 2025"
+    return d.strftime("%B %Y")
 
 def _in_range(ts: float, start: datetime, end: datetime) -> bool:
     if not ts:
@@ -72,49 +75,82 @@ def fmt_iso(ts: float) -> str:
         return ""
 
 
-# -------------------- SUBSTANCE / QUALITY ---------------------
+# -------------------- QUALITY / SPAM SUPPRESSION ---------------------
 
-_LOW_VALUE_URL_HINTS = ("/meeting", "/meetings", "/news-and-calendar", "/calendar", "/events", "/agenda")
-_LOW_VALUE_TEXT_HINTS = (
-    "online meeting",
-    "registration required",
-    "duly registered",
-    "registered observers",
-    "agenda will be available",
-    "open to duly",
-    "meeting will be held",
+# These are "admin notices" rather than real advisory signals.
+# We drop them unconditionally based on URL/title, because extracted text length is unreliable
+# (boilerplate can inflate length and defeat MIN_TEXT_CHARS thresholds).
+
+_MEETING_URL_HINTS = (
+    "/news-and-calendar/",
+    "/calendar",
+    "/events",
+    "/meeting",
+    "/meetings",
 )
 
-def is_low_value_notice(url: str, title: str, text: str) -> bool:
+_MEETING_URL_STRONG = (
+    "online-meeting",
+    "online_meeting",
+    "agenda",
+)
+
+_MEETING_TITLE_HINTS = (
+    "online meeting",
+    "srb online meeting",
+    "frb online meeting",
+    "teg online meeting",
+    "technical expert group meeting",
+    "board meeting",
+)
+
+def is_meeting_notice(url: str, title: str) -> bool:
     u = (url or "").lower()
     t = (title or "").lower()
-    x = (text or "").lower()
-    if any(h in u for h in _LOW_VALUE_URL_HINTS):
+
+    # Strong signals in URL (typical of EFRAG notices)
+    if any(x in u for x in _MEETING_URL_STRONG):
         return True
-    if any(h in t for h in _LOW_VALUE_TEXT_HINTS):
+
+    # Softer URL patterns, combined with "meeting" in URL or title
+    if any(x in u for x in _MEETING_URL_HINTS):
+        if "meeting" in u or any(x in t for x in _MEETING_TITLE_HINTS) or "meeting" in t:
+            return True
+
+    # Title-only patterns
+    if any(x in t for x in _MEETING_TITLE_HINTS):
         return True
-    if any(h in x for h in _LOW_VALUE_TEXT_HINTS):
-        return True
+
     return False
 
+
 def substance_score(text: str) -> int:
+    """
+    Lightweight heuristic to gate out low-signal pages and prioritise regulatory / commercial impact.
+    """
     t = (text or "").lower()
     score = 0
+
     # decision / regulatory signal
     if any(w in t for w in ("final", "decision", "approved", "determination", "rule change")):
         score += 3
     if any(w in t for w in ("consultation", "draft", "exposure draft", "guidance", "standard", "framework")):
         score += 2
+
     # quantitative / commercial signal
     if any(w in t for w in ("mw", "gw", "million", "billion", "$", "€", "aud", "eur")):
         score += 2
     if any(w in t for w in ("auction", "tender", "capacity", "tariff", "price", "market")):
         score += 1
-    # meeting/admin penalty
+
+    # meeting/admin penalty (stronger than before)
     if any(w in t for w in ("meeting", "registration", "observers", "agenda")):
-        score -= 3
+        score -= 6
+
+    # short pages are often low-signal
     if len(t) < 800:
         score -= 2
+
     return score
 
 
@@ -207,7 +243,6 @@ def collect_items(sources, drop_log) -> List[Item]:
     def _iter_sources(sources_obj):
         if sources_obj is None:
             return
-        # dict-of-lists style
         if isinstance(sources_obj, dict):
             for k, v in sources_obj.items():
                 if isinstance(v, list):
@@ -216,12 +251,10 @@ def collect_items(sources, drop_log) -> List[Item]:
                 else:
                     yield (k, v)
             return
-        # list style
         if isinstance(sources_obj, list):
             for item in sources_obj:
                 yield (None, item)
             return
-        # single scalar
         yield (None, sources_obj)
 
     pool: List[Item] = []
@@ -232,7 +265,6 @@ def collect_items(sources, drop_log) -> List[Item]:
         stype = ""
 
         try:
-            # Case 1: URL string
             if isinstance(src, str):
                 url = src.strip()
                 if not url:
@@ -240,7 +272,6 @@ def collect_items(sources, drop_log) -> List[Item]:
                 stype = (forced_type or _infer_type(url)).strip().lower()
                 name = url
 
-            # Case 2: mapping
             elif isinstance(src, dict):
                 url = (src.get("url") or "").strip()
                 if not url:
@@ -269,7 +300,6 @@ def collect_items(sources, drop_log) -> List[Item]:
 
     pool.sort(key=lambda x: x.published_ts or 0, reverse=True)
     return pool
-
 
 
 # ----------------------- MONTHLY GENERATION --------------------
@@ -303,7 +333,6 @@ def generate_monthly_for(ym: str) -> str:
         pool = collect_items(sources, drop_log)
         print(f"[pool] candidates: {len(pool)}")
 
-        # Debug dump of raw pool (first 100)
         if DEBUG:
             _dump_json(
                 OUTDIR / f"debug-pool-{section.replace(' ','_')}-{ym}.json",
@@ -319,7 +348,7 @@ def generate_monthly_for(ym: str) -> str:
                 ],
             )
 
-        selected = []
+        selected: List[Dict] = []
         section_dom_counts: Dict[str, int] = {}
 
         for it in pool:
@@ -329,6 +358,12 @@ def generate_monthly_for(ym: str) -> str:
                 continue
 
             if not _passes_filters(it, filters, drop_log):
+                continue
+
+            # Unconditional meeting notice suppression (key change)
+            if is_meeting_notice(it.url, it.title or ""):
+                if DEBUG:
+                    drop_log(f"meeting_notice\t{it.url}")
                 continue
 
             h = sha1(it.url)
@@ -351,12 +386,6 @@ def generate_monthly_for(ym: str) -> str:
                     )
                 continue
 
-            # Suppress low-value calendar/meeting notices unless they are clearly substantive
-            if is_low_value_notice(it.url, it.title or "", txt) and len(txt) < max(900, MIN_TEXT_CHARS):
-                if DEBUG:
-                    drop_log(f"low_value_notice\tlen={len(txt)}\t{it.url}")
-                continue
-
             # Domain-aware content threshold
             threshold = PRIORITY_MIN_CHARS if any(dom.endswith(d) for d in PRIORITY_DOMAINS) else MIN_TEXT_CHARS
             if len(txt) < threshold and len(it.summary or "") < 160:
@@ -364,7 +393,7 @@ def generate_monthly_for(ym: str) -> str:
                     drop_log(f"too_short\tlen={len(txt)}/thr={threshold}\t{it.url}")
                 continue
 
-            # Simple substance gate (prevents admin/calendar spam)
+            # Substance gate (prevents admin/boilerplate content)
             sscore = substance_score(txt)
             if sscore < MIN_SUBSTANCE_SCORE:
                 if DEBUG:
@@ -395,7 +424,7 @@ def generate_monthly_for(ym: str) -> str:
 
     # Per-domain cap (global)
     per_domain: Dict[str, int] = {}
-    filtered = []
+    filtered: List[Dict] = []
     for row in chosen:
         dom = normalise_domain(row["url"])
         per_domain[dom] = per_domain.get(dom, 0) + 1
@@ -407,14 +436,14 @@ def generate_monthly_for(ym: str) -> str:
 
     chosen = filtered[:12]
 
-    # ✅ Always write a snapshot of selected items (even if empty)
+    # Always write a snapshot of selected items (even if empty)
     _dump_json(
         selected_file,
         [{"title": x["title"], "url": x["url"], "published": x["published"], "section": x["section"]}
          for x in chosen],
     )
 
-    # ✅ Write a small meta summary so you can read it in the log
+    # Write a small meta summary
     try:
         with meta_file.open("w", encoding="utf-8") as mf:
             mf.write(f"month: {ym}\n")
@@ -453,7 +482,7 @@ def main():
     mode = os.getenv("MODE", "single")  # 'single' | 'backfill-months'
     if mode == "backfill-months":
         start_ym = os.getenv("START_YM", "2025-01")
-        end_ym   = os.getenv("END_YM",   "2025-10")
+        end_ym = os.getenv("END_YM", "2025-10")
         sy, sm = map(int, start_ym.split("-"))
         ey, em = map(int, end_ym.split("-"))
         y, m = sy, sm
@@ -466,13 +495,11 @@ def main():
             out.write_text(md, encoding="utf-8")
             print(f"[write] {out}")
 
-            # increment month
             m += 1
             if m > 12:
                 m = 1
                 y += 1
     else:
-        # Single month from env or current UTC month
         ym = os.getenv("YM", datetime.now(timezone.utc).strftime("%Y-%m"))
         md = generate_monthly_for(ym)
         out = OUTDIR / f"monthly-digest-{ym}.md"
