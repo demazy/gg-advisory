@@ -1,8 +1,8 @@
 name: monthly-digest
 
-on:
+"on":
   schedule:
-    - cron: "10 0 1 * *"
+    - cron: "10 0 1 * *" # 00:10 UTC on the 1st of each month
   workflow_dispatch:
     inputs:
       year:
@@ -42,14 +42,26 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Compute target month (prev month in Australia/Melbourne, unless inputs provided)
-        id: when
+      # IMPORTANT: if you want a "clean base", do it BEFORE generating outputs.
+      - name: Sync to origin/main (clean base before generation)
+        if: github.ref == 'refs/heads/main'
         shell: bash
         run: |
           set -euo pipefail
+          git fetch origin
+          git reset --hard origin/main
 
-          IN_YEAR="${{ github.event.inputs.year || '' }}"
-          IN_MONTH="${{ github.event.inputs.month || '' }}"
+      - name: Compute target month (prev month in Australia/Melbourne, unless inputs provided)
+        id: when
+        shell: bash
+        env:
+          IN_YEAR: ${{ github.event.inputs.year }}
+          IN_MONTH: ${{ github.event.inputs.month }}
+        run: |
+          set -euo pipefail
+
+          IN_YEAR="${IN_YEAR:-}"
+          IN_MONTH="${IN_MONTH:-}"
 
           if [[ -n "$IN_YEAR" && -n "$IN_MONTH" ]]; then
             YM="$(printf "%04d-%02d" "$IN_YEAR" "$IN_MONTH")"
@@ -60,14 +72,6 @@ jobs:
 
           echo "ym=$YM" >> "$GITHUB_OUTPUT"
           echo "Chosen month: $YM"
-
-      - name: Sync to origin/main (clean base before generation)
-        if: github.ref == 'refs/heads/main'
-        shell: bash
-        run: |
-          set -euo pipefail
-          git fetch origin
-          git reset --hard origin/main
 
       - name: Generate monthly digest (DEBUG always on)
         env:
@@ -124,7 +128,7 @@ jobs:
           DIGEST="out/monthly-digest-${YM}.md"
           test -f "$DIGEST" || { echo "Digest not found: $DIGEST"; exit 1; }
 
-          git add -f "$DIGEST" || true
+          git add -f "$DIGEST"
           git add -f "out/debug-selected-${YM}.json" 2>/dev/null || true
           git add -f "out/debug-drops-${YM}.txt" 2>/dev/null || true
           git add -f "out/debug-meta-${YM}.txt" 2>/dev/null || true
@@ -132,9 +136,10 @@ jobs:
           shopt -s nullglob
           pool_files=(out/debug-pool-*-"${YM}".json)
           if (( ${#pool_files[@]} )); then
-            git add -f "${pool_files[@]}" || true
+            git add -f "${pool_files[@]}"
           fi
 
+          # Never stage pycache (in case it exists locally)
           git reset -q -- src/__pycache__ || true
 
           if git diff --cached --quiet; then
