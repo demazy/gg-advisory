@@ -62,7 +62,7 @@ jobs:
           echo "ym=$YM" >> "$GITHUB_OUTPUT"
           echo "Chosen month: $YM"
 
-      # ✅ IMPORTANT: if you want a "clean base", do it BEFORE generating outputs.
+      # IMPORTANT: "clean base" must happen BEFORE generation (optional but safe).
       - name: Sync to origin/main (clean base before generation)
         if: github.ref == 'refs/heads/main'
         shell: bash
@@ -78,7 +78,6 @@ jobs:
           START_YM: ${{ steps.when.outputs.ym }}
           END_YM:   ${{ steps.when.outputs.ym }}
 
-          # ----- Content tuning -----
           ITEMS_PER_SECTION: "7"
           PER_DOMAIN_CAP: "3"
           MIN_TEXT_CHARS: "300"
@@ -89,17 +88,17 @@ jobs:
           MODEL: gpt-4o-mini
           TEMP: "0.2"
 
-          # ----- Hybrid PDF capture -----
           MAX_PDF_BYTES: "5242880"
           PDF_TRUSTED: "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org"
 
-          # ----- Debug always on -----
           DEBUG: "1"
         run: python -m src.generate_monthly
 
       - name: List outputs + selection count + git status
         if: always()
+        shell: bash
         run: |
+          set -euo pipefail
           echo "---- OUT ----"
           ls -lh out/ | sed -n '1,400p' || true
 
@@ -121,25 +120,27 @@ jobs:
           echo "---- GIT STATUS (porcelain) ----"
           git status --porcelain || true
 
-      # ✅ Fail fast: if MIN_TOTAL_ITEMS=1 but selected==0, do NOT commit/email placeholders.
+      # Fail fast: if selected==0 do not commit/email placeholder.
       - name: Guardrail: require at least 1 selected item
         shell: bash
         run: |
           set -euo pipefail
           YM="${{ steps.when.outputs.ym }}"
           f="out/debug-selected-${YM}.json"
+
           if [[ ! -f "$f" ]]; then
             echo "Missing selected file: $f"
             exit 1
           fi
-          n=$(jq -r 'length' "$f")
+
+          n="$(jq -r 'length' "$f")"
           echo "selected_count=$n"
+
           if [[ "$n" -lt 1 ]]; then
             echo "ERROR: selected items is $n but MIN_TOTAL_ITEMS=1. Failing run to avoid publishing placeholder."
             exit 1
           fi
 
-      # Commit digest + debug (current month only)
       - name: Commit outputs (digest + current-month debug)
         if: github.ref == 'refs/heads/main'
         shell: bash
@@ -156,15 +157,14 @@ jobs:
             exit 1
           fi
 
-          # Stage only the relevant artifacts for THIS YM (avoid staging old months)
+          # Stage ONLY current month artifacts
           git add -f "$DIGEST"
           git add -f "out/debug-selected-${YM}.json" 2>/dev/null || true
           git add -f "out/debug-drops-${YM}.txt" 2>/dev/null || true
           git add -f "out/debug-meta-${YM}.txt" 2>/dev/null || true
-          git add -f "out/debug-pool-*-(${YM}).json" 2>/dev/null || true
-          git add -f "out/debug-pool-*-2026-01.json" 2>/dev/null || true # fallback if naming differs (safe)
+          git add -f "out/debug-pool-*-${YM}.json" 2>/dev/null || true
 
-          # Don't ever stage pycache even if present
+          # Never stage pycache
           git reset -q -- src/__pycache__ || true
 
           if git diff --cached --quiet; then
@@ -175,7 +175,7 @@ jobs:
           git commit -m "monthly: digest ${YM} (debug=on)"
           git push
 
-      - name: Upload debug artifacts
+      - name: Upload debug artifacts (current month only)
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -183,8 +183,8 @@ jobs:
           path: |
             out/debug-selected-${{ steps.when.outputs.ym }}.json
             out/debug-drops-${{ steps.when.outputs.ym }}.txt
-            out/debug-pool-*
             out/debug-meta-${{ steps.when.outputs.ym }}.txt
+            out/debug-pool-*-${{ steps.when.outputs.ym }}.json
           if-no-files-found: warn
           retention-days: 30
 
@@ -208,4 +208,3 @@ jobs:
             out/debug-selected-${{ steps.when.outputs.ym }}.json
             out/debug-drops-${{ steps.when.outputs.ym }}.txt
             out/debug-meta-${{ steps.when.outputs.ym }}.txt
-
