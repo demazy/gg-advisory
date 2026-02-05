@@ -2,7 +2,7 @@ name: monthly-digest
 
 on:
   schedule:
-    - cron: "10 0 1 * *" # 00:10 UTC on the 1st of each month
+    - cron: "10 0 1 * *"
   workflow_dispatch:
     inputs:
       year:
@@ -122,23 +122,19 @@ jobs:
 
           YM="${{ steps.when.outputs.ym }}"
           DIGEST="out/monthly-digest-${YM}.md"
-
           test -f "$DIGEST" || { echo "Digest not found: $DIGEST"; exit 1; }
 
-          # Stage only THIS month’s artifacts (globbing done in bash, not YAML)
           git add -f "$DIGEST" || true
           git add -f "out/debug-selected-${YM}.json" 2>/dev/null || true
           git add -f "out/debug-drops-${YM}.txt" 2>/dev/null || true
           git add -f "out/debug-meta-${YM}.txt" 2>/dev/null || true
 
-          # Add any debug-pool files for this YM if they exist
           shopt -s nullglob
           pool_files=(out/debug-pool-*-"${YM}".json)
           if (( ${#pool_files[@]} )); then
             git add -f "${pool_files[@]}" || true
           fi
 
-          # Never stage pycache
           git reset -q -- src/__pycache__ || true
 
           if git diff --cached --quiet; then
@@ -149,14 +145,16 @@ jobs:
           git commit -m "monthly: digest ${YM} (debug=on)"
           git push
 
-      - name: Upload debug artifacts (current month only)
+      - name: Prepare debug bundle (current month only)
         if: always()
         shell: bash
         run: |
           set -euo pipefail
           YM="${{ steps.when.outputs.ym }}"
 
+          rm -rf _artifact
           mkdir -p _artifact
+
           cp -f "out/debug-selected-${YM}.json" _artifact/ 2>/dev/null || true
           cp -f "out/debug-drops-${YM}.txt" _artifact/ 2>/dev/null || true
           cp -f "out/debug-meta-${YM}.txt" _artifact/ 2>/dev/null || true
@@ -198,4 +196,3 @@ jobs:
             out/debug-selected-${{ steps.when.outputs.ym }}.json
             out/debug-drops-${{ steps.when.outputs.ym }}.txt
             out/debug-meta-${{ steps.when.outputs.ym }}.txt
-
