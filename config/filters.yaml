@@ -18,7 +18,8 @@ allow_domains:
 deny_domains:
   - bbc.com
   - bloomberg.com
-
+  - assets.bbhub.io
+  - globalreporting.org
 title_deny_regex:
   - "(webcast|podcast|register|replay)"      # junky meeting links
   - "(photo|gallery)"                        # image posts
