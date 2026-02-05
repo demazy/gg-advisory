@@ -1,8 +1,9 @@
 name: monthly-digest
 
-"on":
+on:
   schedule:
-    - cron: "10 0 1 * *" # 00:10 UTC on the 1st of each month
+    # 00:10 UTC on the 1st of each month
+    - cron: "10 0 1 * *"
   workflow_dispatch:
     inputs:
       year:
@@ -42,26 +43,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # IMPORTANT: if you want a "clean base", do it BEFORE generating outputs.
-      - name: Sync to origin/main (clean base before generation)
-        if: github.ref == 'refs/heads/main'
-        shell: bash
-        run: |
-          set -euo pipefail
-          git fetch origin
-          git reset --hard origin/main
-
       - name: Compute target month (prev month in Australia/Melbourne, unless inputs provided)
         id: when
         shell: bash
-        env:
-          IN_YEAR: ${{ github.event.inputs.year }}
-          IN_MONTH: ${{ github.event.inputs.month }}
         run: |
           set -euo pipefail
 
-          IN_YEAR="${IN_YEAR:-}"
-          IN_MONTH="${IN_MONTH:-}"
+          IN_YEAR="${{ github.event.inputs.year || '' }}"
+          IN_MONTH="${{ github.event.inputs.month || '' }}"
 
           if [[ -n "$IN_YEAR" && -n "$IN_MONTH" ]]; then
             YM="$(printf "%04d-%02d" "$IN_YEAR" "$IN_MONTH")"
@@ -73,13 +62,25 @@ jobs:
           echo "ym=$YM" >> "$GITHUB_OUTPUT"
           echo "Chosen month: $YM"
 
+      # Clean base BEFORE generating outputs (prevents "reset wipes generated files" issue)
+      - name: Sync to origin/main (clean base before generation)
+        if: github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin
+          git reset --hard origin/main
+
       - name: Generate monthly digest (DEBUG always on)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+          # Your generator uses these env vars
           MODE: backfill-months
           START_YM: ${{ steps.when.outputs.ym }}
           END_YM: ${{ steps.when.outputs.ym }}
 
+          # ----- Content tuning -----
           ITEMS_PER_SECTION: "7"
           PER_DOMAIN_CAP: "3"
           MIN_TEXT_CHARS: "300"
@@ -90,13 +91,42 @@ jobs:
           MODEL: "gpt-4o-mini"
           TEMP: "0.2"
 
+          # ----- Hybrid PDF capture -----
           MAX_PDF_BYTES: "5242880"
           PDF_TRUSTED: "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org"
 
+          # ----- Debug always on -----
           DEBUG: "1"
         run: python -m src.generate_monthly
-        
-      - name: Guardrail: require at least 1 selected item
+
+      - name: List outputs + selection count + git status
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "---- OUT ----"
+          ls -lh out/ | sed -n '1,400p' || true
+
+          YM="${{ steps.when.outputs.ym }}"
+          f="out/debug-selected-${YM}.json"
+
+          echo "---- SELECTED (count) ----"
+          if test -f "$f"; then
+            echo -n "$f: "
+            jq -r 'length' "$f"
+          else
+            echo "Missing: $f"
+          fi
+
+          echo "---- DROPS (first 40 lines) ----"
+          f2="out/debug-drops-${YM}.txt"
+          test -f "$f2" && head -n 40 "$f2" || true
+
+          echo "---- GIT STATUS (porcelain) ----"
+          git status --porcelain || true
+
+      # Fail fast: do not commit/email placeholders when MIN_TOTAL_ITEMS=1 but selected==0
+      - name: "Guardrail – require at least 1 selected item"
         shell: bash
         run: |
           set -euo pipefail
@@ -128,19 +158,21 @@ jobs:
           DIGEST="out/monthly-digest-${YM}.md"
           test -f "$DIGEST" || { echo "Digest not found: $DIGEST"; exit 1; }
 
-          git add -f "$DIGEST"
+          # Stage only THIS month’s artifacts
+          git add -f "$DIGEST" || true
           git add -f "out/debug-selected-${YM}.json" 2>/dev/null || true
           git add -f "out/debug-drops-${YM}.txt" 2>/dev/null || true
           git add -f "out/debug-meta-${YM}.txt" 2>/dev/null || true
 
+          # Add any debug-pool files for this YM if they exist
           shopt -s nullglob
           pool_files=(out/debug-pool-*-"${YM}".json)
           if (( ${#pool_files[@]} )); then
-            git add -f "${pool_files[@]}"
+            git add -f "${pool_files[@]}" || true
           fi
 
-          # Never stage pycache (in case it exists locally)
-          git reset -q -- src/__pycache__ || true
+          # Never stage pycache
+          git reset -q -- src/__pycache__ 2>/dev/null || true
 
           if git diff --cached --quiet; then
             echo "No changes."
