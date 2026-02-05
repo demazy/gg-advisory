@@ -85,86 +85,86 @@ def fetch_url(url: str, timeout_s: int = 30) -> str:
     return resp.text
 
 
-def fetch_rss(url: str, source_name: str | None = None, **_: object) -> List[Item]:
+def fetch_rss(url: str, *, source_name: str | None = None, **_kwargs) -> list[Item]:
     """
-    Robust RSS fetch using requests + feedparser.
-
-    NOTE: This function now accepts `source_name` (and extra kwargs)
-    because upstream code passes `source_name=` for debugging/attribution.
+    Fetch items from an RSS/Atom feed.
+    `source_name` is accepted for compatibility with generate_monthly; it is optional.
     """
-    out: List[Item] = []
-    headers = {"User-Agent": "gg-advisory-bot/1.0 (+https://www.gg-advisory.org)"}
+    label = source_name or url
+    try:
+        resp = requests.get(url, headers=HEADERS, timeout=TIMEOUT)
+        resp.raise_for_status()
+        feed = feedparser.parse(resp.content)
 
-    attempts, data = 0, None
-    while attempts < 3:
-        attempts += 1
-        try:
-            resp = requests.get(url, headers=headers, timeout=30)
-            resp.raise_for_status()
-            data = resp.content
-            break
-        except Exception:
-            if attempts >= 3:
-                raise
-            time.sleep(1.0 * attempts)
+        items: list[Item] = []
+        for e in feed.entries:
+            link = getattr(e, "link", None) or ""
+            title = (getattr(e, "title", "") or "").strip()
+            summary = (getattr(e, "summary", "") or "").strip()
 
-    feed = feedparser.parse(data)
+            published_ts = None
+            if getattr(e, "published_parsed", None):
+                published_ts = time.mktime(e.published_parsed)
 
-    for entry in getattr(feed, "entries", []) or []:
-        link = getattr(entry, "link", None) or getattr(entry, "id", None)
-        if not link:
-            continue
-
-        title = (getattr(entry, "title", "") or "").strip() or "(untitled)"
-        published_ts = (
-            _safe_ts_from_struct_time(getattr(entry, "published_parsed", None))
-            or _safe_ts_from_struct_time(getattr(entry, "updated_parsed", None))
-        )
-
-        # If feed doesn’t provide a date, default to “now” (downstream time-window filter will drop if needed)
-        if published_ts is None:
-            published_ts = time.time()
-
-        out.append(
-            Item(
+            items.append(Item(
+                source=url,
+                url=link,
                 title=title,
-                url=_norm_url(link),
-                source=(source_name or url),
-                published_ts=float(published_ts),
-                published_iso=_to_iso_utc(float(published_ts)),
-            )
-        )
+                published_ts=published_ts,
+                summary=summary,
+            ))
+        return items
 
-    return _unique_by_url(out)
+    except Exception as ex:
+        raise RuntimeError(f"fetch_rss failed for {label}: {ex}") from ex
 
 
-def fetch_html_index(url: str, source_name: str | None = None, **_: object) -> List[Item]:
+def fetch_html_index(url: str, *, source_name: str | None = None, **_kwargs) -> list[Item]:
     """
-    Fetch an HTML index page and produce Item candidates.
-
-    NOTE: This function now accepts `source_name` (and extra kwargs)
-    because upstream code passes `source_name=`.
+    Fetch candidate article links from an HTML 'news index' page.
+    `source_name` is accepted for compatibility with generate_monthly; it is optional.
     """
-    html = fetch_url(url)
+    label = source_name or url
+    try:
+        resp = requests.get(url, headers=HEADERS, timeout=TIMEOUT)
+        resp.raise_for_status()
 
-    # 1) extract links
-    links = _find_links_html(url, html)
+        soup = BeautifulSoup(resp.text, "html.parser")
+        domain = urllib.parse.urlparse(url).netloc.lower().replace("www.", "")
+        sel = SELECTORS.get(domain, "a[href]")
 
-    # 2) build items; dates are unknown at index-level, so we set to "now"
-    now_ts = time.time()
-    items: List[Item] = []
-    for link in links:
-        items.append(
-            Item(
-                title="(index link)",
-                url=_norm_url(link),
-                source=(source_name or url),
-                published_ts=float(now_ts),
-                published_iso=_to_iso_utc(float(now_ts)),
-            )
-        )
+        items: list[Item] = []
+        for a in soup.select(sel):
+            href = a.get("href") or ""
+            abs_url = urllib.parse.urljoin(url, href)
+            text = (a.get_text(" ", strip=True) or "").strip()
 
-    return _unique_by_url(items)
+            if not abs_url.startswith("http"):
+                continue
+            if not text:
+                continue
+
+            items.append(Item(
+                source=url,
+                url=abs_url,
+                title=text[:180],
+                published_ts=None,
+                summary="",
+            ))
+
+        # de-dupe
+        seen = set()
+        deduped: list[Item] = []
+        for it in items:
+            if it.url in seen:
+                continue
+            seen.add(it.url)
+            deduped.append(it)
+
+        return deduped
+
+    except Exception as ex:
+        raise RuntimeError(f"fetch_html_index failed for {label}: {ex}") from ex
 
 
 def fetch_text(url: str, timeout_s: int = 30) -> str:
