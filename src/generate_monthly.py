@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 
 from .fetch import fetch_rss, fetch_html_index, fetch_full_text, Item
 from .summarise import build_digest
-from .utils import sha1, normalize_whitespace
+from .utils import sha1, normalize_whitespace, normalise_domain
 
 load_dotenv()
 
@@ -27,8 +27,8 @@ ITEMS_PER_SECTION = int(os.getenv("ITEMS_PER_SECTION", "4"))
 PER_DOMAIN_CAP = int(os.getenv("PER_DOMAIN_CAP", "3"))
 MIN_TOTAL_ITEMS = int(os.getenv("MIN_TOTAL_ITEMS", "2"))  # if fewer than this, we skip model call
 DEBUG = os.getenv("DEBUG", "0") == "1"
-
-
+MIN_SUBSTANCE_SCORE = int(os.getenv("MIN_SUBSTANCE_SCORE", "2"))
+MAX_PER_DOMAIN_PER_SECTION = int(os.getenv("MAX_PER_DOMAIN_PER_SECTION", "1"))
 
 # Trusted short-content domains can have a lower character floor
 PRIORITY_DOMAINS = {
@@ -71,132 +71,173 @@ def fmt_iso(ts: float) -> str:
     except Exception:
         return ""
 
-# ----------------------- FILTERS -------------------------------
 
-def _load_filters() -> Dict:
-    """Load filters.yaml (optional). Compile regexes; normalise lists."""
-    base = {"allow_domains": [], "deny_domains": [], "title_deny_regex": [], "keep_keywords": []}
-    if not FILTERS.exists():
-        return base
-    raw = (yaml_safe := __import__("yaml")).safe_load(FILTERS.read_text()) or {}
-    allow = list(raw.get("allow_domains", []) or [])
-    deny = list(raw.get("deny_domains", []) or [])
-    deny_pat = [re.compile(p, re.I) for p in (raw.get("title_deny_regex", []) or [])]
-    keep = [str(k).lower() for k in (raw.get("keep_keywords", []) or [])]
+# -------------------- SUBSTANCE / QUALITY ---------------------
+
+_LOW_VALUE_URL_HINTS = ("/meeting", "/meetings", "/news-and-calendar", "/calendar", "/events", "/agenda")
+_LOW_VALUE_TEXT_HINTS = (
+    "online meeting",
+    "registration required",
+    "duly registered",
+    "registered observers",
+    "agenda will be available",
+    "open to duly",
+    "meeting will be held",
+)
+
+def is_low_value_notice(url: str, title: str, text: str) -> bool:
+    u = (url or "").lower()
+    t = (title or "").lower()
+    x = (text or "").lower()
+    if any(h in u for h in _LOW_VALUE_URL_HINTS):
+        return True
+    if any(h in t for h in _LOW_VALUE_TEXT_HINTS):
+        return True
+    if any(h in x for h in _LOW_VALUE_TEXT_HINTS):
+        return True
+    return False
+
+def substance_score(text: str) -> int:
+    t = (text or "").lower()
+    score = 0
+    # decision / regulatory signal
+    if any(w in t for w in ("final", "decision", "approved", "determination", "rule change")):
+        score += 3
+    if any(w in t for w in ("consultation", "draft", "exposure draft", "guidance", "standard", "framework")):
+        score += 2
+    # quantitative / commercial signal
+    if any(w in t for w in ("mw", "gw", "million", "billion", "$", "€", "aud", "eur")):
+        score += 2
+    if any(w in t for w in ("auction", "tender", "capacity", "tariff", "price", "market")):
+        score += 1
+    # meeting/admin penalty
+    if any(w in t for w in ("meeting", "registration", "observers", "agenda")):
+        score -= 3
+    if len(t) < 800:
+        score -= 2
+    return score
+
+
+# ----------------------- DEBUG HELPERS ------------------------
+
+def _dump_json(path: Path, obj) -> None:
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("w", encoding="utf-8") as f:
+            json.dump(obj, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"[warn] failed to dump json: {path}: {e}")
+
+def _append_line(path: Path, line: str) -> None:
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("a", encoding="utf-8") as f:
+            f.write(line.rstrip("\n") + "\n")
+    except Exception as e:
+        print(f"[warn] failed to append: {path}: {e}")
+
+
+# ----------------------- FILTER LOADERS ------------------------
+
+def load_yaml(path: Path) -> Dict:
+    import yaml
+    with path.open("r", encoding="utf-8") as f:
+        return yaml.safe_load(f) or {}
+
+def compile_filters(filters: Dict) -> Dict:
+    allow = [d.strip().lower() for d in (filters.get("allow_domains") or []) if d.strip()]
+    deny = [d.strip().lower() for d in (filters.get("deny_domains") or []) if d.strip()]
+    deny_pat = [re.compile(p, re.I) for p in (filters.get("title_deny_regex") or []) if p.strip()]
+    keep = [k.strip().lower() for k in (filters.get("keep_keywords") or []) if k.strip()]
     return {"allow_domains": allow, "deny_domains": deny, "title_deny_regex": deny_pat, "keep_keywords": keep}
 
 def _passes_filters(it: Item, filters: Dict, drop_log) -> bool:
     """Domain allow/deny, title deny regex, with keep_keywords override."""
-    from urllib.parse import urlparse
-    dom = urlparse(it.url).netloc.lower()
+    dom = normalise_domain(it.url)
     allow = set(filters.get("allow_domains", []))
     deny = set(filters.get("deny_domains", []))
     deny_title = filters.get("title_deny_regex", [])
     keep_keywords = filters.get("keep_keywords", [])
 
     if allow and not any(dom.endswith(d) for d in allow):
-        if DEBUG: print(f"[drop] domain not allowed: {dom} -> {it.url}")
+        if DEBUG:
+            print(f"[drop] domain not allowed: {dom} -> {it.url}")
         drop_log(f"domain_not_allowed\t{dom}\t{it.url}")
         return False
+
     if any(dom.endswith(d) for d in deny):
-        if DEBUG: print(f"[drop] domain denied: {dom} -> {it.url}")
+        if DEBUG:
+            print(f"[drop] domain denied: {dom} -> {it.url}")
         drop_log(f"domain_denied\t{dom}\t{it.url}")
         return False
 
-    title_low = (it.title or "").lower()
-    if any(kw in title_low for kw in keep_keywords):
+    title = (it.title or "").strip()
+    title_l = title.lower()
+
+    # Keep-keywords override deny-title
+    if keep_keywords and any(k in title_l for k in keep_keywords):
         return True
-    for rx in deny_title:
-        try:
-            if rx.search(it.title or ""):
-                if DEBUG: print(f"[drop] title deny regex: {it.title}")
-                drop_log(f"title_regex\t{rx.pattern}\t{it.url}")
-                return False
-        except Exception:
-            continue
+
+    for pat in deny_title:
+        if pat.search(title):
+            if DEBUG:
+                print(f"[drop] title denied: {title} -> {it.url}")
+            drop_log(f"title_denied\t{title}\t{it.url}")
+            return False
+
     return True
 
-# ----------------------- FETCH / POOL --------------------------
 
-def collect_items(s: Dict, drop_log) -> List[Item]:
-    from yaml import safe_load  # local import to avoid top-level dependency confusion
-    rss_urls = s.get("rss", []) or []
-    html_urls = s.get("html", []) or []
-    items: List[Item] = []
+# ----------------------- ITEM COLLECTION -----------------------
 
-    # RSS
-    for r in rss_urls:
-        fetched = fetch_rss(r)
-        if DEBUG: print(f"[rss] {r}: {len(fetched)}")
-        items.extend(fetched)
+def collect_items(sources: List[Dict], drop_log) -> List[Item]:
+    pool: List[Item] = []
+    for src in sources:
+        stype = src.get("type")
+        url = src.get("url")
+        if not url:
+            continue
+        try:
+            if stype == "rss":
+                items = fetch_rss(url, source_name=src.get("name", url))
+            elif stype == "html":
+                items = fetch_html_index(url, source_name=src.get("name", url))
+            else:
+                continue
+            pool.extend(items)
+        except Exception as e:
+            drop_log(f"source_error\t{src.get('name', url)}\t{url}\t{e}")
+            if DEBUG:
+                print(f"[warn] source error: {src.get('name', url)} -> {e}")
 
-    # HTML
-    for h in html_urls:
-        fetched = fetch_html_index(h)
-        if DEBUG: print(f"[html] {h}: {len(fetched)}")
-        items.extend(fetched)
-
-    items.sort(key=lambda x: (x.published_ts or 0), reverse=True)
-    return items
-
-# ----------------------- DEBUG UTILS ---------------------------
-
-def _mk_drop_logger(drop_path: Path):
-    drop_path.parent.mkdir(parents=True, exist_ok=True)
-    # Always (re)create with a header so the file exists even if nothing is dropped
-    with drop_path.open("w", encoding="utf-8") as f:
-        f.write("# reason\tmeta\turl\n")
-    def _log(line: str):
-        with drop_path.open("a", encoding="utf-8") as f:
-            f.write(line.rstrip() + "\n")
-        # Also echo to stdout so reasons appear in the Actions log
-        if DEBUG:
-            print(line)
-    return _log
+    # Sort candidates by recency (published_ts desc)
+    pool.sort(key=lambda x: x.published_ts or 0, reverse=True)
+    return pool
 
 
+# ----------------------- MONTHLY GENERATION --------------------
 
+def generate_monthly_for(ym: str) -> str:
+    y, m = map(int, ym.split("-"))
+    start, end = _month_bounds(y, m)
 
-def _dump_json(path: Path, obj):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as f:
-        json.dump(obj, f, indent=2, ensure_ascii=False)
+    cfg = load_yaml(CFG)
+    filters = compile_filters(load_yaml(FILTERS))
 
-# ----------------------- CORE GENERATION -----------------------
-
-def _generate_for_range(start: datetime, end: datetime, items_per_section: int) -> str:
-    import yaml  # safe import inside function
-    cfg = yaml.safe_load(CFG.read_text())
-
-    # Provide a month hint (YYYY-MM) to fetch.py and compute filenames once
-    ym = start.strftime("%Y-%m")
-    os.environ["TARGET_YM"] = ym
-    
-    if DEBUG:
-        print(f"[debug] TARGET_YM set to {ym}")
-        
-    # Debug files (compute exact paths and print them)
     drop_file = OUTDIR / f"debug-drops-{ym}.txt"
-    pool_hint = OUTDIR / f"debug-pool-<Section>-{ym}.json"  # placeholder pattern
     selected_file = OUTDIR / f"debug-selected-{ym}.json"
     meta_file = OUTDIR / f"debug-meta-{ym}.txt"
 
-    print(f"[debug] CWD: {Path.cwd()}")
-    print(f"[debug] OUTDIR: {OUTDIR.resolve()}")
-    print(f"[debug] drops: {drop_file.resolve()}")
-    print(f"[debug] pools: {pool_hint}")
-    print(f"[debug] selected: {selected_file.resolve()}")
-    print(f"[debug] meta: {meta_file.resolve()}")
+    if DEBUG:
+        try:
+            drop_file.unlink(missing_ok=True)
+        except Exception:
+            pass
 
-    # (Re)create the drops file immediately so it exists
-    drop_log = _mk_drop_logger(drop_file)
+    def drop_log(line: str) -> None:
+        if DEBUG:
+            _append_line(drop_file, line)
 
-    
-    # Provide a month hint (YYYY-MM) to fetch.py
-    os.environ["TARGET_YM"] = start.strftime("%Y-%m")
-
-
-    filters = _load_filters()
     chosen: List[Dict] = []
     seen_urls: set = set()
 
@@ -222,6 +263,8 @@ def _generate_for_range(start: datetime, end: datetime, items_per_section: int) 
             )
 
         selected = []
+        section_dom_counts: Dict[str, int] = {}
+
         for it in pool:
             if not _in_range(it.published_ts, start, end):
                 if DEBUG:
@@ -241,14 +284,37 @@ def _generate_for_range(start: datetime, end: datetime, items_per_section: int) 
             txt = fetch_full_text(it.url)
             txt = normalize_whitespace(txt)
 
+            dom = normalise_domain(it.url)
+
+            # Per-domain cap within section (prevents one org monopolising a section)
+            if section_dom_counts.get(dom, 0) >= MAX_PER_DOMAIN_PER_SECTION:
+                if DEBUG:
+                    drop_log(
+                        f"per_section_domain_cap\tsection={section}\tdom={dom} cap={MAX_PER_DOMAIN_PER_SECTION}\t{it.url}"
+                    )
+                continue
+
+            # Suppress low-value calendar/meeting notices unless they are clearly substantive
+            if is_low_value_notice(it.url, it.title or "", txt) and len(txt) < max(900, MIN_TEXT_CHARS):
+                if DEBUG:
+                    drop_log(f"low_value_notice\tlen={len(txt)}\t{it.url}")
+                continue
+
             # Domain-aware content threshold
-            from urllib.parse import urlparse
-            dom = urlparse(it.url).netloc.lower()
             threshold = PRIORITY_MIN_CHARS if any(dom.endswith(d) for d in PRIORITY_DOMAINS) else MIN_TEXT_CHARS
             if len(txt) < threshold and len(it.summary or "") < 160:
                 if DEBUG:
                     drop_log(f"too_short\tlen={len(txt)}/thr={threshold}\t{it.url}")
                 continue
+
+            # Simple substance gate (prevents admin/calendar spam)
+            sscore = substance_score(txt)
+            if sscore < MIN_SUBSTANCE_SCORE:
+                if DEBUG:
+                    drop_log(f"low_substance\tscore={sscore} min={MIN_SUBSTANCE_SCORE}\t{it.url}")
+                continue
+
+            section_dom_counts[dom] = section_dom_counts.get(dom, 0) + 1
 
             selected.append({
                 "section": section,
@@ -261,7 +327,7 @@ def _generate_for_range(start: datetime, end: datetime, items_per_section: int) 
             })
             seen_urls.add(h)
 
-            if len(selected) >= items_per_section:
+            if len(selected) >= ITEMS_PER_SECTION:
                 break
 
         print(f"[selected] {len(selected)} from {section}")
@@ -270,12 +336,11 @@ def _generate_for_range(start: datetime, end: datetime, items_per_section: int) 
     # Sort newest first
     chosen = sorted(chosen, key=lambda x: (x.get("published", ""), x.get("section", "")), reverse=True)
 
-    # Per-domain cap
-    from urllib.parse import urlparse
-    per_domain = {}
+    # Per-domain cap (global)
+    per_domain: Dict[str, int] = {}
     filtered = []
     for row in chosen:
-        dom = urlparse(row["url"]).netloc.lower()
+        dom = normalise_domain(row["url"])
         per_domain[dom] = per_domain.get(dom, 0) + 1
         if per_domain[dom] <= PER_DOMAIN_CAP:
             filtered.append(row)
@@ -301,14 +366,12 @@ def _generate_for_range(start: datetime, end: datetime, items_per_section: int) 
             mf.write(f"selected_file: {selected_file.resolve()}\n")
             mf.write(f"counts:\n")
             mf.write(f"  selected_total: {len(chosen)}\n")
-            # per-section counts
             from collections import Counter
             c = Counter([x.get('section','') for x in chosen])
-            for k,v in c.items():
+            for k, v in c.items():
                 mf.write(f"  section[{k}]: {v}\n")
     except Exception as e:
         print(f"[warn] failed to write meta file: {e}")
-
 
     # Safety guard
     if len(chosen) < MIN_TOTAL_ITEMS:
@@ -322,6 +385,7 @@ def _generate_for_range(start: datetime, end: datetime, items_per_section: int) 
 
     date_label = _month_label(end)
     return build_digest(model=MODEL, api_key=OPENAI_API_KEY, items=chosen, temp=TEMP, date_label=date_label)
+
 
 # ----------------------- ENTRY POINT ---------------------------
 
@@ -338,28 +402,26 @@ def main():
         y, m = sy, sm
         while (y < ey) or (y == ey and m <= em):
             start, end = _month_bounds(y, m)
-            md = _generate_for_range(start, end, items_per_section=ITEMS_PER_SECTION)
-            OUT = OUTDIR / f"monthly-digest-{y:04d}-{m:02d}.md"
-            OUT.write_text(md)
-            print(f"[done] {OUT}")
-            m = 1 if m == 12 else m + 1
-            if m == 1:
+            ym = f"{y:04d}-{m:02d}"
+            print(f"\n=== {ym} ({start.date()} -> {end.date()}) ===")
+            md = generate_monthly_for(ym)
+            out = OUTDIR / f"monthly-digest-{ym}.md"
+            out.write_text(md, encoding="utf-8")
+            print(f"[write] {out}")
+
+            # increment month
+            m += 1
+            if m > 12:
+                m = 1
                 y += 1
-        return
+    else:
+        # Single month from env or current UTC month
+        ym = os.getenv("YM", datetime.now(timezone.utc).strftime("%Y-%m"))
+        md = generate_monthly_for(ym)
+        out = OUTDIR / f"monthly-digest-{ym}.md"
+        out.write_text(md, encoding="utf-8")
+        print(f"[write] {out}")
 
-    # single range (manual test)
-    start_date = os.getenv("START_DATE", "2025-11-01")
-    end_date   = os.getenv("END_DATE",   "2025-11-30")
-    start = datetime.fromisoformat(start_date).replace(tzinfo=timezone.utc)
-    end   = datetime.fromisoformat(end_date).replace(hour=23, minute=59, second=59, tzinfo=timezone.utc)
-    md = _generate_for_range(start, end, items_per_section=ITEMS_PER_SECTION)
-    OUT = OUTDIR / f"monthly-digest-{start.date().isoformat()}_{end.date().isoformat()}.md"
-    OUT.write_text(md)
-    print(f"[done] {OUT}")
-
-# Lazy import of yaml at module level (used in _load_filters)
-# to avoid shadowing by variable names.
-import yaml as yaml_safe  # noqa: E402
 
 if __name__ == "__main__":
     main()
