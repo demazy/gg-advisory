@@ -55,14 +55,21 @@ jobs:
           if [[ -n "$IN_YEAR" && -n "$IN_MONTH" ]]; then
             YM="$(printf "%04d-%02d" "$IN_YEAR" "$IN_MONTH")"
           else
-            # Previous month in Australia/Melbourne:
-            # Take the first of the current month, subtract one day -> last day of previous month
             LAST_PREV=$(TZ=Australia/Melbourne date -d "$(TZ=Australia/Melbourne date +%Y-%m-01) -1 day" +%Y-%m-%d)
             YM=$(TZ=Australia/Melbourne date -d "$LAST_PREV" +%Y-%m)
           fi
 
           echo "ym=$YM" >> "$GITHUB_OUTPUT"
           echo "Chosen month: $YM"
+
+      # ✅ IMPORTANT: if you want a "clean base", do it BEFORE generating outputs.
+      - name: Sync to origin/main (clean base before generation)
+        if: github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin
+          git reset --hard origin/main
 
       - name: Generate monthly digest (DEBUG always on)
         env:
@@ -90,35 +97,56 @@ jobs:
           DEBUG: "1"
         run: python -m src.generate_monthly
 
-      - name: List outputs + git status
+      - name: List outputs + selection count + git status
         if: always()
         run: |
           echo "---- OUT ----"
           ls -lh out/ | sed -n '1,400p' || true
 
+          YM="${{ steps.when.outputs.ym }}"
+          f="out/debug-selected-${YM}.json"
+
           echo "---- SELECTED (count) ----"
-          f="out/debug-selected-${{ steps.when.outputs.ym }}.json"
-          test -f "$f" && { echo -n "$f: "; jq -r 'length' "$f"; } || true
+          if test -f "$f"; then
+            echo -n "$f: "
+            jq -r 'length' "$f"
+          else
+            echo "Missing: $f"
+          fi
 
           echo "---- DROPS (first 40 lines) ----"
-          f2="out/debug-drops-${{ steps.when.outputs.ym }}.txt"
+          f2="out/debug-drops-${YM}.txt"
           test -f "$f2" && head -n 40 "$f2" || true
 
           echo "---- GIT STATUS (porcelain) ----"
           git status --porcelain || true
 
-      # Commit digest + debug (always)
-      - name: Commit outputs (safe CI flow, debug always)
+      # ✅ Fail fast: if MIN_TOTAL_ITEMS=1 but selected==0, do NOT commit/email placeholders.
+      - name: Guardrail: require at least 1 selected item
+        shell: bash
+        run: |
+          set -euo pipefail
+          YM="${{ steps.when.outputs.ym }}"
+          f="out/debug-selected-${YM}.json"
+          if [[ ! -f "$f" ]]; then
+            echo "Missing selected file: $f"
+            exit 1
+          fi
+          n=$(jq -r 'length' "$f")
+          echo "selected_count=$n"
+          if [[ "$n" -lt 1 ]]; then
+            echo "ERROR: selected items is $n but MIN_TOTAL_ITEMS=1. Failing run to avoid publishing placeholder."
+            exit 1
+          fi
+
+      # Commit digest + debug (current month only)
+      - name: Commit outputs (digest + current-month debug)
         if: github.ref == 'refs/heads/main'
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "content-bot"
           git config user.email "content-bot@example.com"
-
-          # Ensure clean, up-to-date base
-          git fetch origin
-          git reset --hard origin/main
 
           YM="${{ steps.when.outputs.ym }}"
           DIGEST="out/monthly-digest-${YM}.md"
@@ -128,12 +156,16 @@ jobs:
             exit 1
           fi
 
-          # Always add digest + any debug artifacts produced for this month
+          # Stage only the relevant artifacts for THIS YM (avoid staging old months)
           git add -f "$DIGEST"
           git add -f "out/debug-selected-${YM}.json" 2>/dev/null || true
           git add -f "out/debug-drops-${YM}.txt" 2>/dev/null || true
           git add -f "out/debug-meta-${YM}.txt" 2>/dev/null || true
-          git add -f out/debug-pool-* 2>/dev/null || true
+          git add -f "out/debug-pool-*-(${YM}).json" 2>/dev/null || true
+          git add -f "out/debug-pool-*-2026-01.json" 2>/dev/null || true # fallback if naming differs (safe)
+
+          # Don't ever stage pycache even if present
+          git reset -q -- src/__pycache__ || true
 
           if git diff --cached --quiet; then
             echo "No changes."
@@ -143,7 +175,6 @@ jobs:
           git commit -m "monthly: digest ${YM} (debug=on)"
           git push
 
-      # Also upload debug artifacts (always) for easy download from Actions UI
       - name: Upload debug artifacts
         if: always()
         uses: actions/upload-artifact@v4
@@ -177,3 +208,4 @@ jobs:
             out/debug-selected-${{ steps.when.outputs.ym }}.json
             out/debug-drops-${{ steps.when.outputs.ym }}.txt
             out/debug-meta-${{ steps.when.outputs.ym }}.txt
+
