@@ -195,12 +195,11 @@ def collect_items(sources, drop_log) -> List[Item]:
     Accepts sources as:
       - list[str] (URLs)
       - list[dict] with keys like {type: rss|html, url: ..., name: ...}
-      - dict forms (rare): {rss: [..], html: [..]}
+      - dict forms: {rss: [...], html: [...]}
     """
 
     def _infer_type(url: str) -> str:
         u = (url or "").lower()
-        # crude but effective
         if any(x in u for x in (".xml", "/rss", "feed", "atom")):
             return "rss"
         return "html"
@@ -208,7 +207,7 @@ def collect_items(sources, drop_log) -> List[Item]:
     def _iter_sources(sources_obj):
         if sources_obj is None:
             return
-        # If someone used dict-of-lists style
+        # dict-of-lists style
         if isinstance(sources_obj, dict):
             for k, v in sources_obj.items():
                 if isinstance(v, list):
@@ -217,27 +216,31 @@ def collect_items(sources, drop_log) -> List[Item]:
                 else:
                     yield (k, v)
             return
-        # Normal list
+        # list style
         if isinstance(sources_obj, list):
             for item in sources_obj:
                 yield (None, item)
             return
-        # Single scalar
+        # single scalar
         yield (None, sources_obj)
 
     pool: List[Item] = []
 
     for forced_type, src in _iter_sources(sources):
+        url = ""
+        name = ""
+        stype = ""
+
         try:
-            # Case 1: src is URL string
+            # Case 1: URL string
             if isinstance(src, str):
                 url = src.strip()
                 if not url:
                     continue
-                stype = forced_type or _infer_type(url)
+                stype = (forced_type or _infer_type(url)).strip().lower()
                 name = url
 
-            # Case 2: src is dict
+            # Case 2: mapping
             elif isinstance(src, dict):
                 url = (src.get("url") or "").strip()
                 if not url:
@@ -264,7 +267,6 @@ def collect_items(sources, drop_log) -> List[Item]:
             if DEBUG:
                 print(f"[warn] source error: {name} -> {e}")
 
-    # Sort candidates by recency (published_ts desc)
     pool.sort(key=lambda x: x.published_ts or 0, reverse=True)
     return pool
 
