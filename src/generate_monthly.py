@@ -5,6 +5,7 @@ import os
 import re
 import json
 import calendar
+import urllib.parse
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Dict, List, Tuple
@@ -29,7 +30,6 @@ PER_DOMAIN_CAP = int(os.getenv("PER_DOMAIN_CAP", "3"))
 MIN_TOTAL_ITEMS = int(os.getenv("MIN_TOTAL_ITEMS", "2"))
 DEBUG = os.getenv("DEBUG", "0") == "1"
 
-# New knobs (safe defaults)
 MIN_SUBSTANCE_SCORE = int(os.getenv("MIN_SUBSTANCE_SCORE", "2"))
 MAX_PER_DOMAIN_PER_SECTION = int(os.getenv("MAX_PER_DOMAIN_PER_SECTION", "1"))
 
@@ -77,24 +77,9 @@ def fmt_iso(ts: float) -> str:
 
 # -------------------- QUALITY / SPAM SUPPRESSION ---------------------
 
-# These are "admin notices" rather than real advisory signals.
-# We drop them unconditionally based on URL/title, because extracted text length is unreliable
-# (boilerplate can inflate length and defeat MIN_TEXT_CHARS thresholds).
-
-_MEETING_URL_HINTS = (
-    "/news-and-calendar/",
-    "/calendar",
-    "/events",
-    "/meeting",
-    "/meetings",
-)
-
-_MEETING_URL_STRONG = (
-    "online-meeting",
-    "online_meeting",
-    "agenda",
-)
-
+# Meeting / admin notices: drop unconditionally based on URL/title patterns.
+_MEETING_URL_HINTS = ("/news-and-calendar/", "/calendar", "/events", "/meeting", "/meetings")
+_MEETING_URL_STRONG = ("online-meeting", "online_meeting", "/agenda")
 _MEETING_TITLE_HINTS = (
     "online meeting",
     "srb online meeting",
@@ -108,19 +93,46 @@ def is_meeting_notice(url: str, title: str) -> bool:
     u = (url or "").lower()
     t = (title or "").lower()
 
-    # Strong signals in URL (typical of EFRAG notices)
     if any(x in u for x in _MEETING_URL_STRONG):
         return True
 
-    # Softer URL patterns, combined with "meeting" in URL or title
     if any(x in u for x in _MEETING_URL_HINTS):
-        if "meeting" in u or any(x in t for x in _MEETING_TITLE_HINTS) or "meeting" in t:
+        if "meeting" in u or "meeting" in t or any(x in t for x in _MEETING_TITLE_HINTS):
             return True
 
-    # Title-only patterns
     if any(x in t for x in _MEETING_TITLE_HINTS):
         return True
 
+    return False
+
+
+# Hub/listing URLs: drop unconditionally. These are not content pages and often have query filters.
+# You can extend this as you discover more hubs.
+_HUB_PATHS = {
+    "/news",
+    "/newsroom",
+    "/media",
+    "/press",
+    "/publications",
+    "/updates",
+    "/news-and-calendar/news",
+    "/news-centre",
+}
+
+def is_hub_url(url: str) -> bool:
+    try:
+        p = urllib.parse.urlparse(url)
+        path = (p.path or "/").rstrip("/")
+        if not path:
+            path = "/"
+        # listing/filter pages (querystring) are almost always hubs
+        if p.query:
+            return True
+        # known hub endpoints
+        if path in _HUB_PATHS:
+            return True
+    except Exception:
+        return False
     return False
 
 
@@ -143,11 +155,10 @@ def substance_score(text: str) -> int:
     if any(w in t for w in ("auction", "tender", "capacity", "tariff", "price", "market")):
         score += 1
 
-    # meeting/admin penalty (stronger than before)
+    # meeting/admin penalty (strong)
     if any(w in t for w in ("meeting", "registration", "observers", "agenda")):
         score -= 6
 
-    # short pages are often low-signal
     if len(t) < 800:
         score -= 2
 
@@ -305,6 +316,9 @@ def collect_items(sources, drop_log) -> List[Item]:
 # ----------------------- MONTHLY GENERATION --------------------
 
 def generate_monthly_for(ym: str) -> str:
+    # Make month available to fetch.py for month-hint filtering (reduces noise)
+    os.environ["TARGET_YM"] = ym
+
     y, m = map(int, ym.split("-"))
     start, end = _month_bounds(y, m)
 
@@ -360,7 +374,13 @@ def generate_monthly_for(ym: str) -> str:
             if not _passes_filters(it, filters, drop_log):
                 continue
 
-            # Unconditional meeting notice suppression (key change)
+            # Drop hub/listing URLs (avoid selecting index pages and filtered listings)
+            if is_hub_url(it.url):
+                if DEBUG:
+                    drop_log(f"hub_url\t{it.url}")
+                continue
+
+            # Drop meeting/admin notices (unconditional)
             if is_meeting_notice(it.url, it.title or ""):
                 if DEBUG:
                     drop_log(f"meeting_notice\t{it.url}")
@@ -372,13 +392,12 @@ def generate_monthly_for(ym: str) -> str:
                     drop_log(f"duplicate_url\t-\t{it.url}")
                 continue
 
-            # Fetch full text
             txt = fetch_full_text(it.url)
             txt = normalize_whitespace(txt)
 
             dom = normalise_domain(it.url)
 
-            # Per-domain cap within section (prevents one org monopolising a section)
+            # Per-domain cap within section
             if section_dom_counts.get(dom, 0) >= MAX_PER_DOMAIN_PER_SECTION:
                 if DEBUG:
                     drop_log(
@@ -393,7 +412,7 @@ def generate_monthly_for(ym: str) -> str:
                     drop_log(f"too_short\tlen={len(txt)}/thr={threshold}\t{it.url}")
                 continue
 
-            # Substance gate (prevents admin/boilerplate content)
+            # Substance gate
             sscore = substance_score(txt)
             if sscore < MIN_SUBSTANCE_SCORE:
                 if DEBUG:
@@ -406,7 +425,7 @@ def generate_monthly_for(ym: str) -> str:
                 "section": section,
                 "title": it.title or it.url.split("/")[-1].replace("-", " ")[:100],
                 "url": it.url,
-                "sources_urls": [it.url],  # only pass the article URL to the model
+                "sources_urls": [it.url],
                 "summary": it.summary or "",
                 "text": txt,
                 "published": fmt_iso(it.published_ts),
@@ -436,30 +455,27 @@ def generate_monthly_for(ym: str) -> str:
 
     chosen = filtered[:12]
 
-    # Always write a snapshot of selected items (even if empty)
     _dump_json(
         selected_file,
         [{"title": x["title"], "url": x["url"], "published": x["published"], "section": x["section"]}
          for x in chosen],
     )
 
-    # Write a small meta summary
     try:
         with meta_file.open("w", encoding="utf-8") as mf:
             mf.write(f"month: {ym}\n")
             mf.write(f"outdir: {OUTDIR.resolve()}\n")
             mf.write(f"drops_file: {drop_file.resolve()}\n")
             mf.write(f"selected_file: {selected_file.resolve()}\n")
-            mf.write(f"counts:\n")
+            mf.write("counts:\n")
             mf.write(f"  selected_total: {len(chosen)}\n")
             from collections import Counter
-            c = Counter([x.get('section','') for x in chosen])
+            c = Counter([x.get("section", "") for x in chosen])
             for k, v in c.items():
                 mf.write(f"  section[{k}]: {v}\n")
     except Exception as e:
         print(f"[warn] failed to write meta file: {e}")
 
-    # Safety guard
     if len(chosen) < MIN_TOTAL_ITEMS:
         print(f"[warn] Few items in range ({len(chosen)}<{MIN_TOTAL_ITEMS}); writing placeholder.")
         return (
@@ -509,3 +525,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
