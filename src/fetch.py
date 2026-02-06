@@ -11,20 +11,18 @@ from urllib.parse import urljoin, urlparse
 import feedparser
 import requests
 from bs4 import BeautifulSoup
+from dateutil import parser as dateutil_parser
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 
-@dataclass
-class Item:
-    title: str
-    url: str
-    source: str
-    published_ts: Optional[float] = None
-    summary: str = ""
-    text: str = ""
+# -----------------------------
+# HTTP session (retries/backoff)
+# -----------------------------
+TIMEOUT = 35
 
-
-# More browser-like headers to reduce some basic bot blocks (won't solve all 403s)
 HEADERS = {
+    # Use a more browser-like UA; many govt/international sites WAF-block botty UAs.
     "User-Agent": (
         "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
         "(KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
@@ -34,197 +32,208 @@ HEADERS = {
     "Connection": "keep-alive",
 }
 
-TIMEOUT = 35
+_session = requests.Session()
+_retry = Retry(
+    total=3,
+    backoff_factor=0.8,
+    status_forcelist=(429, 500, 502, 503, 504),
+    allowed_methods=("GET", "HEAD"),
+    raise_on_status=False,
+)
+_session.mount("https://", HTTPAdapter(max_retries=_retry))
+_session.mount("http://", HTTPAdapter(max_retries=_retry))
 
-# Optional per-domain CSS selectors
-SELECTORS = {
-    # "aemo.com.au": "a[href]",
-}
+
+@dataclass
+class Item:
+    source: str
+    url: str
+    title: str
+    published_ts: Optional[float]
+    summary: str = ""
 
 
-def _is_http_url(u: str) -> bool:
+def _looks_like_url(u: str) -> bool:
     try:
         p = urlparse(u)
-        return p.scheme in ("http", "https") and bool(p.netloc)
+        return bool(p.scheme and p.netloc)
     except Exception:
         return False
 
 
-def _norm_url(u: str) -> str:
-    return (u or "").strip()
-
-
-def _dedupe_by_url(items: Iterable[Item]) -> List[Item]:
-    seen = set()
-    out: List[Item] = []
-    for it in items:
-        if it.url in seen:
-            continue
-        seen.add(it.url)
-        out.append(it)
-    return out
-
-
-def _infer_published_ts_from_url(u: str) -> Optional[float]:
+def _infer_published_ts(s: str) -> Optional[float]:
     """
-    Heuristics to infer YYYY-MM-DD from URL patterns, returning UTC timestamp.
-    Supports:
-      - /YYYY/MM/DD/
-      - /YYYY-MM-DD/
-      - YYYYMMDD anywhere
-      - ?date=YYYY-MM-DD
+    Best-effort date inference from URL or text.
+    Supports YYYY-MM-DD, YYYY/MM/DD, DD Month YYYY, Month DD, YYYY.
     """
-    u2 = u
+    if not s:
+        return None
 
-    # query param date=YYYY-MM-DD
-    m = re.search(r"[?&]date=(\d{4})-(\d{2})-(\d{2})\b", u2)
+    # 2026-01-15 or 2026/01/15
+    m = re.search(r"\b(20\d{2})[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12]\d|3[01])\b", s)
     if m:
-        y, mo, d = map(int, m.groups())
+        y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
         return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
 
-    # /YYYY/MM/DD/
-    m = re.search(r"/(\d{4})/(\d{2})/(\d{2})\b", u2)
+    # 15-01-2026 or 15/01/2026 (dayfirst)
+    m = re.search(r"\b(0?[1-9]|[12]\d|3[01])[-/](0?[1-9]|1[0-2])[-/](20\d{2})\b", s)
     if m:
-        y, mo, d = map(int, m.groups())
+        d, mo, y = int(m.group(1)), int(m.group(2)), int(m.group(3))
         return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
 
-    # /YYYY-MM-DD/
-    m = re.search(r"/(\d{4})-(\d{2})-(\d{2})\b", u2)
-    if m:
-        y, mo, d = map(int, m.groups())
-        return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
-
-    # YYYYMMDD (avoid matching long numeric IDs by requiring non-digit boundary)
-    m = re.search(r"(?<!\d)(\d{4})(\d{2})(\d{2})(?!\d)", u2)
-    if m:
-        y, mo, d = map(int, m.groups())
-        # crude sanity check
-        if 1 <= mo <= 12 and 1 <= d <= 31:
-            return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
+    # Try fuzzy parse (handles "15 January 2026", "Jan 15, 2026", etc.)
+    try:
+        dt = dateutil_parser.parse(s, fuzzy=True, dayfirst=False)
+        if dt.year >= 2000:
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt.astimezone(timezone.utc).timestamp()
+    except Exception:
+        pass
 
     return None
 
 
-def fetch_url(url: str, timeout_s: int = TIMEOUT) -> str:
-    resp = requests.get(url, headers=HEADERS, timeout=timeout_s, allow_redirects=True)
-    resp.raise_for_status()
-    return resp.text
+def _parse_time_tag_to_ts(tag) -> Optional[float]:
+    if not tag:
+        return None
+    dt_str = (tag.get("datetime") or "").strip()
+    if dt_str:
+        try:
+            dt = dateutil_parser.parse(dt_str)
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt.astimezone(timezone.utc).timestamp()
+        except Exception:
+            pass
+    # fallback: parse visible text in <time>
+    txt = tag.get_text(" ", strip=True)
+    return _infer_published_ts(txt)
+
+
+def _extract_date_near_anchor(a) -> Optional[float]:
+    """
+    Find a date near the anchor:
+    - <time datetime="..."> within the anchor, its parent, or grandparent
+    - otherwise try to parse from the anchor text itself
+    """
+    if a is None:
+        return None
+
+    # 1) time tag inside anchor
+    t = a.find("time")
+    ts = _parse_time_tag_to_ts(t)
+    if ts:
+        return ts
+
+    # 2) time tag near anchor: parent / grandparent
+    parent = a.parent
+    if parent is not None:
+        t = parent.find("time")
+        ts = _parse_time_tag_to_ts(t)
+        if ts:
+            return ts
+        gp = parent.parent
+        if gp is not None:
+            t = gp.find("time")
+            ts = _parse_time_tag_to_ts(t)
+            if ts:
+                return ts
+
+    # 3) parse from anchor text
+    txt = a.get_text(" ", strip=True)
+    ts = _infer_published_ts(txt)
+    if ts:
+        return ts
+
+    return None
 
 
 def fetch_rss(url: str, *, source_name: str | None = None, **_kwargs) -> list[Item]:
-    """
-    Fetch items from an RSS/Atom feed.
-    Accepts source_name for compatibility with generate_monthly.
-    """
-    label = (source_name or "").strip() or url
+    label = source_name or url
+    try:
+        resp = _session.get(url, headers=HEADERS, timeout=TIMEOUT)
+        resp.raise_for_status()
+        feed = feedparser.parse(resp.content)
 
-    resp = requests.get(url, headers=HEADERS, timeout=TIMEOUT, allow_redirects=True)
-    resp.raise_for_status()
+        items: list[Item] = []
+        for e in feed.entries:
+            link = getattr(e, "link", None) or ""
+            title = (getattr(e, "title", "") or "").strip()
+            summary = (getattr(e, "summary", "") or "").strip()
 
-    feed = feedparser.parse(resp.content)
-    items: list[Item] = []
+            published_ts: Optional[float] = None
+            if getattr(e, "published_parsed", None):
+                published_ts = time.mktime(e.published_parsed)
+            elif getattr(e, "updated_parsed", None):
+                published_ts = time.mktime(e.updated_parsed)
+            else:
+                # fallback: try parsing published/updated strings
+                published_ts = _infer_published_ts(getattr(e, "published", "") or "") or \
+                               _infer_published_ts(getattr(e, "updated", "") or "")
 
-    feed_title = (getattr(feed.feed, "title", "") or "").strip()
-    item_source = label or feed_title or url
-
-    for e in getattr(feed, "entries", []) or []:
-        link = _norm_url(getattr(e, "link", "") or "")
-        if not link:
-            continue
-
-        title = (getattr(e, "title", "") or "").strip()
-        summary = (getattr(e, "summary", "") or "").strip()
-
-        published_ts: Optional[float] = None
-        st = getattr(e, "published_parsed", None) or getattr(e, "updated_parsed", None)
-        if st:
-            try:
-                published_ts = float(time.mktime(st))
-            except Exception:
-                published_ts = None
-
-        # If RSS date missing, try infer from URL
-        if published_ts is None:
-            published_ts = _infer_published_ts_from_url(link)
-
-        items.append(
-            Item(
-                title=title[:300] if title else link,
+            items.append(Item(
+                source=url,
                 url=link,
-                source=item_source,
+                title=title,
                 published_ts=published_ts,
                 summary=summary,
-                text="",
-            )
-        )
+            ))
+        return items
 
-    return _dedupe_by_url(items)
+    except Exception as ex:
+        raise RuntimeError(f"fetch_rss failed for {label}: {ex}") from ex
 
 
 def fetch_html_index(url: str, *, source_name: str | None = None, **_kwargs) -> list[Item]:
     """
     Fetch candidate article links from an HTML 'news index' page.
-    Critical: infer published_ts from URL so generate_monthly can filter by month.
+    Now attempts to extract a publish date near each link (time tag / text / URL).
     """
-    label = (source_name or "").strip() or url
+    label = source_name or url
+    try:
+        resp = _session.get(url, headers=HEADERS, timeout=TIMEOUT)
+        resp.raise_for_status()
 
-    resp = requests.get(url, headers=HEADERS, timeout=TIMEOUT, allow_redirects=True)
-    resp.raise_for_status()
+        soup = BeautifulSoup(resp.text, "html.parser")
+        items: list[Item] = []
 
-    soup = BeautifulSoup(resp.text, "html.parser")
+        for a in soup.select("a[href]"):
+            href = (a.get("href") or "").strip()
+            if not href:
+                continue
+            abs_url = urljoin(url, href)
+            if not _looks_like_url(abs_url):
+                continue
 
-    domain = urlparse(url).netloc.lower().replace("www.", "")
-    sel = SELECTORS.get(domain, "a[href]")
+            text = (a.get_text(" ", strip=True) or "").strip()
+            if not text:
+                continue
 
-    items: list[Item] = []
-    for a in soup.select(sel):
-        href = _norm_url(a.get("href") or "")
-        if not href:
-            continue
+            # Date extraction
+            ts = _extract_date_near_anchor(a)
+            if ts is None:
+                # fall back to URL inference
+                ts = _infer_published_ts(abs_url)
 
-        abs_url = urljoin(url, href)
-        if not _is_http_url(abs_url):
-            continue
-
-        text = (a.get_text(" ", strip=True) or "").strip()
-        if not text:
-            continue
-
-        # Skip obvious non-article links
-        low = abs_url.lower()
-        if any(
-            x in low
-            for x in (
-                "javascript:",
-                "mailto:",
-                "/tag/",
-                "/tags/",
-                "/category/",
-                "/categories/",
-                "/author/",
-                "/search",
-            )
-        ):
-            continue
-
-        published_ts = _infer_published_ts_from_url(abs_url)
-
-        items.append(
-            Item(
-                title=text[:300],
+            items.append(Item(
+                source=url,
                 url=abs_url,
-                source=label,
-                published_ts=published_ts,
+                title=text[:180],
+                published_ts=ts,
                 summary="",
-                text="",
-            )
-        )
+            ))
 
-    return _dedupe_by_url(items)
+        # de-dupe by URL
+        seen = set()
+        deduped: list[Item] = []
+        for it in items:
+            if it.url in seen:
+                continue
+            seen.add(it.url)
+            deduped.append(it)
 
+        return deduped
 
-def fetch_full_text(url: str, timeout_s: int = 45) -> str:
-    """
-    Keep it simple: your downstream extraction can clean HTML using trafilatura/justext.
-    """
-    return fetch_url(url, timeout_s=timeout_s)
+    except Exception as ex:
+        raise RuntimeError(f"fetch_html_index failed for {label}: {ex}") from ex
