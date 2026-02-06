@@ -1,439 +1,510 @@
 # src/fetch.py
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Iterable, Dict, Tuple, List
-import datetime as dt
+import json
 import re
 import time
+from dataclasses import dataclass
+from datetime import datetime, timezone
+from typing import Iterable, List, Optional
+from urllib.parse import urljoin, urlparse
 
 import feedparser
 import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin, urlparse
+from dateutil import parser as dtparser
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
-import dateparser  # installed via requirements
-from htmldate import find_date  # installed via trafilatura deps
+# trafilatura is already in your requirements
+import trafilatura
+
+# htmldate comes via trafilatura deps (you already install it in CI)
+from htmldate import find_date
 
 
-# -----------------------------
-# Models
-# -----------------------------
 @dataclass
 class Item:
     title: str
     url: str
     source: str
-    published_ts: Optional[float]  # unix ts (UTC)
+    published_ts: Optional[float] = None
     summary: str = ""
     text: str = ""
 
 
-# -----------------------------
-# HTTP (robust session)
-# -----------------------------
-DEFAULT_UA = (
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-    "(KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-)
+# Browser-like headers to reduce basic bot blocks
+HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+    ),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-AU,en;q=0.9",
+    "Connection": "keep-alive",
+}
 
-_SESSION: Optional[requests.Session] = None
+TIMEOUT = 35
+MAX_BYTES = 2_000_000  # protect against huge responses
 
+# Per-domain CSS selectors (optional; default is "a[href]")
+SELECTORS: dict[str, str] = {
+    # "aemo.com.au": "a[href]",
+}
 
-def _session() -> requests.Session:
-    global _SESSION
-    if _SESSION is not None:
-        return _SESSION
-
-    s = requests.Session()
-    s.headers.update(
-        {
-            "User-Agent": DEFAULT_UA,
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "Accept-Language": "en-AU,en;q=0.9",
-            "Connection": "keep-alive",
-        }
-    )
-
-    # Simple retry logic (avoid bringing in urllib3 Retry complexity / version issues)
-    # We'll implement retries manually in fetch_url().
-    _SESSION = s
-    return s
+# Limits to keep runtime bounded
+MAX_LINKS_PER_INDEX = 120
+MAX_DATE_RESOLVE_FETCHES_PER_INDEX = 40
 
 
-def fetch_url(
-    url: str,
-    timeout_s: int = 35,
-    max_retries: int = 2,
-    backoff_s: float = 1.0,
-) -> str:
-    """
-    Fetch URL with small retries/backoff. Returns text (decoded by requests).
-    Raises last exception on repeated failure.
-    """
-    last_exc: Exception | None = None
-    s = _session()
-
-    for attempt in range(max_retries + 1):
-        try:
-            resp = s.get(url, timeout=timeout_s, allow_redirects=True)
-            # Treat 403/429/5xx as retryable
-            if resp.status_code in (403, 429) or resp.status_code >= 500:
-                raise requests.HTTPError(
-                    f"{resp.status_code} for url: {url}", response=resp
-                )
-            resp.raise_for_status()
-            return resp.text
-        except Exception as e:
-            last_exc = e
-            if attempt < max_retries:
-                time.sleep(backoff_s * (2**attempt))
-                continue
-            raise
-
-    # should not reach
-    raise last_exc if last_exc else RuntimeError("fetch_url failed without exception")
+def _now_ts() -> float:
+    return time.time()
 
 
-# -----------------------------
-# Date parsing helpers
-# -----------------------------
-_URL_DATE_PATTERNS: List[re.Pattern] = [
-    # /2026/01/31/  or /2026-01-31/
-    re.compile(r"(?P<y>20\d{2})[/-](?P<m>\d{2})[/-](?P<d>\d{2})"),
-    # /2026/01/
-    re.compile(r"(?P<y>20\d{2})[/-](?P<m>\d{2})(?![/-]\d{2})"),
-]
-
-
-def _dt_to_ts_utc(d: dt.datetime) -> float:
-    if d.tzinfo is None:
-        d = d.replace(tzinfo=dt.timezone.utc)
-    else:
-        d = d.astimezone(dt.timezone.utc)
-    return d.timestamp()
-
-
-def _parse_date_to_ts(date_str: str) -> Optional[float]:
-    if not date_str or not date_str.strip():
-        return None
-
-    # Use dateparser because it handles "6 January 2026", "Jan 6, 2026", etc.
-    parsed = dateparser.parse(
-        date_str,
-        settings={
-            "RETURN_AS_TIMEZONE_AWARE": True,
-            "TO_TIMEZONE": "UTC",
-            "TIMEZONE": "UTC",
-            "PREFER_DAY_OF_MONTH": "first",
-        },
-    )
-    if parsed is None:
-        return None
-
-    # Normalize to midnight UTC if time missing
-    if parsed.tzinfo is None:
-        parsed = parsed.replace(tzinfo=dt.timezone.utc)
-    return _dt_to_ts_utc(parsed)
-
-
-def _infer_published_ts_from_url(url: str) -> Optional[float]:
-    path = urlparse(url).path
-    for pat in _URL_DATE_PATTERNS:
-        m = pat.search(path)
-        if not m:
-            continue
-        y = int(m.group("y"))
-        mth = int(m.group("m"))
-        d = int(m.groupdict().get("d") or 1)
-        try:
-            return _dt_to_ts_utc(dt.datetime(y, mth, d, tzinfo=dt.timezone.utc))
-        except ValueError:
-            return None
-    return None
-
-
-_MONTHS_RX = (
-    r"(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|"
-    r"jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)"
-)
-
-# Examples:
-# 6 January 2026
-# January 6, 2026
-# 06 Jan 2026
-_TEXT_DATE_PATTERNS: List[re.Pattern] = [
-    re.compile(rf"\b(\d{{1,2}})\s+{_MONTHS_RX}\s+(20\d{{2}})\b", re.I),
-    re.compile(rf"\b{_MONTHS_RX}\s+(\d{{1,2}})(?:st|nd|rd|th)?\,?\s+(20\d{{2}})\b", re.I),
-    re.compile(r"\b(20\d{2})-(\d{2})-(\d{2})\b"),
-    re.compile(r"\b(\d{1,2})/(\d{1,2})/(20\d{2})\b"),
-]
-
-
-def _extract_date_from_text(text: str) -> Optional[float]:
-    if not text:
-        return None
-    t = " ".join(text.split())
-    for pat in _TEXT_DATE_PATTERNS:
-        m = pat.search(t)
-        if not m:
-            continue
-        return _parse_date_to_ts(m.group(0))
-    return None
-
-
-def _date_from_time_tag(a_tag) -> Optional[float]:
-    """
-    Look near the link for <time datetime="..."> or <time>text</time>.
-    """
-    # Search in a small window: parents + siblings
-    candidates = []
-
-    # parent chain (up to ~3 levels)
-    cur = a_tag
-    for _ in range(3):
-        cur = cur.parent
-        if cur is None:
-            break
-        candidates.append(cur)
-
-    for node in candidates:
-        time_tags = node.find_all("time")
-        for tt in time_tags:
-            dt_attr = (tt.get("datetime") or "").strip()
-            if dt_attr:
-                ts = _parse_date_to_ts(dt_attr)
-                if ts:
-                    return ts
-            ts = _parse_date_to_ts(tt.get_text(" ", strip=True))
-            if ts:
-                return ts
-
-    return None
-
-
-def _date_from_context_text(a_tag) -> Optional[float]:
-    """
-    Extract date-like strings from the surrounding element text.
-    """
-    # Try parent text (often contains date + title)
-    parent = a_tag.parent
-    if parent is not None:
-        ts = _extract_date_from_text(parent.get_text(" ", strip=True))
-        if ts:
-            return ts
-
-    # Try nearby siblings (common layouts)
-    for sib in list(a_tag.parent.children) if a_tag.parent is not None else []:
-        if getattr(sib, "get_text", None) is None:
-            continue
-        ts = _extract_date_from_text(sib.get_text(" ", strip=True))
-        if ts:
-            return ts
-
-    # As a last lightweight attempt, scan the link text itself
-    ts = _extract_date_from_text(a_tag.get_text(" ", strip=True))
-    if ts:
-        return ts
-
-    return None
-
-
-# Cache article-date lookups so the job doesn't re-fetch the same URL repeatedly
-_ARTICLE_DATE_CACHE: Dict[str, Optional[float]] = {}
-
-
-def _date_from_article(url: str, timeout_s: int = 35) -> Optional[float]:
-    """
-    Fallback: fetch article and infer published date using htmldate.
-    This is heavier, so only used when all other methods fail.
-    """
-    if url in _ARTICLE_DATE_CACHE:
-        return _ARTICLE_DATE_CACHE[url]
-
+def _is_http_url(u: str) -> bool:
     try:
-        html = fetch_url(url, timeout_s=timeout_s, max_retries=1, backoff_s=1.0)
+        p = urlparse(u)
+        return p.scheme in ("http", "https") and bool(p.netloc)
     except Exception:
-        _ARTICLE_DATE_CACHE[url] = None
-        return None
-
-    try:
-        # htmldate returns 'YYYY-MM-DD' or None
-        d = find_date(html, url=url, outputformat="%Y-%m-%d")
-        if not d:
-            _ARTICLE_DATE_CACHE[url] = None
-            return None
-        ts = _parse_date_to_ts(d)
-        _ARTICLE_DATE_CACHE[url] = ts
-        return ts
-    except Exception:
-        _ARTICLE_DATE_CACHE[url] = None
-        return None
+        return False
 
 
-# -----------------------------
-# RSS
-# -----------------------------
-def fetch_rss(url: str, label: str, timeout_s: int = 35) -> List[Item]:
-    """
-    Fetch RSS/Atom feeds. Dates typically come from the feed.
-    """
-    xml = fetch_url(url, timeout_s=timeout_s)
-    feed = feedparser.parse(xml)
-
-    items: List[Item] = []
-    for e in feed.entries[:200]:
-        link = e.get("link") or ""
-        title = (e.get("title") or "").strip()
-        if not link or not title:
-            continue
-
-        published_ts: Optional[float] = None
-        # feedparser provides multiple date fields
-        for key in ("published_parsed", "updated_parsed"):
-            if e.get(key):
-                t = e[key]
-                try:
-                    published_ts = _dt_to_ts_utc(
-                        dt.datetime(t.tm_year, t.tm_mon, t.tm_mday, tzinfo=dt.timezone.utc)
-                    )
-                    break
-                except Exception:
-                    pass
-
-        if published_ts is None:
-            # Fallback: try parsing date strings
-            for key in ("published", "updated"):
-                if e.get(key):
-                    published_ts = _parse_date_to_ts(str(e.get(key)))
-                    if published_ts:
-                        break
-
-        items.append(
-            Item(
-                title=title[:300],
-                url=link,
-                source=label,
-                published_ts=published_ts,
-                summary="",
-                text="",
-            )
-        )
-
-    return _dedupe_by_url(items)
+def _norm_url(u: str) -> str:
+    return (u or "").strip()
 
 
-# -----------------------------
-# HTML index scraping
-# -----------------------------
-def _domain_selectors(url: str) -> Tuple[str, str]:
-    """
-    Return (link_selector, title_attr) by domain.
-    Default is 'a' + inner text.
-    """
-    host = urlparse(url).netloc.lower()
-
-    # Domain-specific heuristics can be extended as needed
-    if "ifrs.org" in host:
-        return "a", ""
-    if "efrag.org" in host:
-        return "a", ""
-    if "globalreporting.org" in host:
-        return "a", ""
-    if "asic.gov.au" in host:
-        return "a", ""
-    if "presscorner" in host or "ec.europa.eu" in host:
-        return "a", ""
-    if "aemo.com.au" in host:
-        return "a", ""
-    if "aer.gov.au" in host:
-        return "a", ""
-    if "arena.gov.au" in host:
-        return "a", ""
-
-    return "a", ""
-
-
-def fetch_html_index(url: str, label: str, timeout_s: int = 35) -> List[Item]:
-    """
-    Scrape a listing page and attempt to attach a publish date to each candidate.
-    """
-    html = fetch_url(url, timeout_s=timeout_s)
-    soup = BeautifulSoup(html, "html.parser")
-
-    link_selector, _ = _domain_selectors(url)
-
-    items: List[Item] = []
-    for a in soup.select(link_selector):
-        href = a.get("href") or ""
-        text = a.get_text(" ", strip=True) or ""
-        if not href:
-            continue
-        if not text or len(text) < 6:
-            continue
-
-        abs_url = urljoin(url, href)
-
-        # Basic skip patterns to avoid tag/category/search pages
-        p = urlparse(abs_url).path.lower()
-        if any(
-            p.startswith(prefix)
-            for prefix in (
-                "/tag/",
-                "/tags/",
-                "/category/",
-                "/categories/",
-                "/author/",
-            )
-        ) or "/search" in abs_url.lower():
-            continue
-
-        # Determine publish timestamp (critical for your pipeline)
-        published_ts = (
-            _date_from_time_tag(a)
-            or _date_from_context_text(a)
-            or _infer_published_ts_from_url(abs_url)
-        )
-
-        # If still unknown, do a *single* article fetch + htmldate inference
-        if published_ts is None:
-            published_ts = _date_from_article(abs_url, timeout_s=timeout_s)
-
-        items.append(
-            Item(
-                title=text[:300],
-                url=abs_url,
-                source=label,
-                published_ts=published_ts,
-                summary="",
-                text="",
-            )
-        )
-
-    return _dedupe_by_url(items)
-
-
-# -----------------------------
-# Full text fetch
-# -----------------------------
-def fetch_full_text(url: str, timeout_s: int = 45) -> str:
-    """
-    Raw fetch; downstream summarisation/extraction cleans HTML using trafilatura/justext.
-    """
-    return fetch_url(url, timeout_s=timeout_s)
-
-
-# -----------------------------
-# Utilities
-# -----------------------------
 def _dedupe_by_url(items: Iterable[Item]) -> List[Item]:
     seen = set()
     out: List[Item] = []
     for it in items:
-        if not it.url:
-            continue
         if it.url in seen:
             continue
         seen.add(it.url)
         out.append(it)
     return out
+
+
+def _domain(url: str) -> str:
+    try:
+        return (urlparse(url).netloc or "").lower()
+    except Exception:
+        return ""
+
+
+def _jina_proxy(url: str) -> str:
+    """
+    Jina AI proxy is often effective against basic bot blocks (403) and some CDNs.
+    It returns a text-rendered version of the page.
+    """
+    u = url.strip()
+    if u.startswith("https://"):
+        return "https://r.jina.ai/https://" + u[len("https://") :]
+    if u.startswith("http://"):
+        return "https://r.jina.ai/http://" + u[len("http://") :]
+    return "https://r.jina.ai/https://" + u
+
+
+def _build_session() -> requests.Session:
+    s = requests.Session()
+    retry = Retry(
+        total=4,
+        connect=4,
+        read=4,
+        status=4,
+        backoff_factor=0.8,
+        status_forcelist=(403, 429, 500, 502, 503, 504),
+        allowed_methods=("GET", "HEAD"),
+        raise_on_status=False,
+    )
+    s.mount("https://", HTTPAdapter(max_retries=retry))
+    s.mount("http://", HTTPAdapter(max_retries=retry))
+    return s
+
+
+_SESSION = _build_session()
+
+
+def _read_limited(resp: requests.Response, max_bytes: int = MAX_BYTES) -> str:
+    resp.encoding = resp.encoding or "utf-8"
+    text = resp.text
+    if len(text) > max_bytes:
+        return text[:max_bytes]
+    return text
+
+
+def fetch_url(url: str, timeout_s: int = TIMEOUT) -> str:
+    """
+    Fetch a URL robustly.
+    - Normal fetch first
+    - On 403/429 (or certain failures), attempt Jina proxy
+    """
+    url = _norm_url(url)
+    if not _is_http_url(url):
+        raise ValueError(f"Not a valid http(s) URL: {url}")
+
+    # 1) Normal fetch
+    try:
+        resp = _SESSION.get(url, headers=HEADERS, timeout=timeout_s, allow_redirects=True)
+        if resp.status_code >= 200 and resp.status_code < 300:
+            return _read_limited(resp)
+        # fall through to proxy on 403/429, otherwise raise
+        if resp.status_code not in (403, 429):
+            resp.raise_for_status()
+    except Exception:
+        # fall through to proxy
+        pass
+
+    # 2) Proxy fetch (best-effort)
+    proxy_url = _jina_proxy(url)
+    resp2 = _SESSION.get(proxy_url, headers=HEADERS, timeout=timeout_s, allow_redirects=True)
+    resp2.raise_for_status()
+    return _read_limited(resp2)
+
+
+def _infer_published_ts_from_url(u: str) -> Optional[float]:
+    """
+    Heuristics to infer YYYY-MM-DD from URL patterns, returning UTC timestamp.
+    Supports:
+      - /YYYY/MM/DD/
+      - /YYYY-MM-DD/
+      - YYYYMMDD anywhere
+      - ?date=YYYY-MM-DD
+    """
+    # query param date=YYYY-MM-DD
+    m = re.search(r"[?&]date=(\d{4})-(\d{2})-(\d{2})\b", u)
+    if m:
+        y, mo, d = map(int, m.groups())
+        return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
+
+    # /YYYY/MM/DD/
+    m = re.search(r"/(\d{4})/(\d{2})/(\d{2})\b", u)
+    if m:
+        y, mo, d = map(int, m.groups())
+        return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
+
+    # /YYYY-MM-DD/
+    m = re.search(r"/(\d{4})-(\d{2})-(\d{2})\b", u)
+    if m:
+        y, mo, d = map(int, m.groups())
+        return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
+
+    # YYYYMMDD (avoid matching long numeric IDs by requiring non-digit boundary)
+    m = re.search(r"(?<!\d)(\d{4})(\d{2})(\d{2})(?!\d)", u)
+    if m:
+        y, mo, d = map(int, m.groups())
+        if 1 <= mo <= 12 and 1 <= d <= 31:
+            return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
+
+    return None
+
+
+def _parse_any_date_to_ts(date_str: str) -> Optional[float]:
+    if not date_str:
+        return None
+    try:
+        dt = dtparser.parse(date_str)
+        if dt is None:
+            return None
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc).timestamp()
+    except Exception:
+        return None
+
+
+def _extract_date_from_jsonld(soup: BeautifulSoup) -> Optional[float]:
+    # Look for JSON-LD datePublished / dateCreated
+    for tag in soup.find_all("script", attrs={"type": "application/ld+json"}):
+        raw = (tag.string or "").strip()
+        if not raw:
+            continue
+        try:
+            data = json.loads(raw)
+        except Exception:
+            continue
+
+        # JSON-LD can be dict or list
+        candidates = []
+        if isinstance(data, dict):
+            candidates = [data]
+        elif isinstance(data, list):
+            candidates = [x for x in data if isinstance(x, dict)]
+
+        for obj in candidates:
+            for k in ("datePublished", "dateCreated", "dateModified"):
+                v = obj.get(k)
+                if isinstance(v, str):
+                    ts = _parse_any_date_to_ts(v)
+                    if ts:
+                        return ts
+    return None
+
+
+def _extract_date_from_meta(soup: BeautifulSoup) -> Optional[float]:
+    # Common meta tags
+    meta_keys = [
+        ("property", "article:published_time"),
+        ("property", "og:published_time"),
+        ("name", "pubdate"),
+        ("name", "publishdate"),
+        ("name", "publish-date"),
+        ("name", "date"),
+        ("name", "dc.date"),
+        ("name", "dc.date.issued"),
+        ("name", "datePublished"),
+        ("itemprop", "datePublished"),
+        ("itemprop", "dateCreated"),
+        ("itemprop", "dateModified"),
+    ]
+
+    for attr, key in meta_keys:
+        tag = soup.find("meta", attrs={attr: key})
+        if tag and tag.get("content"):
+            ts = _parse_any_date_to_ts(tag["content"])
+            if ts:
+                return ts
+    return None
+
+
+def _extract_date_from_time_tag(soup: BeautifulSoup) -> Optional[float]:
+    t = soup.find("time")
+    if not t:
+        return None
+    # Prefer datetime attribute
+    if t.get("datetime"):
+        ts = _parse_any_date_to_ts(t["datetime"])
+        if ts:
+            return ts
+    # Fallback text
+    txt = t.get_text(" ", strip=True)
+    return _parse_any_date_to_ts(txt)
+
+
+def _resolve_published_ts_from_article(url: str, html: Optional[str] = None) -> Optional[float]:
+    """
+    Resolve publish timestamp for an article URL by fetching HTML (if not provided)
+    and checking JSON-LD, meta tags, <time>, and finally htmldate.
+    """
+    ts = _infer_published_ts_from_url(url)
+    if ts:
+        return ts
+
+    if html is None:
+        try:
+            html = fetch_url(url)
+        except Exception:
+            return None
+
+    soup = BeautifulSoup(html, "html.parser")
+
+    ts = _extract_date_from_jsonld(soup)
+    if ts:
+        return ts
+
+    ts = _extract_date_from_meta(soup)
+    if ts:
+        return ts
+
+    ts = _extract_date_from_time_tag(soup)
+    if ts:
+        return ts
+
+    # last resort: htmldate heuristics
+    try:
+        d = find_date(html, url=url)
+        ts = _parse_any_date_to_ts(d) if d else None
+        return ts
+    except Exception:
+        return None
+
+
+def fetch_rss(url: str, *, source_name: str | None = None, **_kwargs) -> list[Item]:
+    """
+    Fetch items from an RSS/Atom feed.
+    Accepts source_name for compatibility with generate_monthly.
+    """
+    label = (source_name or "").strip() or url
+    feed = feedparser.parse(url)
+
+    items: list[Item] = []
+    for entry in getattr(feed, "entries", []) or []:
+        link = _norm_url(getattr(entry, "link", "") or "")
+        title = (getattr(entry, "title", "") or "").strip()
+        summary = (getattr(entry, "summary", "") or "").strip()
+
+        ts: Optional[float] = None
+        if getattr(entry, "published_parsed", None):
+            try:
+                ts = time.mktime(entry.published_parsed)
+            except Exception:
+                ts = None
+        if ts is None and getattr(entry, "updated_parsed", None):
+            try:
+                ts = time.mktime(entry.updated_parsed)
+            except Exception:
+                ts = None
+        if ts is None:
+            ts = _infer_published_ts_from_url(link)
+
+        if not link or not title:
+            continue
+
+        items.append(Item(title=title, url=link, source=label, published_ts=ts, summary=summary))
+
+    return _dedupe_by_url(items)
+
+
+def _extract_links_from_index(index_url: str, html: str) -> list[tuple[str, str]]:
+    """
+    Return [(title, absolute_url)] from an index HTML page.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    dom = _domain(index_url)
+    selector = SELECTORS.get(dom, "a[href]")
+
+    out: list[tuple[str, str]] = []
+    for a in soup.select(selector):
+        href = _norm_url(a.get("href") or "")
+        if not href:
+            continue
+        abs_u = urljoin(index_url, href)
+        if not _is_http_url(abs_u):
+            continue
+
+        # Avoid junk
+        low = abs_u.lower()
+        if any(low.endswith(ext) for ext in (".pdf", ".jpg", ".jpeg", ".png", ".zip")):
+            continue
+
+        title = a.get_text(" ", strip=True) or ""
+        title = re.sub(r"\s+", " ", title).strip()
+
+        # If anchor text is empty, skip
+        if not title:
+            continue
+
+        out.append((title, abs_u))
+
+    # Dedupe while keeping order
+    seen = set()
+    deduped: list[tuple[str, str]] = []
+    for t, u in out:
+        if u in seen:
+            continue
+        seen.add(u)
+        deduped.append((t, u))
+
+    return deduped[:MAX_LINKS_PER_INDEX]
+
+
+def _try_nearby_time_tag_ts(a_tag) -> Optional[float]:
+    """
+    Given a BeautifulSoup <a> tag, try to find a nearby <time> tag with a datetime or text.
+    """
+    try:
+        parent = a_tag.parent
+        if not parent:
+            return None
+        t = parent.find("time")
+        if t:
+            if t.get("datetime"):
+                ts = _parse_any_date_to_ts(t["datetime"])
+                if ts:
+                    return ts
+            txt = t.get_text(" ", strip=True)
+            ts = _parse_any_date_to_ts(txt)
+            if ts:
+                return ts
+        return None
+    except Exception:
+        return None
+
+
+def fetch_html_index(url: str, *, source_name: str | None = None, **_kwargs) -> list[Item]:
+    """
+    Fetch items from an HTML index page:
+    - extracts candidate links
+    - tries to infer publish date from URL or nearby <time>
+    - for items still missing dates, fetches article HTML (limited) and extracts publish date
+    """
+    label = (source_name or "").strip() or url
+    html = fetch_url(url)
+
+    # First pass: basic link extraction with titles
+    soup = BeautifulSoup(html, "html.parser")
+    dom = _domain(url)
+    selector = SELECTORS.get(dom, "a[href]")
+
+    candidates: list[Item] = []
+    seen = set()
+
+    for a in soup.select(selector):
+        href = _norm_url(a.get("href") or "")
+        if not href:
+            continue
+        abs_u = urljoin(url, href)
+        if not _is_http_url(abs_u):
+            continue
+        low = abs_u.lower()
+        if any(low.endswith(ext) for ext in (".pdf", ".jpg", ".jpeg", ".png", ".zip")):
+            continue
+
+        title = a.get_text(" ", strip=True) or ""
+        title = re.sub(r"\s+", " ", title).strip()
+        if not title:
+            continue
+
+        if abs_u in seen:
+            continue
+        seen.add(abs_u)
+
+        ts = _infer_published_ts_from_url(abs_u)
+        if ts is None:
+            # try nearby <time> in the DOM
+            ts = _try_nearby_time_tag_ts(a)
+
+        candidates.append(Item(title=title, url=abs_u, source=label, published_ts=ts))
+
+        if len(candidates) >= MAX_LINKS_PER_INDEX:
+            break
+
+    # Second pass: resolve missing dates by fetching the article (budgeted)
+    resolve_budget = MAX_DATE_RESOLVE_FETCHES_PER_INDEX
+    for it in candidates:
+        if resolve_budget <= 0:
+            break
+        if it.published_ts is not None:
+            continue
+        ts = _resolve_published_ts_from_article(it.url)
+        if ts is not None:
+            it.published_ts = ts
+        resolve_budget -= 1
+
+    return _dedupe_by_url(candidates)
+
+
+def fetch_full_text(url: str, timeout_s: int = TIMEOUT) -> str:
+    """
+    Fetch full text of an article, preferring trafilatura extraction.
+    """
+    html = fetch_url(url, timeout_s=timeout_s)
+    try:
+        extracted = trafilatura.extract(
+            html,
+            url=url,
+            include_comments=False,
+            include_tables=False,
+            favor_precision=True,
+        )
+        if extracted:
+            extracted = re.sub(r"\n{3,}", "\n\n", extracted).strip()
+            if extracted:
+                return extracted
+    except Exception:
+        pass
+
+    # Fallback: strip HTML
+    soup = BeautifulSoup(html, "html.parser")
+    txt = soup.get_text("\n", strip=True)
+    txt = re.sub(r"\n{3,}", "\n\n", txt).strip()
+    return txt
