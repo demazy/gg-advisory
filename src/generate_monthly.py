@@ -62,11 +62,12 @@ def _month_bounds(y: int, m: int) -> Tuple[datetime, datetime]:
 def _month_label(d: datetime) -> str:
     return d.strftime("%B %Y")
 
-def _in_range(ts: float, start: datetime, end: datetime) -> bool:
-    if not ts:
-        return False
-    t = datetime.fromtimestamp(ts, tz=timezone.utc)
-    return start <= t <= end
+def _in_range(ts: float | None, start_ts: float, end_ts: float) -> bool:
+    if ts is None:
+        # allow undated items to prevent 0-selection failures
+        return True
+    return start_ts <= ts <= end_ts
+
 
 def fmt_iso(ts: float) -> str:
     try:
