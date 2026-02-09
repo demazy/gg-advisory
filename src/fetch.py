@@ -519,7 +519,8 @@ def fetch_full_text(url: str, timeout_s: int = TIMEOUT) -> str:
     """
     html = fetch_url(url, timeout_s=timeout_s)
     if not html:
-            return ""
+        return ""
+
     # Prefer trafilatura extraction
     try:
         extracted = trafilatura.extract(
