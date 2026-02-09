@@ -448,6 +448,9 @@ def fetch_html_index(url: str, *, source_name: str | None = None, **_kwargs) -> 
         visited_pages.add(page_url)
 
         html = fetch_url(page_url)
+        if not html:
+            break
+
         soup = BeautifulSoup(html, "html.parser")
 
         for a in soup.select(selector):
