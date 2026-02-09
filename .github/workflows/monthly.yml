@@ -42,7 +42,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
-      - name: Sanity check generate_monthly _in_range is the new version
+      - name: Sanity check generate_monthly has robust _in_range
         run: |
           set -euo pipefail
           python - <<'PY'
@@ -51,10 +51,16 @@ jobs:
           print("Loaded:", gm.__file__)
           src = inspect.getsource(gm._in_range)
           print(src)
-          # hard fail if we still see the old float-only compare
-          if "start_ts <=" in src and "<= ts <=" in src:
-            raise SystemExit("ERROR: still using old _in_range implementation")
-          print("OK: _in_range is robust")
+
+          # Hard fail if we detect the old implementation pattern
+          if "return start_ts <= ts <= end_ts" in src:
+            raise SystemExit("ERROR: old _in_range() still present (datetime/float TypeError will occur)")
+
+          # Also require the new coercion helper to be referenced
+          if "_coerce_ts" not in src:
+            raise SystemExit("ERROR: _in_range() is not coercing timestamp types")
+
+          print("OK: _in_range looks robust")
           PY
 
       - name: Compute target month (prev month in Australia/Melbourne, unless inputs provided)
