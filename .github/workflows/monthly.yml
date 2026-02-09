@@ -112,9 +112,9 @@ jobs:
           DEBUG: "1"
           
           # Make HTML index scraping robust against months buried behind pagination
-          MAX_LINKS_PER_INDEX: "600"
-          MAX_INDEX_PAGES: "10"
-          MAX_DATE_RESOLVE_FETCHES_PER_INDEX: "140"
+          MAX_LINKS_PER_INDEX: "250"
+          MAX_INDEX_PAGES: "5"
+          MAX_DATE_RESOLVE_FETCHES_PER_INDEX: "75"
           
         run: |
           python -m src.generate_monthly
