@@ -1,5 +1,7 @@
 # src/generate_monthly.py
-# Full debug-enabled generator for monthly digests
+# Full debug-enabled generator for monthly digests (robust date coercion)
+
+from __future__ import annotations
 
 import os
 import re
@@ -8,9 +10,10 @@ import calendar
 import urllib.parse
 from pathlib import Path
 from datetime import datetime, timezone
-from typing import Dict, List, Tuple
+from typing import Any, Dict, List, Tuple
 
 from dotenv import load_dotenv
+from dateutil import parser as dtparser
 
 from .fetch import fetch_rss, fetch_html_index, fetch_full_text, Item
 from .summarise import build_digest
@@ -38,7 +41,7 @@ PRIORITY_DOMAINS = {
     d.strip().lower()
     for d in os.getenv(
         "PRIORITY_DOMAINS",
-        "aemo.com.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au,ec.europa.eu"
+        "aemo.com.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au,ec.europa.eu,commission.europa.eu",
     ).split(",")
     if d.strip()
 }
@@ -53,25 +56,67 @@ OUTDIR.mkdir(parents=True, exist_ok=True)
 
 # ----------------------- DATE HELPERS --------------------------
 
+
 def _month_bounds(y: int, m: int) -> Tuple[datetime, datetime]:
     start = datetime(y, m, 1, tzinfo=timezone.utc)
     last = calendar.monthrange(y, m)[1]
     end = datetime(y, m, last, 23, 59, 59, tzinfo=timezone.utc)
     return start, end
 
+
 def _month_label(d: datetime) -> str:
     return d.strftime("%B %Y")
 
-def _in_range(ts: float | None, start_ts: float, end_ts: float) -> bool:
+
+def _coerce_ts(ts: Any) -> float | None:
+    """
+    Normalize various date representations to a float epoch timestamp (UTC).
+    Accepts: float/int, datetime, ISO-ish string, None.
+    """
     if ts is None:
-        # allow undated items to prevent 0-selection failures
+        return None
+
+    if isinstance(ts, (int, float)):
+        return float(ts)
+
+    if isinstance(ts, datetime):
+        dt = ts
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc).timestamp()
+
+    if isinstance(ts, str):
+        try:
+            dt = dtparser.parse(ts)
+            if dt is None:
+                return None
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt.astimezone(timezone.utc).timestamp()
+        except Exception:
+            return None
+
+    # Unknown type
+    return None
+
+
+def _in_range(ts: Any, start_ts: float, end_ts: float) -> bool:
+    """
+    Range predicate tolerant to ts types.
+    Undated items are allowed (keeps pipeline alive when some sources omit dates).
+    """
+    ts2 = _coerce_ts(ts)
+    if ts2 is None:
         return True
-    return start_ts <= ts <= end_ts
+    return start_ts <= ts2 <= end_ts
 
 
-def fmt_iso(ts: float) -> str:
+def fmt_iso(ts: Any) -> str:
+    ts2 = _coerce_ts(ts)
+    if ts2 is None:
+        return ""
     try:
-        return datetime.fromtimestamp(ts, tz=timezone.utc).date().isoformat()
+        return datetime.fromtimestamp(ts2, tz=timezone.utc).date().isoformat()
     except Exception:
         return ""
 
@@ -89,6 +134,7 @@ _MEETING_TITLE_HINTS = (
     "technical expert group meeting",
     "board meeting",
 )
+
 
 def is_meeting_notice(url: str, title: str) -> bool:
     u = (url or "").lower()
@@ -108,7 +154,6 @@ def is_meeting_notice(url: str, title: str) -> bool:
 
 
 # Hub/listing URLs: drop unconditionally. These are not content pages and often have query filters.
-# You can extend this as you discover more hubs.
 _HUB_PATHS = {
     "/news",
     "/newsroom",
@@ -119,6 +164,7 @@ _HUB_PATHS = {
     "/news-and-calendar/news",
     "/news-centre",
 }
+
 
 def is_hub_url(url: str) -> bool:
     try:
@@ -168,6 +214,7 @@ def substance_score(text: str) -> int:
 
 # ----------------------- DEBUG HELPERS ------------------------
 
+
 def _dump_json(path: Path, obj) -> None:
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -175,6 +222,7 @@ def _dump_json(path: Path, obj) -> None:
             json.dump(obj, f, ensure_ascii=False, indent=2)
     except Exception as e:
         print(f"[warn] failed to dump json: {path}: {e}")
+
 
 def _append_line(path: Path, line: str) -> None:
     try:
@@ -187,10 +235,13 @@ def _append_line(path: Path, line: str) -> None:
 
 # ----------------------- FILTER LOADERS ------------------------
 
+
 def load_yaml(path: Path) -> Dict:
     import yaml
+
     with path.open("r", encoding="utf-8") as f:
         return yaml.safe_load(f) or {}
+
 
 def compile_filters(filters: Dict) -> Dict:
     allow = [d.strip().lower() for d in (filters.get("allow_domains") or []) if d.strip()]
@@ -198,6 +249,7 @@ def compile_filters(filters: Dict) -> Dict:
     deny_pat = [re.compile(p, re.I) for p in (filters.get("title_deny_regex") or []) if p.strip()]
     keep = [k.strip().lower() for k in (filters.get("keep_keywords") or []) if k.strip()]
     return {"allow_domains": allow, "deny_domains": deny, "title_deny_regex": deny_pat, "keep_keywords": keep}
+
 
 def _passes_filters(it: Item, filters: Dict, drop_log) -> bool:
     """Domain allow/deny, title deny regex, with keep_keywords override."""
@@ -237,6 +289,7 @@ def _passes_filters(it: Item, filters: Dict, drop_log) -> bool:
 
 
 # ----------------------- ITEM COLLECTION -----------------------
+
 
 def collect_items(sources, drop_log) -> List[Item]:
     """
@@ -310,18 +363,22 @@ def collect_items(sources, drop_log) -> List[Item]:
             if DEBUG:
                 print(f"[warn] source error: {name} -> {e}")
 
-    pool.sort(key=lambda x: x.published_ts or 0, reverse=True)
+    # Robust sort even if published_ts is datetime/string/float
+    pool.sort(key=lambda x: _coerce_ts(getattr(x, "published_ts", None)) or 0.0, reverse=True)
     return pool
 
 
 # ----------------------- MONTHLY GENERATION --------------------
+
 
 def generate_monthly_for(ym: str) -> str:
     # Make month available to fetch.py for month-hint filtering (reduces noise)
     os.environ["TARGET_YM"] = ym
 
     y, m = map(int, ym.split("-"))
-    start, end = _month_bounds(y, m)
+    start_dt, end_dt = _month_bounds(y, m)
+    start_ts = start_dt.timestamp()
+    end_ts = end_dt.timestamp()
 
     cfg = load_yaml(CFG)
     filters = compile_filters(load_yaml(FILTERS))
@@ -357,9 +414,10 @@ def generate_monthly_for(ym: str) -> str:
                         "url": it.url,
                         "source": it.source,
                         "published_ts": it.published_ts,
-                        "published_iso": fmt_iso(it.published_ts) if it.published_ts else "",
+                        "published_iso": fmt_iso(it.published_ts),
+                        "published_ts_coerced": _coerce_ts(it.published_ts),
                     }
-                    for it in pool[:100]
+                    for it in pool[:150]
                 ],
             )
 
@@ -367,7 +425,7 @@ def generate_monthly_for(ym: str) -> str:
         section_dom_counts: Dict[str, int] = {}
 
         for it in pool:
-            if not _in_range(it.published_ts, start, end):
+            if not _in_range(it.published_ts, start_ts, end_ts):
                 if DEBUG:
                     drop_log(f"out_of_range\t{fmt_iso(it.published_ts)}\t{it.url}")
                 continue
@@ -422,15 +480,17 @@ def generate_monthly_for(ym: str) -> str:
 
             section_dom_counts[dom] = section_dom_counts.get(dom, 0) + 1
 
-            selected.append({
-                "section": section,
-                "title": it.title or it.url.split("/")[-1].replace("-", " ")[:100],
-                "url": it.url,
-                "sources_urls": [it.url],
-                "summary": it.summary or "",
-                "text": txt,
-                "published": fmt_iso(it.published_ts),
-            })
+            selected.append(
+                {
+                    "section": section,
+                    "title": it.title or it.url.split("/")[-1].replace("-", " ")[:100],
+                    "url": it.url,
+                    "sources_urls": [it.url],
+                    "summary": it.summary or "",
+                    "text": txt,
+                    "published": fmt_iso(it.published_ts),
+                }
+            )
             seen_urls.add(h)
 
             if len(selected) >= ITEMS_PER_SECTION:
@@ -439,7 +499,7 @@ def generate_monthly_for(ym: str) -> str:
         print(f"[selected] {len(selected)} from {section}")
         chosen.extend(selected)
 
-    # Sort newest first
+    # Sort newest first (published is ISO string; OK but ensure stable)
     chosen = sorted(chosen, key=lambda x: (x.get("published", ""), x.get("section", "")), reverse=True)
 
     # Per-domain cap (global)
@@ -458,8 +518,7 @@ def generate_monthly_for(ym: str) -> str:
 
     _dump_json(
         selected_file,
-        [{"title": x["title"], "url": x["url"], "published": x["published"], "section": x["section"]}
-         for x in chosen],
+        [{"title": x["title"], "url": x["url"], "published": x["published"], "section": x["section"]} for x in chosen],
     )
 
     try:
@@ -471,6 +530,7 @@ def generate_monthly_for(ym: str) -> str:
             mf.write("counts:\n")
             mf.write(f"  selected_total: {len(chosen)}\n")
             from collections import Counter
+
             c = Counter([x.get("section", "") for x in chosen])
             for k, v in c.items():
                 mf.write(f"  section[{k}]: {v}\n")
@@ -481,16 +541,17 @@ def generate_monthly_for(ym: str) -> str:
         print(f"[warn] Few items in range ({len(chosen)}<{MIN_TOTAL_ITEMS}); writing placeholder.")
         return (
             f"# Signals Digest — NO ITEMS IN RANGE\n\n"
-            f"_Date range_: {start.date().isoformat()} → {end.date().isoformat()}\n\n"
+            f"_Date range_: {start_dt.date().isoformat()} → {end_dt.date().isoformat()}\n\n"
             "Insufficient eligible items. Consider relaxing MIN_TEXT_CHARS, checking filters, widening sources, "
             "or enabling PRIORITY_* thresholds for trusted domains."
         )
 
-    date_label = _month_label(end)
+    date_label = _month_label(end_dt)
     return build_digest(model=MODEL, api_key=OPENAI_API_KEY, items=chosen, temp=TEMP, date_label=date_label)
 
 
 # ----------------------- ENTRY POINT ---------------------------
+
 
 def main():
     if not OPENAI_API_KEY:
@@ -504,9 +565,9 @@ def main():
         ey, em = map(int, end_ym.split("-"))
         y, m = sy, sm
         while (y < ey) or (y == ey and m <= em):
-            start, end = _month_bounds(y, m)
+            start_dt, end_dt = _month_bounds(y, m)
             ym = f"{y:04d}-{m:02d}"
-            print(f"\n=== {ym} ({start.date()} -> {end.date()}) ===")
+            print(f"\n=== {ym} ({start_dt.date()} -> {end_dt.date()}) ===")
             md = generate_monthly_for(ym)
             out = OUTDIR / f"monthly-digest-{ym}.md"
             out.write_text(md, encoding="utf-8")
@@ -526,4 +587,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
