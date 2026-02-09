@@ -53,6 +53,7 @@ CFG = ROOT / "config" / "sources.yaml"
 FILTERS = ROOT / "config" / "filters.yaml"
 
 OUTDIR.mkdir(parents=True, exist_ok=True)
+ALLOW_UNDATED = os.getenv("ALLOW_UNDATED", "0") == "1"
 
 # ----------------------- DATE HELPERS --------------------------
 
@@ -98,7 +99,7 @@ def _in_range(ts, start, end):
     """
     ts2 = _coerce_ts(ts)
     if ts2 is None:
-        return True  # fail-open for undated items
+        return ALLOW_UNDATED  # fail-open for undated items
 
     s2 = _coerce_ts(start)
     e2 = _coerce_ts(end)
