@@ -497,13 +497,14 @@ def fetch_html_index(url: str, *, source_name: str | None = None, **_kwargs) -> 
 
     return _dedupe_by_url(candidates)
 
+# --- Compatibility API expected by src.generate_monthly ---------------------------------
 
 def fetch_full_text(url: str, timeout_s: int = TIMEOUT) -> str:
     """
     API required by src.generate_monthly:
       txt = fetch_full_text(it.url)
 
-    Returns extracted main article text (best-effort) using trafilatura, falling back to soup text.
+    Returns extracted main article text (best-effort).
     """
     html = fetch_url(url, timeout_s=timeout_s)
 
@@ -528,3 +529,7 @@ def fetch_full_text(url: str, timeout_s: int = TIMEOUT) -> str:
     txt = soup.get_text("\n", strip=True)
     txt = re.sub(r"\n{3,}", "\n\n", txt).strip()
     return txt
+
+
+# Optional alias if any older code uses a different name
+fetch_fulltext = fetch_full_text
