@@ -1,359 +1,1202 @@
 [
   {
+    "title": "Join our team",
+    "url": "https://job-boards.eu.greenhouse.io/ifrsfoundation",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1770595200.0,
+    "published_iso": "2026-02-09",
+    "published_ts_coerced": 1770595200.0
+  },
+  {
+    "title": "Join our team",
+    "url": "https://job-boards.eu.greenhouse.io/ifrsfoundation",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1770595200.0,
+    "published_iso": "2026-02-09",
+    "published_ts_coerced": 1770595200.0
+  },
+  {
+    "title": "Skip to main content",
+    "url": "https://www.efrag.org/en/news-and-calendar/news#main-content",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1770379200.0,
+    "published_iso": "2026-02-06",
+    "published_ts_coerced": 1770379200.0
+  },
+  {
+    "title": "News",
+    "url": "https://www.efrag.org/en/sustainability-reporting/news",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1770379200.0,
+    "published_iso": "2026-02-06",
+    "published_ts_coerced": 1770379200.0
+  },
+  {
     "title": "News and calendar",
     "url": "https://www.efrag.org/en/news-and-calendar/news",
     "source": "https://www.efrag.org/en/news-and-calendar/news",
-    "published_ts": 1770206400.0,
-    "published_iso": "2026-02-04"
+    "published_ts": 1770379200.0,
+    "published_iso": "2026-02-06",
+    "published_ts_coerced": 1770379200.0
   },
   {
     "title": "(-) All news",
     "url": "https://www.efrag.org/en/news-and-calendar/news?facets_query=",
     "source": "https://www.efrag.org/en/news-and-calendar/news",
-    "published_ts": 1770206400.0,
-    "published_iso": "2026-02-04"
+    "published_ts": 1770379200.0,
+    "published_iso": "2026-02-06",
+    "published_ts_coerced": 1770379200.0
   },
   {
-    "title": "Sustainability",
-    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A9",
+    "title": "Outreach event",
+    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A139",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1770379200.0,
+    "published_iso": "2026-02-06",
+    "published_ts_coerced": 1770379200.0
+  },
+  {
+    "title": "Help Shape Europe’s Voice on the New GRI Labor Standards Exposure Drafts: Join EFRAG's workshops",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-the-new-gri-labor-standards-exposure-drafts-join-efrags-workshops",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1770379200.0,
+    "published_iso": "2026-02-06",
+    "published_ts_coerced": 1770379200.0
+  },
+  {
+    "title": "Load More",
+    "url": "https://www.efrag.org/en/news-and-calendar/news?page=1",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1770379200.0,
+    "published_iso": "2026-02-06",
+    "published_ts_coerced": 1770379200.0
+  },
+  {
+    "title": "Sustainability Reporting",
+    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A103",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1770292800.0,
+    "published_iso": "2026-02-05",
+    "published_ts_coerced": 1770292800.0
+  },
+  {
+    "title": "EFRAG releases conference report on Draft Simplified ESRS",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-releases-conference-report-on-draft-simplified-esrs",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1770292800.0,
+    "published_iso": "2026-02-05",
+    "published_ts_coerced": 1770292800.0
+  },
+  {
+    "title": "News",
+    "url": "https://www.efrag.org/en/financial-reporting/news",
     "source": "https://www.efrag.org/en/news-and-calendar/news",
     "published_ts": 1770206400.0,
-    "published_iso": "2026-02-04"
+    "published_iso": "2026-02-04",
+    "published_ts_coerced": 1770206400.0
   },
   {
     "title": "New educational video series available to navigate VSME implementation",
     "url": "https://www.efrag.org/en/news-and-calendar/news/new-educational-video-series-available-to-navigate-vsme-implementation",
     "source": "https://www.efrag.org/en/news-and-calendar/news",
     "published_ts": 1770206400.0,
-    "published_iso": "2026-02-04"
+    "published_iso": "2026-02-04",
+    "published_ts_coerced": 1770206400.0
   },
   {
-    "title": "News and calendar",
-    "url": "https://www.efrag.org/en/news-and-calendar/news",
-    "source": "https://www.efrag.org/en/updates",
+    "title": "EFRAG publishes Due Process Procedures for Financial Reporting Activities",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-due-process-procedures-for-financial-reporting-activities",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
     "published_ts": 1770206400.0,
-    "published_iso": "2026-02-04"
+    "published_iso": "2026-02-04",
+    "published_ts_coerced": 1770206400.0
   },
   {
-    "title": "Sustainability Reporting",
-    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A103",
+    "title": "Meeting",
+    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A138",
     "source": "https://www.efrag.org/en/news-and-calendar/news",
     "published_ts": 1770120000.0,
-    "published_iso": "2026-02-03"
+    "published_iso": "2026-02-03",
+    "published_ts_coerced": 1770120000.0
   },
   {
     "title": "EFRAG SR TEG Online Meeting 5 February 2026",
     "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-5-february-2026",
     "source": "https://www.efrag.org/en/news-and-calendar/news",
     "published_ts": 1770120000.0,
-    "published_iso": "2026-02-03"
+    "published_iso": "2026-02-03",
+    "published_ts_coerced": 1770120000.0
   },
   {
     "title": "EFRAG calls for expression of interest on VSME digital tools and platforms",
     "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-calls-for-expression-of-interest-on-vsme-digital-tools-and-platforms",
     "source": "https://www.efrag.org/en/news-and-calendar/news",
     "published_ts": 1770120000.0,
-    "published_iso": "2026-02-03"
+    "published_iso": "2026-02-03",
+    "published_ts_coerced": 1770120000.0
+  },
+  {
+    "title": "Meetings",
+    "url": "https://www.efrag.org/en/financial-reporting/meetings",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1769990400.0,
+    "published_iso": "2026-02-02",
+    "published_ts_coerced": 1769990400.0
+  },
+  {
+    "title": "Meetings Calendar",
+    "url": "https://www.efrag.org/en/news-and-calendar/meetings-calendar",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1769990400.0,
+    "published_iso": "2026-02-02",
+    "published_ts_coerced": 1769990400.0
+  },
+  {
+    "title": "Events",
+    "url": "https://www.efrag.org/en/efrag-events",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1769644800.0,
+    "published_iso": "2026-01-29",
+    "published_ts_coerced": 1769644800.0
+  },
+  {
+    "title": "Skip to main content",
+    "url": "https://www.efrag.org/en/news-and-calendar/news?page=1#main-content",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1769601600.0,
+    "published_iso": "2026-01-28",
+    "published_ts_coerced": 1769601600.0
   },
   {
     "title": "EFRAG FRB Online Meeting - 29 January 2026",
     "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-29-january-2026",
     "source": "https://www.efrag.org/en/news-and-calendar/news",
     "published_ts": 1769601600.0,
-    "published_iso": "2026-01-28"
+    "published_iso": "2026-01-28",
+    "published_ts_coerced": 1769601600.0
+  },
+  {
+    "title": "Load More",
+    "url": "https://www.efrag.org/en/news-and-calendar/news?page=2",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1769601600.0,
+    "published_iso": "2026-01-28",
+    "published_ts_coerced": 1769601600.0
+  },
+  {
+    "title": "ISSB Update January 2026",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1769558400.0,
+    "published_iso": "2026-01-28",
+    "published_ts_coerced": 1769558400.0
+  },
+  {
+    "title": "Meetings",
+    "url": "https://www.efrag.org/en/sustainability-reporting/meetings",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1769558400.0,
+    "published_iso": "2026-01-28",
+    "published_ts_coerced": 1769558400.0
+  },
+  {
+    "title": "News center",
+    "url": "https://www.globalreporting.org/news/news-center/",
+    "source": "https://www.globalreporting.org/news/news-center/",
+    "published_ts": 1769558400.0,
+    "published_iso": "2026-01-28",
+    "published_ts_coerced": 1769558400.0
+  },
+  {
+    "title": "Showcasing how companies can turn ESG data into decision-useful insights",
+    "url": "https://www.globalreporting.org/news/news-center/showcasing-how-companies-can-turn-esg-data-into-decision-useful-insights/",
+    "source": "https://www.globalreporting.org/news/news-center/",
+    "published_ts": 1769558400.0,
+    "published_iso": "2026-01-28",
+    "published_ts_coerced": 1769558400.0
+  },
+  {
+    "title": "Vacancy",
+    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A141",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1769515200.0,
+    "published_iso": "2026-01-27",
+    "published_ts_coerced": 1769515200.0
   },
   {
     "title": "EFRAG Opens Call for Candidates to Join its Sustainability Reporting Technical Expert Group",
     "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-opens-call-for-candidates-to-join-its-sustainability-reporting-technical-expert-group",
     "source": "https://www.efrag.org/en/news-and-calendar/news",
     "published_ts": 1769515200.0,
-    "published_iso": "2026-01-27"
+    "published_iso": "2026-01-27",
+    "published_ts_coerced": 1769515200.0
   },
   {
     "title": "EFRAG SRB Online Meeting 28 January 2026",
     "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-28-january-2026",
     "source": "https://www.efrag.org/en/news-and-calendar/news",
     "published_ts": 1769428800.0,
-    "published_iso": "2026-01-26"
+    "published_iso": "2026-01-26",
+    "published_ts_coerced": 1769428800.0
   },
   {
-    "title": "Outreach event",
-    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A139",
+    "title": "Standards",
+    "url": "https://www.globalreporting.org/standards/",
+    "source": "https://www.globalreporting.org/news/news-center/",
+    "published_ts": 1769385600.0,
+    "published_iso": "2026-01-26",
+    "published_ts_coerced": 1769385600.0
+  },
+  {
+    "title": "How to use the GRI Standards",
+    "url": "https://www.globalreporting.org/how-to-use-the-gri-standards/",
+    "source": "https://www.globalreporting.org/news/news-center/",
+    "published_ts": 1769385600.0,
+    "published_iso": "2026-01-26",
+    "published_ts_coerced": 1769385600.0
+  },
+  {
+    "title": "Reporting support",
+    "url": "https://www.globalreporting.org/reporting-support/",
+    "source": "https://www.globalreporting.org/news/news-center/",
+    "published_ts": 1769385600.0,
+    "published_iso": "2026-01-26",
+    "published_ts_coerced": 1769385600.0
+  },
+  {
+    "title": "Accelerating progress in 2026 towards a streamlined sustainability reporting system",
+    "url": "https://www.globalreporting.org/news/news-center/accelerating-progress-in-2026-towards-a-streamlined-sustainability-reporting-system/",
+    "source": "https://www.globalreporting.org/news/news-center/",
+    "published_ts": 1769385600.0,
+    "published_iso": "2026-01-26",
+    "published_ts_coerced": 1769385600.0
+  },
+  {
+    "title": "Freedom of information",
+    "url": "https://asic.gov.au/about-asic/freedom-of-information-foi/",
+    "source": "https://asic.gov.au/newsroom/media-releases/",
+    "published_ts": 1769040000.0,
+    "published_iso": "2026-01-22",
+    "published_ts_coerced": 1769040000.0
+  },
+  {
+    "title": "EFRAG SR TEG Online Meeting 22 January 2026",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-22-january-2026",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1768996800.0,
+    "published_iso": "2026-01-21",
+    "published_ts_coerced": 1768996800.0
+  },
+  {
+    "title": "Public policy",
+    "url": "https://www.globalreporting.org/public-policy/",
+    "source": "https://www.globalreporting.org/news/news-center/",
+    "published_ts": 1768867200.0,
+    "published_iso": "2026-01-20",
+    "published_ts_coerced": 1768867200.0
+  },
+  {
+    "title": "GRI appoints Susanne Stormer as next leader of standard-setting board",
+    "url": "https://www.globalreporting.org/news/news-center/gri-appoints-susanne-stormer-as-next-leader-of-standard-setting-board/",
+    "source": "https://www.globalreporting.org/news/news-center/",
+    "published_ts": 1768867200.0,
+    "published_iso": "2026-01-20",
+    "published_ts_coerced": 1768867200.0
+  },
+  {
+    "title": "EFRAG FR TEG Online Meeting - 21 January 2026",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-21-january-2026",
     "source": "https://www.efrag.org/en/news-and-calendar/news",
     "published_ts": 1768824000.0,
-    "published_iso": "2026-01-19"
+    "published_iso": "2026-01-19",
+    "published_ts_coerced": 1768824000.0
+  },
+  {
+    "title": "Join the First SME Forum Meeting of 2026",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/join-the-first-sme-forum-meeting-of-2026",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1768824000.0,
+    "published_iso": "2026-01-19",
+    "published_ts_coerced": 1768824000.0
+  },
+  {
+    "title": "Corporate",
+    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A112",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1768564800.0,
+    "published_iso": "2026-01-16",
+    "published_ts_coerced": 1768564800.0
+  },
+  {
+    "title": "Skip to main content",
+    "url": "https://www.efrag.org/en/news-and-calendar/news?page=2#main-content",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1768564800.0,
+    "published_iso": "2026-01-16",
+    "published_ts_coerced": 1768564800.0
+  },
+  {
+    "title": "EFRAG Administrative Board Online Meeting - 20 January 2026",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-administrative-board-online-meeting-20-january-2026",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1768564800.0,
+    "published_iso": "2026-01-16",
+    "published_ts_coerced": 1768564800.0
+  },
+  {
+    "title": "Join the Webinar “Circular Economy Reporting in Focus: The Draft Simplified ESRS E5”",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/join-the-webinar-circular-economy-reporting-in-focus-the-draft-simplified-esrs-e5",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1768564800.0,
+    "published_iso": "2026-01-16",
+    "published_ts_coerced": 1768564800.0
+  },
+  {
+    "title": "Load More",
+    "url": "https://www.efrag.org/en/news-and-calendar/news?page=3",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1768564800.0,
+    "published_iso": "2026-01-16",
+    "published_ts_coerced": 1768564800.0
+  },
+  {
+    "title": "EFRAG SRB Online Meeting 21 January 2026",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-21-january-2026",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1768478400.0,
+    "published_iso": "2026-01-15",
+    "published_ts_coerced": 1768478400.0
+  },
+  {
+    "title": "EFRAG FR TEG Online Meeting - 15 January 2026",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-15-january-2026",
+    "source": "https://www.efrag.org/en/news-and-calendar/news",
+    "published_ts": 1768392000.0,
+    "published_iso": "2026-01-14",
+    "published_ts_coerced": 1768392000.0
   },
   {
     "title": "Financial Reporting",
     "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A42",
     "source": "https://www.efrag.org/en/news-and-calendar/news",
     "published_ts": 1768219200.0,
-    "published_iso": "2026-01-12"
+    "published_iso": "2026-01-12",
+    "published_ts_coerced": 1768219200.0
   },
   {
-    "title": "Invitation to comment",
-    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A108",
+    "title": "Deadline Extended for Applications to the EFRAG Financial Reporting Technical Expert Group",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/deadline-extended-for-applications-to-the-efrag-financial-reporting-technical-expert-group",
     "source": "https://www.efrag.org/en/news-and-calendar/news",
-    "published_ts": 1766059200.0,
-    "published_iso": "2025-12-18"
+    "published_ts": 1768219200.0,
+    "published_iso": "2026-01-12",
+    "published_ts_coerced": 1768219200.0
   },
   {
-    "title": "the EFRAG Update",
-    "url": "https://www.efrag.org/en/updates",
+    "title": "Privacy",
+    "url": "https://asic.gov.au/about-asic/dealing-with-asic/privacy/",
+    "source": "https://asic.gov.au/newsroom/media-releases/",
+    "published_ts": 1767744000.0,
+    "published_iso": "2026-01-07",
+    "published_ts_coerced": 1767744000.0
+  },
+  {
+    "title": "Vacancies",
+    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A115",
     "source": "https://www.efrag.org/en/news-and-calendar/news",
-    "published_ts": 1765368000.0,
-    "published_iso": "2025-12-10"
+    "published_ts": 1767614400.0,
+    "published_iso": "2026-01-05",
+    "published_ts_coerced": 1767614400.0
   },
   {
-    "title": "(-) All updates",
-    "url": "https://www.efrag.org/en/updates?facets_query=",
-    "source": "https://www.efrag.org/en/updates",
-    "published_ts": 1765368000.0,
-    "published_iso": "2025-12-10"
-  },
-  {
-    "title": "Endorsement status",
-    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A106",
+    "title": "Apply Now to Join EFRAG’s Financial Reporting Technical Expert Group",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/apply-now-to-join-efrags-financial-reporting-technical-expert-group",
     "source": "https://www.efrag.org/en/news-and-calendar/news",
-    "published_ts": 1763726400.0,
-    "published_iso": "2025-11-21"
+    "published_ts": 1767614400.0,
+    "published_iso": "2026-01-05",
+    "published_ts_coerced": 1767614400.0
   },
   {
-    "title": "Terms & Conditions",
-    "url": "https://www.globalreporting.org/media/mgspa4n4/gri-global-website-term-of-use-mpgc-05222025_25-august.pdf",
-    "source": "https://www.globalreporting.org/news/",
-    "published_ts": 1757376000.0,
-    "published_iso": "2025-09-09"
+    "title": "Update to our sign-in process",
+    "url": "https://www.ifrs.org/content/ifrs/home/updated-sign-in-process.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Financial Reporting Publications",
-    "url": "https://www.efrag.org/en/news-and-calendar/financial-reporting-publications",
-    "source": "https://www.efrag.org/en/news-and-calendar/news",
-    "published_ts": 1717243200.0,
-    "published_iso": "2024-06-01"
+    "title": "About us",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/who-we-are.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Financial Reporting Publications",
-    "url": "https://www.efrag.org/en/news-and-calendar/financial-reporting-publications",
-    "source": "https://www.efrag.org/en/updates",
-    "published_ts": 1717243200.0,
-    "published_iso": "2024-06-01"
+    "title": "How we set IFRS Standards",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/how-we-set-ifrs-standards.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download the report",
-    "url": "https://assets.bbhub.io/company/sites/60/2023/09/2023-Status-Report.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1679529600.0,
-    "published_iso": "2023-03-23"
+    "title": "Post-implementation Reviews",
+    "url": "https://www.ifrs.org/content/ifrs/home/projects/post-implementation-reviews.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download the Document Index",
-    "url": "https://assets.bbhub.io/company/sites/60/2023/03/TCFD_Report_Index.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1671408000.0,
-    "published_iso": "2022-12-19"
+    "title": "How we support the application of our Standards",
+    "url": "https://www.ifrs.org/content/ifrs/home/supporting-implementation/how-we-help-support-consistent-application.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download report",
-    "url": "https://assets.bbhub.io/company/sites/60/2022/11/2022-tcfd-implementation-and-use-survey-summary.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1667520000.0,
-    "published_iso": "2022-11-04"
+    "title": "Annual reports",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/who-we-are.html#annual-report",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download report",
-    "url": "https://assets.bbhub.io/company/sites/60/2022/10/2022-TCFD-Status-Report.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1659312000.0,
-    "published_iso": "2022-08-01"
+    "title": "IFRS Foundation Trustees",
+    "url": "https://www.ifrs.org/content/ifrs/home/groups/trustees-of-the-ifrs-foundation.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Simplified Chinese",
-    "url": "https://assets.bbhub.io/company/sites/60/2023/02/tcfd-2022-status-report-simplified-chinese.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1659312000.0,
-    "published_iso": "2022-08-01"
+    "title": "IFRS Foundation advisory groups",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/our-consultative-bodies.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download report",
-    "url": "https://assets.bbhub.io/company/sites/60/2022/11/2022-asset-manager-and-asset-owner-survey-summary.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1649894400.0,
-    "published_iso": "2022-04-14"
+    "title": "Our structure",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/our-structure.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download report",
-    "url": "https://assets.bbhub.io/company/sites/60/2022/03/GPP_TCFD_Status_Report_2021_Book_v17.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1638921600.0,
-    "published_iso": "2021-12-08"
+    "title": "Due process",
+    "url": "https://www.ifrs.org/content/ifrs/home/groups/due-process-oversight-committee.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download TCFD Fundamentals Workshop",
-    "url": "https://assets.bbhub.io/company/sites/60/2022/02/TCFD-Fundamentals-Workshop.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1635292800.0,
-    "published_iso": "2021-10-27"
+    "title": "Funding",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/who-we-are.html#funding",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download Governance Workshop",
-    "url": "https://assets.bbhub.io/company/sites/60/2022/02/TCFD-Governance-Workshop.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1635292800.0,
-    "published_iso": "2021-10-27"
+    "title": "Latest news",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/news.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download Strategy Workshop",
-    "url": "https://assets.bbhub.io/company/sites/60/2022/02/TCFD-Strategy-Workshop.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1635292800.0,
-    "published_iso": "2021-10-27"
+    "title": "IFRS Foundation meeting and events calendar",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/calendar.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download Risk Management Workshop",
-    "url": "https://assets.bbhub.io/company/sites/60/2022/02/TCFD-Risk-Management-Workshop.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1635292800.0,
-    "published_iso": "2021-10-27"
+    "title": "Media enquiries, press releases and speeches",
+    "url": "https://www.ifrs.org/content/ifrs/home/media.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download Metrics and Targets Workshop",
-    "url": "https://assets.bbhub.io/company/sites/60/2022/02/Metrics-and-Targets-Workshop.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1635292800.0,
-    "published_iso": "2021-10-27"
+    "title": "Contact us",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/contact-us.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download report",
-    "url": "https://assets.bbhub.io/company/sites/60/2021/10/2021-Summary-of-Annex-Changes.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1634083200.0,
-    "published_iso": "2021-10-13"
+    "title": "Speaking requests",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/contact-us.html#speaker-engagement-requests",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download report",
-    "url": "https://assets.bbhub.io/company/sites/60/2021/10/Summary-of-Forward-Looking-Financial-Metrics-Consultation.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1633996800.0,
-    "published_iso": "2021-10-12"
+    "title": "International Accounting Standards Board",
+    "url": "https://www.ifrs.org/content/ifrs/home/groups/international-accounting-standards-board.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Simplified Chinese",
-    "url": "https://assets.bbhub.io/company/sites/60/2021/11/TCFD-Recommendation-of-the-Task-Force-on-Climate-related-Financial-Disclosures-Simplified-Chinese-Translation.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1630022400.0,
-    "published_iso": "2021-08-27"
+    "title": "IFRS Interpretations Committee",
+    "url": "https://www.ifrs.org/content/ifrs/home/groups/ifrs-interpretations-committee.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Simplified Chinese",
-    "url": "https://assets.bbhub.io/company/sites/60/2021/11/TCFD-The-Use-of-Scenario-Analysis-in-Disclosure-of-Climate-Related-Risks-and-Opportunities-Simplified-Chinese-Translation.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1630022400.0,
-    "published_iso": "2021-08-27"
+    "title": "Consultative bodies",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/our-consultative-bodies.html#ifrs-accounting-advisory-groups",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Simplified Chinese",
-    "url": "https://assets.bbhub.io/company/sites/60/2022/03/TCFD-Guidance_on_Metrics_Targets_and_Transition_Plans_%E4%B8%AD%E8%AF%91%E7%89%88.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1626739200.0,
-    "published_iso": "2021-07-20"
+    "title": "Connectivity",
+    "url": "https://www.ifrs.org/content/ifrs/home/connectivity.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download report",
-    "url": "https://assets.bbhub.io/company/sites/60/2021/05/2021-TCFD-Metrics_Targets_Guidance.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1613347200.0,
-    "published_iso": "2021-02-15"
+    "title": "Around the world",
+    "url": "https://www.ifrs.org/content/ifrs/home/use-around-the-world.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download report",
-    "url": "https://assets.bbhub.io/company/sites/60/2020/09/2020-TCFD_Guidance-Risk-Management-Integration-and-Disclosure.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1601251200.0,
-    "published_iso": "2020-09-28"
+    "title": "Updates and podcasts",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates.html#accounting-related-updates-and-podcasts",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Simplified Chinese",
-    "url": "https://assets.bbhub.io/company/sites/60/2021/11/TCFD-Guidance-on-Risk-Management-Integration-and-Disclosure-Simplified-Chinese-Translation.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1600560000.0,
-    "published_iso": "2020-09-20"
+    "title": "IFRS for SMEs Accounting Standard",
+    "url": "https://www.ifrs.org/content/ifrs/home/issued-standards/ifrs-for-smes.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download report",
-    "url": "https://assets.bbhub.io/company/sites/60/2021/07/TCFD_Consultation_ForwardLooking_Final.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1600560000.0,
-    "published_iso": "2020-09-20"
+    "title": "Management Commentary",
+    "url": "https://www.ifrs.org/content/ifrs/home/issued-standards/list-of-standards/management-commentary-practice-statement-1.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Simplified Chinese",
-    "url": "https://assets.bbhub.io/company/sites/60/2021/12/Implementing-the-Recommendations-of-the-Task-Force-on-Climate-related-Financial-Disclosures-TCFD-Annex-2017-Simplified-Chinese-Translation.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1592179200.0,
-    "published_iso": "2020-06-15"
+    "title": "Digital financial reporting",
+    "url": "https://www.ifrs.org/content/ifrs/home/digital-financial-reporting.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download webinar presentation",
-    "url": "https://assets.bbhub.io/company/sites/60/2021/10/TCFD-Whats-New-in-2021-Webinar.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1592179200.0,
-    "published_iso": "2020-06-15"
+    "title": "IFRS translations",
+    "url": "https://www.ifrs.org/content/ifrs/home/issued-standards/ifrs-translations.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download report",
-    "url": "https://assets.bbhub.io/company/sites/60/2021/10/October_2021_Metrics_Targets_and_Transition_Plans_Consultation_Summary_of_Responses.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1592179200.0,
-    "published_iso": "2020-06-15"
+    "title": "Integrated reporting",
+    "url": "https://www.ifrs.org/content/ifrs/home/issued-standards/integrated-reporting.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download report",
-    "url": "https://assets.bbhub.io/company/sites/60/2020/09/2020-TCFD_Status-Report.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1589241600.0,
-    "published_iso": "2020-05-12"
+    "title": "Application support",
+    "url": "https://www.ifrs.org/content/ifrs/home/supporting-implementation.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download report",
-    "url": "https://assets.bbhub.io/company/sites/60/2020/09/2020-TCFD_Guidance-Scenario-Analysis-Guidance.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1560988800.0,
-    "published_iso": "2019-06-20"
+    "title": "Agenda decisions",
+    "url": "https://www.ifrs.org/content/ifrs/home/supporting-implementation/how-we-help-support-consistent-application.html#agenda-decisions",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Simplified Chinese",
-    "url": "https://assets.bbhub.io/company/sites/60/2021/11/TCFD-Guidance-on-Scenario-Analysis-for-Non-Financial-Companies-Simplified-Chinese-Translation.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1560729600.0,
-    "published_iso": "2019-06-17"
+    "title": "Open and future projects",
+    "url": "https://www.ifrs.org/content/ifrs/home/projects/work-plan.html#ifrs-accounting-projects",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download report",
-    "url": "https://assets.bbhub.io/company/sites/60/2020/10/FINAL-TCFD-Annex-Amended-121517.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1473984000.0,
-    "published_iso": "2016-09-16"
+    "title": "Open consultations",
+    "url": "https://www.ifrs.org/content/ifrs/home/projects/open-for-comment.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Download report",
-    "url": "https://assets.bbhub.io/company/sites/60/2021/03/FINAL-TCFD-Technical-Supplement-062917.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1473984000.0,
-    "published_iso": "2016-09-16"
+    "title": "Completed projects",
+    "url": "https://www.ifrs.org/content/ifrs/home/projects/completed-projects.html#ifrs-accounting-projects",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Traditional Chinese",
-    "url": "https://assets.bbhub.io/company/sites/60/2020/10/TCFD-Recommendations-Report-Traditional-Chinese-Translation.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1328486400.0,
-    "published_iso": "2012-02-06"
+    "title": "IASB prioritisation framework",
+    "url": "https://www.ifrs.org/content/ifrs/home/projects/iasb-prioritisation-framework.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   },
   {
-    "title": "Simplified Chinese",
-    "url": "https://assets.bbhub.io/company/sites/60/2021/12/TCFD-Status-Report-2021-Simplified-Chinese-Translation.pdf",
-    "source": "https://www.fsb-tcfd.org/publications/",
-    "published_ts": 1328486400.0,
-    "published_iso": "2012-02-06"
+    "title": "Products overview",
+    "url": "https://www.ifrs.org/content/ifrs/home/products-and-services.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "IFRS Accounting licensing",
+    "url": "https://www.ifrs.org/content/ifrs/home/products-and-services/ifrs-accounting-licensing.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "IFRS Digital subscription",
+    "url": "https://www.ifrs.org/content/ifrs/home/products-and-services/ifrs-digital.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "International Sustainability Standards Board",
+    "url": "https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Consultative bodies",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/our-consultative-bodies.html#ifrs-sustainability-groups",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Around the world",
+    "url": "https://www.ifrs.org/content/ifrs/home/ifrs-sustainability-disclosure-standards-around-the-world.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Updates and podcasts",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates.html#sustainability-related-updates-and-podcasts",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "IFRS Sustainability Disclosure Standards",
+    "url": "https://www.ifrs.org/content/ifrs/home/issued-standards/ifrs-sustainability-standards-navigator.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "CDSB guidance and framework",
+    "url": "https://www.ifrs.org/content/ifrs/home/sustainability/climate-disclosure-standards-board.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "SASB Standards",
+    "url": "https://www.ifrs.org/content/ifrs/home/issued-standards/sasb-standards.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "TCFD recommendations",
+    "url": "https://www.ifrs.org/content/ifrs/home/sustainability/tcfd.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Application support",
+    "url": "https://www.ifrs.org/content/ifrs/home/supporting-implementation/supporting-materials-for-ifrs-sustainability-disclosure-standards.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Knowledge hub",
+    "url": "https://www.ifrs.org/content/ifrs/home/sustainability/knowledge-hub.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Partnership Framework for capacity building",
+    "url": "https://www.ifrs.org/content/ifrs/home/use-around-the-world/partnership-framework-for-capacity-building.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Open projects",
+    "url": "https://www.ifrs.org/content/ifrs/home/projects/work-plan.html#ifrs-sustainability-projects",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Completed projects",
+    "url": "https://www.ifrs.org/content/ifrs/home/projects/completed-projects.html#ifrs-sustainability-projects",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Products overview",
+    "url": "https://www.ifrs.org/content/ifrs/home/products-and-services/sustainability-products-and-services.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "IFRS Sustainability licensing",
+    "url": "https://www.ifrs.org/content/ifrs/home/products-and-services/sustainability-products-and-services/ifrs-sustainability-licensing.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Alliance Membership Programme",
+    "url": "https://www.ifrs.org/content/ifrs/home/products-and-services/sustainability-products-and-services/ifrs-sustainability-alliance.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "FSA Credential",
+    "url": "https://www.ifrs.org/content/ifrs/home/products-and-services/sustainability-products-and-services/fsa-credential.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Home",
+    "url": "https://www.ifrs.org/content/ifrs/home.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Updates and podcasts",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "The work plan",
+    "url": "https://www.ifrs.org/content/ifrs/home/projects/work-plan.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "ISSB Update January 2025",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "ISSB Update February 2025",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-february-2025.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "ISSB Update March 2025",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-march-2025.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "ISSB Update April 2025",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-april-2025.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "ISSB Update June 2025",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-june-2025.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "ISSB Update July 2025",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-july-2025.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "ISSB Update September 2025",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "ISSB Update November 2025",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-november-2025.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "IASB–ISSB Update February 2025",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/iasb-issb/2025/iasb-issb-update-february-2025.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "ISSB Update October 2025",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-october-2025.html",
+    "source": "https://www.ifrs.org/news-and-events/updates/issb/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Skip to content",
+    "url": "https://www.ifrs.org/news-and-events/news/#start-of-content",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Update to our sign-in process",
+    "url": "https://www.ifrs.org/content/ifrs/home/updated-sign-in-process.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "About us",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/who-we-are.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "How we set IFRS Standards",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/how-we-set-ifrs-standards.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Post-implementation Reviews",
+    "url": "https://www.ifrs.org/content/ifrs/home/projects/post-implementation-reviews.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "How we support the application of our Standards",
+    "url": "https://www.ifrs.org/content/ifrs/home/supporting-implementation/how-we-help-support-consistent-application.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Annual reports",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/who-we-are.html#annual-report",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "IFRS Foundation Trustees",
+    "url": "https://www.ifrs.org/content/ifrs/home/groups/trustees-of-the-ifrs-foundation.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "IFRS Foundation advisory groups",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/our-consultative-bodies.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Our structure",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/our-structure.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Due process",
+    "url": "https://www.ifrs.org/content/ifrs/home/groups/due-process-oversight-committee.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Funding",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/who-we-are.html#funding",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Latest news",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/news.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "IFRS Foundation meeting and events calendar",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/calendar.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Media enquiries, press releases and speeches",
+    "url": "https://www.ifrs.org/content/ifrs/home/media.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Contact us",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/contact-us.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Speaking requests",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/contact-us.html#speaker-engagement-requests",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "International Accounting Standards Board",
+    "url": "https://www.ifrs.org/content/ifrs/home/groups/international-accounting-standards-board.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "IFRS Interpretations Committee",
+    "url": "https://www.ifrs.org/content/ifrs/home/groups/ifrs-interpretations-committee.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Consultative bodies",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/our-consultative-bodies.html#ifrs-accounting-advisory-groups",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Connectivity",
+    "url": "https://www.ifrs.org/content/ifrs/home/connectivity.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Around the world",
+    "url": "https://www.ifrs.org/content/ifrs/home/use-around-the-world.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Updates and podcasts",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates.html#accounting-related-updates-and-podcasts",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "IFRS for SMEs Accounting Standard",
+    "url": "https://www.ifrs.org/content/ifrs/home/issued-standards/ifrs-for-smes.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Management Commentary",
+    "url": "https://www.ifrs.org/content/ifrs/home/issued-standards/list-of-standards/management-commentary-practice-statement-1.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Digital financial reporting",
+    "url": "https://www.ifrs.org/content/ifrs/home/digital-financial-reporting.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "IFRS translations",
+    "url": "https://www.ifrs.org/content/ifrs/home/issued-standards/ifrs-translations.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Integrated reporting",
+    "url": "https://www.ifrs.org/content/ifrs/home/issued-standards/integrated-reporting.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Application support",
+    "url": "https://www.ifrs.org/content/ifrs/home/supporting-implementation.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Agenda decisions",
+    "url": "https://www.ifrs.org/content/ifrs/home/supporting-implementation/how-we-help-support-consistent-application.html#agenda-decisions",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Open and future projects",
+    "url": "https://www.ifrs.org/content/ifrs/home/projects/work-plan.html#ifrs-accounting-projects",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
+  },
+  {
+    "title": "Open consultations",
+    "url": "https://www.ifrs.org/content/ifrs/home/projects/open-for-comment.html",
+    "source": "https://www.ifrs.org/news-and-events/news/",
+    "published_ts": 1767225600.0,
+    "published_iso": "2026-01-01",
+    "published_ts_coerced": 1767225600.0
   }
 ]

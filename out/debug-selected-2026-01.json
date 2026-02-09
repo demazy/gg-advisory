@@ -1,9 +1,9 @@
 [
   {
-    "title": "EFRAG FRB Online Meeting - 29 January 2026",
-    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-29-january-2026",
+    "title": "Executive team",
+    "url": "https://arena.gov.au/about/executive-team",
     "published": "2026-01-28",
-    "section": "ESG Reporting"
+    "section": "Energy Transition"
   },
   {
     "title": "EFRAG Opens Call for Candidates to Join its Sustainability Reporting Technical Expert Group",
@@ -12,15 +12,51 @@
     "section": "ESG Reporting"
   },
   {
-    "title": "EFRAG SRB Online Meeting 28 January 2026",
-    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-28-january-2026",
-    "published": "2026-01-26",
-    "section": "ESG Reporting"
+    "title": "System security and reliability",
+    "url": "https://arena.gov.au/renewable-energy/system-security-reliability/",
+    "published": "2026-01-23",
+    "section": "Sustainable Finance & Investment"
   },
   {
     "title": "23 Jan 2026 News Energy Networks Australia welcomes Solar Sharer Offer next steps",
     "url": "https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-solar-sharer-offer-next-steps/",
     "published": "2026-01-23",
     "section": "Energy Transition"
+  },
+  {
+    "title": "CEFC backs new QIC infrastructure investment to accelerate energy transition Media release — 20 Jan 2026",
+    "url": "https://www.cefc.com.au/media/media-release/cefc-backs-new-qic-infrastructure-investment-to-accelerate-energy-transition/",
+    "published": "2026-01-20",
+    "section": "Energy Transition"
+  },
+  {
+    "title": "About us",
+    "url": "https://www.cer.gov.au/about-us",
+    "published": "2026-01-12",
+    "section": "Energy Transition"
+  },
+  {
+    "title": "Renewable energy",
+    "url": "https://www.cefc.com.au/where-we-invest/investment-focus-areas/renewable-energy/",
+    "published": "2026-01-01",
+    "section": "Sustainable Finance & Investment"
+  },
+  {
+    "title": "Post-implementation Reviews",
+    "url": "https://www.ifrs.org/content/ifrs/home/projects/post-implementation-reviews.html",
+    "published": "2026-01-01",
+    "section": "Sustainable Finance & Investment"
+  },
+  {
+    "title": "Contact Us",
+    "url": "https://www.aemc.gov.au/contact-us",
+    "published": "2026-01-01",
+    "section": "Energy Transition"
+  },
+  {
+    "title": "About us",
+    "url": "https://www.ifrs.org/content/ifrs/home/about-us/who-we-are.html",
+    "published": "2026-01-01",
+    "section": "ESG Reporting"
   }
 ]
