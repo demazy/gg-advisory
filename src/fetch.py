@@ -136,31 +136,42 @@ def _read_limited(resp: requests.Response, max_bytes: int = MAX_BYTES) -> str:
 
 def fetch_url(url: str, timeout_s: int = TIMEOUT) -> str:
     """
-    Fetch a URL robustly.
-    - Normal fetch first
-    - On 403/429 (or certain failures), attempt Jina proxy
+    Fetch a URL robustly:
+      1) normal request
+      2) if that fails, try Jina proxy
+    NEVER raise on proxy failure; return empty string so callers can drop the item.
     """
     url = _norm_url(url)
     if not _is_http_url(url):
-        raise ValueError(f"Not a valid http(s) URL: {url}")
+        return ""
 
     # 1) Normal fetch
     try:
         resp = _SESSION.get(url, headers=HEADERS, timeout=timeout_s, allow_redirects=True)
         if 200 <= resp.status_code < 300:
             return _read_limited(resp)
-        # fall through to proxy on 403/429, otherwise raise
-        if resp.status_code not in (403, 429):
-            resp.raise_for_status()
+
+        # for non-2xx: only attempt proxy for common bot/edge cases
+        if resp.status_code not in (403, 408, 429, 500, 502, 503, 504):
+            # don't explode the whole run on 404/410/etc.
+            return ""
     except Exception:
-        # fall through to proxy
+        # proceed to proxy attempt
         pass
 
     # 2) Proxy fetch (best-effort)
-    proxy_url = _jina_proxy(url)
-    resp2 = _SESSION.get(proxy_url, headers=HEADERS, timeout=timeout_s, allow_redirects=True)
-    resp2.raise_for_status()
-    return _read_limited(resp2)
+    try:
+        proxy_url = _jina_proxy(url)
+        resp2 = _SESSION.get(proxy_url, headers=HEADERS, timeout=timeout_s, allow_redirects=True)
+
+        if 200 <= resp2.status_code < 300:
+            return _read_limited(resp2)
+
+        # If proxy returns 4xx/5xx (incl. 422), treat as a soft failure
+        return ""
+    except Exception:
+        return ""
+
 
 
 def _infer_published_ts_from_url(u: str) -> Optional[float]:
@@ -507,7 +518,8 @@ def fetch_full_text(url: str, timeout_s: int = TIMEOUT) -> str:
     Returns extracted main article text (best-effort).
     """
     html = fetch_url(url, timeout_s=timeout_s)
-
+    if not html:
+            return ""
     # Prefer trafilatura extraction
     try:
         extracted = trafilatura.extract(
