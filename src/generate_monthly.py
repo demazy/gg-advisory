@@ -68,27 +68,16 @@ def _month_label(d: datetime) -> str:
     return d.strftime("%B %Y")
 
 
-def _coerce_ts(ts: Any) -> float | None:
-    """
-    Normalise various representations to float epoch seconds (UTC).
-    Accepts:
-      - float/int
-      - datetime (naive treated as UTC)
-      - ISO-ish string
-      - None
-    """
+def _coerce_ts(ts):
     if ts is None:
         return None
-
     if isinstance(ts, (int, float)):
         return float(ts)
-
     if isinstance(ts, datetime):
         dt = ts
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=timezone.utc)
         return dt.astimezone(timezone.utc).timestamp()
-
     if isinstance(ts, str):
         try:
             dt = dtparser.parse(ts)
@@ -99,26 +88,20 @@ def _coerce_ts(ts: Any) -> float | None:
             return dt.astimezone(timezone.utc).timestamp()
         except Exception:
             return None
-
-    # Unknown type
     return None
 
-
-def _in_range(ts: Any, start: Any, end: Any) -> bool:
+def _in_range(ts, start, end):
     """
     Robust range predicate:
-      - ts can be float/datetime/str/None
-      - start/end can be float/datetime/str
+    - ts can be float/datetime/str/None
+    - start/end can be datetime OR float OR str
     """
     ts2 = _coerce_ts(ts)
     if ts2 is None:
-        # allow undated items to prevent 0-selection failures
-        return True
+        return True  # fail-open for undated items
 
     s2 = _coerce_ts(start)
     e2 = _coerce_ts(end)
-
-    # If bounds are weird/missing, fail open rather than crashing the run
     if s2 is None or e2 is None:
         return True
 
