@@ -70,8 +70,12 @@ def _month_label(d: datetime) -> str:
 
 def _coerce_ts(ts: Any) -> float | None:
     """
-    Normalize various date representations to a float epoch timestamp (UTC).
-    Accepts: float/int, datetime, ISO-ish string, None.
+    Normalise various representations to float epoch seconds (UTC).
+    Accepts:
+      - float/int
+      - datetime (naive treated as UTC)
+      - ISO-ish string
+      - None
     """
     if ts is None:
         return None
@@ -100,15 +104,25 @@ def _coerce_ts(ts: Any) -> float | None:
     return None
 
 
-def _in_range(ts: Any, start_ts: float, end_ts: float) -> bool:
+def _in_range(ts: Any, start: Any, end: Any) -> bool:
     """
-    Range predicate tolerant to ts types.
-    Undated items are allowed (keeps pipeline alive when some sources omit dates).
+    Robust range predicate:
+      - ts can be float/datetime/str/None
+      - start/end can be float/datetime/str
     """
     ts2 = _coerce_ts(ts)
     if ts2 is None:
+        # allow undated items to prevent 0-selection failures
         return True
-    return start_ts <= ts2 <= end_ts
+
+    s2 = _coerce_ts(start)
+    e2 = _coerce_ts(end)
+
+    # If bounds are weird/missing, fail open rather than crashing the run
+    if s2 is None or e2 is None:
+        return True
+
+    return s2 <= ts2 <= e2
 
 
 def fmt_iso(ts: Any) -> str:
@@ -123,7 +137,6 @@ def fmt_iso(ts: Any) -> str:
 
 # -------------------- QUALITY / SPAM SUPPRESSION ---------------------
 
-# Meeting / admin notices: drop unconditionally based on URL/title patterns.
 _MEETING_URL_HINTS = ("/news-and-calendar/", "/calendar", "/events", "/meeting", "/meetings")
 _MEETING_URL_STRONG = ("online-meeting", "online_meeting", "/agenda")
 _MEETING_TITLE_HINTS = (
@@ -153,7 +166,6 @@ def is_meeting_notice(url: str, title: str) -> bool:
     return False
 
 
-# Hub/listing URLs: drop unconditionally. These are not content pages and often have query filters.
 _HUB_PATHS = {
     "/news",
     "/newsroom",
@@ -172,10 +184,8 @@ def is_hub_url(url: str) -> bool:
         path = (p.path or "/").rstrip("/")
         if not path:
             path = "/"
-        # listing/filter pages (querystring) are almost always hubs
         if p.query:
             return True
-        # known hub endpoints
         if path in _HUB_PATHS:
             return True
     except Exception:
@@ -184,25 +194,19 @@ def is_hub_url(url: str) -> bool:
 
 
 def substance_score(text: str) -> int:
-    """
-    Lightweight heuristic to gate out low-signal pages and prioritise regulatory / commercial impact.
-    """
     t = (text or "").lower()
     score = 0
 
-    # decision / regulatory signal
     if any(w in t for w in ("final", "decision", "approved", "determination", "rule change")):
         score += 3
     if any(w in t for w in ("consultation", "draft", "exposure draft", "guidance", "standard", "framework")):
         score += 2
 
-    # quantitative / commercial signal
     if any(w in t for w in ("mw", "gw", "million", "billion", "$", "€", "aud", "eur")):
         score += 2
     if any(w in t for w in ("auction", "tender", "capacity", "tariff", "price", "market")):
         score += 1
 
-    # meeting/admin penalty (strong)
     if any(w in t for w in ("meeting", "registration", "observers", "agenda")):
         score -= 6
 
@@ -219,7 +223,7 @@ def _dump_json(path: Path, obj) -> None:
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
         with path.open("w", encoding="utf-8") as f:
-            json.dump(obj, f, ensure_ascii=False, indent=2)
+            json.dump(obj, f, ensure_ascii=False, indent=2, default=str)
     except Exception as e:
         print(f"[warn] failed to dump json: {path}: {e}")
 
@@ -252,7 +256,6 @@ def compile_filters(filters: Dict) -> Dict:
 
 
 def _passes_filters(it: Item, filters: Dict, drop_log) -> bool:
-    """Domain allow/deny, title deny regex, with keep_keywords override."""
     dom = normalise_domain(it.url)
     allow = set(filters.get("allow_domains", []))
     deny = set(filters.get("deny_domains", []))
@@ -260,28 +263,21 @@ def _passes_filters(it: Item, filters: Dict, drop_log) -> bool:
     keep_keywords = filters.get("keep_keywords", [])
 
     if allow and not any(dom.endswith(d) for d in allow):
-        if DEBUG:
-            print(f"[drop] domain not allowed: {dom} -> {it.url}")
         drop_log(f"domain_not_allowed\t{dom}\t{it.url}")
         return False
 
     if any(dom.endswith(d) for d in deny):
-        if DEBUG:
-            print(f"[drop] domain denied: {dom} -> {it.url}")
         drop_log(f"domain_denied\t{dom}\t{it.url}")
         return False
 
     title = (it.title or "").strip()
     title_l = title.lower()
 
-    # Keep-keywords override deny-title
     if keep_keywords and any(k in title_l for k in keep_keywords):
         return True
 
     for pat in deny_title:
         if pat.search(title):
-            if DEBUG:
-                print(f"[drop] title denied: {title} -> {it.url}")
             drop_log(f"title_denied\t{title}\t{it.url}")
             return False
 
@@ -292,13 +288,6 @@ def _passes_filters(it: Item, filters: Dict, drop_log) -> bool:
 
 
 def collect_items(sources, drop_log) -> List[Item]:
-    """
-    Accepts sources as:
-      - list[str] (URLs)
-      - list[dict] with keys like {type: rss|html, url: ..., name: ...}
-      - dict forms: {rss: [...], html: [...]}
-    """
-
     def _infer_type(url: str) -> str:
         u = (url or "").lower()
         if any(x in u for x in (".xml", "/rss", "feed", "atom")):
@@ -363,7 +352,7 @@ def collect_items(sources, drop_log) -> List[Item]:
             if DEBUG:
                 print(f"[warn] source error: {name} -> {e}")
 
-    # Robust sort even if published_ts is datetime/string/float
+    # robust sort
     pool.sort(key=lambda x: _coerce_ts(getattr(x, "published_ts", None)) or 0.0, reverse=True)
     return pool
 
@@ -372,13 +361,10 @@ def collect_items(sources, drop_log) -> List[Item]:
 
 
 def generate_monthly_for(ym: str) -> str:
-    # Make month available to fetch.py for month-hint filtering (reduces noise)
     os.environ["TARGET_YM"] = ym
 
     y, m = map(int, ym.split("-"))
-    start_dt, end_dt = _month_bounds(y, m)
-    start_ts = start_dt.timestamp()
-    end_ts = end_dt.timestamp()
+    start, end = _month_bounds(y, m)  # keep as datetime (safe now)
 
     cfg = load_yaml(CFG)
     filters = compile_filters(load_yaml(FILTERS))
@@ -425,7 +411,7 @@ def generate_monthly_for(ym: str) -> str:
         section_dom_counts: Dict[str, int] = {}
 
         for it in pool:
-            if not _in_range(it.published_ts, start_ts, end_ts):
+            if not _in_range(it.published_ts, start, end):
                 if DEBUG:
                     drop_log(f"out_of_range\t{fmt_iso(it.published_ts)}\t{it.url}")
                 continue
@@ -433,13 +419,11 @@ def generate_monthly_for(ym: str) -> str:
             if not _passes_filters(it, filters, drop_log):
                 continue
 
-            # Drop hub/listing URLs (avoid selecting index pages and filtered listings)
             if is_hub_url(it.url):
                 if DEBUG:
                     drop_log(f"hub_url\t{it.url}")
                 continue
 
-            # Drop meeting/admin notices (unconditional)
             if is_meeting_notice(it.url, it.title or ""):
                 if DEBUG:
                     drop_log(f"meeting_notice\t{it.url}")
@@ -456,7 +440,6 @@ def generate_monthly_for(ym: str) -> str:
 
             dom = normalise_domain(it.url)
 
-            # Per-domain cap within section
             if section_dom_counts.get(dom, 0) >= MAX_PER_DOMAIN_PER_SECTION:
                 if DEBUG:
                     drop_log(
@@ -464,14 +447,12 @@ def generate_monthly_for(ym: str) -> str:
                     )
                 continue
 
-            # Domain-aware content threshold
             threshold = PRIORITY_MIN_CHARS if any(dom.endswith(d) for d in PRIORITY_DOMAINS) else MIN_TEXT_CHARS
             if len(txt) < threshold and len(it.summary or "") < 160:
                 if DEBUG:
                     drop_log(f"too_short\tlen={len(txt)}/thr={threshold}\t{it.url}")
                 continue
 
-            # Substance gate
             sscore = substance_score(txt)
             if sscore < MIN_SUBSTANCE_SCORE:
                 if DEBUG:
@@ -499,10 +480,8 @@ def generate_monthly_for(ym: str) -> str:
         print(f"[selected] {len(selected)} from {section}")
         chosen.extend(selected)
 
-    # Sort newest first (published is ISO string; OK but ensure stable)
     chosen = sorted(chosen, key=lambda x: (x.get("published", ""), x.get("section", "")), reverse=True)
 
-    # Per-domain cap (global)
     per_domain: Dict[str, int] = {}
     filtered: List[Dict] = []
     for row in chosen:
@@ -539,14 +518,15 @@ def generate_monthly_for(ym: str) -> str:
 
     if len(chosen) < MIN_TOTAL_ITEMS:
         print(f"[warn] Few items in range ({len(chosen)}<{MIN_TOTAL_ITEMS}); writing placeholder.")
+        # Keep deterministic dates for the placeholder
         return (
             f"# Signals Digest — NO ITEMS IN RANGE\n\n"
-            f"_Date range_: {start_dt.date().isoformat()} → {end_dt.date().isoformat()}\n\n"
+            f"_Date range_: {start.date().isoformat()} → {end.date().isoformat()}\n\n"
             "Insufficient eligible items. Consider relaxing MIN_TEXT_CHARS, checking filters, widening sources, "
             "or enabling PRIORITY_* thresholds for trusted domains."
         )
 
-    date_label = _month_label(end_dt)
+    date_label = _month_label(end)
     return build_digest(model=MODEL, api_key=OPENAI_API_KEY, items=chosen, temp=TEMP, date_label=date_label)
 
 
