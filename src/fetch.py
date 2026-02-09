@@ -1,6 +1,7 @@
 # src/fetch.py
 from __future__ import annotations
 
+import os
 import json
 import re
 import time
@@ -34,48 +35,213 @@ class Item:
 
 
 # Browser-like headers to reduce basic bot blocks
-HEADERS = {
+DEFAULT_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-        "(KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+        "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     ),
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    "Accept-Language": "en-AU,en;q=0.9",
+    "Accept-Language": "en-US,en;q=0.7",
     "Connection": "keep-alive",
 }
 
+
+def _make_session() -> requests.Session:
+    sess = requests.Session()
+    retries = Retry(
+        total=3,
+        backoff_factor=0.7,
+        status_forcelist=(429, 500, 502, 503, 504),
+        allowed_methods=("GET", "HEAD"),
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(max_retries=retries, pool_connections=32, pool_maxsize=32)
+    sess.mount("https://", adapter)
+    sess.mount("http://", adapter)
+    return sess
+
+
+SESSION = _make_session()
+
 TIMEOUT = 35
-MAX_BYTES = 2_000_000  # protect against huge responses
+MAX_BYTES = 600_000  # safety: don't download megabytes of HTML for indexes/articles
 
-# Per-domain CSS selectors (optional; default is "a[href]")
-SELECTORS: dict[str, str] = {
-    # "aemo.com.au": "a[href]",
-}
-
-# Limits to keep runtime bounded
-MAX_LINKS_PER_INDEX = 120
-MAX_DATE_RESOLVE_FETCHES_PER_INDEX = 40
+# Limits to keep runtime bounded (env-configurable)
+MAX_LINKS_PER_INDEX = int(os.getenv("MAX_LINKS_PER_INDEX", "300"))
+# How many "next pages" of the index to follow (best-effort)
+MAX_INDEX_PAGES = int(os.getenv("MAX_INDEX_PAGES", "6"))
+# How many article fetches we allow to resolve missing dates
+MAX_DATE_RESOLVE_FETCHES_PER_INDEX = int(os.getenv("MAX_DATE_RESOLVE_FETCHES_PER_INDEX", "80"))
 
 
-def _now_ts() -> float:
-    return time.time()
+def _domain(url: str) -> str:
+    return urlparse(url).netloc.lower().lstrip("www.")
 
 
 def _is_http_url(u: str) -> bool:
-    try:
-        p = urlparse(u)
-        return p.scheme in ("http", "https") and bool(p.netloc)
-    except Exception:
-        return False
+    return u.startswith("http://") or u.startswith("https://")
 
 
 def _norm_url(u: str) -> str:
-    return (u or "").strip()
+    return u.strip()
 
 
-def _dedupe_by_url(items: Iterable[Item]) -> List[Item]:
-    seen = set()
-    out: List[Item] = []
+def _read_limited(resp: requests.Response, max_bytes: int = MAX_BYTES) -> str:
+    resp.raise_for_status()
+    content = resp.content[:max_bytes]
+    # requests guesses encoding; fall back to utf-8
+    enc = resp.encoding or "utf-8"
+    try:
+        return content.decode(enc, errors="replace")
+    except Exception:
+        return content.decode("utf-8", errors="replace")
+
+
+def fetch_url(url: str, timeout_s: int = TIMEOUT) -> str:
+    # Some sites block CI ranges; a Jina proxy can help for plain HTML
+    # We only use it for HTML pages (not RSS) and only if direct fetch fails.
+    try:
+        resp = SESSION.get(url, headers=DEFAULT_HEADERS, timeout=timeout_s)
+        return _read_limited(resp)
+    except Exception:
+        # try proxy
+        proxied = f"https://r.jina.ai/http://{url.lstrip('https://').lstrip('http://')}"
+        resp2 = SESSION.get(proxied, headers=DEFAULT_HEADERS, timeout=timeout_s)
+        return _read_limited(resp2)
+
+
+def _to_ts(dt: datetime) -> float:
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.timestamp()
+
+
+def _try_parse_dt(s: str) -> Optional[datetime]:
+    try:
+        dt = dtparser.parse(s)
+        if dt is None:
+            return None
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt
+    except Exception:
+        return None
+
+
+def _infer_published_ts_from_url(url: str) -> Optional[float]:
+    """
+    Try a few common URL patterns:
+      /YYYY/MM/DD/
+      /YYYY-MM-DD/
+      /YYYY/MM/
+    """
+    m = re.search(r"/(20\d{2})[/-](\d{1,2})[/-](\d{1,2})/", url)
+    if m:
+        y, mo, d = map(int, m.groups())
+        try:
+            return _to_ts(datetime(y, mo, d, tzinfo=timezone.utc))
+        except Exception:
+            pass
+
+    m = re.search(r"/(20\d{2})-(\d{1,2})-(\d{1,2})/", url)
+    if m:
+        y, mo, d = map(int, m.groups())
+        try:
+            return _to_ts(datetime(y, mo, d, tzinfo=timezone.utc))
+        except Exception:
+            pass
+
+    m = re.search(r"/(20\d{2})[/-](\d{1,2})/", url)
+    if m:
+        y, mo = map(int, m.groups())
+        try:
+            return _to_ts(datetime(y, mo, 1, tzinfo=timezone.utc))
+        except Exception:
+            pass
+
+    return None
+
+
+def _try_nearby_time_tag_ts(a_tag) -> Optional[float]:
+    """
+    Try to pick up <time datetime="..."> near the link element.
+    """
+    try:
+        # direct parent search (common card layouts)
+        parent = a_tag.parent
+        for _ in range(3):
+            if parent is None:
+                break
+            t = parent.find("time")
+            if t is not None:
+                dt_attr = t.get("datetime") or t.get_text(" ", strip=True)
+                dt = _try_parse_dt(dt_attr or "")
+                if dt is not None:
+                    return _to_ts(dt)
+            parent = parent.parent
+    except Exception:
+        pass
+    return None
+
+
+def _resolve_published_ts_from_article(url: str) -> Optional[float]:
+    """
+    Fetch article HTML and extract a publish date using htmldate/find_date,
+    falling back to <meta> tags and regex.
+    """
+    try:
+        html = fetch_url(url)
+    except Exception:
+        return None
+
+    try:
+        # htmldate does good meta + visible date extraction
+        dt_str = find_date(html, extensive_search=True, original_date=True)
+        if dt_str:
+            dt = _try_parse_dt(dt_str)
+            if dt is not None:
+                return _to_ts(dt)
+    except Exception:
+        pass
+
+    soup = BeautifulSoup(html, "html.parser")
+
+    # common meta properties
+    meta_keys = (
+        ("property", "article:published_time"),
+        ("name", "article:published_time"),
+        ("property", "og:published_time"),
+        ("name", "pubdate"),
+        ("name", "publishdate"),
+        ("name", "timestamp"),
+        ("name", "date"),
+        ("name", "dc.date"),
+        ("name", "dc.date.issued"),
+        ("name", "datePublished"),
+    )
+    for attr, key in meta_keys:
+        m = soup.find("meta", attrs={attr: key})
+        if m and m.get("content"):
+            dt = _try_parse_dt(m.get("content") or "")
+            if dt is not None:
+                return _to_ts(dt)
+
+    # regex fallback on visible text
+    text = soup.get_text(" ", strip=True)
+    m = re.search(r"(20\d{2})[-/](\d{1,2})[-/](\d{1,2})", text)
+    if m:
+        y, mo, d = map(int, m.groups())
+        try:
+            return _to_ts(datetime(y, mo, d, tzinfo=timezone.utc))
+        except Exception:
+            pass
+
+    return None
+
+
+def _dedupe_by_url(items: Iterable[Item]) -> list[Item]:
+    out: list[Item] = []
+    seen: set[str] = set()
     for it in items:
         if it.url in seen:
             continue
@@ -84,340 +250,86 @@ def _dedupe_by_url(items: Iterable[Item]) -> List[Item]:
     return out
 
 
-def _domain(url: str) -> str:
+def _extract_text_and_summary(url: str) -> tuple[str, str]:
+    """
+    Fetch and extract main text with trafilatura. Returns (text, summary).
+    """
     try:
-        return (urlparse(url).netloc or "").lower()
+        downloaded = trafilatura.fetch_url(url, timeout=TIMEOUT)
+        if not downloaded:
+            return "", ""
+        text = trafilatura.extract(downloaded) or ""
+        text = re.sub(r"\s+", " ", text).strip()
+        summary = text[:400].strip()
+        return text, summary
     except Exception:
-        return ""
-
-
-def _jina_proxy(url: str) -> str:
-    """
-    Jina AI proxy is often effective against basic bot blocks (403) and some CDNs.
-    It returns a text-rendered version of the page.
-    """
-    u = url.strip()
-    if u.startswith("https://"):
-        return "https://r.jina.ai/https://" + u[len("https://") :]
-    if u.startswith("http://"):
-        return "https://r.jina.ai/http://" + u[len("http://") :]
-    return "https://r.jina.ai/https://" + u
-
-
-def _build_session() -> requests.Session:
-    s = requests.Session()
-    retry = Retry(
-        total=4,
-        connect=4,
-        read=4,
-        status=4,
-        backoff_factor=0.8,
-        status_forcelist=(403, 429, 500, 502, 503, 504),
-        allowed_methods=("GET", "HEAD"),
-        raise_on_status=False,
-    )
-    s.mount("https://", HTTPAdapter(max_retries=retry))
-    s.mount("http://", HTTPAdapter(max_retries=retry))
-    return s
-
-
-_SESSION = _build_session()
-
-
-def _read_limited(resp: requests.Response, max_bytes: int = MAX_BYTES) -> str:
-    resp.encoding = resp.encoding or "utf-8"
-    text = resp.text
-    if len(text) > max_bytes:
-        return text[:max_bytes]
-    return text
-
-
-def fetch_url(url: str, timeout_s: int = TIMEOUT) -> str:
-    """
-    Fetch a URL robustly.
-    - Normal fetch first
-    - On 403/429 (or certain failures), attempt Jina proxy
-    """
-    url = _norm_url(url)
-    if not _is_http_url(url):
-        raise ValueError(f"Not a valid http(s) URL: {url}")
-
-    # 1) Normal fetch
-    try:
-        resp = _SESSION.get(url, headers=HEADERS, timeout=timeout_s, allow_redirects=True)
-        if resp.status_code >= 200 and resp.status_code < 300:
-            return _read_limited(resp)
-        # fall through to proxy on 403/429, otherwise raise
-        if resp.status_code not in (403, 429):
-            resp.raise_for_status()
-    except Exception:
-        # fall through to proxy
-        pass
-
-    # 2) Proxy fetch (best-effort)
-    proxy_url = _jina_proxy(url)
-    resp2 = _SESSION.get(proxy_url, headers=HEADERS, timeout=timeout_s, allow_redirects=True)
-    resp2.raise_for_status()
-    return _read_limited(resp2)
-
-
-def _infer_published_ts_from_url(u: str) -> Optional[float]:
-    """
-    Heuristics to infer YYYY-MM-DD from URL patterns, returning UTC timestamp.
-    Supports:
-      - /YYYY/MM/DD/
-      - /YYYY-MM-DD/
-      - YYYYMMDD anywhere
-      - ?date=YYYY-MM-DD
-    """
-    # query param date=YYYY-MM-DD
-    m = re.search(r"[?&]date=(\d{4})-(\d{2})-(\d{2})\b", u)
-    if m:
-        y, mo, d = map(int, m.groups())
-        return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
-
-    # /YYYY/MM/DD/
-    m = re.search(r"/(\d{4})/(\d{2})/(\d{2})\b", u)
-    if m:
-        y, mo, d = map(int, m.groups())
-        return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
-
-    # /YYYY-MM-DD/
-    m = re.search(r"/(\d{4})-(\d{2})-(\d{2})\b", u)
-    if m:
-        y, mo, d = map(int, m.groups())
-        return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
-
-    # YYYYMMDD (avoid matching long numeric IDs by requiring non-digit boundary)
-    m = re.search(r"(?<!\d)(\d{4})(\d{2})(\d{2})(?!\d)", u)
-    if m:
-        y, mo, d = map(int, m.groups())
-        if 1 <= mo <= 12 and 1 <= d <= 31:
-            return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
-
-    return None
-
-
-def _parse_any_date_to_ts(date_str: str) -> Optional[float]:
-    if not date_str:
-        return None
-    try:
-        dt = dtparser.parse(date_str)
-        if dt is None:
-            return None
-        if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=timezone.utc)
-        return dt.astimezone(timezone.utc).timestamp()
-    except Exception:
-        return None
-
-
-def _extract_date_from_jsonld(soup: BeautifulSoup) -> Optional[float]:
-    # Look for JSON-LD datePublished / dateCreated
-    for tag in soup.find_all("script", attrs={"type": "application/ld+json"}):
-        raw = (tag.string or "").strip()
-        if not raw:
-            continue
-        try:
-            data = json.loads(raw)
-        except Exception:
-            continue
-
-        # JSON-LD can be dict or list
-        candidates = []
-        if isinstance(data, dict):
-            candidates = [data]
-        elif isinstance(data, list):
-            candidates = [x for x in data if isinstance(x, dict)]
-
-        for obj in candidates:
-            for k in ("datePublished", "dateCreated", "dateModified"):
-                v = obj.get(k)
-                if isinstance(v, str):
-                    ts = _parse_any_date_to_ts(v)
-                    if ts:
-                        return ts
-    return None
-
-
-def _extract_date_from_meta(soup: BeautifulSoup) -> Optional[float]:
-    # Common meta tags
-    meta_keys = [
-        ("property", "article:published_time"),
-        ("property", "og:published_time"),
-        ("name", "pubdate"),
-        ("name", "publishdate"),
-        ("name", "publish-date"),
-        ("name", "date"),
-        ("name", "dc.date"),
-        ("name", "dc.date.issued"),
-        ("name", "datePublished"),
-        ("itemprop", "datePublished"),
-        ("itemprop", "dateCreated"),
-        ("itemprop", "dateModified"),
-    ]
-
-    for attr, key in meta_keys:
-        tag = soup.find("meta", attrs={attr: key})
-        if tag and tag.get("content"):
-            ts = _parse_any_date_to_ts(tag["content"])
-            if ts:
-                return ts
-    return None
-
-
-def _extract_date_from_time_tag(soup: BeautifulSoup) -> Optional[float]:
-    t = soup.find("time")
-    if not t:
-        return None
-    # Prefer datetime attribute
-    if t.get("datetime"):
-        ts = _parse_any_date_to_ts(t["datetime"])
-        if ts:
-            return ts
-    # Fallback text
-    txt = t.get_text(" ", strip=True)
-    return _parse_any_date_to_ts(txt)
-
-
-def _resolve_published_ts_from_article(url: str, html: Optional[str] = None) -> Optional[float]:
-    """
-    Resolve publish timestamp for an article URL by fetching HTML (if not provided)
-    and checking JSON-LD, meta tags, <time>, and finally htmldate.
-    """
-    ts = _infer_published_ts_from_url(url)
-    if ts:
-        return ts
-
-    if html is None:
-        try:
-            html = fetch_url(url)
-        except Exception:
-            return None
-
-    soup = BeautifulSoup(html, "html.parser")
-
-    ts = _extract_date_from_jsonld(soup)
-    if ts:
-        return ts
-
-    ts = _extract_date_from_meta(soup)
-    if ts:
-        return ts
-
-    ts = _extract_date_from_time_tag(soup)
-    if ts:
-        return ts
-
-    # last resort: htmldate heuristics
-    try:
-        d = find_date(html, url=url)
-        ts = _parse_any_date_to_ts(d) if d else None
-        return ts
-    except Exception:
-        return None
+        return "", ""
 
 
 def fetch_rss(url: str, *, source_name: str | None = None, **_kwargs) -> list[Item]:
-    """
-    Fetch items from an RSS/Atom feed.
-    Accepts source_name for compatibility with generate_monthly.
-    """
     label = (source_name or "").strip() or url
-    feed = feedparser.parse(url)
-
+    parsed = feedparser.parse(url)
     items: list[Item] = []
-    for entry in getattr(feed, "entries", []) or []:
-        link = _norm_url(getattr(entry, "link", "") or "")
-        title = (getattr(entry, "title", "") or "").strip()
-        summary = (getattr(entry, "summary", "") or "").strip()
-
-        ts: Optional[float] = None
-        if getattr(entry, "published_parsed", None):
-            try:
-                ts = time.mktime(entry.published_parsed)
-            except Exception:
-                ts = None
-        if ts is None and getattr(entry, "updated_parsed", None):
-            try:
-                ts = time.mktime(entry.updated_parsed)
-            except Exception:
-                ts = None
-        if ts is None:
-            ts = _infer_published_ts_from_url(link)
-
-        if not link or not title:
+    for e in parsed.entries[:200]:
+        link = (getattr(e, "link", "") or "").strip()
+        if not link or not _is_http_url(link):
             continue
-
-        items.append(Item(title=title, url=link, source=label, published_ts=ts, summary=summary))
-
+        title = (getattr(e, "title", "") or "").strip()
+        if not title:
+            continue
+        ts = None
+        for field in ("published", "updated", "created"):
+            if hasattr(e, field):
+                dt = _try_parse_dt(getattr(e, field))
+                if dt is not None:
+                    ts = _to_ts(dt)
+                    break
+        items.append(Item(title=title, url=link, source=label, published_ts=ts))
     return _dedupe_by_url(items)
 
 
-def _extract_links_from_index(index_url: str, html: str) -> list[tuple[str, str]]:
+# Domain-specific selectors for "index" pages; keep it conservative.
+SELECTORS: dict[str, str] = {
+    # You can add domains as you learn the markup
+    "www.aer.gov.au": "a[href]",
+    "www.dcceew.gov.au": "a[href]",
+    "www.infrastructureaustralia.gov.au": "a[href]",
+    "www.iea.org": "a[href]",
+    "www.irena.org": "a[href]",
+    "www.efrag.org": "a[href]",
+}
+
+
+def _find_next_index_page(soup: BeautifulSoup, base_url: str) -> str | None:
     """
-    Return [(title, absolute_url)] from an index HTML page.
+    Best-effort discovery of a "next" page for news/listing indexes.
+    Supports rel="next" and common "Next/›/>" anchors.
     """
-    soup = BeautifulSoup(html, "html.parser")
-    dom = _domain(index_url)
-    selector = SELECTORS.get(dom, "a[href]")
+    # 1) rel=next
+    a = soup.select_one('a[rel="next"][href]')
+    if a and a.get("href"):
+        nxt = urljoin(base_url, a.get("href"))
+        if _is_http_url(nxt):
+            return nxt
 
-    out: list[tuple[str, str]] = []
-    for a in soup.select(selector):
-        href = _norm_url(a.get("href") or "")
-        if not href:
-            continue
-        abs_u = urljoin(index_url, href)
-        if not _is_http_url(abs_u):
-            continue
+    # 2) common next-page anchors by label
+    for cand in soup.select("a[href]"):
+        txt = (cand.get_text(" ", strip=True) or "").lower()
+        if txt in ("next", "older", "›", "»", ">"):
+            href = _norm_url(cand.get("href") or "")
+            if not href:
+                continue
+            nxt = urljoin(base_url, href)
+            if _is_http_url(nxt):
+                return nxt
 
-        # Avoid junk
-        low = abs_u.lower()
-        if any(low.endswith(ext) for ext in (".pdf", ".jpg", ".jpeg", ".png", ".zip")):
-            continue
-
-        title = a.get_text(" ", strip=True) or ""
-        title = re.sub(r"\s+", " ", title).strip()
-
-        # If anchor text is empty, skip
-        if not title:
-            continue
-
-        out.append((title, abs_u))
-
-    # Dedupe while keeping order
-    seen = set()
-    deduped: list[tuple[str, str]] = []
-    for t, u in out:
-        if u in seen:
-            continue
-        seen.add(u)
-        deduped.append((t, u))
-
-    return deduped[:MAX_LINKS_PER_INDEX]
-
-
-def _try_nearby_time_tag_ts(a_tag) -> Optional[float]:
-    """
-    Given a BeautifulSoup <a> tag, try to find a nearby <time> tag with a datetime or text.
-    """
-    try:
-        parent = a_tag.parent
-        if not parent:
-            return None
-        t = parent.find("time")
-        if t:
-            if t.get("datetime"):
-                ts = _parse_any_date_to_ts(t["datetime"])
-                if ts:
-                    return ts
-            txt = t.get_text(" ", strip=True)
-            ts = _parse_any_date_to_ts(txt)
-            if ts:
-                return ts
-        return None
-    except Exception:
-        return None
+    # 3) heuristic: class contains "next" or aria-label
+    a2 = soup.select_one('a[href].next, a[href][class*="next"], a[href][aria-label*="Next"]')
+    if a2 and a2.get("href"):
+        nxt = urljoin(base_url, a2.get("href"))
+        if _is_http_url(nxt):
+            return nxt
+    return None
 
 
 def fetch_html_index(url: str, *, source_name: str | None = None, **_kwargs) -> list[Item]:
@@ -426,47 +338,67 @@ def fetch_html_index(url: str, *, source_name: str | None = None, **_kwargs) -> 
     - extracts candidate links
     - tries to infer publish date from URL or nearby <time>
     - for items still missing dates, fetches article HTML (limited) and extracts publish date
+
+    This implementation follows pagination links (best-effort) to reduce the chance that an entire
+    month is missed because it is not present on the first listing page.
     """
     label = (source_name or "").strip() or url
-    html = fetch_url(url)
 
-    # First pass: basic link extraction with titles
-    soup = BeautifulSoup(html, "html.parser")
+    candidates: list[Item] = []
+    seen: set[str] = set()
+
+    page_url = url
+    visited_pages: set[str] = set()
     dom = _domain(url)
     selector = SELECTORS.get(dom, "a[href]")
 
-    candidates: list[Item] = []
-    seen = set()
+    # First pass: basic link extraction with titles across a few index pages
+    for _page in range(MAX_INDEX_PAGES):
+        if page_url in visited_pages:
+            break
+        visited_pages.add(page_url)
 
-    for a in soup.select(selector):
-        href = _norm_url(a.get("href") or "")
-        if not href:
-            continue
-        abs_u = urljoin(url, href)
-        if not _is_http_url(abs_u):
-            continue
-        low = abs_u.lower()
-        if any(low.endswith(ext) for ext in (".pdf", ".jpg", ".jpeg", ".png", ".zip")):
-            continue
+        html = fetch_url(page_url)
+        soup = BeautifulSoup(html, "html.parser")
 
-        title = a.get_text(" ", strip=True) or ""
-        title = re.sub(r"\s+", " ", title).strip()
-        if not title:
-            continue
+        for a in soup.select(selector):
+            href = _norm_url(a.get("href") or "")
+            if not href:
+                continue
+            abs_u = urljoin(page_url, href)
+            if not _is_http_url(abs_u):
+                continue
 
-        if abs_u in seen:
-            continue
-        seen.add(abs_u)
+            low = abs_u.lower()
+            if any(low.endswith(ext) for ext in (".pdf", ".jpg", ".jpeg", ".png", ".zip")):
+                continue
 
-        ts = _infer_published_ts_from_url(abs_u)
-        if ts is None:
-            # try nearby <time> in the DOM
-            ts = _try_nearby_time_tag_ts(a)
+            title = a.get_text(" ", strip=True) or ""
+            title = re.sub(r"\s+", " ", title).strip()
+            if not title:
+                continue
 
-        candidates.append(Item(title=title, url=abs_u, source=label, published_ts=ts))
+            if abs_u in seen:
+                continue
+            seen.add(abs_u)
+
+            ts = _infer_published_ts_from_url(abs_u)
+            if ts is None:
+                # try nearby <time> in the DOM
+                ts = _try_nearby_time_tag_ts(a)
+
+            candidates.append(Item(title=title, url=abs_u, source=label, published_ts=ts))
+
+            if len(candidates) >= MAX_LINKS_PER_INDEX:
+                break
 
         if len(candidates) >= MAX_LINKS_PER_INDEX:
             break
+
+        nxt = _find_next_index_page(soup, page_url)
+        if not nxt:
+            break
+        page_url = nxt
 
     # Second pass: resolve missing dates by fetching the article (budgeted)
     resolve_budget = MAX_DATE_RESOLVE_FETCHES_PER_INDEX
@@ -483,28 +415,67 @@ def fetch_html_index(url: str, *, source_name: str | None = None, **_kwargs) -> 
     return _dedupe_by_url(candidates)
 
 
-def fetch_full_text(url: str, timeout_s: int = TIMEOUT) -> str:
+def enrich_items(items: list[Item]) -> list[Item]:
     """
-    Fetch full text of an article, preferring trafilatura extraction.
+    Fetch article text + summary for a list of items (best-effort, limited).
     """
-    html = fetch_url(url, timeout_s=timeout_s)
-    try:
-        extracted = trafilatura.extract(
-            html,
-            url=url,
-            include_comments=False,
-            include_tables=False,
-            favor_precision=True,
-        )
-        if extracted:
-            extracted = re.sub(r"\n{3,}", "\n\n", extracted).strip()
-            if extracted:
-                return extracted
-    except Exception:
-        pass
+    out: list[Item] = []
+    for it in items:
+        text, summary = _extract_text_and_summary(it.url)
+        it.text = text
+        it.summary = summary
+        out.append(it)
+        # small delay to be polite
+        time.sleep(0.15)
+    return out
 
-    # Fallback: strip HTML
-    soup = BeautifulSoup(html, "html.parser")
-    txt = soup.get_text("\n", strip=True)
-    txt = re.sub(r"\n{3,}", "\n\n", txt).strip()
-    return txt
+
+def fetch_source(source: dict) -> list[Item]:
+    """
+    source schema (from sources.yaml):
+      - name
+      - url
+      - kind: rss|html
+    """
+    url = source.get("url", "").strip()
+    if not url:
+        return []
+    kind = (source.get("kind") or "rss").strip().lower()
+    name = source.get("name") or url
+    if kind == "html":
+        return fetch_html_index(url, source_name=name)
+    return fetch_rss(url, source_name=name)
+
+
+def load_debug_pool(path: str) -> list[Item]:
+    raw = json.loads(open(path, "r", encoding="utf-8").read())
+    out: list[Item] = []
+    for r in raw:
+        out.append(
+            Item(
+                title=r.get("title", ""),
+                url=r.get("url", ""),
+                source=r.get("source", ""),
+                published_ts=r.get("published_ts"),
+                summary=r.get("summary", ""),
+                text=r.get("text", ""),
+            )
+        )
+    return out
+
+
+def dump_items(path: str, items: list[Item]) -> None:
+    raw = []
+    for it in items:
+        raw.append(
+            {
+                "title": it.title,
+                "url": it.url,
+                "source": it.source,
+                "published_ts": it.published_ts,
+                "summary": it.summary,
+                "text": it.text,
+            }
+        )
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(raw, f, ensure_ascii=False, indent=2)
