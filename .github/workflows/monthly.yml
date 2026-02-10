@@ -48,7 +48,19 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          
+      - name: Sanity check fetch module is not corrupted
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          txt = Path("src/fetch.py").read_text(encoding="utf-8", errors="replace")
+          if "def fetch_rss" not in txt or "class Item" not in txt:
+              raise SystemExit("ERROR: src/fetch.py does not look like the fetch module (missing Item/fetch_rss)")
+          if "from .fetch import fetch_rss" in txt:
+              raise SystemExit("ERROR: src/fetch.py contains a self-import (will cause circular import)")
+          print("OK: fetch module looks valid")
+          PY
+         
       - name: Sanity check generate_monthly has robust _in_range
         run: |
           set -euo pipefail
