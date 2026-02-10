@@ -107,6 +107,8 @@ jobs:
           MODE: backfill-months
           START_YM: ${{ steps.when.outputs.ym }}
           END_YM: ${{ steps.when.outputs.ym }}
+          SOURCES_YAML: config/sources.yaml
+          FILTERS_YAML: config/filters.yaml
 
           ITEMS_PER_SECTION: "7"
           PER_DOMAIN_CAP: "3"
