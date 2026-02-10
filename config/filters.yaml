@@ -1,42 +1,159 @@
 allow_domains:
-  - aemo.com.au
-  - aemc.gov.au
-  - aer.gov.au
-  - cer.gov.au
-  - arena.gov.au
-  - cefc.com.au
-  - dcceew.gov.au
-  - energynetworks.com.au
-  - infrastructureaustralia.gov.au
-  - iea.org
-  - irena.org
-  - ifrs.org
-  - efrag.org
-  - ec.europa.eu
-  - commission.europa.eu
+  # Broad, but gated by keyword signal + article-url heuristics
+  - "*.gov.au"
+  - "*.edu.au"
 
-deny_domains:
-  - bbc.com
-  - bloomberg.com
-  - assets.bbhub.io
-  - bbhub.io
-  
+  # Energy institutions + regulators
+  - "*.aemo.com.au"
+  - "aemo.com.au"
+  - "*.aer.gov.au"
+  - "aer.gov.au"
+  - "*.arena.gov.au"
+  - "arena.gov.au"
+  - "*.cefc.com.au"
+  - "cefc.com.au"
+  - "*.cleanenergyregulator.gov.au"
+  - "cleanenergyregulator.gov.au"
+  - "*.energy.gov.au"
+  - "energy.gov.au"
+
+  # Your current list (kept)
+  - "energynetworks.com.au"
+  - "aemo.com.au"
+  - "arena.gov.au"
+  - "iea.org"
+  - "irena.org"
+  - "dcceew.gov.au"
+  - "aer.gov.au"
+  - "climatechangeauthority.gov.au"
+  - "cleanenergyregulator.gov.au"
+  - "cefc.com.au"
+  - "energy.gov.au"
+  - "agriculture.gov.au"
+  - "environment.gov.au"
+  - "treasury.gov.au"
+  - "rba.gov.au"
+  - "fca.org.uk"
+  - "esma.europa.eu"
+  - "ifrs.org"
+  - "ec.europa.eu"
+  - "europarl.europa.eu"
+  - "eumonitor.eu"
+  - "bankofengland.co.uk"
+  - "bis.org"
+  - "imf.org"
+  - "worldbank.org"
+  - "unepfi.org"
+  - "unfccc.int"
+  - "sustainablefinanceplatform.org"
+  - "transitionplan.uk"
+  - "climateaction100.org"
+  - "tcfdhub.org"
+  - "tnfd.global"
+  - "ghgprotocol.org"
+  - "sciencebasedtargets.org"
+  - "pri.org"
+
+  # Domains present in your sources.yaml but not previously allowed
+  - "asic.gov.au"
+  - "globalreporting.org"
+  - "about.bnef.com"
+
+deny_domains: []
 
 title_deny_regex:
-  - "(webcast|podcast|register|replay)"      # junky meeting links
-  - "(photo|gallery)"                        # image posts
-  - "(award|awards|nominee|winners)"         # not signals
-  - "(terms? & conditions|privacy|cookies)"  # legal boilerplate
-  - "(register|replay|webcast|podcast)"
-  - "(photo|gallery|award|nominee)"
+  - "(cookie|privacy|terms|subscribe|sign\\s?up|login|careers|jobs)"
+  - "(webinar|event|tickets|conference|register)"
 
+# Global keyword signal (weak weight; still used as a noise gate)
 keep_keywords:
-  - standard
-  - decision
-  - guidance
-  - consultation
-  - regulation
-  - investment
-  - funding
+  - "energy"
+  - "electricity"
+  - "grid"
+  - "power"
+  - "renewable"
+  - "solar"
+  - "wind"
+  - "storage"
+  - "battery"
+  - "hydrogen"
+  - "transmission"
+  - "distribution"
+  - "NEM"
+  - "DER"
+  - "CER"
+  - "capacity investment scheme"
+  - "safeguard"
+  - "emissions"
+  - "decarbon"
+  - "net zero"
+  - "climate"
+  - "ESG"
+  - "sustainab"
+  - "ISSB"
+  - "IFRS S1"
+  - "IFRS S2"
+  - "ASRS"
+  - "taxonomy"
+  - "transition plan"
+  - "scenario"
+  - "disclosure"
+  - "assurance"
+  - "green bond"
+  - "sustainable finance"
+  - "TCFD"
+  - "TNFD"
 
+# Stronger, section-specific signal (high weight)
+section_keywords:
+  Energy Transition:
+    - "NEM"
+    - "AEMO"
+    - "AER"
+    - "system strength"
+    - "inertia"
+    - "frequency"
+    - "congestion"
+    - "transmission"
+    - "interconnector"
+    - "DER"
+    - "CER"
+    - "CIS"
+    - "flexibility"
+    - "capacity"
+    - "firming"
+    - "battery"
+    - "storage"
+    - "renewable"
+    - "hydrogen"
 
+  ESG Reporting:
+    - "ISSB"
+    - "IFRS S1"
+    - "IFRS S2"
+    - "ASRS"
+    - "GRI"
+    - "SASB"
+    - "assurance"
+    - "materiality"
+    - "double materiality"
+    - "transition plan"
+    - "taxonomy"
+    - "disclosure"
+    - "scope 1"
+    - "scope 2"
+    - "scope 3"
+
+  Sustainable Finance & Investment:
+    - "green bond"
+    - "sustainability-linked"
+    - "transition finance"
+    - "taxonomy"
+    - "stewardship"
+    - "fiduciary"
+    - "climate risk"
+    - "physical risk"
+    - "scenario analysis"
+    - "portfolio"
+    - "capital allocation"
+    - "financed emissions"
