@@ -24,13 +24,15 @@ concurrency:
 jobs:
   run-monthly:
     runs-on: ubuntu-latest
+    timeout-minutes: 55
 
     steps:
       - name: Checkout (full history)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
+          clean: true
+
       - name: Sync with main (before generation)
         if: github.ref == 'refs/heads/main'
         shell: bash
@@ -48,7 +50,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          
+
       - name: Sanity check generate_monthly has robust _in_range
         run: |
           set -euo pipefail
@@ -57,16 +59,10 @@ jobs:
           import src.generate_monthly as gm
           print("Loaded:", gm.__file__)
           src = inspect.getsource(gm._in_range)
-          print(src)
-
-          # Hard fail if we detect the old implementation pattern
           if "return start_ts <= ts <= end_ts" in src:
-            raise SystemExit("ERROR: old _in_range() still present (datetime/float TypeError will occur)")
-
-          # Also require the new coercion helper to be referenced
+            raise SystemExit("ERROR: old _in_range() still present")
           if "_coerce_ts" not in src:
             raise SystemExit("ERROR: _in_range() is not coercing timestamp types")
-
           print("OK: _in_range looks robust")
           PY
 
@@ -91,6 +87,8 @@ jobs:
 
       - name: Generate monthly digest (DEBUG always on)
         env:
+          PYTHONDONTWRITEBYTECODE: "1"
+
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MODE: backfill-months
           START_YM: ${{ steps.when.outputs.ym }}
@@ -101,23 +99,34 @@ jobs:
           MIN_TEXT_CHARS: "300"
           PRIORITY_MIN_CHARS: "200"
           MIN_TOTAL_ITEMS: "1"
+          MIN_SUBSTANCE_SCORE: "2"
+          MAX_PER_DOMAIN_PER_SECTION: "3"
+          ALLOW_UNDATED: "0"
 
           PRIORITY_DOMAINS: "aemo.com.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au,ec.europa.eu,commission.europa.eu"
           MODEL: "gpt-4o-mini"
           TEMP: "0.2"
 
-          MAX_PDF_BYTES: "5242880"
-          PDF_TRUSTED: "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org"
-
           DEBUG: "1"
-          
-          # Make HTML index scraping robust against months buried behind pagination
-          MAX_LINKS_PER_INDEX: "250"
-          MAX_INDEX_PAGES: "5"
-          MAX_DATE_RESOLVE_FETCHES_PER_INDEX: "75"
-          
+
+          # Index crawl bounds (keep reasonable)
+          MAX_LINKS_PER_INDEX: "220"
+          MAX_INDEX_PAGES: "4"
+          MAX_DATE_RESOLVE_FETCHES_PER_INDEX: "55"
+
+          # New: fulltext budgets (major runtime control)
+          MAX_FULLTEXT_FETCHES_PER_SECTION: "55"
+          MAX_FULLTEXT_FETCHES_TOTAL: "150"
+
+          # New: fetch profile
+          TIMEOUT_FAST: "15"
+          TIMEOUT_PRIORITY: "30"
+          RETRIES_FAST: "2"
+          RETRIES_PRIORITY: "4"
+          FETCH_CACHE_MAX: "900"
+
         run: |
-          python -m src.generate_monthly
+          python -B -m src.generate_monthly
 
       - name: Guardrail - require at least 1 selected item
         shell: bash
@@ -152,9 +161,6 @@ jobs:
 
           test -f "$DIGEST" || { echo "Digest not found: $DIGEST"; exit 1; }
 
-          # Never commit pycache
-          rm -rf src/__pycache__ || true
-
           # Stage only this month's artifacts
           git add -f "$DIGEST"
           git add -f "out/debug-selected-${YM}.json" 2>/dev/null || true
@@ -171,6 +177,7 @@ jobs:
             echo "No changes to commit."
             exit 0
           fi
+
           echo "---- git status (porcelain) ----"
           git status --porcelain
 
