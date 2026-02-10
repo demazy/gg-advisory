@@ -235,22 +235,59 @@ def _dump_json(path: Path, obj: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8") as f:
         json.dump(obj, f, ensure_ascii=False, indent=2)
+def _parse_source(src: Any) -> Dict[str, Any]:
+    """
+    Accepts either:
+      - "https://..." (string)
+      - {"name": "...", "url": "...", "type": "rss|html"} (dict)
+    Returns a normalized dict with keys: name, url, type
+    """
+    if isinstance(src, str):
+        url = src.strip()
+        # heuristic: treat xml feeds as rss unless explicitly html
+        kind = "rss" if (url.endswith(".xml") or "rss" in url.lower() or "feed" in url.lower()) else "html"
+        return {"name": url, "url": url, "type": kind}
+
+    if isinstance(src, dict):
+        url = (src.get("url") or "").strip()
+        name = (src.get("name") or url or "source").strip()
+        kind = (src.get("type") or "").strip().lower()
+
+        if not kind:
+            # if type omitted in dict, infer
+            kind = "rss" if (url.endswith(".xml") or "rss" in url.lower() or "feed" in url.lower()) else "html"
+
+        # normalize kind
+        if kind not in ("rss", "html"):
+            kind = "html"
+
+        return {"name": name, "url": url, "type": kind}
+
+    # unknown structure
+    return {"name": "source", "url": "", "type": "html"}
 
 
-def collect_items(sources: List[Dict[str, Any]], drop_log) -> List[Item]:
+def collect_items(sources: List[Any], drop_log) -> List[Item]:
     pool: List[Item] = []
 
-    for src in sources:
-        name = src.get("name") or src.get("url") or "source"
-        url = src.get("url")
-        kind = (src.get("type") or "html").lower()
+    for raw in sources:
+        src = _parse_source(raw)
+        name = src["name"]
+        url = src["url"]
+        kind = src["type"]
+
+        if not url:
+            drop_log(f"source_invalid\t{name}\t{url}\t(empty_url)")
+            continue
 
         try:
             if kind == "rss":
                 items = fetch_rss(url, source_name=name)
             else:
                 items = fetch_html_index(url, source_name=name)
+
             pool.extend(items)
+
         except Exception as e:
             drop_log(f"source_error\t{name}\t{url}\t{e}")
             if DEBUG:
@@ -258,6 +295,7 @@ def collect_items(sources: List[Dict[str, Any]], drop_log) -> List[Item]:
 
     pool.sort(key=lambda x: _coerce_ts(getattr(x, "published_ts", None)) or 0.0, reverse=True)
     return pool
+
 
 
 # ----------------------- MONTHLY GENERATION --------------------
