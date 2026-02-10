@@ -7,7 +7,7 @@ import re
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Iterable, List, Optional
+from typing import Dict, Iterable, List, Optional, Tuple
 from urllib.parse import urljoin, urlparse
 
 import feedparser
@@ -17,10 +17,7 @@ from dateutil import parser as dtparser
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-# trafilatura is already in your requirements
 import trafilatura
-
-# htmldate comes via trafilatura deps (you already install it in CI)
 from htmldate import find_date
 
 
@@ -34,6 +31,31 @@ class Item:
     text: str = ""
 
 
+# -------------------- Tunables (env) --------------------
+
+TIMEOUT_FAST = int(os.getenv("TIMEOUT_FAST", "15"))
+TIMEOUT_PRIORITY = int(os.getenv("TIMEOUT_PRIORITY", "30"))
+TIMEOUT_RSS = int(os.getenv("TIMEOUT_RSS", "25"))
+
+MAX_BYTES = int(os.getenv("MAX_BYTES", str(2_000_000)))
+
+# Runtime bounds for index crawling
+MAX_LINKS_PER_INDEX = int(os.getenv("MAX_LINKS_PER_INDEX", "250"))
+MAX_DATE_RESOLVE_FETCHES_PER_INDEX = int(os.getenv("MAX_DATE_RESOLVE_FETCHES_PER_INDEX", "75"))
+MAX_INDEX_PAGES = int(os.getenv("MAX_INDEX_PAGES", "5"))
+
+# Simple in-memory cache (per run). Big win.
+FETCH_CACHE_MAX = int(os.getenv("FETCH_CACHE_MAX", "800"))
+
+PRIORITY_DOMAINS = {
+    d.strip().lower()
+    for d in os.getenv(
+        "PRIORITY_DOMAINS",
+        "aemo.com.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au,ec.europa.eu,commission.europa.eu",
+    ).split(",")
+    if d.strip()
+}
+
 # Browser-like headers to reduce basic bot blocks
 HEADERS = {
     "User-Agent": (
@@ -45,22 +67,12 @@ HEADERS = {
     "Connection": "keep-alive",
 }
 
-TIMEOUT = 35
-MAX_BYTES = 2_000_000  # protect against huge responses
-
 # Per-domain CSS selectors (optional; default is "a[href]")
 SELECTORS: dict[str, str] = {
     # "aemo.com.au": "a[href]",
 }
 
-# Limits to keep runtime bounded (env-configurable)
-MAX_LINKS_PER_INDEX = int(os.getenv("MAX_LINKS_PER_INDEX", "300"))
-MAX_DATE_RESOLVE_FETCHES_PER_INDEX = int(os.getenv("MAX_DATE_RESOLVE_FETCHES_PER_INDEX", "80"))
-MAX_INDEX_PAGES = int(os.getenv("MAX_INDEX_PAGES", "6"))
-
-
-def _now_ts() -> float:
-    return time.time()
+# -------------------- Helpers --------------------
 
 
 def _is_http_url(u: str) -> bool:
@@ -75,6 +87,18 @@ def _norm_url(u: str) -> str:
     return (u or "").strip()
 
 
+def _domain(url: str) -> str:
+    try:
+        return (urlparse(url).netloc or "").lower()
+    except Exception:
+        return ""
+
+
+def _is_priority_domain(url: str) -> bool:
+    dom = _domain(url)
+    return any(dom == d or dom.endswith("." + d) for d in PRIORITY_DOMAINS)
+
+
 def _dedupe_by_url(items: Iterable[Item]) -> List[Item]:
     seen = set()
     out: List[Item] = []
@@ -86,17 +110,10 @@ def _dedupe_by_url(items: Iterable[Item]) -> List[Item]:
     return out
 
 
-def _domain(url: str) -> str:
-    try:
-        return (urlparse(url).netloc or "").lower()
-    except Exception:
-        return ""
-
-
 def _jina_proxy(url: str) -> str:
     """
-    Jina AI proxy is often effective against basic bot blocks (403) and some CDNs.
-    It returns a text-rendered version of the page.
+    Jina proxy can help around simple bot blocks.
+    Treat any proxy error as soft-fail.
     """
     u = url.strip()
     if u.startswith("https://"):
@@ -106,15 +123,15 @@ def _jina_proxy(url: str) -> str:
     return "https://r.jina.ai/https://" + u
 
 
-def _build_session() -> requests.Session:
+def _build_session(retries: int) -> requests.Session:
     s = requests.Session()
     retry = Retry(
-        total=4,
-        connect=4,
-        read=4,
-        status=4,
-        backoff_factor=0.8,
-        status_forcelist=(403, 429, 500, 502, 503, 504),
+        total=retries,
+        connect=retries,
+        read=retries,
+        status=retries,
+        backoff_factor=0.7,
+        status_forcelist=(403, 408, 429, 500, 502, 503, 504),
         allowed_methods=("GET", "HEAD"),
         raise_on_status=False,
     )
@@ -123,85 +140,117 @@ def _build_session() -> requests.Session:
     return s
 
 
-_SESSION = _build_session()
+# Use fewer retries for fast profile; more for priority profile
+_SESSION_FAST = _build_session(int(os.getenv("RETRIES_FAST", "2")))
+_SESSION_PRIORITY = _build_session(int(os.getenv("RETRIES_PRIORITY", "4")))
+
+# Simple FIFO-ish cache
+_FETCH_CACHE: Dict[str, str] = {}
+_FETCH_CACHE_ORDER: List[str] = []
 
 
-def _read_limited(resp: requests.Response, max_bytes: int = MAX_BYTES) -> str:
+def _cache_get(url: str) -> Optional[str]:
+    return _FETCH_CACHE.get(url)
+
+
+def _cache_put(url: str, text: str) -> None:
+    if url in _FETCH_CACHE:
+        return
+    if len(_FETCH_CACHE_ORDER) >= FETCH_CACHE_MAX:
+        old = _FETCH_CACHE_ORDER.pop(0)
+        _FETCH_CACHE.pop(old, None)
+    _FETCH_CACHE[url] = text
+    _FETCH_CACHE_ORDER.append(url)
+
+
+def _read_limited(resp: requests.Response) -> str:
     resp.encoding = resp.encoding or "utf-8"
-    text = resp.text
-    if len(text) > max_bytes:
-        return text[:max_bytes]
+    text = resp.text or ""
+    if len(text) > MAX_BYTES:
+        return text[:MAX_BYTES]
     return text
 
 
-def fetch_url(url: str, timeout_s: int = TIMEOUT) -> str:
+def fetch_url(url: str, timeout_s: Optional[int] = None) -> str:
     """
-    Fetch a URL robustly:
-      1) normal request
-      2) if that fails, try Jina proxy
-    NEVER raise on proxy failure; return empty string so callers can drop the item.
+    Fetch a URL robustly, with caching:
+      1) direct fetch
+      2) (if bot/edge codes) try jina proxy
+    Never raises; returns "" on failure.
     """
     url = _norm_url(url)
     if not _is_http_url(url):
         return ""
 
-    # 1) Normal fetch
-    try:
-        resp = _SESSION.get(url, headers=HEADERS, timeout=timeout_s, allow_redirects=True)
-        if 200 <= resp.status_code < 300:
-            return _read_limited(resp)
+    cached = _cache_get(url)
+    if cached is not None:
+        return cached
 
-        # for non-2xx: only attempt proxy for common bot/edge cases
+    is_priority = _is_priority_domain(url)
+    sess = _SESSION_PRIORITY if is_priority else _SESSION_FAST
+    timeout = timeout_s if timeout_s is not None else (TIMEOUT_PRIORITY if is_priority else TIMEOUT_FAST)
+
+    # 1) normal fetch
+    try:
+        resp = sess.get(url, headers=HEADERS, timeout=timeout, allow_redirects=True)
+        if 200 <= resp.status_code < 300:
+            txt = _read_limited(resp)
+            _cache_put(url, txt)
+            return txt
+
+        # only attempt proxy for common bot/edge errors
         if resp.status_code not in (403, 408, 429, 500, 502, 503, 504):
-            # don't explode the whole run on 404/410/etc.
+            _cache_put(url, "")
             return ""
     except Exception:
-        # proceed to proxy attempt
         pass
 
-    # 2) Proxy fetch (best-effort)
+    # 2) proxy fetch (best-effort)
     try:
         proxy_url = _jina_proxy(url)
-        resp2 = _SESSION.get(proxy_url, headers=HEADERS, timeout=timeout_s, allow_redirects=True)
 
+        cached2 = _cache_get(proxy_url)
+        if cached2 is not None:
+            _cache_put(url, cached2)
+            return cached2
+
+        resp2 = sess.get(proxy_url, headers=HEADERS, timeout=timeout, allow_redirects=True)
         if 200 <= resp2.status_code < 300:
-            return _read_limited(resp2)
+            txt2 = _read_limited(resp2)
+            _cache_put(proxy_url, txt2)
+            _cache_put(url, txt2)
+            return txt2
 
-        # If proxy returns 4xx/5xx (incl. 422), treat as a soft failure
+        _cache_put(proxy_url, "")
+        _cache_put(url, "")
         return ""
     except Exception:
+        _cache_put(url, "")
         return ""
 
+
+# -------------------- Date extraction --------------------
 
 
 def _infer_published_ts_from_url(u: str) -> Optional[float]:
     """
-    Heuristics to infer YYYY-MM-DD from URL patterns, returning UTC timestamp.
-    Supports:
-      - /YYYY/MM/DD/
-      - /YYYY-MM-DD/
-      - YYYYMMDD anywhere
-      - ?date=YYYY-MM-DD
+    Infer YYYY-MM-DD from URL patterns -> UTC timestamp.
     """
-    # query param date=YYYY-MM-DD
     m = re.search(r"[?&]date=(\d{4})-(\d{2})-(\d{2})\b", u)
     if m:
         y, mo, d = map(int, m.groups())
         return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
 
-    # /YYYY/MM/DD/
     m = re.search(r"/(\d{4})/(\d{2})/(\d{2})\b", u)
     if m:
         y, mo, d = map(int, m.groups())
         return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
 
-    # /YYYY-MM-DD/
     m = re.search(r"/(\d{4})-(\d{2})-(\d{2})\b", u)
     if m:
         y, mo, d = map(int, m.groups())
         return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
 
-    # YYYYMMDD (avoid matching long numeric IDs by requiring non-digit boundary)
     m = re.search(r"(?<!\d)(\d{4})(\d{2})(\d{2})(?!\d)", u)
     if m:
         y, mo, d = map(int, m.groups())
@@ -226,7 +275,6 @@ def _parse_any_date_to_ts(date_str: str) -> Optional[float]:
 
 
 def _extract_date_from_jsonld(soup: BeautifulSoup) -> Optional[float]:
-    # Look for JSON-LD datePublished / dateCreated
     for tag in soup.find_all("script", attrs={"type": "application/ld+json"}):
         raw = (tag.string or "").strip()
         if not raw:
@@ -236,7 +284,6 @@ def _extract_date_from_jsonld(soup: BeautifulSoup) -> Optional[float]:
         except Exception:
             continue
 
-        # JSON-LD can be dict or list
         candidates = []
         if isinstance(data, dict):
             candidates = [data]
@@ -254,7 +301,6 @@ def _extract_date_from_jsonld(soup: BeautifulSoup) -> Optional[float]:
 
 
 def _extract_date_from_meta(soup: BeautifulSoup) -> Optional[float]:
-    # Common meta tags
     meta_keys = [
         ("property", "article:published_time"),
         ("property", "og:published_time"),
@@ -269,7 +315,6 @@ def _extract_date_from_meta(soup: BeautifulSoup) -> Optional[float]:
         ("itemprop", "dateCreated"),
         ("itemprop", "dateModified"),
     ]
-
     for attr, key in meta_keys:
         tag = soup.find("meta", attrs={attr: key})
         if tag and tag.get("content"):
@@ -283,35 +328,22 @@ def _extract_date_from_time_tag(soup: BeautifulSoup) -> Optional[float]:
     t = soup.find("time")
     if not t:
         return None
-    # Prefer datetime attribute
     if t.get("datetime"):
         ts = _parse_any_date_to_ts(t["datetime"])
         if ts:
             return ts
-    # Fallback text
     txt = t.get_text(" ", strip=True)
     return _parse_any_date_to_ts(txt)
 
 
 def _resolve_published_ts_from_article(url: str, html: Optional[str] = None) -> Optional[float]:
-    """
-    Resolve publish timestamp for an article URL by fetching HTML (if not provided)
-    and checking (in order):
-      - URL heuristics
-      - JSON-LD datePublished/dateCreated/dateModified
-      - Meta tags
-      - <time> tag
-      - htmldate find_date()
-    """
-    # URL heuristic first
     ts = _infer_published_ts_from_url(url)
     if ts:
         return ts
 
     if html is None:
-        try:
-            html = fetch_url(url)
-        except Exception:
+        html = fetch_url(url)
+        if not html:
             return None
 
     soup = BeautifulSoup(html, "html.parser")
@@ -328,7 +360,6 @@ def _resolve_published_ts_from_article(url: str, html: Optional[str] = None) -> 
     if ts:
         return ts
 
-    # htmldate last (can be slower)
     try:
         dt_str = find_date(html, extensive_search=True, original_date=True)
         ts = _parse_any_date_to_ts(dt_str or "")
@@ -341,9 +372,6 @@ def _resolve_published_ts_from_article(url: str, html: Optional[str] = None) -> 
 
 
 def _try_nearby_time_tag_ts(a_tag) -> Optional[float]:
-    """
-    Try to pick up <time datetime="..."> near the link element (within a few ancestor hops).
-    """
     try:
         parent = a_tag.parent
         for _ in range(4):
@@ -362,10 +390,6 @@ def _try_nearby_time_tag_ts(a_tag) -> Optional[float]:
 
 
 def _find_next_index_page(soup: BeautifulSoup, base_url: str) -> Optional[str]:
-    """
-    Best-effort discovery of the next page for listing/index pages.
-    Supports rel="next" and common "Next/Older/›/»" anchor labels.
-    """
     a = soup.select_one('a[rel="next"][href]')
     if a and a.get("href"):
         nxt = urljoin(base_url, a.get("href"))
@@ -391,11 +415,31 @@ def _find_next_index_page(soup: BeautifulSoup, base_url: str) -> Optional[str]:
     return None
 
 
+def _looks_like_article(url: str) -> bool:
+    """
+    Cheap heuristic to avoid resolving dates for obvious hub pages.
+    """
+    p = urlparse(url)
+    path = (p.path or "").lower().strip("/")
+    if not path:
+        return False
+    # lots of CMS articles have a year or slug depth
+    if re.search(r"/\d{4}/\d{2}/\d{2}/", p.path):
+        return True
+    if len(path.split("/")) >= 2:
+        return True
+    # avoid obvious hubs
+    if any(k in path for k in ("tag/", "category/", "topics/", "search", "events", "calendar")):
+        return False
+    return True
+
+
+# -------------------- Public API used by generator --------------------
+
+
 def fetch_rss(url: str, *, source_name: str | None = None, **_kwargs) -> list[Item]:
-    """
-    Parse RSS/Atom via feedparser.
-    """
     label = (source_name or "").strip() or url
+    # feedparser does its own fetching; we accept it, but keep it bounded
     feed = feedparser.parse(url)
     out: list[Item] = []
 
@@ -425,14 +469,12 @@ def fetch_rss(url: str, *, source_name: str | None = None, **_kwargs) -> list[It
 
 def fetch_html_index(url: str, *, source_name: str | None = None, **_kwargs) -> list[Item]:
     """
-    Fetch items from an HTML index page:
-    - extracts candidate links with titles
-    - tries to infer publish date from URL or nearby <time>
-    - follows pagination (best-effort) to avoid missing an entire month
-    - for items still missing dates, fetches article HTML (budgeted) and extracts publish date
+    HTML index crawler:
+    - bounded pagination
+    - bounded date resolution (fetch article HTML only for items missing ts)
+    - skips obvious non-articles for date resolution
     """
     label = (source_name or "").strip() or url
-
     candidates: list[Item] = []
     seen: set[str] = set()
 
@@ -491,40 +533,40 @@ def fetch_html_index(url: str, *, source_name: str | None = None, **_kwargs) -> 
             break
         page_url = nxt
 
-    # Second pass: resolve missing dates by fetching the article (budgeted)
     resolve_budget = MAX_DATE_RESOLVE_FETCHES_PER_INDEX
     for it in candidates:
         if resolve_budget <= 0:
             break
         if it.published_ts is not None:
             continue
-        try:
-            html = fetch_url(it.url)
-        except Exception:
-            resolve_budget -= 1
+        if not _looks_like_article(it.url):
+            continue
+
+        html = fetch_url(it.url)
+        resolve_budget -= 1
+        if not html:
             continue
 
         ts = _resolve_published_ts_from_article(it.url, html=html)
         if ts is not None:
             it.published_ts = ts
-        resolve_budget -= 1
 
     return _dedupe_by_url(candidates)
 
-# --- Compatibility API expected by src.generate_monthly ---------------------------------
 
-def fetch_full_text(url: str, timeout_s: int = TIMEOUT) -> str:
+def fetch_full_text(url: str, timeout_s: Optional[int] = None) -> str:
     """
-    API required by src.generate_monthly:
-      txt = fetch_full_text(it.url)
-
     Returns extracted main article text (best-effort).
+    Uses cached fetch_url().
     """
+    # Use profile timeout by default
+    if timeout_s is None:
+        timeout_s = TIMEOUT_PRIORITY if _is_priority_domain(url) else TIMEOUT_FAST
+
     html = fetch_url(url, timeout_s=timeout_s)
     if not html:
         return ""
 
-    # Prefer trafilatura extraction
     try:
         extracted = trafilatura.extract(
             html,
@@ -540,12 +582,11 @@ def fetch_full_text(url: str, timeout_s: int = TIMEOUT) -> str:
     except Exception:
         pass
 
-    # Fallback: strip HTML
     soup = BeautifulSoup(html, "html.parser")
     txt = soup.get_text("\n", strip=True)
     txt = re.sub(r"\n{3,}", "\n\n", txt).strip()
     return txt
 
 
-# Optional alias if any older code uses a different name
+# Optional alias
 fetch_fulltext = fetch_full_text
