@@ -3,7 +3,7 @@ name: Monthly Digest
 
 on:
   schedule:
-    - cron: "41 0 10 * *" # (example) adjust as needed
+    - cron: "41 0 10 * *"
   workflow_dispatch:
     inputs:
       year:
@@ -17,6 +17,10 @@ on:
 
 permissions:
   contents: write
+
+concurrency:
+  group: monthly-digest
+  cancel-in-progress: false
 
 jobs:
   run-monthly:
@@ -43,6 +47,7 @@ jobs:
       - name: Install deps
         shell: bash
         run: |
+          set -euo pipefail
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
@@ -53,12 +58,17 @@ jobs:
           python - <<'PY'
           import inspect
           import src.generate_monthly as gm
+
           print("Loaded:", gm.__file__)
           src = inspect.getsource(gm._in_range)
+          print("--- _in_range() source ---")
+          print(src)
+          print("--- end ---")
+
           if "return start_ts <= ts <= end_ts" in src:
-            raise SystemExit("ERROR: old _in_range() still present")
+              raise SystemExit("ERROR: old _in_range() still present")
           if "_coerce_ts" not in src:
-            raise SystemExit("ERROR: _in_range() is not coercing timestamp types")
+              raise SystemExit("ERROR: _in_range() is not coercing timestamp types")
           print("OK: _in_range looks robust")
           PY
 
@@ -87,23 +97,29 @@ jobs:
           MODE: backfill-months
           START_YM: ${{ steps.month.outputs.ym }}
           END_YM: ${{ steps.month.outputs.ym }}
+
           ITEMS_PER_SECTION: "7"
           PER_DOMAIN_CAP: "3"
+          MAX_PER_DOMAIN_PER_SECTION: "3"
+
           MIN_TEXT_CHARS: "300"
           PRIORITY_MIN_CHARS: "200"
           MIN_TOTAL_ITEMS: "1"
           MIN_SUBSTANCE_SCORE: "2"
-          MAX_PER_DOMAIN_PER_SECTION: "3"
           ALLOW_UNDATED: "0"
+
           PRIORITY_DOMAINS: "aemo.com.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au,ec.europa.eu,commission.europa.eu"
+
           MODEL: "gpt-4o-mini"
           TEMP: "0.2"
           DEBUG: "1"
+
           MAX_LINKS_PER_INDEX: "220"
           MAX_INDEX_PAGES: "4"
           MAX_DATE_RESOLVE_FETCHES_PER_INDEX: "55"
           MAX_FULLTEXT_FETCHES_PER_SECTION: "55"
           MAX_FULLTEXT_FETCHES_TOTAL: "150"
+
           TIMEOUT_FAST: "15"
           TIMEOUT_PRIORITY: "30"
           RETRIES_FAST: "2"
@@ -111,9 +127,41 @@ jobs:
           FETCH_CACHE_MAX: "900"
         shell: bash
         run: |
+          set -euo pipefail
           python -B -m src.generate_monthly
 
-      - name: Collect debug artifacts (always)
+      - name: Print debug summary (always)
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          YM="${{ steps.month.outputs.ym }}"
+
+          echo ""
+          echo "==== debug-meta-${YM}.txt (if exists) ===="
+          if [[ -f "out/debug-meta-${YM}.txt" ]]; then
+            sed -n '1,200p' "out/debug-meta-${YM}.txt"
+          else
+            echo "(missing)"
+          fi
+
+          echo ""
+          echo "==== debug-drops-${YM}.txt (first 200 lines, if exists) ===="
+          if [[ -f "out/debug-drops-${YM}.txt" ]]; then
+            sed -n '1,200p' "out/debug-drops-${YM}.txt"
+          else
+            echo "(missing)"
+          fi
+
+          echo ""
+          echo "==== monthly-digest-${YM}.md (head, if exists) ===="
+          if [[ -f "out/monthly-digest-${YM}.md" ]]; then
+            sed -n '1,120p' "out/monthly-digest-${YM}.md"
+          else
+            echo "(missing)"
+          fi
+
+      - name: Collect artifacts (always)
         if: always()
         shell: bash
         run: |
@@ -123,6 +171,10 @@ jobs:
           rm -rf _artifact
           mkdir -p _artifact
 
+          # digest
+          cp -f "out/monthly-digest-${YM}.md" _artifact/ 2>/dev/null || true
+
+          # debug
           cp -f "out/debug-selected-${YM}.json" _artifact/ 2>/dev/null || true
           cp -f "out/debug-drops-${YM}.txt" _artifact/ 2>/dev/null || true
           cp -f "out/debug-meta-${YM}.txt" _artifact/ 2>/dev/null || true
@@ -135,11 +187,11 @@ jobs:
           echo "Artifact files:"
           ls -lah _artifact || true
 
-      - name: Upload debug artifact (always)
+      - name: Upload artifact (always)
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: monthly-debug-${{ steps.month.outputs.ym }}
+          name: monthly-run-${{ steps.month.outputs.ym }}
           path: _artifact
           retention-days: 30
 # === END .github/workflows/monthly.yml ===
