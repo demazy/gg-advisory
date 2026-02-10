@@ -1,552 +1,598 @@
-# src/generate_monthly.py
-# Full debug-enabled generator for monthly digests (robust date coercion)
+#!/usr/bin/env python3
+"""
+generate_monthly.py
 
+End-to-end pipeline for GG Advisory monthly digest.
+
+Improvements (systemic, not firefighting):
+- Better candidate quality from HTML index pages (via improved fetch.py)
+- Stronger filtering early using keyword signal (title + summary + anchor text)
+- Best-effort date resolution for undated HTML links (bounded + concurrent)
+- Bounded concurrent full-text fetching for stability + speed
+- More robust domain allow-list matching (subdomains + *.wildcards)
+
+Artifacts preserved:
+- out/monthly-digest-YYYY-MM.md
+- out/debug-selected-YYYY-MM.json
+- out/debug-drops-YYYY-MM.txt
+- out/debug-meta-YYYY-MM.txt
+- out/debug-pool-<Section>-YYYY-MM.json
+"""
 from __future__ import annotations
 
+import json
 import os
 import re
-import json
-import calendar
-import urllib.parse
+from collections import defaultdict
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from datetime import datetime, timezone
-from typing import Any, Dict, List, Tuple
+from typing import List, Optional, Tuple
 
-from dotenv import load_dotenv
-from dateutil import parser as dtparser
+import yaml
 
-from .fetch import fetch_rss, fetch_html_index, fetch_full_text, Item
+from .fetch import (
+    Item,
+    canonicalize_url,
+    domain_of,
+    fetch_date_only,
+    fetch_full_text,
+    fetch_html_index,
+    fetch_rss,
+)
 from .summarise import build_digest
-from .utils import sha1, normalize_whitespace, normalise_domain
 
-load_dotenv()
 
-# ----------------------- ENV / CONSTANTS -----------------------
+# ----------------------------
+# Configuration (env vars)
+# ----------------------------
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+MODE = os.getenv("MODE", "monthly")  # monthly | backfill-months
+START_YM = os.getenv("START_YM", "")
+END_YM = os.getenv("END_YM", "")
+
+ITEMS_PER_SECTION = int(os.getenv("ITEMS_PER_SECTION", "7"))
+PER_DOMAIN_CAP = int(os.getenv("PER_DOMAIN_CAP", "3"))
+
+MIN_TEXT_CHARS = int(os.getenv("MIN_TEXT_CHARS", "300"))
+PRIORITY_MIN_CHARS = int(os.getenv("PRIORITY_MIN_CHARS", "200"))
+
+MIN_TOTAL_ITEMS = int(os.getenv("MIN_TOTAL_ITEMS", "1"))
+DEBUG = os.getenv("DEBUG", "0") == "1"
+
 MODEL = os.getenv("MODEL", "gpt-4o-mini")
 TEMP = float(os.getenv("TEMP", "0.2"))
 
-MIN_TEXT_CHARS = int(os.getenv("MIN_TEXT_CHARS", "700"))
-ITEMS_PER_SECTION = int(os.getenv("ITEMS_PER_SECTION", "4"))
-PER_DOMAIN_CAP = int(os.getenv("PER_DOMAIN_CAP", "3"))
-MIN_TOTAL_ITEMS = int(os.getenv("MIN_TOTAL_ITEMS", "2"))
-DEBUG = os.getenv("DEBUG", "0") == "1"
+MAX_PDF_BYTES = int(os.getenv("MAX_PDF_BYTES", str(5 * 1024 * 1024)))
+PDF_TRUSTED = [d.strip().lower() for d in os.getenv("PDF_TRUSTED", "").split(",") if d.strip()]
 
-MIN_SUBSTANCE_SCORE = int(os.getenv("MIN_SUBSTANCE_SCORE", "2"))
-MAX_PER_DOMAIN_PER_SECTION = int(os.getenv("MAX_PER_DOMAIN_PER_SECTION", "1"))
+PRIORITY_DOMAINS = [d.strip().lower() for d in os.getenv("PRIORITY_DOMAINS", "").split(",") if d.strip()]
 
-# Trusted short-content domains can have a lower character floor
-PRIORITY_DOMAINS = {
-    d.strip().lower()
-    for d in os.getenv(
-        "PRIORITY_DOMAINS",
-        "aemo.com.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au,ec.europa.eu,commission.europa.eu",
-    ).split(",")
-    if d.strip()
-}
-PRIORITY_MIN_CHARS = int(os.getenv("PRIORITY_MIN_CHARS", "250"))
+# HTML crawling guardrails
+MAX_LINKS_PER_INDEX = int(os.getenv("MAX_LINKS_PER_INDEX", "250"))
+MAX_INDEX_PAGES = int(os.getenv("MAX_INDEX_PAGES", "5"))
+MAX_DATE_RESOLVE_FETCHES_PER_INDEX = int(os.getenv("MAX_DATE_RESOLVE_FETCHES_PER_INDEX", "75"))
 
-ROOT = Path(__file__).resolve().parents[1]
-OUTDIR = ROOT / "out"
-CFG = ROOT / "config" / "sources.yaml"
-FILTERS = ROOT / "config" / "filters.yaml"
+# New knobs (safe defaults)
+MAX_UNDATED_RESOLVE_PER_SECTION = int(os.getenv("MAX_UNDATED_RESOLVE_PER_SECTION", "40"))
+MAX_FULLTEXT_FETCHES_PER_SECTION = int(os.getenv("MAX_FULLTEXT_FETCHES_PER_SECTION", str(ITEMS_PER_SECTION * 20)))
 
-OUTDIR.mkdir(parents=True, exist_ok=True)
+# Behaviour for undated items (keep conservative by default)
 ALLOW_UNDATED = os.getenv("ALLOW_UNDATED", "0") == "1"
 
-# ----------------------- DATE HELPERS --------------------------
 
+# ----------------------------
+# Time helpers
+# ----------------------------
 
-def _month_bounds(y: int, m: int) -> Tuple[datetime, datetime]:
+def _month_bounds_utc(ym: str) -> Tuple[datetime, datetime]:
+    """Returns [start, end] inclusive bounds in UTC for YYYY-MM."""
+    y, m = map(int, ym.split("-"))
     start = datetime(y, m, 1, tzinfo=timezone.utc)
-    last = calendar.monthrange(y, m)[1]
-    end = datetime(y, m, last, 23, 59, 59, tzinfo=timezone.utc)
+    if m == 12:
+        nxt = datetime(y + 1, 1, 1, tzinfo=timezone.utc)
+    else:
+        nxt = datetime(y, m + 1, 1, tzinfo=timezone.utc)
+    end = nxt - timedelta(seconds=1)
     return start, end
 
 
-def _month_label(d: datetime) -> str:
-    return d.strftime("%B %Y")
-
-
-def _coerce_ts(ts):
-    if ts is None:
+def _coerce_ts(x) -> Optional[float]:
+    """Coerce datetime/float/int/str to epoch seconds (UTC)."""
+    if x is None:
         return None
-    if isinstance(ts, (int, float)):
-        return float(ts)
-    if isinstance(ts, datetime):
-        dt = ts
+    if isinstance(x, (int, float)):
+        return float(x)
+    if isinstance(x, datetime):
+        dt = x
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=timezone.utc)
-        return dt.astimezone(timezone.utc).timestamp()
-    if isinstance(ts, str):
+        return dt.timestamp()
+    if isinstance(x, str) and x.strip():
         try:
-            dt = dtparser.parse(ts)
-            if dt is None:
-                return None
+            dt = datetime.fromisoformat(x.replace("Z", "+00:00"))
             if dt.tzinfo is None:
                 dt = dt.replace(tzinfo=timezone.utc)
-            return dt.astimezone(timezone.utc).timestamp()
+            return dt.timestamp()
         except Exception:
             return None
     return None
 
-def _in_range(ts, start, end):
-    """
-    Robust range predicate:
-    - ts can be float/datetime/str/None
-    - start/end can be datetime OR float OR str
-    """
+
+def _in_range(ts, start, end) -> bool:
     ts2 = _coerce_ts(ts)
     if ts2 is None:
-        return ALLOW_UNDATED  # fail-open for undated items
-
+        return ALLOW_UNDATED
     s2 = _coerce_ts(start)
     e2 = _coerce_ts(end)
     if s2 is None or e2 is None:
         return True
-
     return s2 <= ts2 <= e2
 
 
-def fmt_iso(ts: Any) -> str:
-    ts2 = _coerce_ts(ts)
-    if ts2 is None:
-        return ""
-    try:
-        return datetime.fromtimestamp(ts2, tz=timezone.utc).date().isoformat()
-    except Exception:
-        return ""
+# ----------------------------
+# Config IO
+# ----------------------------
+
+def _read_yaml(path: str) -> dict:
+    return yaml.safe_load(Path(path).read_text(encoding="utf-8"))
 
 
-# -------------------- QUALITY / SPAM SUPPRESSION ---------------------
-
-_MEETING_URL_HINTS = ("/news-and-calendar/", "/calendar", "/events", "/meeting", "/meetings")
-_MEETING_URL_STRONG = ("online-meeting", "online_meeting", "/agenda")
-_MEETING_TITLE_HINTS = (
-    "online meeting",
-    "srb online meeting",
-    "frb online meeting",
-    "teg online meeting",
-    "technical expert group meeting",
-    "board meeting",
-)
+def _load_config() -> Tuple[dict, dict]:
+    sources_path = os.getenv("SOURCES_YAML", "sources.yaml")
+    filters_path = os.getenv("FILTERS_YAML", "filters.yaml")
+    return _read_yaml(sources_path), _read_yaml(filters_path)
 
 
-def is_meeting_notice(url: str, title: str) -> bool:
-    u = (url or "").lower()
-    t = (title or "").lower()
+# ----------------------------
+# Domain + scoring
+# ----------------------------
 
-    if any(x in u for x in _MEETING_URL_STRONG):
-        return True
+def _norm_domain(d: str) -> str:
+    d = (d or "").strip().lower()
+    if d.startswith("www."):
+        d = d[4:]
+    return d
 
-    if any(x in u for x in _MEETING_URL_HINTS):
-        if "meeting" in u or "meeting" in t or any(x in t for x in _MEETING_TITLE_HINTS):
-            return True
 
-    if any(x in t for x in _MEETING_TITLE_HINTS):
-        return True
-
+def _domain_matches(host: str, allowed: List[str]) -> bool:
+    """
+    Match host against allow-list with support for:
+      - exact host (aemo.com.au)
+      - wildcard subdomain (*.aemo.com.au)
+    """
+    host = _norm_domain(host)
+    for a in allowed:
+        a = _norm_domain(a)
+        if not a:
+            continue
+        if a.startswith("*."):
+            base = a[2:]
+            if host == base or host.endswith("." + base):
+                return True
+        else:
+            if host == a or host.endswith("." + a):
+                return True
     return False
 
 
-_HUB_PATHS = {
-    "/news",
-    "/newsroom",
-    "/media",
-    "/press",
-    "/publications",
-    "/updates",
-    "/news-and-calendar/news",
-    "/news-centre",
-}
+def _priority_bonus(domain: str) -> int:
+    d = _norm_domain(domain)
+    for p in PRIORITY_DOMAINS:
+        p2 = _norm_domain(p)
+        if d == p2 or d.endswith("." + p2):
+            return 2
+    return 0
 
 
-def is_hub_url(url: str) -> bool:
-    try:
-        p = urllib.parse.urlparse(url)
-        path = (p.path or "/").rstrip("/")
-        if not path:
-            path = "/"
-        if p.query:
-            return True
-        if path in _HUB_PATHS:
-            return True
-    except Exception:
-        return False
-    return False
-
-
-def substance_score(text: str) -> int:
+def _quick_score(text: str, url: str, section_kw: List[str], global_kw: List[str]) -> int:
     t = (text or "").lower()
+    u = (url or "").lower()
+
     score = 0
+    for kw in section_kw:
+        if kw and kw.lower() in t:
+            score += 4
+    for kw in global_kw:
+        if kw and kw.lower() in t:
+            score += 1
 
-    if any(w in t for w in ("final", "decision", "approved", "determination", "rule change")):
-        score += 3
-    if any(w in t for w in ("consultation", "draft", "exposure draft", "guidance", "standard", "framework")):
-        score += 2
-
-    if any(w in t for w in ("mw", "gw", "million", "billion", "$", "€", "aud", "eur")):
-        score += 2
-    if any(w in t for w in ("auction", "tender", "capacity", "tariff", "price", "market")):
+    if re.search(r"/(news|media|press|insights|blog|articles|publications|updates)/", u):
         score += 1
-
-    if any(w in t for w in ("meeting", "registration", "observers", "agenda")):
-        score -= 6
-
-    if len(t) < 800:
-        score -= 2
+    if re.search(r"/20\d{2}/\d{1,2}/", u):
+        score += 1
+    if u.endswith(".pdf") or ".pdf?" in u:
+        score -= 1
 
     return score
 
 
-# ----------------------- DEBUG HELPERS ------------------------
+# ----------------------------
+# Filtering
+# ----------------------------
 
+def _passes_filters(
+    it: Item,
+    *,
+    allow_domains: List[str],
+    deny_domains: List[str],
+    title_deny_regex: List[str],
+    keep_keywords: List[str],
+    section_keywords: List[str],
+) -> Tuple[bool, str, int]:
+    """Returns (ok, reason, quick_score)."""
+    it.url = canonicalize_url(it.url)
+    it.domain = _norm_domain(it.domain or domain_of(it.url))
 
-def _dump_json(path: Path, obj) -> None:
-    try:
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with path.open("w", encoding="utf-8") as f:
-            json.dump(obj, f, ensure_ascii=False, indent=2, default=str)
-    except Exception as e:
-        print(f"[warn] failed to dump json: {path}: {e}")
-
-
-def _append_line(path: Path, line: str) -> None:
-    try:
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with path.open("a", encoding="utf-8") as f:
-            f.write(line.rstrip("\n") + "\n")
-    except Exception as e:
-        print(f"[warn] failed to append: {path}: {e}")
-
-
-# ----------------------- FILTER LOADERS ------------------------
-
-
-def load_yaml(path: Path) -> Dict:
-    import yaml
-
-    with path.open("r", encoding="utf-8") as f:
-        return yaml.safe_load(f) or {}
-
-
-def compile_filters(filters: Dict) -> Dict:
-    allow = [d.strip().lower() for d in (filters.get("allow_domains") or []) if d.strip()]
-    deny = [d.strip().lower() for d in (filters.get("deny_domains") or []) if d.strip()]
-    deny_pat = [re.compile(p, re.I) for p in (filters.get("title_deny_regex") or []) if p.strip()]
-    keep = [k.strip().lower() for k in (filters.get("keep_keywords") or []) if k.strip()]
-    return {"allow_domains": allow, "deny_domains": deny, "title_deny_regex": deny_pat, "keep_keywords": keep}
-
-
-def _passes_filters(it: Item, filters: Dict, drop_log) -> bool:
-    dom = normalise_domain(it.url)
-    allow = set(filters.get("allow_domains", []))
-    deny = set(filters.get("deny_domains", []))
-    deny_title = filters.get("title_deny_regex", [])
-    keep_keywords = filters.get("keep_keywords", [])
-
-    if allow and not any(dom.endswith(d) for d in allow):
-        drop_log(f"domain_not_allowed\t{dom}\t{it.url}")
-        return False
-
-    if any(dom.endswith(d) for d in deny):
-        drop_log(f"domain_denied\t{dom}\t{it.url}")
-        return False
+    if deny_domains and _domain_matches(it.domain, deny_domains):
+        return (False, "domain_denied", 0)
+    if allow_domains and not _domain_matches(it.domain, allow_domains):
+        return (False, "domain_not_allowed", 0)
 
     title = (it.title or "").strip()
-    title_l = title.lower()
+    if title_deny_regex:
+        for pat in title_deny_regex:
+            if not pat:
+                continue
+            try:
+                if re.search(pat, title, re.I):
+                    return (False, "title_denied", 0)
+            except re.error:
+                continue
 
-    if keep_keywords and any(k in title_l for k in keep_keywords):
-        return True
+    blob = " ".join([title, (it.summary or "")]).strip()
+    qs = _quick_score(blob, it.url, section_keywords, keep_keywords)
 
-    for pat in deny_title:
-        if pat.search(title):
-            drop_log(f"title_denied\t{title}\t{it.url}")
-            return False
+    # Early noise gate: if nothing matches and not priority, drop
+    if keep_keywords:
+        has_any_kw = any(kw.lower() in blob.lower() for kw in keep_keywords if kw)
+        if (not has_any_kw) and qs <= 0 and _priority_bonus(it.domain) == 0:
+            return (False, "no_keyword_signal", qs)
 
-    return True
-
-
-# ----------------------- ITEM COLLECTION -----------------------
+    return (True, "ok", qs)
 
 
-def collect_items(sources, drop_log) -> List[Item]:
-    def _infer_type(url: str) -> str:
-        u = (url or "").lower()
-        if any(x in u for x in (".xml", "/rss", "feed", "atom")):
-            return "rss"
-        return "html"
+# ----------------------------
+# Pool building
+# ----------------------------
 
-    def _iter_sources(sources_obj):
-        if sources_obj is None:
-            return
-        if isinstance(sources_obj, dict):
-            for k, v in sources_obj.items():
-                if isinstance(v, list):
-                    for item in v:
-                        yield (k, item)
-                else:
-                    yield (k, v)
-            return
-        if isinstance(sources_obj, list):
-            for item in sources_obj:
-                yield (None, item)
-            return
-        yield (None, sources_obj)
-
+def _build_pool_for_section(section: str, section_cfg: dict) -> List[Item]:
     pool: List[Item] = []
 
-    for forced_type, src in _iter_sources(sources):
-        url = ""
-        name = ""
-        stype = ""
+    rss_list = section_cfg.get("rss", []) or []
+    html_list = section_cfg.get("html", []) or []
 
+    for feed_url in rss_list:
         try:
-            if isinstance(src, str):
-                url = src.strip()
-                if not url:
-                    continue
-                stype = (forced_type or _infer_type(url)).strip().lower()
-                name = url
+            items = fetch_rss(feed_url)
+            for it in items:
+                it.section = section
+                it.source = feed_url
+                pool.append(it)
+        except Exception as e:  # noqa: BLE001
+            print(f"[warn] source error: {feed_url} -> {e}")
 
-            elif isinstance(src, dict):
-                url = (src.get("url") or "").strip()
-                if not url:
-                    continue
-                stype = (src.get("type") or forced_type or _infer_type(url)).strip().lower()
-                name = src.get("name") or url
-
-            else:
-                drop_log(f"source_bad_type\t{type(src)}\t{src}")
-                continue
-
-            if stype == "rss":
-                items = fetch_rss(url, source_name=name)
-            elif stype == "html":
-                items = fetch_html_index(url, source_name=name)
-            else:
-                drop_log(f"source_bad_stype\t{stype}\t{url}")
-                continue
-
-            pool.extend(items)
-
-        except Exception as e:
-            drop_log(f"source_error\t{name}\t{url}\t{e}")
-            if DEBUG:
-                print(f"[warn] source error: {name} -> {e}")
-
-    # robust sort
-    pool.sort(key=lambda x: _coerce_ts(getattr(x, "published_ts", None)) or 0.0, reverse=True)
-    return pool
-
-
-# ----------------------- MONTHLY GENERATION --------------------
-
-
-def generate_monthly_for(ym: str) -> str:
-    os.environ["TARGET_YM"] = ym
-
-    y, m = map(int, ym.split("-"))
-    start, end = _month_bounds(y, m)  # keep as datetime (safe now)
-
-    cfg = load_yaml(CFG)
-    filters = compile_filters(load_yaml(FILTERS))
-
-    drop_file = OUTDIR / f"debug-drops-{ym}.txt"
-    selected_file = OUTDIR / f"debug-selected-{ym}.json"
-    meta_file = OUTDIR / f"debug-meta-{ym}.txt"
-
-    if DEBUG:
+    for index_url in html_list:
         try:
-            drop_file.unlink(missing_ok=True)
-        except Exception:
-            pass
-
-    def drop_log(line: str) -> None:
-        if DEBUG:
-            _append_line(drop_file, line)
-
-    chosen: List[Dict] = []
-    seen_urls: set = set()
-
-    for section, sources in cfg["sections"].items():
-        print(f"[section] {section}")
-        pool = collect_items(sources, drop_log)
-        print(f"[pool] candidates: {len(pool)}")
-
-        if DEBUG:
-            _dump_json(
-                OUTDIR / f"debug-pool-{section.replace(' ','_')}-{ym}.json",
-                [
-                    {
-                        "title": it.title,
-                        "url": it.url,
-                        "source": it.source,
-                        "published_ts": it.published_ts,
-                        "published_iso": fmt_iso(it.published_ts),
-                        "published_ts_coerced": _coerce_ts(it.published_ts),
-                    }
-                    for it in pool[:150]
-                ],
+            items = fetch_html_index(
+                index_url,
+                max_links=MAX_LINKS_PER_INDEX,
+                max_pages=MAX_INDEX_PAGES,
+                date_resolve_budget=MAX_DATE_RESOLVE_FETCHES_PER_INDEX,
             )
+            for it in items:
+                it.section = section
+                it.source = index_url
+                pool.append(it)
+        except Exception as e:  # noqa: BLE001
+            print(f"[warn] source error: {index_url} -> {e}")
 
-        selected: List[Dict] = []
-        section_dom_counts: Dict[str, int] = {}
+    # Canonicalize + de-dupe
+    seen = set()
+    uniq: List[Item] = []
+    for it in pool:
+        it.url = canonicalize_url(it.url)
+        if it.url in seen:
+            continue
+        seen.add(it.url)
+        it.domain = _norm_domain(it.domain or domain_of(it.url))
+        uniq.append(it)
 
-        for it in pool:
-            if not _in_range(it.published_ts, start, end):
-                if DEBUG:
-                    drop_log(f"out_of_range\t{fmt_iso(it.published_ts)}\t{it.url}")
-                continue
+    return uniq
 
-            if not _passes_filters(it, filters, drop_log):
-                continue
 
-            if is_hub_url(it.url):
-                if DEBUG:
-                    drop_log(f"hub_url\t{it.url}")
-                continue
+def _write_debug_pool(section: str, ym: str, pool: List[Item]) -> None:
+    if not os.getenv("DEBUG", "0") == "1":
+        return
+    out_dir = Path("out")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    p = out_dir / f"debug-pool-{section.replace(' ', '_')}-{ym}.json"
+    p.write_text(json.dumps([it.to_dict() for it in pool], ensure_ascii=False, indent=2), encoding="utf-8")
 
-            if is_meeting_notice(it.url, it.title or ""):
-                if DEBUG:
-                    drop_log(f"meeting_notice\t{it.url}")
-                continue
 
-            h = sha1(it.url)
-            if h in seen_urls:
-                if DEBUG:
-                    drop_log(f"duplicate_url\t-\t{it.url}")
-                continue
+# ----------------------------
+# Date resolution + full text
+# ----------------------------
 
-            txt = fetch_full_text(it.url)
-            txt = normalize_whitespace(txt)
+def _resolve_undated_items(
+    items: List[Item],
+    *,
+    section_keywords: List[str],
+    keep_keywords: List[str],
+    budget: int,
+) -> None:
+    undated = [it for it in items if it.published is None]
+    if not undated or budget <= 0:
+        return
 
-            dom = normalise_domain(it.url)
+    ranked = sorted(
+        undated,
+        key=lambda it: (
+            -_priority_bonus(it.domain),
+            -_quick_score(" ".join([(it.title or ""), (it.summary or "")]), it.url, section_keywords, keep_keywords),
+        ),
+    )[:budget]
 
-            if section_dom_counts.get(dom, 0) >= MAX_PER_DOMAIN_PER_SECTION:
-                if DEBUG:
-                    drop_log(
-                        f"per_section_domain_cap\tsection={section}\tdom={dom} cap={MAX_PER_DOMAIN_PER_SECTION}\t{it.url}"
-                    )
-                continue
+    from concurrent.futures import ThreadPoolExecutor, as_completed
 
-            threshold = PRIORITY_MIN_CHARS if any(dom.endswith(d) for d in PRIORITY_DOMAINS) else MIN_TEXT_CHARS
-            if len(txt) < threshold and len(it.summary or "") < 160:
-                if DEBUG:
-                    drop_log(f"too_short\tlen={len(txt)}/thr={threshold}\t{it.url}")
-                continue
+    with ThreadPoolExecutor(max_workers=10) as ex:
+        futs = {ex.submit(fetch_date_only, it.url): it for it in ranked}
+        for fut in as_completed(futs):
+            it = futs[fut]
+            try:
+                it.published = fut.result()
+            except Exception:
+                it.published = None
 
-            sscore = substance_score(txt)
-            if sscore < MIN_SUBSTANCE_SCORE:
-                if DEBUG:
-                    drop_log(f"low_substance\tscore={sscore} min={MIN_SUBSTANCE_SCORE}\t{it.url}")
-                continue
 
-            section_dom_counts[dom] = section_dom_counts.get(dom, 0) + 1
+def _fetch_text_for_candidates(candidates: List[Item], max_fetches: int) -> List[Item]:
+    if not candidates:
+        return []
+    take = candidates[:max_fetches]
 
-            selected.append(
-                {
-                    "section": section,
-                    "title": it.title or it.url.split("/")[-1].replace("-", " ")[:100],
-                    "url": it.url,
-                    "sources_urls": [it.url],
-                    "summary": it.summary or "",
-                    "text": txt,
-                    "published": fmt_iso(it.published_ts),
-                }
-            )
-            seen_urls.add(h)
+    from concurrent.futures import ThreadPoolExecutor, as_completed
 
-            if len(selected) >= ITEMS_PER_SECTION:
-                break
+    def _one(it: Item) -> Item:
+        text, dt, _mime = fetch_full_text(it.url, max_pdf_bytes=MAX_PDF_BYTES)
+        if dt and it.published is None:
+            it.published = dt
+        it.fetched_text = text or ""
+        return it
 
-        print(f"[selected] {len(selected)} from {section}")
-        chosen.extend(selected)
+    out: List[Item] = []
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        futs = [ex.submit(_one, it) for it in take]
+        for fut in as_completed(futs):
+            out.append(fut.result())
 
-    chosen = sorted(chosen, key=lambda x: (x.get("published", ""), x.get("section", "")), reverse=True)
+    order = {it.url: i for i, it in enumerate(take)}
+    out.sort(key=lambda it: order.get(it.url, 10**9))
+    return out
 
-    per_domain: Dict[str, int] = {}
-    filtered: List[Dict] = []
-    for row in chosen:
-        dom = normalise_domain(row["url"])
-        per_domain[dom] = per_domain.get(dom, 0) + 1
-        if per_domain[dom] <= PER_DOMAIN_CAP:
-            filtered.append(row)
-        else:
-            if DEBUG:
-                drop_log(f"per_domain_cap\tdom={dom} cap={PER_DOMAIN_CAP}\t{row['url']}")
 
-    chosen = filtered[:12]
+# ----------------------------
+# Selection
+# ----------------------------
 
-    _dump_json(
-        selected_file,
-        [{"title": x["title"], "url": x["url"], "published": x["published"], "section": x["section"]} for x in chosen],
+def _select_for_section(
+    section: str,
+    pool: List[Item],
+    *,
+    filters_cfg: dict,
+    start_dt: datetime,
+    end_dt: datetime,
+) -> Tuple[List[Item], List[Tuple[str, str]]]:
+    allow_domains = filters_cfg.get("allow_domains") or []
+    deny_domains = filters_cfg.get("deny_domains") or []
+    title_deny_regex = filters_cfg.get("title_deny_regex") or []
+    keep_keywords = filters_cfg.get("keep_keywords") or []
+    section_kw_map = filters_cfg.get("section_keywords") or {}
+    section_keywords = section_kw_map.get(section, []) or []
+
+    passed: List[Tuple[Item, int]] = []
+    drops: List[Tuple[str, str]] = []
+
+    for it in pool:
+        ok, reason, qs = _passes_filters(
+            it,
+            allow_domains=allow_domains,
+            deny_domains=deny_domains,
+            title_deny_regex=title_deny_regex,
+            keep_keywords=keep_keywords,
+            section_keywords=section_keywords,
+        )
+        if not ok:
+            drops.append((reason, it.url))
+            continue
+        passed.append((it, qs))
+
+    _resolve_undated_items(
+        [it for it, _ in passed],
+        section_keywords=section_keywords,
+        keep_keywords=keep_keywords,
+        budget=MAX_UNDATED_RESOLVE_PER_SECTION,
     )
 
-    try:
-        with meta_file.open("w", encoding="utf-8") as mf:
-            mf.write(f"month: {ym}\n")
-            mf.write(f"outdir: {OUTDIR.resolve()}\n")
-            mf.write(f"drops_file: {drop_file.resolve()}\n")
-            mf.write(f"selected_file: {selected_file.resolve()}\n")
-            mf.write("counts:\n")
-            mf.write(f"  selected_total: {len(chosen)}\n")
-            from collections import Counter
+    in_range: List[Tuple[Item, int]] = []
+    for it, qs in passed:
+        if _in_range(it.published, start_dt, end_dt):
+            in_range.append((it, qs))
+        else:
+            drops.append(("out_of_range", it.url))
 
-            c = Counter([x.get("section", "") for x in chosen])
-            for k, v in c.items():
-                mf.write(f"  section[{k}]: {v}\n")
-    except Exception as e:
-        print(f"[warn] failed to write meta file: {e}")
+    in_range.sort(
+        key=lambda x: (
+            -_priority_bonus(x[0].domain),
+            -x[1],
+            -(x[0].published.timestamp() if x[0].published else 0.0),
+        )
+    )
 
-    if len(chosen) < MIN_TOTAL_ITEMS:
-        print(f"[warn] Few items in range ({len(chosen)}<{MIN_TOTAL_ITEMS}); writing placeholder.")
-        # Keep deterministic dates for the placeholder
+    fetched = _fetch_text_for_candidates([it for it, _ in in_range], MAX_FULLTEXT_FETCHES_PER_SECTION)
+
+    eligible: List[Item] = []
+    for it in fetched:
+        text_len = len(it.fetched_text or "")
+        if _priority_bonus(it.domain) > 0:
+            if text_len >= PRIORITY_MIN_CHARS:
+                eligible.append(it)
+            else:
+                drops.append(("too_short_priority", it.url))
+        else:
+            if text_len >= MIN_TEXT_CHARS:
+                eligible.append(it)
+            else:
+                drops.append(("too_short", it.url))
+
+    def final_key(it: Item) -> Tuple[int, int, float, int]:
+        blob = " ".join([(it.title or ""), (it.summary or ""), (it.fetched_text or "")[:500]])
+        qs = _quick_score(blob, it.url, section_keywords, keep_keywords)
         return (
-            f"# Signals Digest — NO ITEMS IN RANGE\n\n"
-            f"_Date range_: {start.date().isoformat()} → {end.date().isoformat()}\n\n"
-            "Insufficient eligible items. Consider relaxing MIN_TEXT_CHARS, checking filters, widening sources, "
-            "or enabling PRIORITY_* thresholds for trusted domains."
+            _priority_bonus(it.domain),
+            qs,
+            it.published.timestamp() if it.published else 0.0,
+            len(it.fetched_text or ""),
         )
 
-    date_label = _month_label(end)
-    return build_digest(model=MODEL, api_key=OPENAI_API_KEY, items=chosen, temp=TEMP, date_label=date_label)
+    eligible.sort(key=final_key, reverse=True)
+
+    selected: List[Item] = []
+    per_domain = defaultdict(int)
+    for it in eligible:
+        if len(selected) >= ITEMS_PER_SECTION:
+            break
+        if per_domain[it.domain] >= PER_DOMAIN_CAP:
+            drops.append(("domain_cap", it.url))
+            continue
+        per_domain[it.domain] += 1
+        selected.append(it)
+
+    return selected, drops
 
 
-# ----------------------- ENTRY POINT ---------------------------
+# ----------------------------
+# Outputs
+# ----------------------------
+
+def _write_debug_selected(ym: str, selected: List[Item]) -> None:
+    out_dir = Path("out")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    p = out_dir / f"debug-selected-{ym}.json"
+    p.write_text(json.dumps([it.to_dict() for it in selected], ensure_ascii=False, indent=2), encoding="utf-8")
 
 
-def main():
-    if not OPENAI_API_KEY:
-        raise RuntimeError("OPENAI_API_KEY not set")
+def _write_debug_drops(ym: str, drops: List[Tuple[str, str]]) -> None:
+    out_dir = Path("out")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    p = out_dir / f"debug-drops-{ym}.txt"
+    lines = ["reason\tmeta\turl"]
+    for reason, url in drops:
+        lines.append(f"{reason}\t\t{url}")
+    p.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
-    mode = os.getenv("MODE", "single")  # 'single' | 'backfill-months'
-    if mode == "backfill-months":
-        start_ym = os.getenv("START_YM", "2025-01")
-        end_ym = os.getenv("END_YM", "2025-10")
-        sy, sm = map(int, start_ym.split("-"))
-        ey, em = map(int, end_ym.split("-"))
-        y, m = sy, sm
-        while (y < ey) or (y == ey and m <= em):
-            start_dt, end_dt = _month_bounds(y, m)
-            ym = f"{y:04d}-{m:02d}"
-            print(f"\n=== {ym} ({start_dt.date()} -> {end_dt.date()}) ===")
-            md = generate_monthly_for(ym)
-            out = OUTDIR / f"monthly-digest-{ym}.md"
-            out.write_text(md, encoding="utf-8")
-            print(f"[write] {out}")
 
-            m += 1
-            if m > 12:
-                m = 1
-                y += 1
-    else:
-        ym = os.getenv("YM", datetime.now(timezone.utc).strftime("%Y-%m"))
-        md = generate_monthly_for(ym)
-        out = OUTDIR / f"monthly-digest-{ym}.md"
-        out.write_text(md, encoding="utf-8")
-        print(f"[write] {out}")
+def _write_debug_meta(ym: str, meta: dict) -> None:
+    out_dir = Path("out")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    p = out_dir / f"debug-meta-{ym}.txt"
+    p.write_text(json.dumps(meta, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def _write_digest(ym: str, md: str) -> Path:
+    out_dir = Path("out")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    p = out_dir / f"monthly-digest-{ym}.md"
+    p.write_text(md, encoding="utf-8")
+    return p
+
+
+# ----------------------------
+# Main entry points
+# ----------------------------
+
+def generate_for_month(ym: str) -> Path:
+    sources_cfg, filters_cfg = _load_config()
+    start_dt, end_dt = _month_bounds_utc(ym)
+
+    print(f"\n=== {ym} ({start_dt.date()} -> {end_dt.date()}) ===")
+
+    selected_all: List[Item] = []
+    drops_all: List[Tuple[str, str]] = []
+
+    for section, section_cfg in (sources_cfg.get("sections") or {}).items():
+        print(f"[section] {section}")
+        pool = _build_pool_for_section(section, section_cfg)
+        _write_debug_pool(section, ym, pool)
+        print(f"[pool] candidates: {len(pool)}")
+
+        selected, drops = _select_for_section(
+            section,
+            pool,
+            filters_cfg=filters_cfg,
+            start_dt=start_dt,
+            end_dt=end_dt,
+        )
+        print(f"[selected] {len(selected)} from {section}")
+        selected_all.extend(selected)
+        drops_all.extend(drops)
+
+    if len(selected_all) < MIN_TOTAL_ITEMS:
+        raise SystemExit(
+            f"ERROR: selected items is {len(selected_all)} but MIN_TOTAL_ITEMS={MIN_TOTAL_ITEMS}. "
+            "Failing run to avoid publishing placeholder."
+        )
+
+    md = build_digest(ym=ym, items=selected_all, model=MODEL, temperature=TEMP)
+    out_path = _write_digest(ym, md)
+
+    _write_debug_selected(ym, selected_all)
+    _write_debug_drops(ym, drops_all)
+    _write_debug_meta(
+        ym,
+        meta={
+            "ym": ym,
+            "mode": MODE,
+            "items_per_section": ITEMS_PER_SECTION,
+            "per_domain_cap": PER_DOMAIN_CAP,
+            "min_text_chars": MIN_TEXT_CHARS,
+            "priority_min_chars": PRIORITY_MIN_CHARS,
+            "priority_domains": PRIORITY_DOMAINS,
+            "allow_undated": ALLOW_UNDATED,
+            "max_links_per_index": MAX_LINKS_PER_INDEX,
+            "max_index_pages": MAX_INDEX_PAGES,
+            "max_date_resolve_fetches_per_index": MAX_DATE_RESOLVE_FETCHES_PER_INDEX,
+            "max_undated_resolve_per_section": MAX_UNDATED_RESOLVE_PER_SECTION,
+            "max_fulltext_fetches_per_section": MAX_FULLTEXT_FETCHES_PER_SECTION,
+        },
+    )
+
+    print(f"[write] {out_path.resolve()}")
+    return out_path
+
+
+def _iter_months(start_ym: str, end_ym: str) -> List[str]:
+    sy, sm = map(int, start_ym.split("-"))
+    ey, em = map(int, end_ym.split("-"))
+    months: List[str] = []
+    y, m = sy, sm
+    while (y, m) <= (ey, em):
+        months.append(f"{y:04d}-{m:02d}")
+        m += 1
+        if m > 12:
+            y += 1
+            m = 1
+    return months
+
+
+def main() -> None:
+    if MODE == "backfill-months":
+        if not START_YM or not END_YM:
+            raise SystemExit("MODE=backfill-months requires START_YM and END_YM")
+        for ym in _iter_months(START_YM, END_YM):
+            generate_for_month(ym)
+        return
+
+    ym = START_YM or datetime.now(timezone.utc).strftime("%Y-%m")
+    generate_for_month(ym)
 
 
 if __name__ == "__main__":
