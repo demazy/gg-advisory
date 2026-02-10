@@ -1,592 +1,426 @@
-# src/fetch.py
+# === BEGIN src/generate_monthly.py ===
 from __future__ import annotations
 
-import os
+import inspect as _inspect
 import json
+import os
 import re
-import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Dict, Iterable, List, Optional, Tuple
-from urllib.parse import urljoin, urlparse
+from pathlib import Path
+from typing import Any, Dict, Iterable, List, Optional, Tuple
 
-import feedparser
-import requests
-from bs4 import BeautifulSoup
-from dateutil import parser as dtparser
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
+import yaml
 
-import trafilatura
-from htmldate import find_date
+from .fetch import fetch_url
+from .summarise import build_digest
 
+
+# ----------------------------
+# Config / env
+# ----------------------------
+
+ROOT = Path(__file__).resolve().parents[1]
+OUTDIR = ROOT / "out"
+OUTDIR.mkdir(parents=True, exist_ok=True)
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
+MODEL = os.getenv("MODEL", "gpt-4o-mini").strip()
+TEMP = float(os.getenv("TEMP", "0.2"))
+
+MODE = os.getenv("MODE", "monthly").strip()
+START_YM = os.getenv("START_YM", "").strip()
+END_YM = os.getenv("END_YM", "").strip()
+
+ITEMS_PER_SECTION = int(os.getenv("ITEMS_PER_SECTION", "7"))
+PER_DOMAIN_CAP = int(os.getenv("PER_DOMAIN_CAP", "3"))
+MAX_PER_DOMAIN_PER_SECTION = int(os.getenv("MAX_PER_DOMAIN_PER_SECTION", str(PER_DOMAIN_CAP)))
+
+MIN_TEXT_CHARS = int(os.getenv("MIN_TEXT_CHARS", "300"))
+PRIORITY_MIN_CHARS = int(os.getenv("PRIORITY_MIN_CHARS", "200"))
+MIN_TOTAL_ITEMS = int(os.getenv("MIN_TOTAL_ITEMS", "1"))
+
+MIN_SUBSTANCE_SCORE = int(os.getenv("MIN_SUBSTANCE_SCORE", "2"))
+ALLOW_UNDATED = int(os.getenv("ALLOW_UNDATED", "0"))
+
+DEBUG = int(os.getenv("DEBUG", "0"))
+
+PRIORITY_DOMAINS = [d.strip() for d in os.getenv("PRIORITY_DOMAINS", "").split(",") if d.strip()]
+
+
+# ----------------------------
+# Compatibility wrapper (fixes build_digest signature drift)
+# ----------------------------
+
+def _call_build_digest(selected_items, ym, *, model, temperature, api_key):
+    """
+    Call build_digest with a signature-compatible keyword mapping.
+
+    build_digest() has had a few signature variants in this repo; introspection
+    keeps the workflow stable when that changes.
+    """
+    sig = _inspect.signature(build_digest)
+    params = list(sig.parameters.values())
+    kwargs: Dict[str, Any] = {}
+
+    # Map the 'items' argument (whatever it's called)
+    preferred_item_keys = ["items", "selected", "entries", "articles", "records", "chosen"]
+    item_key = None
+    for k in preferred_item_keys:
+        if k in sig.parameters:
+            item_key = k
+            break
+    if item_key is None:
+        item_key = params[0].name if params else "items"
+    kwargs[item_key] = selected_items
+
+    # Common optional params
+    if "ym" in sig.parameters:
+        kwargs["ym"] = ym
+    elif "month" in sig.parameters:
+        kwargs["month"] = ym
+
+    if "model" in sig.parameters:
+        kwargs["model"] = model
+
+    if "temperature" in sig.parameters:
+        kwargs["temperature"] = temperature
+    elif "temp" in sig.parameters:
+        kwargs["temp"] = temperature
+
+    if "api_key" in sig.parameters:
+        kwargs["api_key"] = api_key
+    elif "openai_api_key" in sig.parameters:
+        kwargs["openai_api_key"] = api_key
+
+    # If build_digest doesn't accept **kwargs, strip unknown keys
+    if not any(p.kind == p.VAR_KEYWORD for p in params):
+        allowed = set(sig.parameters.keys())
+        kwargs = {k: v for k, v in kwargs.items() if k in allowed}
+
+    return build_digest(**kwargs)
+
+
+# ----------------------------
+# Data structures
+# ----------------------------
 
 @dataclass
 class Item:
+    section: str
+    source: str
     title: str
     url: str
-    source: str
-    published_ts: Optional[float] = None
-    summary: str = ""
-    text: str = ""
+    domain: str
+    ts: Optional[float]
+    text: str
+    substance_score: int = 0
 
 
-# -------------------- Tunables (env) --------------------
-
-TIMEOUT_FAST = int(os.getenv("TIMEOUT_FAST", "15"))
-TIMEOUT_PRIORITY = int(os.getenv("TIMEOUT_PRIORITY", "30"))
-TIMEOUT_RSS = int(os.getenv("TIMEOUT_RSS", "25"))
-
-MAX_BYTES = int(os.getenv("MAX_BYTES", str(2_000_000)))
-
-# Runtime bounds for index crawling
-MAX_LINKS_PER_INDEX = int(os.getenv("MAX_LINKS_PER_INDEX", "250"))
-MAX_DATE_RESOLVE_FETCHES_PER_INDEX = int(os.getenv("MAX_DATE_RESOLVE_FETCHES_PER_INDEX", "75"))
-MAX_INDEX_PAGES = int(os.getenv("MAX_INDEX_PAGES", "5"))
-
-# Simple in-memory cache (per run). Big win.
-FETCH_CACHE_MAX = int(os.getenv("FETCH_CACHE_MAX", "800"))
-
-PRIORITY_DOMAINS = {
-    d.strip().lower()
-    for d in os.getenv(
-        "PRIORITY_DOMAINS",
-        "aemo.com.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au,ec.europa.eu,commission.europa.eu",
-    ).split(",")
-    if d.strip()
-}
-
-# Browser-like headers to reduce basic bot blocks
-HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-        "(KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-    ),
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    "Accept-Language": "en-AU,en;q=0.9",
-    "Connection": "keep-alive",
-}
-
-# Per-domain CSS selectors (optional; default is "a[href]")
-SELECTORS: dict[str, str] = {
-    # "aemo.com.au": "a[href]",
-}
-
-# -------------------- Helpers --------------------
-
-
-def _is_http_url(u: str) -> bool:
-    try:
-        p = urlparse(u)
-        return p.scheme in ("http", "https") and bool(p.netloc)
-    except Exception:
-        return False
-
-
-def _norm_url(u: str) -> str:
-    return (u or "").strip()
+def _ym_to_range(ym: str) -> Tuple[datetime, datetime]:
+    year, month = [int(x) for x in ym.split("-")]
+    start = datetime(year, month, 1, tzinfo=timezone.utc)
+    if month == 12:
+        end = datetime(year + 1, 1, 1, tzinfo=timezone.utc)
+    else:
+        end = datetime(year, month + 1, 1, tzinfo=timezone.utc)
+    return start, end
 
 
 def _domain(url: str) -> str:
-    try:
-        return (urlparse(url).netloc or "").lower()
-    except Exception:
-        return ""
+    m = re.match(r"^https?://([^/]+)/?", url.strip())
+    return (m.group(1).lower() if m else "").replace("www.", "")
 
 
-def _is_priority_domain(url: str) -> bool:
-    dom = _domain(url)
-    return any(dom == d or dom.endswith("." + d) for d in PRIORITY_DOMAINS)
+def _coerce_ts(ts: Any) -> Optional[float]:
+    if ts is None:
+        return None
+    if isinstance(ts, (int, float)):
+        return float(ts)
+    if isinstance(ts, datetime):
+        if ts.tzinfo is None:
+            ts = ts.replace(tzinfo=timezone.utc)
+        return ts.timestamp()
+    if isinstance(ts, str):
+        s = ts.strip()
+        # try ISO
+        try:
+            dt = datetime.fromisoformat(s.replace("Z", "+00:00"))
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt.timestamp()
+        except Exception:
+            return None
+    return None
 
 
-def _dedupe_by_url(items: Iterable[Item]) -> List[Item]:
+def _in_range(ts: Any, start_dt: datetime, end_dt: datetime) -> bool:
+    t = _coerce_ts(ts)
+    if t is None:
+        return bool(ALLOW_UNDATED)
+    return start_dt.timestamp() <= t < end_dt.timestamp()
+
+
+def _parse_source(src: Any) -> Tuple[str, str]:
+    """
+    src may be:
+      - string URL
+      - dict {name, url}
+      - dict {url}
+    """
+    if isinstance(src, str):
+        return (src, src)
+    if isinstance(src, dict):
+        url = src.get("url") or src.get("feed") or src.get("link") or ""
+        name = src.get("name") or url or "source"
+        return (name, url)
+    return ("source", str(src))
+
+
+def _load_yaml_sources() -> Dict[str, Any]:
+    # This repo commonly keeps the monthly sources config under config/monthly.yml
+    # or monthly.yml at root. We tolerate both.
+    candidates = [
+        ROOT / "config" / "monthly.yml",
+        ROOT / "config" / "monthly.yaml",
+        ROOT / "monthly.yml",
+        ROOT / "monthly.yaml",
+    ]
+    for p in candidates:
+        if p.exists():
+            data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+            return data
+    raise SystemExit("ERROR: could not find monthly sources YAML (tried config/monthly.yml and monthly.yml)")
+
+
+def _resolve_index_links(url: str, *, priority: bool) -> List[str]:
+    fr = fetch_url(url, priority=priority)
+    if not fr.ok or not fr.text:
+        return []
+    # best-effort parse: links in HTML only
+    links = re.findall(r'https?://[^\s"<>]+', fr.text)
+    # very light de-dup
+    out: List[str] = []
     seen = set()
-    out: List[Item] = []
-    for it in items:
-        if it.url in seen:
+    for u in links:
+        if u in seen:
             continue
-        seen.add(it.url)
-        out.append(it)
+        seen.add(u)
+        out.append(u)
     return out
 
 
-def _jina_proxy(url: str) -> str:
-    """
-    Jina proxy can help around simple bot blocks.
-    Treat any proxy error as soft-fail.
-    """
-    u = url.strip()
-    if u.startswith("https://"):
-        return "https://r.jina.ai/https://" + u[len("https://") :]
-    if u.startswith("http://"):
-        return "https://r.jina.ai/http://" + u[len("http://") :]
-    return "https://r.jina.ai/https://" + u
+def collect_items(sources: Any, drop_log: List[str]) -> List[Item]:
+    # Normalise sources: YAML can provide a single string, a dict, or a list.
+    if isinstance(sources, str):
+        sources = [sources]
+    elif isinstance(sources, dict):
+        # tolerate {"sources":[...]} / {"url": "..."} shapes
+        if "sources" in sources and isinstance(sources["sources"], list):
+            sources = sources["sources"]
+        else:
+            sources = [sources]
 
+    items: List[Item] = []
+    now = time_now_utc()
 
-def _build_session(retries: int) -> requests.Session:
-    s = requests.Session()
-    retry = Retry(
-        total=retries,
-        connect=retries,
-        read=retries,
-        status=retries,
-        backoff_factor=0.7,
-        status_forcelist=(403, 408, 429, 500, 502, 503, 504),
-        allowed_methods=("GET", "HEAD"),
-        raise_on_status=False,
-    )
-    s.mount("https://", HTTPAdapter(max_retries=retry))
-    s.mount("http://", HTTPAdapter(max_retries=retry))
-    return s
-
-
-# Use fewer retries for fast profile; more for priority profile
-_SESSION_FAST = _build_session(int(os.getenv("RETRIES_FAST", "2")))
-_SESSION_PRIORITY = _build_session(int(os.getenv("RETRIES_PRIORITY", "4")))
-
-# Simple FIFO-ish cache
-_FETCH_CACHE: Dict[str, str] = {}
-_FETCH_CACHE_ORDER: List[str] = []
-
-
-def _cache_get(url: str) -> Optional[str]:
-    return _FETCH_CACHE.get(url)
-
-
-def _cache_put(url: str, text: str) -> None:
-    if url in _FETCH_CACHE:
-        return
-    if len(_FETCH_CACHE_ORDER) >= FETCH_CACHE_MAX:
-        old = _FETCH_CACHE_ORDER.pop(0)
-        _FETCH_CACHE.pop(old, None)
-    _FETCH_CACHE[url] = text
-    _FETCH_CACHE_ORDER.append(url)
-
-
-def _read_limited(resp: requests.Response) -> str:
-    resp.encoding = resp.encoding or "utf-8"
-    text = resp.text or ""
-    if len(text) > MAX_BYTES:
-        return text[:MAX_BYTES]
-    return text
-
-
-def fetch_url(url: str, timeout_s: Optional[int] = None) -> str:
-    """
-    Fetch a URL robustly, with caching:
-      1) direct fetch
-      2) (if bot/edge codes) try jina proxy
-    Never raises; returns "" on failure.
-    """
-    url = _norm_url(url)
-    if not _is_http_url(url):
-        return ""
-
-    cached = _cache_get(url)
-    if cached is not None:
-        return cached
-
-    is_priority = _is_priority_domain(url)
-    sess = _SESSION_PRIORITY if is_priority else _SESSION_FAST
-    timeout = timeout_s if timeout_s is not None else (TIMEOUT_PRIORITY if is_priority else TIMEOUT_FAST)
-
-    # 1) normal fetch
-    try:
-        resp = sess.get(url, headers=HEADERS, timeout=timeout, allow_redirects=True)
-        if 200 <= resp.status_code < 300:
-            txt = _read_limited(resp)
-            _cache_put(url, txt)
-            return txt
-
-        # only attempt proxy for common bot/edge errors
-        if resp.status_code not in (403, 408, 429, 500, 502, 503, 504):
-            _cache_put(url, "")
-            return ""
-    except Exception:
-        pass
-
-    # 2) proxy fetch (best-effort)
-    try:
-        proxy_url = _jina_proxy(url)
-
-        cached2 = _cache_get(proxy_url)
-        if cached2 is not None:
-            _cache_put(url, cached2)
-            return cached2
-
-        resp2 = sess.get(proxy_url, headers=HEADERS, timeout=timeout, allow_redirects=True)
-        if 200 <= resp2.status_code < 300:
-            txt2 = _read_limited(resp2)
-            _cache_put(proxy_url, txt2)
-            _cache_put(url, txt2)
-            return txt2
-
-        _cache_put(proxy_url, "")
-        _cache_put(url, "")
-        return ""
-    except Exception:
-        _cache_put(url, "")
-        return ""
-
-
-# -------------------- Date extraction --------------------
-
-
-def _infer_published_ts_from_url(u: str) -> Optional[float]:
-    """
-    Infer YYYY-MM-DD from URL patterns -> UTC timestamp.
-    """
-    m = re.search(r"[?&]date=(\d{4})-(\d{2})-(\d{2})\b", u)
-    if m:
-        y, mo, d = map(int, m.groups())
-        return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
-
-    m = re.search(r"/(\d{4})/(\d{2})/(\d{2})\b", u)
-    if m:
-        y, mo, d = map(int, m.groups())
-        return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
-
-    m = re.search(r"/(\d{4})-(\d{2})-(\d{2})\b", u)
-    if m:
-        y, mo, d = map(int, m.groups())
-        return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
-
-    m = re.search(r"(?<!\d)(\d{4})(\d{2})(\d{2})(?!\d)", u)
-    if m:
-        y, mo, d = map(int, m.groups())
-        if 1 <= mo <= 12 and 1 <= d <= 31:
-            return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
-
-    return None
-
-
-def _parse_any_date_to_ts(date_str: str) -> Optional[float]:
-    if not date_str:
-        return None
-    try:
-        dt = dtparser.parse(date_str)
-        if dt is None:
-            return None
-        if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=timezone.utc)
-        return dt.astimezone(timezone.utc).timestamp()
-    except Exception:
-        return None
-
-
-def _extract_date_from_jsonld(soup: BeautifulSoup) -> Optional[float]:
-    for tag in soup.find_all("script", attrs={"type": "application/ld+json"}):
-        raw = (tag.string or "").strip()
-        if not raw:
-            continue
-        try:
-            data = json.loads(raw)
-        except Exception:
+    for src in sources:
+        name, url = _parse_source(src)
+        if not url:
+            drop_log.append(f"bad_source\t{name}\t(empty_url)")
             continue
 
-        candidates = []
-        if isinstance(data, dict):
-            candidates = [data]
-        elif isinstance(data, list):
-            candidates = [x for x in data if isinstance(x, dict)]
+        dom = _domain(url)
+        is_priority = dom in PRIORITY_DOMAINS
 
-        for obj in candidates:
-            for k in ("datePublished", "dateCreated", "dateModified"):
-                v = obj.get(k)
-                if isinstance(v, str):
-                    ts = _parse_any_date_to_ts(v)
-                    if ts:
-                        return ts
-    return None
-
-
-def _extract_date_from_meta(soup: BeautifulSoup) -> Optional[float]:
-    meta_keys = [
-        ("property", "article:published_time"),
-        ("property", "og:published_time"),
-        ("name", "pubdate"),
-        ("name", "publishdate"),
-        ("name", "publish-date"),
-        ("name", "date"),
-        ("name", "dc.date"),
-        ("name", "dc.date.issued"),
-        ("name", "datePublished"),
-        ("itemprop", "datePublished"),
-        ("itemprop", "dateCreated"),
-        ("itemprop", "dateModified"),
-    ]
-    for attr, key in meta_keys:
-        tag = soup.find("meta", attrs={attr: key})
-        if tag and tag.get("content"):
-            ts = _parse_any_date_to_ts(tag["content"])
-            if ts:
-                return ts
-    return None
-
-
-def _extract_date_from_time_tag(soup: BeautifulSoup) -> Optional[float]:
-    t = soup.find("time")
-    if not t:
-        return None
-    if t.get("datetime"):
-        ts = _parse_any_date_to_ts(t["datetime"])
-        if ts:
-            return ts
-    txt = t.get_text(" ", strip=True)
-    return _parse_any_date_to_ts(txt)
-
-
-def _resolve_published_ts_from_article(url: str, html: Optional[str] = None) -> Optional[float]:
-    ts = _infer_published_ts_from_url(url)
-    if ts:
-        return ts
-
-    if html is None:
-        html = fetch_url(url)
-        if not html:
-            return None
-
-    soup = BeautifulSoup(html, "html.parser")
-
-    ts = _extract_date_from_jsonld(soup)
-    if ts:
-        return ts
-
-    ts = _extract_date_from_meta(soup)
-    if ts:
-        return ts
-
-    ts = _extract_date_from_time_tag(soup)
-    if ts:
-        return ts
-
-    try:
-        dt_str = find_date(html, extensive_search=True, original_date=True)
-        ts = _parse_any_date_to_ts(dt_str or "")
-        if ts:
-            return ts
-    except Exception:
-        pass
-
-    return None
-
-
-def _try_nearby_time_tag_ts(a_tag) -> Optional[float]:
-    try:
-        parent = a_tag.parent
-        for _ in range(4):
-            if parent is None:
-                break
-            t = parent.find("time")
-            if t is not None:
-                dt_attr = t.get("datetime") or t.get_text(" ", strip=True)
-                ts = _parse_any_date_to_ts(dt_attr or "")
-                if ts:
-                    return ts
-            parent = parent.parent
-    except Exception:
-        pass
-    return None
-
-
-def _find_next_index_page(soup: BeautifulSoup, base_url: str) -> Optional[str]:
-    a = soup.select_one('a[rel="next"][href]')
-    if a and a.get("href"):
-        nxt = urljoin(base_url, a.get("href"))
-        if _is_http_url(nxt):
-            return nxt
-
-    for cand in soup.select("a[href]"):
-        txt = (cand.get_text(" ", strip=True) or "").lower()
-        if txt in ("next", "older", "›", "»", ">"):
-            href = _norm_url(cand.get("href") or "")
-            if not href:
-                continue
-            nxt = urljoin(base_url, href)
-            if _is_http_url(nxt):
-                return nxt
-
-    a2 = soup.select_one('a[href].next, a[href][class*="next"], a[href][aria-label*="Next"]')
-    if a2 and a2.get("href"):
-        nxt = urljoin(base_url, a2.get("href"))
-        if _is_http_url(nxt):
-            return nxt
-
-    return None
-
-
-def _looks_like_article(url: str) -> bool:
-    """
-    Cheap heuristic to avoid resolving dates for obvious hub pages.
-    """
-    p = urlparse(url)
-    path = (p.path or "").lower().strip("/")
-    if not path:
-        return False
-    # lots of CMS articles have a year or slug depth
-    if re.search(r"/\d{4}/\d{2}/\d{2}/", p.path):
-        return True
-    if len(path.split("/")) >= 2:
-        return True
-    # avoid obvious hubs
-    if any(k in path for k in ("tag/", "category/", "topics/", "search", "events", "calendar")):
-        return False
-    return True
-
-
-# -------------------- Public API used by generator --------------------
-
-
-def fetch_rss(url: str, *, source_name: str | None = None, **_kwargs) -> list[Item]:
-    label = (source_name or "").strip() or url
-    # feedparser does its own fetching; we accept it, but keep it bounded
-    feed = feedparser.parse(url)
-    out: list[Item] = []
-
-    for e in feed.entries or []:
-        link = _norm_url(getattr(e, "link", "") or "")
-        if not _is_http_url(link):
-            continue
-        title = (getattr(e, "title", "") or "").strip()
-        if not title:
+        # Index sources can be expanded (optional heuristic)
+        if url.endswith("/") or "index" in url.lower():
+            links = _resolve_index_links(url, priority=is_priority)
+            for u in links[:220]:
+                fr = fetch_url(u, priority=is_priority)
+                if not fr.ok:
+                    drop_log.append(f"fetch_fail\t{name}\t{u}")
+                    continue
+                text = (fr.text or "").strip()
+                if len(text) < MIN_TEXT_CHARS:
+                    drop_log.append(f"too_short\t{name}\t{u}")
+                    continue
+                items.append(
+                    Item(
+                        section="",
+                        source=name,
+                        title=u,
+                        url=u,
+                        domain=_domain(u),
+                        ts=None,
+                        text=text,
+                        substance_score=0,
+                    )
+                )
             continue
 
-        ts: Optional[float] = None
-        for k in ("published", "updated", "created"):
-            v = getattr(e, k, None)
-            if isinstance(v, str):
-                ts = _parse_any_date_to_ts(v)
-                if ts:
-                    break
-
-        summary = (getattr(e, "summary", "") or "").strip()
-        summary = re.sub(r"\s+", " ", summary).strip()
-
-        out.append(Item(title=title, url=link, source=label, published_ts=ts, summary=summary))
-
-    return _dedupe_by_url(out)
-
-
-def fetch_html_index(url: str, *, source_name: str | None = None, **_kwargs) -> list[Item]:
-    """
-    HTML index crawler:
-    - bounded pagination
-    - bounded date resolution (fetch article HTML only for items missing ts)
-    - skips obvious non-articles for date resolution
-    """
-    label = (source_name or "").strip() or url
-    candidates: list[Item] = []
-    seen: set[str] = set()
-
-    dom = _domain(url)
-    selector = SELECTORS.get(dom, "a[href]")
-
-    page_url = url
-    visited_pages: set[str] = set()
-
-    for _page in range(MAX_INDEX_PAGES):
-        if page_url in visited_pages:
-            break
-        visited_pages.add(page_url)
-
-        html = fetch_url(page_url)
-        if not html:
-            break
-
-        soup = BeautifulSoup(html, "html.parser")
-
-        for a in soup.select(selector):
-            href = _norm_url(a.get("href") or "")
-            if not href:
-                continue
-            abs_u = urljoin(page_url, href)
-            if not _is_http_url(abs_u):
-                continue
-
-            low = abs_u.lower()
-            if any(low.endswith(ext) for ext in (".pdf", ".jpg", ".jpeg", ".png", ".zip")):
-                continue
-
-            title = a.get_text(" ", strip=True) or ""
-            title = re.sub(r"\s+", " ", title).strip()
-            if not title:
-                continue
-
-            if abs_u in seen:
-                continue
-            seen.add(abs_u)
-
-            ts = _infer_published_ts_from_url(abs_u)
-            if ts is None:
-                ts = _try_nearby_time_tag_ts(a)
-
-            candidates.append(Item(title=title, url=abs_u, source=label, published_ts=ts))
-
-            if len(candidates) >= MAX_LINKS_PER_INDEX:
-                break
-
-        if len(candidates) >= MAX_LINKS_PER_INDEX:
-            break
-
-        nxt = _find_next_index_page(soup, page_url)
-        if not nxt:
-            break
-        page_url = nxt
-
-    resolve_budget = MAX_DATE_RESOLVE_FETCHES_PER_INDEX
-    for it in candidates:
-        if resolve_budget <= 0:
-            break
-        if it.published_ts is not None:
-            continue
-        if not _looks_like_article(it.url):
+        # Normal fetch of feed/page
+        fr = fetch_url(url, priority=is_priority)
+        if not fr.ok:
+            drop_log.append(f"fetch_fail\t{name}\t{url}")
             continue
 
-        html = fetch_url(it.url)
-        resolve_budget -= 1
-        if not html:
+        text = (fr.text or "").strip()
+        if len(text) < (PRIORITY_MIN_CHARS if is_priority else MIN_TEXT_CHARS):
+            drop_log.append(f"too_short\t{name}\t{url}")
             continue
 
-        ts = _resolve_published_ts_from_article(it.url, html=html)
-        if ts is not None:
-            it.published_ts = ts
-
-    return _dedupe_by_url(candidates)
-
-
-def fetch_full_text(url: str, timeout_s: Optional[int] = None) -> str:
-    """
-    Returns extracted main article text (best-effort).
-    Uses cached fetch_url().
-    """
-    # Use profile timeout by default
-    if timeout_s is None:
-        timeout_s = TIMEOUT_PRIORITY if _is_priority_domain(url) else TIMEOUT_FAST
-
-    html = fetch_url(url, timeout_s=timeout_s)
-    if not html:
-        return ""
-
-    try:
-        extracted = trafilatura.extract(
-            html,
-            url=url,
-            include_comments=False,
-            include_tables=False,
-            favor_precision=True,
+        items.append(
+            Item(
+                section="",
+                source=name,
+                title=name,
+                url=url,
+                domain=_domain(url),
+                ts=None,
+                text=text,
+                substance_score=0,
+            )
         )
-        if extracted:
-            extracted = re.sub(r"\n{3,}", "\n\n", extracted).strip()
-            if extracted:
-                return extracted
-    except Exception:
-        pass
 
-    soup = BeautifulSoup(html, "html.parser")
-    txt = soup.get_text("\n", strip=True)
-    txt = re.sub(r"\n{3,}", "\n\n", txt).strip()
-    return txt
+    return items
 
 
-# Optional alias
-fetch_fulltext = fetch_full_text
+def score_substance(text: str) -> int:
+    # extremely cheap heuristic
+    t = text.lower()
+    score = 0
+    if len(t) >= 800:
+        score += 1
+    if any(k in t for k in ["aemo", "arena", "cefc", "ifrs", "efrag", "safeguard", "taxonomy", "inertia", "system strength"]):
+        score += 1
+    if any(k in t for k in ["consultation", "determination", "draft", "rule change", "final report", "exposure draft"]):
+        score += 1
+    return score
+
+
+def select_items(pool: List[Item], section: str, ym: str) -> List[Item]:
+    start_dt, end_dt = _ym_to_range(ym)
+
+    # annotate
+    candidates: List[Item] = []
+    for it in pool:
+        it.section = section
+        it.substance_score = score_substance(it.text)
+        if it.substance_score < MIN_SUBSTANCE_SCORE:
+            continue
+        if not _in_range(it.ts, start_dt, end_dt):
+            continue
+        candidates.append(it)
+
+    # per-domain cap
+    selected: List[Item] = []
+    per_dom: Dict[str, int] = {}
+    for it in candidates:
+        if len(selected) >= ITEMS_PER_SECTION:
+            break
+        c = per_dom.get(it.domain, 0)
+        if c >= MAX_PER_DOMAIN_PER_SECTION:
+            continue
+        per_dom[it.domain] = c + 1
+        selected.append(it)
+
+    return selected
+
+
+def time_now_utc() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def write_debug(path: Path, data: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if isinstance(data, (dict, list)):
+        path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    else:
+        path.write_text(str(data), encoding="utf-8")
+    if DEBUG:
+        print(f"[write] {path}")
+
+
+def generate_monthly_for(ym: str) -> None:
+    cfg = _load_yaml_sources()
+    sections = cfg.get("sections", {}) or {}
+
+    all_selected: List[Dict[str, Any]] = []
+    meta_lines: List[str] = []
+    drop_log: List[str] = []
+
+    meta_lines.append(f"ym={ym}")
+    meta_lines.append(f"MODEL={MODEL}")
+    meta_lines.append(f"ITEMS_PER_SECTION={ITEMS_PER_SECTION}")
+    meta_lines.append(f"MIN_TOTAL_ITEMS={MIN_TOTAL_ITEMS}")
+    meta_lines.append(f"ALLOW_UNDATED={ALLOW_UNDATED}")
+    meta_lines.append(f"PRIORITY_DOMAINS={','.join(PRIORITY_DOMAINS)}")
+
+    for section, sources in sections.items():
+        print(f"[section] {section}")
+
+        pool = collect_items(sources, drop_log)
+        write_debug(OUTDIR / f"debug-pool-{section.replace(' ', '_')}-{ym}.json", [it.__dict__ for it in pool])
+
+        print(f"[pool] candidates: {len(pool)}")
+
+        chosen = select_items(pool, section, ym)
+        print(f"[selected] {len(chosen)} from {section}")
+
+        for it in chosen:
+            all_selected.append(it.__dict__)
+
+    write_debug(OUTDIR / f"debug-selected-{ym}.json", all_selected)
+    write_debug(OUTDIR / f"debug-drops-{ym}.txt", "\n".join(drop_log))
+    write_debug(OUTDIR / f"debug-meta-{ym}.txt", "\n".join(meta_lines))
+
+    if len(all_selected) < MIN_TOTAL_ITEMS:
+        # Fail fast but still emit a placeholder digest file for artefacts.
+        out_md = OUTDIR / f"monthly-digest-{ym}.md"
+        out_md.write_text(
+            f"# Monthly Digest ({ym})\n\n_No items met the selection criteria for this month._\n",
+            encoding="utf-8",
+        )
+        print(f"[write] {out_md}")
+        raise SystemExit(f"ERROR: selected {len(all_selected)} items for {ym} (MIN_TOTAL_ITEMS={MIN_TOTAL_ITEMS})")
+
+    md = _call_build_digest(all_selected, ym, model=MODEL, temperature=TEMP, api_key=OPENAI_API_KEY)
+
+    out_md = OUTDIR / f"monthly-digest-{ym}.md"
+    out_md.write_text(md, encoding="utf-8")
+    print(f"[write] {out_md}")
+
+
+def _iter_months(start_ym: str, end_ym: str) -> List[str]:
+    sy, sm = [int(x) for x in start_ym.split("-")]
+    ey, em = [int(x) for x in end_ym.split("-")]
+    out: List[str] = []
+    y, m = sy, sm
+    while (y < ey) or (y == ey and m <= em):
+        out.append(f"{y:04d}-{m:02d}")
+        m += 1
+        if m == 13:
+            m = 1
+            y += 1
+    return out
+
+
+def main() -> None:
+    if MODE == "backfill-months":
+        if not START_YM or not END_YM:
+            raise SystemExit("ERROR: MODE=backfill-months requires START_YM and END_YM")
+        months = _iter_months(START_YM, END_YM)
+    else:
+        # default: run for START_YM if provided, else current month
+        months = [START_YM] if START_YM else [datetime.now().strftime("%Y-%m")]
+
+    for ym in months:
+        print(f"\n=== {ym} ({ym}-01 -> ...) ===")
+        generate_monthly_for(ym)
+
+
+if __name__ == "__main__":
+    main()
+
+# === END src/generate_monthly.py ===
