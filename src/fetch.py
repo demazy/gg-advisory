@@ -247,7 +247,7 @@ def fetch_rss(feed_url: str, source_name: str = "", **kwargs) -> List[Item]:
 def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[Item]:
     """
     Extract candidate article links from an index/listing page.
-    Lightweight (no per-link fetch). Titles come from the anchor text associated with each href.
+    We intentionally avoid heavy per-link fetches here to keep runtime bounded.
     """
     index_url = _clean_url(index_url)
     if not index_url:
@@ -257,10 +257,12 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
     if resp is None:
         return []
 
+    ctype = _content_type(resp)
     raw = _read_limited(resp, MAX_BYTES)
     if not raw:
         return []
 
+    # crude decode
     try:
         html = raw.decode(resp.encoding or "utf-8", errors="replace")
     except Exception:
@@ -268,65 +270,61 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
 
     soup = BeautifulSoup(html, "html.parser")
 
-    # Common junk anchor texts
-    junk_title_rx = re.compile(
-        r"^(skip to (main )?content|skip navigation|menu|home)$|"
-        r"(cookie|privacy|terms|subscribe|sign\s?up|login|log in|register|careers|jobs|sitemap|accessibility)",
-        re.I,
-    )
-
-    url_to_title: Dict[str, str] = {}
-
+    links: List[str] = []
     for a in soup.select("a[href]"):
         href = (a.get("href") or "").strip()
         if not href:
             continue
-        if href.startswith(("mailto:", "javascript:", "tel:")):
+        if href.startswith("mailto:") or href.startswith("javascript:"):
             continue
-
         abs_url = _clean_url(urljoin(index_url, href))
         if not abs_url:
             continue
+        # keep only http(s)
         if urlparse(abs_url).scheme not in ("http", "https"):
             continue
-
-        # Avoid self-links / same-page fragments
-        if abs_url.lower() == index_url.lower():
+        if is_probably_taxonomy_or_hub(abs_url):
             continue
+        links.append(abs_url)
 
-        text = " ".join(a.get_text(" ", strip=True).split())
-        if not text or len(text) < 12:
+    # de-dupe, keep order
+    seen = set()
+    uniq = []
+    for u in links:
+        key = u.lower()
+        if key in seen:
             continue
-        if junk_title_rx.search(text):
-            continue
+        seen.add(key)
+        uniq.append(u)
 
-        # Keep the longest (usually most descriptive) anchor text for a URL
-        prev = url_to_title.get(abs_url)
-        if (prev is None) or (len(text) > len(prev)):
-            url_to_title[abs_url] = text
-
-        if len(url_to_title) >= MAX_LINKS_PER_INDEX:
-            break
+    uniq = uniq[:MAX_LINKS_PER_INDEX]
 
     items: List[Item] = []
-    for u, t in url_to_title.items():
+    for u in uniq:
+        # title: best-effort from anchor text, else empty (filtered later)
+        t = ""
+        try:
+            # pick first matching anchor
+            a = soup.find("a", href=True, string=True)
+            if a and a.string:
+                t = a.string.strip()
+        except Exception:
+            t = ""
+
         items.append(
             Item(
                 url=u,
-                title=t,
+                title=(t or u),
                 summary="",
-                # Prefer the target URL’s domain as publisher
-                source=(urlparse(u).netloc or source_name or urlparse(index_url).netloc),
+                source=(source_name or urlparse(index_url).netloc),
                 index_url=index_url,
             )
         )
 
     return items
 
-from dateutil import parser as dtparser
-import json as _json
 
-def fetch_full_text(url: str, return_meta: bool = False, **kwargs):
+def fetch_full_text(url: str, **kwargs) -> str:
     """
     Return extracted text for a URL (HTML or PDF).
     Returns empty string on failure.
@@ -347,65 +345,46 @@ def fetch_full_text(url: str, return_meta: bool = False, **kwargs):
     if not raw:
         return ""
 
-        if is_pdf:
-        text = ...
-        return (text, {}) if return_meta else text
+    if is_pdf:
+        if fitz is None:
+            return ""
+        try:
+            doc = fitz.open(stream=raw, filetype="pdf")
+            parts = []
+            for i in range(min(doc.page_count, 25)):
+                parts.append(doc.load_page(i).get_text("text"))
+            doc.close()
+            text = "\n".join(parts).strip()
+            return text
+        except Exception:
+            return ""
 
+    # HTML extraction
     try:
         html = raw.decode(resp.encoding or "utf-8", errors="replace")
     except Exception:
         html = raw.decode("utf-8", errors="replace")
 
-    meta = {}
-    text = ""
-
-    # Prefer JSON output to capture title/date when possible
+    # trafilatura first (best signal)
     try:
-        j = trafilatura.extract(html, output_format="json", include_images=False, include_comments=False)
-        if j:
-            obj = _json.loads(j)
-            text = (obj.get("text") or "").strip()
-            meta["title"] = (obj.get("title") or "").strip() or None
-            date_s = (obj.get("date") or obj.get("date_published") or "").strip()
-            if date_s:
-                try:
-                    dt = dtparser.parse(date_s)
-                    if dt.tzinfo is None:
-                        dt = dt.replace(tzinfo=timezone.utc)
-                    dt = dt.astimezone(timezone.utc)
-                    meta["published_iso"] = dt.isoformat()
-                    meta["published_ts"] = dt.timestamp()
-                    meta["published_source"] = "trafilatura"
-                except Exception:
-                    pass
+        extracted = trafilatura.extract(
+            html,
+            include_comments=False,
+            include_tables=False,
+            favor_recall=True,
+        )
+        if extracted and extracted.strip():
+            return extracted.strip()
     except Exception:
         pass
 
-    if not text:
-        try:
-            text = (trafilatura.extract(html, include_images=False, include_comments=False) or "").strip()
-        except Exception:
-            text = ""
-
-    # Fallback metadata extractor
-    if (not meta.get("title") or not meta.get("published_ts")):
-        try:
-            md = trafi_metadata.extract_metadata(html, default_url=url)
-            if md:
-                if not meta.get("title") and getattr(md, "title", None):
-                    meta["title"] = md.title
-                if not meta.get("published_ts") and getattr(md, "date", None):
-                    try:
-                        dt = dtparser.parse(md.date)
-                        if dt.tzinfo is None:
-                            dt = dt.replace(tzinfo=timezone.utc)
-                        dt = dt.astimezone(timezone.utc)
-                        meta["published_iso"] = dt.isoformat()
-                        meta["published_ts"] = dt.timestamp()
-                        meta["published_source"] = "metadata"
-                    except Exception:
-                        pass
-        except Exception:
-            pass
-
-    return (text, meta) if return_meta else text
+    # fallback: soup text
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        for tag in soup(["script", "style", "noscript"]):
+            tag.decompose()
+        txt = soup.get_text("\n")
+        txt = re.sub(r"\n{3,}", "\n\n", txt).strip()
+        return txt
+    except Exception:
+        return ""
