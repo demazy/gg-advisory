@@ -155,87 +155,26 @@ def _looks_articleish(url: str) -> bool:
     return not any(b in u for b in bad)
 
 
-import fnmatch
-
 class Filters:
     def __init__(self, raw: Dict[str, Any]):
-        raw = raw or {}
-
-        # --- key aliases (backwards compatible with your filters.yaml) ---
-        if "deny_title_regex" not in raw and "title_deny_regex" in raw:
-            raw["deny_title_regex"] = raw.get("title_deny_regex")
-        if "deny_url_substrings" not in raw and "domain_deny_substrings" not in raw:
-            raw["deny_url_substrings"] = raw.get("deny_url_substrings", [])
-
-        self.allow_domains = [str(d).lower().strip() for d in raw.get("allow_domains", []) if str(d).strip()]
-        self.deny_domains = [str(d).lower().strip() for d in raw.get("deny_domains", []) if str(d).strip()]
-        self.deny_url_substrings = [str(s).lower() for s in raw.get("deny_url_substrings", []) if str(s).strip()]
+        self.allow_domains = [d.lower().strip() for d in raw.get("allow_domains", []) if str(d).strip()]
+        self.deny_domains = [d.lower().strip() for d in raw.get("deny_domains", []) if str(d).strip()]
+        self.deny_url_substrings = [s.lower() for s in raw.get("deny_url_substrings", []) if str(s).strip()]
         self.deny_title_regex = [re.compile(r, re.I) for r in raw.get("deny_title_regex", []) if str(r).strip()]
-
-        # domain-scoped URL deny substrings (your YAML uses this)
-        dds = raw.get("domain_deny_substrings", {}) or {}
-        self.domain_deny_substrings = {
-            str(dom).lower().strip(): [str(s).lower() for s in (subs or []) if str(s).strip()]
-            for dom, subs in dds.items()
-            if isinstance(subs, list)
-        }
-
-        # global keyword noise gate (your YAML uses keep_keywords)
-        self.keep_keywords = [str(k).lower() for k in (raw.get("keep_keywords", []) or []) if str(k).strip()]
-
         self.section_keywords = {
-            k: [str(w).lower() for w in v] for k, v in (raw.get("section_keywords", {}) or {}).items()
+            k: [w.lower() for w in v] for k, v in (raw.get("section_keywords", {}) or {}).items()
             if isinstance(v, list)
         }
 
     def domain_allowed(self, domain: str) -> bool:
-        d = (domain or "").lower()
-        if not self.allow_domains:
-            return True
-
-        for pat in self.allow_domains:
-            p = (pat or "").lower()
-            if not p:
-                continue
-
-            # "*.gov.au" => suffix match "gov.au"
-            if p.startswith("*."):
-                suf = p[2:]
-                if d == suf or d.endswith("." + suf):
-                    return True
-                continue
-
-            # allow simple globs too
-            if ("*" in p) or ("?" in p):
-                if fnmatch.fnmatch(d, p):
-                    return True
-                continue
-
-            if d == p or d.endswith("." + p):
-                return True
-
-        return False
+        d = domain.lower()
+        if self.allow_domains:
+            return any(d == a or d.endswith("." + a) for a in self.allow_domains)
+        return True
 
     def domain_denied(self, domain: str) -> bool:
-        d = (domain or "").lower()
+        d = domain.lower()
         return any(d == x or d.endswith("." + x) for x in self.deny_domains)
-
-    def url_denied(self, url: str) -> bool:
-        u = (url or "").lower()
-        if any(ss and ss in u for ss in self.deny_url_substrings):
-            return True
-        dom = normalise_domain(url)
-        for ss in self.domain_deny_substrings.get(dom, []):
-            if ss and ss in u:
-                return True
-        return False
-
-    def keep_keyword_hit(self, title: str, url: str) -> bool:
-        if not self.keep_keywords:
-            return True
-        hay = f"{title or ''} {url or ''}".lower()
-        return any(k in hay for k in self.keep_keywords if k)
-
 
 
 def _passes_filters(it: Item, flt: Filters, section: str, *, bypass_allow: bool = False) -> Tuple[bool, str]:
@@ -246,12 +185,6 @@ def _passes_filters(it: Item, flt: Filters, section: str, *, bypass_allow: bool 
 
     if is_probably_taxonomy_or_hub(url):
         return False, "hub_url"
-    if flt.url_denied(url):
-        return False, "deny_url_substring"
-
-    # Noise gate (especially important when dates are missing)
-    if not flt.keep_keyword_hit(title, url):
-        return False, "no_keep_keyword"
 
     domain = normalise_domain(url)
     if flt.domain_denied(domain):
