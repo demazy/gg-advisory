@@ -58,14 +58,6 @@
   {
     "section": "ESG Reporting",
     "title": "Skip to content",
-    "url": "https://www.ifrs.org/bin/oauth-redirect.html//content/ifrs/home/news-and-events/news.html/j_security_check?configid=ifrs-idp",
-    "publisher": "ifrs.org",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "ESG Reporting",
-    "title": "Skip to content",
     "url": "https://www.ifrs.org/bin/oauth-redirect.html//content/ifrs/home/news-and-events/updates/issb.html/j_security_check?configid=ifrs-idp",
     "publisher": "ifrs.org",
     "published": null,
@@ -75,6 +67,14 @@
     "section": "ESG Reporting",
     "title": "Skip to content",
     "url": "https://www.ifrs.org/bin/oauth-redirect.html/content/ifrs/home/news-and-events/news.html/j_security_check?configid=ifrs-idp",
+    "publisher": "ifrs.org",
+    "published": null,
+    "published_ts": null
+  },
+  {
+    "section": "ESG Reporting",
+    "title": "Skip to content",
+    "url": "https://www.ifrs.org/content/ifrs/home.html",
     "publisher": "ifrs.org",
     "published": null,
     "published_ts": null
@@ -122,7 +122,7 @@
   {
     "section": "Sustainable Finance & Investment",
     "title": "Skip to content",
-    "url": "https://www.ifrs.org/bin/oauth-redirect.html//content/ifrs/home/news-and-events/updates/issb.html/j_security_check?configid=ifrs-idp",
+    "url": "https://www.ifrs.org/bin/oauth-redirect.html/content/ifrs/home/news-and-events/updates/issb.html/j_security_check?configid=ifrs-idp",
     "publisher": "ifrs.org",
     "published": null,
     "published_ts": null
@@ -130,7 +130,7 @@
   {
     "section": "Sustainable Finance & Investment",
     "title": "Skip to content",
-    "url": "https://www.ifrs.org/bin/oauth-redirect.html/content/ifrs/home/news-and-events/updates/issb.html/j_security_check?configid=ifrs-idp",
+    "url": "https://www.ifrs.org/content/ifrs/home.html",
     "publisher": "ifrs.org",
     "published": null,
     "published_ts": null

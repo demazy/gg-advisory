@@ -322,10 +322,10 @@ not_in_allowlist	https://www.efrag.org/en/news-and-calendar/efrag-and-ifass	Skip
 not_in_allowlist	https://www.efrag.org/en/news-and-calendar/financial-reporting-publications	Skip to main content
 not_in_allowlist	https://www.efrag.org/en/news-and-calendar/meetings-calendar	Skip to main content
 not_in_allowlist	https://www.efrag.org/en/news-and-calendar/news	Skip to main content
-not_in_allowlist	https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-due-process-procedures-for-financial-reporting-activities	Skip to main content
+not_in_allowlist	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-11-february-2026	Skip to main content
 not_in_allowlist	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-conference-report-on-draft-simplified-esrs	Skip to main content
 not_in_allowlist	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-draft-comment-letter-on-the-iasbs-exposure-draft-risk-mitigation-accounting	Skip to main content
-not_in_allowlist	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-5-february-2026	Skip to main content
+not_in_allowlist	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-12-february-2026	Skip to main content
 not_in_allowlist	https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-the-new-gri-labor-standards-exposure-drafts-join-efrags-workshops	Skip to main content
 not_in_allowlist	https://www.efrag.org/en/news-and-calendar/news/new-educational-video-series-available-to-navigate-vsme-implementation	Skip to main content
 not_in_allowlist	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A103	Skip to main content
@@ -373,10 +373,10 @@ not_in_allowlist	https://www.efrag.org/en/ways-of-contributing-to-efrags-work	Sk
 not_in_allowlist	https://www.facebook.com/IFRSFoundation/	Skip to content
 not_in_allowlist	https://www.facebook.com/sharer.php?url=https://www.ifrs.org/content/ifrs/home/news-and-events/news.html	Skip to content
 not_in_allowlist	https://www.facebook.com/sharer.php?url=https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb.html	Skip to content
-per_domain_cap	https://www.ifrs.org/bin/oauth-redirect.html/content/ifrs/home/news-and-events/updates/issb.html/j_security_check?configid=ifrs-idp	Skip to content
-per_domain_cap	https://www.ifrs.org/content/dam/ifrs/about-us/legal-and-governance/legal-docs/modern-slavery-statement.pdf	Skip to content
-per_domain_cap	https://www.ifrs.org/content/dam/ifrs/about-us/legal-and-governance/legal-docs/trade-mark-guidelines.pdf	Skip to content
-per_domain_cap	https://www.ifrs.org/content/ifrs/home.html	Skip to content
+low_substance	https://www.ifrs.org/bin/oauth-redirect.html//content/ifrs/home/news-and-events/news.html/j_security_check?configid=ifrs-idp	Skip to content
+low_substance	https://www.ifrs.org/bin/oauth-redirect.html/content/ifrs/home/news-and-events/updates/issb.html/j_security_check?configid=ifrs-idp	Skip to content
+not_articleish	https://www.ifrs.org/content/dam/ifrs/about-us/legal-and-governance/legal-docs/modern-slavery-statement.pdf	Skip to content
+not_articleish	https://www.ifrs.org/content/dam/ifrs/about-us/legal-and-governance/legal-docs/trade-mark-guidelines.pdf	Skip to content
 per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/contact-us	Skip to content
 per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/contact-us.html	Skip to content
 per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/contact-us/	Skip to content
@@ -674,3 +674,6 @@ not_in_allowlist	https://www.facebook.com/IFRSFoundation/	Skip to content
 not_in_allowlist	https://www.facebook.com/arenagovau/	Skip to Content
 not_in_allowlist	https://www.facebook.com/sharer.php?url=https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb.html	Skip to content
 not_in_allowlist	https://www.global-climatescope.org/	Skip to content
+low_substance	https://www.ifrs.org/bin/oauth-redirect.html//content/ifrs/home/news-and-events/updates/issb.html/j_security_check?configid=ifrs-idp	Skip to content
+not_articleish	https://www.ifrs.org/content/dam/ifrs/about-us/legal-and-governance/legal-docs/modern-slavery-statement.pdf	Skip to content
+not_articleish	https://www.ifrs.org/content/dam/ifrs/about-us/legal-and-governance/legal-docs/trade-mark-guidelines.pdf	Skip to content
