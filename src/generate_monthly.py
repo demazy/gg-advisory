@@ -1,581 +1,583 @@
-#!/usr/bin/env python3
-"""
-Monthly digest generator.
-
-Robustness objectives:
-- Never hard-fail because config files moved (e.g., config/sources.yaml).
-- Allow explicit override via env vars SOURCES_YAML and FILTERS_YAML.
-- Provide actionable error messages when config is missing.
-"""
+# src/generate_monthly.py
 from __future__ import annotations
 
-import json
 import os
 import re
-from collections import defaultdict
-from datetime import datetime, timedelta, timezone
+import json
+import math
+import calendar
+import inspect
+import urllib.parse
 from pathlib import Path
-from typing import List, Optional, Tuple
+from datetime import datetime, timezone
+from typing import Any, Dict, List, Tuple, Optional
 
 import yaml
+from dotenv import load_dotenv
+from dateutil import parser as dtparser
 
-from .fetch import (
-    Item,
-    canonicalize_url,
-    domain_of,
-    fetch_date_only,
-    fetch_full_text,
-    fetch_html_index,
-    fetch_rss,
-)
+from .fetch import fetch_rss, fetch_html_index, fetch_full_text, Item
 from .summarise import build_digest
+from .utils import sha1, normalize_whitespace, normalise_domain
 
+load_dotenv()
 
-# ----------------------------
-# Environment configuration
-# ----------------------------
+# ----------------------- ENV / CONSTANTS -----------------------
 
-MODE = os.getenv("MODE", "monthly")  # monthly | backfill-months
-START_YM = os.getenv("START_YM", "")
-END_YM = os.getenv("END_YM", "")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
+MODEL = os.getenv("MODEL", "gpt-4o-mini")
+TEMP = float(os.getenv("TEMP", "0.2"))
+
+DEBUG = os.getenv("DEBUG", "0") == "1"
 
 ITEMS_PER_SECTION = int(os.getenv("ITEMS_PER_SECTION", "7"))
 PER_DOMAIN_CAP = int(os.getenv("PER_DOMAIN_CAP", "3"))
+MIN_TOTAL_ITEMS = int(os.getenv("MIN_TOTAL_ITEMS", "1"))
 
 MIN_TEXT_CHARS = int(os.getenv("MIN_TEXT_CHARS", "300"))
 PRIORITY_MIN_CHARS = int(os.getenv("PRIORITY_MIN_CHARS", "200"))
 
-MIN_TOTAL_ITEMS = int(os.getenv("MIN_TOTAL_ITEMS", "1"))
-DEBUG = os.getenv("DEBUG", "0") == "1"
-
-MODEL = os.getenv("MODEL", "gpt-4o-mini")
-TEMP = float(os.getenv("TEMP", "0.2"))
-
-MAX_PDF_BYTES = int(os.getenv("MAX_PDF_BYTES", str(5 * 1024 * 1024)))
-PDF_TRUSTED = [d.strip().lower() for d in os.getenv("PDF_TRUSTED", "").split(",") if d.strip()]
-PRIORITY_DOMAINS = [d.strip().lower() for d in os.getenv("PRIORITY_DOMAINS", "").split(",") if d.strip()]
-
-MAX_LINKS_PER_INDEX = int(os.getenv("MAX_LINKS_PER_INDEX", "250"))
-MAX_INDEX_PAGES = int(os.getenv("MAX_INDEX_PAGES", "5"))
-MAX_DATE_RESOLVE_FETCHES_PER_INDEX = int(os.getenv("MAX_DATE_RESOLVE_FETCHES_PER_INDEX", "75"))
-
-MAX_UNDATED_RESOLVE_PER_SECTION = int(os.getenv("MAX_UNDATED_RESOLVE_PER_SECTION", "40"))
-MAX_FULLTEXT_FETCHES_PER_SECTION = int(os.getenv("MAX_FULLTEXT_FETCHES_PER_SECTION", str(ITEMS_PER_SECTION * 20)))
-
 ALLOW_UNDATED = os.getenv("ALLOW_UNDATED", "0") == "1"
 
+PRIORITY_DOMAINS = {
+    d.strip().lower()
+    for d in os.getenv(
+        "PRIORITY_DOMAINS",
+        "aemo.com.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au,ec.europa.eu,commission.europa.eu",
+    ).split(",")
+    if d.strip()
+}
 
-# ----------------------------
-# Time helpers
-# ----------------------------
+ROOT = Path(__file__).resolve().parents[1]
+OUTDIR = ROOT / "out"
+OUTDIR.mkdir(parents=True, exist_ok=True)
 
-def _month_bounds_utc(ym: str) -> Tuple[datetime, datetime]:
-    y, m = map(int, ym.split("-"))
+# Respect env variables, but also provide robust fallbacks
+SOURCES_YAML = os.getenv("SOURCES_YAML", "config/sources.yaml")
+FILTERS_YAML = os.getenv("FILTERS_YAML", "config/filters.yaml")
+
+# ----------------------- DATE HELPERS --------------------------
+
+def _month_bounds(y: int, m: int) -> Tuple[datetime, datetime]:
     start = datetime(y, m, 1, tzinfo=timezone.utc)
-    if m == 12:
-        nxt = datetime(y + 1, 1, 1, tzinfo=timezone.utc)
-    else:
-        nxt = datetime(y, m + 1, 1, tzinfo=timezone.utc)
-    end = nxt - timedelta(seconds=1)
+    last = calendar.monthrange(y, m)[1]
+    end = datetime(y, m, last, 23, 59, 59, tzinfo=timezone.utc)
     return start, end
 
 
-def _coerce_ts(x) -> Optional[float]:
-    if x is None:
+def _month_label(y: int, m: int) -> str:
+    return datetime(y, m, 1, tzinfo=timezone.utc).strftime("%B %Y")
+
+
+def _coerce_dt(v: Any) -> Optional[datetime]:
+    if v is None:
         return None
-    if isinstance(x, (int, float)):
-        return float(x)
-    if isinstance(x, datetime):
-        dt = x if x.tzinfo else x.replace(tzinfo=timezone.utc)
-        return dt.timestamp()
-    if isinstance(x, str) and x.strip():
+    if isinstance(v, datetime):
+        dt = v
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc)
+    if isinstance(v, (int, float)):
         try:
-            dt = datetime.fromisoformat(x.replace("Z", "+00:00"))
-            dt = dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
-            return dt.timestamp()
+            return datetime.fromtimestamp(float(v), tz=timezone.utc)
+        except Exception:
+            return None
+    if isinstance(v, str):
+        s = v.strip()
+        if not s:
+            return None
+        try:
+            dt = dtparser.parse(s)
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt.astimezone(timezone.utc)
         except Exception:
             return None
     return None
 
 
-def _in_range(ts, start, end) -> bool:
-    ts2 = _coerce_ts(ts)
-    if ts2 is None:
+def _in_range(ts: Any, start: datetime, end: datetime) -> bool:
+    dt = _coerce_dt(ts)
+    if dt is None:
         return ALLOW_UNDATED
-    s2 = _coerce_ts(start)
-    e2 = _coerce_ts(end)
-    if s2 is None or e2 is None:
-        return True
-    return s2 <= ts2 <= e2
+    return start <= dt <= end
 
 
-# ----------------------------
-# Robust config loading
-# ----------------------------
+# ----------------------- CONFIG LOADING ------------------------
 
-def _read_yaml(path: Path) -> dict:
-    return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-
-
-def _candidate_paths(name_stem: str) -> List[Path]:
+def _resolve_cfg_path(path: str) -> Path:
     """
-    Search common locations.
-    Your repo uses config/, so that’s included first among folders.
+    Accept:
+      - config/sources.yaml
+      - sources.yaml
+      - /abs/path
+    Robustly resolve relative to repo root.
     """
-    folders = ("config", "configs", ".", "src", "data", "src/config", "src/configs")
-    exts = ("yaml", "yml")
-    out: List[Path] = []
-    for folder in folders:
-        for ext in exts:
-            p = Path(folder) / f"{name_stem}.{ext}" if folder != "." else Path(f"{name_stem}.{ext}")
-            out.append(p)
-    # De-dupe
-    seen = set()
-    uniq: List[Path] = []
-    for p in out:
-        s = str(p)
-        if s in seen:
-            continue
-        seen.add(s)
-        uniq.append(p)
-    return uniq
+    p = Path(path)
+    if p.is_file():
+        return p
+    # Try relative to repo root
+    p2 = (ROOT / path).resolve()
+    if p2.is_file():
+        return p2
+    # Try legacy: if someone passed just "sources.yaml" but it's in config/
+    p3 = (ROOT / "config" / path).resolve()
+    if p3.is_file():
+        return p3
+    return p2  # return best guess for error message
 
 
-def _resolve_config_path(env_var: str, name_stem: str) -> Path:
-    """
-    Priority:
-      1) env var if points to existing file
-      2) auto-discovery
-      3) clear error listing attempted paths
-    """
-    raw = (os.getenv(env_var, "") or "").strip()
-    tried: List[Path] = []
-
-    if raw:
-        p = Path(raw)
-        tried.append(p)
-        if p.exists() and p.is_file():
-            return p
-
-    for p in _candidate_paths(name_stem):
-        tried.append(p)
-        if p.exists() and p.is_file():
-            return p
-
-    tried_str = "\n".join(f"  - {p}" for p in tried)
-    raise FileNotFoundError(
-        f"Could not find {name_stem} config file.\n"
-        f"{env_var}={raw!r}\n"
-        f"Tried:\n{tried_str}\n"
-        f"Fix: commit the file to config/ (recommended) or set {env_var} to the correct path."
-    )
+def _read_yaml(path: str) -> Dict[str, Any]:
+    p = _resolve_cfg_path(path)
+    if not p.is_file():
+        raise FileNotFoundError(f"Missing YAML config: {path} (resolved to: {p})")
+    return yaml.safe_load(p.read_text(encoding="utf-8")) or {}
 
 
-def _load_config() -> Tuple[dict, dict]:
-    sources_path = _resolve_config_path("SOURCES_YAML", "sources")
-    filters_path = _resolve_config_path("FILTERS_YAML", "filters")
-    return _read_yaml(sources_path), _read_yaml(filters_path)
+def _load_config() -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    return _read_yaml(SOURCES_YAML), _read_yaml(FILTERS_YAML)
 
 
-# ----------------------------
-# Selection utilities
-# ----------------------------
+# ----------------------- URL NORMALISATION ---------------------
 
-def _norm_domain(d: str) -> str:
-    d = (d or "").strip().lower()
-    return d[4:] if d.startswith("www.") else d
+_UTM_KEYS = {
+    "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
+    "utm_id", "utm_name", "utm_reader",
+    "fbclid", "gclid", "mc_cid", "mc_eid",
+}
 
+def _canonical_url(url: str) -> str:
+    try:
+        u = urllib.parse.urlsplit(url.strip())
+    except Exception:
+        return url.strip()
 
-def _priority_bonus(domain: str) -> int:
-    d = _norm_domain(domain)
-    for p in PRIORITY_DOMAINS:
-        p2 = _norm_domain(p)
-        if d == p2 or d.endswith("." + p2):
-            return 2
-    return 0
+    # strip fragment
+    fragmentless = urllib.parse.SplitResult(u.scheme, u.netloc, u.path, u.query, "")
+    # strip common tracking params
+    q = urllib.parse.parse_qsl(fragmentless.query, keep_blank_values=True)
+    q2 = [(k, v) for (k, v) in q if k.lower() not in _UTM_KEYS]
+    query = urllib.parse.urlencode(q2, doseq=True)
 
+    # normalise netloc
+    netloc = fragmentless.netloc.lower()
+    if netloc.startswith("www."):
+        netloc = netloc[4:]
 
-def _quick_score(text: str, url: str, section_kw: List[str], global_kw: List[str]) -> int:
-    t = (text or "").lower()
-    u = (url or "").lower()
-    score = 0
-    for kw in section_kw:
-        if kw and kw.lower() in t:
-            score += 4
-    for kw in global_kw:
-        if kw and kw.lower() in t:
-            score += 1
-    if re.search(r"/(news|media|press|insights|blog|articles|publications|updates)/", u):
-        score += 1
-    if re.search(r"/20\d{2}/\d{1,2}/", u):
-        score += 1
-    if u.endswith(".pdf") or ".pdf?" in u:
-        score -= 1
-    return score
+    return urllib.parse.urlunsplit((fragmentless.scheme, netloc, fragmentless.path, query, ""))
 
 
-def _passes_filters(
-    it: Item,
-    *,
-    allow_domains: List[str],
-    deny_domains: List[str],
-    title_deny_regex: List[str],
-    keep_keywords: List[str],
-    section_keywords: List[str],
-) -> Tuple[bool, str, int]:
-    it.url = canonicalize_url(it.url)
-    it.domain = _norm_domain(it.domain or domain_of(it.url))
+# ----------------------- RELEVANCE SCORING ---------------------
 
-    # Domain allow/deny (simple suffix match)
-    if deny_domains:
-        for d in deny_domains:
-            d2 = _norm_domain(d)
-            if it.domain == d2 or it.domain.endswith("." + d2):
-                return (False, "domain_denied", 0)
-    if allow_domains:
-        ok = False
-        for d in allow_domains:
-            d2 = _norm_domain(d)
-            if it.domain == d2 or it.domain.endswith("." + d2):
-                ok = True
-                break
-        if not ok:
-            return (False, "domain_not_allowed", 0)
-
-    title = (it.title or "").strip()
-    for pat in title_deny_regex or []:
+def _compile_regexes(patterns: List[str]) -> List[re.Pattern]:
+    out: List[re.Pattern] = []
+    for p in patterns:
         try:
-            if pat and re.search(pat, title, re.I):
-                return (False, "title_denied", 0)
+            out.append(re.compile(p, re.I))
         except re.error:
+            # ignore bad regexes rather than breaking the run
             continue
-
-    blob = " ".join([title, (it.summary or "")]).strip()
-    qs = _quick_score(blob, it.url, section_keywords, keep_keywords)
-
-    if keep_keywords:
-        has_any = any(kw.lower() in blob.lower() for kw in keep_keywords if kw)
-        if (not has_any) and qs <= 0 and _priority_bonus(it.domain) == 0:
-            return (False, "no_keyword_signal", qs)
-
-    return (True, "ok", qs)
-
-
-# ----------------------------
-# Pool building / fetching
-# ----------------------------
-
-def _build_pool_for_section(section: str, section_cfg: dict) -> List[Item]:
-    pool: List[Item] = []
-    for feed_url in (section_cfg.get("rss") or []):
-        try:
-            for it in fetch_rss(feed_url):
-                it.section = section
-                it.source = feed_url
-                pool.append(it)
-        except Exception as e:
-            print(f"[warn] source error: {feed_url} -> {e}")
-
-    for index_url in (section_cfg.get("html") or []):
-        try:
-            for it in fetch_html_index(
-                index_url,
-                max_links=MAX_LINKS_PER_INDEX,
-                max_pages=MAX_INDEX_PAGES,
-                date_resolve_budget=MAX_DATE_RESOLVE_FETCHES_PER_INDEX,
-            ):
-                it.section = section
-                it.source = index_url
-                pool.append(it)
-        except Exception as e:
-            print(f"[warn] source error: {index_url} -> {e}")
-
-    seen = set()
-    uniq: List[Item] = []
-    for it in pool:
-        it.url = canonicalize_url(it.url)
-        if it.url in seen:
-            continue
-        seen.add(it.url)
-        it.domain = _norm_domain(it.domain or domain_of(it.url))
-        uniq.append(it)
-
-    return uniq
-
-
-def _fetch_text_for_candidates(candidates: List[Item], max_fetches: int) -> List[Item]:
-    if not candidates:
-        return []
-    take = candidates[:max_fetches]
-
-    from concurrent.futures import ThreadPoolExecutor, as_completed
-
-    def _one(it: Item) -> Item:
-        text, dt, _mime = fetch_full_text(it.url, max_pdf_bytes=MAX_PDF_BYTES)
-        if dt and it.published is None:
-            it.published = dt
-        it.fetched_text = text or ""
-        return it
-
-    out: List[Item] = []
-    with ThreadPoolExecutor(max_workers=8) as ex:
-        futs = [ex.submit(_one, it) for it in take]
-        for fut in as_completed(futs):
-            out.append(fut.result())
-
-    order = {it.url: i for i, it in enumerate(take)}
-    out.sort(key=lambda it: order.get(it.url, 10**9))
     return out
 
 
-def _resolve_undated_items(items: List[Item], budget: int) -> None:
-    undated = [it for it in items if it.published is None]
-    if not undated or budget <= 0:
-        return
+def _text_substance_score(text: str) -> int:
+    """
+    Cheap heuristic to reward “real” policy/market content vs fluff.
+    """
+    t = (text or "").lower()
+    score = 0
+    # signals
+    if "consultation" in t or "exposure draft" in t or "draft" in t:
+        score += 2
+    if "determination" in t or "decision" in t or "final" in t:
+        score += 2
+    if "rule" in t or "amendment" in t or "standard" in t:
+        score += 2
+    if "guidance" in t:
+        score += 1
+    if "funding" in t or "grant" in t or "investment" in t:
+        score += 2
+    if "auction" in t or "tender" in t or "cfds" in t or "contract for difference" in t:
+        score += 2
+    # numeric density often correlates with substance
+    if sum(ch.isdigit() for ch in t) >= 8:
+        score += 1
+    return score
 
-    from concurrent.futures import ThreadPoolExecutor, as_completed
 
-    take = undated[:budget]
-    with ThreadPoolExecutor(max_workers=10) as ex:
-        futs = {ex.submit(fetch_date_only, it.url): it for it in take}
-        for fut in as_completed(futs):
-            it = futs[fut]
+def _keyword_hits(text: str, keywords: List[str]) -> int:
+    t = (text or "").lower()
+    hits = 0
+    for kw in keywords:
+        k = (kw or "").strip().lower()
+        if not k:
+            continue
+        if k in t:
+            hits += 1
+    return hits
+
+
+def _age_penalty(published: Optional[datetime], month_start: datetime, month_end: datetime) -> float:
+    """
+    Prefer items in-range; softly penalize a bit outside range (when date parsing is imperfect).
+    """
+    if published is None:
+        return 0.25 if ALLOW_UNDATED else 1.0
+    if month_start <= published <= month_end:
+        return 0.0
+    # distance in days
+    d = abs((published - month_end).total_seconds()) / 86400.0
+    return min(2.0, 0.15 * math.log1p(d))
+
+
+def _score_item(
+    it: Item,
+    *,
+    section: str,
+    month_start: datetime,
+    month_end: datetime,
+    allow_domains: set[str],
+    deny_domains: set[str],
+    title_deny: List[re.Pattern],
+    keep_keywords: List[str],
+) -> float:
+    url = it.url or ""
+    dom = normalise_domain(url)
+
+    # domain allow/deny
+    if allow_domains and dom not in allow_domains:
+        return -9999.0
+    if deny_domains and dom in deny_domains:
+        return -9999.0
+
+    title = normalize_whitespace(it.title or "")
+    summ = normalize_whitespace(it.summary or "")
+    blob = f"{title}\n{summ}".lower()
+
+    # title deny patterns
+    for rx in title_deny:
+        if rx.search(title):
+            return -9999.0
+
+    score = 0.0
+
+    # priority domain boost
+    if dom in PRIORITY_DOMAINS:
+        score += 2.0
+
+    # keyword hits boost
+    kh = _keyword_hits(blob, keep_keywords)
+    score += min(3.0, 0.75 * kh)
+
+    # section hint: encourage section label words (cheap but helps)
+    sec_tokens = [w.lower() for w in re.findall(r"[A-Za-z]{3,}", section)]
+    score += min(1.0, 0.2 * _keyword_hits(blob, sec_tokens))
+
+    # substance boost
+    score += 0.5 * _text_substance_score(blob)
+
+    # prefer longer summaries a bit (but cap)
+    score += min(1.25, len(summ) / 800.0)
+
+    # recency/in-range
+    pub = _coerce_dt(it.published_ts)
+    score -= _age_penalty(pub, month_start, month_end)
+
+    return score
+
+
+# ----------------------- DIGEST BUILD ADAPTER ------------------
+
+def _call_build_digest(*, items: List[Dict[str, Any]], year: int, month: int) -> str:
+    """
+    Your summarise.build_digest currently expects:
+      build_digest(model, api_key, items, temp, date_label)
+
+    But we keep this adapter robust if you later change the signature.
+    """
+    date_label = _month_label(year, month)
+
+    sig = None
+    try:
+        sig = inspect.signature(build_digest)
+    except Exception:
+        sig = None
+
+    # Try keyword route first if supported
+    if sig is not None:
+        params = set(sig.parameters.keys())
+        kw: Dict[str, Any] = {}
+
+        # Common names we’ve seen / might use later
+        if "model" in params:
+            kw["model"] = MODEL
+        if "api_key" in params:
+            kw["api_key"] = OPENAI_API_KEY
+        if "items" in params:
+            kw["items"] = items
+        if "temp" in params:
+            kw["temp"] = TEMP
+        if "temperature" in params:
+            kw["temperature"] = TEMP
+        if "date_label" in params:
+            kw["date_label"] = date_label
+        if "ym" in params:
+            kw["ym"] = f"{year:04d}-{month:02d}"
+
+        # Only call with kwargs if it looks compatible
+        if "items" in params:
             try:
-                it.published = fut.result()
-            except Exception:
-                it.published = None
+                return build_digest(**kw)  # type: ignore[arg-type]
+            except TypeError:
+                pass  # fallback to positional
+
+    # Positional fallback for the known-good signature
+    return build_digest(MODEL, OPENAI_API_KEY, items, TEMP, date_label)  # type: ignore[misc]
 
 
-# ----------------------------
-# Debug outputs
-# ----------------------------
+# ----------------------- MAIN PIPELINE -------------------------
 
-def _write_debug_pool(section: str, ym: str, pool: List[Item]) -> None:
-    if not DEBUG:
-        return
-    out_dir = Path("out")
-    out_dir.mkdir(parents=True, exist_ok=True)
-    p = out_dir / f"debug-pool-{section.replace(' ', '_')}-{ym}.json"
-    p.write_text(json.dumps([it.to_dict() for it in pool], ensure_ascii=False, indent=2), encoding="utf-8")
+def _debug_write(path: Path, data: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if isinstance(data, (dict, list)):
+        path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    else:
+        path.write_text(str(data), encoding="utf-8")
 
 
-def _write_debug_selected(ym: str, selected: List[Item]) -> None:
-    out_dir = Path("out")
-    out_dir.mkdir(parents=True, exist_ok=True)
-    p = out_dir / f"debug-selected-{ym}.json"
-    p.write_text(json.dumps([it.to_dict() for it in selected], ensure_ascii=False, indent=2), encoding="utf-8")
+def _item_to_dict(it: Item, section: str, full_text: str | None = None) -> Dict[str, Any]:
+    return {
+        "section": section,
+        "url": it.url,
+        "domain": normalise_domain(it.url),
+        "title": normalize_whitespace(it.title or ""),
+        "summary": normalize_whitespace(it.summary or ""),
+        "published": (_coerce_dt(it.published_ts).isoformat() if _coerce_dt(it.published_ts) else None),
+        "full_text": (full_text or ""),
+        "id": sha1(_canonical_url(it.url)),
+    }
 
 
-def _write_debug_drops(ym: str, drops: List[Tuple[str, str]]) -> None:
-    out_dir = Path("out")
-    out_dir.mkdir(parents=True, exist_ok=True)
-    p = out_dir / f"debug-drops-{ym}.txt"
-    lines = ["reason\tmeta\turl"]
-    for reason, url in drops:
-        lines.append(f"{reason}\t\t{url}")
-    p.write_text("\n".join(lines) + "\n", encoding="utf-8")
+def _passes_length_floor(dom: str, text: str) -> bool:
+    n = len(text or "")
+    if dom in PRIORITY_DOMAINS:
+        return n >= PRIORITY_MIN_CHARS
+    return n >= MIN_TEXT_CHARS
 
-
-def _write_debug_meta(ym: str, meta: dict) -> None:
-    out_dir = Path("out")
-    out_dir.mkdir(parents=True, exist_ok=True)
-    p = out_dir / f"debug-meta-{ym}.txt"
-    p.write_text(json.dumps(meta, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-
-
-def _write_digest(ym: str, md: str) -> Path:
-    out_dir = Path("out")
-    out_dir.mkdir(parents=True, exist_ok=True)
-    p = out_dir / f"monthly-digest-{ym}.md"
-    p.write_text(md, encoding="utf-8")
-    return p
-
-
-# ----------------------------
-# Selection per section
-# ----------------------------
 
 def _select_for_section(
     section: str,
-    pool: List[Item],
+    items: List[Item],
     *,
-    filters_cfg: dict,
-    start_dt: datetime,
-    end_dt: datetime,
-) -> Tuple[List[Item], List[Tuple[str, str]]]:
-    allow_domains = filters_cfg.get("allow_domains") or []
-    deny_domains = filters_cfg.get("deny_domains") or []
-    title_deny_regex = filters_cfg.get("title_deny_regex") or []
+    month_start: datetime,
+    month_end: datetime,
+    filters_cfg: Dict[str, Any],
+) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
+    allow_domains = {d.lower() for d in (filters_cfg.get("allow_domains") or [])}
+    deny_domains = {d.lower() for d in (filters_cfg.get("deny_domains") or [])}
+    title_deny = _compile_regexes(filters_cfg.get("title_deny_regex") or [])
     keep_keywords = filters_cfg.get("keep_keywords") or []
-    section_kw_map = filters_cfg.get("section_keywords") or {}
-    section_keywords = section_kw_map.get(section, []) or []
 
-    passed: List[Tuple[Item, int]] = []
-    drops: List[Tuple[str, str]] = []
-
-    for it in pool:
-        ok, reason, qs = _passes_filters(
+    scored: List[Tuple[float, Item]] = []
+    for it in items:
+        it.url = _canonical_url(it.url)
+        s = _score_item(
             it,
+            section=section,
+            month_start=month_start,
+            month_end=month_end,
             allow_domains=allow_domains,
             deny_domains=deny_domains,
-            title_deny_regex=title_deny_regex,
+            title_deny=title_deny,
             keep_keywords=keep_keywords,
-            section_keywords=section_keywords,
         )
-        if not ok:
-            drops.append((reason, it.url))
-            continue
-        passed.append((it, qs))
+        if s > -1000:
+            scored.append((s, it))
 
-    _resolve_undated_items([it for it, _ in passed], budget=MAX_UNDATED_RESOLVE_PER_SECTION)
+    scored.sort(key=lambda x: x[0], reverse=True)
 
-    in_range: List[Tuple[Item, int]] = []
-    for it, qs in passed:
-        if _in_range(it.published, start_dt, end_dt):
-            in_range.append((it, qs))
-        else:
-            drops.append(("out_of_range", it.url))
+    chosen: List[Dict[str, Any]] = []
+    per_domain: Dict[str, int] = {}
+    drops: List[str] = []
 
-    in_range.sort(
-        key=lambda x: (
-            -_priority_bonus(x[0].domain),
-            -x[1],
-            -(x[0].published.timestamp() if x[0].published else 0.0),
-        )
-    )
-
-    fetched = _fetch_text_for_candidates([it for it, _ in in_range], MAX_FULLTEXT_FETCHES_PER_SECTION)
-
-    eligible: List[Item] = []
-    for it in fetched:
-        n = len(it.fetched_text or "")
-        if _priority_bonus(it.domain) > 0:
-            if n >= PRIORITY_MIN_CHARS:
-                eligible.append(it)
-            else:
-                drops.append(("too_short_priority", it.url))
-        else:
-            if n >= MIN_TEXT_CHARS:
-                eligible.append(it)
-            else:
-                drops.append(("too_short", it.url))
-
-    def final_key(it: Item) -> Tuple[int, int, float, int]:
-        blob = " ".join([(it.title or ""), (it.summary or ""), (it.fetched_text or "")[:500]])
-        qs = _quick_score(blob, it.url, section_keywords, keep_keywords)
-        return (
-            _priority_bonus(it.domain),
-            qs,
-            it.published.timestamp() if it.published else 0.0,
-            len(it.fetched_text or ""),
-        )
-
-    eligible.sort(key=final_key, reverse=True)
-
-    selected: List[Item] = []
-    per_domain = defaultdict(int)
-    for it in eligible:
-        if len(selected) >= ITEMS_PER_SECTION:
+    # Controlled relaxation: if not enough selected, we do a second pass later.
+    for s, it in scored:
+        if len(chosen) >= ITEMS_PER_SECTION:
             break
-        if per_domain[it.domain] >= PER_DOMAIN_CAP:
-            drops.append(("domain_cap", it.url))
+
+        dom = normalise_domain(it.url)
+        per_domain.setdefault(dom, 0)
+        if per_domain[dom] >= max(1, PER_DOMAIN_CAP):
+            drops.append(f"cap_domain\t{dom}\t{it.url}")
             continue
-        per_domain[it.domain] += 1
-        selected.append(it)
 
-    return selected, drops
+        # Fetch full text (main cost) only when item is a plausible candidate
+        try:
+            full_text = fetch_full_text(it.url) or ""
+        except Exception as e:
+            drops.append(f"fetch_error\t{dom}\t{it.url}\t{type(e).__name__}:{e}")
+            continue
+
+        if not _in_range(it.published_ts, month_start, month_end):
+            drops.append(f"out_of_range\t{dom}\t{it.url}")
+            continue
+
+        if not _passes_length_floor(dom, full_text):
+            drops.append(f"too_short\t{dom}\t{it.url}\tlen={len(full_text)}")
+            continue
+
+        chosen.append(_item_to_dict(it, section, full_text=full_text))
+        per_domain[dom] += 1
+
+    meta = {
+        "section": section,
+        "candidates": len(items),
+        "scored": len(scored),
+        "selected": len(chosen),
+        "drops": len(drops),
+    }
+    return chosen, {"meta": meta, "drops": drops}
 
 
-# ----------------------------
-# Main generation
-# ----------------------------
+def _fetch_section_pool(section_cfg: Dict[str, Any]) -> List[Item]:
+    pool: List[Item] = []
+    for url in section_cfg.get("rss", []) or []:
+        pool.extend(fetch_rss(url))
+    for url in section_cfg.get("html", []) or []:
+        pool.extend(fetch_html_index(url))
+    return pool
 
-def generate_for_month(ym: str) -> Path:
+
+def generate_for_month(ym: str) -> None:
+    y, m = [int(x) for x in ym.split("-")]
+    start, end = _month_bounds(y, m)
     sources_cfg, filters_cfg = _load_config()
-    start_dt, end_dt = _month_bounds_utc(ym)
 
-    print(f"\n=== {ym} ({start_dt.date()} -> {end_dt.date()}) ===")
+    sections = (sources_cfg.get("sections") or {})
+    selected_all: List[Dict[str, Any]] = []
+    debug_meta_lines: List[str] = []
+    debug_drops_lines: List[str] = []
 
-    selected_all: List[Item] = []
-    drops_all: List[Tuple[str, str]] = []
+    # First pass (strict)
+    for section, cfg in sections.items():
+        pool = _fetch_section_pool(cfg)
+        print(f"[pool] {section}: candidates: {len(pool)}")
 
-    sections = sources_cfg.get("sections") or {}
-    for section, section_cfg in sections.items():
-        print(f"[section] {section}")
-        pool = _build_pool_for_section(section, section_cfg)
-        _write_debug_pool(section, ym, pool)
-        print(f"[pool] candidates: {len(pool)}")
-
-        selected, drops = _select_for_section(
+        chosen, dbg = _select_for_section(
             section,
             pool,
+            month_start=start,
+            month_end=end,
             filters_cfg=filters_cfg,
-            start_dt=start_dt,
-            end_dt=end_dt,
         )
-        print(f"[selected] {len(selected)} from {section}")
-        selected_all.extend(selected)
-        drops_all.extend(drops)
+        selected_all.extend(chosen)
+
+        debug_meta_lines.append(f"{section}\tcandidates={dbg['meta']['candidates']}\tselected={dbg['meta']['selected']}\tdrops={dbg['meta']['drops']}")
+        debug_drops_lines.extend([f"{section}\t{line}" for line in dbg["drops"]])
+
+        if DEBUG:
+            _debug_write(OUTDIR / f"debug-pool-{section.replace(' ', '_')}-{ym}.json", [ _item_to_dict(it, section) for it in pool ])
+
+        print(f"[selected] {len(chosen)} from {section}")
+
+    # If too few items overall, relax in a controlled way:
+    #  1) allow undated temporarily
+    #  2) lower length floor slightly
+    # But do NOT remove title/domain filters.
+    if len(selected_all) < MIN_TOTAL_ITEMS:
+        print(f"[warn] Only {len(selected_all)} items selected; attempting controlled relaxation")
+
+        global ALLOW_UNDATED
+        prev_allow_undated = ALLOW_UNDATED
+        ALLOW_UNDATED = True
+
+        prev_min = MIN_TEXT_CHARS
+        prev_prio_min = PRIORITY_MIN_CHARS
+        # small reduction only
+        relaxed_min = max(150, int(prev_min * 0.75))
+        relaxed_prio = max(120, int(prev_prio_min * 0.8))
+
+        try:
+            # Temporarily override floors
+            globals()["MIN_TEXT_CHARS"] = relaxed_min
+            globals()["PRIORITY_MIN_CHARS"] = relaxed_prio
+
+            selected_all_2: List[Dict[str, Any]] = []
+            debug_meta_lines.append(f"RELAX\tALLOW_UNDATED=1\tMIN_TEXT_CHARS={relaxed_min}\tPRIORITY_MIN_CHARS={relaxed_prio}")
+
+            for section, cfg in sections.items():
+                pool = _fetch_section_pool(cfg)
+                chosen, _dbg = _select_for_section(
+                    section,
+                    pool,
+                    month_start=start,
+                    month_end=end,
+                    filters_cfg=filters_cfg,
+                )
+                selected_all_2.extend(chosen)
+
+            # Merge dedup by canonical URL id
+            seen = set()
+            merged: List[Dict[str, Any]] = []
+            for d in (selected_all + selected_all_2):
+                if d["id"] in seen:
+                    continue
+                seen.add(d["id"])
+                merged.append(d)
+
+            selected_all = merged
+        finally:
+            ALLOW_UNDATED = prev_allow_undated
+            globals()["MIN_TEXT_CHARS"] = prev_min
+            globals()["PRIORITY_MIN_CHARS"] = prev_prio_min
+
+    # Persist debug outputs
+    _debug_write(OUTDIR / f"debug-selected-{ym}.json", selected_all)
+    _debug_write(OUTDIR / f"debug-meta-{ym}.txt", "\n".join(debug_meta_lines) + "\n")
+    _debug_write(OUTDIR / f"debug-drops-{ym}.txt", "\n".join(debug_drops_lines) + "\n")
 
     if len(selected_all) < MIN_TOTAL_ITEMS:
-        raise SystemExit(
-            f"ERROR: selected items is {len(selected_all)} but MIN_TOTAL_ITEMS={MIN_TOTAL_ITEMS}. "
-            "Failing run to avoid publishing placeholder."
-        )
+        raise SystemExit(f"ERROR: selected items is {len(selected_all)} but MIN_TOTAL_ITEMS={MIN_TOTAL_ITEMS}")
 
-    md = build_digest(ym=ym, items=selected_all, model=MODEL, temperature=TEMP)
-    out_path = _write_digest(ym, md)
+    # Build digest markdown (FIXED: robust adapter)
+    md = _call_build_digest(items=selected_all, year=y, month=m)
 
-    _write_debug_selected(ym, selected_all)
-    _write_debug_drops(ym, drops_all)
-    _write_debug_meta(
-        ym,
-        meta={
-            "ym": ym,
-            "mode": MODE,
-            "items_per_section": ITEMS_PER_SECTION,
-            "per_domain_cap": PER_DOMAIN_CAP,
-            "min_text_chars": MIN_TEXT_CHARS,
-            "priority_min_chars": PRIORITY_MIN_CHARS,
-            "priority_domains": PRIORITY_DOMAINS,
-            "allow_undated": ALLOW_UNDATED,
-            "max_links_per_index": MAX_LINKS_PER_INDEX,
-            "max_index_pages": MAX_INDEX_PAGES,
-            "max_date_resolve_fetches_per_index": MAX_DATE_RESOLVE_FETCHES_PER_INDEX,
-            "max_undated_resolve_per_section": MAX_UNDATED_RESOLVE_PER_SECTION,
-            "max_fulltext_fetches_per_section": MAX_FULLTEXT_FETCHES_PER_SECTION,
-            "sources_yaml": str(_resolve_config_path("SOURCES_YAML", "sources")),
-            "filters_yaml": str(_resolve_config_path("FILTERS_YAML", "filters")),
-        },
-    )
-
-    print(f"[write] {out_path.resolve()}")
-    return out_path
+    out_path = OUTDIR / f"monthly-digest-{ym}.md"
+    out_path.write_text(md, encoding="utf-8")
+    print(f"[write] {out_path}")
 
 
 def _iter_months(start_ym: str, end_ym: str) -> List[str]:
-    sy, sm = map(int, start_ym.split("-"))
-    ey, em = map(int, end_ym.split("-"))
-    months: List[str] = []
+    sy, sm = [int(x) for x in start_ym.split("-")]
+    ey, em = [int(x) for x in end_ym.split("-")]
+    months = []
     y, m = sy, sm
-    while (y, m) <= (ey, em):
+    while (y < ey) or (y == ey and m <= em):
         months.append(f"{y:04d}-{m:02d}")
         m += 1
-        if m > 12:
-            y += 1
+        if m == 13:
             m = 1
+            y += 1
     return months
 
 
 def main() -> None:
-    if MODE == "backfill-months":
-        if not START_YM or not END_YM:
+    mode = os.getenv("MODE", "backfill-months")
+
+    if mode == "backfill-months":
+        start_ym = os.getenv("START_YM")
+        end_ym = os.getenv("END_YM")
+        if not start_ym or not end_ym:
             raise SystemExit("MODE=backfill-months requires START_YM and END_YM")
-        for ym in _iter_months(START_YM, END_YM):
+        for ym in _iter_months(start_ym, end_ym):
+            print(f"\n=== {ym} ({ym}-01 -> {ym}-??) ===")
             generate_for_month(ym)
         return
 
-    ym = START_YM or datetime.now(timezone.utc).strftime("%Y-%m")
+    # Default: single month from YM env
+    ym = os.getenv("YM")
+    if not ym:
+        raise SystemExit("Set YM=YYYY-MM or MODE=backfill-months with START_YM/END_YM")
     generate_for_month(ym)
 
 
