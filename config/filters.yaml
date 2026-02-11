@@ -61,6 +61,14 @@ allow_domains:
 
 deny_domains: []
 
+domain_deny_substrings:
+  arena.gov.au:
+    - "/renewable-energy/"
+  cefc.com.au:
+    - "/where-we-invest/"
+  ifrs.org:
+    - "/content/ifrs/home"
+
 title_deny_regex:
   - "(cookie|privacy|terms|subscribe|sign\\s?up|login|careers|jobs)"
   - "(webinar|event|tickets|conference|register)"
