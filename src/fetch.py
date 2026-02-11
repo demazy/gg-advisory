@@ -1,553 +1,528 @@
-# src/generate_monthly.py
-# Full debug-enabled generator for monthly digests (robust date coercion)
+# src/fetch.py
+# Robust fetch layer for monthly digest pipeline (RSS + HTML index + full text + PDF)
+# IMPORTANT: must NOT import from .fetch anywhere in this file (avoids circular import)
 
 from __future__ import annotations
 
 import os
 import re
-import json
-import calendar
+import html
+import time
 import urllib.parse
-from pathlib import Path
+from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Tuple
 
-from dotenv import load_dotenv
+import requests
+import feedparser
+from bs4 import BeautifulSoup
 from dateutil import parser as dtparser
+from requests.adapters import HTTPAdapter
 
-from .fetch import fetch_rss, fetch_html_index, fetch_full_text, Item
-from .summarise import build_digest
-from .utils import sha1, normalize_whitespace, normalise_domain
+try:
+    # Comes via trafilatura deps; helps infer publish dates
+    from htmldate import find_date  # type: ignore
+except Exception:  # pragma: no cover
+    find_date = None
 
-load_dotenv()
+try:
+    import trafilatura  # type: ignore
+except Exception:  # pragma: no cover
+    trafilatura = None
 
-# ----------------------- ENV / CONSTANTS -----------------------
+try:
+    import fitz  # PyMuPDF
+except Exception:  # pragma: no cover
+    fitz = None
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-MODEL = os.getenv("MODEL", "gpt-4o-mini")
-TEMP = float(os.getenv("TEMP", "0.2"))
 
-MIN_TEXT_CHARS = int(os.getenv("MIN_TEXT_CHARS", "700"))
-ITEMS_PER_SECTION = int(os.getenv("ITEMS_PER_SECTION", "4"))
-PER_DOMAIN_CAP = int(os.getenv("PER_DOMAIN_CAP", "3"))
-MIN_TOTAL_ITEMS = int(os.getenv("MIN_TOTAL_ITEMS", "2"))
-DEBUG = os.getenv("DEBUG", "0") == "1"
+# ----------------------------- Data model -----------------------------
 
-MIN_SUBSTANCE_SCORE = int(os.getenv("MIN_SUBSTANCE_SCORE", "2"))
-MAX_PER_DOMAIN_PER_SECTION = int(os.getenv("MAX_PER_DOMAIN_PER_SECTION", "1"))
+@dataclass
+class Item:
+    title: str
+    url: str
+    source: str
+    published_ts: Optional[Any] = None  # datetime | float | str | None (generate_monthly coerces)
+    summary: str = ""
 
-# Trusted short-content domains can have a lower character floor
-PRIORITY_DOMAINS = {
+
+# ----------------------------- Environment -----------------------------
+
+_UA = os.getenv(
+    "HTTP_USER_AGENT",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36",
+)
+_TIMEOUT = int(os.getenv("HTTP_TIMEOUT", "25"))
+_MAX_BYTES = int(os.getenv("HTTP_MAX_BYTES", str(8 * 1024 * 1024)))  # max HTML bytes to read
+_MAX_PDF_BYTES = int(os.getenv("MAX_PDF_BYTES", str(5 * 1024 * 1024)))
+
+MAX_LINKS_PER_INDEX = int(os.getenv("MAX_LINKS_PER_INDEX", "200"))
+MAX_INDEX_PAGES = int(os.getenv("MAX_INDEX_PAGES", "1"))
+MAX_DATE_RESOLVE_FETCHES_PER_INDEX = int(os.getenv("MAX_DATE_RESOLVE_FETCHES_PER_INDEX", "0"))
+
+# If set, we only parse PDFs hosted on these domains
+PDF_TRUSTED = {
     d.strip().lower()
-    for d in os.getenv(
-        "PRIORITY_DOMAINS",
-        "aemo.com.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au,ec.europa.eu,commission.europa.eu",
-    ).split(",")
+    for d in os.getenv("PDF_TRUSTED", "").split(",")
     if d.strip()
 }
-PRIORITY_MIN_CHARS = int(os.getenv("PRIORITY_MIN_CHARS", "250"))
 
-ROOT = Path(__file__).resolve().parents[1]
-OUTDIR = ROOT / "out"
-CFG = ROOT / "config" / "sources.yaml"
-FILTERS = ROOT / "config" / "filters.yaml"
+# By default, keep index scraping on same host to avoid pulling sitewide noise
+ALLOW_CROSS_DOMAIN_INDEX = os.getenv("ALLOW_CROSS_DOMAIN_INDEX", "0") == "1"
 
-OUTDIR.mkdir(parents=True, exist_ok=True)
-ALLOW_UNDATED = os.getenv("ALLOW_UNDATED", "0") == "1"
-
-# ----------------------- DATE HELPERS --------------------------
+# Retry behaviour
+RETRIES = int(os.getenv("HTTP_RETRIES", "3"))
+RETRY_BACKOFF = float(os.getenv("HTTP_RETRY_BACKOFF", "0.6"))
 
 
-def _month_bounds(y: int, m: int) -> Tuple[datetime, datetime]:
-    start = datetime(y, m, 1, tzinfo=timezone.utc)
-    last = calendar.monthrange(y, m)[1]
-    end = datetime(y, m, last, 23, 59, 59, tzinfo=timezone.utc)
-    return start, end
+# ----------------------------- HTTP helpers -----------------------------
+
+def _host(url: str) -> str:
+    return urllib.parse.urlsplit(url).netloc.lower()
 
 
-def _month_label(d: datetime) -> str:
-    return d.strftime("%B %Y")
+def _abs_url(base: str, href: str) -> str:
+    return urllib.parse.urljoin(base, href)
 
 
-def _coerce_ts(ts):
-    if ts is None:
+def _norm_url(url: str) -> str:
+    """Normalise URL for de-duplication: strip fragment, preserve query."""
+    u = urllib.parse.urlsplit(url.strip())
+    # normalise scheme/netloc casing
+    scheme = (u.scheme or "https").lower()
+    netloc = u.netloc.lower()
+    return urllib.parse.urlunsplit((scheme, netloc, u.path or "/", u.query or "", ""))
+
+
+def _looks_like_pdf(url: str, content_type: str = "") -> bool:
+    if url.lower().split("?")[0].endswith(".pdf"):
+        return True
+    ct = (content_type or "").lower()
+    return "application/pdf" in ct or "pdf" in ct
+
+
+def _session() -> requests.Session:
+    s = requests.Session()
+
+    # urllib3 retry is fine here; requests exposes it via adapter
+    try:
+        from urllib3.util.retry import Retry  # type: ignore
+
+        retry = Retry(
+            total=RETRIES,
+            connect=RETRIES,
+            read=RETRIES,
+            status=RETRIES,
+            backoff_factor=RETRY_BACKOFF,
+            status_forcelist=(429, 500, 502, 503, 504),
+            allowed_methods=frozenset(["GET", "HEAD"]),
+            raise_on_status=False,
+        )
+        adapter = HTTPAdapter(max_retries=retry, pool_connections=20, pool_maxsize=20)
+    except Exception:
+        adapter = HTTPAdapter(pool_connections=20, pool_maxsize=20)
+
+    s.mount("http://", adapter)
+    s.mount("https://", adapter)
+    return s
+
+
+_SESS = _session()
+
+
+def _get(url: str, *, stream: bool = False) -> requests.Response:
+    r = _SESS.get(
+        url,
+        headers={"User-Agent": _UA, "Accept": "*/*"},
+        timeout=_TIMEOUT,
+        allow_redirects=True,
+        stream=stream,
+    )
+    r.raise_for_status()
+    return r
+
+
+def _get_text(url: str) -> Tuple[str, str]:
+    """Return (text, content_type) with size guard."""
+    r = _get(url, stream=True)
+    ct = r.headers.get("Content-Type", "") or ""
+
+    # bounded read
+    chunks = []
+    read = 0
+    for chunk in r.iter_content(chunk_size=64 * 1024):
+        if not chunk:
+            continue
+        chunks.append(chunk)
+        read += len(chunk)
+        if read > _MAX_BYTES:
+            break
+
+    data = b"".join(chunks)
+    # best-effort decode
+    enc = r.encoding or "utf-8"
+    try:
+        txt = data.decode(enc, errors="replace")
+    except Exception:
+        txt = data.decode("utf-8", errors="replace")
+    return txt, ct
+
+
+# ----------------------------- Date parsing -----------------------------
+
+_URL_DATE_PATTERNS = [
+    # /YYYY/MM/DD/
+    re.compile(r"/(20\d{2})/(0[1-9]|1[0-2])/(0[1-9]|[12]\d|3[01])(?:/|$)"),
+    # /YYYY-MM-DD/
+    re.compile(r"/(20\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])(?:/|$)"),
+    # ?date=YYYY-MM-DD etc
+    re.compile(r"[?&](?:date|published|pubdate)=(20\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\b"),
+]
+
+
+def _parse_dt(s: str) -> Optional[datetime]:
+    s = (s or "").strip()
+    if not s:
         return None
-    if isinstance(ts, (int, float)):
-        return float(ts)
-    if isinstance(ts, datetime):
-        dt = ts
+    try:
+        dt = dtparser.parse(s)
+        if dt is None:
+            return None
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=timezone.utc)
-        return dt.astimezone(timezone.utc).timestamp()
-    if isinstance(ts, str):
-        try:
-            dt = dtparser.parse(ts)
-            if dt is None:
-                return None
-            if dt.tzinfo is None:
-                dt = dt.replace(tzinfo=timezone.utc)
-            return dt.astimezone(timezone.utc).timestamp()
-        except Exception:
-            return None
+        return dt.astimezone(timezone.utc)
+    except Exception:
+        return None
+
+
+def _date_from_url(url: str) -> Optional[datetime]:
+    u = _norm_url(url)
+    for pat in _URL_DATE_PATTERNS:
+        m = pat.search(u)
+        if m:
+            y, mo, d = map(int, m.groups())
+            return datetime(y, mo, d, tzinfo=timezone.utc)
     return None
 
-def _in_range(ts, start, end):
-    """
-    Robust range predicate:
-    - ts can be float/datetime/str/None
-    - start/end can be datetime OR float OR str
-    """
-    ts2 = _coerce_ts(ts)
-    if ts2 is None:
-        return ALLOW_UNDATED  # fail-open for undated items
 
-    s2 = _coerce_ts(start)
-    e2 = _coerce_ts(end)
-    if s2 is None or e2 is None:
-        return True
+def _extract_pubdate_from_html(html_txt: str) -> Optional[datetime]:
+    soup = BeautifulSoup(html_txt, "html.parser")
 
-    return s2 <= ts2 <= e2
+    # common metadata fields
+    meta_selectors = [
+        'meta[property="article:published_time"]',
+        'meta[name="article:published_time"]',
+        'meta[name="pubdate"]',
+        'meta[name="publish_date"]',
+        'meta[name="publication_date"]',
+        'meta[name="date"]',
+        'meta[property="og:published_time"]',
+        'meta[property="og:updated_time"]',
+        'meta[name="parsely-pub-date"]',
+    ]
+    for sel in meta_selectors:
+        tag = soup.select_one(sel)
+        if tag and tag.get("content"):
+            dt = _parse_dt(tag.get("content", ""))
+            if dt:
+                return dt
 
+    # <time datetime="..."> or <time>text</time>
+    t = soup.find("time")
+    if t:
+        raw = (t.get("datetime") or t.get_text(" ", strip=True) or "").strip()
+        dt = _parse_dt(raw)
+        if dt:
+            return dt
 
-def fmt_iso(ts: Any) -> str:
-    ts2 = _coerce_ts(ts)
-    if ts2 is None:
-        return ""
-    try:
-        return datetime.fromtimestamp(ts2, tz=timezone.utc).date().isoformat()
-    except Exception:
-        return ""
-
-
-# -------------------- QUALITY / SPAM SUPPRESSION ---------------------
-
-_MEETING_URL_HINTS = ("/news-and-calendar/", "/calendar", "/events", "/meeting", "/meetings")
-_MEETING_URL_STRONG = ("online-meeting", "online_meeting", "/agenda")
-_MEETING_TITLE_HINTS = (
-    "online meeting",
-    "srb online meeting",
-    "frb online meeting",
-    "teg online meeting",
-    "technical expert group meeting",
-    "board meeting",
-)
-
-
-def is_meeting_notice(url: str, title: str) -> bool:
-    u = (url or "").lower()
-    t = (title or "").lower()
-
-    if any(x in u for x in _MEETING_URL_STRONG):
-        return True
-
-    if any(x in u for x in _MEETING_URL_HINTS):
-        if "meeting" in u or "meeting" in t or any(x in t for x in _MEETING_TITLE_HINTS):
-            return True
-
-    if any(x in t for x in _MEETING_TITLE_HINTS):
-        return True
-
-    return False
-
-
-_HUB_PATHS = {
-    "/news",
-    "/newsroom",
-    "/media",
-    "/press",
-    "/publications",
-    "/updates",
-    "/news-and-calendar/news",
-    "/news-centre",
-}
-
-
-def is_hub_url(url: str) -> bool:
-    try:
-        p = urllib.parse.urlparse(url)
-        path = (p.path or "/").rstrip("/")
-        if not path:
-            path = "/"
-        if p.query:
-            return True
-        if path in _HUB_PATHS:
-            return True
-    except Exception:
-        return False
-    return False
-
-
-def substance_score(text: str) -> int:
-    t = (text or "").lower()
-    score = 0
-
-    if any(w in t for w in ("final", "decision", "approved", "determination", "rule change")):
-        score += 3
-    if any(w in t for w in ("consultation", "draft", "exposure draft", "guidance", "standard", "framework")):
-        score += 2
-
-    if any(w in t for w in ("mw", "gw", "million", "billion", "$", "€", "aud", "eur")):
-        score += 2
-    if any(w in t for w in ("auction", "tender", "capacity", "tariff", "price", "market")):
-        score += 1
-
-    if any(w in t for w in ("meeting", "registration", "observers", "agenda")):
-        score -= 6
-
-    if len(t) < 800:
-        score -= 2
-
-    return score
-
-
-# ----------------------- DEBUG HELPERS ------------------------
-
-
-def _dump_json(path: Path, obj) -> None:
-    try:
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with path.open("w", encoding="utf-8") as f:
-            json.dump(obj, f, ensure_ascii=False, indent=2, default=str)
-    except Exception as e:
-        print(f"[warn] failed to dump json: {path}: {e}")
-
-
-def _append_line(path: Path, line: str) -> None:
-    try:
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with path.open("a", encoding="utf-8") as f:
-            f.write(line.rstrip("\n") + "\n")
-    except Exception as e:
-        print(f"[warn] failed to append: {path}: {e}")
-
-
-# ----------------------- FILTER LOADERS ------------------------
-
-
-def load_yaml(path: Path) -> Dict:
-    import yaml
-
-    with path.open("r", encoding="utf-8") as f:
-        return yaml.safe_load(f) or {}
-
-
-def compile_filters(filters: Dict) -> Dict:
-    allow = [d.strip().lower() for d in (filters.get("allow_domains") or []) if d.strip()]
-    deny = [d.strip().lower() for d in (filters.get("deny_domains") or []) if d.strip()]
-    deny_pat = [re.compile(p, re.I) for p in (filters.get("title_deny_regex") or []) if p.strip()]
-    keep = [k.strip().lower() for k in (filters.get("keep_keywords") or []) if k.strip()]
-    return {"allow_domains": allow, "deny_domains": deny, "title_deny_regex": deny_pat, "keep_keywords": keep}
-
-
-def _passes_filters(it: Item, filters: Dict, drop_log) -> bool:
-    dom = normalise_domain(it.url)
-    allow = set(filters.get("allow_domains", []))
-    deny = set(filters.get("deny_domains", []))
-    deny_title = filters.get("title_deny_regex", [])
-    keep_keywords = filters.get("keep_keywords", [])
-
-    if allow and not any(dom.endswith(d) for d in allow):
-        drop_log(f"domain_not_allowed\t{dom}\t{it.url}")
-        return False
-
-    if any(dom.endswith(d) for d in deny):
-        drop_log(f"domain_denied\t{dom}\t{it.url}")
-        return False
-
-    title = (it.title or "").strip()
-    title_l = title.lower()
-
-    if keep_keywords and any(k in title_l for k in keep_keywords):
-        return True
-
-    for pat in deny_title:
-        if pat.search(title):
-            drop_log(f"title_denied\t{title}\t{it.url}")
-            return False
-
-    return True
-
-
-# ----------------------- ITEM COLLECTION -----------------------
-
-
-def collect_items(sources, drop_log) -> List[Item]:
-    def _infer_type(url: str) -> str:
-        u = (url or "").lower()
-        if any(x in u for x in (".xml", "/rss", "feed", "atom")):
-            return "rss"
-        return "html"
-
-    def _iter_sources(sources_obj):
-        if sources_obj is None:
-            return
-        if isinstance(sources_obj, dict):
-            for k, v in sources_obj.items():
-                if isinstance(v, list):
-                    for item in v:
-                        yield (k, item)
-                else:
-                    yield (k, v)
-            return
-        if isinstance(sources_obj, list):
-            for item in sources_obj:
-                yield (None, item)
-            return
-        yield (None, sources_obj)
-
-    pool: List[Item] = []
-
-    for forced_type, src in _iter_sources(sources):
-        url = ""
-        name = ""
-        stype = ""
-
+    # htmldate fallback (very helpful for news sites)
+    if find_date is not None:
         try:
-            if isinstance(src, str):
-                url = src.strip()
-                if not url:
-                    continue
-                stype = (forced_type or _infer_type(url)).strip().lower()
-                name = url
-
-            elif isinstance(src, dict):
-                url = (src.get("url") or "").strip()
-                if not url:
-                    continue
-                stype = (src.get("type") or forced_type or _infer_type(url)).strip().lower()
-                name = src.get("name") or url
-
-            else:
-                drop_log(f"source_bad_type\t{type(src)}\t{src}")
-                continue
-
-            if stype == "rss":
-                items = fetch_rss(url, source_name=name)
-            elif stype == "html":
-                items = fetch_html_index(url, source_name=name)
-            else:
-                drop_log(f"source_bad_stype\t{stype}\t{url}")
-                continue
-
-            pool.extend(items)
-
-        except Exception as e:
-            drop_log(f"source_error\t{name}\t{url}\t{e}")
-            if DEBUG:
-                print(f"[warn] source error: {name} -> {e}")
-
-    # robust sort
-    pool.sort(key=lambda x: _coerce_ts(getattr(x, "published_ts", None)) or 0.0, reverse=True)
-    return pool
-
-
-# ----------------------- MONTHLY GENERATION --------------------
-
-
-def generate_monthly_for(ym: str) -> str:
-    os.environ["TARGET_YM"] = ym
-
-    y, m = map(int, ym.split("-"))
-    start, end = _month_bounds(y, m)  # keep as datetime (safe now)
-
-    cfg = load_yaml(CFG)
-    filters = compile_filters(load_yaml(FILTERS))
-
-    drop_file = OUTDIR / f"debug-drops-{ym}.txt"
-    selected_file = OUTDIR / f"debug-selected-{ym}.json"
-    meta_file = OUTDIR / f"debug-meta-{ym}.txt"
-
-    if DEBUG:
-        try:
-            drop_file.unlink(missing_ok=True)
+            d = find_date(html_txt)
+            if d:
+                dt = _parse_dt(d)
+                if dt:
+                    return dt
         except Exception:
             pass
 
-    def drop_log(line: str) -> None:
-        if DEBUG:
-            _append_line(drop_file, line)
+    return None
 
-    chosen: List[Dict] = []
-    seen_urls: set = set()
 
-    for section, sources in cfg["sections"].items():
-        print(f"[section] {section}")
-        pool = collect_items(sources, drop_log)
-        print(f"[pool] candidates: {len(pool)}")
-
-        if DEBUG:
-            _dump_json(
-                OUTDIR / f"debug-pool-{section.replace(' ','_')}-{ym}.json",
-                [
-                    {
-                        "title": it.title,
-                        "url": it.url,
-                        "source": it.source,
-                        "published_ts": it.published_ts,
-                        "published_iso": fmt_iso(it.published_ts),
-                        "published_ts_coerced": _coerce_ts(it.published_ts),
-                    }
-                    for it in pool[:150]
-                ],
-            )
-
-        selected: List[Dict] = []
-        section_dom_counts: Dict[str, int] = {}
-
-        for it in pool:
-            if not _in_range(it.published_ts, start, end):
-                if DEBUG:
-                    drop_log(f"out_of_range\t{fmt_iso(it.published_ts)}\t{it.url}")
-                continue
-
-            if not _passes_filters(it, filters, drop_log):
-                continue
-
-            if is_hub_url(it.url):
-                if DEBUG:
-                    drop_log(f"hub_url\t{it.url}")
-                continue
-
-            if is_meeting_notice(it.url, it.title or ""):
-                if DEBUG:
-                    drop_log(f"meeting_notice\t{it.url}")
-                continue
-
-            h = sha1(it.url)
-            if h in seen_urls:
-                if DEBUG:
-                    drop_log(f"duplicate_url\t-\t{it.url}")
-                continue
-
-            txt = fetch_full_text(it.url)
-            txt = normalize_whitespace(txt)
-
-            dom = normalise_domain(it.url)
-
-            if section_dom_counts.get(dom, 0) >= MAX_PER_DOMAIN_PER_SECTION:
-                if DEBUG:
-                    drop_log(
-                        f"per_section_domain_cap\tsection={section}\tdom={dom} cap={MAX_PER_DOMAIN_PER_SECTION}\t{it.url}"
-                    )
-                continue
-
-            threshold = PRIORITY_MIN_CHARS if any(dom.endswith(d) for d in PRIORITY_DOMAINS) else MIN_TEXT_CHARS
-            if len(txt) < threshold and len(it.summary or "") < 160:
-                if DEBUG:
-                    drop_log(f"too_short\tlen={len(txt)}/thr={threshold}\t{it.url}")
-                continue
-
-            sscore = substance_score(txt)
-            if sscore < MIN_SUBSTANCE_SCORE:
-                if DEBUG:
-                    drop_log(f"low_substance\tscore={sscore} min={MIN_SUBSTANCE_SCORE}\t{it.url}")
-                continue
-
-            section_dom_counts[dom] = section_dom_counts.get(dom, 0) + 1
-
-            selected.append(
-                {
-                    "section": section,
-                    "title": it.title or it.url.split("/")[-1].replace("-", " ")[:100],
-                    "url": it.url,
-                    "sources_urls": [it.url],
-                    "summary": it.summary or "",
-                    "text": txt,
-                    "published": fmt_iso(it.published_ts),
-                }
-            )
-            seen_urls.add(h)
-
-            if len(selected) >= ITEMS_PER_SECTION:
-                break
-
-        print(f"[selected] {len(selected)} from {section}")
-        chosen.extend(selected)
-
-    chosen = sorted(chosen, key=lambda x: (x.get("published", ""), x.get("section", "")), reverse=True)
-
-    per_domain: Dict[str, int] = {}
-    filtered: List[Dict] = []
-    for row in chosen:
-        dom = normalise_domain(row["url"])
-        per_domain[dom] = per_domain.get(dom, 0) + 1
-        if per_domain[dom] <= PER_DOMAIN_CAP:
-            filtered.append(row)
-        else:
-            if DEBUG:
-                drop_log(f"per_domain_cap\tdom={dom} cap={PER_DOMAIN_CAP}\t{row['url']}")
-
-    chosen = filtered[:12]
-
-    _dump_json(
-        selected_file,
-        [{"title": x["title"], "url": x["url"], "published": x["published"], "section": x["section"]} for x in chosen],
-    )
+def _resolve_published_date(url: str) -> Optional[datetime]:
+    # cheap date from URL first
+    dt = _date_from_url(url)
+    if dt:
+        return dt
 
     try:
-        with meta_file.open("w", encoding="utf-8") as mf:
-            mf.write(f"month: {ym}\n")
-            mf.write(f"outdir: {OUTDIR.resolve()}\n")
-            mf.write(f"drops_file: {drop_file.resolve()}\n")
-            mf.write(f"selected_file: {selected_file.resolve()}\n")
-            mf.write("counts:\n")
-            mf.write(f"  selected_total: {len(chosen)}\n")
-            from collections import Counter
+        txt, ct = _get_text(url)
+        if _looks_like_pdf(url, ct):
+            return None
+        return _extract_pubdate_from_html(txt)
+    except Exception:
+        return None
 
-            c = Counter([x.get("section", "") for x in chosen])
-            for k, v in c.items():
-                mf.write(f"  section[{k}]: {v}\n")
-    except Exception as e:
-        print(f"[warn] failed to write meta file: {e}")
 
-    if len(chosen) < MIN_TOTAL_ITEMS:
-        print(f"[warn] Few items in range ({len(chosen)}<{MIN_TOTAL_ITEMS}); writing placeholder.")
-        # Keep deterministic dates for the placeholder
-        return (
-            f"# Signals Digest — NO ITEMS IN RANGE\n\n"
-            f"_Date range_: {start.date().isoformat()} → {end.date().isoformat()}\n\n"
-            "Insufficient eligible items. Consider relaxing MIN_TEXT_CHARS, checking filters, widening sources, "
-            "or enabling PRIORITY_* thresholds for trusted domains."
+# ----------------------------- RSS fetch -----------------------------
+
+def _strip_html(s: str) -> str:
+    s = html.unescape(s or "")
+    # very light strip: bs4 already installed
+    try:
+        soup = BeautifulSoup(s, "html.parser")
+        return soup.get_text(" ", strip=True)
+    except Exception:
+        return re.sub(r"<[^>]+>", " ", s).strip()
+
+
+def fetch_rss(feed_url: str, source_name: str = "") -> List[Item]:
+    txt, _ct = _get_text(feed_url)
+    feed = feedparser.parse(txt)
+
+    out: List[Item] = []
+    for e in (feed.entries or []):
+        url = (e.get("link") or "").strip()
+        if not url:
+            continue
+
+        title = (e.get("title") or "").strip()
+        summary = _strip_html(e.get("summary") or e.get("description") or "")
+
+        published_ts: Optional[Any] = None
+        # feedparser provides published_parsed sometimes
+        if getattr(e, "published_parsed", None):
+            dt = datetime(*e.published_parsed[:6], tzinfo=timezone.utc)
+            published_ts = dt
+        elif e.get("published"):
+            published_ts = _parse_dt(e.get("published", "")) or None
+        elif e.get("updated"):
+            published_ts = _parse_dt(e.get("updated", "")) or None
+
+        out.append(
+            Item(
+                title=title,
+                url=_norm_url(url),
+                source=source_name or feed_url,
+                published_ts=published_ts,
+                summary=summary,
+            )
         )
 
-    date_label = _month_label(end)
-    return build_digest(model=MODEL, api_key=OPENAI_API_KEY, items=chosen, temp=TEMP, date_label=date_label)
+    # newest first when dates exist
+    def _key(it: Item) -> float:
+        ts = it.published_ts
+        if isinstance(ts, datetime):
+            return ts.timestamp()
+        if isinstance(ts, (int, float)):
+            return float(ts)
+        return 0.0
+
+    out.sort(key=_key, reverse=True)
+    return out
 
 
-# ----------------------- ENTRY POINT ---------------------------
+# ----------------------------- HTML index scraping -----------------------------
+
+# Heuristics to drop obvious non-article links
+_SKIP_URL_RE = re.compile(
+    r"(/login\b|/signin\b|/sign-in\b|/subscribe\b|/newsletter\b|/privacy\b|/terms\b|/contact\b|/about\b"
+    r"|/careers\b|/jobs\b|/events?\b|/tag/|/tags/|/category/|/categories/|/search\b|/sitemap\b)",
+    flags=re.I,
+)
+
+# Heuristics for “next page” discovery
+_NEXT_TEXTS = {"next", "older", "older posts", "more", "load more"}
 
 
-def main():
-    if not OPENAI_API_KEY:
-        raise RuntimeError("OPENAI_API_KEY not set")
+def _extract_links_from_index(html_txt: str, base_url: str) -> List[Tuple[str, str, Optional[datetime]]]:
+    soup = BeautifulSoup(html_txt, "html.parser")
+    base_host = _host(base_url)
 
-    mode = os.getenv("MODE", "single")  # 'single' | 'backfill-months'
-    if mode == "backfill-months":
-        start_ym = os.getenv("START_YM", "2025-01")
-        end_ym = os.getenv("END_YM", "2025-10")
-        sy, sm = map(int, start_ym.split("-"))
-        ey, em = map(int, end_ym.split("-"))
-        y, m = sy, sm
-        while (y < ey) or (y == ey and m <= em):
-            start_dt, end_dt = _month_bounds(y, m)
-            ym = f"{y:04d}-{m:02d}"
-            print(f"\n=== {ym} ({start_dt.date()} -> {end_dt.date()}) ===")
-            md = generate_monthly_for(ym)
-            out = OUTDIR / f"monthly-digest-{ym}.md"
-            out.write_text(md, encoding="utf-8")
-            print(f"[write] {out}")
+    links: List[Tuple[str, str, Optional[datetime]]] = []
+    for a in soup.select("a[href]"):
+        href = (a.get("href") or "").strip()
+        if not href or href.startswith(("mailto:", "javascript:")):
+            continue
 
-            m += 1
-            if m > 12:
-                m = 1
-                y += 1
-    else:
-        ym = os.getenv("YM", datetime.now(timezone.utc).strftime("%Y-%m"))
-        md = generate_monthly_for(ym)
-        out = OUTDIR / f"monthly-digest-{ym}.md"
-        out.write_text(md, encoding="utf-8")
-        print(f"[write] {out}")
+        u = _norm_url(_abs_url(base_url, href))
+        if not u.startswith(("http://", "https://")):
+            continue
+
+        if not ALLOW_CROSS_DOMAIN_INDEX and _host(u) != base_host:
+            continue
+
+        if _SKIP_URL_RE.search(u):
+            continue
+
+        # avoid pure fragments
+        if urllib.parse.urlsplit(u).path in ("", "/") and urllib.parse.urlsplit(u).query == "":
+            continue
+
+        # title text from anchor
+        txt = (a.get_text(" ", strip=True) or "").strip()
+
+        # try to detect nearby date without fetching the article
+        dt: Optional[datetime] = _date_from_url(u)
+        if dt is None:
+            # check parent container for <time> or date-like text
+            parent = a.find_parent(["article", "li", "div", "section"])
+            if parent:
+                t = parent.find("time")
+                if t:
+                    raw = (t.get("datetime") or t.get_text(" ", strip=True) or "").strip()
+                    dt = _parse_dt(raw)
+
+        links.append((u, txt, dt))
+
+        if len(links) >= MAX_LINKS_PER_INDEX:
+            break
+
+    # De-dupe preserve order
+    seen = set()
+    uniq: List[Tuple[str, str, Optional[datetime]]] = []
+    for u, t, d in links:
+        if u in seen:
+            continue
+        seen.add(u)
+        uniq.append((u, t, d))
+    return uniq
 
 
-if __name__ == "__main__":
-    main()
+def _find_next_page(html_txt: str, current_url: str) -> Optional[str]:
+    soup = BeautifulSoup(html_txt, "html.parser")
+
+    # <link rel="next" href="...">
+    ln = soup.find("link", attrs={"rel": lambda v: v and "next" in (v if isinstance(v, list) else [v])})
+    if ln and ln.get("href"):
+        return _norm_url(_abs_url(current_url, ln["href"]))
+
+    # <a rel="next" href="...">
+    an = soup.find("a", attrs={"rel": lambda v: v and "next" in (v if isinstance(v, list) else [v])})
+    if an and an.get("href"):
+        return _norm_url(_abs_url(current_url, an["href"]))
+
+    # anchor text
+    a2 = soup.find(
+        "a",
+        string=lambda s: isinstance(s, str) and s.strip().lower() in _NEXT_TEXTS,
+    )
+    if a2 and a2.get("href"):
+        return _norm_url(_abs_url(current_url, a2["href"]))
+
+    # class-based
+    a3 = soup.select_one("a.next, a.older, a.pagination__next, a[aria-label='Next']")
+    if a3 and a3.get("href"):
+        return _norm_url(_abs_url(current_url, a3["href"]))
+
+    return None
+
+
+def fetch_html_index(index_url: str, source_name: str = "") -> List[Item]:
+    url = _norm_url(index_url)
+    collected: List[Tuple[str, str, Optional[datetime]]] = []
+
+    for _page in range(max(1, MAX_INDEX_PAGES)):
+        html_txt, _ct = _get_text(url)
+        collected.extend(_extract_links_from_index(html_txt, url))
+
+        if len(collected) >= MAX_LINKS_PER_INDEX:
+            break
+
+        nxt = _find_next_page(html_txt, url)
+        if not nxt or nxt == url:
+            break
+        url = nxt
+
+        # be polite on aggressive pagination
+        time.sleep(0.05)
+
+    # Build items
+    items: List[Item] = []
+    for u, t, d in collected[:MAX_LINKS_PER_INDEX]:
+        items.append(
+            Item(
+                title=(t or u.rsplit("/", 1)[-1].replace("-", " ")[:140]),
+                url=u,
+                source=source_name or index_url,
+                published_ts=d,
+                summary="",
+            )
+        )
+
+    # Optional date resolution: fetch N items to extract meta publish time
+    if MAX_DATE_RESOLVE_FETCHES_PER_INDEX > 0:
+        n = min(MAX_DATE_RESOLVE_FETCHES_PER_INDEX, len(items))
+        for it in items[:n]:
+            if it.published_ts is not None:
+                continue
+            dt = _resolve_published_date(it.url)
+            if dt:
+                it.published_ts = dt
+
+    return items
+
+
+# ----------------------------- Full text extraction -----------------------------
+
+def _fetch_pdf_bytes(url: str) -> Optional[bytes]:
+    # trust-gate PDFs if configured
+    if PDF_TRUSTED:
+        h = _host(url)
+        if not any(h.endswith(d) for d in PDF_TRUSTED):
+            return None
+
+    r = _get(url, stream=True)
+    data = b""
+    for chunk in r.iter_content(chunk_size=128 * 1024):
+        if not chunk:
+            continue
+        data += chunk
+        if len(data) > _MAX_PDF_BYTES:
+            return None
+    return data
+
+
+def _pdf_to_text(data: bytes) -> str:
+    if fitz is None:
+        return ""
+    try:
+        doc = fitz.open(stream=data, filetype="pdf")
+        parts: List[str] = []
+        for page in doc:
+            parts.append(page.get_text("text"))
+        doc.close()
+        return "\n".join(parts).strip()
+    except Exception:
+        return ""
+
+
+def fetch_full_text(url: str) -> str:
+    """
+    Extract main content from a URL.
+    - HTML: trafilatura.extract
+    - PDF: PyMuPDF
+    Returns "" on failure (caller applies thresholds).
+    """
+    try:
+        txt, ct = _get_text(url)
+        if _looks_like_pdf(url, ct):
+            # Re-fetch bounded bytes for PDF (text-mode fetch may have truncated)
+            data = _fetch_pdf_bytes(url)
+            if not data:
+                return ""
+            return _pdf_to_text(data)
+
+        # HTML extraction
+        if trafilatura is not None:
+            extracted = trafilatura.extract(txt, include_comments=False, include_tables=False)
+            if extracted:
+                return extracted.strip()
+
+        # fallback: visible text
+        soup = BeautifulSoup(txt, "html.parser")
+        return soup.get_text(" ", strip=True)
+
+    except Exception:
+        return ""
