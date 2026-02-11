@@ -323,8 +323,10 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
 
     return items
 
+from dateutil import parser as dtparser
+import json as _json
 
-def fetch_full_text(url: str, **kwargs) -> str:
+def fetch_full_text(url: str, return_meta: bool = False, **kwargs):
     """
     Return extracted text for a URL (HTML or PDF).
     Returns empty string on failure.
@@ -345,46 +347,65 @@ def fetch_full_text(url: str, **kwargs) -> str:
     if not raw:
         return ""
 
-    if is_pdf:
-        if fitz is None:
-            return ""
-        try:
-            doc = fitz.open(stream=raw, filetype="pdf")
-            parts = []
-            for i in range(min(doc.page_count, 25)):
-                parts.append(doc.load_page(i).get_text("text"))
-            doc.close()
-            text = "\n".join(parts).strip()
-            return text
-        except Exception:
-            return ""
+        if is_pdf:
+        text = ...
+        return (text, {}) if return_meta else text
 
-    # HTML extraction
     try:
         html = raw.decode(resp.encoding or "utf-8", errors="replace")
     except Exception:
         html = raw.decode("utf-8", errors="replace")
 
-    # trafilatura first (best signal)
+    meta = {}
+    text = ""
+
+    # Prefer JSON output to capture title/date when possible
     try:
-        extracted = trafilatura.extract(
-            html,
-            include_comments=False,
-            include_tables=False,
-            favor_recall=True,
-        )
-        if extracted and extracted.strip():
-            return extracted.strip()
+        j = trafilatura.extract(html, output_format="json", include_images=False, include_comments=False)
+        if j:
+            obj = _json.loads(j)
+            text = (obj.get("text") or "").strip()
+            meta["title"] = (obj.get("title") or "").strip() or None
+            date_s = (obj.get("date") or obj.get("date_published") or "").strip()
+            if date_s:
+                try:
+                    dt = dtparser.parse(date_s)
+                    if dt.tzinfo is None:
+                        dt = dt.replace(tzinfo=timezone.utc)
+                    dt = dt.astimezone(timezone.utc)
+                    meta["published_iso"] = dt.isoformat()
+                    meta["published_ts"] = dt.timestamp()
+                    meta["published_source"] = "trafilatura"
+                except Exception:
+                    pass
     except Exception:
         pass
 
-    # fallback: soup text
-    try:
-        soup = BeautifulSoup(html, "html.parser")
-        for tag in soup(["script", "style", "noscript"]):
-            tag.decompose()
-        txt = soup.get_text("\n")
-        txt = re.sub(r"\n{3,}", "\n\n", txt).strip()
-        return txt
-    except Exception:
-        return ""
+    if not text:
+        try:
+            text = (trafilatura.extract(html, include_images=False, include_comments=False) or "").strip()
+        except Exception:
+            text = ""
+
+    # Fallback metadata extractor
+    if (not meta.get("title") or not meta.get("published_ts")):
+        try:
+            md = trafi_metadata.extract_metadata(html, default_url=url)
+            if md:
+                if not meta.get("title") and getattr(md, "title", None):
+                    meta["title"] = md.title
+                if not meta.get("published_ts") and getattr(md, "date", None):
+                    try:
+                        dt = dtparser.parse(md.date)
+                        if dt.tzinfo is None:
+                            dt = dt.replace(tzinfo=timezone.utc)
+                        dt = dt.astimezone(timezone.utc)
+                        meta["published_iso"] = dt.isoformat()
+                        meta["published_ts"] = dt.timestamp()
+                        meta["published_source"] = "metadata"
+                    except Exception:
+                        pass
+        except Exception:
+            pass
+
+    return (text, meta) if return_meta else text
