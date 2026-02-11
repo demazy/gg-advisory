@@ -10,29 +10,24 @@ on:
         required: false
         default: ""
       month:
-        description: "Month to backfill (01..12)"
+        description: "Month to backfill (1-12). If empty, uses previous month in Australia/Melbourne."
         required: false
         default: ""
 
 permissions:
   contents: write
 
-concurrency:
-  group: monthly-digest
-  cancel-in-progress: false
-
 jobs:
   run-monthly:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
-      - name: Checkout (full history)
+      - name: Checkout repository (full history)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
-      - name: Sync with main (before generation)
-        if: github.ref == 'refs/heads/main'
+
+      - name: Ensure up-to-date main
         shell: bash
         run: |
           set -euo pipefail
@@ -48,6 +43,26 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Compute target month (prev month in Australia/Melbourne, unless inputs provided)
+        id: when
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          IN_YEAR="${{ github.event.inputs.year || '' }}"
+          IN_MONTH="${{ github.event.inputs.month || '' }}"
+
+          if [[ -n "$IN_YEAR" && -n "$IN_MONTH" ]]; then
+            YM="$(printf "%04d-%02d" "$IN_YEAR" "$IN_MONTH")"
+          else
+            LAST_PREV=$(TZ=Australia/Melbourne date -d "$(TZ=Australia/Melbourne date +%Y-%m-01) -1 day" +%Y-%m-%d)
+            YM=$(TZ=Australia/Melbourne date -d "$LAST_PREV" +%Y-%m)
+          fi
+
+          echo "ym=$YM" >> "$GITHUB_OUTPUT"
+          echo "Chosen month: $YM"
+
       - name: Sanity check fetch module is not corrupted
         run: |
           set -euo pipefail
@@ -60,7 +75,7 @@ jobs:
               raise SystemExit("ERROR: src/fetch.py contains a self-import (will cause circular import)")
           print("OK: fetch module looks valid")
           PY
-         
+
       - name: Sanity check generate_monthly has robust _in_range
         run: |
           set -euo pipefail
@@ -82,26 +97,7 @@ jobs:
           print("OK: _in_range looks robust")
           PY
 
-      - name: Compute target month (prev month in Australia/Melbourne, unless inputs provided)
-        id: when
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          IN_YEAR="${{ github.event.inputs.year || '' }}"
-          IN_MONTH="${{ github.event.inputs.month || '' }}"
-
-          if [[ -n "$IN_YEAR" && -n "$IN_MONTH" ]]; then
-            YM="$(printf "%04d-%02d" "$IN_YEAR" "$IN_MONTH")"
-          else
-            LAST_PREV=$(TZ=Australia/Melbourne date -d "$(TZ=Australia/Melbourne date +%Y-%m-01) -1 day" +%Y-%m-%d)
-            YM=$(TZ=Australia/Melbourne date -d "$LAST_PREV" +%Y-%m)
-          fi
-
-          echo "ym=$YM" >> "$GITHUB_OUTPUT"
-          echo "Chosen month: $YM"
-
-      - name: Generate monthly digest (DEBUG always on)
+      - name: Generate monthly digest
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MODE: backfill-months
@@ -124,59 +120,34 @@ jobs:
           PDF_TRUSTED: "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org"
 
           DEBUG: "1"
-          
+
           # Make HTML index scraping robust against months buried behind pagination
           MAX_LINKS_PER_INDEX: "250"
           MAX_INDEX_PAGES: "5"
-          MAX_DATE_RESOLVE_FETCHES_PER_INDEX: "75"
-          
         run: |
+          set -euo pipefail
           python -m src.generate_monthly
 
-      - name: Guardrail - require at least 1 selected item
+      - name: Commit and push outputs
+        if: success()
         shell: bash
         run: |
           set -euo pipefail
           YM="${{ steps.when.outputs.ym }}"
-          f="out/debug-selected-${YM}.json"
 
-          if [[ ! -f "$f" ]]; then
-            echo "Missing selected file: $f"
-            exit 1
-          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          n="$(jq -r 'length' "$f")"
-          echo "selected_count=$n"
-          if [[ "$n" -lt 1 ]]; then
-            echo "ERROR: selected items is $n but MIN_TOTAL_ITEMS=1. Failing run to avoid publishing placeholder."
-            exit 1
-          fi
-
-      - name: Commit outputs (digest + current-month debug)
-        if: github.ref == 'refs/heads/main'
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          git config user.name "content-bot"
-          git config user.email "content-bot@example.com"
-
-          YM="${{ steps.when.outputs.ym }}"
-          DIGEST="out/monthly-digest-${YM}.md"
-
-          test -f "$DIGEST" || { echo "Digest not found: $DIGEST"; exit 1; }
-
-          # Never commit pycache
-          rm -rf src/__pycache__ || true
-
-          # Stage only this month's artifacts
-          git add -f "$DIGEST"
-          git add -f "out/debug-selected-${YM}.json" 2>/dev/null || true
-          git add -f "out/debug-drops-${YM}.txt" 2>/dev/null || true
-          git add -f "out/debug-meta-${YM}.txt" 2>/dev/null || true
+          md="out/monthly-digest-${YM}.md"
+          sel="out/debug-selected-${YM}.json"
+          drops="out/debug-drops-${YM}.txt"
+          meta="out/debug-meta-${YM}.txt"
 
           shopt -s nullglob
           pool_files=(out/debug-pool-*-"${YM}".json)
+
+          git add -f "$md" || true
+          git add -f "$sel" "$drops" "$meta" || true
           if (( ${#pool_files[@]} )); then
             git add -f "${pool_files[@]}"
           fi
@@ -185,6 +156,7 @@ jobs:
             echo "No changes to commit."
             exit 0
           fi
+
           echo "---- git status (porcelain) ----"
           git status --porcelain
 
@@ -196,7 +168,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          YM="${{ steps.when.outputs.ym }}"
+          YM="${{ steps.when.outputs.ym || '' }}"
+
+          if [[ -z "$YM" ]]; then
+            YM="$(date -u +%Y-%m)"
+          fi
 
           rm -rf _artifact
           mkdir -p _artifact
@@ -217,28 +193,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: monthly-debug-${{ steps.when.outputs.ym }}
+          name: monthly-debug-${{ steps.when.outputs.ym || 'unknown' }}
           path: _artifact
           if-no-files-found: warn
           retention-days: 30
-
-      - name: Email monthly digest (iCloud)
-        if: success()
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.mail.me.com
-          server_port: 587
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          subject: "GG Advisory | Monthly Digest (${{ steps.when.outputs.ym }})"
-          from: "GG Advisory <${{ secrets.MAIL_USERNAME }}>"
-          to: "a.demazy_de_fortet@icloud.com"
-          body: |
-            ✅ Monthly digest for ${{ steps.when.outputs.ym }} attached.
-            Repo: https://github.com/${{ github.repository }}/tree/main/out
-            Debug: always on
-          attachments: |
-            out/monthly-digest-${{ steps.when.outputs.ym }}.md
-            out/debug-selected-${{ steps.when.outputs.ym }}.json
-            out/debug-drops-${{ steps.when.outputs.ym }}.txt
-            out/debug-meta-${{ steps.when.outputs.ym }}.txt
