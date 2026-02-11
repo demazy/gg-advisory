@@ -1,34 +1,39 @@
-# src/fetch.py
-# Robust fetch layer for monthly digest pipeline (RSS + HTML index + full text + PDF)
-# IMPORTANT: must NOT import from .fetch anywhere in this file (avoids circular import)
+"""src/fetch.py
+
+Robust content fetching + metadata extraction for GG Advisory digests.
+
+Key design choices (A + B):
+- A (hub avoidance): aggressively filter out taxonomy/landing/index URLs early
+  to reduce the chance of selecting evergreen pages.
+- B (date hygiene): only accept publication dates from strong signals
+  (JSON-LD datePublished, article:published_time, explicit <time> datePublished, etc.).
+  Ignore generic "date" meta tags and treat "updated" dates as NOT publication dates.
+  Reject partial dates (e.g., '2026' -> 2026-01-01) to prevent false in-range items.
+
+All functions are best-effort: they should not raise on network/parse failures.
+"""
 
 from __future__ import annotations
 
+import hashlib
+import json
 import os
 import re
-import html
 import time
 import urllib.parse
 from dataclasses import dataclass
-from datetime import datetime, timezone
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from datetime import datetime, timezone, timedelta
+from typing import Dict, Iterable, List, Optional, Tuple
 
-import requests
 import feedparser
+import requests
 from bs4 import BeautifulSoup
 from dateutil import parser as dtparser
 from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
-try:
-    # Comes via trafilatura deps; helps infer publish dates
-    from htmldate import find_date  # type: ignore
-except Exception:  # pragma: no cover
-    find_date = None
-
-try:
-    import trafilatura  # type: ignore
-except Exception:  # pragma: no cover
-    trafilatura = None
+import trafilatura
+from trafilatura.settings import DEFAULT_CONFIG
 
 try:
     import fitz  # PyMuPDF
@@ -36,493 +41,600 @@ except Exception:  # pragma: no cover
     fitz = None
 
 
-# ----------------------------- Data model -----------------------------
+# ---------------------------- Config ----------------------------
+
+USER_AGENT = os.getenv(
+    "USER_AGENT",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/122.0 Safari/537.36 gg-advisory-bot/1.0",
+)
+
+REQUEST_TIMEOUT = float(os.getenv("HTTP_TIMEOUT_SECS", "25"))
+CONNECT_TIMEOUT = float(os.getenv("HTTP_CONNECT_TIMEOUT_SECS", "15"))
+MAX_BYTES = int(os.getenv("MAX_BYTES", str(6 * 1024 * 1024)))
+MAX_PDF_BYTES = int(os.getenv("MAX_PDF_BYTES", str(5 * 1024 * 1024)))
+
+# Limit expensive per-link date resolution fetches from index pages
+MAX_DATE_RESOLVE_FETCHES_PER_INDEX = int(os.getenv("MAX_DATE_RESOLVE_FETCHES_PER_INDEX", "75"))
+
+# When true, allow undated items downstream (generate_monthly enforces this)
+ALLOW_UNDATED = os.getenv("ALLOW_UNDATED", "0").strip().lower() in ("1", "true", "yes")
+
+
+# ---------------------------- Model ----------------------------
 
 @dataclass
 class Item:
-    title: str
     url: str
-    source: str
-    published_ts: Optional[Any] = None  # datetime | float | str | None (generate_monthly coerces)
+    title: str = ""
     summary: str = ""
+    source: str = ""
+
+    published_ts: Optional[float] = None  # UTC timestamp
+    published_iso: str = ""  # YYYY-MM-DD (best-effort)
+    published_source: str = ""  # e.g. 'jsonld:datePublished'
+    published_confidence: str = "none"  # high|medium|low|none
+
+    # for debugging / provenance
+    index_url: str = ""
 
 
-# ----------------------------- Environment -----------------------------
+# ---------------------------- HTTP ----------------------------
 
-_UA = os.getenv(
-    "HTTP_USER_AGENT",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36",
+def _make_session() -> requests.Session:
+    sess = requests.Session()
+    retry = Retry(
+        total=4,
+        connect=3,
+        read=3,
+        status=3,
+        backoff_factor=0.6,
+        status_forcelist=(429, 500, 502, 503, 504),
+        allowed_methods=frozenset(["GET", "HEAD"]),
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(max_retries=retry, pool_connections=20, pool_maxsize=20)
+    sess.mount("http://", adapter)
+    sess.mount("https://", adapter)
+    sess.headers.update(
+        {
+            "User-Agent": USER_AGENT,
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            "Accept-Language": "en-AU,en;q=0.9,fr;q=0.7",
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+        }
+    )
+    return sess
+
+
+_SESSION = _make_session()
+
+
+def http_get(url: str, *, stream: bool = False, timeout: Optional[float] = None) -> Optional[requests.Response]:
+    """Best-effort GET with sane defaults. Returns None on hard failures."""
+    if not url:
+        return None
+    try:
+        r = _SESSION.get(
+            url,
+            timeout=(CONNECT_TIMEOUT, timeout or REQUEST_TIMEOUT),
+            allow_redirects=True,
+            stream=stream,
+        )
+        # Some sites return 403/404 but with useful bodies; caller decides.
+        return r
+    except Exception:
+        return None
+
+
+def _content_type(r: requests.Response) -> str:
+    return (r.headers.get("Content-Type") or "").split(";")[0].strip().lower()
+
+
+# ---------------------------- URL helpers ----------------------------
+
+_TAXONOMY_PAT = re.compile(
+    r"/(tag|tags|topic|topics|category|categories|taxonomy|themes|theme|author|authors|search|sitemap|events|calendar)(/|$)",
+    re.I,
 )
-_TIMEOUT = int(os.getenv("HTTP_TIMEOUT", "25"))
-_MAX_BYTES = int(os.getenv("HTTP_MAX_BYTES", str(8 * 1024 * 1024)))  # max HTML bytes to read
-_MAX_PDF_BYTES = int(os.getenv("MAX_PDF_BYTES", str(5 * 1024 * 1024)))
 
-MAX_LINKS_PER_INDEX = int(os.getenv("MAX_LINKS_PER_INDEX", "200"))
-MAX_INDEX_PAGES = int(os.getenv("MAX_INDEX_PAGES", "1"))
-MAX_DATE_RESOLVE_FETCHES_PER_INDEX = int(os.getenv("MAX_DATE_RESOLVE_FETCHES_PER_INDEX", "0"))
-
-# If set, we only parse PDFs hosted on these domains
-PDF_TRUSTED = {
-    d.strip().lower()
-    for d in os.getenv("PDF_TRUSTED", "").split(",")
-    if d.strip()
+_LOW_VALUE_TAIL = {
+    "", "home", "index", "default", "overview", "about", "what-we-do", "who-we-are",
+    "media", "news", "newsroom", "press", "publications", "resources", "insights", "updates",
+    "funding", "grants", "invest", "investment", "investments",
 }
 
-# By default, keep index scraping on same host to avoid pulling sitewide noise
-ALLOW_CROSS_DOMAIN_INDEX = os.getenv("ALLOW_CROSS_DOMAIN_INDEX", "0") == "1"
-
-# Retry behaviour
-RETRIES = int(os.getenv("HTTP_RETRIES", "3"))
-RETRY_BACKOFF = float(os.getenv("HTTP_RETRY_BACKOFF", "0.6"))
-
-
-# ----------------------------- HTTP helpers -----------------------------
-
-def _host(url: str) -> str:
-    return urllib.parse.urlsplit(url).netloc.lower()
-
-
-def _abs_url(base: str, href: str) -> str:
-    return urllib.parse.urljoin(base, href)
-
-
-def _norm_url(url: str) -> str:
-    """Normalise URL for de-duplication: strip fragment, preserve query."""
-    u = urllib.parse.urlsplit(url.strip())
-    # normalise scheme/netloc casing
-    scheme = (u.scheme or "https").lower()
-    netloc = u.netloc.lower()
-    return urllib.parse.urlunsplit((scheme, netloc, u.path or "/", u.query or "", ""))
+def normalise_url(url: str, base: str = "") -> str:
+    if not url:
+        return ""
+    u = url.strip()
+    if base:
+        u = urllib.parse.urljoin(base, u)
+    p = urllib.parse.urlparse(u)
+    # remove fragments
+    p = p._replace(fragment="")
+    # normalise scheme/host
+    scheme = p.scheme or "https"
+    netloc = p.netloc.lower()
+    if netloc.startswith("www."):
+        netloc = netloc[4:]
+    # collapse multiple slashes in path
+    path = re.sub(r"/{2,}", "/", p.path or "/")
+    return urllib.parse.urlunparse((scheme, netloc, path, p.params, p.query, p.fragment))
 
 
-def _looks_like_pdf(url: str, content_type: str = "") -> bool:
-    if url.lower().split("?")[0].endswith(".pdf"):
+def _path_tail(url: str) -> str:
+    try:
+        path = urllib.parse.urlparse(url).path or ""
+        tail = path.rstrip("/").split("/")[-1].lower()
+        return tail
+    except Exception:
+        return ""
+
+
+def looks_like_pdf(url: str, ctype: str = "") -> bool:
+    u = (url or "").lower()
+    return u.endswith(".pdf") or ctype == "application/pdf"
+
+
+def is_probably_taxonomy_or_hub(url: str) -> bool:
+    """A conservative early filter for index/taxonomy pages (A)."""
+    if not url:
         return True
-    ct = (content_type or "").lower()
-    return "application/pdf" in ct or "pdf" in ct
+    p = urllib.parse.urlparse(url)
+    path = (p.path or "/").lower()
+    # Queries are often index/pagination; allow only if obviously a document
+    if p.query and not any(x in path for x in (".pdf", ".doc", ".docx")):
+        if re.search(r"(page=|p=|type=|filter=|sort=|q=)", p.query, re.I):
+            return True
+
+    if _TAXONOMY_PAT.search(path):
+        return True
+
+    # root-ish / landing pages
+    segs = [s for s in path.split("/") if s]
+    tail = _path_tail(url)
+    if len(segs) <= 1 and tail in _LOW_VALUE_TAIL:
+        return True
+    if tail in _LOW_VALUE_TAIL and len(segs) <= 2:
+        return True
+
+    return False
 
 
-def _session() -> requests.Session:
-    s = requests.Session()
-
-    # urllib3 retry is fine here; requests exposes it via adapter
-    try:
-        from urllib3.util.retry import Retry  # type: ignore
-
-        retry = Retry(
-            total=RETRIES,
-            connect=RETRIES,
-            read=RETRIES,
-            status=RETRIES,
-            backoff_factor=RETRY_BACKOFF,
-            status_forcelist=(429, 500, 502, 503, 504),
-            allowed_methods=frozenset(["GET", "HEAD"]),
-            raise_on_status=False,
-        )
-        adapter = HTTPAdapter(max_retries=retry, pool_connections=20, pool_maxsize=20)
-    except Exception:
-        adapter = HTTPAdapter(pool_connections=20, pool_maxsize=20)
-
-    s.mount("http://", adapter)
-    s.mount("https://", adapter)
-    return s
+def sha1(s: str) -> str:
+    return hashlib.sha1((s or "").encode("utf-8")).hexdigest()
 
 
-_SESS = _session()
+# ---------------------------- Date parsing (B) ----------------------------
 
+_RE_YEAR_ONLY = re.compile(r"^\s*(19|20)\d{2}\s*$")
+_RE_YM_ONLY = re.compile(r"^\s*(19|20)\d{2}[-/](0[1-9]|1[0-2])\s*$")
 
-def _get(url: str, *, stream: bool = False) -> requests.Response:
-    r = _SESS.get(
-        url,
-        headers={"User-Agent": _UA, "Accept": "*/*"},
-        timeout=_TIMEOUT,
-        allow_redirects=True,
-        stream=stream,
-    )
-    r.raise_for_status()
-    return r
-
-
-def _get_text(url: str) -> Tuple[str, str]:
-    """Return (text, content_type) with size guard."""
-    r = _get(url, stream=True)
-    ct = r.headers.get("Content-Type", "") or ""
-
-    # bounded read
-    chunks = []
-    read = 0
-    for chunk in r.iter_content(chunk_size=64 * 1024):
-        if not chunk:
-            continue
-        chunks.append(chunk)
-        read += len(chunk)
-        if read > _MAX_BYTES:
-            break
-
-    data = b"".join(chunks)
-    # best-effort decode
-    enc = r.encoding or "utf-8"
-    try:
-        txt = data.decode(enc, errors="replace")
-    except Exception:
-        txt = data.decode("utf-8", errors="replace")
-    return txt, ct
-
-
-# ----------------------------- Date parsing -----------------------------
-
-_URL_DATE_PATTERNS = [
-    # /YYYY/MM/DD/
-    re.compile(r"/(20\d{2})/(0[1-9]|1[0-2])/(0[1-9]|[12]\d|3[01])(?:/|$)"),
-    # /YYYY-MM-DD/
-    re.compile(r"/(20\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])(?:/|$)"),
-    # ?date=YYYY-MM-DD etc
-    re.compile(r"[?&](?:date|published|pubdate)=(20\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\b"),
-]
-
-
-def _parse_dt(s: str) -> Optional[datetime]:
-    s = (s or "").strip()
-    if not s:
+def _parse_dt(value: str) -> Optional[datetime]:
+    """Parse a date/time string to aware UTC datetime. Reject partial dates."""
+    if not value:
         return None
+    v = str(value).strip()
+    if not v:
+        return None
+
+    # Reject year-only or year-month-only values that dtparser would coerce to Jan 1.
+    if _RE_YEAR_ONLY.match(v) or _RE_YM_ONLY.match(v):
+        return None
+
     try:
-        dt = dtparser.parse(s)
-        if dt is None:
-            return None
-        if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=timezone.utc)
-        return dt.astimezone(timezone.utc)
+        dt = dtparser.parse(v, fuzzy=True)
     except Exception:
         return None
+
+    if not dt:
+        return None
+
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    else:
+        dt = dt.astimezone(timezone.utc)
+
+    # Reject obviously bogus dates
+    now = datetime.now(timezone.utc)
+    if dt > (now.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=3)):
+        return None
+    if dt.year < 2000:
+        # You can loosen this if you truly expect older sources; for monthly signals it's usually noise.
+        return None
+
+    return dt
+
+
+def _dt_to_item_fields(dt: datetime, source: str, confidence: str) -> Tuple[float, str, str, str]:
+    ts = dt.timestamp()
+    iso = dt.date().isoformat()
+    return ts, iso, source, confidence
 
 
 def _date_from_url(url: str) -> Optional[datetime]:
-    u = _norm_url(url)
-    for pat in _URL_DATE_PATTERNS:
-        m = pat.search(u)
-        if m:
-            y, mo, d = map(int, m.groups())
+    """Extract a date from common URL patterns."""
+    if not url:
+        return None
+    path = urllib.parse.urlparse(url).path
+    if not path:
+        return None
+
+    # 2026/01/20 or 2026-01-20 etc
+    m = re.search(r"(20\d{2})[/-](0[1-9]|1[0-2])[/-]([0-3]\d)", path)
+    if m:
+        y, mo, d = map(int, m.groups())
+        try:
             return datetime(y, mo, d, tzinfo=timezone.utc)
+        except Exception:
+            return None
+
+    # 20260120
+    m = re.search(r"(20\d{2})(0[1-9]|1[0-2])([0-3]\d)", path)
+    if m:
+        y, mo, d = map(int, m.groups())
+        try:
+            return datetime(y, mo, d, tzinfo=timezone.utc)
+        except Exception:
+            return None
+
     return None
 
 
-def _extract_pubdate_from_html(html_txt: str) -> Optional[datetime]:
-    soup = BeautifulSoup(html_txt, "html.parser")
+def _iter_jsonld_nodes(obj) -> Iterable[dict]:
+    if isinstance(obj, dict):
+        yield obj
+        if "@graph" in obj and isinstance(obj["@graph"], list):
+            for it in obj["@graph"]:
+                yield from _iter_jsonld_nodes(it)
+    elif isinstance(obj, list):
+        for it in obj:
+            yield from _iter_jsonld_nodes(it)
 
-    # common metadata fields
+
+def _jsonld_date_published(soup: BeautifulSoup) -> Optional[str]:
+    for script in soup.find_all("script", attrs={"type": re.compile(r"application/ld\+json", re.I)}):
+        txt = (script.string or script.get_text() or "").strip()
+        if not txt:
+            continue
+        # Some sites embed multiple JSON blobs; try lenient parsing.
+        candidates = []
+        try:
+            candidates.append(json.loads(txt))
+        except Exception:
+            # try to extract first {...} block(s)
+            for m in re.finditer(r"\{.*?\}", txt, flags=re.S):
+                try:
+                    candidates.append(json.loads(m.group(0)))
+                except Exception:
+                    continue
+
+        for obj in candidates:
+            for node in _iter_jsonld_nodes(obj):
+                t = node.get("@type")
+                types = set([t] if isinstance(t, str) else (t or []))
+                if not types.intersection({"Article", "NewsArticle", "BlogPosting", "Report"}):
+                    continue
+                dp = node.get("datePublished") or node.get("dateCreated")
+                if isinstance(dp, str) and dp.strip():
+                    return dp.strip()
+    return None
+
+
+def _extract_pubdate_from_html(html: str) -> Tuple[Optional[datetime], str, str]:
+    """Return (datetime, confidence, source). Ignore 'updated' as publication."""
+    if not html:
+        return None, "none", ""
+
+    soup = BeautifulSoup(html, "html.parser")
+
+    # 1) Strongest: JSON-LD datePublished
+    dp = _jsonld_date_published(soup)
+    dt = _parse_dt(dp or "")
+    if dt:
+        return dt, "high", "jsonld:datePublished"
+
+    # 2) Meta tags / OpenGraph / Article tags - strong signals
     meta_selectors = [
-        'meta[property="article:published_time"]',
-        'meta[name="article:published_time"]',
-        'meta[name="pubdate"]',
-        'meta[name="publish_date"]',
-        'meta[name="publication_date"]',
-        'meta[name="date"]',
-        'meta[property="og:published_time"]',
-        'meta[property="og:updated_time"]',
-        'meta[name="parsely-pub-date"]',
+        ('meta[property="article:published_time"]', "high", "meta:article:published_time"),
+        ('meta[property="og:published_time"]', "medium", "meta:og:published_time"),
+        ('meta[name="parsely-pub-date"]', "medium", "meta:parsely-pub-date"),
+        ('meta[name="pubdate"]', "medium", "meta:pubdate"),
+        ('meta[name="publishdate"]', "medium", "meta:publishdate"),
+        ('meta[itemprop="datePublished"]', "high", "meta:itemprop:datePublished"),
+        ('meta[name="datePublished"]', "high", "meta:datePublished"),
     ]
-    for sel in meta_selectors:
+    for sel, conf, src in meta_selectors:
         tag = soup.select_one(sel)
         if tag and tag.get("content"):
             dt = _parse_dt(tag.get("content", ""))
             if dt:
-                return dt
+                return dt, conf, src
 
-    # <time datetime="..."> or <time>text</time>
-    t = soup.find("time")
-    if t:
-        raw = (t.get("datetime") or t.get_text(" ", strip=True) or "").strip()
-        dt = _parse_dt(raw)
+    # 3) <time> tags with publication hints
+    for t in soup.find_all("time"):
+        attrs = " ".join([str(v) for v in t.attrs.values()]) if t.attrs else ""
+        attrs_l = attrs.lower()
+        if "publish" in attrs_l or "datepublished" in attrs_l or "posted" in attrs_l:
+            dt = _parse_dt(t.get("datetime") or t.get_text() or "")
+            if dt:
+                return dt, "high", "time:publish-hint"
+    # fallback: any <time datetime=...> that is plausible
+    for t in soup.find_all("time"):
+        dt = _parse_dt(t.get("datetime") or "")
         if dt:
-            return dt
+            return dt, "medium", "time:datetime"
 
-    # htmldate fallback (very helpful for news sites)
-    if find_date is not None:
-        try:
-            d = find_date(html_txt)
-            if d:
-                dt = _parse_dt(d)
-                if dt:
-                    return dt
-        except Exception:
-            pass
-
-    return None
-
-
-def _resolve_published_date(url: str) -> Optional[datetime]:
-    # cheap date from URL first
-    dt = _date_from_url(url)
-    if dt:
-        return dt
-
+    # 5) htmldate / heuristics (very weak). Use only if it yields a full date string and not Jan 1.
     try:
-        txt, ct = _get_text(url)
-        if _looks_like_pdf(url, ct):
-            return None
-        return _extract_pubdate_from_html(txt)
+        from htmldate import find_date  # provided by trafilatura dependencies
+        ds = find_date(html)
+        dt = _parse_dt(ds or "")
+        if dt:
+            if dt.month == 1 and dt.day == 1:
+                # very common false positive for year-only pages
+                return None, "none", ""
+            return dt, "low", "htmldate:find_date"
     except Exception:
-        return None
+        pass
+
+    return None, "none", ""
 
 
-# ----------------------------- RSS fetch -----------------------------
+# ---------------------------- RSS ----------------------------
 
-def _strip_html(s: str) -> str:
-    s = html.unescape(s or "")
-    # very light strip: bs4 already installed
-    try:
-        soup = BeautifulSoup(s, "html.parser")
-        return soup.get_text(" ", strip=True)
-    except Exception:
-        return re.sub(r"<[^>]+>", " ", s).strip()
-
-
-def fetch_rss(feed_url: str, source_name: str = "") -> List[Item]:
-    txt, _ct = _get_text(feed_url)
-    feed = feedparser.parse(txt)
-
+def fetch_rss(url: str, source_name: str = "") -> List[Item]:
+    url = normalise_url(url)
     out: List[Item] = []
-    for e in (feed.entries or []):
-        url = (e.get("link") or "").strip()
-        if not url:
+    r = http_get(url, timeout=REQUEST_TIMEOUT)
+    if not r or not r.text:
+        return out
+
+    feed = feedparser.parse(r.text)
+    for e in feed.entries[:500]:
+        link = normalise_url(getattr(e, "link", "") or "", base=url)
+        if not link:
             continue
+        title = (getattr(e, "title", "") or "").strip()
+        summary = (getattr(e, "summary", "") or getattr(e, "description", "") or "").strip()
+        dt: Optional[datetime] = None
+        for attr in ("published", "updated", "created"):
+            v = getattr(e, attr, None)
+            if v:
+                dt = _parse_dt(v)
+                if dt:
+                    break
+        if not dt and getattr(e, "published_parsed", None):
+            try:
+                dt = datetime(*e.published_parsed[:6], tzinfo=timezone.utc)
+            except Exception:
+                dt = None
 
-        title = (e.get("title") or "").strip()
-        summary = _strip_html(e.get("summary") or e.get("description") or "")
-
-        published_ts: Optional[Any] = None
-        # feedparser provides published_parsed sometimes
-        if getattr(e, "published_parsed", None):
-            dt = datetime(*e.published_parsed[:6], tzinfo=timezone.utc)
-            published_ts = dt
-        elif e.get("published"):
-            published_ts = _parse_dt(e.get("published", "")) or None
-        elif e.get("updated"):
-            published_ts = _parse_dt(e.get("updated", "")) or None
-
-        out.append(
-            Item(
-                title=title,
-                url=_norm_url(url),
-                source=source_name or feed_url,
-                published_ts=published_ts,
-                summary=summary,
+        item = Item(url=link, title=title, summary=summary, source=source_name or url, index_url=url)
+        if dt:
+            item.published_ts, item.published_iso, item.published_source, item.published_confidence = _dt_to_item_fields(
+                dt, "rss", "medium"
             )
-        )
-
-    # newest first when dates exist
-    def _key(it: Item) -> float:
-        ts = it.published_ts
-        if isinstance(ts, datetime):
-            return ts.timestamp()
-        if isinstance(ts, (int, float)):
-            return float(ts)
-        return 0.0
-
-    out.sort(key=_key, reverse=True)
+        out.append(item)
     return out
 
 
-# ----------------------------- HTML index scraping -----------------------------
+# ---------------------------- HTML index scraping (A) ----------------------------
 
-# Heuristics to drop obvious non-article links
-_SKIP_URL_RE = re.compile(
-    r"(/login\b|/signin\b|/sign-in\b|/subscribe\b|/newsletter\b|/privacy\b|/terms\b|/contact\b|/about\b"
-    r"|/careers\b|/jobs\b|/events?\b|/tag/|/tags/|/category/|/categories/|/search\b|/sitemap\b)",
-    flags=re.I,
-)
+def _extract_index_candidates(html: str, index_url: str) -> List[Tuple[str, str, Optional[datetime]]]:
+    """Return (url, title, hinted_date)."""
+    soup = BeautifulSoup(html, "html.parser")
+    base = index_url
 
-# Heuristics for “next page” discovery
-_NEXT_TEXTS = {"next", "older", "older posts", "more", "load more"}
+    candidates: List[Tuple[str, str, Optional[datetime]]] = []
 
-
-def _extract_links_from_index(html_txt: str, base_url: str) -> List[Tuple[str, str, Optional[datetime]]]:
-    soup = BeautifulSoup(html_txt, "html.parser")
-    base_host = _host(base_url)
-
-    links: List[Tuple[str, str, Optional[datetime]]] = []
-    for a in soup.select("a[href]"):
-        href = (a.get("href") or "").strip()
-        if not href or href.startswith(("mailto:", "javascript:")):
+    # Prefer article-like blocks
+    for art in soup.find_all(["article", "section", "div"], limit=600):
+        cls = " ".join(art.get("class", [])).lower()
+        if art.name != "article" and not any(k in cls for k in ("news", "media", "post", "article", "release", "update")):
             continue
 
-        u = _norm_url(_abs_url(base_url, href))
-        if not u.startswith(("http://", "https://")):
+        a = art.find("a", href=True)
+        if not a:
             continue
 
-        if not ALLOW_CROSS_DOMAIN_INDEX and _host(u) != base_host:
+        href = normalise_url(a.get("href", ""), base=base)
+        if not href or href == base:
             continue
 
-        if _SKIP_URL_RE.search(u):
-            continue
+        title = (a.get_text(" ", strip=True) or "").strip()
+        if not title:
+            # try header text
+            h = art.find(["h1", "h2", "h3", "h4"])
+            if h:
+                title = (h.get_text(" ", strip=True) or "").strip()
 
-        # avoid pure fragments
-        if urllib.parse.urlsplit(u).path in ("", "/") and urllib.parse.urlsplit(u).query == "":
-            continue
+        hinted = None
+        t = art.find("time")
+        if t:
+            hinted = _parse_dt(t.get("datetime") or t.get_text() or "")
+        if not hinted:
+            hinted = _date_from_url(href)
 
-        # title text from anchor
-        txt = (a.get_text(" ", strip=True) or "").strip()
+        candidates.append((href, title, hinted))
 
-        # try to detect nearby date without fetching the article
-        dt: Optional[datetime] = _date_from_url(u)
-        if dt is None:
-            # check parent container for <time> or date-like text
-            parent = a.find_parent(["article", "li", "div", "section"])
-            if parent:
-                t = parent.find("time")
-                if t:
-                    raw = (t.get("datetime") or t.get_text(" ", strip=True) or "").strip()
-                    dt = _parse_dt(raw)
-
-        links.append((u, txt, dt))
-
-        if len(links) >= MAX_LINKS_PER_INDEX:
-            break
-
-    # De-dupe preserve order
-    seen = set()
-    uniq: List[Tuple[str, str, Optional[datetime]]] = []
-    for u, t, d in links:
-        if u in seen:
-            continue
-        seen.add(u)
-        uniq.append((u, t, d))
-    return uniq
-
-
-def _find_next_page(html_txt: str, current_url: str) -> Optional[str]:
-    soup = BeautifulSoup(html_txt, "html.parser")
-
-    # <link rel="next" href="...">
-    ln = soup.find("link", attrs={"rel": lambda v: v and "next" in (v if isinstance(v, list) else [v])})
-    if ln and ln.get("href"):
-        return _norm_url(_abs_url(current_url, ln["href"]))
-
-    # <a rel="next" href="...">
-    an = soup.find("a", attrs={"rel": lambda v: v and "next" in (v if isinstance(v, list) else [v])})
-    if an and an.get("href"):
-        return _norm_url(_abs_url(current_url, an["href"]))
-
-    # anchor text
-    a2 = soup.find(
-        "a",
-        string=lambda s: isinstance(s, str) and s.strip().lower() in _NEXT_TEXTS,
-    )
-    if a2 and a2.get("href"):
-        return _norm_url(_abs_url(current_url, a2["href"]))
-
-    # class-based
-    a3 = soup.select_one("a.next, a.older, a.pagination__next, a[aria-label='Next']")
-    if a3 and a3.get("href"):
-        return _norm_url(_abs_url(current_url, a3["href"]))
-
-    return None
-
-
-def fetch_html_index(index_url: str, source_name: str = "") -> List[Item]:
-    url = _norm_url(index_url)
-    collected: List[Tuple[str, str, Optional[datetime]]] = []
-
-    for _page in range(max(1, MAX_INDEX_PAGES)):
-        html_txt, _ct = _get_text(url)
-        collected.extend(_extract_links_from_index(html_txt, url))
-
-        if len(collected) >= MAX_LINKS_PER_INDEX:
-            break
-
-        nxt = _find_next_page(html_txt, url)
-        if not nxt or nxt == url:
-            break
-        url = nxt
-
-        # be polite on aggressive pagination
-        time.sleep(0.05)
-
-    # Build items
-    items: List[Item] = []
-    for u, t, d in collected[:MAX_LINKS_PER_INDEX]:
-        items.append(
-            Item(
-                title=(t or u.rsplit("/", 1)[-1].replace("-", " ")[:140]),
-                url=u,
-                source=source_name or index_url,
-                published_ts=d,
-                summary="",
-            )
-        )
-
-    # Optional date resolution: fetch N items to extract meta publish time
-    if MAX_DATE_RESOLVE_FETCHES_PER_INDEX > 0:
-        n = min(MAX_DATE_RESOLVE_FETCHES_PER_INDEX, len(items))
-        for it in items[:n]:
-            if it.published_ts is not None:
+    # Fallback: all links inside main/content
+    if len(candidates) < 20:
+        scope = soup.find("main") or soup.find("body") or soup
+        for a in scope.find_all("a", href=True, limit=3500):
+            href = normalise_url(a.get("href", ""), base=base)
+            if not href or href == base:
                 continue
-            dt = _resolve_published_date(it.url)
-            if dt:
-                it.published_ts = dt
+            title = (a.get_text(" ", strip=True) or "").strip()
+            if len(title) < 6:
+                continue
+            hinted = _date_from_url(href)
+            candidates.append((href, title, hinted))
 
-    return items
-
-
-# ----------------------------- Full text extraction -----------------------------
-
-def _fetch_pdf_bytes(url: str) -> Optional[bytes]:
-    # trust-gate PDFs if configured
-    if PDF_TRUSTED:
-        h = _host(url)
-        if not any(h.endswith(d) for d in PDF_TRUSTED):
-            return None
-
-    r = _get(url, stream=True)
-    data = b""
-    for chunk in r.iter_content(chunk_size=128 * 1024):
-        if not chunk:
+    # Deduplicate by URL, keep first non-empty title
+    seen = set()
+    out: List[Tuple[str, str, Optional[datetime]]] = []
+    for href, title, hinted in candidates:
+        if href in seen:
             continue
-        data += chunk
-        if len(data) > _MAX_PDF_BYTES:
-            return None
-    return data
+        seen.add(href)
+        out.append((href, title, hinted))
+    return out
 
 
-def _pdf_to_text(data: bytes) -> str:
+def fetch_html_index(url: str, source_name: str = "") -> List[Item]:
+    """Fetch an HTML index page and return candidate Items (best-effort)."""
+    index_url = normalise_url(url)
+    out: List[Item] = []
+
+    r = http_get(index_url, timeout=REQUEST_TIMEOUT)
+    if not r or not r.text:
+        return out
+
+    ctype = _content_type(r)
+    if looks_like_pdf(index_url, ctype):
+        # Not an index, but allow downstream to treat as a document item.
+        it = Item(url=index_url, title=_path_tail(index_url) or index_url, source=source_name or index_url, index_url=index_url)
+        out.append(it)
+        return out
+
+    html = r.text
+    candidates = _extract_index_candidates(html, index_url=index_url)
+
+    resolve_budget = MAX_DATE_RESOLVE_FETCHES_PER_INDEX
+
+    for href, title, hinted_dt in candidates:
+        href = normalise_url(href)
+        if not href:
+            continue
+
+        # Early hub/taxonomy rejection (A)
+        if is_probably_taxonomy_or_hub(href):
+            continue
+
+        it = Item(url=href, title=title, source=source_name or index_url, index_url=index_url)
+
+        # Date from URL or hinted date is decent
+        dt = hinted_dt or _date_from_url(href)
+        if dt:
+            it.published_ts, it.published_iso, it.published_source, it.published_confidence = _dt_to_item_fields(
+                dt, "url_or_index_hint", "medium"
+            )
+            out.append(it)
+            continue
+
+        # Only resolve expensive dates for URLs that look like articles/documents
+        if resolve_budget <= 0:
+            out.append(it)
+            continue
+
+        # Heuristic: avoid resolving dates for shallow/landing pages
+        if is_probably_taxonomy_or_hub(href):
+            out.append(it)
+            continue
+
+        # Fetch the candidate page to extract a publication date (B)
+        rr = http_get(href, timeout=REQUEST_TIMEOUT)
+        resolve_budget -= 1
+        if not rr:
+            out.append(it)
+            continue
+
+        dt2 = None
+        conf = "none"
+        src = ""
+        ctype2 = _content_type(rr)
+        if looks_like_pdf(href, ctype2):
+            # Use Last-Modified as weak-ish fallback for PDFs
+            lm = rr.headers.get("Last-Modified") or ""
+            dt2 = _parse_dt(lm)
+            if dt2:
+                conf, src = "low", "header:last-modified"
+        else:
+            dt2, conf, src = _extract_pubdate_from_html(rr.text or "")
+
+        if dt2:
+            it.published_ts, it.published_iso, it.published_source, it.published_confidence = _dt_to_item_fields(dt2, src, conf)
+
+        out.append(it)
+
+    return out
+
+
+# ---------------------------- Full-text extraction ----------------------------
+
+def fetch_pdf_text(url: str) -> str:
     if fitz is None:
         return ""
+    r = http_get(url, stream=True, timeout=REQUEST_TIMEOUT)
+    if not r or r.status_code >= 400:
+        return ""
+
+    # cap bytes
+    data = b""
+    try:
+        for chunk in r.iter_content(chunk_size=16384):
+            if not chunk:
+                continue
+            data += chunk
+            if len(data) >= MAX_PDF_BYTES:
+                break
+    except Exception:
+        return ""
+
     try:
         doc = fitz.open(stream=data, filetype="pdf")
-        parts: List[str] = []
-        for page in doc:
-            parts.append(page.get_text("text"))
-        doc.close()
+        parts = []
+        for i in range(min(doc.page_count, 30)):
+            parts.append(doc.load_page(i).get_text("text"))
         return "\n".join(parts).strip()
     except Exception:
         return ""
 
 
 def fetch_full_text(url: str) -> str:
-    """
-    Extract main content from a URL.
-    - HTML: trafilatura.extract
-    - PDF: PyMuPDF
-    Returns "" on failure (caller applies thresholds).
-    """
+    """Return cleaned main text for URL. Best-effort, never raises."""
+    u = normalise_url(url)
+    if not u:
+        return ""
+
+    # First probe content-type (cheap)
+    r = http_get(u, timeout=REQUEST_TIMEOUT)
+    if not r:
+        return ""
+
+    ctype = _content_type(r)
+    if looks_like_pdf(u, ctype):
+        return fetch_pdf_text(u)
+
+    html = r.text or ""
+    if not html:
+        return ""
+
+    # Trafilatura extraction
     try:
-        txt, ct = _get_text(url)
-        if _looks_like_pdf(url, ct):
-            # Re-fetch bounded bytes for PDF (text-mode fetch may have truncated)
-            data = _fetch_pdf_bytes(url)
-            if not data:
-                return ""
-            return _pdf_to_text(data)
+        extracted = trafilatura.extract(
+            html,
+            url=u,
+            include_comments=False,
+            include_tables=False,
+            include_images=False,
+            favor_precision=True,
+            config=DEFAULT_CONFIG,
+        )
+        if extracted and extracted.strip():
+            return extracted.strip()
+    except Exception:
+        pass
 
-        # HTML extraction
-        if trafilatura is not None:
-            extracted = trafilatura.extract(txt, include_comments=False, include_tables=False)
-            if extracted:
-                return extracted.strip()
-
-        # fallback: visible text
-        soup = BeautifulSoup(txt, "html.parser")
-        return soup.get_text(" ", strip=True)
-
+    # Fallback: BeautifulSoup text
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        for tag in soup(["script", "style", "nav", "footer", "header", "aside"]):
+            tag.decompose()
+        txt = soup.get_text("\n", strip=True)
+        return re.sub(r"\n{3,}", "\n\n", txt).strip()
     except Exception:
         return ""
