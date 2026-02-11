@@ -247,7 +247,7 @@ def fetch_rss(feed_url: str, source_name: str = "", **kwargs) -> List[Item]:
 def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[Item]:
     """
     Extract candidate article links from an index/listing page.
-    We intentionally avoid heavy per-link fetches here to keep runtime bounded.
+    Lightweight (no per-link fetch). Titles come from the anchor text associated with each href.
     """
     index_url = _clean_url(index_url)
     if not index_url:
@@ -257,12 +257,10 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
     if resp is None:
         return []
 
-    ctype = _content_type(resp)
     raw = _read_limited(resp, MAX_BYTES)
     if not raw:
         return []
 
-    # crude decode
     try:
         html = raw.decode(resp.encoding or "utf-8", errors="replace")
     except Exception:
@@ -270,53 +268,55 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
 
     soup = BeautifulSoup(html, "html.parser")
 
-    links: List[str] = []
+    # Common junk anchor texts
+    junk_title_rx = re.compile(
+        r"^(skip to (main )?content|skip navigation|menu|home)$|"
+        r"(cookie|privacy|terms|subscribe|sign\s?up|login|log in|register|careers|jobs|sitemap|accessibility)",
+        re.I,
+    )
+
+    url_to_title: Dict[str, str] = {}
+
     for a in soup.select("a[href]"):
         href = (a.get("href") or "").strip()
         if not href:
             continue
-        if href.startswith("mailto:") or href.startswith("javascript:"):
+        if href.startswith(("mailto:", "javascript:", "tel:")):
             continue
+
         abs_url = _clean_url(urljoin(index_url, href))
         if not abs_url:
             continue
-        # keep only http(s)
         if urlparse(abs_url).scheme not in ("http", "https"):
             continue
-        if is_probably_taxonomy_or_hub(abs_url):
-            continue
-        links.append(abs_url)
 
-    # de-dupe, keep order
-    seen = set()
-    uniq = []
-    for u in links:
-        key = u.lower()
-        if key in seen:
+        # Avoid self-links / same-page fragments
+        if abs_url.lower() == index_url.lower():
             continue
-        seen.add(key)
-        uniq.append(u)
 
-    uniq = uniq[:MAX_LINKS_PER_INDEX]
+        text = " ".join(a.get_text(" ", strip=True).split())
+        if not text or len(text) < 12:
+            continue
+        if junk_title_rx.search(text):
+            continue
+
+        # Keep the longest (usually most descriptive) anchor text for a URL
+        prev = url_to_title.get(abs_url)
+        if (prev is None) or (len(text) > len(prev)):
+            url_to_title[abs_url] = text
+
+        if len(url_to_title) >= MAX_LINKS_PER_INDEX:
+            break
 
     items: List[Item] = []
-    for u in uniq:
-        # title: best-effort from anchor text, else empty (filtered later)
-        t = ""
-        try:
-            # pick first matching anchor
-            a = soup.find("a", href=True, string=True)
-            if a and a.string:
-                t = a.string.strip()
-        except Exception:
-            t = ""
-
+    for u, t in url_to_title.items():
         items.append(
             Item(
                 url=u,
-                title=(t or u),
+                title=t,
                 summary="",
-                source=(source_name or urlparse(index_url).netloc),
+                # Prefer the target URL’s domain as publisher
+                source=(urlparse(u).netloc or source_name or urlparse(index_url).netloc),
                 index_url=index_url,
             )
         )
