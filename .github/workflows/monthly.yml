@@ -10,24 +10,29 @@ on:
         required: false
         default: ""
       month:
-        description: "Month to backfill (1-12). If empty, uses previous month in Australia/Melbourne."
+        description: "Month to backfill (01..12)"
         required: false
         default: ""
 
 permissions:
   contents: write
 
+concurrency:
+  group: monthly-digest
+  cancel-in-progress: false
+
 jobs:
   run-monthly:
     runs-on: ubuntu-24.04
 
     steps:
-      - name: Checkout repository (full history)
+      - name: Checkout (full history)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Ensure up-to-date main
+      - name: Sync with main (before generation)
+        if: github.ref == 'refs/heads/main'
         shell: bash
         run: |
           set -euo pipefail
@@ -121,7 +126,6 @@ jobs:
 
           DEBUG: "1"
 
-          # Make HTML index scraping robust against months buried behind pagination
           MAX_LINKS_PER_INDEX: "250"
           MAX_INDEX_PAGES: "5"
         run: |
@@ -197,3 +201,24 @@ jobs:
           path: _artifact
           if-no-files-found: warn
           retention-days: 30
+
+      - name: Email monthly digest (iCloud)
+        if: success()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.mail.me.com
+          server_port: 587
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "GG Advisory | Monthly Digest (${{ steps.when.outputs.ym }})"
+          from: "GG Advisory <${{ secrets.MAIL_USERNAME }}>"
+          to: "a.demazy_de_fortet@icloud.com"
+          body: |
+            ✅ Monthly digest for ${{ steps.when.outputs.ym }} attached.
+            Repo: https://github.com/${{ github.repository }}/tree/main/out
+            Debug: always on
+          attachments: |
+            out/monthly-digest-${{ steps.when.outputs.ym }}.md
+            out/debug-selected-${{ steps.when.outputs.ym }}.json
+            out/debug-drops-${{ steps.when.outputs.ym }}.txt
+            out/debug-meta-${{ steps.when.outputs.ym }}.txt
