@@ -31,7 +31,7 @@ from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 import yaml
 from dateutil import parser as dtparser
 
-from .fetch import Item, fetch_full_text, fetch_html_index, fetch_rss, is_probably_taxonomy_or_hub, infer_published_ts_from_url
+from .fetch import Item, fetch_full_text, fetch_html_index, fetch_rss, is_probably_taxonomy_or_hub
 from .summarise import build_digest
 from .utils import normalise_domain
 
@@ -53,6 +53,7 @@ RELAXED_MIN_TEXT_CHARS = int(os.getenv("RELAXED_MIN_TEXT_CHARS", str(max(300, MI
 ALLOW_UNDATED = os.getenv("ALLOW_UNDATED", "0") == "1"
 ALLOW_PLACEHOLDER = os.getenv("ALLOW_PLACEHOLDER", "1") == "1"
 FALLBACK_WINDOW_DAYS = int(os.getenv("FALLBACK_WINDOW_DAYS", "3"))
+LAST_RESORT_IGNORE_DATES = os.getenv("LAST_RESORT_IGNORE_DATES", "0") == "1"
 DEBUG = os.getenv("DEBUG", "0") == "1"
 
 # Auto-allow: expands an allowlist without requiring config changes (safe defaults).
@@ -508,15 +509,8 @@ def _select_from_pool(
 
     def sort_key(it: Item):
         dt = _effective_published_ts(it)
-        if dt is None:
-            inferred = infer_published_ts_from_url((it.url or '').strip())
-            if inferred is not None:
-                try:
-                    dt = datetime.fromtimestamp(float(inferred), tz=timezone.utc)
-                except Exception:
-                    dt = None
         ts = dt.timestamp() if dt else 0.0
-        return (-ts, (it.url or ''))
+        return (-ts, (it.url or ""))
 
     for it in sorted(pool, key=sort_key):
         url = (it.url or "").strip()
@@ -531,19 +525,6 @@ def _select_from_pool(
             drops.append({"reason": why, "url": url, "title": it.title or ""})
             continue
 
-        # If missing publish date, try conservative inference from URL patterns (YYYY/MM/DD etc).
-        # This reduces false "undated" drops for many gov/standards sites where the date is only in the URL.
-        if getattr(it, "published_ts", None) in (None, 0, 0.0):
-            inferred = infer_published_ts_from_url(url)
-            if inferred is not None:
-                try:
-                    it.published_ts = float(inferred)
-                    it.published_iso = datetime.fromtimestamp(float(inferred), tz=timezone.utc).date().isoformat()
-                    it.published_source = (getattr(it, "published_source", None) or "url")
-                    it.published_confidence = max(float(getattr(it, "published_confidence", 0.0) or 0.0), 0.55)
-                except Exception:
-                    pass
-
         ts_eff = _effective_published_ts(it)
         if ts_eff is None and (not ALLOW_UNDATED):
             drops.append({"reason": "undated", "url": url, "title": it.title or ""})
@@ -556,6 +537,11 @@ def _select_from_pool(
         if per_domain.get(domain, 0) >= per_domain_cap:
             drops.append({"reason": "per_domain_cap", "url": url, "title": it.title or "", "domain": domain})
             continue
+
+        if (not ignore_dates) and start_dt and end_dt:
+            if not _in_range(getattr(it, 'published_ts', None), start_dt, end_dt):
+                drops.append({'reason': 'out_of_range_last_resort', 'url': url, 'title': it.title or ''})
+                continue
 
         if not _looks_articleish(url):
             drops.append({"reason": "not_articleish", "url": url, "title": it.title or ""})
@@ -594,7 +580,7 @@ def _select_from_pool(
     return selected, drops
 
 
-def _last_resort_pick(pool: Sequence[Item], section: str, flt: Filters, *, items_needed: int) -> Tuple[List[Item], List[Dict[str, str]]]:
+def _last_resort_pick(pool: Sequence[Item], section: str, flt: Filters, *, items_needed: int, start_dt: Optional[datetime] = None, end_dt: Optional[datetime] = None, ignore_dates: bool = False) -> Tuple[List[Item], List[Dict[str, str]]]:
     """
     Emergency picker used only when strict+relaxed selection yields nothing.
     Still rejects obvious non-content URLs/titles and requires at least minimal extract.
@@ -611,6 +597,11 @@ def _last_resort_pick(pool: Sequence[Item], section: str, flt: Filters, *, items
         if not ok:
             drops.append({"reason": why, "url": url, "title": it.title or ""})
             continue
+
+        if (not ignore_dates) and start_dt and end_dt:
+            if not _in_range(getattr(it, 'published_ts', None), start_dt, end_dt):
+                drops.append({'reason': 'out_of_range_last_resort', 'url': url, 'title': it.title or ''})
+                continue
 
         if not _looks_articleish(url):
             drops.append({"reason": "not_articleish", "url": url, "title": it.title or ""})
@@ -638,8 +629,35 @@ def _last_resort_pick(pool: Sequence[Item], section: str, flt: Filters, *, items
     return picked, drops
 
 
-def _emergency_pool(section: str) -> List[Item]:
-    rss = EMERGENCY_RSS.get(section)
+
+
+def _build_emergency_rss_url(section: str, start_dt: datetime, end_dt: datetime) -> Optional[str]:
+    """Return an emergency RSS URL that is *time-bounded* for backfills.
+
+    Google News RSS supports query operators like:
+      after:YYYY-MM-DD before:YYYY-MM-DD
+    This materially improves backfill months where "current" news would be out-of-range.
+    """
+    base = EMERGENCY_RSS.get(section)
+    if not base:
+        return None
+    try:
+        from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse
+        p = urlparse(base)
+        q = dict(parse_qsl(p.query, keep_blank_values=True))
+        qstr = q.get("q", "")
+        after = start_dt.date().isoformat()
+        before = (end_dt + timedelta(days=1)).date().isoformat()
+        # avoid duplicating operators
+        if "after:" not in qstr:
+            qstr = (qstr + f" after:{after} before:{before}").strip()
+        q["q"] = qstr
+        new_query = urlencode(list(q.items()), doseq=True)
+        return urlunparse((p.scheme, p.netloc, p.path, p.params, new_query, ""))
+    except Exception:
+        return base
+def _emergency_pool(section: str, start_dt: datetime, end_dt: datetime) -> List[Item]:
+    rss = _build_emergency_rss_url(section, start_dt, end_dt)
     if not rss:
         return []
     try:
@@ -726,8 +744,8 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
 
         # Last resort: pick only content-like URLs with minimal extract
         if not selected:
-            print("[warn] Still no items after fallback; last-resort pick (ignoring dates).")
-            picked, drops4 = _last_resort_pick(pool, section, flt, items_needed=ITEMS_PER_SECTION)
+            print("[warn] Still no items after fallback; last-resort pick.")
+            picked, drops4 = _last_resort_pick(pool, section, flt, items_needed=ITEMS_PER_SECTION, start_dt=start_dt - timedelta(days=FALLBACK_WINDOW_DAYS), end_dt=end_dt + timedelta(days=FALLBACK_WINDOW_DAYS), ignore_dates=LAST_RESORT_IGNORE_DATES)
             all_drops.extend(drops4)
             picked2: List[Item] = []
             for it in picked:
@@ -742,8 +760,8 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
         # Emergency RSS only if nothing at all
         if not selected:
             print("[warn] No candidates available; trying emergency RSS.")
-            epool = _emergency_pool(section)
-            picked, drops5 = _last_resort_pick(epool, section, flt, items_needed=max(1, ITEMS_PER_SECTION // 2))
+            epool = _emergency_pool(section, start_dt, end_dt)
+            picked, drops5 = _last_resort_pick(epool, section, flt, items_needed=max(1, ITEMS_PER_SECTION // 2), start_dt=start_dt - timedelta(days=FALLBACK_WINDOW_DAYS), end_dt=end_dt + timedelta(days=FALLBACK_WINDOW_DAYS), ignore_dates=False)
             all_drops.extend(drops5)
             picked2: List[Item] = []
             for it in picked:
@@ -819,7 +837,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
         "\n".join(
             [
                 f"ym={ym}",
-                f"selected_total={len([it for it in all_selected if (getattr(it, 'url', '') or '').strip()])}",
+                f"selected_total={len(all_selected)}",
                 f"items_per_section={ITEMS_PER_SECTION}",
                 f"per_domain_cap={PER_DOMAIN_CAP}",
                 f"allow_undated={ALLOW_UNDATED}",
