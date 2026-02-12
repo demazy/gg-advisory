@@ -46,7 +46,7 @@ REQ_RETRIES = int(os.getenv("OPENAI_RETRIES", "2"))
 BACKOFF = float(os.getenv("OPENAI_BACKOFF", "1.8"))
 
 # Hard cap to prevent runaway prompt size
-MAX_TEXT_CHARS_PER_ITEM = int(os.getenv("MAX_TEXT_CHARS_PER_ITEM", "6000"))
+MAX_TEXT_CHARS_PER_ITEM = int(os.getenv("MAX_TEXT_CHARS_PER_ITEM", "3500"))  # CHANGE: smaller prompt -> faster/less timeouts
 
 
 def _month_label(ym: str) -> str:
@@ -118,10 +118,54 @@ def _prepare_items(items: List[Item]) -> List[Dict]:
     return out
 
 
+def _extractive_summary(raw: str, max_words: int = 140) -> str:
+    """
+    Deterministic extractive summary (verbatim sentences) to reduce hallucination risk
+    when the LLM call fails.
+
+    It prioritises early sentences and those containing numbers/dates.
+    """
+    if not raw:
+        return "Insufficient extract; see source."
+    text = re.sub(r"\s+", " ", raw).strip()
+    if len(text) < 200:
+        return "Insufficient extract; see source."
+
+    # crude sentence split (good enough for fallback)
+    sents = re.split(r"(?<=[\.\!\?])\s+", text)
+    picked: List[str] = []
+
+    def add(sent: str) -> None:
+        s = sent.strip()
+        if not s:
+            return
+        if s in picked:
+            return
+        picked.append(s)
+
+    for s in sents[:3]:
+        add(s)
+
+    for s in sents[3:]:
+        if re.search(r"\b(20\d{2}|%|\$|€|MW|GW|Mt|bn|billion|million)\b", s, re.I):
+            add(s)
+        if len(" ".join(picked).split()) >= max_words:
+            break
+
+    out = " ".join(picked)
+    words = out.split()
+    if len(words) > max_words:
+        out = " ".join(words[:max_words]).rstrip(" ,;:") + "…"
+    return out
+
+
 def _deterministic_structured_digest(date_label: str, items: List[Item], note: Optional[str] = None) -> str:
     """
     Deterministic fallback that never raises.
-    It preserves the requested structure but does not attempt to summarise facts.
+
+    CHANGE (Feb 2026):
+    - Provide extractive (verbatim) summaries from the fetched text to preserve usefulness
+      without increasing hallucination risk.
     """
     if not items:
         return "NO_ITEMS_IN_RANGE\n"
@@ -138,7 +182,11 @@ def _deterministic_structured_digest(date_label: str, items: List[Item], note: O
             other.append(it)
 
     lines: List[str] = [f"# Signals Digest — {date_label}", "", "## Top Lines"]
-    lines += ["- (LLM unavailable; fallback digest)"] * 3
+    lines += [
+        "- (LLM unavailable; using extractive fallback summaries)",
+        "- (Summaries below are verbatim sentence extracts; consult sources for full context)",
+        "- (If this persists: increase OPENAI_TIMEOUT, reduce MAX_TEXT_CHARS_PER_ITEM, or enable retries)",
+    ]
     lines.append("")
 
     for sec in sections:
@@ -149,11 +197,13 @@ def _deterministic_structured_digest(date_label: str, items: List[Item], note: O
             published = getattr(it, "published_iso", None) or "Unknown"
             title = (it.title or "").strip() or "Untitled"
             url = (it.url or "").strip()
+            raw = (it.summary or "").strip()
+            summ = _extractive_summary(raw, max_words=140)
             lines += [
                 f"### {title[:80]}",
                 f"- **PUBLISHER:** {pub}",
                 f"- **PUBLISHED:** {published}",
-                '- **Summary:** Insufficient extract; see source.',
+                f"- **Summary:** {summ}",
                 "- **Why it matters:**",
                 "  - See source.",
                 f"- **Source:** {url}",
@@ -173,53 +223,44 @@ def _deterministic_structured_digest(date_label: str, items: List[Item], note: O
     return "\n".join(lines).strip() + "\n"
 
 
-def _openai_chat_completion(messages: List[Dict], model: str, temperature: float) -> str:
+def _openai_chat_completion(model: str, messages: List[Dict[str, str]], temperature: float = 0.2) -> str:
     """
-    Calls OpenAI Chat Completions endpoint via HTTP (no SDK dependency).
-    Raises on terminal failure; caller handles fallback.
+    Call OpenAI Chat Completions via HTTPS.
+
+    CHANGE (Feb 2026):
+    - Retries with exponential backoff for transient timeouts.
+    - Separate connect/read timeout and increased default.
+    - Bounded max_tokens for faster responses.
     """
-    headers = {
-        "Authorization": f"Bearer {OPENAI_API_KEY}",
-        "Content-Type": "application/json",
-    }
+    if not OPENAI_API_KEY:
+        raise RuntimeError("OPENAI_API_KEY missing")
+
+    url = "https://api.openai.com/v1/chat/completions"
+    headers = {"Authorization": f"Bearer {OPENAI_API_KEY}", "Content-Type": "application/json"}
     payload = {
         "model": model,
-        "temperature": temperature,
         "messages": messages,
+        "temperature": temperature,
+        "max_tokens": OPENAI_MAX_TOKENS,
     }
 
-    last_err: Optional[str] = None
-    for attempt in range(REQ_RETRIES + 1):
+    last_err: Optional[Exception] = None
+    for attempt in range(max(1, OPENAI_RETRIES)):
         try:
-            r = requests.post(
-                OPENAI_CHAT_URL,
-                headers=headers,
-                data=json.dumps(payload, ensure_ascii=False),
-                timeout=REQ_TIMEOUT,
-            )
-            if r.status_code == 429 and attempt < REQ_RETRIES:
-                time.sleep(BACKOFF ** attempt)
-                continue
-            if r.status_code >= 400:
-                last_err = f"{r.status_code}: {r.text[:400]}"
-                if attempt < REQ_RETRIES:
-                    time.sleep(BACKOFF ** attempt)
-                    continue
-                raise RuntimeError(last_err)
-
+            # (connect timeout, read timeout)
+            r = requests.post(url, headers=headers, json=payload, timeout=(10, OPENAI_TIMEOUT))
+            r.raise_for_status()
             data = r.json()
-            content = (data.get("choices") or [{}])[0].get("message", {}).get("content", "")
-            if content and content.strip():
-                return content.strip()
-            last_err = "Empty completion"
+            return data["choices"][0]["message"]["content"].strip()
         except Exception as e:
-            last_err = str(e)
-            if attempt < REQ_RETRIES:
-                time.sleep(BACKOFF ** attempt)
+            last_err = e
+            # backoff: 1s, 2s, 4s...
+            if attempt < max(1, OPENAI_RETRIES) - 1:
+                time.sleep(2 ** attempt)
                 continue
-            raise RuntimeError(last_err or "OpenAI call failed")
+            break
 
-    raise RuntimeError(last_err or "OpenAI call failed")
+    raise RuntimeError(f"OpenAI call failed after {OPENAI_RETRIES} attempt(s): {last_err}")
 
 
 def build_digest(ym: str, items: List[Item]) -> str:
