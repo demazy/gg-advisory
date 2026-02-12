@@ -1,7 +1,7 @@
 [
   {
     "url": "https://www.aemc.gov.au/news-centre",
-    "title": "Skip To Main Content",
+    "title": "Mobile Menu",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -13,7 +13,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/",
-    "title": "Skip To Main Content",
+    "title": "Home",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -25,7 +25,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/about-us",
-    "title": "Skip To Main Content",
+    "title": "About Us",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -37,7 +37,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/energy-system",
-    "title": "Skip To Main Content",
+    "title": "Energy System",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -49,7 +49,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/regulation",
-    "title": "Skip To Main Content",
+    "title": "Regulation",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -61,7 +61,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/our-work",
-    "title": "Skip To Main Content",
+    "title": "Our Work",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -73,7 +73,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/contact-us",
-    "title": "Skip To Main Content",
+    "title": "Contact Us",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -85,7 +85,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/metering",
-    "title": "Skip To Main Content",
+    "title": "https://www.aemc.gov.au/metering",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -97,19 +97,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/calendar",
-    "title": "Skip To Main Content",
-    "summary": "",
-    "source": "aemc.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
-  },
-  {
-    "url": "https://www.aemc.gov.au/careers",
-    "title": "Skip To Main Content",
+    "title": "Calendar",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -121,7 +109,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/about-us/chair-and-commissioners",
-    "title": "Skip To Main Content",
+    "title": "Chair and commissioners",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -133,7 +121,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/about-us/executive-leadership-team",
-    "title": "Skip To Main Content",
+    "title": "Executive leadership team",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -145,7 +133,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/about-us/our-governance",
-    "title": "Skip To Main Content",
+    "title": "Our governance",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -157,7 +145,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/about-us/reliability-panel",
-    "title": "Skip To Main Content",
+    "title": "Reliability Panel",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -169,7 +157,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/about-us/stakeholder-engagement",
-    "title": "Skip To Main Content",
+    "title": "Stakeholder engagement",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -181,7 +169,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/about-us/mission-and-values",
-    "title": "Skip To Main Content",
+    "title": "Vision, mission and values",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -193,7 +181,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/about-us/history",
-    "title": "Skip To Main Content",
+    "title": "History",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -205,7 +193,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/energy-system/electricity",
-    "title": "Skip To Main Content",
+    "title": "Electricity",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -217,7 +205,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/energy-system/energy-system",
-    "title": "Skip To Main Content",
+    "title": "Gas",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -229,7 +217,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/energy-system/retail",
-    "title": "Skip To Main Content",
+    "title": "Retail",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -241,7 +229,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/energy-system/energy-system-0",
-    "title": "Skip To Main Content",
+    "title": "Energy terminology",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -253,7 +241,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/regulation/national-governance",
-    "title": "Skip To Main Content",
+    "title": "National energy governance",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -265,7 +253,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/regulation/neo",
-    "title": "Skip To Main Content",
+    "title": "National Energy Objectives",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -277,7 +265,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/regulation/legislation",
-    "title": "Skip To Main Content",
+    "title": "Legislation",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -289,7 +277,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/regulation/energy-rules",
-    "title": "Skip To Main Content",
+    "title": "Energy rules",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -301,7 +289,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/regulation/energy-rules/national-electricity-rules/current",
-    "title": "Skip To Main Content",
+    "title": "National Electricity Rules - Current",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -313,7 +301,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/regulation/energy-rules/national-gas-rules/current",
-    "title": "Skip To Main Content",
+    "title": "National Gas Rules - Current",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -325,7 +313,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/regulation/energy-rules/national-energy-retail-rules/current",
-    "title": "Skip To Main Content",
+    "title": "National Energy Retail Rules - Current",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -337,7 +325,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/regulation/electricity-guidelines-and-standards",
-    "title": "Skip To Main Content",
+    "title": "Electricity guidelines, standards and schedules",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -349,7 +337,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/our-work/our-priorities",
-    "title": "Skip To Main Content",
+    "title": "Our Priorities",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -361,7 +349,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/our-work/changing-energy-rules/rule-changes",
-    "title": "Skip To Main Content",
+    "title": "Rule change projects",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -373,7 +361,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/our-work/market-reviews-and-advice",
-    "title": "Skip To Main Content",
+    "title": "Market reviews and advice",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -385,7 +373,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/our-work/developing-electricity-guidelines-and-standards",
-    "title": "Skip To Main Content",
+    "title": "Developing electricity guidelines, standards and schedules",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -397,7 +385,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/our-work/changing-energy-rules",
-    "title": "Skip To Main Content",
+    "title": "Changing the energy rules – a unique process",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -409,7 +397,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/our-work/research",
-    "title": "Skip To Main Content",
+    "title": "research@AEMC",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -421,7 +409,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/our-work/compensation",
-    "title": "Skip To Main Content",
+    "title": "Compensation – administered pricing, market suspension, and directions",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -433,7 +421,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/media-releases",
-    "title": "Skip To Main Content",
+    "title": "Media Releases >",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -445,7 +433,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/speeches",
-    "title": "Skip To Main Content",
+    "title": "Speeches >",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -457,7 +445,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/infographics",
-    "title": "Skip To Main Content",
+    "title": "Infographics >",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -469,7 +457,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/corporate-publications",
-    "title": "Skip To Main Content",
+    "title": "Corporate publications >",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -481,7 +469,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/submissions-to-inquiries",
-    "title": "Skip To Main Content",
+    "title": "Submissions to Inquiries >",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -493,7 +481,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/perspectives",
-    "title": "Skip To Main Content",
+    "title": "Perspectives >",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -505,7 +493,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/annual-reports",
-    "title": "Skip To Main Content",
+    "title": "Annual reports >",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -517,7 +505,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/data-portal",
-    "title": "Skip To Main Content",
+    "title": "Data portal >",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -529,19 +517,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/videos",
-    "title": "Skip To Main Content",
-    "summary": "",
-    "source": "aemc.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
-  },
-  {
-    "url": "https://www.aemc.gov.au/contact-us/subscribe",
-    "title": "Skip To Main Content",
+    "title": "View All >",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -553,7 +529,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/contact-us/lodge-submission",
-    "title": "Skip To Main Content",
+    "title": "Lodge a submission",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -565,31 +541,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/contact-us/propose-rule-change",
-    "title": "Skip To Main Content",
-    "summary": "",
-    "source": "aemc.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
-  },
-  {
-    "url": "https://au.linkedin.com/company/australian-energy-market-commission",
-    "title": "Skip To Main Content",
-    "summary": "",
-    "source": "aemc.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
-  },
-  {
-    "url": "https://twitter.com/the_aemc",
-    "title": "Skip To Main Content",
+    "title": "Propose a rule change",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -601,7 +553,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/media-releases/faster-renewable-buildout-and-electrification-key-affordable-energy-transition",
-    "title": "Skip To Main Content",
+    "title": "https://www.aemc.gov.au/news-centre/media-releases/faster-renewable-buildout-and-electrification-key-affordable-energy-transition",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -613,7 +565,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-makes-final-rule-help-vulnerable-consumers-get-energy-bill-help-they-deserve",
-    "title": "Skip To Main Content",
+    "title": "https://www.aemc.gov.au/news-centre/media-releases/aemc-makes-final-rule-help-vulnerable-consumers-get-energy-bill-help-they-deserve",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -625,7 +577,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/speeches/coordinating-transition-lower-household-energy-costs-navigating-known-unknowns",
-    "title": "Skip To Main Content",
+    "title": "Access the full speech",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -637,7 +589,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-delivers-enhanced-consumer-protections-help-customers-find-better-energy-deals",
-    "title": "Skip To Main Content",
+    "title": "https://www.aemc.gov.au/news-centre/media-releases/aemc-delivers-enhanced-consumer-protections-help-customers-find-better-energy-deals",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -649,19 +601,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-finalises-landmark-reform-accelerate-smart-meter-rollout",
-    "title": "Skip To Main Content",
-    "summary": "",
-    "source": "aemc.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
-  },
-  {
-    "url": "https://utilitymagazine.com.au/flipping-the-switch-on-cer/",
-    "title": "Skip To Main Content",
+    "title": "https://www.aemc.gov.au/news-centre/media-releases/aemc-finalises-landmark-reform-accelerate-smart-meter-rollout",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -673,7 +613,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-applies-new-emissions-reduction-objective",
-    "title": "Skip To Main Content",
+    "title": "https://www.aemc.gov.au/news-centre/media-releases/aemc-applies-new-emissions-reduction-objective",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -685,7 +625,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-undertake-critical-review-reconsider-role-electricity-networks-transition",
-    "title": "Skip To Main Content",
+    "title": "AEMC to undertake critical review to reconsider the role of electricity networks in the transition",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -697,7 +637,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/market-reviews-advice/electricity-network-regulation-review",
-    "title": "Skip To Main Content",
+    "title": "EPR0106",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -709,7 +649,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/media-releases/aemcs-final-rule-gives-consumers-smarter-data-options",
-    "title": "Skip To Main Content",
+    "title": "AEMC’s final rule gives consumers smarter data options",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -721,7 +661,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/rule-changes/real-time-data-consumers",
-    "title": "Skip To Main Content",
+    "title": "ERC0399",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -733,7 +673,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/rule-changes/real-time-data-consumers-retail",
-    "title": "Skip To Main Content",
+    "title": "RRC0057",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -745,7 +685,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-starts-consultation-isp-review",
-    "title": "Skip To Main Content",
+    "title": "AEMC starts consultation on the ISP Review",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -757,7 +697,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/market-reviews-advice/review-integrated-system-plan-framework",
-    "title": "Skip To Main Content",
+    "title": "​​EPR0092​",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -769,7 +709,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/media-releases/electricity-pricing-reforms-target-fairness-lower-costs",
-    "title": "Skip To Main Content",
+    "title": "Electricity pricing reforms target fairness, lower costs",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -781,7 +721,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/market-reviews-advice/pricing-review-electricity-pricing-consumer-driven-future",
-    "title": "Skip To Main Content",
+    "title": "​​EPR0097​",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -793,7 +733,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/charging-ahead-residential-batteries-are-growing-popularity-and-profitability",
-    "title": "Skip To Main Content",
+    "title": "Charging ahead: Residential batteries are growing in popularity and profitability",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -805,7 +745,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/energeia-finds-cer-flexibility-could-deliver-45b-benefits-2050",
-    "title": "Skip To Main Content",
+    "title": "Energeia finds that CER flexibility could deliver $45B in benefits by 2050",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -817,7 +757,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/ess-system-security-update-aemc-reform-work-program",
-    "title": "Skip To Main Content",
+    "title": "ESS & system security - An update on AEMC reform work program",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -829,7 +769,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/you-can-be-anything-barbies-power-quest",
-    "title": "Skip To Main Content",
+    "title": "\"You can be anything\" - Barbie’s power quest",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -841,7 +781,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/sites/default/files/2023-05/EPR0087%20-%20final%20-%20infographic.pdf",
-    "title": "Skip To Main Content",
+    "title": "Making transmission investment and delivery more timely and efficient – to enable the transition to net zero",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -853,7 +793,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/market-reviews-advice/transmission-planning-and-investment-review",
-    "title": "Skip To Main Content",
+    "title": "EPR0087",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -865,7 +805,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/sites/default/files/2023-08/emo0040_-aemc_metering_services_infographic.pdf",
-    "title": "Skip To Main Content",
+    "title": "Smart meters are a key enabler in the transition to net zero",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -877,7 +817,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/sites/default/files/2022-10/EPR0087-%20Final%20report%20-%20stage%202%20-%20infographic.pdf",
-    "title": "Skip To Main Content",
+    "title": "Improving certainty to enable the transmission needed for net zero",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -889,7 +829,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/sites/default/files/2021-11/4145_AEMC-Price-Trends-2021_National%20A_v4.pdf",
-    "title": "Skip To Main Content",
+    "title": "Residential Electricity Price Trends Report 25 November 2021",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -901,19 +841,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/speeches/energy-revolution-our-homes",
-    "title": "Skip To Main Content",
-    "summary": "",
-    "source": "aemc.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
-  },
-  {
-    "url": "https://www.aemc.gov.au/news-centre/speeches/redesigning-rules-how-regulation-can-enable-smarter-fairer-energy-system",
-    "title": "Skip To Main Content",
+    "title": "The energy revolution in our homes",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -925,7 +853,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/speeches/aemcs-20th-anniversary",
-    "title": "Skip To Main Content",
+    "title": "AEMC's 20th anniversary",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -937,7 +865,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/speeches/navigating-dual-trends-power-systems",
-    "title": "Skip To Main Content",
+    "title": "Navigating dual trends in power systems",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -949,7 +877,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/infographics/smart-meters-are-key-enabler-transition-net-zero",
-    "title": "Skip To Main Content",
+    "title": "Infographic | Smart meters are a key enabler in the transition to net zero",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -961,7 +889,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/infographics/improving-certainty-enable-transmission-needed-net-zero",
-    "title": "Skip To Main Content",
+    "title": "Infographic | Improving certainty to enable the transmission needed for net zero",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -973,7 +901,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/videos/reconciliation-action-plan",
-    "title": "Skip To Main Content",
+    "title": "Reconciliation action plan",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -985,7 +913,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/videos/making-solar-batteries-and-new-energy-technology-work-everyone",
-    "title": "Skip To Main Content",
+    "title": "Making solar, batteries and new energy technology work for everyone",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -997,7 +925,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/videos/better-way-read-rules",
-    "title": "Skip To Main Content",
+    "title": "A better way to read the rules",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1009,7 +937,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/submissions-to-enquiry",
-    "title": "Skip To Main Content",
+    "title": "View All >",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1021,7 +949,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/sites/default/files/2025-09/2025.09.17%20-%20AEMC%20submission%20to%20the%20NEM%20review%20draft%20report_final.pdf",
-    "title": "Skip To Main Content",
+    "title": "Submission to the National Electricity Market wholesale market settings review draft report",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1033,7 +961,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/market-reviews-advice/future-wholesale-market",
-    "title": "Skip To Main Content",
+    "title": "​​EPR0093​",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1045,7 +973,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/sites/default/files/2025-09/AEMC%20submission%20to%20PC%20interim%20report%20-%2015%20Sept%202025.pdf",
-    "title": "Skip To Main Content",
+    "title": "Submission to Productivity Commission - Cheaper, cleaner energy and the net zero transformation – Interim report",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1057,7 +985,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/sites/default/files/2025-08/AEMC%20submission%20to%20the%20CCA%202025%20Issues%20Paper.pdf",
-    "title": "Skip To Main Content",
+    "title": "AEMC submission to the CCA 2025 Issues Paper",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1069,7 +997,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/sites/default/files/2025-08/20250725%20AEMC%20-%20Submission%20in%20response%20to%20the%20NSW%20Transmission%20Planning%20Review%20Interim%20Report.pdf",
-    "title": "Skip To Main Content",
+    "title": "AEMC submission to the NSW Transmission Planning Review – Interim report",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1081,7 +1009,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/sites/default/files/2025-11/2024-25%20AEMC%20Annual%20Report%20final_0.pdf",
-    "title": "Skip To Main Content",
+    "title": "AEMC Annual Report 2024-2025",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1093,7 +1021,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/sites/default/files/2024-12/AEMC_annual_report_2023-24.pdf",
-    "title": "Skip To Main Content",
+    "title": "AEMC Annual Report 2023-2024",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1105,7 +1033,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/sites/default/files/2023-12/AEMC_annual_report_2022-23_web_v2.pdf",
-    "title": "Skip To Main Content",
+    "title": "AEMC Annual Report 2022-2023",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1117,7 +1045,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/sites/default/files/2022-12/AEMC%20Annual%20Report%202021%20-%202022.pdf",
-    "title": "Skip To Main Content",
+    "title": "AEMC Annual Report 2021-2022",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1129,7 +1057,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/corporate-publications/rule-drafting-philosophy",
-    "title": "Skip To Main Content",
+    "title": "Rule drafting philosophy",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1141,7 +1069,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/corporate-publications/prioritisation-regulatory-initiatives-stakeholder-consultation",
-    "title": "Skip To Main Content",
+    "title": "Prioritisation of regulatory initiatives – stakeholder consultation",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1153,7 +1081,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/corporate-publications/joint-market-body-prioritisation-framework",
-    "title": "Skip To Main Content",
+    "title": "Joint market body prioritisation framework",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1165,7 +1093,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/corporate-publications/prioritising-implementation-timeframes-more-detailed-view",
-    "title": "Skip To Main Content",
+    "title": "Prioritising implementation timeframes - a more detailed view",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1177,19 +1105,7 @@
   },
   {
     "url": "https://www.aemc.gov.au/terms-use",
-    "title": "Skip To Main Content",
-    "summary": "",
-    "source": "aemc.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
-  },
-  {
-    "url": "https://www.aemc.gov.au/terms-use/sitemap",
-    "title": "Skip To Main Content",
+    "title": "Terms of Use",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1201,7 +1117,7 @@
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news",
-    "title": "Skip to main content",
+    "title": "News",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1213,7 +1129,7 @@
   },
   {
     "url": "https://www.cer.gov.au/about-us/contact-us",
-    "title": "Skip to main content",
+    "title": "Contact us",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1224,8 +1140,8 @@
     "index_url": "https://www.cer.gov.au/news-and-media/news"
   },
   {
-    "url": "https://www.cer.gov.au/careers",
-    "title": "Skip to main content",
+    "url": "https://www.cer.gov.au/news-and-media/media-centre",
+    "title": "Media centre",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1237,7 +1153,7 @@
   },
   {
     "url": "https://www.cer.gov.au/about-us",
-    "title": "Skip to main content",
+    "title": "About us",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1249,7 +1165,7 @@
   },
   {
     "url": "https://www.cer.gov.au/about-us/who-we-are",
-    "title": "Skip to main content",
+    "title": "Who we are",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1261,19 +1177,7 @@
   },
   {
     "url": "https://www.cer.gov.au/about-us/our-policies",
-    "title": "Skip to main content",
-    "summary": "",
-    "source": "cer.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
-  },
-  {
-    "url": "https://www.cer.gov.au/about-us/our-reports-and-accountability",
-    "title": "Skip to main content",
+    "title": "Our policies",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1285,7 +1189,7 @@
   },
   {
     "url": "https://www.cer.gov.au/about-us/our-compliance-approach",
-    "title": "Skip to main content",
+    "title": "Our compliance approach",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1297,7 +1201,7 @@
   },
   {
     "url": "https://www.cer.gov.au/about-us/supporting-renewable-energy",
-    "title": "Skip to main content",
+    "title": "Supporting renewable energy",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1309,7 +1213,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/renewable-energy-target",
-    "title": "Skip to main content",
+    "title": "Renewable Energy Target",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1321,7 +1225,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/renewable-energy-target/information-householders",
-    "title": "Skip to main content",
+    "title": "Information for householders",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1333,7 +1237,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/renewable-energy-target/small-scale-renewable-energy-scheme",
-    "title": "Skip to main content",
+    "title": "Small-scale Renewable Energy Scheme",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1345,7 +1249,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/large-scale-renewable-energy-target",
-    "title": "Skip to main content",
+    "title": "Large-scale Renewable Energy Target",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1357,7 +1261,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/renewable-energy-target/renewable-energy-target-liability-and-exemptions",
-    "title": "Skip to main content",
+    "title": "Renewable Energy Target liability and exemptions",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1369,7 +1273,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/renewable-energy-target/renewable-energy-target-participants-and-industry",
-    "title": "Skip to main content",
+    "title": "Participants and industry",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1381,7 +1285,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/australian-carbon-credit-unit-scheme",
-    "title": "Skip to main content",
+    "title": "Australian Carbon Credit Unit Scheme",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1393,7 +1297,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/australian-carbon-credit-unit-scheme/how-to-participate-accu-scheme",
-    "title": "Skip to main content",
+    "title": "Participate in the ACCU Scheme",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1405,7 +1309,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/australian-carbon-credit-unit-scheme/accu-scheme-methods",
-    "title": "Skip to main content",
+    "title": "Methods",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1417,7 +1321,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/australian-carbon-credit-unit-scheme/australian-carbon-credit-units",
-    "title": "Skip to main content",
+    "title": "Australian carbon credit units",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1429,7 +1333,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/australian-carbon-credit-unit-scheme/how-to-participate-accu-scheme/project-reporting-and-audits",
-    "title": "Skip to main content",
+    "title": "Project reporting and audits",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1441,7 +1345,7 @@
   },
   {
     "url": "https://www.cer.gov.au/markets/reports-and-data/accu-project-and-contract-register",
-    "title": "Skip to main content",
+    "title": "ACCU project and contract register",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1453,7 +1357,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/national-greenhouse-and-energy-reporting-scheme",
-    "title": "Skip to main content",
+    "title": "National Greenhouse and Energy Reporting Scheme",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1465,7 +1369,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/national-greenhouse-and-energy-reporting-scheme/report-emissions-and-energy",
-    "title": "Skip to main content",
+    "title": "Report emissions and energy",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1477,7 +1381,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/national-greenhouse-and-energy-reporting-scheme/assess-your-obligations",
-    "title": "Skip to main content",
+    "title": "Assess your obligations",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1489,7 +1393,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/national-greenhouse-and-energy-reporting-scheme/record-keeping-and-compliance-greenhouse-and-energy-reporting",
-    "title": "Skip to main content",
+    "title": "Record keeping and compliance",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1501,7 +1405,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/national-greenhouse-and-energy-reporting-scheme/register-nger-reporter",
-    "title": "Skip to main content",
+    "title": "Register as a reporter",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1513,7 +1417,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/safeguard-mechanism",
-    "title": "Skip to main content",
+    "title": "The Safeguard Mechanism",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1525,7 +1429,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/safeguard-mechanism/safeguard-baselines",
-    "title": "Skip to main content",
+    "title": "Safeguard baselines",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1537,7 +1441,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/safeguard-mechanism/safeguard-net-emissions",
-    "title": "Skip to main content",
+    "title": "Safeguard net emissions",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1549,7 +1453,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/safeguard-mechanism/managing-excess-emissions",
-    "title": "Skip to main content",
+    "title": "Managing excess emissions",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1561,7 +1465,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/safeguard-mechanism/safeguard-mechanism-credit-units",
-    "title": "Skip to main content",
+    "title": "Safeguard Mechanism credit units",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1573,7 +1477,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/safeguard-mechanism/safeguard-mechanism-1-july-2023",
-    "title": "Skip to main content",
+    "title": "Safeguard Mechanism before 1 July 2023",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1585,7 +1489,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/guarantee-origin-scheme",
-    "title": "Skip to main content",
+    "title": "Guarantee of Origin Scheme",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1597,7 +1501,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/guarantee-origin-scheme/product-guarantee-origin",
-    "title": "Skip to main content",
+    "title": "Product Guarantee of Origin",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1609,7 +1513,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/guarantee-origin-scheme/product-guarantee-origin/how-to-participate-pgo",
-    "title": "Skip to main content",
+    "title": "Participate in the PGO",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1621,7 +1525,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/guarantee-origin-scheme/renewable-electricity-guarantee-origin",
-    "title": "Skip to main content",
+    "title": "Renewable Electricity Guarantee of Origin",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1633,19 +1537,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/guarantee-origin-scheme/renewable-electricity-guarantee-origin/how-to-participate-rego",
-    "title": "Skip to main content",
-    "summary": "",
-    "source": "cer.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
-  },
-  {
-    "url": "https://www.cer.gov.au/schemes/guarantee-origin-scheme/designing-guarantee-origin",
-    "title": "Skip to main content",
+    "title": "Participate in the REGO",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1657,7 +1549,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/nature-repair-market-scheme",
-    "title": "Skip to main content",
+    "title": "Nature Repair Market scheme",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1669,7 +1561,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/nature-repair-market-scheme/how-to-participate-nature-repair-market-scheme",
-    "title": "Skip to main content",
+    "title": "Participate in the scheme",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1681,7 +1573,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/nature-repair-market-scheme/replanting-native-forest-and-woodland-ecosystems-method",
-    "title": "Skip to main content",
+    "title": "Replanting method",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1693,7 +1585,7 @@
   },
   {
     "url": "https://www.cer.gov.au/markets/biodiversity-certificates",
-    "title": "Skip to main content",
+    "title": "Biodiversity certificates",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1705,7 +1597,7 @@
   },
   {
     "url": "https://www.cer.gov.au/markets/reports-and-data/biodiversity-market-register",
-    "title": "Skip to main content",
+    "title": "Biodiversity Market Register",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1717,7 +1609,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/audits-our-schemes",
-    "title": "Skip to main content",
+    "title": "Audits in our schemes",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1729,7 +1621,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/audits-our-schemes/find-auditor",
-    "title": "Skip to main content",
+    "title": "Find an auditor",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1741,7 +1633,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/audits-our-schemes/audit-teams-and-quality-management",
-    "title": "Skip to main content",
+    "title": "Audit teams and quality management",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1753,7 +1645,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/audits-our-schemes/register-auditor",
-    "title": "Skip to main content",
+    "title": "Register as an auditor",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1765,7 +1657,7 @@
   },
   {
     "url": "https://www.cer.gov.au/schemes/audits-our-schemes/maintain-your-registration-auditor",
-    "title": "Skip to main content",
+    "title": "Maintain your registration as an auditor",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1777,7 +1669,7 @@
   },
   {
     "url": "https://www.cer.gov.au/markets",
-    "title": "Skip to main content",
+    "title": "Markets",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1789,7 +1681,7 @@
   },
   {
     "url": "https://www.cer.gov.au/markets/carbon-credits",
-    "title": "Skip to main content",
+    "title": "Carbon credits",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1801,7 +1693,7 @@
   },
   {
     "url": "https://www.cer.gov.au/markets/reports-and-data",
-    "title": "Skip to main content",
+    "title": "Reports and data",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1813,7 +1705,7 @@
   },
   {
     "url": "https://www.cer.gov.au/markets/renewable-energy-certificates",
-    "title": "Skip to main content",
+    "title": "Renewable energy certificates",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1825,7 +1717,7 @@
   },
   {
     "url": "https://www.cer.gov.au/markets/interoperability-unit-and-certificate-registry",
-    "title": "Skip to main content",
+    "title": "Interoperability with the Unit and Certificate Registry",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1837,7 +1729,7 @@
   },
   {
     "url": "https://www.cer.gov.au/markets/international-units",
-    "title": "Skip to main content",
+    "title": "International units",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1849,7 +1741,7 @@
   },
   {
     "url": "https://www.cer.gov.au/markets/voluntary-offsetting-and-surrender",
-    "title": "Skip to main content",
+    "title": "Voluntary offsetting and surrender",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1861,7 +1753,7 @@
   },
   {
     "url": "https://www.cer.gov.au/news-and-media",
-    "title": "Skip to main content",
+    "title": "News and media",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1873,7 +1765,7 @@
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/case-studies",
-    "title": "Skip to main content",
+    "title": "Case studies",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1885,7 +1777,7 @@
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/public-consultations",
-    "title": "Skip to main content",
+    "title": "Public consultations",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1897,7 +1789,7 @@
   },
   {
     "url": "https://www.cer.gov.au/online-systems",
-    "title": "Skip to main content",
+    "title": "Australian National Registry of Emissions Units",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1909,7 +1801,7 @@
   },
   {
     "url": "https://www.cer.gov.au/online-systems/new-unit-and-certificate-registry",
-    "title": "Skip to main content",
+    "title": "Unit and Certificate Registry",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1921,7 +1813,7 @@
   },
   {
     "url": "https://data.cer.gov.au/",
-    "title": "Skip to main content",
+    "title": "Data Services beta",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1933,7 +1825,19 @@
   },
   {
     "url": "https://www.cer.gov.au/",
-    "title": "Skip to main content",
+    "title": "Home",
+    "summary": "",
+    "source": "cer.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.cer.gov.au/news-and-media/news"
+  },
+  {
+    "url": "https://www.cer.gov.au/news-and-media/media-centre/media-releases",
+    "title": "media releases",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1945,223 +1849,115 @@
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news/2026/january/explore-q4-2025-qcmr-data-workbook",
-    "title": "Skip to main content",
+    "title": "Read more arrow_right_alt",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
+    "published_iso": "2026-01-01T00:00:00+00:00",
+    "published_ts": 1767225600.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
     "index_url": "https://www.cer.gov.au/news-and-media/news"
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news/2025/december/fifth-independent-review-hir-gateway-checks",
-    "title": "Skip to main content",
+    "title": "Read more arrow_right_alt",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
+    "published_iso": "2025-12-01T00:00:00+00:00",
+    "published_ts": 1764547200.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
     "index_url": "https://www.cer.gov.au/news-and-media/news"
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news/2025/december/changes-to-cheaper-home-batteries-program",
-    "title": "Skip to main content",
+    "title": "Read more arrow_right_alt",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
+    "published_iso": "2025-12-01T00:00:00+00:00",
+    "published_ts": 1764547200.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
     "index_url": "https://www.cer.gov.au/news-and-media/news"
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news/2025/december/register-solar-water-heaters-version-56-now-available",
-    "title": "Skip to main content",
+    "title": "Read more arrow_right_alt",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
+    "published_iso": "2025-12-01T00:00:00+00:00",
+    "published_ts": 1764547200.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
     "index_url": "https://www.cer.gov.au/news-and-media/news"
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news/2025/december/fixed-delivery-exit-arrangement-now-permanent",
-    "title": "Skip to main content",
+    "title": "Read more arrow_right_alt",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
+    "published_iso": "2025-12-01T00:00:00+00:00",
+    "published_ts": 1764547200.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
     "index_url": "https://www.cer.gov.au/news-and-media/news"
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news/2025/december/market-update-fixed-delivery-exit-arrangement",
-    "title": "Skip to main content",
+    "title": "Read more arrow_right_alt",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
+    "published_iso": "2025-12-01T00:00:00+00:00",
+    "published_ts": 1764547200.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
     "index_url": "https://www.cer.gov.au/news-and-media/news"
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news/2025/december/renewable-energy-target-enforcement-action-against-mojo-power-east",
-    "title": "Skip to main content",
+    "title": "Read more arrow_right_alt",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
+    "published_iso": "2025-12-01T00:00:00+00:00",
+    "published_ts": 1764547200.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
     "index_url": "https://www.cer.gov.au/news-and-media/news"
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news/2025/november/2024-25-preliminary-safeguard-mechanism-insights-released",
-    "title": "Skip to main content",
+    "title": "Read more arrow_right_alt",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
+    "published_iso": "2025-11-01T00:00:00+00:00",
+    "published_ts": 1761955200.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
     "index_url": "https://www.cer.gov.au/news-and-media/news"
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news/2025/november/recall-issued-sigenergy-single-phase-81012-kw-energy-controllers",
-    "title": "Skip to main content",
+    "title": "Read more arrow_right_alt",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
-  },
-  {
-    "url": "https://www.cer.gov.au/news-and-media/news?page=0",
-    "title": "Skip to main content",
-    "summary": "",
-    "source": "cer.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
-  },
-  {
-    "url": "https://www.cer.gov.au/news-and-media/news?page=1",
-    "title": "Skip to main content",
-    "summary": "",
-    "source": "cer.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
-  },
-  {
-    "url": "https://www.cer.gov.au/news-and-media/news?page=2",
-    "title": "Skip to main content",
-    "summary": "",
-    "source": "cer.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
-  },
-  {
-    "url": "https://www.cer.gov.au/news-and-media/news?page=3",
-    "title": "Skip to main content",
-    "summary": "",
-    "source": "cer.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
-  },
-  {
-    "url": "https://www.facebook.com/CERegulator/",
-    "title": "Skip to main content",
-    "summary": "",
-    "source": "cer.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
-  },
-  {
-    "url": "https://www.youtube.com/user/cercommunications",
-    "title": "Skip to main content",
-    "summary": "",
-    "source": "cer.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
-  },
-  {
-    "url": "https://www.linkedin.com/company/clean-energy-regulator",
-    "title": "Skip to main content",
-    "summary": "",
-    "source": "cer.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
-  },
-  {
-    "url": "https://twitter.com/CERegulator",
-    "title": "Skip to main content",
-    "summary": "",
-    "source": "cer.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
+    "published_iso": "2025-11-01T00:00:00+00:00",
+    "published_ts": 1761955200.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
     "index_url": "https://www.cer.gov.au/news-and-media/news"
   },
   {
     "url": "https://www.cer.gov.au/about-us/our-policies/privacy-policy",
-    "title": "Skip to main content",
-    "summary": "",
-    "source": "cer.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
-  },
-  {
-    "url": "https://www.cer.gov.au/about-us/our-policies/accessibility",
-    "title": "Skip to main content",
+    "title": "Privacy policy",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -2173,7 +1969,7 @@
   },
   {
     "url": "https://www.cer.gov.au/about-us/our-policies/copyright",
-    "title": "Skip to main content",
+    "title": "Copyright",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -2185,19 +1981,7 @@
   },
   {
     "url": "https://www.cer.gov.au/about-us/social-media-guidelines",
-    "title": "Skip to main content",
-    "summary": "",
-    "source": "cer.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
-  },
-  {
-    "url": "https://www.cer.gov.au/about-us/our-reports-and-accountability/freedom-information-foi",
-    "title": "Skip to main content",
+    "title": "Social media",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -2209,7 +1993,7 @@
   },
   {
     "url": "https://www.cer.gov.au/about-us/our-policies/artificial-intelligence-transparency-statement",
-    "title": "Skip to main content",
+    "title": "AI transparency statement",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -2221,7 +2005,7 @@
   },
   {
     "url": "https://www.cer.gov.au/about-us/our-policies/disclaimer",
-    "title": "Skip to main content",
+    "title": "Disclaimer",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -2233,7 +2017,7 @@
   },
   {
     "url": "https://www.cer.gov.au/glossary",
-    "title": "Skip to main content",
+    "title": "Glossary",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -2245,7 +2029,7 @@
   },
   {
     "url": "https://cer.gov.au/online-systems/new-unit-and-certificate-registry",
-    "title": "Skip to main content",
+    "title": "Unit and Certificate Registry",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -2257,7 +2041,7 @@
   },
   {
     "url": "https://www.cer.gov.au/markets/reports-and-data/quarterly-carbon-market-reports",
-    "title": "Skip to main content",
+    "title": "Quarterly Carbon Market Reports",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -2269,7 +2053,7 @@
   },
   {
     "url": "https://arena.gov.au/news/",
-    "title": "Skip to Content",
+    "title": "Load more news",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2281,7 +2065,7 @@
   },
   {
     "url": "https://arena.gov.au/",
-    "title": "Skip to Content",
+    "title": "Home",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2293,7 +2077,7 @@
   },
   {
     "url": "https://arena.gov.au/what-is-renewable-energy/",
-    "title": "Skip to Content",
+    "title": "Renewable Energy overview",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2305,7 +2089,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/battery-storage/",
-    "title": "Skip to Content",
+    "title": "Battery storage",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2317,7 +2101,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/bioenergy/",
-    "title": "Skip to Content",
+    "title": "Bioenergy / Energy from waste",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2329,7 +2113,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/community-electrification/",
-    "title": "Skip to Content",
+    "title": "Community electrification",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2341,7 +2125,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/demand-response/",
-    "title": "Skip to Content",
+    "title": "Demand response",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2353,7 +2137,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/distributed-energy-resources/",
-    "title": "Skip to Content",
+    "title": "Distributed energy resources",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2365,7 +2149,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/electric-vehicles/",
-    "title": "Skip to Content",
+    "title": "Electric vehicles",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2377,7 +2161,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/geothermal/",
-    "title": "Skip to Content",
+    "title": "Geothermal",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2389,7 +2173,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/hybrid/",
-    "title": "Skip to Content",
+    "title": "Hybrid",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2401,7 +2185,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/hydrogen/",
-    "title": "Skip to Content",
+    "title": "Hydrogen",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2413,7 +2197,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/pumped-hydro-energy-storage/",
-    "title": "Skip to Content",
+    "title": "Hydropower / Pumped Hydro Energy Storage",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2425,7 +2209,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/ocean/",
-    "title": "Skip to Content",
+    "title": "Ocean",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2437,7 +2221,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/off-grid/",
-    "title": "Skip to Content",
+    "title": "Off grid",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2449,7 +2233,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/renewables-for-industry/",
-    "title": "Skip to Content",
+    "title": "Renewables for industry",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2461,7 +2245,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/renewables-in-buildings/",
-    "title": "Skip to Content",
+    "title": "Renewables in buildings",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2473,7 +2257,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/solar/",
-    "title": "Skip to Content",
+    "title": "Solar overview",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2485,7 +2269,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/concentrated-solar-thermal/",
-    "title": "Skip to Content",
+    "title": "Concentrated solar thermal",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2497,7 +2281,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/large-scale-solar/",
-    "title": "Skip to Content",
+    "title": "Large-scale solar",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2509,7 +2293,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/solar-pv-rd/",
-    "title": "Skip to Content",
+    "title": "Solar PV R&D",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2521,7 +2305,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/wind/",
-    "title": "Skip to Content",
+    "title": "Wind",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2533,7 +2317,7 @@
   },
   {
     "url": "https://arena.gov.au/renewable-energy/system-security-reliability/",
-    "title": "Skip to Content",
+    "title": "System security and reliability",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2545,7 +2329,7 @@
   },
   {
     "url": "https://arena.gov.au/funding",
-    "title": "Skip to Content",
+    "title": "Funding",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2557,7 +2341,7 @@
   },
   {
     "url": "https://arena.gov.au/projects",
-    "title": "Skip to Content",
+    "title": "Projects",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2569,7 +2353,7 @@
   },
   {
     "url": "https://arena.gov.au/knowledge-innovation/",
-    "title": "Skip to Content",
+    "title": "Knowledge & Innovation overview",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2581,7 +2365,7 @@
   },
   {
     "url": "https://arena.gov.au/knowledge-bank",
-    "title": "Skip to Content",
+    "title": "Knowledge Bank",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2593,7 +2377,7 @@
   },
   {
     "url": "https://arena.gov.au/knowledge-innovation/deip",
-    "title": "Skip to Content",
+    "title": "Distributed Energy Integration Program (DEIP) overview",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2605,19 +2389,7 @@
   },
   {
     "url": "https://arena.gov.au/news",
-    "title": "Skip to Content",
-    "summary": "",
-    "source": "arena.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://arena.gov.au/news/"
-  },
-  {
-    "url": "https://arena.gov.au/about",
-    "title": "Skip to Content",
+    "title": "News",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2629,7 +2401,7 @@
   },
   {
     "url": "https://arena.gov.au/about/board-arena-renewable-energy/",
-    "title": "Skip to Content",
+    "title": "Board",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2641,7 +2413,7 @@
   },
   {
     "url": "https://arena.gov.au/about/executive-team",
-    "title": "Skip to Content",
+    "title": "Executive team",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2653,7 +2425,7 @@
   },
   {
     "url": "https://arena.gov.au/about/advisory-panel/",
-    "title": "Skip to Content",
+    "title": "Advisory panel",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2665,7 +2437,7 @@
   },
   {
     "url": "https://arena.gov.au/about/partners",
-    "title": "Skip to Content",
+    "title": "Partners",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2677,7 +2449,7 @@
   },
   {
     "url": "https://arena.gov.au/about/strategic-priorities/",
-    "title": "Skip to Content",
+    "title": "Strategic priorities",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2689,7 +2461,7 @@
   },
   {
     "url": "https://arena.gov.au/about/legislation-and-regulation/",
-    "title": "Skip to Content",
+    "title": "Legislation and regulation",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2701,7 +2473,7 @@
   },
   {
     "url": "https://arena.gov.au/about/publications/",
-    "title": "Skip to Content",
+    "title": "Publications",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2713,31 +2485,7 @@
   },
   {
     "url": "https://arena.gov.au/about/finance-reporting/",
-    "title": "Skip to Content",
-    "summary": "",
-    "source": "arena.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://arena.gov.au/news/"
-  },
-  {
-    "url": "https://arena.gov.au/about/careers/",
-    "title": "Skip to Content",
-    "summary": "",
-    "source": "arena.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://arena.gov.au/news/"
-  },
-  {
-    "url": "https://arena.gov.au/contact/",
-    "title": "Skip to Content",
+    "title": "Finance reporting",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2749,7 +2497,7 @@
   },
   {
     "url": "https://arena.gov.au/blog",
-    "title": "Skip to Content",
+    "title": "https://arena.gov.au/blog",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2761,91 +2509,7 @@
   },
   {
     "url": "https://arena.gov.au/knowledge-bank/",
-    "title": "Skip to Content",
-    "summary": "",
-    "source": "arena.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://arena.gov.au/news/"
-  },
-  {
-    "url": "https://www.facebook.com/arenagovau/",
-    "title": "Skip to Content",
-    "summary": "",
-    "source": "arena.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://arena.gov.au/news/"
-  },
-  {
-    "url": "https://twitter.com/arenagovau",
-    "title": "Skip to Content",
-    "summary": "",
-    "source": "arena.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://arena.gov.au/news/"
-  },
-  {
-    "url": "https://www.youtube.com/c/AustralianRenewableEnergyAgency",
-    "title": "Skip to Content",
-    "summary": "",
-    "source": "arena.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://arena.gov.au/news/"
-  },
-  {
-    "url": "https://www.linkedin.com/company/arenagovau/",
-    "title": "Skip to Content",
-    "summary": "",
-    "source": "arena.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://arena.gov.au/news/"
-  },
-  {
-    "url": "https://policies.google.com/privacy",
-    "title": "Skip to Content",
-    "summary": "",
-    "source": "arena.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://arena.gov.au/news/"
-  },
-  {
-    "url": "https://policies.google.com/terms",
-    "title": "Skip to Content",
-    "summary": "",
-    "source": "arena.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://arena.gov.au/news/"
-  },
-  {
-    "url": "https://arena.gov.au/privacy/",
-    "title": "Skip to Content",
+    "title": "ARENA Insights newsletter",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2857,19 +2521,7 @@
   },
   {
     "url": "https://arena.gov.au/terms-of-use/",
-    "title": "Skip to Content",
-    "summary": "",
-    "source": "arena.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://arena.gov.au/news/"
-  },
-  {
-    "url": "https://arena.gov.au/sitemap/",
-    "title": "Skip to Content",
+    "title": "Terms",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2881,19 +2533,7 @@
   },
   {
     "url": "https://arena.gov.au/public-interest-disclosure/",
-    "title": "Skip to Content",
-    "summary": "",
-    "source": "arena.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://arena.gov.au/news/"
-  },
-  {
-    "url": "https://arena.gov.au/accessibility/",
-    "title": "Skip to Content",
+    "title": "Public Interest Disclosure",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2905,7 +2545,7 @@
   },
   {
     "url": "https://arena.gov.au/freedom-of-information/",
-    "title": "Skip to Content",
+    "title": "Freedom of Information",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Energy Transition",
@@ -2917,7 +2557,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au",
-    "title": "About",
+    "title": "https://www.energynetworks.com.au",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -2929,7 +2569,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/transition-innovation/",
-    "title": "About",
+    "title": "Transition Innovation",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -2941,7 +2581,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/renewable-connection/",
-    "title": "About",
+    "title": "Connecting Renewables",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -2953,7 +2593,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/the-role-of-gas/",
-    "title": "About",
+    "title": "Gas & Renewable Gas",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -2965,7 +2605,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/news/",
-    "title": "About",
+    "title": "News",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -2977,31 +2617,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/resources/",
-    "title": "About",
-    "summary": "",
-    "source": "energynetworks.com.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.energynetworks.com.au/news/"
-  },
-  {
-    "url": "https://aus01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fenergynetworksconference.com.au%2F&data=05%7C02%7Crshanthiratne%40energynetworks.com.au%7Caa2ecd16ae3b4026991908de32e9b982%7Cae40df0dc54c496891ffc2a26e848a79%7C0%7C0%7C639004176582767118%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=KiMhjWTMVN3bQFR9%2F%2F9%2BGuXzZd6Z2v1VqoworIDZZfg%3D&reserved=0",
-    "title": "About",
-    "summary": "",
-    "source": "energynetworks.com.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.energynetworks.com.au/news/"
-  },
-  {
-    "url": "https://www.energynetworks.com.au/about/",
-    "title": "About",
+    "title": "Resources",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3013,19 +2629,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/projects",
-    "title": "About",
-    "summary": "",
-    "source": "energynetworks.com.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.energynetworks.com.au/news/"
-  },
-  {
-    "url": "https://www.energynetworks.com.au/contact/",
-    "title": "About",
+    "title": "Projects",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3037,19 +2641,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/about/our-members/",
-    "title": "About",
-    "summary": "",
-    "source": "energynetworks.com.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.energynetworks.com.au/news/"
-  },
-  {
-    "url": "https://www.aer.gov.au/consumers/who-is-my-distributor",
-    "title": "About",
+    "title": "Our Members",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3061,7 +2653,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/about/energy-networks-australia/",
-    "title": "About",
+    "title": "Our organisation",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3073,7 +2665,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/projects/gas-vision-2050/",
-    "title": "About",
+    "title": "Renewable Gas Innovation",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3085,7 +2677,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/projects/national-grid-connection-guidelines/",
-    "title": "About",
+    "title": "National Connection Guidelines",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3097,7 +2689,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/projects/knowledge-bank/",
-    "title": "About",
+    "title": "Knowledge Bank Database",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3109,7 +2701,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/projects/innovation-and-infrastructure/",
-    "title": "About",
+    "title": "Innovation and Infrastructure",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3121,7 +2713,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/news/energy-insider/",
-    "title": "About",
+    "title": "See all Articles",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3133,7 +2725,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/news/media-releases/",
-    "title": "About",
+    "title": "See all Articles",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3145,7 +2737,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/resources/reports/",
-    "title": "About",
+    "title": "Reports and publications",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3157,7 +2749,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/resources/fact-sheets/",
-    "title": "About",
+    "title": "Fact Sheets & Briefing Notes",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3169,7 +2761,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/guidelines/",
-    "title": "About",
+    "title": "Guidelines",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3181,7 +2773,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/about/privacy-policy/",
-    "title": "About",
+    "title": "Privacy Policy",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3193,7 +2785,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/about/our-members/affiliate-program-application-form/affiliate-program-terms-conditions/",
-    "title": "About",
+    "title": "Affiliate Program Terms & Conditions",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3205,7 +2797,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/news/speeches-op-eds/",
-    "title": "About",
+    "title": "Speeches / Op Eds",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3217,7 +2809,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/about/energy-networks-australia/media-enquiries/",
-    "title": "About",
+    "title": "Media enquiries",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3229,7 +2821,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-solar-sharer-offer-next-steps/",
-    "title": "About",
+    "title": "23 Jan 2026 News Energy Networks Australia welcomes Solar Sharer Offer next steps",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3241,7 +2833,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/news/media-releases/joint-statement-on-the-national-electricity-market-review/",
-    "title": "About",
+    "title": "16 Dec 2025 Media releases Joint Statement on the National Electricity Market Review",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3253,7 +2845,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-responds-to-aemc-pricing-review-released-today/",
-    "title": "About",
+    "title": "15 Dec 2025 Media releases Energy Networks Australia responds to AEMC pricing review released today",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3265,7 +2857,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/news/draft-isp-aims-to-right-size-transmission-and-reinforces-networks-as-the-backbone-of-the-energy-transition/",
-    "title": "About",
+    "title": "10 Dec 2025 News Draft ISP aims to right-size transmission and reinforces networks as the backbone of the energy transition",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3277,7 +2869,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/news/energy-insider/what-australias-energy-system-wants-for-christmas/",
-    "title": "About",
+    "title": "18 Dec 2025 Energy Insider What Australia’s Energy System Wants for Christmas",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3289,7 +2881,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/news/the-age-of-dso/",
-    "title": "About",
+    "title": "18 Dec 2025 News The Age of DSO",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3301,7 +2893,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/news/meet-new-ena-chair-andrew-bills/",
-    "title": "About",
+    "title": "17 Dec 2025 News Meet new ENA Chair – Andrew Bills",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3313,43 +2905,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/news/energy-insider/why-you-cant-miss-dan-gardner-at-en26/",
-    "title": "About",
-    "summary": "",
-    "source": "energynetworks.com.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.energynetworks.com.au/news/"
-  },
-  {
-    "url": "https://www.google.com.au/maps/place/Level%2033%2C%20385%20Bourke%20Street%20Melbourne%20VIC%203000/",
-    "title": "About",
-    "summary": "",
-    "source": "energynetworks.com.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.energynetworks.com.au/news/"
-  },
-  {
-    "url": "https://www.linkedin.com/company/energy-networks-australia",
-    "title": "About",
-    "summary": "",
-    "source": "energynetworks.com.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.energynetworks.com.au/news/"
-  },
-  {
-    "url": "https://www.energynetworks.com.au/about/energy-networks-australia/careers/",
-    "title": "About",
+    "title": "17 Dec 2025 Energy Insider Why You Can’t Miss Dan Gardner at EN26",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -3361,19 +2917,7 @@
   },
   {
     "url": "https://www.energynetworks.com.au/about/our-members/affiliate-program-application-form/",
-    "title": "About",
-    "summary": "",
-    "source": "energynetworks.com.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.energynetworks.com.au/news/"
-  },
-  {
-    "url": "https://olivergrace.com.au/",
-    "title": "About",
+    "title": "Affiliate Program",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",

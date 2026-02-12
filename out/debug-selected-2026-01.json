@@ -1,79 +1,103 @@
 [
   {
     "section": "Energy Transition",
-    "title": "Skip to Content",
-    "url": "https://arena.gov.au/",
+    "title": "Read more arrow_right_alt",
+    "url": "https://www.cer.gov.au/news-and-media/news/2026/january/explore-q4-2025-qcmr-data-workbook",
+    "publisher": "cer.gov.au",
+    "published": "2026-01-01T00:00:00+00:00",
+    "published_ts": 1767225600.0
+  },
+  {
+    "section": "Energy Transition",
+    "title": "Advisory panel",
+    "url": "https://arena.gov.au/about/advisory-panel/",
     "publisher": "arena.gov.au",
     "published": null,
     "published_ts": null
   },
   {
     "section": "Energy Transition",
-    "title": "Skip to Content",
-    "url": "https://arena.gov.au/accessibility/",
+    "title": "Board",
+    "url": "https://arena.gov.au/about/board-arena-renewable-energy/",
     "publisher": "arena.gov.au",
     "published": null,
     "published_ts": null
   },
   {
     "section": "Energy Transition",
-    "title": "Skip to Content",
-    "url": "https://arena.gov.au/blog",
+    "title": "Executive team",
+    "url": "https://arena.gov.au/about/executive-team",
     "publisher": "arena.gov.au",
     "published": null,
     "published_ts": null
   },
   {
     "section": "Energy Transition",
-    "title": "About",
-    "url": "https://www.energynetworks.com.au",
-    "publisher": "energynetworks.com.au",
+    "title": "Unit and Certificate Registry",
+    "url": "https://cer.gov.au/online-systems/new-unit-and-certificate-registry",
+    "publisher": "cer.gov.au",
     "published": null,
     "published_ts": null
   },
   {
     "section": "Energy Transition",
-    "title": "About",
-    "url": "https://www.energynetworks.com.au/guidelines/",
-    "publisher": "energynetworks.com.au",
+    "title": "Chair and commissioners",
+    "url": "https://www.aemc.gov.au/about-us/chair-and-commissioners",
+    "publisher": "aemc.gov.au",
     "published": null,
     "published_ts": null
   },
   {
     "section": "Energy Transition",
-    "title": "About",
-    "url": "https://www.energynetworks.com.au/news/draft-isp-aims-to-right-size-transmission-and-reinforces-networks-as-the-backbone-of-the-energy-transition/",
-    "publisher": "energynetworks.com.au",
+    "title": "Executive leadership team",
+    "url": "https://www.aemc.gov.au/about-us/executive-leadership-team",
+    "publisher": "aemc.gov.au",
     "published": null,
     "published_ts": null
   },
   {
     "section": "ESG Reporting",
-    "title": "Skip to content",
-    "url": "http://shop.ifrs.org/",
+    "title": "About financial reporting and due process",
+    "url": "https://www.efrag.org/en/about-financial-reporting",
+    "publisher": "efrag.org",
+    "published": null,
+    "published_ts": null
+  },
+  {
+    "section": "ESG Reporting",
+    "title": "About EFRAG",
+    "url": "https://www.efrag.org/en/about-us",
+    "publisher": "efrag.org",
+    "published": null,
+    "published_ts": null
+  },
+  {
+    "section": "ESG Reporting",
+    "title": "European lab",
+    "url": "https://www.efrag.org/en/about-us/about-efrag/the-european-corporate-reporting-lab",
+    "publisher": "efrag.org",
+    "published": null,
+    "published_ts": null
+  },
+  {
+    "section": "ESG Reporting",
+    "title": "Modern slavery statement",
+    "url": "https://www.ifrs.org/content/dam/ifrs/about-us/legal-and-governance/legal-docs/modern-slavery-statement.pdf",
     "publisher": "ifrs.org",
     "published": null,
     "published_ts": null
   },
   {
     "section": "ESG Reporting",
-    "title": "Skip to content",
-    "url": "https://www.ifrs.org/bin/oauth-redirect.html//content/ifrs/home/news-and-events/updates/issb.html/j_security_check?configid=ifrs-idp",
+    "title": "Trade mark guidelines",
+    "url": "https://www.ifrs.org/content/dam/ifrs/about-us/legal-and-governance/legal-docs/trade-mark-guidelines.pdf",
     "publisher": "ifrs.org",
     "published": null,
     "published_ts": null
   },
   {
     "section": "ESG Reporting",
-    "title": "Skip to content",
-    "url": "https://www.ifrs.org/bin/oauth-redirect.html/content/ifrs/home/news-and-events/news.html/j_security_check?configid=ifrs-idp",
-    "publisher": "ifrs.org",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "ESG Reporting",
-    "title": "Skip to content",
+    "title": "Home",
     "url": "https://www.ifrs.org/content/ifrs/home.html",
     "publisher": "ifrs.org",
     "published": null,
@@ -81,56 +105,56 @@
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Skip to content",
-    "url": "http://shop.ifrs.org/",
-    "publisher": "ifrs.org",
+    "title": "BNEF Pioneers Enter the world's leading climate-tech innovation competition and learn about our past winners.",
+    "url": "https://about.bnef.com/about/pioneers/",
+    "publisher": "about.bnef.com",
     "published": null,
     "published_ts": null
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Skip to Content",
-    "url": "https://arena.gov.au/",
+    "title": "Commodities Traders Review projections and risks within the commodities market.",
+    "url": "https://about.bnef.com/commodities-trader/",
+    "publisher": "about.bnef.com",
+    "published": null,
+    "published_ts": null
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "Financial Institutions Identify rising technologies and find your next big investment.",
+    "url": "https://about.bnef.com/financial-institutions/",
+    "publisher": "about.bnef.com",
+    "published": null,
+    "published_ts": null
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "Advisory panel",
+    "url": "https://arena.gov.au/about/advisory-panel/",
     "publisher": "arena.gov.au",
     "published": null,
     "published_ts": null
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Skip to Content",
-    "url": "https://arena.gov.au/accessibility/",
+    "title": "Board",
+    "url": "https://arena.gov.au/about/board-arena-renewable-energy/",
     "publisher": "arena.gov.au",
     "published": null,
     "published_ts": null
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Skip to Content",
-    "url": "https://arena.gov.au/blog",
+    "title": "Executive team",
+    "url": "https://arena.gov.au/about/executive-team",
     "publisher": "arena.gov.au",
     "published": null,
     "published_ts": null
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Skip to Content",
-    "url": "https://www.cefc.com.au/where-we-invest/sustainable-economy/innovation-fund/",
-    "publisher": "arena.gov.au",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "Sustainable Finance & Investment",
-    "title": "Skip to content",
-    "url": "https://www.ifrs.org/bin/oauth-redirect.html/content/ifrs/home/news-and-events/updates/issb.html/j_security_check?configid=ifrs-idp",
-    "publisher": "ifrs.org",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "Sustainable Finance & Investment",
-    "title": "Skip to content",
-    "url": "https://www.ifrs.org/content/ifrs/home.html",
+    "title": "Modern slavery statement",
+    "url": "https://www.ifrs.org/content/dam/ifrs/about-us/legal-and-governance/legal-docs/modern-slavery-statement.pdf",
     "publisher": "ifrs.org",
     "published": null,
     "published_ts": null
