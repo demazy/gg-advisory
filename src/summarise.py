@@ -48,7 +48,7 @@ OPENAI_RETRIES = int(os.getenv("OPENAI_RETRIES", "2"))
 OPENAI_BACKOFF = float(os.getenv("OPENAI_BACKOFF", "1.8"))
 
 # Response length control (used by chat-completions)
-OPENAI_MAX_TOKENS = int(os.getenv("OPENAI_MAX_TOKENS", "900"))
+OPENAI_MAX_TOKENS = int(os.getenv("OPENAI_MAX_TOKENS", "2800"))
 
 # Hard cap to prevent runaway prompt size
 MAX_TEXT_CHARS_PER_ITEM = int(os.getenv("MAX_TEXT_CHARS_PER_ITEM", "3500"))  # CHANGE: smaller prompt -> faster/less timeouts
@@ -121,6 +121,16 @@ def _prepare_items(items: List[Item]) -> List[Dict]:
             }
         )
     return out
+
+
+
+
+def _effective_max_tokens(n_items: int) -> int:
+    """Scale token budget with item count, within safe bounds."""
+    base = OPENAI_MAX_TOKENS
+    if n_items > 6:
+        base += (n_items - 6) * 120
+    return int(min(max(base, 1200), 3800))
 
 
 def _extractive_summary(raw: str, max_words: int = 140) -> str:
@@ -228,7 +238,7 @@ def _deterministic_structured_digest(date_label: str, items: List[Item], note: O
     return "\n".join(lines).strip() + "\n"
 
 
-def _openai_chat_completion(model: str, messages: List[Dict[str, str]], temperature: float = 0.2) -> str:
+def _openai_chat_completion(model: str, messages: List[Dict[str, str]], temperature: float = 0.2, max_tokens: Optional[int] = None) -> str:
     """
     Call OpenAI Chat Completions via HTTPS.
 
@@ -246,7 +256,7 @@ def _openai_chat_completion(model: str, messages: List[Dict[str, str]], temperat
         "model": model,
         "messages": messages,
         "temperature": temperature,
-        "max_tokens": OPENAI_MAX_TOKENS,
+        "max_tokens": int(max_tokens or OPENAI_MAX_TOKENS),
     }
 
     last_err: Optional[Exception] = None
@@ -256,7 +266,13 @@ def _openai_chat_completion(model: str, messages: List[Dict[str, str]], temperat
             r = requests.post(url, headers=headers, json=payload, timeout=(10, OPENAI_TIMEOUT))
             r.raise_for_status()
             data = r.json()
-            return data["choices"][0]["message"]["content"].strip()
+            choice = (data.get("choices") or [{}])[0]
+            content = ((choice.get("message") or {}).get("content") or "").strip()
+            finish = choice.get("finish_reason")
+            if finish == "length":
+                # Caller will validate structure; raise to trigger deterministic fallback.
+                raise RuntimeError("OpenAI output truncated (finish_reason=length)")
+            return content
         except Exception as e:
             last_err = e
             # backoff: 1s, 2s, 4s...
@@ -284,6 +300,15 @@ def build_digest(ym: str, items: List[Item]) -> str:
     items_json = json.dumps(payload, ensure_ascii=False, indent=2)
     user_msg = USER_TMPL.format(date_label=date_label, items_json=items_json)
 
+
+    REQUIRED_HEADINGS = [
+        "# Signals Digest",
+        "## Top Lines",
+        "## Energy Transition",
+        "## ESG Reporting",
+        "## Sustainable Finance & Investment",
+    ]
+
     try:
         content = _openai_chat_completion(
             messages=[
@@ -292,8 +317,14 @@ def build_digest(ym: str, items: List[Item]) -> str:
             ],
             model=MODEL,
             temperature=TEMP,
+            max_tokens=_effective_max_tokens(len(items)),
         )
-        return content.strip() + "\n"
+        out = content.strip() + "\n"
+        # Validate structure to avoid silently publishing truncated digests
+        for h in REQUIRED_HEADINGS:
+            if h not in out:
+                raise RuntimeError(f"Missing heading: {h}")
+        return out
     except Exception as e:
         return _deterministic_structured_digest(date_label, items, note=f"LLM summarisation failed; fallback used. Error: {e}")
 
