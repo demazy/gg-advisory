@@ -190,81 +190,153 @@ _MONTHS = {
 }
 
 
+
+
+def _find_date_in_text(text: str) -> Optional[datetime]:
+    """Last-resort date extraction from visible text.
+
+    Looks for common patterns like:
+    - 29 January 2026 / 29 Jan 2026
+    - January 29, 2026
+    - 2026-01-29
+    Returns a UTC datetime (midnight) on success.
+    """
+    t = (text or "").strip()
+    if not t:
+        return None
+    # collapse whitespace and keep it bounded
+    t = re.sub(r"\s+", " ", t)
+    t = t[:5000]
+
+    # ISO yyyy-mm-dd
+    m = re.search(r"\b(20\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\b", t)
+    if m:
+        try:
+            y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
+            return datetime(y, mo, d, tzinfo=timezone.utc)
+        except Exception:
+            pass
+
+    # 29 January 2026 / 29 Jan 2026
+    m = re.search(r"\b(0?[1-9]|[12]\d|3[01])\s+(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:t|tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+(20\d{2})\b", t, re.I)
+    if m:
+        d = int(m.group(1))
+        mon = m.group(2).lower()
+        y = int(m.group(3))
+        mon_key = mon if mon in _MONTHS else mon[:3]
+        mo = _MONTHS.get(mon_key)
+        if mo:
+            try:
+                return datetime(y, mo, d, tzinfo=timezone.utc)
+            except Exception:
+                pass
+
+    # January 29, 2026
+    m = re.search(r"\b(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:t|tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+(0?[1-9]|[12]\d|3[01])(?:st|nd|rd|th)?[,]?\s+(20\d{2})\b", t, re.I)
+    if m:
+        mon = m.group(1).lower()
+        d = int(m.group(2))
+        y = int(m.group(3))
+        mon_key = mon if mon in _MONTHS else mon[:3]
+        mo = _MONTHS.get(mon_key)
+        if mo:
+            try:
+                return datetime(y, mo, d, tzinfo=timezone.utc)
+            except Exception:
+                pass
+
+    return None
 def infer_published_ts_from_url(url: str) -> Optional[float]:
     """
-    Best-effort month inference from URL patterns.
+    Best-effort inference of publish timestamp from URL path.
+    Used to improve month-based filtering when RSS dates are missing.
 
-    CHANGE (Feb 2026):
-    - Handle "monthname-year" in slugs (e.g. .../issb-update-january-2026.html).
-      IFRS Updates commonly use this pattern.
+    We intentionally keep this conservative (month-level at best).
     """
     u = (url or "").strip()
     if not u:
         return None
-    ul = u.lower()
 
-    # Common YYYY/MM(/DD) in path
-    m = re.search(r"/(20\d{2})/([01]?\d)(?:/([0-3]?\d))?/", ul)
+    path = urlparse(u).path.lower()
+
+    # YYYY-MM-DD
+    m = re.search(r"/(20\d{2})-(\d{2})-(\d{2})(?:/|$)", path)
     if m:
-        y = int(m.group(1))
-        mo = int(m.group(2))
-        d = int(m.group(3) or 1)
+        y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
         try:
-            return datetime(y, mo, max(1, min(28, d)), tzinfo=timezone.utc).timestamp()
+            return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
         except Exception:
             return None
 
-    # Common YYYY-MM or YYYY_MM
-    m = re.search(r"(20\d{2})[-_](0?[1-9]|1[0-2])(?:[-_](0?[1-9]|[12]\d|3[01]))?", ul)
+    # /YYYY/MM/DD/
+    m = re.search(r"/(20\d{2})/(\d{1,2})/(\d{1,2})(?:/|$)", path)
     if m:
-        y = int(m.group(1))
-        mo = int(m.group(2))
-        d = int(m.group(3) or 1)
+        y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
         try:
-            return datetime(y, mo, max(1, min(28, d)), tzinfo=timezone.utc).timestamp()
+            return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
         except Exception:
             return None
 
-    # Common /YYYY/<monthname>/ in path
-    month_map = {
-        "january": 1, "february": 2, "march": 3, "april": 4, "may": 5, "june": 6,
-        "july": 7, "august": 8, "september": 9, "october": 10, "november": 11, "december": 12,
-        "jan": 1, "feb": 2, "mar": 3, "apr": 4, "jun": 6, "jul": 7, "aug": 8, "sep": 9, "sept": 9, "oct": 10, "nov": 11, "dec": 12,
-    }
-    m = re.search(r"/(20\d{2})/(january|february|march|april|may|june|july|august|september|october|november|december)/", ul)
+    # /YYYY/<monthname>/
+    m = re.search(r"/(20\d{2})/([a-z]{3,9})(?:/|$)", path)
     if m:
         y = int(m.group(1))
-        mo = month_map.get(m.group(2), 0)
+        mo = _MONTHS.get(m.group(2).lower())
         if mo:
-            return datetime(y, mo, 1, tzinfo=timezone.utc).timestamp()
+            try:
+                return datetime(y, mo, 1, tzinfo=timezone.utc).timestamp()
+            except Exception:
+                return None
 
-    # Slug patterns: <monthname>-YYYY or YYYY-<monthname>
-    m = re.search(r"(january|february|march|april|may|june|july|august|september|october|november|december)[-_](20\d{2})", ul)
+    # /YYYY/MM/
+    m = re.search(r"/(20\d{2})/(\d{1,2})(?:/|$)", path)
     if m:
-        mo = month_map.get(m.group(1), 0)
+        y, mo = int(m.group(1)), int(m.group(2))
+        if 1 <= mo <= 12:
+            try:
+                return datetime(y, mo, 1, tzinfo=timezone.utc).timestamp()
+            except Exception:
+                return None
+
+    # monthname-YYYY or YYYY-monthname in slug (e.g., .../issb-update-january-2026/)
+    m = re.search(r"(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t|tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[-_ ]?(20\d{2})", path)
+    if m:
         y = int(m.group(2))
+        mo = _MONTHS.get(m.group(1).lower()) or _MONTHS.get(m.group(1)[:3].lower())
         if mo:
-            return datetime(y, mo, 1, tzinfo=timezone.utc).timestamp()
+            try:
+                return datetime(y, mo, 1, tzinfo=timezone.utc).timestamp()
+            except Exception:
+                return None
 
-    m = re.search(r"(20\d{2})[-_](january|february|march|april|may|june|july|august|september|october|november|december)", ul)
+    m = re.search(r"(20\d{2})[-_ ]?(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t|tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)", path)
     if m:
         y = int(m.group(1))
-        mo = month_map.get(m.group(2), 0)
+        mo = _MONTHS.get(m.group(2).lower()) or _MONTHS.get(m.group(2)[:3].lower())
         if mo:
+            try:
+                return datetime(y, mo, 1, tzinfo=timezone.utc).timestamp()
+            except Exception:
+                return None
+
+    # YYYYMM (e.g., .../202601/...)
+    m = re.search(r"/(20\d{2})(0[1-9]|1[0-2])(?:/|$)", path)
+    if m:
+        y, mo = int(m.group(1)), int(m.group(2))
+        try:
             return datetime(y, mo, 1, tzinfo=timezone.utc).timestamp()
+        except Exception:
+            return None
 
     return None
-
 
 def is_probably_taxonomy_or_hub(url: str) -> bool:
     """
     Heuristic: return True for URLs that are unlikely to be *content items* (listing pages,
-    taxonomy/facet pages, nav/utility pages, auth flows).
+    taxonomy pages, nav/utility pages, auth flows).
 
-    CHANGE (Feb 2026):
-    - Treat "faceted listing" URLs (e.g., EFRAG f[0]=..., ?type=..., ?category=...) as hubs.
-      These were previously mis-classified as content items, then "dated" via first <time> tag,
-      which polluted selection.
+    NOTE: This function is used both during index extraction and during selection filtering,
+    so keep it focused on obvious non-content URLs.
     """
     u = (url or "").strip()
     if not u:
@@ -276,33 +348,24 @@ def is_probably_taxonomy_or_hub(url: str) -> bool:
     if any(s in ul for s in ("oauth-redirect", "j_security_check", "sso", "signin", "login")):
         return True
 
+    # query-based searches / pagination
     q = parse_qs(parsed.query or "")
 
-    # query-based searches / pagination / facets
-    # - EFRAG uses f[0]=category:... (facets); treat as hubs/taxonomy.
-    # - Many sites use ?type=media+release / ?category=... for listings.
-    if q:
-        # common "listing" params
-        listing_keys = {"page", "paged", "offset", "start", "from", "to", "q", "s", "search", "category", "tag", "topic", "type"}
-        if any(k in q for k in listing_keys):
-            # allow lightweight tracking params only
-            tracking_keys = {"utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid"}
-            non_tracking = [k for k in q.keys() if k not in tracking_keys]
-            if non_tracking:
-                return True
-        # facet keys like f[0], f[1]...
-        if any(k.startswith("f[") or k.startswith("f%5b") for k in q.keys()):
-            return True
-        # special-case: some sites put facets in repeated "f" keys
-        if "f" in q and len(q.get("f") or []) > 0:
-            return True
+    # facet/filter query params (common on EFRAG and other CMS listings)
+    if any(k.startswith("f[") for k in q.keys()):
+        return True
+    if any(k in {"category", "categories", "topic", "topics", "tag", "tags", "type", "types", "filter"} for k in q.keys()):
+        return True
+    if "page" in q and (parsed.path.endswith("/news") or parsed.path.endswith("/news/")):
+        return True
+    if "s" in q or "q" in q and parsed.path.endswith("/search"):
+        return True
 
     path = parsed.path or "/"
-
     # nav/utility endpoints
     utility_segments = {
         "about", "contact", "privacy", "terms", "cookies", "accessibility", "sitemap",
-        "careers", "jobs", "vacancies", "pressroom", "newsroom",
+        "careers", "jobs", "vacancies", "pressroom", "newsroom", "media-releases", "media-release", "media-centre", "media-center", "news-centre", "news-center", "press-releases", "press-release", "announcements", "statement", "statements",
         "events", "event", "webinars", "webinar",
         "tag", "tags", "category", "categories", "topic", "topics",
         "author", "authors",
@@ -313,13 +376,13 @@ def is_probably_taxonomy_or_hub(url: str) -> bool:
     segs = [s for s in path.split("/") if s]
     if segs and segs[-1] in utility_segments:
         return True
-
     # taxonomy/listing patterns anywhere in path
     bad_parts = [
         "/tag/", "/tags/", "/category/", "/categories/", "/topic/", "/topics/",
         "/author/", "/authors/",
         "/search", "?s=", "/page/", "/index",
         "/events", "/event", "/webinars", "/webinar",
+        "/media-releases", "/media-release", "/press-releases", "/press-release", "/newsroom", "/pressroom", "/announcements",
         "/board", "/governance", "/leadership", "/executive", "/executives", "/team", "/our-people", "/people",
     ]
     if any(p in ul for p in bad_parts):
@@ -445,103 +508,41 @@ def _best_anchor_title(a: Any) -> str:
 
 
 def _parse_dt_like(s: str) -> Optional[datetime]:
-    """
-    Parse a date/datetime string in common web formats (best-effort, UTC).
-
-    CHANGE (Feb 2026):
-    - Support HTTP-date (RFC 2822 / RFC 1123) via email.utils.parsedate_to_datetime.
-    - Support common human formats like "20 January 2026" and "January 20, 2026".
-    """
+    """Parse a date/datetime string in common web formats (best-effort, UTC)."""
     if not s:
         return None
     ss = str(s).strip()
     if not ss:
         return None
-
-    # HTTP date (e.g. "Tue, 30 Jan 2026 08:11:12 GMT")
-    try:
-        from email.utils import parsedate_to_datetime  # stdlib
-        dt = parsedate_to_datetime(ss)
-        if dt:
-            if dt.tzinfo is None:
-                dt = dt.replace(tzinfo=timezone.utc)
-            return dt.astimezone(timezone.utc)
-    except Exception:
-        pass
-
     ss = ss.replace("Z", "+00:00")
     ss = re.sub(r"(\.\d{3,6})\+00:00$", "+00:00", ss)
-
-    # ISO date
     if re.fullmatch(r"\d{4}-\d{2}-\d{2}", ss):
         try:
             return datetime.fromisoformat(ss).replace(tzinfo=timezone.utc)
         except Exception:
             return None
-
-    # ISO datetime
     try:
         dt = datetime.fromisoformat(ss)
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=timezone.utc)
         return dt.astimezone(timezone.utc)
     except Exception:
-        pass
-
-    # Human dates: "20 January 2026" / "20 Jan 2026"
-    for fmt in ("%d %B %Y", "%d %b %Y", "%B %d %Y", "%b %d %Y"):
-        try:
-            dt = datetime.strptime(ss, fmt).replace(tzinfo=timezone.utc)
-            return dt
-        except Exception:
-            pass
-
-    # "January 20, 2026"
-    for fmt in ("%B %d, %Y", "%b %d, %Y"):
-        try:
-            dt = datetime.strptime(ss, fmt).replace(tzinfo=timezone.utc)
-            return dt
-        except Exception:
-            pass
-
-    # Extract embedded yyyy-mm-dd
-    m = re.search(r"(20\d{2})-(\d{2})-(\d{2})", ss)
-    if m:
-        try:
-            return datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)), tzinfo=timezone.utc)
-        except Exception:
-            return None
-
-    # Extract embedded "dd Month yyyy"
-    m = re.search(r"(\d{1,2})\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+(20\d{2})", ss, re.I)
-    if m:
-        try:
-            dt = datetime.strptime(f"{int(m.group(1))} {m.group(2)} {int(m.group(3))}", "%d %B %Y").replace(tzinfo=timezone.utc)
-            return dt
-        except Exception:
-            return None
-
+        m = re.search(r"(20\d{2})-(\d{2})-(\d{2})", ss)
+        if m:
+            try:
+                return datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)), tzinfo=timezone.utc)
+            except Exception:
+                return None
     return None
 
 
 def _resolve_published_ts_from_html(url: str) -> Optional[float]:
-    """
-    Fetch a small slice of HTML and extract published date from meta/time/JSON-LD.
-
-    CHANGE (Feb 2026):
-    - Much broader metadata support (dc/dcterms/article meta).
-    - Parse <time> inner text when datetime attr is absent.
-    - Parse nested JSON-LD (@graph, lists, nested objects).
-    - Regex fallback against visible text for "Published/Released" date patterns.
-
-    This materially increases dated candidates for domains like aemc.gov.au and arena.gov.au,
-    where URLs rarely embed dates.
-    """
+    """Fetch a small slice of HTML and extract published date from meta/time/JSON-LD."""
     resp = _http_get(url)
     if resp is None:
         return None
     ctype = _content_type(resp)
-    raw = _read_limited(resp, min(MAX_BYTES, 450_000))
+    raw = _read_limited(resp, min(MAX_BYTES, 400_000))
     if not raw:
         return None
 
@@ -565,66 +566,29 @@ def _resolve_published_ts_from_html(url: str) -> Optional[float]:
 
     soup = BeautifulSoup(html, "html.parser")
 
-    # ---- meta tags ----
-    meta_candidates = [
-        # OpenGraph / article
+    meta_attrs = [
         {"property": "article:published_time"},
-        {"property": "article:modified_time"},
-        {"property": "og:published_time"},
-        {"property": "og:updated_time"},
-        # Common name-based tags
         {"name": "article:published_time"},
         {"name": "pubdate"},
         {"name": "publishdate"},
-        {"name": "publish_date"},
         {"name": "date"},
         {"name": "dc.date"},
         {"name": "dc.date.issued"},
-        {"name": "dc.date.created"},
-        {"name": "dcterms.date"},
-        {"name": "dcterms.created"},
-        {"name": "dcterms.issued"},
-        {"name": "last-modified"},
+        {"property": "og:updated_time"},
     ]
-    for attrs in meta_candidates:
+    for attrs in meta_attrs:
         el = soup.find("meta", attrs=attrs)
         if el and el.get("content"):
             dt = _parse_dt_like(el.get("content"))
             if dt:
                 return dt.timestamp()
 
-    # ---- <time> tag ----
     t = soup.find("time")
     if t is not None:
-        dtattr = (t.get("datetime") or "").strip()
-        if dtattr:
-            dt = _parse_dt_like(dtattr)
-            if dt:
-                return dt.timestamp()
-        # inner text (e.g. "20 January 2026")
-        inner = t.get_text(" ", strip=True)
-        dt = _parse_dt_like(inner)
+        dtattr = t.get("datetime") or ""
+        dt = _parse_dt_like(dtattr)
         if dt:
             return dt.timestamp()
-
-    # ---- JSON-LD ----
-    def walk(obj) -> List[str]:
-        out: List[str] = []
-        if isinstance(obj, dict):
-            # unwrap graphs
-            if "@graph" in obj and isinstance(obj.get("@graph"), list):
-                for it in obj["@graph"]:
-                    out.extend(walk(it))
-            for k, v in obj.items():
-                if k in ("datePublished", "dateCreated", "dateModified", "uploadDate"):
-                    if isinstance(v, str):
-                        out.append(v)
-                else:
-                    out.extend(walk(v))
-        elif isinstance(obj, list):
-            for it in obj:
-                out.extend(walk(it))
-        return out
 
     for s in soup.find_all("script", attrs={"type": "application/ld+json"}):
         try:
@@ -632,30 +596,17 @@ def _resolve_published_ts_from_html(url: str) -> Optional[float]:
             if not txt:
                 continue
             data = json.loads(txt)
-            for cand in walk(data):
-                dt = _parse_dt_like(cand)
-                if dt:
-                    return dt.timestamp()
+            candidates = data if isinstance(data, list) else [data]
+            for obj in candidates:
+                if not isinstance(obj, dict):
+                    continue
+                for key in ("datePublished", "dateCreated"):
+                    if key in obj:
+                        dt = _parse_dt_like(obj.get(key))
+                        if dt:
+                            return dt.timestamp()
         except Exception:
             continue
-
-    # ---- visible text fallback ----
-    try:
-        text = soup.get_text(" ", strip=True)
-        # Published: 20 January 2026
-        m = re.search(r"(Published|Publication date|Released|Posted|Date)\s*[:\-]?\s*(\d{1,2}\s+[A-Za-z]{3,9}\s+20\d{2})", text, re.I)
-        if m:
-            dt = _parse_dt_like(m.group(2))
-            if dt:
-                return dt.timestamp()
-        # 2026-01-20 (rare)
-        m = re.search(r"(Published|Released|Posted|Date)\s*[:\-]?\s*(20\d{2}-\d{2}-\d{2})", text, re.I)
-        if m:
-            dt = _parse_dt_like(m.group(2))
-            if dt:
-                return dt.timestamp()
-    except Exception:
-        pass
 
     return last_mod
 
@@ -736,148 +687,191 @@ def fetch_rss(feed_url: str, source_name: str = "", **kwargs) -> List[Item]:
     return items
 
 
-def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[Item]:
-    """
-    Fetch a hub/listing HTML page and extract likely content links.
 
-    CHANGE (Feb 2026):
-    - Actually honour MAX_INDEX_PAGES by following rel="next" (or common next-page patterns).
-      The workflow already sets MAX_INDEX_PAGES, but the previous implementation fetched only
-      the first page, which reduced coverage and amplified per-domain caps.
-    - Share a single date-resolution budget across all fetched pages for that index.
-    """
+def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[Item]:
+    """Fetch a hub/listing HTML page (optionally paginated) and extract likely content links."""
     index_url = _clean_url(index_url)
     if not index_url:
         return []
 
-    max_pages = int(kwargs.get("max_index_pages") or MAX_INDEX_PAGES)
-    max_links = int(kwargs.get("max_links_per_index") or MAX_LINKS_PER_INDEX)
-    date_budget = int(kwargs.get("max_date_resolve_fetches") or MAX_DATE_RESOLVE_FETCHES_PER_INDEX)
+    title_by_url: Dict[str, str] = {}
+    ordered: List[str] = []
 
-    collected: List[Tuple[str, str]] = []  # (url, title)
-    visited_pages: set = set()
-    cur = index_url
+    next_url: Optional[str] = index_url
+    pages_seen: set[str] = set()
 
-    for _page in range(max(1, max_pages)):
-        if not cur or cur in visited_pages:
+    for page_no in range(max(1, MAX_INDEX_PAGES)):
+        if not next_url:
             break
-        visited_pages.add(cur)
+        nu = _clean_url(next_url)
+        if not nu or nu.lower() in pages_seen:
+            break
+        pages_seen.add(nu.lower())
 
-        resp = _http_get(cur)
+        resp = _http_get(nu)
         if resp is None:
             break
-
         raw = _read_limited(resp, MAX_BYTES)
         if not raw:
             break
-
         try:
             html = raw.decode(resp.encoding or "utf-8", errors="replace")
         except Exception:
             html = raw.decode("utf-8", errors="replace")
 
         soup = BeautifulSoup(html, "html.parser")
-        # strip scripts/styles
-        for tag in soup(["script", "style", "noscript"]):
-            tag.decompose()
 
-        # Extract candidate links from anchors
-        for a in soup.find_all("a", href=True):
-            href = a.get("href") or ""
-            href = href.strip()
+        # Drop obvious boilerplate containers to reduce navigation links
+        try:
+            for tag in soup(["script", "style", "noscript"]):
+                tag.decompose()
+            _strip_nav_blocks(soup)
+        except Exception:
+            pass
+
+        # 1) JSON-LD ItemList (some sites hide links this way)
+        try:
+            for s in soup.find_all("script", attrs={"type": "application/ld+json"}):
+                try:
+                    data = json.loads(s.get_text(" ", strip=True) or "{}")
+                except Exception:
+                    continue
+                objs = data if isinstance(data, list) else [data]
+                for obj in objs:
+                    if not isinstance(obj, dict):
+                        continue
+                    if str(obj.get("@type") or "").lower() != "itemlist":
+                        continue
+                    elems = obj.get("itemListElement") or []
+                    if not isinstance(elems, list):
+                        continue
+                    for el in elems:
+                        if isinstance(el, dict):
+                            u = el.get("url") or (el.get("item") or {}).get("@id") if isinstance(el.get("item"), dict) else None
+                            if u:
+                                abs_url = _clean_url(urljoin(nu, str(u)))
+                                if abs_url.lower().startswith(("http://", "https://")):
+                                    ordered.append(abs_url)
+        except Exception:
+            pass
+
+        # 2) Anchor harvest
+        for a in soup.find_all("a"):
+            href = (a.get("href") or "").strip()
             if not href:
                 continue
-            abs_url = urljoin(cur, href)
-            abs_url = _clean_url(abs_url)
-            if not abs_url:
+            if href.startswith("#") or href.lower().startswith(("mailto:", "javascript:")):
                 continue
-            if not _same_site(index_url, abs_url):
-                # keep only same-site by default to avoid scraping irrelevant external links
+
+            abs_url = _clean_url(urljoin(nu, href))
+            if not abs_url.lower().startswith(("http://", "https://")):
                 continue
+
             if _deny_from_index(abs_url):
                 continue
             if is_probably_taxonomy_or_hub(abs_url):
                 continue
-
-            title = _best_anchor_title(a)
-            if not title:
+            if (not ALLOW_EXTERNAL_LINKS_FROM_INDEX) and (not _same_site(abs_url, index_url)):
                 continue
 
-            collected.append((abs_url, title))
-            if len(collected) >= max_links:
-                break
-        if len(collected) >= max_links:
-            break
+            t = _best_anchor_title(a)
+            if not t:
+                continue
 
-        # Find "next" page (rel=next, or common pager patterns)
-        next_url = None
+            if abs_url not in title_by_url or (len(t) > len(title_by_url.get(abs_url, ""))):
+                title_by_url[abs_url] = t
+
+            ordered.append(abs_url)
+
+        # Find "next" page link (rel=next or common pagination patterns)
+        next_url_found: Optional[str] = None
         try:
-            # <link rel="next" href="...">
-            lnk = soup.find("link", rel=lambda v: v and "next" in (v if isinstance(v, list) else [v]))
+            lnk = soup.find("link", attrs={"rel": re.compile(r"\bnext\b", re.I)})
             if lnk and lnk.get("href"):
-                next_url = urljoin(cur, lnk.get("href"))
-            if not next_url:
-                # <a rel="next" href="...">
-                a_next = soup.find("a", rel=lambda v: v and "next" in (v if isinstance(v, list) else [v]))
+                next_url_found = _clean_url(urljoin(nu, lnk.get("href")))
+            if not next_url_found:
+                a_next = soup.find("a", attrs={"rel": re.compile(r"\bnext\b", re.I)})
                 if a_next and a_next.get("href"):
-                    next_url = urljoin(cur, a_next.get("href"))
-            if not next_url:
-                # fallback: anchor text / class contains next
-                for a in soup.find_all("a", href=True):
-                    txt = (a.get_text(" ", strip=True) or "").lower()
-                    cls = " ".join(a.get("class") or []).lower()
-                    if ("next" in txt) or (txt in {"›", "→", "older"}) or ("next" in cls):
-                        cand = urljoin(cur, a.get("href"))
-                        cand = _clean_url(cand)
-                        if not cand:
-                            continue
-                        if not _same_site(index_url, cand):
-                            continue
-                        # heuristically require pagination signal
-                        if any(s in cand.lower() for s in ("page=", "paged=", "/page/", "offset=", "start=")):
-                            next_url = cand
-                            break
+                    next_url_found = _clean_url(urljoin(nu, a_next.get("href")))
+            if not next_url_found:
+                # heuristic: anchor text "Next"
+                for a_next in soup.find_all("a"):
+                    txt = (a_next.get_text(" ", strip=True) or "").strip().lower()
+                    if txt in {"next", "next ›", "older", "older posts"} and a_next.get("href"):
+                        next_url_found = _clean_url(urljoin(nu, a_next.get("href")))
+                        break
         except Exception:
-            next_url = None
+            next_url_found = None
 
-        if not next_url:
+        next_url = next_url_found
+        # stop if we've hit cap already
+        if len(ordered) >= MAX_LINKS_PER_INDEX:
             break
 
-        cur = next_url
-
-    # Deduplicate while preserving order
-    seen: set = set()
-    dedup: List[Tuple[str, str]] = []
-    for u, t in collected:
-        key = u.lower()
-        if not key or key in seen:
+    # De-duplicate in-order
+    uniq: List[str] = []
+    seen: set[str] = set()
+    for u in ordered:
+        ul = (u or "").lower()
+        if not ul or ul in seen:
             continue
-        seen.add(key)
-        dedup.append((u, t))
-        if len(dedup) >= max_links:
-            break
+        seen.add(ul)
+        uniq.append(u)
+
+    uniq = uniq[:MAX_LINKS_PER_INDEX]
 
     items: List[Item] = []
-    for url, title in dedup:
-        it = Item(url=url, title=title, summary="", source=source_name or _norm_host(url))
+    resolve_budget = MAX_DATE_RESOLVE_FETCHES_PER_INDEX
 
-        # date inference (best effort)
-        ts = infer_published_ts_from_url(url)
-        if ts is not None:
-            it.published_ts = ts
-            it.published_iso = datetime.fromtimestamp(ts, tz=timezone.utc).date().isoformat()
-            it.published_source = "url"
-            it.published_confidence = 0.35
-        elif date_budget > 0:
-            ts2 = _resolve_published_ts_from_html(url)
-            date_budget -= 1
-            if ts2 is not None:
-                it.published_ts = ts2
-                it.published_iso = datetime.fromtimestamp(ts2, tz=timezone.utc).date().isoformat()
-                it.published_source = "html"
-                it.published_confidence = 0.55
+    # Prioritise higher-signal URLs for date resolution
+    def _prio(u: str) -> int:
+        p = urlparse(u).path.lower()
+        if re.search(r"/20\d{2}/", p) or re.search(r"/20\d{2}-\d{2}-\d{2}", p):
+            return 0
+        if any(seg in p for seg in ("/news/", "/media/", "/press/", "/blog/", "/insights/", "/updates/", "/publication", "/publications/")):
+            return 1
+        return 2
 
-        items.append(it)
+    uniq_sorted = sorted(uniq, key=_prio)
+    resolved_ts: Dict[str, Tuple[Optional[float], bool]] = {}
+
+    for u in uniq_sorted:
+        inferred_ts = infer_published_ts_from_url(u)
+        used_meta = False
+        if inferred_ts is None and resolve_budget > 0 and _looks_content_url(u):
+            try:
+                ts2 = _resolve_published_ts_from_html(u)
+            except Exception:
+                ts2 = None
+            resolve_budget -= 1
+            if ts2:
+                inferred_ts = ts2
+                used_meta = True
+        resolved_ts[u] = (inferred_ts, used_meta)
+
+    for u in uniq:
+        inferred_ts, used_meta = resolved_ts.get(u, (infer_published_ts_from_url(u), False))
+        inferred_iso = datetime.fromtimestamp(inferred_ts, tz=timezone.utc).date().isoformat() if inferred_ts else None
+
+        title = title_by_url.get(u, "") or u
+
+        src = source_name or _norm_host(urlparse(index_url).netloc)
+        if not _same_site(u, index_url):
+            src = _norm_host(urlparse(u).netloc)
+
+        items.append(
+            Item(
+                url=u,
+                title=title,
+                summary="",
+                source=src,
+                published_iso=inferred_iso,
+                published_ts=inferred_ts,
+                published_source=("meta" if used_meta else ("url" if inferred_ts else None)),
+                published_confidence=(0.6 if used_meta else (0.35 if inferred_ts else None)),
+                index_url=index_url,
+            )
+        )
 
     return items
 
@@ -886,11 +880,6 @@ def fetch_full_text(url: str, **kwargs) -> str:
     """
     Return extracted text for a URL (HTML or PDF).
     Returns empty string on failure.
-
-    CHANGE (Feb 2026):
-    - Improve fallback HTML extraction by prioritising <article>/<main> (or largest content-like container)
-      and incorporating meta descriptions when the extracted text is too short. This reduces the number
-      of "Insufficient extract" summaries when the LLM is unavailable.
     """
     url = _clean_url(url)
     if not url:
@@ -946,66 +935,13 @@ def fetch_full_text(url: str, **kwargs) -> str:
         except Exception:
             pass
 
-    # fallback: soup-based main-content heuristic
+    # fallback: soup text
     try:
         soup = BeautifulSoup(html, "html.parser")
         for tag in soup(["script", "style", "noscript"]):
             tag.decompose()
-
-        # capture meta description (helps for JS-heavy pages)
-        desc = ""
-        try:
-            m = soup.find("meta", attrs={"property": "og:description"}) or soup.find("meta", attrs={"name": "description"})
-            if m and m.get("content"):
-                desc = str(m.get("content")).strip()
-        except Exception:
-            desc = ""
-
-        # strip common chrome
-        for tag in soup.find_all(["header", "footer", "nav", "aside", "form"]):
-            try:
-                tag.decompose()
-            except Exception:
-                pass
-
-        candidates = []
-        for sel in ["article", "main"]:
-            el = soup.find(sel)
-            if el is not None:
-                candidates.append(el)
-
-        # also consider common content containers
-        for el in soup.find_all(attrs={"class": re.compile(r"(content|article|post|entry|body|story|main)", re.I)}):
-            candidates.append(el)
-
-        def _text_len(el) -> int:
-            try:
-                return len((el.get_text(" ", strip=True) or "").strip())
-            except Exception:
-                return 0
-
-        best = None
-        if candidates:
-            best = max(candidates, key=_text_len)
-            if _text_len(best) < 200:
-                best = None
-
-        base = best if best is not None else soup
-        txt = base.get_text("\n")
+        txt = soup.get_text("\n")
         txt = re.sub(r"\n{3,}", "\n\n", txt).strip()
-
-        if desc and len(txt) < 600:
-            title = ""
-            try:
-                title = (soup.title.string or "").strip() if soup.title else ""
-            except Exception:
-                title = ""
-            prefix = "\n".join([x for x in [title, desc] if x]).strip()
-            if prefix:
-                txt = (prefix + "\n\n" + txt).strip()
-
         return txt
     except Exception:
         return ""
-
-
