@@ -1,11 +1,27 @@
 [
   {
     "section": "Energy Transition",
+    "title": "Media Releases",
+    "url": "https://www.aemc.gov.au/news-centre/media-releases",
+    "publisher": "aemc.gov.au",
+    "published": "2026-01-28",
+    "published_ts": 1769641542.0
+  },
+  {
+    "section": "Energy Transition",
     "title": "23 Jan 2026 News Energy Networks Australia welcomes Solar Sharer Offer next steps",
     "url": "https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-solar-sharer-offer-next-steps/",
     "publisher": "energynetworks.com.au",
     "published": "2026-01-23",
     "published_ts": 1769133664.0
+  },
+  {
+    "section": "Energy Transition",
+    "title": "Quarterly Carbon Market Reports",
+    "url": "https://www.cer.gov.au/markets/reports-and-data/quarterly-carbon-market-reports",
+    "publisher": "cer.gov.au",
+    "published": "2026-01-21",
+    "published_ts": 1768953600.0
   },
   {
     "section": "Energy Transition",
@@ -17,81 +33,41 @@
   },
   {
     "section": "ESG Reporting",
-    "title": "Vacancy",
-    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A141",
+    "title": "EFRAG Opens Call for Candidates to Join its Sustainability Reporting Technical Expert Group",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-opens-call-for-candidates-to-join-its-sustainability-reporting-technical-expert-group",
     "publisher": "efrag.org",
     "published": "2026-01-27",
     "published_ts": 1769515200.0
   },
   {
     "section": "ESG Reporting",
-    "title": "Corporate",
-    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A112",
+    "title": "EFRAG FRB Online Meeting - 29 January 2026",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-29-january-2026",
     "publisher": "efrag.org",
-    "published": "2026-01-16",
-    "published_ts": 1768564800.0
+    "published": "2026-01-01",
+    "published_ts": 1767225600.0
   },
   {
     "section": "ESG Reporting",
-    "title": "Financial Reporting",
-    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A42",
+    "title": "EFRAG SRB Online Meeting 28 January 2026",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-28-january-2026",
     "publisher": "efrag.org",
-    "published": "2026-01-12",
-    "published_ts": 1768219200.0
+    "published": "2026-01-01",
+    "published_ts": 1767225600.0
+  },
+  {
+    "section": "ESG Reporting",
+    "title": "ISSB Update January 2026",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html",
+    "publisher": "ifrs.org",
+    "published": "2026-01-01",
+    "published_ts": 1767225600.0
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "New Energy Outlook",
-    "url": "https://about.bnef.com/insights/clean-energy/new-energy-outlook/",
-    "publisher": "about.bnef.com",
-    "published": "2025-05-19",
-    "published_ts": 1747644873.0
-  },
-  {
-    "section": "Sustainable Finance & Investment",
-    "title": "REPORT New Energy Outlook",
-    "url": "https://about.bnef.com/insights/uncategorized/new-energy-outlook/",
-    "publisher": "about.bnef.com",
-    "published": "2025-05-19",
-    "published_ts": 1747644873.0
-  },
-  {
-    "section": "Sustainable Finance & Investment",
-    "title": "Industrial Energy Transformation Studies (IETS) Program",
-    "url": "https://arena.gov.au/funding/industrial-energy-transformation-studies-program/",
-    "publisher": "arena.gov.au",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "Sustainable Finance & Investment",
-    "title": "Ultra Low-Cost Solar PV R&D Funding Round",
-    "url": "https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/",
-    "publisher": "arena.gov.au",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "Sustainable Finance & Investment",
-    "title": "REPORT Electric Vehicle Outlook",
-    "url": "https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/",
-    "publisher": "about.bnef.com",
-    "published": "2025-06-18",
-    "published_ts": 1750243826.0
-  },
-  {
-    "section": "Sustainable Finance & Investment",
-    "title": "Electric Vehicle Outlook",
-    "url": "https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook/",
-    "publisher": "about.bnef.com",
-    "published": "2025-06-18",
-    "published_ts": 1750243826.0
-  },
-  {
-    "section": "Sustainable Finance & Investment",
-    "title": "National Industrial Transformation Program",
-    "url": "https://arena.gov.au/funding/national-industrial-transformation-program/",
-    "publisher": "arena.gov.au",
+    "title": "Sustainable Finance & Investment: no retrievable items for 2026-01",
+    "url": "",
+    "publisher": "pipeline",
     "published": null,
     "published_ts": null
   }
