@@ -4,20 +4,29 @@ Monthly digest generator.
 
 Key robustness properties:
 - Compatible with older/newer fetch/summarise signatures (via **kwargs shims).
-- Never ends with 0 selected items unless ALLOW_PLACEHOLDER=0 AND everything is down.
 - Emits debug-selected/meta/drops on every run.
 - Preserves publisher (Item.source) and logical digest section (Item.section).
+
+Incremental improvements (Feb 2026):
+- Prevent low-signal "navigation" pages from being selected (home/about/login/etc).
+- Fill each section up to ITEMS_PER_SECTION using a strict->relaxed two-pass strategy
+  (relaxed still enforces minimum substance; it no longer allows arbitrarily short pages).
+- Add "auto-allow" support for trusted public domains (e.g. *.gov.au, specific standards bodies)
+  to reduce drops caused by an overly narrow allowlist.
+- Add built-in deny patterns for common social/tracking/auth URLs to reduce noise.
 """
+
 from __future__ import annotations
 
 import json
 import math
 import os
 import re
+from collections import Counter
 from dataclasses import asdict
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Sequence, Tuple
+from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 
 import yaml
 from dateutil import parser as dtparser
@@ -38,16 +47,44 @@ MIN_TEXT_CHARS = int(os.getenv("MIN_TEXT_CHARS", "900"))
 PRIORITY_MIN_CHARS = int(os.getenv("PRIORITY_MIN_CHARS", "250"))
 MIN_TOTAL_ITEMS = int(os.getenv("MIN_TOTAL_ITEMS", "1"))
 
+# Relaxed pass still enforces substance; it just lowers the minimum.
+RELAXED_MIN_TEXT_CHARS = int(os.getenv("RELAXED_MIN_TEXT_CHARS", str(max(300, MIN_TEXT_CHARS // 3))))
+
 ALLOW_UNDATED = os.getenv("ALLOW_UNDATED", "1") == "1"
 ALLOW_PLACEHOLDER = os.getenv("ALLOW_PLACEHOLDER", "1") == "1"
 FALLBACK_WINDOW_DAYS = int(os.getenv("FALLBACK_WINDOW_DAYS", "3"))
 DEBUG = os.getenv("DEBUG", "0") == "1"
+
+# Auto-allow: expands an allowlist without requiring config changes (safe defaults).
+AUTO_ALLOW_GOV_AU = os.getenv("AUTO_ALLOW_GOV_AU", "1") == "1"
+AUTO_ALLOW_DOMAINS = {
+    d.strip().lower()
+    for d in os.getenv("AUTO_ALLOW_DOMAINS", "efrag.org").split(",")
+    if d.strip()
+}
 
 PRIORITY_DOMAINS = {
     d.strip().lower()
     for d in os.getenv("PRIORITY_DOMAINS", "").split(",")
     if d.strip()
 }
+
+# Additional built-in noise filters (merged with config/filters.yaml)
+BUILTIN_DENY_DOMAINS = {
+    "facebook.com", "twitter.com", "x.com", "linkedin.com", "youtube.com", "instagram.com", "tiktok.com",
+    "policies.google.com", "safelinks.protection.outlook.com",
+}
+
+BUILTIN_DENY_URL_SUBSTRINGS = [
+    "oauth-redirect", "j_security_check", "login", "signin", "sign-in", "subscribe", "newsletter",
+    "utm_", "fbclid=", "gclid=", "mc_cid=", "mc_eid=",
+    "open.spotify.com", "spotify.com",
+]
+
+BUILTIN_DENY_TITLE_REGEX = [
+    r"^\s*skip to (main )?content\s*$",
+    r"^\s*about\s*$",
+]
 
 EMERGENCY_RSS = {
     "Energy Transition": "https://news.google.com/rss/search?q=Australia%20energy%20transition&hl=en-AU&gl=AU&ceid=AU:en",
@@ -143,20 +180,64 @@ def _substance_ok(text: str, is_priority: bool) -> bool:
     return True
 
 
+def _substance_ok_relaxed(text: str) -> bool:
+    """Lower bar than _substance_ok, but still rejects boilerplate."""
+    if not text:
+        return False
+    if len(text) < RELAXED_MIN_TEXT_CHARS:
+        return False
+    letters = sum(c.isalpha() for c in text)
+    if letters < min(80, len(text) * 0.05):
+        return False
+    return True
+
+
 def _looks_articleish(url: str) -> bool:
-    u = (url or "").lower()
-    bad = [
-        "/tag/", "/tags/", "/category/", "/categories/",
-        "/topic/", "/topics/", "/author/", "/authors/",
-        "/search", "?s=", "/page/", "/index",
-        "/events", "/event", "/webinars", "/webinar",
-        "/jobs", "/careers", "/about", "/contact",
-    ]
-    return not any(b in u for b in bad)
+    """
+    Heuristic: URL appears to be an actual content item, not a hub or navigation page.
+
+    Improvement: previously, the site root ("/") could pass. We now require some path depth / signal.
+    """
+    u = (url or "").strip()
+    if not u:
+        return False
+    ul = u.lower()
+
+    # obvious non-content patterns
+    if is_probably_taxonomy_or_hub(ul):
+        return False
+
+    # must have meaningful path beyond root
+    path = re.sub(r"[?#].*$", "", ul)
+    # strip scheme+domain
+    path = re.sub(r"^https?://[^/]+", "", path)
+    if path in ("", "/"):
+        return False
+
+    # deny common nav segments (segment-based, to avoid false positives like ".../about-energy...")
+    bad_segments = {
+        "about", "contact", "privacy", "terms", "cookies", "accessibility", "sitemap",
+        "careers", "jobs", "vacancies",
+    }
+    segs = [s for s in path.split("/") if s]
+    if segs and segs[-1] in bad_segments:
+        return False
+
+    # require at least one "signal": depth, date-like digits, or a long slug
+    depth = len(segs)
+    if depth >= 2:
+        return True
+    if re.search(r"(20\d{2})", path):
+        return True
+    if segs and len(segs[-1]) >= 18:
+        return True
+
+    return False
 
 
 class Filters:
     def __init__(self, raw: Dict[str, Any]):
+        # allow/deny lists from config
         self.allow_domains = [d.lower().strip() for d in raw.get("allow_domains", []) if str(d).strip()]
         self.deny_domains = [d.lower().strip() for d in raw.get("deny_domains", []) if str(d).strip()]
         self.deny_url_substrings = [s.lower() for s in raw.get("deny_url_substrings", []) if str(s).strip()]
@@ -166,14 +247,43 @@ class Filters:
             if isinstance(v, list)
         }
 
+        # merge built-in denylists (incremental improvement)
+        for d in BUILTIN_DENY_DOMAINS:
+            if d not in self.deny_domains:
+                self.deny_domains.append(d)
+        for s in BUILTIN_DENY_URL_SUBSTRINGS:
+            if s not in self.deny_url_substrings:
+                self.deny_url_substrings.append(s)
+        for rx in BUILTIN_DENY_TITLE_REGEX:
+            try:
+                self.deny_title_regex.append(re.compile(rx, re.I))
+            except Exception:
+                pass
+
     def domain_allowed(self, domain: str) -> bool:
-        d = domain.lower()
+        d = (domain or "").lower()
+        if not d:
+            return False
+
+        # If an allowlist exists, allow it…
         if self.allow_domains:
-            return any(d == a or d.endswith("." + a) for a in self.allow_domains)
+            if any(d == a or d.endswith("." + a) for a in self.allow_domains):
+                return True
+
+            # …but also auto-allow a small set of trusted public domains so that a too-narrow
+            # allowlist does not collapse the pool (e.g., AEMC/CER/EFRAG in your debug drops).
+            if AUTO_ALLOW_GOV_AU and (d.endswith(".gov.au") or d.endswith(".edu.au")):
+                return True
+            if any(d == a or d.endswith("." + a) for a in AUTO_ALLOW_DOMAINS):
+                return True
+
+            return False
+
+        # No allowlist: allow by default (still subject to deny lists)
         return True
 
     def domain_denied(self, domain: str) -> bool:
-        d = domain.lower()
+        d = (domain or "").lower()
         return any(d == x or d.endswith("." + x) for x in self.deny_domains)
 
 
@@ -183,6 +293,7 @@ def _passes_filters(it: Item, flt: Filters, section: str, *, bypass_allow: bool 
     if not url or not title:
         return False, "missing_url_or_title"
 
+    # Reject obvious non-item URLs early.
     if is_probably_taxonomy_or_hub(url):
         return False, "hub_url"
 
@@ -224,7 +335,7 @@ def _score_item(it: Item, text: str, section: str, flt: Filters, *, ignore_subst
     recency = (dt.timestamp() / 1e10) if dt is not None else 0.0
     substance = math.log(max(50, len(text)), 10)
     kw = _keyword_boost(it.title or "", section, flt)
-    articleish = 0.2 if _looks_articleish(it.url or "") else -0.2
+    articleish = 0.25 if _looks_articleish(it.url or "") else -0.35
     return recency + substance + kw + articleish
 
 
@@ -253,7 +364,8 @@ def _collect_section_pool(section: str, sec_cfg: Dict[str, Any]) -> Tuple[List[I
         except Exception as e:
             drops.append({"reason": "html_index_error", "source": str(entry), "detail": str(e)})
 
-    seen = set()
+    # URL dedup
+    seen: Set[str] = set()
     deduped: List[Item] = []
     for it in pool:
         key = (it.url or "").strip().lower()
@@ -272,14 +384,26 @@ def _select_from_pool(
     end_dt: datetime,
     flt: Filters,
     *,
-    items_per_section: int,
+    items_needed: int,
     per_domain_cap: int,
     strict: bool,
     bypass_allow: bool = False,
+    exclude_urls: Optional[Set[str]] = None,
+    initial_per_domain: Optional[Dict[str, int]] = None,
 ) -> Tuple[List[Item], List[Dict[str, str]]]:
+    """
+    Select up to items_needed items from pool.
+
+    strict=True:
+      - requires _looks_articleish AND _substance_ok
+    strict=False (relaxed):
+      - still requires _looks_articleish AND _substance_ok_relaxed
+        (previously it could select arbitrarily short/non-content pages)
+    """
     drops: List[Dict[str, str]] = []
     selected: List[Item] = []
-    per_domain: Dict[str, int] = {}
+    per_domain: Dict[str, int] = dict(initial_per_domain or {})
+    ex: Set[str] = set((u or "").strip().lower() for u in (exclude_urls or set()) if str(u).strip())
     text_cache: Dict[str, str] = {}
 
     def sort_key(it: Item):
@@ -288,73 +412,100 @@ def _select_from_pool(
         return (-ts, (it.url or ""))
 
     for it in sorted(pool, key=sort_key):
+        url = (it.url or "").strip()
+        if not url:
+            drops.append({"reason": "missing_url", "url": "", "title": it.title or ""})
+            continue
+        if url.lower() in ex:
+            continue
+
         ok, why = _passes_filters(it, flt, section, bypass_allow=bypass_allow)
         if not ok:
-            drops.append({"reason": why, "url": it.url or "", "title": it.title or ""})
+            drops.append({"reason": why, "url": url, "title": it.title or ""})
             continue
 
         if not _in_range(_effective_published_ts(it), start_dt, end_dt):
-            drops.append({"reason": "out_of_range", "url": it.url or "", "title": it.title or ""})
+            drops.append({"reason": "out_of_range", "url": url, "title": it.title or ""})
             continue
 
-        domain = normalise_domain(it.url)
+        domain = normalise_domain(url)
         if per_domain.get(domain, 0) >= per_domain_cap:
-            drops.append({"reason": "per_domain_cap", "url": it.url or "", "title": it.title or "", "domain": domain})
+            drops.append({"reason": "per_domain_cap", "url": url, "title": it.title or "", "domain": domain})
             continue
 
-        if strict and (not _looks_articleish(it.url or "")):
-            drops.append({"reason": "not_articleish", "url": it.url or "", "title": it.title or ""})
+        if not _looks_articleish(url):
+            drops.append({"reason": "not_articleish", "url": url, "title": it.title or ""})
             continue
 
-        text = text_cache.get(it.url or "")
-        if text is None:
-            text = ""
+        text = text_cache.get(url, "")
         if not text:
             try:
-                text = (fetch_full_text(it.url or "") or "").strip()
+                text = (fetch_full_text(url) or "").strip()
             except Exception:
                 text = ""
             if not text:
                 text = (it.summary or "").strip()
-            text_cache[it.url or ""] = text
+            text_cache[url] = text
 
-        prio = _is_priority(it.url or "")
-        if strict and (not _substance_ok(text, prio)):
-            drops.append({"reason": "low_substance", "url": it.url or "", "title": it.title or ""})
-            continue
+        if strict:
+            prio = _is_priority(url)
+            if not _substance_ok(text, prio):
+                drops.append({"reason": "low_substance", "url": url, "title": it.title or ""})
+                continue
+        else:
+            if not _substance_ok_relaxed(text):
+                drops.append({"reason": "low_substance_relaxed", "url": url, "title": it.title or ""})
+                continue
 
         if text:
             it.summary = text
 
         selected.append(it)
         per_domain[domain] = per_domain.get(domain, 0) + 1
-        if len(selected) >= items_per_section:
+        ex.add(url.lower())
+
+        if len(selected) >= max(0, items_needed):
             break
 
     return selected, drops
 
 
 def _last_resort_pick(pool: Sequence[Item], section: str, flt: Filters, *, items_needed: int) -> Tuple[List[Item], List[Dict[str, str]]]:
+    """
+    Emergency picker used only when strict+relaxed selection yields nothing.
+    Still rejects obvious non-content URLs/titles and requires at least minimal extract.
+    """
     drops: List[Dict[str, str]] = []
     scored: List[Tuple[float, Item]] = []
 
     for it in pool:
+        url = (it.url or "").strip()
+        if not url:
+            continue
+
         ok, why = _passes_filters(it, flt, section, bypass_allow=True)
         if not ok:
-            drops.append({"reason": why, "url": it.url or "", "title": it.title or ""})
+            drops.append({"reason": why, "url": url, "title": it.title or ""})
+            continue
+
+        if not _looks_articleish(url):
+            drops.append({"reason": "not_articleish", "url": url, "title": it.title or ""})
             continue
 
         text = ""
         try:
-            text = (fetch_full_text(it.url or "") or "").strip()
+            text = (fetch_full_text(url) or "").strip()
         except Exception:
             text = ""
         if not text:
             text = (it.summary or "").strip()
-        if not text:
-            text = (it.title or "").strip()
-        it.summary = text
 
+        # require at least some substance even in last resort
+        if not _substance_ok_relaxed(text):
+            drops.append({"reason": "low_substance_last_resort", "url": url, "title": it.title or ""})
+            continue
+
+        it.summary = text
         sc = _score_item(it, text, section, flt, ignore_substance=True)
         scored.append((sc, it))
 
@@ -399,51 +550,60 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
 
         print(f"[pool] candidates: {len(pool)}")
 
+        # Pass 1 (strict)
         selected, drops1 = _select_from_pool(
             pool, section, start_dt, end_dt, flt,
-            items_per_section=ITEMS_PER_SECTION,
+            items_needed=ITEMS_PER_SECTION,
             per_domain_cap=PER_DOMAIN_CAP,
             strict=True,
         )
         all_drops.extend(drops1)
-        print(f"[selected] {len(selected)} from {section}")
 
-        if not selected:
-            selected2, drops2 = _select_from_pool(
+        # Pass 2 (relaxed fill): only to top up to quota, and still enforces minimum substance
+        if len(selected) < ITEMS_PER_SECTION:
+            used = {it.url.lower() for it in selected if it.url}
+            per_dom = Counter(normalise_domain(it.url) for it in selected if it.url)
+            filler, drops2 = _select_from_pool(
                 pool, section, start_dt, end_dt, flt,
-                items_per_section=ITEMS_PER_SECTION,
+                items_needed=(ITEMS_PER_SECTION - len(selected)),
                 per_domain_cap=PER_DOMAIN_CAP,
                 strict=False,
+                exclude_urls=used,
+                initial_per_domain=dict(per_dom),
             )
             all_drops.extend(drops2)
-            selected = selected2
+            selected.extend(filler)
 
+        # Wider date window (still strict+relaxed)
         if not selected:
             print(f"[warn] No selected items in strict/relaxed passes; applying ±{FALLBACK_WINDOW_DAYS} day window.")
             s2 = start_dt - timedelta(days=FALLBACK_WINDOW_DAYS)
             e2 = end_dt + timedelta(days=FALLBACK_WINDOW_DAYS)
             selected3, drops3 = _select_from_pool(
                 pool, section, s2, e2, flt,
-                items_per_section=ITEMS_PER_SECTION,
+                items_needed=ITEMS_PER_SECTION,
                 per_domain_cap=PER_DOMAIN_CAP,
                 strict=False,
             )
             all_drops.extend(drops3)
             selected = selected3
 
+        # Last resort: pick only content-like URLs with minimal extract
         if not selected:
-            print("[warn] Still no items after fallback; last-resort pick (ignoring dates/substance).")
+            print("[warn] Still no items after fallback; last-resort pick (ignoring dates).")
             picked, drops4 = _last_resort_pick(pool, section, flt, items_needed=ITEMS_PER_SECTION)
             all_drops.extend(drops4)
             selected = picked
 
+        # Emergency RSS only if nothing at all
         if not selected:
             print("[warn] No candidates available; trying emergency RSS.")
             epool = _emergency_pool(section)
-            picked, drops5 = _last_resort_pick(epool, section, flt, items_needed=1)
+            picked, drops5 = _last_resort_pick(epool, section, flt, items_needed=max(1, ITEMS_PER_SECTION // 2))
             all_drops.extend(drops5)
             selected = picked
 
+        # Placeholder (only if explicitly enabled)
         if not selected and ALLOW_PLACEHOLDER:
             placeholder = Item(
                 url="",
@@ -455,6 +615,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
             selected = [placeholder]
             all_drops.append({"reason": "placeholder_used", "url": "", "title": placeholder.title})
 
+        print(f"[selected] {len(selected)} from {section}")
         all_selected.extend(selected)
 
     if not all_selected and ALLOW_PLACEHOLDER:
@@ -468,7 +629,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
         all_selected = [placeholder]
         all_drops.append({"reason": "global_placeholder_used", "url": "", "title": placeholder.title})
 
-    # Ensure we meet MIN_TOTAL_ITEMS to avoid downstream guardrails failing
+    # Ensure we meet MIN_TOTAL_ITEMS (avoids downstream guardrails failing)
     if len(all_selected) < MIN_TOTAL_ITEMS and ALLOW_PLACEHOLDER:
         for k in range(MIN_TOTAL_ITEMS - len(all_selected)):
             ph = Item(
@@ -511,6 +672,9 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
                 f"per_domain_cap={PER_DOMAIN_CAP}",
                 f"allow_undated={ALLOW_UNDATED}",
                 f"allow_placeholder={ALLOW_PLACEHOLDER}",
+                f"relaxed_min_text_chars={RELAXED_MIN_TEXT_CHARS}",
+                f"auto_allow_gov_au={AUTO_ALLOW_GOV_AU}",
+                f"auto_allow_domains={','.join(sorted(AUTO_ALLOW_DOMAINS)) if AUTO_ALLOW_DOMAINS else ''}",
             ]
         )
         + "\n",
