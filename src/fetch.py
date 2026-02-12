@@ -20,6 +20,7 @@ Incremental improvements (Feb 2026):
 from __future__ import annotations
 
 import hashlib
+import json
 import os
 import re
 import time
@@ -119,6 +120,23 @@ def _clean_url(u: str) -> str:
     if not u:
         return ""
     u, _frag = urldefrag(u)
+
+    # Drop common tracking query params to reduce duplicates.
+    try:
+        p = urlparse(u)
+        if p.query:
+            from urllib.parse import parse_qsl, urlencode, urlunparse
+            keep = []
+            for k, v in parse_qsl(p.query, keep_blank_values=True):
+                kl = (k or "").lower()
+                if kl.startswith("utm_") or kl in {"fbclid", "gclid", "mc_cid", "mc_eid"}:
+                    continue
+                keep.append((k, v))
+            new_q = urlencode(keep, doseq=True)
+            u = urlunparse((p.scheme, p.netloc, p.path, p.params, new_q, ""))  # fragment already removed
+    except Exception:
+        pass
+
     return u
 
 
@@ -224,8 +242,37 @@ def infer_published_ts_from_url(url: str) -> Optional[float]:
             except Exception:
                 return None
 
-    return None
+    # monthname-YYYY or YYYY-monthname in slug (e.g., .../issb-update-january-2026/)
+    m = re.search(r"(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t|tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[-_ ]?(20\d{2})", path)
+    if m:
+        y = int(m.group(2))
+        mo = _MONTHS.get(m.group(1).lower()) or _MONTHS.get(m.group(1)[:3].lower())
+        if mo:
+            try:
+                return datetime(y, mo, 1, tzinfo=timezone.utc).timestamp()
+            except Exception:
+                return None
 
+    m = re.search(r"(20\d{2})[-_ ]?(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t|tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)", path)
+    if m:
+        y = int(m.group(1))
+        mo = _MONTHS.get(m.group(2).lower()) or _MONTHS.get(m.group(2)[:3].lower())
+        if mo:
+            try:
+                return datetime(y, mo, 1, tzinfo=timezone.utc).timestamp()
+            except Exception:
+                return None
+
+    # YYYYMM (e.g., .../202601/...)
+    m = re.search(r"/(20\d{2})(0[1-9]|1[0-2])(?:/|$)", path)
+    if m:
+        y, mo = int(m.group(1)), int(m.group(2))
+        try:
+            return datetime(y, mo, 1, tzinfo=timezone.utc).timestamp()
+        except Exception:
+            return None
+
+    return None
 
 def is_probably_taxonomy_or_hub(url: str) -> bool:
     """
@@ -261,6 +308,8 @@ def is_probably_taxonomy_or_hub(url: str) -> bool:
         "tag", "tags", "category", "categories", "topic", "topics",
         "author", "authors",
         "help", "support", "faq",
+        "board", "governance", "leadership", "executive", "executives", "management", "team", "teams",
+        "people", "our-people", "who-we-are", "organisation", "organization",
     }
     segs = [s for s in path.split("/") if s]
     if segs and segs[-1] in utility_segments:
@@ -271,6 +320,7 @@ def is_probably_taxonomy_or_hub(url: str) -> bool:
         "/author/", "/authors/",
         "/search", "?s=", "/page/", "/index",
         "/events", "/event", "/webinars", "/webinar",
+        "/board", "/governance", "/leadership", "/executive", "/executives", "/team", "/our-people", "/people",
     ]
     if any(p in ul for p in bad_parts):
         return True
@@ -356,10 +406,146 @@ def _clean_anchor_text(t: str) -> str:
     if not t:
         return ""
     t = re.sub(r"\s+", " ", t).strip()
+    # strip common icon tokens
+    t = t.replace("arrow_right_alt", "").strip()
+
     # very common boilerplate link labels
-    if t.lower() in {"skip to content", "skip to main content", "read more", "learn more", "more"}:
+    if t.lower() in {"skip to content", "skip to main content", "read more", "learn more", "more", "continue reading"}:
         return ""
     return t
+
+_GENERIC_ANCHOR_RE = re.compile(r"^(read more|learn more|more|continue reading)$", re.I)
+
+
+def _best_anchor_title(a: Any) -> str:
+    """Recover a meaningful title for an <a>, even when the anchor text is generic."""
+    try:
+        txt = _clean_anchor_text(a.get_text(" ", strip=True) or "")
+    except Exception:
+        txt = ""
+    if txt and (not _GENERIC_ANCHOR_RE.match(txt)):
+        return txt
+
+    try:
+        parent = a
+        for _ in range(7):
+            parent = getattr(parent, "parent", None)
+            if parent is None:
+                break
+            if getattr(parent, "name", "") in {"article", "li", "div", "section"}:
+                h = parent.find(["h1", "h2", "h3", "h4"])
+                if h is not None:
+                    ht = _clean_anchor_text(h.get_text(" ", strip=True) or "")
+                    if ht and (not _GENERIC_ANCHOR_RE.match(ht)):
+                        return ht
+    except Exception:
+        pass
+
+    return txt or ""
+
+
+def _parse_dt_like(s: str) -> Optional[datetime]:
+    """Parse a date/datetime string in common web formats (best-effort, UTC)."""
+    if not s:
+        return None
+    ss = str(s).strip()
+    if not ss:
+        return None
+    ss = ss.replace("Z", "+00:00")
+    ss = re.sub(r"(\.\d{3,6})\+00:00$", "+00:00", ss)
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", ss):
+        try:
+            return datetime.fromisoformat(ss).replace(tzinfo=timezone.utc)
+        except Exception:
+            return None
+    try:
+        dt = datetime.fromisoformat(ss)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc)
+    except Exception:
+        m = re.search(r"(20\d{2})-(\d{2})-(\d{2})", ss)
+        if m:
+            try:
+                return datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)), tzinfo=timezone.utc)
+            except Exception:
+                return None
+    return None
+
+
+def _resolve_published_ts_from_html(url: str) -> Optional[float]:
+    """Fetch a small slice of HTML and extract published date from meta/time/JSON-LD."""
+    resp = _http_get(url)
+    if resp is None:
+        return None
+    ctype = _content_type(resp)
+    raw = _read_limited(resp, min(MAX_BYTES, 400_000))
+    if not raw:
+        return None
+
+    last_mod = None
+    try:
+        lm = resp.headers.get("Last-Modified") or ""
+        if lm:
+            dt = _parse_dt_like(lm)
+            if dt:
+                last_mod = dt.timestamp()
+    except Exception:
+        pass
+
+    if ("application/pdf" in ctype) or url.lower().endswith(".pdf"):
+        return last_mod
+
+    try:
+        html = raw.decode(resp.encoding or "utf-8", errors="replace")
+    except Exception:
+        html = raw.decode("utf-8", errors="replace")
+
+    soup = BeautifulSoup(html, "html.parser")
+
+    meta_attrs = [
+        {"property": "article:published_time"},
+        {"name": "article:published_time"},
+        {"name": "pubdate"},
+        {"name": "publishdate"},
+        {"name": "date"},
+        {"name": "dc.date"},
+        {"name": "dc.date.issued"},
+        {"property": "og:updated_time"},
+    ]
+    for attrs in meta_attrs:
+        el = soup.find("meta", attrs=attrs)
+        if el and el.get("content"):
+            dt = _parse_dt_like(el.get("content"))
+            if dt:
+                return dt.timestamp()
+
+    t = soup.find("time")
+    if t is not None:
+        dtattr = t.get("datetime") or ""
+        dt = _parse_dt_like(dtattr)
+        if dt:
+            return dt.timestamp()
+
+    for s in soup.find_all("script", attrs={"type": "application/ld+json"}):
+        try:
+            txt = (s.string or "").strip()
+            if not txt:
+                continue
+            data = json.loads(txt)
+            candidates = data if isinstance(data, list) else [data]
+            for obj in candidates:
+                if not isinstance(obj, dict):
+                    continue
+                for key in ("datePublished", "dateCreated"):
+                    if key in obj:
+                        dt = _parse_dt_like(obj.get(key))
+                        if dt:
+                            return dt.timestamp()
+        except Exception:
+            continue
+
+    return last_mod
 
 
 def _looks_like_asset_url(u: str) -> bool:
@@ -439,12 +625,7 @@ def fetch_rss(feed_url: str, source_name: str = "", **kwargs) -> List[Item]:
 
 
 def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[Item]:
-    """
-    Extract candidate content links from an index/listing page.
-
-    NOTE: This function should be conservative: it is better to return fewer, higher-signal
-    candidates than hundreds of navigation links.
-    """
+    """Fetch a hub/listing HTML page and extract likely content links."""
     index_url = _clean_url(index_url)
     if not index_url:
         return []
@@ -457,7 +638,6 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
     if not raw:
         return []
 
-    # crude decode
     try:
         html = raw.decode(resp.encoding or "utf-8", errors="replace")
     except Exception:
@@ -465,60 +645,81 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
 
     soup = BeautifulSoup(html, "html.parser")
 
+    # Drop obvious boilerplate containers to reduce navigation links
+    try:
+        for tag in soup(["script", "style", "noscript"]):
+            tag.decompose()
+        for tag in soup(["header", "nav", "footer", "aside", "form"]):
+            tag.decompose()
+    except Exception:
+        pass
+
     # Collect (url -> best_title) from anchors
     title_by_url: Dict[str, str] = {}
-    links: List[str] = []
-    for a in soup.select("a[href]"):
+    ordered: List[str] = []
+
+    for a in soup.find_all("a"):
         href = (a.get("href") or "").strip()
         if not href:
             continue
-        if href.startswith("mailto:") or href.startswith("javascript:"):
+        if href.startswith("#") or href.lower().startswith(("mailto:", "javascript:")):
             continue
 
         abs_url = _clean_url(urljoin(index_url, href))
-        if not abs_url:
-            continue
-        if urlparse(abs_url).scheme not in ("http", "https"):
+        if not abs_url.lower().startswith(("http://", "https://")):
             continue
 
-        # Filter obvious non-content
-        if _deny_from_index(abs_url) or is_probably_taxonomy_or_hub(abs_url):
+        if _deny_from_index(abs_url):
             continue
-
+        if is_probably_taxonomy_or_hub(abs_url):
+            continue
         if (not ALLOW_EXTERNAL_LINKS_FROM_INDEX) and (not _same_site(abs_url, index_url)):
             continue
 
-        t = _clean_anchor_text(a.get_text(" ", strip=True) or "")
-        # Keep best (longest) anchor text seen for a URL
-        if abs_url not in title_by_url or len(t) > len(title_by_url.get(abs_url, "")):
-            if t:
-                title_by_url[abs_url] = t
-
-        links.append(abs_url)
-
-    # De-dupe, keep order
-    seen = set()
-    uniq: List[str] = []
-    for u in links:
-        key = u.lower()
-        if key in seen:
+        t = _best_anchor_title(a)
+        if not t:
             continue
-        seen.add(key)
+
+        if abs_url not in title_by_url or (len(t) > len(title_by_url.get(abs_url, ""))):
+            title_by_url[abs_url] = t
+
+        ordered.append(abs_url)
+
+    # De-duplicate in-order
+    uniq: List[str] = []
+    seen: Set[str] = set()
+    for u in ordered:
+        ul = u.lower()
+        if ul in seen:
+            continue
+        seen.add(ul)
         uniq.append(u)
 
     uniq = uniq[:MAX_LINKS_PER_INDEX]
 
     items: List[Item] = []
+    resolve_budget = MAX_DATE_RESOLVE_FETCHES_PER_INDEX
+
     for u in uniq:
         inferred_ts = infer_published_ts_from_url(u)
-        inferred_iso = datetime.fromtimestamp(inferred_ts, tz=timezone.utc).isoformat() if inferred_ts else None
+        used_meta = False
+        if inferred_ts is None and resolve_budget > 0:
+            try:
+                ts2 = _resolve_published_ts_from_html(u)
+            except Exception:
+                ts2 = None
+            resolve_budget -= 1
+            if ts2:
+                inferred_ts = ts2
+                used_meta = True
 
-        # Source: prefer explicit source_name for same-site links, else fall back to the URL's host.
+        inferred_iso = datetime.fromtimestamp(inferred_ts, tz=timezone.utc).date().isoformat() if inferred_ts else None
+
+        title = title_by_url.get(u, "") or u
+
         src = source_name or _norm_host(urlparse(index_url).netloc)
         if not _same_site(u, index_url):
             src = _norm_host(urlparse(u).netloc)
-
-        title = title_by_url.get(u, "") or u
 
         items.append(
             Item(
@@ -528,8 +729,8 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
                 source=src,
                 published_iso=inferred_iso,
                 published_ts=inferred_ts,
-                published_source="url" if inferred_ts else None,
-                published_confidence=0.35 if inferred_ts else None,
+                published_source=("meta" if used_meta else ("url" if inferred_ts else None)),
+                published_confidence=(0.6 if used_meta else (0.35 if inferred_ts else None)),
                 index_url=index_url,
             )
         )
