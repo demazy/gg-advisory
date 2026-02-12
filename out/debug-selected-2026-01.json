@@ -1,161 +1,97 @@
 [
   {
     "section": "Energy Transition",
-    "title": "Read more arrow_right_alt",
+    "title": "23 Jan 2026 News Energy Networks Australia welcomes Solar Sharer Offer next steps",
+    "url": "https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-solar-sharer-offer-next-steps/",
+    "publisher": "energynetworks.com.au",
+    "published": "2026-01-23",
+    "published_ts": 1769133664.0
+  },
+  {
+    "section": "Energy Transition",
+    "title": "Explore the Q4 2025 QCMR data workbook",
     "url": "https://www.cer.gov.au/news-and-media/news/2026/january/explore-q4-2025-qcmr-data-workbook",
     "publisher": "cer.gov.au",
-    "published": "2026-01-01T00:00:00+00:00",
+    "published": "2026-01-01",
     "published_ts": 1767225600.0
   },
   {
-    "section": "Energy Transition",
-    "title": "Advisory panel",
-    "url": "https://arena.gov.au/about/advisory-panel/",
-    "publisher": "arena.gov.au",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "Energy Transition",
-    "title": "Board",
-    "url": "https://arena.gov.au/about/board-arena-renewable-energy/",
-    "publisher": "arena.gov.au",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "Energy Transition",
-    "title": "Executive team",
-    "url": "https://arena.gov.au/about/executive-team",
-    "publisher": "arena.gov.au",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "Energy Transition",
-    "title": "Unit and Certificate Registry",
-    "url": "https://cer.gov.au/online-systems/new-unit-and-certificate-registry",
-    "publisher": "cer.gov.au",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "Energy Transition",
-    "title": "Chair and commissioners",
-    "url": "https://www.aemc.gov.au/about-us/chair-and-commissioners",
-    "publisher": "aemc.gov.au",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "Energy Transition",
-    "title": "Executive leadership team",
-    "url": "https://www.aemc.gov.au/about-us/executive-leadership-team",
-    "publisher": "aemc.gov.au",
-    "published": null,
-    "published_ts": null
-  },
-  {
     "section": "ESG Reporting",
-    "title": "About financial reporting and due process",
-    "url": "https://www.efrag.org/en/about-financial-reporting",
+    "title": "Vacancy",
+    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A141",
     "publisher": "efrag.org",
-    "published": null,
-    "published_ts": null
+    "published": "2026-01-27",
+    "published_ts": 1769515200.0
   },
   {
     "section": "ESG Reporting",
-    "title": "About EFRAG",
-    "url": "https://www.efrag.org/en/about-us",
+    "title": "Corporate",
+    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A112",
     "publisher": "efrag.org",
-    "published": null,
-    "published_ts": null
+    "published": "2026-01-16",
+    "published_ts": 1768564800.0
   },
   {
     "section": "ESG Reporting",
-    "title": "European lab",
-    "url": "https://www.efrag.org/en/about-us/about-efrag/the-european-corporate-reporting-lab",
+    "title": "Financial Reporting",
+    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A42",
     "publisher": "efrag.org",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "ESG Reporting",
-    "title": "Modern slavery statement",
-    "url": "https://www.ifrs.org/content/dam/ifrs/about-us/legal-and-governance/legal-docs/modern-slavery-statement.pdf",
-    "publisher": "ifrs.org",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "ESG Reporting",
-    "title": "Trade mark guidelines",
-    "url": "https://www.ifrs.org/content/dam/ifrs/about-us/legal-and-governance/legal-docs/trade-mark-guidelines.pdf",
-    "publisher": "ifrs.org",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "ESG Reporting",
-    "title": "Home",
-    "url": "https://www.ifrs.org/content/ifrs/home.html",
-    "publisher": "ifrs.org",
-    "published": null,
-    "published_ts": null
+    "published": "2026-01-12",
+    "published_ts": 1768219200.0
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "BNEF Pioneers Enter the world's leading climate-tech innovation competition and learn about our past winners.",
-    "url": "https://about.bnef.com/about/pioneers/",
+    "title": "New Energy Outlook",
+    "url": "https://about.bnef.com/insights/clean-energy/new-energy-outlook/",
     "publisher": "about.bnef.com",
-    "published": null,
-    "published_ts": null
+    "published": "2025-05-19",
+    "published_ts": 1747644873.0
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Commodities Traders Review projections and risks within the commodities market.",
-    "url": "https://about.bnef.com/commodities-trader/",
+    "title": "REPORT New Energy Outlook",
+    "url": "https://about.bnef.com/insights/uncategorized/new-energy-outlook/",
     "publisher": "about.bnef.com",
-    "published": null,
-    "published_ts": null
+    "published": "2025-05-19",
+    "published_ts": 1747644873.0
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Financial Institutions Identify rising technologies and find your next big investment.",
-    "url": "https://about.bnef.com/financial-institutions/",
-    "publisher": "about.bnef.com",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "Sustainable Finance & Investment",
-    "title": "Advisory panel",
-    "url": "https://arena.gov.au/about/advisory-panel/",
+    "title": "Industrial Energy Transformation Studies (IETS) Program",
+    "url": "https://arena.gov.au/funding/industrial-energy-transformation-studies-program/",
     "publisher": "arena.gov.au",
     "published": null,
     "published_ts": null
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Board",
-    "url": "https://arena.gov.au/about/board-arena-renewable-energy/",
+    "title": "Ultra Low-Cost Solar PV R&D Funding Round",
+    "url": "https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/",
     "publisher": "arena.gov.au",
     "published": null,
     "published_ts": null
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Executive team",
-    "url": "https://arena.gov.au/about/executive-team",
-    "publisher": "arena.gov.au",
-    "published": null,
-    "published_ts": null
+    "title": "REPORT Electric Vehicle Outlook",
+    "url": "https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/",
+    "publisher": "about.bnef.com",
+    "published": "2025-06-18",
+    "published_ts": 1750243826.0
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Modern slavery statement",
-    "url": "https://www.ifrs.org/content/dam/ifrs/about-us/legal-and-governance/legal-docs/modern-slavery-statement.pdf",
-    "publisher": "ifrs.org",
+    "title": "Electric Vehicle Outlook",
+    "url": "https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook/",
+    "publisher": "about.bnef.com",
+    "published": "2025-06-18",
+    "published_ts": 1750243826.0
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "National Industrial Transformation Program",
+    "url": "https://arena.gov.au/funding/national-industrial-transformation-program/",
+    "publisher": "arena.gov.au",
     "published": null,
     "published_ts": null
   }

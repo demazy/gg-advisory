@@ -1,541 +1,717 @@
 # reason	url	title
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/changes-to-cheaper-home-batteries-program	Read more arrow_right_alt
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fifth-independent-review-hir-gateway-checks	Read more arrow_right_alt
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fixed-delivery-exit-arrangement-now-permanent	Read more arrow_right_alt
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/market-update-fixed-delivery-exit-arrangement	Read more arrow_right_alt
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/register-solar-water-heaters-version-56-now-available	Read more arrow_right_alt
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/renewable-energy-target-enforcement-action-against-mojo-power-east	Read more arrow_right_alt
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/2024-25-preliminary-safeguard-mechanism-insights-released	Read more arrow_right_alt
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/recall-issued-sigenergy-single-phase-81012-kw-energy-controllers	Read more arrow_right_alt
-not_articleish	https://arena.gov.au/	Home
-per_domain_cap	https://arena.gov.au/about/finance-reporting/	Finance reporting
-per_domain_cap	https://arena.gov.au/about/legislation-and-regulation/	Legislation and regulation
-per_domain_cap	https://arena.gov.au/about/partners	Partners
-per_domain_cap	https://arena.gov.au/about/publications/	Publications
-per_domain_cap	https://arena.gov.au/about/strategic-priorities/	Strategic priorities
-per_domain_cap	https://arena.gov.au/blog	https://arena.gov.au/blog
-per_domain_cap	https://arena.gov.au/freedom-of-information/	Freedom of Information
-per_domain_cap	https://arena.gov.au/funding	Funding
-per_domain_cap	https://arena.gov.au/knowledge-bank	Knowledge Bank
-per_domain_cap	https://arena.gov.au/knowledge-bank/	ARENA Insights newsletter
-per_domain_cap	https://arena.gov.au/knowledge-innovation/	Knowledge & Innovation overview
-per_domain_cap	https://arena.gov.au/knowledge-innovation/deip	Distributed Energy Integration Program (DEIP) overview
-per_domain_cap	https://arena.gov.au/news	News
-per_domain_cap	https://arena.gov.au/news/	Load more news
-per_domain_cap	https://arena.gov.au/projects	Projects
-per_domain_cap	https://arena.gov.au/public-interest-disclosure/	Public Interest Disclosure
-per_domain_cap	https://arena.gov.au/renewable-energy/battery-storage/	Battery storage
-per_domain_cap	https://arena.gov.au/renewable-energy/bioenergy/	Bioenergy / Energy from waste
-per_domain_cap	https://arena.gov.au/renewable-energy/community-electrification/	Community electrification
-per_domain_cap	https://arena.gov.au/renewable-energy/concentrated-solar-thermal/	Concentrated solar thermal
-per_domain_cap	https://arena.gov.au/renewable-energy/demand-response/	Demand response
-per_domain_cap	https://arena.gov.au/renewable-energy/distributed-energy-resources/	Distributed energy resources
-per_domain_cap	https://arena.gov.au/renewable-energy/electric-vehicles/	Electric vehicles
-per_domain_cap	https://arena.gov.au/renewable-energy/geothermal/	Geothermal
-per_domain_cap	https://arena.gov.au/renewable-energy/hybrid/	Hybrid
-per_domain_cap	https://arena.gov.au/renewable-energy/hydrogen/	Hydrogen
-per_domain_cap	https://arena.gov.au/renewable-energy/large-scale-solar/	Large-scale solar
-per_domain_cap	https://arena.gov.au/renewable-energy/ocean/	Ocean
-per_domain_cap	https://arena.gov.au/renewable-energy/off-grid/	Off grid
-per_domain_cap	https://arena.gov.au/renewable-energy/pumped-hydro-energy-storage/	Hydropower / Pumped Hydro Energy Storage
-per_domain_cap	https://arena.gov.au/renewable-energy/renewables-for-industry/	Renewables for industry
-per_domain_cap	https://arena.gov.au/renewable-energy/renewables-in-buildings/	Renewables in buildings
-per_domain_cap	https://arena.gov.au/renewable-energy/solar-pv-rd/	Solar PV R&D
-per_domain_cap	https://arena.gov.au/renewable-energy/solar/	Solar overview
-per_domain_cap	https://arena.gov.au/renewable-energy/system-security-reliability/	System security and reliability
-per_domain_cap	https://arena.gov.au/renewable-energy/wind/	Wind
-per_domain_cap	https://arena.gov.au/terms-of-use/	Terms
-per_domain_cap	https://arena.gov.au/what-is-renewable-energy/	Renewable Energy overview
-not_articleish	https://data.cer.gov.au/	Data Services beta
-not_articleish	https://www.aemc.gov.au/	Home
-not_articleish	https://www.aemc.gov.au/about-us	About Us
-not_articleish	https://knowledgehub.efrag.org	ESRS Knowledge Hub
-not_articleish	https://www.efrag.org/en	https://www.efrag.org/en
-per_domain_cap	https://www.efrag.org/en/about-us/annual-reviews	Annual reviews
-per_domain_cap	https://www.efrag.org/en/about-us/efrag-facts	Elements of history and reforms
-per_domain_cap	https://www.efrag.org/en/about-us/friends-of-efrag	Friends of EFRAG
-per_domain_cap	https://www.efrag.org/en/about-us/governance	Our structure and member organisations
-per_domain_cap	https://www.efrag.org/en/about-us/governance/consultative-forum-of-standard-setters	EFRAG Consultative Forum of Standard Setters
-per_domain_cap	https://www.efrag.org/en/about-us/governance/efrag-financial-reporting-board	EFRAG Financial Reporting Board
-per_domain_cap	https://www.efrag.org/en/about-us/governance/efrag-financial-reporting-technical-expert-group-efrag-fr-teg	EFRAG Financial Reporting Technical Expert Group
-per_domain_cap	https://www.efrag.org/en/about-us/governance/efrag-secretariat	EFRAG Secretariat
-per_domain_cap	https://www.efrag.org/en/about-us/governance/efrag-sustainability-reporting-board	EFRAG Sustainability Reporting Board
-per_domain_cap	https://www.efrag.org/en/about-us/governance/efrag-sustainability-reporting-technical-expert-group-efrag-sr-teg	EFRAG Sustainability Reporting Technical Expert Group
-per_domain_cap	https://www.efrag.org/en/about-us/legal-policies	Legal & Policies
-per_domain_cap	https://www.efrag.org/en/about-us/our-structure-and-technical-bodies/efrag-administrative-board	EFRAG Administrative Board
-per_domain_cap	https://www.efrag.org/en/about-us/working-groups-and-advisory-panels	Working groups and advisory panels
-per_domain_cap	https://www.efrag.org/en/about-us/working-groups/efrag-financial-reporting-technical-expert-group-efrag-fr-teg	EFRAG Financial Reporting Technical Expert Group
-per_domain_cap	https://www.efrag.org/en/amended-esrs	Simplified ESRS
-per_domain_cap	https://www.efrag.org/en/cookie-statement	Cookie statement
-per_domain_cap	https://www.efrag.org/en/disclaimer	Disclaimer
-per_domain_cap	https://www.efrag.org/en/efrag-events	Events
-per_domain_cap	https://www.efrag.org/en/financial-reporting	Financial reporting
-per_domain_cap	https://www.efrag.org/en/financial-reporting/about-connectivity	Connectivity between FR and SR
-per_domain_cap	https://www.efrag.org/en/financial-reporting/endorsement-status	Endorsement status
-per_domain_cap	https://www.efrag.org/en/financial-reporting/fr-open-consultations	Open consultations
-per_domain_cap	https://www.efrag.org/en/financial-reporting/governance-and-technical-bodies	Governance and technical bodies
-per_domain_cap	https://www.efrag.org/en/financial-reporting/meetings	Meetings
-per_domain_cap	https://www.efrag.org/en/financial-reporting/news	News
-per_domain_cap	https://www.efrag.org/en/financial-reporting/projects	Projects
-per_domain_cap	https://www.efrag.org/en/how-to-reach-us	How to reach us
-per_domain_cap	https://www.efrag.org/en/join-efrag	Vacancy
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/efrag-and-ifass	IFASS meetings
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/financial-reporting-publications	Financial Reporting Publications
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/meetings-calendar	Meetings Calendar
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news	News and calendar
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-11-february-2026	Read more about EFRAG FR TEG Online Meeting - 11 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-conference-report-on-draft-simplified-esrs	Read more about EFRAG releases conference report on Draft Simplified ESRS
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-12-february-2026	Read more about EFRAG SRB Online Meeting 12 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-the-new-gri-labor-standards-exposure-drafts-join-efrags-workshops	Read more about Help Shape Europe’s Voice on the New GRI Labor Standards Exposure Drafts: Join EFRAG's workshops
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/new-educational-video-series-available-to-navigate-vsme-implementation	Read more about New educational video series available to navigate VSME implementation
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A103	Sustainability Reporting
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A104	Corporate
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A106	Endorsement status
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A108	Invitation to comment
+not_articleish	https://www.aemc.gov.au/news-centre/media-releases	Media Releases >
+out_of_range	https://www.energynetworks.com.au/news/energy-insider/what-australias-energy-system-wants-for-christmas/	18 Dec 2025 Energy Insider What Australia’s Energy System Wants for Christmas
+out_of_range	https://www.energynetworks.com.au/news/the-age-of-dso/	18 Dec 2025 News The Age of DSO
+out_of_range	https://www.energynetworks.com.au/news/meet-new-ena-chair-andrew-bills/	17 Dec 2025 News Meet new ENA Chair – Andrew Bills
+out_of_range	https://www.energynetworks.com.au/news/energy-insider/why-you-cant-miss-dan-gardner-at-en26/	17 Dec 2025 Energy Insider Why You Can’t Miss Dan Gardner at EN26
+out_of_range	https://www.energynetworks.com.au/news/media-releases/joint-statement-on-the-national-electricity-market-review/	16 Dec 2025 Media releases Joint Statement on the National Electricity Market Review
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-responds-to-aemc-pricing-review-released-today/	15 Dec 2025 Media releases Energy Networks Australia responds to AEMC pricing review released today
+out_of_range	https://www.energynetworks.com.au/news/draft-isp-aims-to-right-size-transmission-and-reinforces-networks-as-the-backbone-of-the-energy-transition/	10 Dec 2025 News Draft ISP aims to right-size transmission and reinforces networks as the backbone of the energy transition
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/changes-to-cheaper-home-batteries-program	Changes to the Cheaper Home Batteries Program
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fifth-independent-review-hir-gateway-checks	Fifth independent review of HIR gateway checks
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fixed-delivery-exit-arrangement-now-permanent	Fixed delivery exit arrangement is now permanent
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/market-update-fixed-delivery-exit-arrangement	Market update on the fixed delivery exit arrangement
+deny_title_regex	https://www.cer.gov.au/news-and-media/news/2025/december/register-solar-water-heaters-version-56-now-available	Register of solar water heaters version 56 is now available
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/renewable-energy-target-enforcement-action-against-mojo-power-east	Renewable Energy Target enforcement action against Mojo Power East
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/2024-25-preliminary-safeguard-mechanism-insights-released	2024–25 preliminary Safeguard Mechanism insights released
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/recall-issued-sigenergy-single-phase-81012-kw-energy-controllers	Recall issued for Sigenergy single phase 8/10/12 kW energy controllers
+out_of_range	https://www.aemc.gov.au/news-centre/perspectives	Perspectives >
+undated	https://arena.gov.au/	Home
+undated	https://www.aemc.gov.au/about-us	About Us
+undated	https://www.aemc.gov.au/about-us/chair-and-commissioners	Chair and commissioners
+undated	https://www.aemc.gov.au/about-us/history	History
+undated	https://www.aemc.gov.au/about-us/mission-and-values	Vision, mission and values
+undated	https://www.aemc.gov.au/about-us/our-governance	Our governance
+undated	https://www.aemc.gov.au/about-us/reliability-panel	Reliability Panel
+undated	https://www.aemc.gov.au/about-us/stakeholder-engagement	Stakeholder engagement
+undated	https://www.aemc.gov.au/calendar	Calendar
+undated	https://www.aemc.gov.au/charging-ahead-residential-batteries-are-growing-popularity-and-profitability	Charging ahead: Residential batteries are growing in popularity and profitability
+undated	https://www.aemc.gov.au/contact-us	Contact Us
+undated	https://www.aemc.gov.au/contact-us/lodge-submission	Lodge a submission
+undated	https://www.aemc.gov.au/contact-us/propose-rule-change	Propose a rule change
+undated	https://www.aemc.gov.au/energeia-finds-cer-flexibility-could-deliver-45b-benefits-2050	Energeia finds that CER flexibility could deliver $45B in benefits by 2050
+undated	https://www.aemc.gov.au/energy-system	Energy System
+undated	https://www.aemc.gov.au/energy-system/electricity	Electricity
+undated	https://www.aemc.gov.au/energy-system/energy-system	Gas
+undated	https://www.aemc.gov.au/energy-system/energy-system-0	Energy terminology
+undated	https://www.aemc.gov.au/energy-system/retail	Retail
+undated	https://www.aemc.gov.au/ess-system-security-update-aemc-reform-work-program	ESS & system security - An update on AEMC reform work program
+undated	https://www.aemc.gov.au/market-reviews-advice/electricity-network-regulation-review	EPR0106
+undated	https://www.aemc.gov.au/market-reviews-advice/future-wholesale-market	​​EPR0093​
+undated	https://www.aemc.gov.au/market-reviews-advice/pricing-review-electricity-pricing-consumer-driven-future	​​EPR0097​
+undated	https://www.aemc.gov.au/market-reviews-advice/review-integrated-system-plan-framework	​​EPR0092​
+undated	https://www.aemc.gov.au/market-reviews-advice/transmission-planning-and-investment-review	EPR0087
+undated	https://www.aemc.gov.au/metering	Price Trends 2025 report published
+undated	https://www.aemc.gov.au/news-centre	News Centre
+undated	https://www.aemc.gov.au/news-centre/annual-reports	Annual reports >
+undated	https://www.aemc.gov.au/news-centre/corporate-publications	Corporate publications >
+undated	https://www.aemc.gov.au/news-centre/corporate-publications/joint-market-body-prioritisation-framework	Joint market body prioritisation framework
+undated	https://www.aemc.gov.au/news-centre/corporate-publications/prioritisation-regulatory-initiatives-stakeholder-consultation	Prioritisation of regulatory initiatives – stakeholder consultation
+undated	https://www.aemc.gov.au/news-centre/corporate-publications/prioritising-implementation-timeframes-more-detailed-view	Prioritising implementation timeframes - a more detailed view
+undated	https://www.aemc.gov.au/news-centre/corporate-publications/rule-drafting-philosophy	Rule drafting philosophy
+undated	https://www.aemc.gov.au/news-centre/data-portal	Data portal >
+undated	https://www.aemc.gov.au/news-centre/infographics	Infographics >
+undated	https://www.aemc.gov.au/news-centre/infographics/improving-certainty-enable-transmission-needed-net-zero	Infographic | Improving certainty to enable the transmission needed for net zero
+undated	https://www.aemc.gov.au/news-centre/infographics/smart-meters-are-key-enabler-transition-net-zero	Infographic | Smart meters are a key enabler in the transition to net zero
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-applies-new-emissions-reduction-objective	Emissions reduction objective
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-delivers-enhanced-consumer-protections-help-customers-find-better-energy-deals	Enhanced consumer protections
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-finalises-landmark-reform-accelerate-smart-meter-rollout	Rule to roll out smart meters by 2030
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-makes-final-rule-help-vulnerable-consumers-get-energy-bill-help-they-deserve	New rules help vulnerable consumers get energy bill help they deserve
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-starts-consultation-isp-review	AEMC starts consultation on the ISP Review
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-undertake-critical-review-reconsider-role-electricity-networks-transition	AEMC to undertake critical review to reconsider the role of electricity networks in the transition
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemcs-final-rule-gives-consumers-smarter-data-options	AEMC’s final rule gives consumers smarter data options
+undated	https://www.aemc.gov.au/news-centre/media-releases/electricity-pricing-reforms-target-fairness-lower-costs	Electricity pricing reforms target fairness, lower costs
+undated	https://www.aemc.gov.au/news-centre/media-releases/faster-renewable-buildout-and-electrification-key-affordable-energy-transition	Price Trends 2025 report published
+undated	https://www.aemc.gov.au/news-centre/speeches	Speeches >
+undated	https://www.aemc.gov.au/news-centre/speeches/aemcs-20th-anniversary	AEMC's 20th anniversary
+undated	https://www.aemc.gov.au/news-centre/speeches/coordinating-transition-lower-household-energy-costs-navigating-known-unknowns	Access the full speech
+undated	https://www.aemc.gov.au/news-centre/speeches/energy-revolution-our-homes	The energy revolution in our homes
+undated	https://www.aemc.gov.au/news-centre/speeches/navigating-dual-trends-power-systems	Navigating dual trends in power systems
+undated	https://www.aemc.gov.au/news-centre/submissions-to-enquiry	View All >
+undated	https://www.aemc.gov.au/news-centre/submissions-to-inquiries	Submissions to Inquiries >
+undated	https://www.aemc.gov.au/news-centre/videos	View All >
+undated	https://www.aemc.gov.au/news-centre/videos/better-way-read-rules	A better way to read the rules
+undated	https://www.aemc.gov.au/news-centre/videos/making-solar-batteries-and-new-energy-technology-work-everyone	Making solar, batteries and new energy technology work for everyone
+undated	https://www.aemc.gov.au/news-centre/videos/reconciliation-action-plan	Reconciliation action plan
+undated	https://www.aemc.gov.au/our-work	Our Work
+undated	https://www.aemc.gov.au/our-work/changing-energy-rules	Changing the energy rules – a unique process
+undated	https://www.aemc.gov.au/our-work/changing-energy-rules/rule-changes	Rule change projects
+undated	https://www.aemc.gov.au/our-work/compensation	Compensation – administered pricing, market suspension, and directions
+undated	https://www.aemc.gov.au/our-work/developing-electricity-guidelines-and-standards	Developing electricity guidelines, standards and schedules
+undated	https://www.aemc.gov.au/our-work/market-reviews-and-advice	Market reviews and advice
+undated	https://www.aemc.gov.au/our-work/our-priorities	Our Priorities
+undated	https://www.aemc.gov.au/our-work/research	research@AEMC
+undated	https://www.aemc.gov.au/regulation	Regulation
+undated	https://www.aemc.gov.au/regulation/electricity-guidelines-and-standards	Electricity guidelines, standards and schedules
+undated	https://www.aemc.gov.au/regulation/energy-rules	Energy rules
+undated	https://www.aemc.gov.au/regulation/energy-rules/national-electricity-rules/current	National Electricity Rules - Current
+undated	https://www.aemc.gov.au/regulation/energy-rules/national-energy-retail-rules/current	National Energy Retail Rules - Current
+undated	https://www.aemc.gov.au/regulation/energy-rules/national-gas-rules/current	National Gas Rules - Current
+undated	https://www.aemc.gov.au/regulation/legislation	Legislation
+undated	https://www.aemc.gov.au/regulation/national-governance	National energy governance
+undated	https://www.aemc.gov.au/regulation/neo	National Energy Objectives
+undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers	ERC0399
+undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers-retail	RRC0057
+undated	https://www.aemc.gov.au/sites/default/files/2021-11/4145_AEMC-Price-Trends-2021_National%20A_v4.pdf	Residential Electricity Price Trends Report 25 November 2021
+undated	https://www.aemc.gov.au/sites/default/files/2022-10/EPR0087-%20Final%20report%20-%20stage%202%20-%20infographic.pdf	Improving certainty to enable the transmission needed for net zero
+undated	https://www.aemc.gov.au/sites/default/files/2022-12/AEMC%20Annual%20Report%202021%20-%202022.pdf	AEMC Annual Report 2021-2022
+undated	https://www.aemc.gov.au/sites/default/files/2023-05/EPR0087%20-%20final%20-%20infographic.pdf	Making transmission investment and delivery more timely and efficient – to enable the transition to net zero
+undated	https://www.aemc.gov.au/sites/default/files/2023-08/emo0040_-aemc_metering_services_infographic.pdf	Smart meters are a key enabler in the transition to net zero
+undated	https://www.aemc.gov.au/sites/default/files/2023-12/AEMC_annual_report_2022-23_web_v2.pdf	AEMC Annual Report 2022-2023
+undated	https://www.aemc.gov.au/sites/default/files/2024-12/AEMC_annual_report_2023-24.pdf	AEMC Annual Report 2023-2024
+undated	https://www.aemc.gov.au/sites/default/files/2025-08/20250725%20AEMC%20-%20Submission%20in%20response%20to%20the%20NSW%20Transmission%20Planning%20Review%20Interim%20Report.pdf	AEMC submission to the NSW Transmission Planning Review – Interim report
+undated	https://www.aemc.gov.au/sites/default/files/2025-08/AEMC%20submission%20to%20the%20CCA%202025%20Issues%20Paper.pdf	AEMC submission to the CCA 2025 Issues Paper
+undated	https://www.aemc.gov.au/sites/default/files/2025-09/2025.09.17%20-%20AEMC%20submission%20to%20the%20NEM%20review%20draft%20report_final.pdf	Submission to the National Electricity Market wholesale market settings review draft report
+undated	https://www.aemc.gov.au/sites/default/files/2025-09/AEMC%20submission%20to%20PC%20interim%20report%20-%2015%20Sept%202025.pdf	Submission to Productivity Commission - Cheaper, cleaner energy and the net zero transformation – Interim report
+undated	https://www.aemc.gov.au/sites/default/files/2025-11/2024-25%20AEMC%20Annual%20Report%20final_0.pdf	AEMC Annual Report 2024-2025
+undated	https://www.aemc.gov.au/you-can-be-anything-barbies-power-quest	"You can be anything" - Barbie’s power quest
+undated	https://www.cer.gov.au/news-and-media/media-centre/media-releases	media releases
+undated	https://www.energynetworks.com.au	Media releases
+undated	https://www.energynetworks.com.au/about/energy-networks-australia/media-enquiries/	Media enquiries
+undated	https://www.energynetworks.com.au/news/	News
+undated	https://www.energynetworks.com.au/news/energy-insider/	See all Articles
+undated	https://www.energynetworks.com.au/news/media-releases/	See all Articles
+undated	https://www.energynetworks.com.au/news/speeches-op-eds/	Speeches / Op Eds
+not_articleish	https://www.aemc.gov.au/news-centre/media-releases	Media Releases >
+out_of_range	https://www.energynetworks.com.au/news/energy-insider/what-australias-energy-system-wants-for-christmas/	18 Dec 2025 Energy Insider What Australia’s Energy System Wants for Christmas
+out_of_range	https://www.energynetworks.com.au/news/the-age-of-dso/	18 Dec 2025 News The Age of DSO
+out_of_range	https://www.energynetworks.com.au/news/meet-new-ena-chair-andrew-bills/	17 Dec 2025 News Meet new ENA Chair – Andrew Bills
+out_of_range	https://www.energynetworks.com.au/news/energy-insider/why-you-cant-miss-dan-gardner-at-en26/	17 Dec 2025 Energy Insider Why You Can’t Miss Dan Gardner at EN26
+out_of_range	https://www.energynetworks.com.au/news/media-releases/joint-statement-on-the-national-electricity-market-review/	16 Dec 2025 Media releases Joint Statement on the National Electricity Market Review
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-responds-to-aemc-pricing-review-released-today/	15 Dec 2025 Media releases Energy Networks Australia responds to AEMC pricing review released today
+out_of_range	https://www.energynetworks.com.au/news/draft-isp-aims-to-right-size-transmission-and-reinforces-networks-as-the-backbone-of-the-energy-transition/	10 Dec 2025 News Draft ISP aims to right-size transmission and reinforces networks as the backbone of the energy transition
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/changes-to-cheaper-home-batteries-program	Changes to the Cheaper Home Batteries Program
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fifth-independent-review-hir-gateway-checks	Fifth independent review of HIR gateway checks
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fixed-delivery-exit-arrangement-now-permanent	Fixed delivery exit arrangement is now permanent
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/market-update-fixed-delivery-exit-arrangement	Market update on the fixed delivery exit arrangement
+deny_title_regex	https://www.cer.gov.au/news-and-media/news/2025/december/register-solar-water-heaters-version-56-now-available	Register of solar water heaters version 56 is now available
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/renewable-energy-target-enforcement-action-against-mojo-power-east	Renewable Energy Target enforcement action against Mojo Power East
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/2024-25-preliminary-safeguard-mechanism-insights-released	2024–25 preliminary Safeguard Mechanism insights released
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/recall-issued-sigenergy-single-phase-81012-kw-energy-controllers	Recall issued for Sigenergy single phase 8/10/12 kW energy controllers
+out_of_range	https://www.aemc.gov.au/news-centre/perspectives	Perspectives >
+undated	https://arena.gov.au/	Home
+undated	https://www.aemc.gov.au/about-us	About Us
+undated	https://www.aemc.gov.au/about-us/chair-and-commissioners	Chair and commissioners
+undated	https://www.aemc.gov.au/about-us/history	History
+undated	https://www.aemc.gov.au/about-us/mission-and-values	Vision, mission and values
+undated	https://www.aemc.gov.au/about-us/our-governance	Our governance
+undated	https://www.aemc.gov.au/about-us/reliability-panel	Reliability Panel
+undated	https://www.aemc.gov.au/about-us/stakeholder-engagement	Stakeholder engagement
+undated	https://www.aemc.gov.au/calendar	Calendar
+undated	https://www.aemc.gov.au/charging-ahead-residential-batteries-are-growing-popularity-and-profitability	Charging ahead: Residential batteries are growing in popularity and profitability
+undated	https://www.aemc.gov.au/contact-us	Contact Us
+undated	https://www.aemc.gov.au/contact-us/lodge-submission	Lodge a submission
+undated	https://www.aemc.gov.au/contact-us/propose-rule-change	Propose a rule change
+undated	https://www.aemc.gov.au/energeia-finds-cer-flexibility-could-deliver-45b-benefits-2050	Energeia finds that CER flexibility could deliver $45B in benefits by 2050
+undated	https://www.aemc.gov.au/energy-system	Energy System
+undated	https://www.aemc.gov.au/energy-system/electricity	Electricity
+undated	https://www.aemc.gov.au/energy-system/energy-system	Gas
+undated	https://www.aemc.gov.au/energy-system/energy-system-0	Energy terminology
+undated	https://www.aemc.gov.au/energy-system/retail	Retail
+undated	https://www.aemc.gov.au/ess-system-security-update-aemc-reform-work-program	ESS & system security - An update on AEMC reform work program
+undated	https://www.aemc.gov.au/market-reviews-advice/electricity-network-regulation-review	EPR0106
+undated	https://www.aemc.gov.au/market-reviews-advice/future-wholesale-market	​​EPR0093​
+undated	https://www.aemc.gov.au/market-reviews-advice/pricing-review-electricity-pricing-consumer-driven-future	​​EPR0097​
+undated	https://www.aemc.gov.au/market-reviews-advice/review-integrated-system-plan-framework	​​EPR0092​
+undated	https://www.aemc.gov.au/market-reviews-advice/transmission-planning-and-investment-review	EPR0087
+undated	https://www.aemc.gov.au/metering	Price Trends 2025 report published
+undated	https://www.aemc.gov.au/news-centre	News Centre
+undated	https://www.aemc.gov.au/news-centre/annual-reports	Annual reports >
+undated	https://www.aemc.gov.au/news-centre/corporate-publications	Corporate publications >
+undated	https://www.aemc.gov.au/news-centre/corporate-publications/joint-market-body-prioritisation-framework	Joint market body prioritisation framework
+undated	https://www.aemc.gov.au/news-centre/corporate-publications/prioritisation-regulatory-initiatives-stakeholder-consultation	Prioritisation of regulatory initiatives – stakeholder consultation
+undated	https://www.aemc.gov.au/news-centre/corporate-publications/prioritising-implementation-timeframes-more-detailed-view	Prioritising implementation timeframes - a more detailed view
+undated	https://www.aemc.gov.au/news-centre/corporate-publications/rule-drafting-philosophy	Rule drafting philosophy
+undated	https://www.aemc.gov.au/news-centre/data-portal	Data portal >
+undated	https://www.aemc.gov.au/news-centre/infographics	Infographics >
+undated	https://www.aemc.gov.au/news-centre/infographics/improving-certainty-enable-transmission-needed-net-zero	Infographic | Improving certainty to enable the transmission needed for net zero
+undated	https://www.aemc.gov.au/news-centre/infographics/smart-meters-are-key-enabler-transition-net-zero	Infographic | Smart meters are a key enabler in the transition to net zero
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-applies-new-emissions-reduction-objective	Emissions reduction objective
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-delivers-enhanced-consumer-protections-help-customers-find-better-energy-deals	Enhanced consumer protections
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-finalises-landmark-reform-accelerate-smart-meter-rollout	Rule to roll out smart meters by 2030
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-makes-final-rule-help-vulnerable-consumers-get-energy-bill-help-they-deserve	New rules help vulnerable consumers get energy bill help they deserve
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-starts-consultation-isp-review	AEMC starts consultation on the ISP Review
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-undertake-critical-review-reconsider-role-electricity-networks-transition	AEMC to undertake critical review to reconsider the role of electricity networks in the transition
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemcs-final-rule-gives-consumers-smarter-data-options	AEMC’s final rule gives consumers smarter data options
+undated	https://www.aemc.gov.au/news-centre/media-releases/electricity-pricing-reforms-target-fairness-lower-costs	Electricity pricing reforms target fairness, lower costs
+undated	https://www.aemc.gov.au/news-centre/media-releases/faster-renewable-buildout-and-electrification-key-affordable-energy-transition	Price Trends 2025 report published
+undated	https://www.aemc.gov.au/news-centre/speeches	Speeches >
+undated	https://www.aemc.gov.au/news-centre/speeches/aemcs-20th-anniversary	AEMC's 20th anniversary
+undated	https://www.aemc.gov.au/news-centre/speeches/coordinating-transition-lower-household-energy-costs-navigating-known-unknowns	Access the full speech
+undated	https://www.aemc.gov.au/news-centre/speeches/energy-revolution-our-homes	The energy revolution in our homes
+undated	https://www.aemc.gov.au/news-centre/speeches/navigating-dual-trends-power-systems	Navigating dual trends in power systems
+undated	https://www.aemc.gov.au/news-centre/submissions-to-enquiry	View All >
+undated	https://www.aemc.gov.au/news-centre/submissions-to-inquiries	Submissions to Inquiries >
+undated	https://www.aemc.gov.au/news-centre/videos	View All >
+undated	https://www.aemc.gov.au/news-centre/videos/better-way-read-rules	A better way to read the rules
+undated	https://www.aemc.gov.au/news-centre/videos/making-solar-batteries-and-new-energy-technology-work-everyone	Making solar, batteries and new energy technology work for everyone
+undated	https://www.aemc.gov.au/news-centre/videos/reconciliation-action-plan	Reconciliation action plan
+undated	https://www.aemc.gov.au/our-work	Our Work
+undated	https://www.aemc.gov.au/our-work/changing-energy-rules	Changing the energy rules – a unique process
+undated	https://www.aemc.gov.au/our-work/changing-energy-rules/rule-changes	Rule change projects
+undated	https://www.aemc.gov.au/our-work/compensation	Compensation – administered pricing, market suspension, and directions
+undated	https://www.aemc.gov.au/our-work/developing-electricity-guidelines-and-standards	Developing electricity guidelines, standards and schedules
+undated	https://www.aemc.gov.au/our-work/market-reviews-and-advice	Market reviews and advice
+undated	https://www.aemc.gov.au/our-work/our-priorities	Our Priorities
+undated	https://www.aemc.gov.au/our-work/research	research@AEMC
+undated	https://www.aemc.gov.au/regulation	Regulation
+undated	https://www.aemc.gov.au/regulation/electricity-guidelines-and-standards	Electricity guidelines, standards and schedules
+undated	https://www.aemc.gov.au/regulation/energy-rules	Energy rules
+undated	https://www.aemc.gov.au/regulation/energy-rules/national-electricity-rules/current	National Electricity Rules - Current
+undated	https://www.aemc.gov.au/regulation/energy-rules/national-energy-retail-rules/current	National Energy Retail Rules - Current
+undated	https://www.aemc.gov.au/regulation/energy-rules/national-gas-rules/current	National Gas Rules - Current
+undated	https://www.aemc.gov.au/regulation/legislation	Legislation
+undated	https://www.aemc.gov.au/regulation/national-governance	National energy governance
+undated	https://www.aemc.gov.au/regulation/neo	National Energy Objectives
+undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers	ERC0399
+undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers-retail	RRC0057
+undated	https://www.aemc.gov.au/sites/default/files/2021-11/4145_AEMC-Price-Trends-2021_National%20A_v4.pdf	Residential Electricity Price Trends Report 25 November 2021
+undated	https://www.aemc.gov.au/sites/default/files/2022-10/EPR0087-%20Final%20report%20-%20stage%202%20-%20infographic.pdf	Improving certainty to enable the transmission needed for net zero
+undated	https://www.aemc.gov.au/sites/default/files/2022-12/AEMC%20Annual%20Report%202021%20-%202022.pdf	AEMC Annual Report 2021-2022
+undated	https://www.aemc.gov.au/sites/default/files/2023-05/EPR0087%20-%20final%20-%20infographic.pdf	Making transmission investment and delivery more timely and efficient – to enable the transition to net zero
+undated	https://www.aemc.gov.au/sites/default/files/2023-08/emo0040_-aemc_metering_services_infographic.pdf	Smart meters are a key enabler in the transition to net zero
+undated	https://www.aemc.gov.au/sites/default/files/2023-12/AEMC_annual_report_2022-23_web_v2.pdf	AEMC Annual Report 2022-2023
+undated	https://www.aemc.gov.au/sites/default/files/2024-12/AEMC_annual_report_2023-24.pdf	AEMC Annual Report 2023-2024
+undated	https://www.aemc.gov.au/sites/default/files/2025-08/20250725%20AEMC%20-%20Submission%20in%20response%20to%20the%20NSW%20Transmission%20Planning%20Review%20Interim%20Report.pdf	AEMC submission to the NSW Transmission Planning Review – Interim report
+undated	https://www.aemc.gov.au/sites/default/files/2025-08/AEMC%20submission%20to%20the%20CCA%202025%20Issues%20Paper.pdf	AEMC submission to the CCA 2025 Issues Paper
+undated	https://www.aemc.gov.au/sites/default/files/2025-09/2025.09.17%20-%20AEMC%20submission%20to%20the%20NEM%20review%20draft%20report_final.pdf	Submission to the National Electricity Market wholesale market settings review draft report
+undated	https://www.aemc.gov.au/sites/default/files/2025-09/AEMC%20submission%20to%20PC%20interim%20report%20-%2015%20Sept%202025.pdf	Submission to Productivity Commission - Cheaper, cleaner energy and the net zero transformation – Interim report
+undated	https://www.aemc.gov.au/sites/default/files/2025-11/2024-25%20AEMC%20Annual%20Report%20final_0.pdf	AEMC Annual Report 2024-2025
+undated	https://www.aemc.gov.au/you-can-be-anything-barbies-power-quest	"You can be anything" - Barbie’s power quest
+undated	https://www.cer.gov.au/news-and-media/media-centre/media-releases	media releases
+undated	https://www.energynetworks.com.au	Media releases
+undated	https://www.energynetworks.com.au/about/energy-networks-australia/media-enquiries/	Media enquiries
+undated	https://www.energynetworks.com.au/news/	News
+undated	https://www.energynetworks.com.au/news/energy-insider/	See all Articles
+undated	https://www.energynetworks.com.au/news/media-releases/	See all Articles
+undated	https://www.energynetworks.com.au/news/speeches-op-eds/	Speeches / Op Eds
+out_of_range	https://www.efrag.org/en	Missed what happened this month?
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A108	Invitation to comment
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A138	Meeting
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A8	Financial
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A9	Sustainability
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?facets_query=	(-) All news
+out_of_range	https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-the-new-gri-labor-standards-exposure-drafts-join-efrags-workshops	Read more about Help Shape Europe’s Voice on the New GRI Labor Standards Exposure Drafts: Join EFRAG's workshops
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A139	Outreach event
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-conference-report-on-draft-simplified-esrs	Read more about EFRAG releases conference report on Draft Simplified ESRS
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A103	Sustainability Reporting
+out_of_range	https://www.efrag.org/en/news-and-calendar/news/new-educational-video-series-available-to-navigate-vsme-implementation	Read more about New educational video series available to navigate VSME implementation
+out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-11-february-2026	Read more about EFRAG FR TEG Online Meeting - 11 February 2026
+out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-12-february-2026	Read more about EFRAG SRB Online Meeting 12 February 2026
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A115	Vacancies
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A137	Project
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A138	Meeting
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A139	Outreach event
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A140	Decision
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A141	Vacancy
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A164	EFRAG
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A42	Financial Reporting
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A43	Public
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A112	Corporate
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A8	Financial
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A9	Sustainability
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?facets_query=	(-) All news
-per_domain_cap	https://www.efrag.org/en/node/4164/noneu-groups	Non-EU Group(s)
-per_domain_cap	https://www.efrag.org/en/open-consultations	Open consultations
-per_domain_cap	https://www.efrag.org/en/privacy-policy	Privacy policy
-per_domain_cap	https://www.efrag.org/en/projects	All EFRAG projects
-per_domain_cap	https://www.efrag.org/en/projects/efrag-esrs-qa-platform	ESRS Q&A platform
-per_domain_cap	https://www.efrag.org/en/publications-sustainability-reporting	Sustainability Reporting Publications
-per_domain_cap	https://www.efrag.org/en/smes-and-sustainability-reporting	SMEs
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting	Sustainability reporting
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/about-sustainability-reporting	About sustainability reporting and due process
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/esrs-workstreams	ESRS workstreams
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/esrs-workstreams/digital-reporting-with-xbrl	Digital Reporting
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/esrs-workstreams/implementation-support	Implementation support
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/esrs-workstreams/interoperability	Interoperability
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/esrs-workstreams/issb-consultations	ISSB consultations
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/esrs-workstreams/sector-agnostic-standards-set-1-esrs	Sector agnostic
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/esrs-workstreams/sectorspecific-esrs	Sector specific
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/governance-and-technical-bodies	Governance and technical bodies
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/meetings	Meetings
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/news	News
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/projects	Projects
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/sr-open-consultations	Open consultations
-per_domain_cap	https://www.efrag.org/en/updates	the EFRAG Update
-per_domain_cap	https://www.efrag.org/en/ways-of-contributing-to-efrags-work	Ways of contributing to EFRAG Work
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/contact-us	Speaking requests
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/contact-us.html	Speaking requests
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/contact-us/	Contact us
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/how-we-set-ifrs-standards.html	How we set IFRS Standards
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/our-consultative-bodies.html	IFRS Foundation advisory groups
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/our-structure.html	Our structure
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/who-we-are	About us
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/who-we-are.html	Annual reports
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/who-we-are/	Funding
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/academics	Academics
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/connectivity.html	Connectivity
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/digital-financial-reporting.html	Digital financial reporting
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/getting-started	Using our website
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/groups/due-process-oversight-committee.html	Due process
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/groups/ifrs-interpretations-committee.html	IFRS Interpretations Committee
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/groups/trustees-of-the-ifrs-foundation.html	IFRS Foundation Trustees
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/ifrs-foundation-sustainability/our-ghg-emissions	GHG emissions
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/ifrs-sustainability-disclosure-standards-around-the-world.html	Around the world
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/investor-centre	Investors
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/ifrs-for-smes.html	IFRS for SMEs Accounting Standard
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/ifrs-sustainability-standards-navigator	IFRS Sustainability Standards
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/ifrs-sustainability-standards-navigator.html	IFRS Sustainability Disclosure Standards
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/ifrs-translations	IFRS translations
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/ifrs-translations.html	IFRS translations
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/integrated-reporting.html	Integrated reporting
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/list-of-standards	IFRS Accounting Standards
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/list-of-standards.html	IFRS Accounting Standards
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/list-of-standards/management-commentary-practice-statement-1.html	Management Commentary
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/sasb-standards.html	SASB Standards
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/legal	Policies
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/legal/terms-and-conditions	Terms and conditions
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/media	Media
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/media.html	Media enquiries, press releases and speeches
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/national-standard-setters	National standard-setters
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events	News and events
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/calendar.html	IFRS Foundation meeting and events calendar
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/news.html	Latest news
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates.html	Updates and podcasts
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/iasb-issb/2025/iasb-issb-update-february-2025.html	IASB–ISSB Update February 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-november-2022.html	ISSB Update November 2022
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-october-2022.html	ISSB Update October 2022
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-september-2022.html	ISSB Update September 2022
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/supplementary-issb-update-november-2022.html	Supplementary ISSB Update November 2022
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-april-2023.html	ISSB Update April 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-december-2023.html	ISSB Update December 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-february-2023.html	ISSB Update February 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-january-2023.html	ISSB Update January 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-july-2023.html	ISSB Update July 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-march-2023.html	ISSB Update March 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-may-2023.html	ISSB Update May 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-november-2023.html	ISSB Update November 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-october-2023.html	ISSB Update October 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-september-2023.html	ISSB Update September 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/supplementary-issb-update-april-2023.html	Supplementary ISSB Update April 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-april-2024.html	ISSB Update April 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-december-2024.html	ISSB Update December 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-february-2024.html	ISSB Update February 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-july-2024.html	ISSB Update July 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-june-2024.html	ISSB Update June 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-march-2024.html	ISSB Update March 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-may-2024.html	ISSB Update May 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-november-2024.html	ISSB Update November 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-october-2024.html	ISSB Update October 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-september-2024.html	ISSB Update September 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/joint-iasb-issb-update-january-2024.html	IASB–ISSB Update January 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-april-2025.html	ISSB Update April 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-december-2025.html	ISSB Update December 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-february-2025.html	ISSB Update February 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html	ISSB Update January 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-july-2025.html	ISSB Update July 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-june-2025.html	ISSB Update June 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-march-2025.html	ISSB Update March 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-may-2025.html	ISSB Update May 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-november-2025.html	ISSB Update November 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-october-2025.html	ISSB Update October 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html	ISSB Update September 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html	ISSB Update January 2026
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/preparers	Preparers
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/products-and-services	Products and services
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/products-and-services.html	Products overview
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/products-and-services/ifrs-digital.html	IFRS Digital subscription
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/products-and-services/sustainability-products-and-services.html	Products overview
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/products-and-services/sustainability-products-and-services/fsa-credential.html	FSA Credential
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/products-and-services/sustainability-products-and-services/ifrs-sustainability-alliance.html	Alliance Membership Programme
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/products-and-services/sustainability-products-and-services/ifrs-sustainability-licensing.html	IFRS Sustainability licensing
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/projects/	Projects
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/projects/completed-projects.html	Completed projects
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/projects/iasb-prioritisation-framework.html	IASB prioritisation framework
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/projects/open-for-comment.html	Open consultations
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/projects/post-implementation-reviews.html	Post-implementation Reviews
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	Open and future projects
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/regulators	Regulators
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/students	Students
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/supporting-implementation	Supporting implementation
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/supporting-implementation.html	Application support
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/supporting-implementation/how-we-help-support-consistent-application.html	How we support the application of our Standards
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/supporting-implementation/supporting-materials-for-ifrs-sustainability-disclosure-standards.html	Application support
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/sustainability/climate-disclosure-standards-board.html	CDSB guidance and framework
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/sustainability/knowledge-hub.html	Knowledge hub
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/sustainability/tcfd.html	TCFD recommendations
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/use-around-the-world.html	Around the world
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/use-around-the-world/	Around the world
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/use-around-the-world/partnership-framework-for-capacity-building.html	Partnership Framework for capacity building
-per_domain_cap	https://www.ifrs.org/dashboard	Register for news alerts
-per_domain_cap	https://www.ifrs.org/news-and-events/news/	Cookie details
-per_domain_cap	https://www.ifrs.org/news-and-events/updates/issb/	Cookie details
-not_articleish	https://knowledgehub.efrag.org	ESRS Knowledge Hub
-per_domain_cap	https://www.efrag.org/en	https://www.efrag.org/en
-per_domain_cap	https://www.efrag.org/en/about-us/annual-reviews	Annual reviews
-per_domain_cap	https://www.efrag.org/en/about-us/efrag-facts	Elements of history and reforms
-per_domain_cap	https://www.efrag.org/en/about-us/friends-of-efrag	Friends of EFRAG
-per_domain_cap	https://www.efrag.org/en/about-us/governance	Our structure and member organisations
-per_domain_cap	https://www.efrag.org/en/about-us/governance/consultative-forum-of-standard-setters	EFRAG Consultative Forum of Standard Setters
-per_domain_cap	https://www.efrag.org/en/about-us/governance/efrag-financial-reporting-board	EFRAG Financial Reporting Board
-per_domain_cap	https://www.efrag.org/en/about-us/governance/efrag-financial-reporting-technical-expert-group-efrag-fr-teg	EFRAG Financial Reporting Technical Expert Group
-per_domain_cap	https://www.efrag.org/en/about-us/governance/efrag-secretariat	EFRAG Secretariat
-per_domain_cap	https://www.efrag.org/en/about-us/governance/efrag-sustainability-reporting-board	EFRAG Sustainability Reporting Board
-per_domain_cap	https://www.efrag.org/en/about-us/governance/efrag-sustainability-reporting-technical-expert-group-efrag-sr-teg	EFRAG Sustainability Reporting Technical Expert Group
-per_domain_cap	https://www.efrag.org/en/about-us/legal-policies	Legal & Policies
-per_domain_cap	https://www.efrag.org/en/about-us/our-structure-and-technical-bodies/efrag-administrative-board	EFRAG Administrative Board
-per_domain_cap	https://www.efrag.org/en/about-us/working-groups-and-advisory-panels	Working groups and advisory panels
-per_domain_cap	https://www.efrag.org/en/about-us/working-groups/efrag-financial-reporting-technical-expert-group-efrag-fr-teg	EFRAG Financial Reporting Technical Expert Group
-per_domain_cap	https://www.efrag.org/en/amended-esrs	Simplified ESRS
-per_domain_cap	https://www.efrag.org/en/cookie-statement	Cookie statement
-per_domain_cap	https://www.efrag.org/en/disclaimer	Disclaimer
-per_domain_cap	https://www.efrag.org/en/efrag-events	Events
-per_domain_cap	https://www.efrag.org/en/financial-reporting	Financial reporting
-per_domain_cap	https://www.efrag.org/en/financial-reporting/about-connectivity	Connectivity between FR and SR
-per_domain_cap	https://www.efrag.org/en/financial-reporting/endorsement-status	Endorsement status
-per_domain_cap	https://www.efrag.org/en/financial-reporting/fr-open-consultations	Open consultations
-per_domain_cap	https://www.efrag.org/en/financial-reporting/governance-and-technical-bodies	Governance and technical bodies
-per_domain_cap	https://www.efrag.org/en/financial-reporting/meetings	Meetings
-per_domain_cap	https://www.efrag.org/en/financial-reporting/news	News
-per_domain_cap	https://www.efrag.org/en/financial-reporting/projects	Projects
-per_domain_cap	https://www.efrag.org/en/how-to-reach-us	How to reach us
-per_domain_cap	https://www.efrag.org/en/join-efrag	Vacancy
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/efrag-and-ifass	IFASS meetings
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/financial-reporting-publications	Financial Reporting Publications
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/meetings-calendar	Meetings Calendar
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news	News and calendar
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-11-february-2026	Read more about EFRAG FR TEG Online Meeting - 11 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-conference-report-on-draft-simplified-esrs	Read more about EFRAG releases conference report on Draft Simplified ESRS
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-12-february-2026	Read more about EFRAG SRB Online Meeting 12 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-the-new-gri-labor-standards-exposure-drafts-join-efrags-workshops	Read more about Help Shape Europe’s Voice on the New GRI Labor Standards Exposure Drafts: Join EFRAG's workshops
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/new-educational-video-series-available-to-navigate-vsme-implementation	Read more about New educational video series available to navigate VSME implementation
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A103	Sustainability Reporting
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A104	Corporate
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A106	Endorsement status
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A108	Invitation to comment
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html	ISSB Update January 2026
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A164	EFRAG
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A104	Corporate
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A137	Project
+out_of_range	https://www.efrag.org/en/updates	the EFRAG Update
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-december-2025.html	ISSB Update December 2025
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A106	Endorsement status
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-november-2025.html	ISSB Update November 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-october-2025.html	ISSB Update October 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html	ISSB Update September 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-july-2025.html	ISSB Update July 2025
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A43	Public
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-june-2025.html	ISSB Update June 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-may-2025.html	ISSB Update May 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-april-2025.html	ISSB Update April 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-march-2025.html	ISSB Update March 2025
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A140	Decision
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/iasb-issb/2025/iasb-issb-update-february-2025.html	IASB–ISSB Update February 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-february-2025.html	ISSB Update February 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html	ISSB Update January 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-december-2024.html	ISSB Update December 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-november-2024.html	ISSB Update November 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-october-2024.html	ISSB Update October 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-september-2024.html	ISSB Update September 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-july-2024.html	ISSB Update July 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-june-2024.html	ISSB Update June 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-may-2024.html	ISSB Update May 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-april-2024.html	ISSB Update April 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-march-2024.html	ISSB Update March 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-february-2024.html	ISSB Update February 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/joint-iasb-issb-update-january-2024.html	IASB–ISSB Update January 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-december-2023.html	ISSB Update December 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-november-2023.html	ISSB Update November 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-october-2023.html	ISSB Update October 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-september-2023.html	ISSB Update September 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-july-2023.html	ISSB Update July 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-may-2023.html	ISSB Update May 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-april-2023.html	ISSB Update April 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/supplementary-issb-update-april-2023.html	Supplementary ISSB Update April 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-march-2023.html	ISSB Update March 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-february-2023.html	ISSB Update February 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-january-2023.html	ISSB Update January 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-november-2022.html	ISSB Update November 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/supplementary-issb-update-november-2022.html	Supplementary ISSB Update November 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-october-2022.html	ISSB Update October 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-september-2022.html	ISSB Update September 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	The work plan
+out_of_range	https://www.efrag.org/en	Missed what happened this month?
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A108	Invitation to comment
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A138	Meeting
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A8	Financial
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A9	Sustainability
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?facets_query=	(-) All news
+out_of_range	https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-the-new-gri-labor-standards-exposure-drafts-join-efrags-workshops	Read more about Help Shape Europe’s Voice on the New GRI Labor Standards Exposure Drafts: Join EFRAG's workshops
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A139	Outreach event
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-conference-report-on-draft-simplified-esrs	Read more about EFRAG releases conference report on Draft Simplified ESRS
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A103	Sustainability Reporting
+out_of_range	https://www.efrag.org/en/news-and-calendar/news/new-educational-video-series-available-to-navigate-vsme-implementation	Read more about New educational video series available to navigate VSME implementation
+out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-11-february-2026	Read more about EFRAG FR TEG Online Meeting - 11 February 2026
+out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-12-february-2026	Read more about EFRAG SRB Online Meeting 12 February 2026
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A115	Vacancies
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A137	Project
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A138	Meeting
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A139	Outreach event
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A140	Decision
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A141	Vacancy
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A164	EFRAG
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A42	Financial Reporting
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A43	Public
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A112	Corporate
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A8	Financial
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A9	Sustainability
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?facets_query=	(-) All news
-per_domain_cap	https://www.efrag.org/en/node/4164/noneu-groups	Non-EU Group(s)
-per_domain_cap	https://www.efrag.org/en/open-consultations	Open consultations
-per_domain_cap	https://www.efrag.org/en/privacy-policy	Privacy policy
-per_domain_cap	https://www.efrag.org/en/projects	All EFRAG projects
-per_domain_cap	https://www.efrag.org/en/projects/efrag-esrs-qa-platform	ESRS Q&A platform
-per_domain_cap	https://www.efrag.org/en/publications-sustainability-reporting	Sustainability Reporting Publications
-per_domain_cap	https://www.efrag.org/en/smes-and-sustainability-reporting	SMEs
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting	Sustainability reporting
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/about-sustainability-reporting	About sustainability reporting and due process
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/esrs-workstreams	ESRS workstreams
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/esrs-workstreams/digital-reporting-with-xbrl	Digital Reporting
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/esrs-workstreams/implementation-support	Implementation support
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/esrs-workstreams/interoperability	Interoperability
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/esrs-workstreams/issb-consultations	ISSB consultations
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/esrs-workstreams/sector-agnostic-standards-set-1-esrs	Sector agnostic
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/esrs-workstreams/sectorspecific-esrs	Sector specific
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/governance-and-technical-bodies	Governance and technical bodies
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/meetings	Meetings
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/news	News
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/projects	Projects
-per_domain_cap	https://www.efrag.org/en/sustainability-reporting/sr-open-consultations	Open consultations
-per_domain_cap	https://www.efrag.org/en/updates	the EFRAG Update
-per_domain_cap	https://www.efrag.org/en/ways-of-contributing-to-efrags-work	Ways of contributing to EFRAG Work
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/contact-us	Speaking requests
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/contact-us.html	Speaking requests
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/contact-us/	Contact us
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/how-we-set-ifrs-standards.html	How we set IFRS Standards
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/our-consultative-bodies.html	IFRS Foundation advisory groups
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/our-structure.html	Our structure
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/who-we-are	About us
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/who-we-are.html	Annual reports
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/about-us/who-we-are/	Funding
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/academics	Academics
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/connectivity.html	Connectivity
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/digital-financial-reporting.html	Digital financial reporting
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/getting-started	Using our website
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/groups/due-process-oversight-committee.html	Due process
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/groups/ifrs-interpretations-committee.html	IFRS Interpretations Committee
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/groups/trustees-of-the-ifrs-foundation.html	IFRS Foundation Trustees
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/ifrs-foundation-sustainability/our-ghg-emissions	GHG emissions
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/ifrs-sustainability-disclosure-standards-around-the-world.html	Around the world
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/investor-centre	Investors
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/ifrs-for-smes.html	IFRS for SMEs Accounting Standard
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/ifrs-sustainability-standards-navigator	IFRS Sustainability Standards
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/ifrs-sustainability-standards-navigator.html	IFRS Sustainability Disclosure Standards
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/ifrs-translations	IFRS translations
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/ifrs-translations.html	IFRS translations
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/integrated-reporting.html	Integrated reporting
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/list-of-standards	IFRS Accounting Standards
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/list-of-standards.html	IFRS Accounting Standards
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/list-of-standards/management-commentary-practice-statement-1.html	Management Commentary
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/issued-standards/sasb-standards.html	SASB Standards
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/legal	Policies
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/legal/terms-and-conditions	Terms and conditions
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/media	Media
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/media.html	Media enquiries, press releases and speeches
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/national-standard-setters	National standard-setters
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events	News and events
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/calendar.html	IFRS Foundation meeting and events calendar
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/news.html	Latest news
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates.html	Updates and podcasts
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/iasb-issb/2025/iasb-issb-update-february-2025.html	IASB–ISSB Update February 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-november-2022.html	ISSB Update November 2022
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-october-2022.html	ISSB Update October 2022
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-september-2022.html	ISSB Update September 2022
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/supplementary-issb-update-november-2022.html	Supplementary ISSB Update November 2022
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-april-2023.html	ISSB Update April 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-december-2023.html	ISSB Update December 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-february-2023.html	ISSB Update February 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-january-2023.html	ISSB Update January 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-july-2023.html	ISSB Update July 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-march-2023.html	ISSB Update March 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-may-2023.html	ISSB Update May 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-november-2023.html	ISSB Update November 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-october-2023.html	ISSB Update October 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-september-2023.html	ISSB Update September 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/supplementary-issb-update-april-2023.html	Supplementary ISSB Update April 2023
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-april-2024.html	ISSB Update April 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-december-2024.html	ISSB Update December 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-february-2024.html	ISSB Update February 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-july-2024.html	ISSB Update July 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-june-2024.html	ISSB Update June 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-march-2024.html	ISSB Update March 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-may-2024.html	ISSB Update May 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-november-2024.html	ISSB Update November 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-october-2024.html	ISSB Update October 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-september-2024.html	ISSB Update September 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/joint-iasb-issb-update-january-2024.html	IASB–ISSB Update January 2024
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-april-2025.html	ISSB Update April 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-december-2025.html	ISSB Update December 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-february-2025.html	ISSB Update February 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html	ISSB Update January 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-july-2025.html	ISSB Update July 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-june-2025.html	ISSB Update June 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-march-2025.html	ISSB Update March 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-may-2025.html	ISSB Update May 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-november-2025.html	ISSB Update November 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-october-2025.html	ISSB Update October 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html	ISSB Update September 2025
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html	ISSB Update January 2026
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/preparers	Preparers
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/products-and-services	Products and services
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/products-and-services.html	Products overview
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/products-and-services/ifrs-digital.html	IFRS Digital subscription
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/products-and-services/sustainability-products-and-services.html	Products overview
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/products-and-services/sustainability-products-and-services/fsa-credential.html	FSA Credential
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/products-and-services/sustainability-products-and-services/ifrs-sustainability-alliance.html	Alliance Membership Programme
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/products-and-services/sustainability-products-and-services/ifrs-sustainability-licensing.html	IFRS Sustainability licensing
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/projects/	Projects
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/projects/completed-projects.html	Completed projects
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/projects/iasb-prioritisation-framework.html	IASB prioritisation framework
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/projects/open-for-comment.html	Open consultations
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/projects/post-implementation-reviews.html	Post-implementation Reviews
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	Open and future projects
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/regulators	Regulators
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/students	Students
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/supporting-implementation	Supporting implementation
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/supporting-implementation.html	Application support
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/supporting-implementation/how-we-help-support-consistent-application.html	How we support the application of our Standards
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/supporting-implementation/supporting-materials-for-ifrs-sustainability-disclosure-standards.html	Application support
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/sustainability/climate-disclosure-standards-board.html	CDSB guidance and framework
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/sustainability/knowledge-hub.html	Knowledge hub
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/sustainability/tcfd.html	TCFD recommendations
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/use-around-the-world.html	Around the world
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/use-around-the-world/	Around the world
-per_domain_cap	https://www.ifrs.org/content/ifrs/home/use-around-the-world/partnership-framework-for-capacity-building.html	Partnership Framework for capacity building
-per_domain_cap	https://www.ifrs.org/dashboard	Register for news alerts
-per_domain_cap	https://www.ifrs.org/news-and-events/news/	Cookie details
-per_domain_cap	https://www.ifrs.org/news-and-events/updates/issb/	Cookie details
-not_articleish	https://about.bnef.com	BloombergNEF
-deny_url_substring	https://about.bnef.com/?utm_source=bloomberg-menu&utm_medium=bnef	BloombergNEF
-not_articleish	https://about.bnef.com/blog/	Cookie Preferences
-not_articleish	https://about.bnef.com/china/	Simplified Chinese
-not_articleish	https://about.bnef.com/chinese-zh/	Traditional Chinese
-not_articleish	https://about.bnef.com/contact-us/	Contact us Get global customer support or learn how we can help your firm.
-not_articleish	https://about.bnef.com/corporations/	Corporations Make strategic decisions to position your business for success.
-not_articleish	https://about.bnef.com/disclaimer/	Disclaimer
-per_domain_cap	https://about.bnef.com/governments/	Governments Analyze how policy change and capital flows impact the energy transition.
-per_domain_cap	https://about.bnef.com/insights/	View all insights
-per_domain_cap	https://about.bnef.com/insights/clean-energy/new-energy-outlook/	New Energy Outlook
-per_domain_cap	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/	REPORT Electric Vehicle Outlook
-per_domain_cap	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook/	Electric Vehicle Outlook
-per_domain_cap	https://about.bnef.com/insights/climate-week-and-cop-public-research/	Climate Week and COP Public Research
-per_domain_cap	https://about.bnef.com/insights/commodities/global-gas-and-lng-outlook/	Global Gas and LNG Outlooks
-per_domain_cap	https://about.bnef.com/insights/commodities/transition-metal-outlook-2024/	Transition Metals Outlook
-per_domain_cap	https://about.bnef.com/insights/commodities/transition-metal-outlook/	REPORT Transition Metals Outlook
-per_domain_cap	https://about.bnef.com/insights/finance/energy-transition-investment-trends/	Energy Transition Investment Trends
-per_domain_cap	https://about.bnef.com/insights/type/press/	Press Search our latest press releases and contact the BNEF Media team.
-per_domain_cap	https://about.bnef.com/insights/type/report/	All Reports
-per_domain_cap	https://about.bnef.com/insights/uncategorized/energy-transition-investment-trends/	REPORT Energy Transition Investment Trends
-per_domain_cap	https://about.bnef.com/insights/uncategorized/new-energy-outlook/	REPORT New Energy Outlook
-per_domain_cap	https://about.bnef.com/japan/	Japanese
-per_domain_cap	https://about.bnef.com/korea/	Korean
-per_domain_cap	https://about.bnef.com/privacy-policy/	Privacy Policy
-per_domain_cap	https://about.bnef.com/terms-of-service/	Terms of Service
-per_domain_cap	https://about.bnef.com/what-we-do/	What we do
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html	ISSB Update January 2026
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A164	EFRAG
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A104	Corporate
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A137	Project
+out_of_range	https://www.efrag.org/en/updates	the EFRAG Update
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-december-2025.html	ISSB Update December 2025
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A106	Endorsement status
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-november-2025.html	ISSB Update November 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-october-2025.html	ISSB Update October 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html	ISSB Update September 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-july-2025.html	ISSB Update July 2025
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A43	Public
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-june-2025.html	ISSB Update June 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-may-2025.html	ISSB Update May 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-april-2025.html	ISSB Update April 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-march-2025.html	ISSB Update March 2025
+out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A140	Decision
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/iasb-issb/2025/iasb-issb-update-february-2025.html	IASB–ISSB Update February 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-february-2025.html	ISSB Update February 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html	ISSB Update January 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-december-2024.html	ISSB Update December 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-november-2024.html	ISSB Update November 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-october-2024.html	ISSB Update October 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-september-2024.html	ISSB Update September 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-july-2024.html	ISSB Update July 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-june-2024.html	ISSB Update June 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-may-2024.html	ISSB Update May 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-april-2024.html	ISSB Update April 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-march-2024.html	ISSB Update March 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-february-2024.html	ISSB Update February 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/joint-iasb-issb-update-january-2024.html	IASB–ISSB Update January 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-december-2023.html	ISSB Update December 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-november-2023.html	ISSB Update November 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-october-2023.html	ISSB Update October 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-september-2023.html	ISSB Update September 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-july-2023.html	ISSB Update July 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-may-2023.html	ISSB Update May 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-april-2023.html	ISSB Update April 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/supplementary-issb-update-april-2023.html	Supplementary ISSB Update April 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-march-2023.html	ISSB Update March 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-february-2023.html	ISSB Update February 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-january-2023.html	ISSB Update January 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-november-2022.html	ISSB Update November 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/supplementary-issb-update-november-2022.html	Supplementary ISSB Update November 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-october-2022.html	ISSB Update October 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-september-2022.html	ISSB Update September 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	The work plan
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html	ISSB Update January 2026
+out_of_range	https://about.bnef.com/insights/commodities/transition-metal-outlook/	REPORT Transition Metals Outlook
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-december-2025.html	ISSB Update December 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-november-2025.html	ISSB Update November 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-october-2025.html	ISSB Update October 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html	ISSB Update September 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-july-2025.html	ISSB Update July 2025
+out_of_range	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/	REPORT Electric Vehicle Outlook
+out_of_range	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook/	Electric Vehicle Outlook
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-june-2025.html	ISSB Update June 2025
+out_of_range	https://about.bnef.com/insights/clean-energy/new-energy-outlook/	New Energy Outlook
+out_of_range	https://about.bnef.com/insights/uncategorized/new-energy-outlook/	REPORT New Energy Outlook
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-may-2025.html	ISSB Update May 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-april-2025.html	ISSB Update April 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-march-2025.html	ISSB Update March 2025
+out_of_range	https://about.bnef.com/insights/finance/energy-transition-investment-trends/	Energy Transition Investment Trends
+out_of_range	https://about.bnef.com/insights/uncategorized/energy-transition-investment-trends/	REPORT Energy Transition Investment Trends
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/iasb-issb/2025/iasb-issb-update-february-2025.html	IASB–ISSB Update February 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-february-2025.html	ISSB Update February 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html	ISSB Update January 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-december-2024.html	ISSB Update December 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-november-2024.html	ISSB Update November 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-october-2024.html	ISSB Update October 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-september-2024.html	ISSB Update September 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-july-2024.html	ISSB Update July 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-june-2024.html	ISSB Update June 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-may-2024.html	ISSB Update May 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-april-2024.html	ISSB Update April 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-march-2024.html	ISSB Update March 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-february-2024.html	ISSB Update February 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/joint-iasb-issb-update-january-2024.html	IASB–ISSB Update January 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-december-2023.html	ISSB Update December 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-november-2023.html	ISSB Update November 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-october-2023.html	ISSB Update October 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-september-2023.html	ISSB Update September 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-july-2023.html	ISSB Update July 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-may-2023.html	ISSB Update May 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-april-2023.html	ISSB Update April 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/supplementary-issb-update-april-2023.html	Supplementary ISSB Update April 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-march-2023.html	ISSB Update March 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-february-2023.html	ISSB Update February 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-january-2023.html	ISSB Update January 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-november-2022.html	ISSB Update November 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/supplementary-issb-update-november-2022.html	Supplementary ISSB Update November 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-october-2022.html	ISSB Update October 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-september-2022.html	ISSB Update September 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
+deny_title_regex	https://about.bnef.com/insights/climate-week-and-cop-public-research/	Discover BNEF's Climate Week and COP Public Research, freely available to non-subscribers.
+undated	https://about.bnef.com/insights/type/report/	All Reports
+undated	https://arena.gov.au/	Home
+undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+undated	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+undated	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+undated	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+undated	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+undated	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+undated	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+undated	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+undated	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+undated	https://arena.gov.au/funding/demand-response/	Demand Response
+undated	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+undated	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+undated	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+undated	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+undated	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+undated	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+undated	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+undated	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+undated	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+undated	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+undated	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+undated	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+undated	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+undated	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+undated	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+undated	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+undated	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+undated	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+undated	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+undated	https://arena.gov.au/funding/power-system-services/	System Security
+undated	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+undated	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+undated	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+undated	https://arena.gov.au/funding/research-development-program/	Research and Development
+undated	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+undated	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+undated	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+undated	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+undated	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+undated	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+undated	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+undated	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+undated	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+undated	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
+undated	https://arena.gov.au/projects	Funding Opportunities
+undated	https://arenanet.arena.gov.au/s/funding-advice	here
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	The work plan
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html	ISSB Update January 2026
+out_of_range	https://about.bnef.com/insights/commodities/transition-metal-outlook/	REPORT Transition Metals Outlook
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-december-2025.html	ISSB Update December 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-november-2025.html	ISSB Update November 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-october-2025.html	ISSB Update October 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html	ISSB Update September 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-july-2025.html	ISSB Update July 2025
+out_of_range	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/	REPORT Electric Vehicle Outlook
+out_of_range	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook/	Electric Vehicle Outlook
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-june-2025.html	ISSB Update June 2025
+out_of_range	https://about.bnef.com/insights/clean-energy/new-energy-outlook/	New Energy Outlook
+out_of_range	https://about.bnef.com/insights/uncategorized/new-energy-outlook/	REPORT New Energy Outlook
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-may-2025.html	ISSB Update May 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-april-2025.html	ISSB Update April 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-march-2025.html	ISSB Update March 2025
+out_of_range	https://about.bnef.com/insights/finance/energy-transition-investment-trends/	Energy Transition Investment Trends
+out_of_range	https://about.bnef.com/insights/uncategorized/energy-transition-investment-trends/	REPORT Energy Transition Investment Trends
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/iasb-issb/2025/iasb-issb-update-february-2025.html	IASB–ISSB Update February 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-february-2025.html	ISSB Update February 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html	ISSB Update January 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-december-2024.html	ISSB Update December 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-november-2024.html	ISSB Update November 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-october-2024.html	ISSB Update October 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-september-2024.html	ISSB Update September 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-july-2024.html	ISSB Update July 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-june-2024.html	ISSB Update June 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-may-2024.html	ISSB Update May 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-april-2024.html	ISSB Update April 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-march-2024.html	ISSB Update March 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-february-2024.html	ISSB Update February 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/joint-iasb-issb-update-january-2024.html	IASB–ISSB Update January 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-december-2023.html	ISSB Update December 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-november-2023.html	ISSB Update November 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-october-2023.html	ISSB Update October 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-september-2023.html	ISSB Update September 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-july-2023.html	ISSB Update July 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-may-2023.html	ISSB Update May 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-april-2023.html	ISSB Update April 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/supplementary-issb-update-april-2023.html	Supplementary ISSB Update April 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-march-2023.html	ISSB Update March 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-february-2023.html	ISSB Update February 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-january-2023.html	ISSB Update January 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-november-2022.html	ISSB Update November 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/supplementary-issb-update-november-2022.html	Supplementary ISSB Update November 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-october-2022.html	ISSB Update October 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-september-2022.html	ISSB Update September 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
+deny_title_regex	https://about.bnef.com/insights/climate-week-and-cop-public-research/	Discover BNEF's Climate Week and COP Public Research, freely available to non-subscribers.
+undated	https://about.bnef.com/insights/type/report/	All Reports
+undated	https://arena.gov.au/	Home
+undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+undated	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+undated	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+undated	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+undated	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+undated	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+undated	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+undated	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+undated	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+undated	https://arena.gov.au/funding/demand-response/	Demand Response
+undated	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+undated	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+undated	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+undated	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+undated	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+undated	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+undated	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+undated	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+undated	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+undated	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+undated	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+undated	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+undated	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+undated	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+undated	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+undated	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+undated	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+undated	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+undated	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+undated	https://arena.gov.au/funding/power-system-services/	System Security
+undated	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+undated	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+undated	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+undated	https://arena.gov.au/funding/research-development-program/	Research and Development
+undated	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+undated	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+undated	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+undated	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+undated	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+undated	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+undated	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+undated	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+undated	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+undated	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
+undated	https://arena.gov.au/projects	Funding Opportunities
+undated	https://arenanet.arena.gov.au/s/funding-advice	here
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	The work plan
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html	ISSB Update January 2026
+out_of_range	https://about.bnef.com/insights/commodities/transition-metal-outlook/	REPORT Transition Metals Outlook
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-december-2025.html	ISSB Update December 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-november-2025.html	ISSB Update November 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-october-2025.html	ISSB Update October 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html	ISSB Update September 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-july-2025.html	ISSB Update July 2025
+out_of_range	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/	REPORT Electric Vehicle Outlook
+out_of_range	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook/	Electric Vehicle Outlook
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-june-2025.html	ISSB Update June 2025
+out_of_range	https://about.bnef.com/insights/clean-energy/new-energy-outlook/	New Energy Outlook
+out_of_range	https://about.bnef.com/insights/uncategorized/new-energy-outlook/	REPORT New Energy Outlook
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-may-2025.html	ISSB Update May 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-april-2025.html	ISSB Update April 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-march-2025.html	ISSB Update March 2025
+out_of_range	https://about.bnef.com/insights/finance/energy-transition-investment-trends/	Energy Transition Investment Trends
+out_of_range	https://about.bnef.com/insights/uncategorized/energy-transition-investment-trends/	REPORT Energy Transition Investment Trends
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/iasb-issb/2025/iasb-issb-update-february-2025.html	IASB–ISSB Update February 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-february-2025.html	ISSB Update February 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html	ISSB Update January 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-december-2024.html	ISSB Update December 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-november-2024.html	ISSB Update November 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-october-2024.html	ISSB Update October 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-september-2024.html	ISSB Update September 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-july-2024.html	ISSB Update July 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-june-2024.html	ISSB Update June 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-may-2024.html	ISSB Update May 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-april-2024.html	ISSB Update April 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-march-2024.html	ISSB Update March 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-february-2024.html	ISSB Update February 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/joint-iasb-issb-update-january-2024.html	IASB–ISSB Update January 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-december-2023.html	ISSB Update December 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-november-2023.html	ISSB Update November 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-october-2023.html	ISSB Update October 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-september-2023.html	ISSB Update September 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-july-2023.html	ISSB Update July 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-may-2023.html	ISSB Update May 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-april-2023.html	ISSB Update April 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/supplementary-issb-update-april-2023.html	Supplementary ISSB Update April 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-march-2023.html	ISSB Update March 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-february-2023.html	ISSB Update February 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-january-2023.html	ISSB Update January 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-november-2022.html	ISSB Update November 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/supplementary-issb-update-november-2022.html	Supplementary ISSB Update November 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-october-2022.html	ISSB Update October 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-september-2022.html	ISSB Update September 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
+deny_title_regex	https://about.bnef.com/insights/climate-week-and-cop-public-research/	Discover BNEF's Climate Week and COP Public Research, freely available to non-subscribers.
+undated	https://about.bnef.com/insights/type/report/	All Reports
+undated	https://arena.gov.au/	Home
+undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+undated	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+undated	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+undated	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+undated	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+undated	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+undated	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+undated	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+undated	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+undated	https://arena.gov.au/funding/demand-response/	Demand Response
+undated	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+undated	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+undated	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+undated	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+undated	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+undated	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+undated	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+undated	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+undated	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+undated	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+undated	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+undated	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+undated	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+undated	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+undated	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+undated	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+undated	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+undated	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+undated	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+undated	https://arena.gov.au/funding/power-system-services/	System Security
+undated	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+undated	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+undated	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+undated	https://arena.gov.au/funding/research-development-program/	Research and Development
+undated	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+undated	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+undated	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+undated	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+undated	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+undated	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+undated	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+undated	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+undated	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+undated	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
+undated	https://arena.gov.au/projects	Funding Opportunities
+undated	https://arenanet.arena.gov.au/s/funding-advice	here
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	The work plan
 not_articleish	https://arena.gov.au/	Home
-per_domain_cap	https://arena.gov.au/about/finance-reporting/	Finance reporting
-per_domain_cap	https://arena.gov.au/about/legislation-and-regulation/	Legislation and regulation
-per_domain_cap	https://arena.gov.au/about/partners	Partners
-per_domain_cap	https://arena.gov.au/about/publications/	Publications
-per_domain_cap	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
-per_domain_cap	https://arena.gov.au/blog	https://arena.gov.au/blog
-per_domain_cap	https://arena.gov.au/freedom-of-information/	Freedom of Information
-per_domain_cap	https://arena.gov.au/funding	Funding
-per_domain_cap	https://arena.gov.au/funding/	search opener
-per_domain_cap	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
-per_domain_cap	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
-per_domain_cap	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
-per_domain_cap	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
-per_domain_cap	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
-per_domain_cap	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
-per_domain_cap	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
-per_domain_cap	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
-per_domain_cap	https://arena.gov.au/funding/demand-response/	Demand Response
-per_domain_cap	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
-per_domain_cap	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
-per_domain_cap	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
-per_domain_cap	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
-per_domain_cap	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
-per_domain_cap	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
-per_domain_cap	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
-per_domain_cap	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
-per_domain_cap	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
-per_domain_cap	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
-per_domain_cap	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
-per_domain_cap	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
-per_domain_cap	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
-per_domain_cap	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
-per_domain_cap	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
-per_domain_cap	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
-per_domain_cap	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
-per_domain_cap	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
-per_domain_cap	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
-per_domain_cap	https://arena.gov.au/funding/power-system-services/	System Security
-per_domain_cap	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
-per_domain_cap	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
-per_domain_cap	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
-per_domain_cap	https://arena.gov.au/funding/research-development-program/	Research and Development
-per_domain_cap	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
-per_domain_cap	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
-per_domain_cap	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
-per_domain_cap	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
-per_domain_cap	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
-per_domain_cap	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
-per_domain_cap	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
-per_domain_cap	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
-per_domain_cap	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
-per_domain_cap	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
-per_domain_cap	https://arena.gov.au/knowledge-bank	Knowledge Bank
-per_domain_cap	https://arena.gov.au/knowledge-bank/	ARENA Insights newsletter
-per_domain_cap	https://arena.gov.au/knowledge-innovation/	Knowledge & Innovation overview
-per_domain_cap	https://arena.gov.au/knowledge-innovation/deip	Distributed Energy Integration Program (DEIP) overview
-per_domain_cap	https://arena.gov.au/news	News
-per_domain_cap	https://arena.gov.au/news/	Load more news
-per_domain_cap	https://arena.gov.au/projects	Projects
-per_domain_cap	https://arena.gov.au/public-interest-disclosure/	Public Interest Disclosure
-per_domain_cap	https://arena.gov.au/renewable-energy/battery-storage/	Battery storage
-per_domain_cap	https://arena.gov.au/renewable-energy/bioenergy/	Bioenergy / Energy from waste
-per_domain_cap	https://arena.gov.au/renewable-energy/community-electrification/	Community electrification
-per_domain_cap	https://arena.gov.au/renewable-energy/concentrated-solar-thermal/	Concentrated solar thermal
-per_domain_cap	https://arena.gov.au/renewable-energy/demand-response/	Demand response
-per_domain_cap	https://arena.gov.au/renewable-energy/distributed-energy-resources/	Distributed energy resources
-per_domain_cap	https://arena.gov.au/renewable-energy/electric-vehicles/	Electric vehicles
-per_domain_cap	https://arena.gov.au/renewable-energy/geothermal/	Geothermal
-per_domain_cap	https://arena.gov.au/renewable-energy/hybrid/	Hybrid
-per_domain_cap	https://arena.gov.au/renewable-energy/hydrogen/	Hydrogen
-per_domain_cap	https://arena.gov.au/renewable-energy/large-scale-solar/	Large-scale solar
-per_domain_cap	https://arena.gov.au/renewable-energy/ocean/	Ocean
-per_domain_cap	https://arena.gov.au/renewable-energy/off-grid/	Off grid
-per_domain_cap	https://arena.gov.au/renewable-energy/pumped-hydro-energy-storage/	Hydropower / Pumped Hydro Energy Storage
-per_domain_cap	https://arena.gov.au/renewable-energy/renewables-for-industry/	Renewables for industry
-per_domain_cap	https://arena.gov.au/renewable-energy/renewables-in-buildings/	Renewables in buildings
-per_domain_cap	https://arena.gov.au/renewable-energy/solar-pv-rd/	Solar PV R&D
-per_domain_cap	https://arena.gov.au/renewable-energy/solar/	Solar overview
-per_domain_cap	https://arena.gov.au/renewable-energy/system-security-reliability/	System security and reliability
-per_domain_cap	https://arena.gov.au/renewable-energy/wind/	Wind
-per_domain_cap	https://arena.gov.au/terms-of-use/	Terms
-per_domain_cap	https://arena.gov.au/what-is-renewable-energy/	Renewable Energy overview
-low_substance	https://arenanet.arena.gov.au/s/funding-advice	here
-not_in_allowlist	https://www.bnef.com/core	Log In
+not_articleish	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+not_articleish	https://arenanet.arena.gov.au/s/funding-advice	here
+not_articleish	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+not_articleish	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+not_articleish	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+not_articleish	https://arena.gov.au/projects	Funding Opportunities
+not_articleish	https://arena.gov.au/knowledge-bank	Funding Opportunities
+not_articleish	https://arena.gov.au/funding/demand-response/	Demand Response
+not_articleish	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+not_articleish	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+low_substance_last_resort	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+deny_title_regex	https://about.bnef.com/insights/climate-week-and-cop-public-research/	Discover BNEF's Climate Week and COP Public Research, freely available to non-subscribers.
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	The work plan
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html	ISSB Update January 2026
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html	ISSB Update January 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-february-2025.html	ISSB Update February 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-march-2025.html	ISSB Update March 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-april-2025.html	ISSB Update April 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-june-2025.html	ISSB Update June 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-july-2025.html	ISSB Update July 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html	ISSB Update September 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-november-2025.html	ISSB Update November 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/iasb-issb/2025/iasb-issb-update-february-2025.html	IASB–ISSB Update February 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-october-2025.html	ISSB Update October 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-may-2025.html	ISSB Update May 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-december-2025.html	ISSB Update December 2025
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/joint-iasb-issb-update-january-2024.html	IASB–ISSB Update January 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-february-2024.html	ISSB Update February 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-april-2024.html	ISSB Update April 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-july-2024.html	ISSB Update July 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-june-2024.html	ISSB Update June 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-may-2024.html	ISSB Update May 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-march-2024.html	ISSB Update March 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-september-2024.html	ISSB Update September 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-october-2024.html	ISSB Update October 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-november-2024.html	ISSB Update November 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-december-2024.html	ISSB Update December 2024
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/supplementary-issb-update-april-2023.html	Supplementary ISSB Update April 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-january-2023.html	ISSB Update January 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-february-2023.html	ISSB Update February 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-may-2023.html	ISSB Update May 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-july-2023.html	ISSB Update July 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-september-2023.html	ISSB Update September 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-october-2023.html	ISSB Update October 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-march-2023.html	ISSB Update March 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-december-2023.html	ISSB Update December 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-november-2023.html	ISSB Update November 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-april-2023.html	ISSB Update April 2023
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/supplementary-issb-update-november-2022.html	Supplementary ISSB Update November 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-september-2022.html	ISSB Update September 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-november-2022.html	ISSB Update November 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-october-2022.html	ISSB Update October 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
+domain_deny_substring	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy

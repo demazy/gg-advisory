@@ -1,8 +1,8 @@
 ym=2026-01
-selected_total=20
+selected_total=12
 items_per_section=7
 per_domain_cap=3
-allow_undated=True
+allow_undated=False
 allow_placeholder=True
 relaxed_min_text_chars=300
 auto_allow_gov_au=True
