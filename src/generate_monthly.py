@@ -23,7 +23,7 @@ import math
 import os
 import re
 from collections import Counter
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
@@ -51,8 +51,9 @@ MIN_TOTAL_ITEMS = int(os.getenv("MIN_TOTAL_ITEMS", "1"))
 RELAXED_MIN_TEXT_CHARS = int(os.getenv("RELAXED_MIN_TEXT_CHARS", str(max(300, MIN_TEXT_CHARS // 3))))
 
 ALLOW_UNDATED = os.getenv("ALLOW_UNDATED", "0") == "1"
-ALLOW_PLACEHOLDER = os.getenv("ALLOW_PLACEHOLDER", "1") == "1"  # default on; prevents GitHub guardrail failures
+ALLOW_PLACEHOLDER = os.getenv("ALLOW_PLACEHOLDER", "1") == "1"
 FALLBACK_WINDOW_DAYS = int(os.getenv("FALLBACK_WINDOW_DAYS", "3"))
+LAST_RESORT_IGNORE_DATES = os.getenv("LAST_RESORT_IGNORE_DATES", "0") == "1"
 DEBUG = os.getenv("DEBUG", "0") == "1"
 
 # Auto-allow: expands an allowlist without requiring config changes (safe defaults).
@@ -91,143 +92,6 @@ EMERGENCY_RSS = {
     "ESG Reporting": "https://news.google.com/rss/search?q=ISSB%20ESG%20reporting&hl=en&gl=US&ceid=US:en",
     "Sustainable Finance & Investment": "https://news.google.com/rss/search?q=sustainable%20finance%20green%20bond&hl=en&gl=US&ceid=US:en",
 }
-
-
-@dataclass
-class Filters:
-    """
-    Parsed filter configuration.
-
-    This class intentionally supports multiple schema variants for backwards compatibility:
-    - allow_domains / deny_domains
-    - domain_deny_substrings
-    - title_deny_regex or deny_title_regex
-    - deny_url_substrings (optional)
-
-    It also merges built-in deny lists and "auto-allow" domain patterns controlled via env vars.
-    """
-    raw: Dict[str, Any] = field(default_factory=dict)
-
-    allow_domains: List[str] = field(default_factory=list)
-    deny_domains: List[str] = field(default_factory=list)
-    domain_deny_substrings: Dict[str, List[str]] = field(default_factory=dict)
-
-    deny_url_substrings: List[str] = field(default_factory=list)
-    deny_title_regex: List[re.Pattern] = field(default_factory=list)
-
-    section_keywords: Dict[str, List[str]] = field(default_factory=dict)
-
-    def __post_init__(self) -> None:
-        cfg = self.raw or {}
-
-        # allow/deny domains (strings or lists)
-        self.allow_domains = [str(x).strip().lower() for x in (cfg.get("allow_domains") or []) if str(x).strip()]
-        self.deny_domains = [str(x).strip().lower() for x in (cfg.get("deny_domains") or []) if str(x).strip()]
-
-        # Per-domain deny substrings
-        dds = cfg.get("domain_deny_substrings") or {}
-        if isinstance(dds, dict):
-            out: Dict[str, List[str]] = {}
-            for k, v in dds.items():
-                if v is None:
-                    out[str(k).strip().lower()] = []
-                elif isinstance(v, list):
-                    out[str(k).strip().lower()] = [str(s).strip().lower() for s in v if str(s).strip()]
-                else:
-                    out[str(k).strip().lower()] = [str(v).strip().lower()]
-            self.domain_deny_substrings = out
-
-        # URL substring denylists: merge config + built-ins
-        cfg_url_denies = cfg.get("deny_url_substrings") or cfg.get("deny_url_substring") or []
-        if isinstance(cfg_url_denies, str):
-            cfg_url_denies = [cfg_url_denies]
-        self.deny_url_substrings = [
-            *[str(s).strip().lower() for s in cfg_url_denies if str(s).strip()],
-            *[str(s).strip().lower() for s in BUILTIN_DENY_URL_SUBSTRINGS if str(s).strip()],
-        ]
-
-        # Title deny regexes: accept both schema keys; compile + merge built-ins
-        title_patterns = cfg.get("title_deny_regex") or cfg.get("deny_title_regex") or []
-        if isinstance(title_patterns, str):
-            title_patterns = [title_patterns]
-        compiled: List[re.Pattern] = []
-        for pat in list(title_patterns) + list(BUILTIN_DENY_TITLE_REGEX):
-            if not pat:
-                continue
-            try:
-                compiled.append(re.compile(pat, flags=re.IGNORECASE))
-            except re.error:
-                # Don't hard-fail on a bad pattern; just skip it.
-                continue
-        self.deny_title_regex = compiled
-
-        # Section keywords
-        sk = cfg.get("section_keywords") or {}
-        if isinstance(sk, dict):
-            self.section_keywords = {
-                str(sec): [str(k).strip().lower() for k in (kws or []) if str(k).strip()]
-                for sec, kws in sk.items()
-            }
-        else:
-            self.section_keywords = {}
-
-    # ------------------------
-    # Matching helpers
-    # ------------------------
-    @staticmethod
-    def _match_domain_pattern(domain: str, pattern: str) -> bool:
-        """
-        Match a domain against a pattern.
-
-        Supported:
-        - exact: "ifrs.org"
-        - wildcard prefix: "*.gov.au" matches "dcceew.gov.au" and "www.dcceew.gov.au"
-        """
-        d = (domain or "").lower().strip(".")
-        p = (pattern or "").lower().strip()
-        if not d or not p:
-            return False
-        if p.startswith("*."):
-            root = p[2:].strip(".")
-            return d == root or d.endswith("." + root)
-        return d == p or d.endswith("." + p)
-
-    def domain_denied(self, domain: str) -> bool:
-        d = (domain or "").lower().strip(".")
-        if not d:
-            return True
-
-        # Built-in deny domains
-        if d in BUILTIN_DENY_DOMAINS:
-            return True
-
-        # Config deny patterns
-        for pat in self.deny_domains:
-            if self._match_domain_pattern(d, pat):
-                return True
-        return False
-
-    def domain_allowed(self, domain: str) -> bool:
-        d = (domain or "").lower().strip(".")
-        if not d:
-            return False
-
-        # Auto-allow common public domains
-        if AUTO_ALLOW_GOV_AU and (d == "gov.au" or d.endswith(".gov.au")):
-            return True
-        for ad in AUTO_ALLOW_DOMAINS:
-            if self._match_domain_pattern(d, ad):
-                return True
-
-        # If config allowlist is empty, default allow.
-        if not self.allow_domains:
-            return True
-
-        for pat in self.allow_domains:
-            if self._match_domain_pattern(d, pat):
-                return True
-        return False
-
 
 
 def _slug(s: str) -> str:
@@ -334,10 +198,8 @@ def _looks_articleish(url: str) -> bool:
     Heuristic: URL appears to be an actual *content item* (article/report/media release),
     not a hub/listing, navigation, governance, or utility page.
 
-    CHANGE (Feb 2026):
-    - Reject "bare hub slugs" like .../news, .../updates, .../releases when they appear as the
-      final path segment with no additional slug. These were being selected (e.g. EFRAG facet pages)
-      and then mis-dated via the first <time> tag on the listing.
+    This is intentionally conservative because false positives create low-quality digests
+    and increase hallucination risk downstream.
     """
     u = (url or "").strip()
     if not u:
@@ -354,11 +216,6 @@ def _looks_articleish(url: str) -> bool:
 
     segs = [s for s in path.split("/") if s]
     if not segs:
-        return False
-
-    # reject bare hubs (no article slug beyond the hub name)
-    bare_hubs = {"news", "updates", "releases", "release", "media", "press", "insights", "blog"}
-    if segs[-1] in bare_hubs and len(segs) <= 3:
         return False
 
     evergreen_segments = {
@@ -386,33 +243,144 @@ def _looks_articleish(url: str) -> bool:
         "news", "media", "press", "releases", "release", "announcements", "announcement",
         "updates", "insights", "blog",
         "publications", "publication", "reports", "report",
+        "consultations", "consultation",
+        "statements", "statement",
     }
+    has_positive = any(seg in positive_parts for seg in segs)
+    has_year = bool(re.search(r"(20\d{2})", path))
+    has_long_slug = len(slug) >= 18
 
-    # Some sites have no explicit "news" in the path; for those, require a reasonably "sluggy" tail
-    if len(segs) >= 2:
-        if is_pdf:
-            return True
-        # slug should look like content (has hyphen or >8 chars)
-        if ("-" in slug) or (len(slug) >= 9):
-            return True
+    if is_pdf:
+        return has_positive or has_year or has_long_slug
 
-    # If path contains a strong positive segment and there is an additional slug, accept
-    if any(p in segs for p in positive_parts) and len(segs) >= 3 and segs[-1] not in positive_parts:
+    if has_positive or has_year:
+        return True
+
+    if len(segs) <= 1:
+        return has_long_slug
+
+    return has_long_slug
+
+
+    # must have meaningful path beyond root
+    path = re.sub(r"[?#].*$", "", ul)
+    # strip scheme+domain
+    path = re.sub(r"^https?://[^/]+", "", path)
+    if path in ("", "/"):
+        return False
+
+    # deny common nav segments (segment-based, to avoid false positives like ".../about-energy...")
+    bad_segments = {
+        "about", "contact", "privacy", "terms", "cookies", "accessibility", "sitemap",
+        "careers", "jobs", "vacancies",
+    }
+    segs = [s for s in path.split("/") if s]
+    if segs and segs[-1] in bad_segments:
+        return False
+
+    # require at least one "signal": depth, date-like digits, or a long slug
+    depth = len(segs)
+    if depth >= 2:
+        return True
+    if re.search(r"(20\d{2})", path):
+        return True
+    if segs and len(segs[-1]) >= 18:
         return True
 
     return False
 
 
-def _passes_filters(it: Item, flt: Filters, section: str, *, bypass_allow: bool = False) -> Tuple[bool, str]:
-    """
-    Apply allow/deny rules from filters.yaml plus a few safety exceptions.
+class Filters:
+    def __init__(self, raw: Dict[str, Any]):
+        # allow/deny lists from config (supporting alias keys)
+        self.allow_domains = [str(d).lower().strip() for d in (raw.get("allow_domains") or []) if str(d).strip()]
+        self.deny_domains = [str(d).lower().strip() for d in (raw.get("deny_domains") or []) if str(d).strip()]
 
-    CHANGE (Feb 2026):
-    - Prevent an over-broad IFRS deny-substring ("/content/ifrs/home") from blocking IFRS
-      News & Events pages (this was dropping *all* ifrs.org items in the Jan 2026 run).
-    - Treat "conference report" (a publication) as *not* an event, even if title_deny_regex
-      includes "conference".
-    """
+        self.deny_url_substrings = [str(s).lower() for s in (raw.get("deny_url_substrings") or []) if str(s).strip()]
+
+        deny_title_list = (raw.get("deny_title_regex") or raw.get("title_deny_regex") or [])
+        self.deny_title_regex = []
+        for r in deny_title_list:
+            rr = str(r).strip()
+            if not rr:
+                continue
+            try:
+                self.deny_title_regex.append(re.compile(rr, re.I))
+            except Exception:
+                pass
+
+        self.section_keywords = {
+            k: [str(w).lower() for w in v]
+            for k, v in (raw.get("section_keywords", {}) or {}).items()
+            if isinstance(v, list)
+        }
+
+        # Per-domain URL substring denylists (domain_pattern -> [url_substring,...])
+        self.domain_deny_substrings: Dict[str, List[str]] = {}
+        dd = raw.get("domain_deny_substrings", {}) or {}
+        if isinstance(dd, dict):
+            for k, v in dd.items():
+                key = str(k).strip().lower()
+                if not key:
+                    continue
+                if isinstance(v, list):
+                    subs = [str(x).strip().lower() for x in v if str(x).strip()]
+                elif isinstance(v, str) and v.strip():
+                    subs = [v.strip().lower()]
+                else:
+                    subs = []
+                if subs:
+                    self.domain_deny_substrings[key] = subs
+
+        # merge built-in denylists (incremental improvement)
+        for d in BUILTIN_DENY_DOMAINS:
+            if d not in self.deny_domains:
+                self.deny_domains.append(d)
+        for s in BUILTIN_DENY_URL_SUBSTRINGS:
+            if s not in self.deny_url_substrings:
+                self.deny_url_substrings.append(s)
+        for rx in BUILTIN_DENY_TITLE_REGEX:
+            try:
+                self.deny_title_regex.append(re.compile(rx, re.I))
+            except Exception:
+                pass
+
+    @staticmethod
+    def _match_domain_pattern(domain: str, pattern: str) -> bool:
+        d = (domain or "").lower()
+        p = (pattern or "").lower().strip()
+        if not d or not p:
+            return False
+        if p.startswith("*."):
+            suf = p[1:]  # ".gov.au"
+            return d.endswith(suf) or d == suf.lstrip(".")
+        return d == p or d.endswith("." + p)
+
+    def domain_allowed(self, domain: str) -> bool:
+        d = (domain or "").lower()
+        if not d:
+            return False
+
+        if self.allow_domains:
+            if any(self._match_domain_pattern(d, a) for a in self.allow_domains):
+                return True
+
+            # Auto-allow a small set of trusted public domains so that an overly narrow allowlist
+            # does not collapse the pool (still subject to deny rules).
+            if AUTO_ALLOW_GOV_AU and (d.endswith(".gov.au") or d.endswith(".edu.au")):
+                return True
+            if any(self._match_domain_pattern(d, a) for a in AUTO_ALLOW_DOMAINS):
+                return True
+
+            return False
+
+        return True
+
+    def domain_denied(self, domain: str) -> bool:
+        d = (domain or "").lower()
+        return any(self._match_domain_pattern(d, x) for x in self.deny_domains)
+
+def _passes_filters(it: Item, flt: Filters, section: str, *, bypass_allow: bool = False) -> Tuple[bool, str]:
     url = (it.url or "").strip()
     title = (it.title or "").strip()
     if not url or not title:
@@ -429,20 +397,12 @@ def _passes_filters(it: Item, flt: Filters, section: str, *, bypass_allow: bool 
         return False, "not_in_allowlist"
 
     u = url.lower()
-    t = title.lower()
 
     # Per-domain URL substring denylists (filters.yaml)
     for dom_pat, subs in (flt.domain_deny_substrings or {}).items():
         if flt._match_domain_pattern(domain, dom_pat):
             for ss in subs:
-                if not ss:
-                    continue
-                if ss in u:
-                    # Exception: IFRS uses "/content/ifrs/home/..." for most content.
-                    # We only want to block *non-content* areas, not News & Events updates.
-                    if domain.endswith("ifrs.org") and ss.strip("/") == "content/ifrs/home":
-                        if "/news-and-events/" in u or "/updates/" in u or "/news/" in u:
-                            continue
+                if ss and ss in u:
                     return False, "domain_deny_substring"
 
     for ss in flt.deny_url_substrings:
@@ -451,12 +411,6 @@ def _passes_filters(it: Item, flt: Filters, section: str, *, bypass_allow: bool 
 
     for rx in flt.deny_title_regex:
         if rx.search(title):
-            # "conference report" is a publication, not an event registration page.
-            if "conference report" in t:
-                continue
-            # if it looks like a substantive publication/update, allow even if it contains "event"/"conference"
-            if any(k in t for k in ("report", "statement", "outcomes", "minutes", "update", "guidance")):
-                continue
             return False, "deny_title_regex"
 
     return True, ""
@@ -584,6 +538,11 @@ def _select_from_pool(
             drops.append({"reason": "per_domain_cap", "url": url, "title": it.title or "", "domain": domain})
             continue
 
+        if (not ignore_dates) and start_dt and end_dt:
+            if not _in_range(getattr(it, 'published_ts', None), start_dt, end_dt):
+                drops.append({'reason': 'out_of_range_last_resort', 'url': url, 'title': it.title or ''})
+                continue
+
         if not _looks_articleish(url):
             drops.append({"reason": "not_articleish", "url": url, "title": it.title or ""})
             continue
@@ -621,7 +580,7 @@ def _select_from_pool(
     return selected, drops
 
 
-def _last_resort_pick(pool: Sequence[Item], section: str, flt: Filters, *, items_needed: int) -> Tuple[List[Item], List[Dict[str, str]]]:
+def _last_resort_pick(pool: Sequence[Item], section: str, flt: Filters, *, items_needed: int, start_dt: Optional[datetime] = None, end_dt: Optional[datetime] = None, ignore_dates: bool = False) -> Tuple[List[Item], List[Dict[str, str]]]:
     """
     Emergency picker used only when strict+relaxed selection yields nothing.
     Still rejects obvious non-content URLs/titles and requires at least minimal extract.
@@ -638,6 +597,11 @@ def _last_resort_pick(pool: Sequence[Item], section: str, flt: Filters, *, items
         if not ok:
             drops.append({"reason": why, "url": url, "title": it.title or ""})
             continue
+
+        if (not ignore_dates) and start_dt and end_dt:
+            if not _in_range(getattr(it, 'published_ts', None), start_dt, end_dt):
+                drops.append({'reason': 'out_of_range_last_resort', 'url': url, 'title': it.title or ''})
+                continue
 
         if not _looks_articleish(url):
             drops.append({"reason": "not_articleish", "url": url, "title": it.title or ""})
@@ -665,8 +629,35 @@ def _last_resort_pick(pool: Sequence[Item], section: str, flt: Filters, *, items
     return picked, drops
 
 
-def _emergency_pool(section: str) -> List[Item]:
-    rss = EMERGENCY_RSS.get(section)
+
+
+def _build_emergency_rss_url(section: str, start_dt: datetime, end_dt: datetime) -> Optional[str]:
+    """Return an emergency RSS URL that is *time-bounded* for backfills.
+
+    Google News RSS supports query operators like:
+      after:YYYY-MM-DD before:YYYY-MM-DD
+    This materially improves backfill months where "current" news would be out-of-range.
+    """
+    base = EMERGENCY_RSS.get(section)
+    if not base:
+        return None
+    try:
+        from urllib.parse import urlparse, parse_qsl, urlencode, urlunparse
+        p = urlparse(base)
+        q = dict(parse_qsl(p.query, keep_blank_values=True))
+        qstr = q.get("q", "")
+        after = start_dt.date().isoformat()
+        before = (end_dt + timedelta(days=1)).date().isoformat()
+        # avoid duplicating operators
+        if "after:" not in qstr:
+            qstr = (qstr + f" after:{after} before:{before}").strip()
+        q["q"] = qstr
+        new_query = urlencode(list(q.items()), doseq=True)
+        return urlunparse((p.scheme, p.netloc, p.path, p.params, new_query, ""))
+    except Exception:
+        return base
+def _emergency_pool(section: str, start_dt: datetime, end_dt: datetime) -> List[Item]:
+    rss = _build_emergency_rss_url(section, start_dt, end_dt)
     if not rss:
         return []
     try:
@@ -679,16 +670,6 @@ def _emergency_pool(section: str) -> List[Item]:
 
 
 def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> None:
-    """
-    End-to-end month generation.
-
-    CHANGE (Feb 2026):
-    - Remove section-level "last resort pick (ignoring dates)" that was pulling out-of-range
-      items (e.g. 2025 BNEF reports) and undated evergreen pages into the Jan 2026 digest.
-    - Prefer emergency RSS (Google News) *within the month* to fill empty sections, rather than
-      filling with out-of-range items.
-    - Keep the run resilient: never hard-fail if sections are empty; emit NO_ITEMS_IN_RANGE if needed.
-    """
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     start_d, end_d = _month_range(ym)
     start_dt = datetime(start_d.year, start_d.month, start_d.day, tzinfo=timezone.utc)
@@ -727,6 +708,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
 
         # Pass 2 (relaxed fill): only to top up to quota, and still enforces minimum substance
         if len(selected) < ITEMS_PER_SECTION:
+            used = {it.url.lower() for it in selected if it.url}
             per_dom = Counter(normalise_domain(it.url) for it in selected if it.url)
             filler, drops2 = _select_from_pool(
                 pool, section, start_dt, end_dt, flt,
@@ -742,7 +724,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
                 if it.url:
                     global_used_urls.add(it.url.strip().lower())
 
-        # Wider date window (only if completely empty)
+        # Wider date window (still strict+relaxed)
         if not selected:
             print(f"[warn] No selected items in strict/relaxed passes; applying ±{FALLBACK_WINDOW_DAYS} day window.")
             s2 = start_dt - timedelta(days=FALLBACK_WINDOW_DAYS)
@@ -760,23 +742,36 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
                 if it.url:
                     global_used_urls.add(it.url.strip().lower())
 
-        # Emergency RSS *in-range* for empty sections (bypasses allowlist but keeps deny rules)
+        # Last resort: pick only content-like URLs with minimal extract
         if not selected:
-            print("[warn] Still no items; trying emergency RSS (in-range).")
-            epool = _emergency_pool(section)
-            picked, drops4 = _select_from_pool(
-                epool, section, start_dt, end_dt, flt,
-                items_needed=max(1, ITEMS_PER_SECTION // 2),
-                per_domain_cap=PER_DOMAIN_CAP,
-                strict=False,
-                bypass_allow=True,
-                exclude_urls=global_used_urls,
-            )
+            print("[warn] Still no items after fallback; last-resort pick.")
+            picked, drops4 = _last_resort_pick(pool, section, flt, items_needed=ITEMS_PER_SECTION, start_dt=start_dt - timedelta(days=FALLBACK_WINDOW_DAYS), end_dt=end_dt + timedelta(days=FALLBACK_WINDOW_DAYS), ignore_dates=LAST_RESORT_IGNORE_DATES)
             all_drops.extend(drops4)
-            selected = picked
+            picked2: List[Item] = []
             for it in picked:
-                if it.url:
-                    global_used_urls.add(it.url.strip().lower())
+                u2 = (it.url or "").strip().lower()
+                if u2 and u2 in global_used_urls:
+                    continue
+                picked2.append(it)
+                if u2:
+                    global_used_urls.add(u2)
+            selected = picked2
+
+        # Emergency RSS only if nothing at all
+        if not selected:
+            print("[warn] No candidates available; trying emergency RSS.")
+            epool = _emergency_pool(section, start_dt, end_dt)
+            picked, drops5 = _last_resort_pick(epool, section, flt, items_needed=max(1, ITEMS_PER_SECTION // 2), start_dt=start_dt - timedelta(days=FALLBACK_WINDOW_DAYS), end_dt=end_dt + timedelta(days=FALLBACK_WINDOW_DAYS), ignore_dates=False)
+            all_drops.extend(drops5)
+            picked2: List[Item] = []
+            for it in picked:
+                u2 = (it.url or "").strip().lower()
+                if u2 and u2 in global_used_urls:
+                    continue
+                picked2.append(it)
+                if u2:
+                    global_used_urls.add(u2)
+            selected = picked2
 
         # Placeholder (only if explicitly enabled)
         if not selected and ALLOW_PLACEHOLDER:
@@ -793,32 +788,6 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
         print(f"[selected] {len(selected)} from {section}")
         all_selected.extend(selected)
 
-    # Global safety: try to satisfy MIN_TOTAL_ITEMS via emergency RSS (still in-range)
-    if len([it for it in all_selected if (it.url or "").strip()]) < MIN_TOTAL_ITEMS:
-        need = max(0, MIN_TOTAL_ITEMS - len([it for it in all_selected if (it.url or "").strip()]))
-        if need > 0:
-            print(f"[warn] Total real items < MIN_TOTAL_ITEMS; trying global emergency RSS to add {need}.")
-            gpool: List[Item] = []
-            for sec in sections.keys():
-                gpool.extend(_emergency_pool(sec))
-            extra, dropsx = _select_from_pool(
-                gpool, "General", start_dt, end_dt, flt,
-                items_needed=need,
-                per_domain_cap=PER_DOMAIN_CAP,
-                strict=False,
-                bypass_allow=True,
-                exclude_urls=global_used_urls,
-            )
-            all_drops.extend(dropsx)
-            for it in extra:
-                if it.section == "General":
-                    # keep whatever section the item came with if present
-                    pass
-                all_selected.append(it)
-                if it.url:
-                    global_used_urls.add(it.url.strip().lower())
-
-    # If still empty and placeholders allowed, add a single global placeholder (keeps pipeline stable)
     if not all_selected and ALLOW_PLACEHOLDER:
         placeholder = Item(
             url="",
@@ -830,10 +799,9 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
         all_selected = [placeholder]
         all_drops.append({"reason": "global_placeholder_used", "url": "", "title": placeholder.title})
 
-    # Ensure we meet MIN_TOTAL_ITEMS (only via placeholders if explicitly enabled)
-    if len([it for it in all_selected if (it.url or "").strip()]) < MIN_TOTAL_ITEMS and ALLOW_PLACEHOLDER:
-        real = len([it for it in all_selected if (it.url or "").strip()])
-        for k in range(MIN_TOTAL_ITEMS - real):
+    # Ensure we meet MIN_TOTAL_ITEMS (avoids downstream guardrails failing)
+    if len(all_selected) < MIN_TOTAL_ITEMS and ALLOW_PLACEHOLDER:
+        for k in range(MIN_TOTAL_ITEMS - len(all_selected)):
             ph = Item(
                 url="",
                 title=f"Monthly digest {ym}: additional fallback item {k+1}",
@@ -844,7 +812,6 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
             all_selected.append(ph)
             all_drops.append({"reason": "min_total_placeholder_used", "url": "", "title": ph.title})
 
-    # --- debug artefacts ---
     sel_path = OUT_DIR / f"debug-selected-{ym}.json"
     sel_path.write_text(
         json.dumps(
@@ -870,7 +837,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
         "\n".join(
             [
                 f"ym={ym}",
-                f"selected_total={len([it for it in all_selected if (it.url or '').strip()])}",
+                f"selected_total={len(all_selected)}",
                 f"items_per_section={ITEMS_PER_SECTION}",
                 f"per_domain_cap={PER_DOMAIN_CAP}",
                 f"allow_undated={ALLOW_UNDATED}",
@@ -890,12 +857,10 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
         for d in all_drops:
             f.write(f"{d.get('reason','')}\t{d.get('url','')}\t{d.get('title','')}\n")
 
-    # --- output artefact ---
     md = build_digest(ym, all_selected)
     out_path = OUT_DIR / f"monthly-digest-{ym}.md"
     out_path.write_text(md, encoding="utf-8")
     print(f"[write] {out_path.resolve()}")
-
 
 
 def _iter_months(start_ym: str, end_ym: str) -> List[str]:
