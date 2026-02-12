@@ -19,8 +19,6 @@ Incremental improvements (Feb 2026):
 
 from __future__ import annotations
 
-# IMPORTANT: Avoid any self-import in this module; it will create a circular import.
-
 import hashlib
 import os
 import re
@@ -177,10 +175,9 @@ _MONTHS = {
 def infer_published_ts_from_url(url: str) -> Optional[float]:
     """
     Best-effort inference of publish timestamp from URL path.
-
     Used to improve month-based filtering when RSS dates are missing.
 
-    This is intentionally conservative. When only a month is inferred, day is set to 1.
+    We intentionally keep this conservative (month-level at best).
     """
     u = (url or "").strip()
     if not u:
@@ -188,77 +185,44 @@ def infer_published_ts_from_url(url: str) -> Optional[float]:
 
     path = urlparse(u).path.lower()
 
-    def _mk(y: int, mo: int, d: int = 1) -> Optional[float]:
+    # YYYY-MM-DD
+    m = re.search(r"/(20\d{2})-(\d{2})-(\d{2})(?:/|$)", path)
+    if m:
+        y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
         try:
             return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
         except Exception:
             return None
 
-    # ----------------------------------------------------
-    # Common structured patterns in path segments
-    # ----------------------------------------------------
-
-    # YYYY-MM-DD (e.g. /2026-01-15/)
-    m = re.search(r"/(20\d{2})-(\d{2})-(\d{2})(?:/|$)", path)
-    if m:
-        return _mk(int(m.group(1)), int(m.group(2)), int(m.group(3)))
-
-    # /YYYY/MM/DD/ (e.g. /2026/1/15/)
+    # /YYYY/MM/DD/
     m = re.search(r"/(20\d{2})/(\d{1,2})/(\d{1,2})(?:/|$)", path)
     if m:
-        return _mk(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        try:
+            return datetime(y, mo, d, tzinfo=timezone.utc).timestamp()
+        except Exception:
+            return None
 
-    # /YYYY/<monthname>/ (e.g. /2026/january/)
+    # /YYYY/<monthname>/
     m = re.search(r"/(20\d{2})/([a-z]{3,9})(?:/|$)", path)
     if m:
         y = int(m.group(1))
         mo = _MONTHS.get(m.group(2).lower())
         if mo:
-            return _mk(y, mo, 1)
+            try:
+                return datetime(y, mo, 1, tzinfo=timezone.utc).timestamp()
+            except Exception:
+                return None
 
-    # /YYYY/MM/ (e.g. /2026/01/)
+    # /YYYY/MM/
     m = re.search(r"/(20\d{2})/(\d{1,2})(?:/|$)", path)
     if m:
         y, mo = int(m.group(1)), int(m.group(2))
         if 1 <= mo <= 12:
-            return _mk(y, mo, 1)
-
-    # ----------------------------------------------------
-    # Slug patterns (often used by standards bodies and gov sites)
-    # ----------------------------------------------------
-    # dd-<monthname>-yyyy  (e.g. .../meeting-11-february-2026)
-    m = re.search(r"(?:^|[/-])(\d{1,2})[-_]+([a-z]{3,9})[-_]+(20\d{2})(?:[/-]|\.|$)", path)
-    if m:
-        d = int(m.group(1))
-        mo = _MONTHS.get(m.group(2).lower())
-        y = int(m.group(3))
-        if mo:
-            return _mk(y, mo, d)
-
-    # <monthname>-dd-yyyy (less common)
-    m = re.search(r"(?:^|[/-])([a-z]{3,9})[-_]+(\d{1,2})[-_]+(20\d{2})(?:[/-]|\.|$)", path)
-    if m:
-        mo = _MONTHS.get(m.group(1).lower())
-        d = int(m.group(2))
-        y = int(m.group(3))
-        if mo:
-            return _mk(y, mo, d)
-
-    # <monthname>-yyyy  (e.g. .../issb-update-january-2026.html)
-    m = re.search(r"(?:^|[/-])([a-z]{3,9})[-_]+(20\d{2})(?:[/-]|\.|$)", path)
-    if m:
-        mo = _MONTHS.get(m.group(1).lower())
-        y = int(m.group(2))
-        if mo:
-            return _mk(y, mo, 1)
-
-    # yyyy-<monthname>  (e.g. .../2026-january-update)
-    m = re.search(r"(?:^|[/-])(20\d{2})[-_]+([a-z]{3,9})(?:[/-]|\.|$)", path)
-    if m:
-        y = int(m.group(1))
-        mo = _MONTHS.get(m.group(2).lower())
-        if mo:
-            return _mk(y, mo, 1)
+            try:
+                return datetime(y, mo, 1, tzinfo=timezone.utc).timestamp()
+            except Exception:
+                return None
 
     return None
 
