@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import time
 from datetime import datetime
 from typing import Dict, List, Optional
@@ -41,9 +42,13 @@ TEMP = float(os.getenv("OPENAI_TEMPERATURE") or os.getenv("TEMP") or "0.2")
 # Endpoint can be overridden (useful for proxies)
 OPENAI_CHAT_URL = (os.getenv("OPENAI_CHAT_URL") or "https://api.openai.com/v1/chat/completions").strip()
 
-REQ_TIMEOUT = float(os.getenv("OPENAI_TIMEOUT", "45"))
-REQ_RETRIES = int(os.getenv("OPENAI_RETRIES", "2"))
-BACKOFF = float(os.getenv("OPENAI_BACKOFF", "1.8"))
+# Read/Retry controls (backwards compatible names)
+OPENAI_TIMEOUT = float(os.getenv("OPENAI_TIMEOUT", "45"))
+OPENAI_RETRIES = int(os.getenv("OPENAI_RETRIES", "2"))
+OPENAI_BACKOFF = float(os.getenv("OPENAI_BACKOFF", "1.8"))
+
+# Response length control (used by chat-completions)
+OPENAI_MAX_TOKENS = int(os.getenv("OPENAI_MAX_TOKENS", "900"))
 
 # Hard cap to prevent runaway prompt size
 MAX_TEXT_CHARS_PER_ITEM = int(os.getenv("MAX_TEXT_CHARS_PER_ITEM", "3500"))  # CHANGE: smaller prompt -> faster/less timeouts
@@ -235,7 +240,7 @@ def _openai_chat_completion(model: str, messages: List[Dict[str, str]], temperat
     if not OPENAI_API_KEY:
         raise RuntimeError("OPENAI_API_KEY missing")
 
-    url = "https://api.openai.com/v1/chat/completions"
+    url = OPENAI_CHAT_URL
     headers = {"Authorization": f"Bearer {OPENAI_API_KEY}", "Content-Type": "application/json"}
     payload = {
         "model": model,
@@ -256,7 +261,7 @@ def _openai_chat_completion(model: str, messages: List[Dict[str, str]], temperat
             last_err = e
             # backoff: 1s, 2s, 4s...
             if attempt < max(1, OPENAI_RETRIES) - 1:
-                time.sleep(2 ** attempt)
+                time.sleep(max(0.5, OPENAI_BACKOFF) ** attempt)
                 continue
             break
 
