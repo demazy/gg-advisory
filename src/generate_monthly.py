@@ -31,7 +31,7 @@ from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 import yaml
 from dateutil import parser as dtparser
 
-from .fetch import Item, fetch_full_text, fetch_html_index, fetch_rss, is_probably_taxonomy_or_hub
+from .fetch import Item, fetch_full_text, fetch_html_index, fetch_rss, is_probably_taxonomy_or_hub, infer_published_ts_from_url
 from .summarise import build_digest
 from .utils import normalise_domain
 
@@ -192,11 +192,18 @@ def _substance_ok_relaxed(text: str) -> bool:
     return True
 
 
+def _url_has_content_hint(url: str) -> bool:
+    """Cheap URL-only signal: does the path look like news/media/update content?"""
+    u = (url or "").lower()
+    return bool(re.search(r"(news|media|press|release|blog|insight|update|report|publication|consultation|speech|statement|submission|announcement)", u))
+
+
 def _looks_articleish(url: str) -> bool:
     """
-    Heuristic: URL appears to be an actual content item, not a hub or navigation page.
+    Heuristic: URL appears to be an actual *content item* (article/report/release), not a hub
+    or navigation page.
 
-    Improvement: previously, the site root ("/") could pass. We now require some path depth / signal.
+    This intentionally stays URL-only (no network calls) so it is safe to run at scale.
     """
     u = (url or "").strip()
     if not u:
@@ -209,27 +216,42 @@ def _looks_articleish(url: str) -> bool:
 
     # must have meaningful path beyond root
     path = re.sub(r"[?#].*$", "", ul)
-    # strip scheme+domain
     path = re.sub(r"^https?://[^/]+", "", path)
     if path in ("", "/"):
         return False
 
-    # deny common nav segments (segment-based, to avoid false positives like ".../about-energy...")
-    bad_segments = {
-        "about", "contact", "privacy", "terms", "cookies", "accessibility", "sitemap",
-        "careers", "jobs", "vacancies",
-    }
     segs = [s for s in path.split("/") if s]
-    if segs and segs[-1] in bad_segments:
+    last = segs[-1] if segs else ""
+
+    # reject obvious listing endpoints (these are hubs, not items)
+    listing_last = {
+        "news", "blog", "blogs", "insights", "updates", "update", "events", "event",
+        "publications", "publication", "reports", "report", "media", "press", "press-releases", "media-releases",
+        "news-centre", "news-center", "newsroom", "pressroom", "news-and-media",
+    }
+    if last in listing_last and not re.search(r"(20\d{2})", path):
         return False
 
-    # require at least one "signal": depth, date-like digits, or a long slug
-    depth = len(segs)
-    if depth >= 2:
-        return True
-    if re.search(r"(20\d{2})", path):
-        return True
-    if segs and len(segs[-1]) >= 18:
+    has_year = bool(re.search(r"(20\d{2})", path))
+    has_hint = _url_has_content_hint(path)
+
+    # navigation / governance pages (typically not time-bound digest items)
+    navish = bool(re.search(
+        r"(?:^|/)(about|who-we-are|our-people|people|board|executive|executives|leadership|team|advisory|governance|committee|committees|"
+        r"careers?|jobs?|vacanc(?:y|ies)|contact|privacy|terms|cookies|accessibility|sitemap)(?:/|$)",
+        path,
+        re.I,
+    ))
+
+    # strong-ish slug signal (avoids selecting "/news" etc)
+    long_slug = (len(last) >= 18)
+
+    # If the path is nav-ish and lacks strong content signals, reject.
+    if navish and (not has_year) and (not has_hint):
+        return False
+
+    # Require at least one content signal: year/date, content hint segment, or a long slug.
+    if has_year or has_hint or long_slug:
         return True
 
     return False
@@ -406,10 +428,36 @@ def _select_from_pool(
     ex: Set[str] = set((u or "").strip().lower() for u in (exclude_urls or set()) if str(u).strip())
     text_cache: Dict[str, str] = {}
 
-    def sort_key(it: Item):
-        dt = _effective_published_ts(it)
-        ts = dt.timestamp() if dt else 0.0
-        return (-ts, (it.url or ""))
+def _effective_dt_with_infer(it: Item) -> Optional[datetime]:
+    dt = _effective_published_ts(it)
+    if dt is not None:
+        return dt
+    # try URL inference (keeps date filtering honest for e.g. "...-february-2026" slugs)
+    try:
+        ts = infer_published_ts_from_url(it.url or "")
+    except Exception:
+        ts = None
+    if ts:
+        try:
+            dt2 = datetime.fromtimestamp(float(ts), tz=timezone.utc)
+            # persist the inferred signal for downstream debugging/formatting
+            if getattr(it, "published_ts", None) is None:
+                it.published_ts = float(ts)
+                it.published_source = getattr(it, "published_source", None) or "url_infer"
+                it.published_confidence = getattr(it, "published_confidence", None) or 0.35
+            return dt2
+        except Exception:
+            return None
+    return None
+
+def sort_key(it: Item):
+    dt = _effective_dt_with_infer(it)
+    ts = dt.timestamp() if dt else 0.0
+    has_dt = 1 if dt else 0
+    hint = 1 if _url_has_content_hint(it.url or "") else 0
+    kw = _keyword_boost(it.title or "", section, flt)
+    # date first, then URL-content signals (prevents "/about/..." from dominating undated pools)
+    return (-has_dt, -ts, -hint, -kw, (it.url or ""))
 
     for it in sorted(pool, key=sort_key):
         url = (it.url or "").strip()
@@ -424,7 +472,8 @@ def _select_from_pool(
             drops.append({"reason": why, "url": url, "title": it.title or ""})
             continue
 
-        if not _in_range(_effective_published_ts(it), start_dt, end_dt):
+        dt_eff = _effective_dt_with_infer(it)
+        if not _in_range(dt_eff, start_dt, end_dt):
             drops.append({"reason": "out_of_range", "url": url, "title": it.title or ""})
             continue
 
@@ -537,6 +586,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
 
     all_selected: List[Item] = []
     all_drops: List[Dict[str, str]] = []
+    global_used_urls: Set[str] = set()
 
     sections: Dict[str, Any] = cfg_sources.get("sections") or {}
     for section, sec_cfg in sections.items():
@@ -556,6 +606,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
             items_needed=ITEMS_PER_SECTION,
             per_domain_cap=PER_DOMAIN_CAP,
             strict=True,
+            exclude_urls=global_used_urls,
         )
         all_drops.extend(drops1)
 
@@ -568,7 +619,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
                 items_needed=(ITEMS_PER_SECTION - len(selected)),
                 per_domain_cap=PER_DOMAIN_CAP,
                 strict=False,
-                exclude_urls=used,
+                exclude_urls=(used | global_used_urls),
                 initial_per_domain=dict(per_dom),
             )
             all_drops.extend(drops2)
@@ -584,6 +635,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
                 items_needed=ITEMS_PER_SECTION,
                 per_domain_cap=PER_DOMAIN_CAP,
                 strict=False,
+                exclude_urls=global_used_urls,
             )
             all_drops.extend(drops3)
             selected = selected3
@@ -591,7 +643,8 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
         # Last resort: pick only content-like URLs with minimal extract
         if not selected:
             print("[warn] Still no items after fallback; last-resort pick (ignoring dates).")
-            picked, drops4 = _last_resort_pick(pool, section, flt, items_needed=ITEMS_PER_SECTION)
+            pool_lr = [it for it in pool if (it.url or '').strip().lower() not in global_used_urls]
+            picked, drops4 = _last_resort_pick(pool_lr, section, flt, items_needed=ITEMS_PER_SECTION)
             all_drops.extend(drops4)
             selected = picked
 
@@ -602,6 +655,27 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
             picked, drops5 = _last_resort_pick(epool, section, flt, items_needed=max(1, ITEMS_PER_SECTION // 2))
             all_drops.extend(drops5)
             selected = picked
+
+
+# Emergency top-up: if we are still below quota, try Google News RSS to fill gaps
+# (date-filtered + deduped, bypassing allowlist so it can contribute diversity).
+if len(selected) < ITEMS_PER_SECTION:
+    need = ITEMS_PER_SECTION - len(selected)
+    epool = _emergency_pool(section)
+    if epool:
+        used2 = {it.url.lower() for it in selected if it.url} | global_used_urls
+        per_dom2 = Counter(normalise_domain(it.url) for it in selected if it.url)
+        extra, dropsE = _select_from_pool(
+            epool, section, start_dt, end_dt, flt,
+            items_needed=need,
+            per_domain_cap=PER_DOMAIN_CAP,
+            strict=False,
+            bypass_allow=True,
+            exclude_urls=used2,
+            initial_per_domain=dict(per_dom2),
+        )
+        all_drops.extend(dropsE)
+        selected.extend(extra)
 
         # Placeholder (only if explicitly enabled)
         if not selected and ALLOW_PLACEHOLDER:
@@ -616,6 +690,8 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
             all_drops.append({"reason": "placeholder_used", "url": "", "title": placeholder.title})
 
         print(f"[selected] {len(selected)} from {section}")
+        # Global de-dup across sections (prevents the same page appearing in multiple sections)
+        global_used_urls.update({it.url.lower() for it in selected if it.url})
         all_selected.extend(selected)
 
     if not all_selected and ALLOW_PLACEHOLDER:
