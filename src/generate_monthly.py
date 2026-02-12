@@ -23,7 +23,7 @@ import math
 import os
 import re
 from collections import Counter
-from dataclasses import asdict
+from dataclasses import asdict, dataclass, field
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
@@ -91,6 +91,143 @@ EMERGENCY_RSS = {
     "ESG Reporting": "https://news.google.com/rss/search?q=ISSB%20ESG%20reporting&hl=en&gl=US&ceid=US:en",
     "Sustainable Finance & Investment": "https://news.google.com/rss/search?q=sustainable%20finance%20green%20bond&hl=en&gl=US&ceid=US:en",
 }
+
+
+@dataclass
+class Filters:
+    """
+    Parsed filter configuration.
+
+    This class intentionally supports multiple schema variants for backwards compatibility:
+    - allow_domains / deny_domains
+    - domain_deny_substrings
+    - title_deny_regex or deny_title_regex
+    - deny_url_substrings (optional)
+
+    It also merges built-in deny lists and "auto-allow" domain patterns controlled via env vars.
+    """
+    raw: Dict[str, Any] = field(default_factory=dict)
+
+    allow_domains: List[str] = field(default_factory=list)
+    deny_domains: List[str] = field(default_factory=list)
+    domain_deny_substrings: Dict[str, List[str]] = field(default_factory=dict)
+
+    deny_url_substrings: List[str] = field(default_factory=list)
+    deny_title_regex: List[re.Pattern] = field(default_factory=list)
+
+    section_keywords: Dict[str, List[str]] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        cfg = self.raw or {}
+
+        # allow/deny domains (strings or lists)
+        self.allow_domains = [str(x).strip().lower() for x in (cfg.get("allow_domains") or []) if str(x).strip()]
+        self.deny_domains = [str(x).strip().lower() for x in (cfg.get("deny_domains") or []) if str(x).strip()]
+
+        # Per-domain deny substrings
+        dds = cfg.get("domain_deny_substrings") or {}
+        if isinstance(dds, dict):
+            out: Dict[str, List[str]] = {}
+            for k, v in dds.items():
+                if v is None:
+                    out[str(k).strip().lower()] = []
+                elif isinstance(v, list):
+                    out[str(k).strip().lower()] = [str(s).strip().lower() for s in v if str(s).strip()]
+                else:
+                    out[str(k).strip().lower()] = [str(v).strip().lower()]
+            self.domain_deny_substrings = out
+
+        # URL substring denylists: merge config + built-ins
+        cfg_url_denies = cfg.get("deny_url_substrings") or cfg.get("deny_url_substring") or []
+        if isinstance(cfg_url_denies, str):
+            cfg_url_denies = [cfg_url_denies]
+        self.deny_url_substrings = [
+            *[str(s).strip().lower() for s in cfg_url_denies if str(s).strip()],
+            *[str(s).strip().lower() for s in BUILTIN_DENY_URL_SUBSTRINGS if str(s).strip()],
+        ]
+
+        # Title deny regexes: accept both schema keys; compile + merge built-ins
+        title_patterns = cfg.get("title_deny_regex") or cfg.get("deny_title_regex") or []
+        if isinstance(title_patterns, str):
+            title_patterns = [title_patterns]
+        compiled: List[re.Pattern] = []
+        for pat in list(title_patterns) + list(BUILTIN_DENY_TITLE_REGEX):
+            if not pat:
+                continue
+            try:
+                compiled.append(re.compile(pat, flags=re.IGNORECASE))
+            except re.error:
+                # Don't hard-fail on a bad pattern; just skip it.
+                continue
+        self.deny_title_regex = compiled
+
+        # Section keywords
+        sk = cfg.get("section_keywords") or {}
+        if isinstance(sk, dict):
+            self.section_keywords = {
+                str(sec): [str(k).strip().lower() for k in (kws or []) if str(k).strip()]
+                for sec, kws in sk.items()
+            }
+        else:
+            self.section_keywords = {}
+
+    # ------------------------
+    # Matching helpers
+    # ------------------------
+    @staticmethod
+    def _match_domain_pattern(domain: str, pattern: str) -> bool:
+        """
+        Match a domain against a pattern.
+
+        Supported:
+        - exact: "ifrs.org"
+        - wildcard prefix: "*.gov.au" matches "dcceew.gov.au" and "www.dcceew.gov.au"
+        """
+        d = (domain or "").lower().strip(".")
+        p = (pattern or "").lower().strip()
+        if not d or not p:
+            return False
+        if p.startswith("*."):
+            root = p[2:].strip(".")
+            return d == root or d.endswith("." + root)
+        return d == p or d.endswith("." + p)
+
+    def domain_denied(self, domain: str) -> bool:
+        d = (domain or "").lower().strip(".")
+        if not d:
+            return True
+
+        # Built-in deny domains
+        if d in BUILTIN_DENY_DOMAINS:
+            return True
+
+        # Config deny patterns
+        for pat in self.deny_domains:
+            if self._match_domain_pattern(d, pat):
+                return True
+        return False
+
+    def domain_allowed(self, domain: str) -> bool:
+        d = (domain or "").lower().strip(".")
+        if not d:
+            return False
+
+        # Auto-allow common public domains
+        if AUTO_ALLOW_GOV_AU and (d == "gov.au" or d.endswith(".gov.au")):
+            return True
+        for ad in AUTO_ALLOW_DOMAINS:
+            if self._match_domain_pattern(d, ad):
+                return True
+
+        # If config allowlist is empty, default allow.
+        if not self.allow_domains:
+            return True
+
+        for pat in self.allow_domains:
+            if self._match_domain_pattern(d, pat):
+                return True
+        return False
+
 
 
 def _slug(s: str) -> str:
