@@ -417,3 +417,192 @@ def fetch_rss(feed_url: str, source_name: str = "", **kwargs) -> List[Item]:
             # lightweight fallback: infer month from URL if possible
             published_ts = infer_published_ts_from_url(link)
             if published_ts is not None:
+                published_iso = datetime.fromtimestamp(published_ts, tz=timezone.utc).isoformat()
+
+        if published_ts is not None and published_iso is None:
+            published_iso = datetime.fromtimestamp(published_ts, tz=timezone.utc).isoformat()
+
+        it = Item(
+            url=link,
+            title=title,
+            summary=summary,
+            source=(source_name or (getattr(parsed.feed, "title", "") or "")).strip(),
+            published_iso=published_iso,
+            published_ts=published_ts,
+            published_source="rss" if getattr(e, "published_parsed", None) or getattr(e, "updated_parsed", None) else ("url" if published_ts else None),
+            published_confidence=0.9 if getattr(e, "published_parsed", None) or getattr(e, "updated_parsed", None) else (0.4 if published_ts else None),
+            index_url=feed_url,
+        )
+        items.append(it)
+
+    return items
+
+
+def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[Item]:
+    """
+    Extract candidate content links from an index/listing page.
+
+    NOTE: This function should be conservative: it is better to return fewer, higher-signal
+    candidates than hundreds of navigation links.
+    """
+    index_url = _clean_url(index_url)
+    if not index_url:
+        return []
+
+    resp = _http_get(index_url)
+    if resp is None:
+        return []
+
+    raw = _read_limited(resp, MAX_BYTES)
+    if not raw:
+        return []
+
+    # crude decode
+    try:
+        html = raw.decode(resp.encoding or "utf-8", errors="replace")
+    except Exception:
+        html = raw.decode("utf-8", errors="replace")
+
+    soup = BeautifulSoup(html, "html.parser")
+
+    # Collect (url -> best_title) from anchors
+    title_by_url: Dict[str, str] = {}
+    links: List[str] = []
+    for a in soup.select("a[href]"):
+        href = (a.get("href") or "").strip()
+        if not href:
+            continue
+        if href.startswith("mailto:") or href.startswith("javascript:"):
+            continue
+
+        abs_url = _clean_url(urljoin(index_url, href))
+        if not abs_url:
+            continue
+        if urlparse(abs_url).scheme not in ("http", "https"):
+            continue
+
+        # Filter obvious non-content
+        if _deny_from_index(abs_url) or is_probably_taxonomy_or_hub(abs_url):
+            continue
+
+        if (not ALLOW_EXTERNAL_LINKS_FROM_INDEX) and (not _same_site(abs_url, index_url)):
+            continue
+
+        t = _clean_anchor_text(a.get_text(" ", strip=True) or "")
+        # Keep best (longest) anchor text seen for a URL
+        if abs_url not in title_by_url or len(t) > len(title_by_url.get(abs_url, "")):
+            if t:
+                title_by_url[abs_url] = t
+
+        links.append(abs_url)
+
+    # De-dupe, keep order
+    seen = set()
+    uniq: List[str] = []
+    for u in links:
+        key = u.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        uniq.append(u)
+
+    uniq = uniq[:MAX_LINKS_PER_INDEX]
+
+    items: List[Item] = []
+    for u in uniq:
+        inferred_ts = infer_published_ts_from_url(u)
+        inferred_iso = datetime.fromtimestamp(inferred_ts, tz=timezone.utc).isoformat() if inferred_ts else None
+
+        # Source: prefer explicit source_name for same-site links, else fall back to the URL's host.
+        src = source_name or _norm_host(urlparse(index_url).netloc)
+        if not _same_site(u, index_url):
+            src = _norm_host(urlparse(u).netloc)
+
+        title = title_by_url.get(u, "") or u
+
+        items.append(
+            Item(
+                url=u,
+                title=title,
+                summary="",
+                source=src,
+                published_iso=inferred_iso,
+                published_ts=inferred_ts,
+                published_source="url" if inferred_ts else None,
+                published_confidence=0.35 if inferred_ts else None,
+                index_url=index_url,
+            )
+        )
+
+    return items
+
+
+def fetch_full_text(url: str, **kwargs) -> str:
+    """
+    Return extracted text for a URL (HTML or PDF).
+    Returns empty string on failure.
+    """
+    url = _clean_url(url)
+    if not url:
+        return ""
+
+    # Hard stop for obvious non-content URLs (prevents wasting fetch budget downstream)
+    if _deny_from_index(url) or is_probably_taxonomy_or_hub(url):
+        return ""
+
+    resp = _http_get(url)
+    if resp is None:
+        return ""
+
+    ctype = _content_type(resp)
+    is_pdf = ("application/pdf" in ctype) or url.lower().endswith(".pdf")
+
+    cap = MAX_PDF_BYTES if is_pdf else MAX_BYTES
+    raw = _read_limited(resp, cap)
+    if not raw:
+        return ""
+
+    if is_pdf:
+        if fitz is None:
+            return ""
+        try:
+            doc = fitz.open(stream=raw, filetype="pdf")
+            parts = []
+            for i in range(min(doc.page_count, 25)):
+                parts.append(doc.load_page(i).get_text("text"))
+            doc.close()
+            text = "\n".join(parts).strip()
+            return text
+        except Exception:
+            return ""
+
+    # HTML extraction
+    try:
+        html = raw.decode(resp.encoding or "utf-8", errors="replace")
+    except Exception:
+        html = raw.decode("utf-8", errors="replace")
+
+    # trafilatura first (best signal) – optional dependency in some environments
+    if trafilatura is not None:
+        try:
+            extracted = trafilatura.extract(
+                html,
+                include_comments=False,
+                include_tables=False,
+                favor_recall=True,
+            )
+            if extracted and extracted.strip():
+                return extracted.strip()
+        except Exception:
+            pass
+
+    # fallback: soup text
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        for tag in soup(["script", "style", "noscript"]):
+            tag.decompose()
+        txt = soup.get_text("\n")
+        txt = re.sub(r"\n{3,}", "\n\n", txt).strip()
+        return txt
+    except Exception:
+        return ""
