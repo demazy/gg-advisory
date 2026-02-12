@@ -1,7 +1,7 @@
 # Signals Digest — January 2026
 
 ## Top Lines
-- No items were retrieved for Energy Transition, ESG Reporting, or Sustainable Finance & Investment in January 2026.
+- No items were retrieved for any section in January 2026.
 
 ## Energy Transition
 ### Energy Transition: no retrievable items for 2026-01
@@ -9,7 +9,7 @@
 - **PUBLISHED:** Unknown
 - **Summary:** Insufficient extract; see source.
 - **Why it matters:** 
-  - No insights available for the energy transition sector.
+  - No information available.
 - **Source:** 
 
 ## ESG Reporting
@@ -18,7 +18,7 @@
 - **PUBLISHED:** Unknown
 - **Summary:** Insufficient extract; see source.
 - **Why it matters:** 
-  - No insights available for ESG reporting.
+  - No information available.
 - **Source:** 
 
 ## Sustainable Finance & Investment
@@ -27,5 +27,5 @@
 - **PUBLISHED:** Unknown
 - **Summary:** Insufficient extract; see source.
 - **Why it matters:** 
-  - No insights available for sustainable finance and investment.
+  - No information available.
 - **Source:**
