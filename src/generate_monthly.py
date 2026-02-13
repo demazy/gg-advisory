@@ -488,22 +488,26 @@ def _keyword_boost(title: str, section: str, flt: Filters) -> float:
 
 
 def _score_item(it: Item, text: str, section: str, flt: Filters, *, ignore_substance: bool = False) -> float:
-    domain = normalise_domain(it.url)
-    if flt.domain_denied(domain):
-        return -1e9
-    if (not ignore_substance) and (not _substance_ok(text, _is_priority(it.url))):
-        return -1e9
+    try:
+        domain = normalise_domain(it.url)
+        if flt.domain_denied(domain):
+            return -1e9
+        if (not ignore_substance) and (not _substance_ok(text, _is_priority(it.url))):
+            return -1e9
 
-    dt = _effective_published_ts(it)
-    recency = (dt.timestamp() / 1e10) if dt is not None else 0.0
-    substance = math.log(max(50, len(text)), 10)
-    kw = _keyword_boost(it.title or "", section, flt)
-    articleish = 0.35 if _looks_articleish(it.url or "") else -0.6
-    path_score = _domain_path_score(it.url or "")
-    title_pen = -0.8 if _is_bad_title(it.title or "") else 0.0
-    undated_pen = -0.6 if (it.published_ts is None and not _is_priority(it.url)) else 0.0
-    return recency + substance + kw + articleishcleish + path_score + title_pen + undated_pencleish
+        dt = _effective_published_ts(it)
+        recency = (dt.timestamp() / 1e10) if dt is not None else 0.0
+        substance = math.log(max(50, len(text)), 10)
+        kw = _keyword_boost(it.title or "", section, flt)
+        articleish = 0.35 if _looks_articleish(it.url or "") else -0.6
+        path_score = _domain_path_score(it.url or "")
+        title_pen = -0.8 if _is_bad_title(it.title or "") else 0.0
+        undated_pen = -0.6 if (it.published_ts is None and not _is_priority(it.url)) else 0.0
+        return recency + substance + kw + articleish + path_score + title_pen + undated_pen
 
+    except Exception as e:
+        # Never fail the run due to a scoring bug; treat as very low score.
+        return -1e9
 
 def _collect_section_pool(section: str, sec_cfg: Dict[str, Any]) -> Tuple[List[Item], List[Dict[str, str]]]:
     drops: List[Dict[str, str]] = []
