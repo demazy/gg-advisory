@@ -1,5 +1,53 @@
 [
   {
+    "url": "https://arena.gov.au/funding/",
+    "title": "Back to top",
+    "summary": "",
+    "source": "arena.gov.au",
+    "section": "Sustainable Finance & Investment",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://arena.gov.au/funding/"
+  },
+  {
+    "url": "https://arena.gov.au/",
+    "title": "Home",
+    "summary": "",
+    "source": "arena.gov.au",
+    "section": "Sustainable Finance & Investment",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://arena.gov.au/funding/"
+  },
+  {
+    "url": "https://arena.gov.au/about/strategic-priorities/",
+    "title": "ARENA's strategic priorities",
+    "summary": "",
+    "source": "arena.gov.au",
+    "section": "Sustainable Finance & Investment",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://arena.gov.au/funding/"
+  },
+  {
+    "url": "https://arenanet.arena.gov.au/s/funding-advice",
+    "title": "Funding advice",
+    "summary": "",
+    "source": "arena.gov.au",
+    "section": "Sustainable Finance & Investment",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://arena.gov.au/funding/"
+  },
+  {
     "url": "https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/",
     "title": "Powering the Regions Industrial Transformation Stream",
     "summary": "",
@@ -48,6 +96,18 @@
     "index_url": "https://arena.gov.au/funding/"
   },
   {
+    "url": "https://arena.gov.au/funding/solar-sunshot/",
+    "title": "Solar Sunshot",
+    "summary": "",
+    "source": "arena.gov.au",
+    "section": "Sustainable Finance & Investment",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://arena.gov.au/funding/"
+  },
+  {
     "url": "https://arena.gov.au/funding/advancing-renewables-program/",
     "title": "Advancing Renewables Program (ARP)",
     "summary": "",
@@ -86,6 +146,18 @@
   {
     "url": "https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/",
     "title": "Ultra Low-Cost Solar PV R&D Funding Round",
+    "summary": "",
+    "source": "arena.gov.au",
+    "section": "Sustainable Finance & Investment",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://arena.gov.au/funding/"
+  },
+  {
+    "url": "https://arena.gov.au/funding/rmp/",
+    "title": "Regional Microgrids Program",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Sustainable Finance & Investment",
@@ -216,6 +288,18 @@
     "index_url": "https://arena.gov.au/funding/"
   },
   {
+    "url": "https://arena.gov.au/funding/future-fuels-fund/",
+    "title": "Future Fuels Fund Round 1",
+    "summary": "",
+    "source": "arena.gov.au",
+    "section": "Sustainable Finance & Investment",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://arena.gov.au/funding/"
+  },
+  {
     "url": "https://arena.gov.au/funding/research-development-program/",
     "title": "Research and Development",
     "summary": "",
@@ -242,6 +326,18 @@
   {
     "url": "https://arena.gov.au/funding/venture-capital-fund/",
     "title": "Renewable Energy Venture Capital Fund (REVC)",
+    "summary": "",
+    "source": "arena.gov.au",
+    "section": "Sustainable Finance & Investment",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://arena.gov.au/funding/"
+  },
+  {
+    "url": "https://arena.gov.au/projects",
+    "title": "Funding Opportunities",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Sustainable Finance & Investment",
@@ -326,6 +422,42 @@
   {
     "url": "https://arena.gov.au/funding/distributed-energy-resources/",
     "title": "Distributed Energy Resources",
+    "summary": "",
+    "source": "arena.gov.au",
+    "section": "Sustainable Finance & Investment",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://arena.gov.au/funding/"
+  },
+  {
+    "url": "https://arena.gov.au/funding/demand-response/",
+    "title": "Demand Response",
+    "summary": "",
+    "source": "arena.gov.au",
+    "section": "Sustainable Finance & Investment",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://arena.gov.au/funding/"
+  },
+  {
+    "url": "https://arena.gov.au/funding/large-scale-solar/",
+    "title": "Large-Scale Solar",
+    "summary": "",
+    "source": "arena.gov.au",
+    "section": "Sustainable Finance & Investment",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://arena.gov.au/funding/"
+  },
+  {
+    "url": "https://arena.gov.au/funding/hydrogen/",
+    "title": "Renewable Hydrogen for Export",
     "summary": "",
     "source": "arena.gov.au",
     "section": "Sustainable Finance & Investment",
@@ -590,6 +722,18 @@
   {
     "url": "https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html",
     "title": "International Sustainability Standards Board",
+    "summary": "",
+    "source": "ifrs.org",
+    "section": "Sustainable Finance & Investment",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.ifrs.org/news-and-events/updates/issb/"
+  },
+  {
+    "url": "https://www.ifrs.org/content/ifrs/home/projects/work-plan.html",
+    "title": "The work plan",
     "summary": "",
     "source": "ifrs.org",
     "section": "Sustainable Finance & Investment",
@@ -1101,6 +1245,18 @@
     "published_ts": 1669852800.0,
     "published_source": "url",
     "published_confidence": 0.35,
+    "index_url": "https://www.ifrs.org/news-and-events/updates/issb/"
+  },
+  {
+    "url": "https://www.ifrs.org/content/ifrs/home/legal/privacy.html",
+    "title": "privacy policy",
+    "summary": "",
+    "source": "ifrs.org",
+    "section": "Sustainable Finance & Investment",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
     "index_url": "https://www.ifrs.org/news-and-events/updates/issb/"
   }
 ]

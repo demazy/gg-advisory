@@ -12,6 +12,18 @@
     "index_url": "https://www.ifrs.org/news-and-events/updates/issb/"
   },
   {
+    "url": "https://www.ifrs.org/content/ifrs/home/projects/work-plan.html",
+    "title": "The work plan",
+    "summary": "",
+    "source": "ifrs.org",
+    "section": "ESG Reporting",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.ifrs.org/news-and-events/updates/issb/"
+  },
+  {
     "url": "https://www.ifrs.org/news-and-events/updates/issb/",
     "title": "Cookie details",
     "summary": "",
@@ -516,6 +528,18 @@
     "index_url": "https://www.ifrs.org/news-and-events/updates/issb/"
   },
   {
+    "url": "https://www.ifrs.org/content/ifrs/home/legal/privacy.html",
+    "title": "privacy policy",
+    "summary": "",
+    "source": "ifrs.org",
+    "section": "ESG Reporting",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.ifrs.org/news-and-events/updates/issb/"
+  },
+  {
     "url": "https://www.ifrs.org/news-and-events/news/",
     "title": "Cookie details",
     "summary": "",
@@ -537,6 +561,18 @@
     "published_ts": 1770724800.0,
     "published_source": "meta",
     "published_confidence": 0.75,
+    "index_url": "https://www.efrag.org/en/news-and-calendar/news"
+  },
+  {
+    "url": "https://www.efrag.org/en",
+    "title": "https://www.efrag.org/en",
+    "summary": "",
+    "source": "efrag.org",
+    "section": "ESG Reporting",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
     "index_url": "https://www.efrag.org/en/news-and-calendar/news"
   },
   {
@@ -589,7 +625,7 @@
   },
   {
     "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A164",
-    "title": "EFRAG",
+    "title": "News",
     "summary": "",
     "source": "efrag.org",
     "section": "ESG Reporting",
@@ -637,7 +673,7 @@
   },
   {
     "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A138",
-    "title": "Meeting",
+    "title": "News",
     "summary": "",
     "source": "efrag.org",
     "section": "ESG Reporting",
@@ -661,7 +697,7 @@
   },
   {
     "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A137",
-    "title": "Project",
+    "title": "News",
     "summary": "",
     "source": "efrag.org",
     "section": "ESG Reporting",
@@ -673,7 +709,7 @@
   },
   {
     "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A43",
-    "title": "Public",
+    "title": "News",
     "summary": "",
     "source": "efrag.org",
     "section": "ESG Reporting",
@@ -709,7 +745,7 @@
   },
   {
     "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A141",
-    "title": "Vacancy",
+    "title": "News",
     "summary": "",
     "source": "efrag.org",
     "section": "ESG Reporting",
