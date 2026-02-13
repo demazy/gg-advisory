@@ -139,19 +139,41 @@ def _deterministic_structured_digest(date_label: str, items: List[Item], note: s
     lines.append("")
     return "\n".join(lines)
 
-def _prepare_items(items: List[Item]) -> List[Dict[str, Any]]:
+def _prepare_items(items: List[Any]) -> List[Dict[str, Any]]:
+    """Normalise items for the LLM payload.
+
+    The pipeline's Item model has evolved over time. Some versions expose only `summary`,
+    others may have `text`, `full_text`, `content`, etc. This helper must be schema-tolerant.
+    """
     out: List[Dict[str, Any]] = []
+
+    def _get(obj: Any, key: str, default: Any = "") -> Any:
+        if isinstance(obj, dict):
+            return obj.get(key, default)
+        return getattr(obj, key, default)
+
     for it in items:
+        # Prefer richest text field available; fall back to summary/snippet.
+        raw_text = (
+            _get(it, "text", "")
+            or _get(it, "full_text", "")
+            or _get(it, "content", "")
+            or _get(it, "summary", "")
+            or _get(it, "snippet", "")
+            or ""
+        )
+
         out.append(
             {
-                "title": it.title,
-                "url": it.url,
-                "section": it.section,
-                "published": it.published_iso,
-                "text": (it.text or "")[:MAX_TEXT_CHARS_PER_ITEM],
+                "title": _get(it, "title", ""),
+                "url": _get(it, "url", ""),
+                "section": _get(it, "section", ""),
+                "published": _get(it, "published_iso", None) or _get(it, "published", None),
+                "text": (raw_text or "")[:MAX_TEXT_CHARS_PER_ITEM],
             }
         )
     return out
+
 
 def _openai_chat_completion(
     *,
