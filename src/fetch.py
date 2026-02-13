@@ -155,6 +155,97 @@ def _same_site(a: str, b: str) -> bool:
         return False
     return ha == hb or ha.endswith("." + hb) or hb.endswith("." + ha)
 
+# -----------------------------
+# Indirect / wrapper URL resolution
+# -----------------------------
+_GOOGLE_NEWS_HOSTS = {"news.google.com"}
+_GOOGLE_REDIRECT_HOSTS = {"www.google.com", "google.com"}
+
+def _resolve_google_redirect(u: str) -> str:
+    """Resolve classic Google redirect URLs (e.g., https://www.google.com/url?url=...)."""
+    try:
+        p = urlparse(u)
+        if _norm_host(p.netloc) not in _GOOGLE_REDIRECT_HOSTS:
+            return u
+        if not p.path.startswith("/url"):
+            return u
+        q = parse_qs(p.query)
+        cand = (q.get("url") or q.get("q") or [""])[0]
+        return cand or u
+    except Exception:
+        return u
+
+def resolve_indirect_url(u: str) -> str:
+    """
+    Attempt to unwrap known aggregator/wrapper URLs to their canonical target.
+    Currently supports Google redirect URLs and Google News article wrappers.
+    Returns the original URL on failure.
+    """
+    u = (u or "").strip()
+    if not u:
+        return u
+
+    u2 = _resolve_google_redirect(u)
+    if u2 and u2 != u:
+        return _clean_url(u2)
+
+    try:
+        p = urlparse(u)
+        host = _norm_host(p.netloc)
+        if host in _GOOGLE_NEWS_HOSTS and (p.path.startswith("/rss/articles") or p.path.startswith("/articles")):
+            # Fetch the wrapper page and try to extract a canonical external URL
+            resp = _http_get(u)
+            if resp is None:
+                return u
+            raw = _read_limited(resp, min(MAX_BYTES, 800_000))
+            if not raw:
+                return u
+            try:
+                html = raw.decode(resp.encoding or "utf-8", errors="replace")
+            except Exception:
+                html = raw.decode("utf-8", errors="replace")
+            soup = BeautifulSoup(html, "html.parser")
+
+            # Prefer explicit canonical/og:url
+            for sel in [
+                ("meta", {"property": "og:url"}),
+                ("meta", {"name": "og:url"}),
+            ]:
+                tag = soup.find(sel[0], sel[1])
+                if tag and tag.get("content"):
+                    cand = tag.get("content", "").strip()
+                    if cand and "news.google.com" not in cand:
+                        return _clean_url(cand)
+
+            link = soup.find("link", {"rel": "canonical"})
+            if link and link.get("href"):
+                cand = link.get("href", "").strip()
+                if cand and "news.google.com" not in cand:
+                    return _clean_url(cand)
+
+            # Heuristic: first external https link
+            for a in soup.find_all("a", href=True):
+                href = a.get("href", "").strip()
+                if not href.startswith("http"):
+                    continue
+                hhost = _norm_host(urlparse(href).netloc)
+                if not hhost or hhost in _GOOGLE_NEWS_HOSTS or hhost in _GOOGLE_REDIRECT_HOSTS:
+                    continue
+                if any(bad in href.lower() for bad in ["facebook.com", "twitter.com", "x.com", "linkedin.com"]):
+                    continue
+                return _clean_url(href)
+
+            # Regex fallback: look for url=https%3A%2F%2F... patterns
+            m = re.search(r"url=(https?%3A%2F%2F[^&\"'>]+)", html)
+            if m:
+                cand = unquote(m.group(1))
+                if cand and cand.startswith("http") and "news.google.com" not in cand:
+                    return _clean_url(cand)
+    except Exception:
+        return u
+
+    return u
+
 
 # Common non-content patterns that should never become digest items
 _DENY_URL_SUBSTRINGS = [
@@ -881,6 +972,9 @@ def fetch_full_text(url: str, **kwargs) -> str:
     Return extracted text for a URL (HTML or PDF).
     Returns empty string on failure.
     """
+    url = _clean_url(url)
+    # Unwrap known aggregator URLs (e.g., Google News RSS wrappers)
+    url = resolve_indirect_url(url)
     url = _clean_url(url)
     if not url:
         return ""
