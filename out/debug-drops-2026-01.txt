@@ -14,47 +14,51 @@ out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/register-s
 out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/renewable-energy-target-enforcement-action-against-mojo-power-east	Read more
 out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/2024-25-preliminary-safeguard-mechanism-insights-released	Read more
 out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/recall-issued-sigenergy-single-phase-81012-kw-energy-controllers	Read more
-not_articleish	https://www.aemc.gov.au/about-us/executive-leadership-team	Executive leadership team
-per_domain_cap	https://www.aemc.gov.au/charging-ahead-residential-batteries-are-growing-popularity-and-profitability	Charging ahead: Residential batteries are growing in popularity and profitability
-per_domain_cap	https://www.aemc.gov.au/contact-us/propose-rule-change	Propose a rule change
-per_domain_cap	https://www.aemc.gov.au/energeia-finds-cer-flexibility-could-deliver-45b-benefits-2050	Charging ahead: Residential batteries are growing in popularity and profitability
-per_domain_cap	https://www.aemc.gov.au/ess-system-security-update-aemc-reform-work-program	Energeia finds that CER flexibility could deliver $45B in benefits by 2050
-per_domain_cap	https://www.aemc.gov.au/market-reviews-advice/electricity-network-regulation-review	EPR0106
-per_domain_cap	https://www.aemc.gov.au/market-reviews-advice/future-wholesale-market	​​EPR0093​
-per_domain_cap	https://www.aemc.gov.au/market-reviews-advice/pricing-review-electricity-pricing-consumer-driven-future	​​EPR0097​
-per_domain_cap	https://www.aemc.gov.au/market-reviews-advice/review-integrated-system-plan-framework	​​EPR0092​
-per_domain_cap	https://www.aemc.gov.au/market-reviews-advice/transmission-planning-and-investment-review	EPR0087
-per_domain_cap	https://www.aemc.gov.au/news-centre/corporate-publications	Corporate publications >
+undated	https://arena.gov.au/news/	Back to top
+undated	https://www.aemc.gov.au/about-us/chair-and-commissioners	Chair and commissioners
+undated	https://www.aemc.gov.au/about-us/executive-leadership-team	Executive leadership team
+undated	https://www.aemc.gov.au/about-us/mission-and-values	Vision, mission and values
+undated	https://www.aemc.gov.au/about-us/stakeholder-engagement	Stakeholder engagement
+undated	https://www.aemc.gov.au/charging-ahead-residential-batteries-are-growing-popularity-and-profitability	Charging ahead: Residential batteries are growing in popularity and profitability
+undated	https://www.aemc.gov.au/contact-us/propose-rule-change	Propose a rule change
+undated	https://www.aemc.gov.au/energeia-finds-cer-flexibility-could-deliver-45b-benefits-2050	Charging ahead: Residential batteries are growing in popularity and profitability
+undated	https://www.aemc.gov.au/ess-system-security-update-aemc-reform-work-program	Energeia finds that CER flexibility could deliver $45B in benefits by 2050
+undated	https://www.aemc.gov.au/market-reviews-advice/electricity-network-regulation-review	EPR0106
+undated	https://www.aemc.gov.au/market-reviews-advice/future-wholesale-market	​​EPR0093​
+undated	https://www.aemc.gov.au/market-reviews-advice/pricing-review-electricity-pricing-consumer-driven-future	​​EPR0097​
+undated	https://www.aemc.gov.au/market-reviews-advice/review-integrated-system-plan-framework	​​EPR0092​
+undated	https://www.aemc.gov.au/market-reviews-advice/transmission-planning-and-investment-review	EPR0087
+undated	https://www.aemc.gov.au/news-centre/corporate-publications	Corporate publications >
 undated	https://www.aemc.gov.au/news-centre/corporate-publications/joint-market-body-prioritisation-framework	Joint market body prioritisation framework
 undated	https://www.aemc.gov.au/news-centre/corporate-publications/prioritisation-regulatory-initiatives-stakeholder-consultation	Prioritisation of regulatory initiatives – stakeholder consultation
 undated	https://www.aemc.gov.au/news-centre/corporate-publications/prioritising-implementation-timeframes-more-detailed-view	Prioritising implementation timeframes - a more detailed view
 undated	https://www.aemc.gov.au/news-centre/corporate-publications/rule-drafting-philosophy	Rule drafting philosophy
 undated	https://www.aemc.gov.au/news-centre/infographics/improving-certainty-enable-transmission-needed-net-zero	Infographic | Improving certainty to enable the transmission needed for net zero
 undated	https://www.aemc.gov.au/news-centre/infographics/smart-meters-are-key-enabler-transition-net-zero	Infographic | Improving certainty to enable the transmission needed for net zero
-per_domain_cap	https://www.aemc.gov.au/news-centre/media-releases/aemc-applies-new-emissions-reduction-objective	Emissions reduction objective
-per_domain_cap	https://www.aemc.gov.au/news-centre/media-releases/aemc-delivers-enhanced-consumer-protections-help-customers-find-better-energy-deals	Enhanced consumer protections
-per_domain_cap	https://www.aemc.gov.au/news-centre/media-releases/aemc-finalises-landmark-reform-accelerate-smart-meter-rollout	Rule to roll out smart meters by 2030
-per_domain_cap	https://www.aemc.gov.au/news-centre/media-releases/aemc-makes-final-rule-help-vulnerable-consumers-get-energy-bill-help-they-deserve	New rules help vulnerable consumers get energy bill help they deserve
-per_domain_cap	https://www.aemc.gov.au/news-centre/media-releases/aemc-starts-consultation-isp-review	AEMC’s final rule gives consumers smarter data options
-per_domain_cap	https://www.aemc.gov.au/news-centre/media-releases/aemc-undertake-critical-review-reconsider-role-electricity-networks-transition	AEMC to undertake critical review to reconsider the role of electricity networks in the transition
-per_domain_cap	https://www.aemc.gov.au/news-centre/media-releases/aemcs-final-rule-gives-consumers-smarter-data-options	AEMC to undertake critical review to reconsider the role of electricity networks in the transition
-per_domain_cap	https://www.aemc.gov.au/news-centre/media-releases/electricity-pricing-reforms-target-fairness-lower-costs	Electricity pricing reforms target fairness, lower costs
-per_domain_cap	https://www.aemc.gov.au/news-centre/media-releases/faster-renewable-buildout-and-electrification-key-affordable-energy-transition	Price Trends 2025 report published
-per_domain_cap	https://www.aemc.gov.au/news-centre/speeches/aemcs-20th-anniversary	Redesigning the rules: How regulation can enable a smarter, fairer energy system
-per_domain_cap	https://www.aemc.gov.au/news-centre/speeches/coordinating-transition-lower-household-energy-costs-navigating-known-unknowns	Access the full speech
-per_domain_cap	https://www.aemc.gov.au/news-centre/speeches/energy-revolution-our-homes	The energy revolution in our homes
-per_domain_cap	https://www.aemc.gov.au/news-centre/speeches/navigating-dual-trends-power-systems	Navigating dual trends in power systems
-per_domain_cap	https://www.aemc.gov.au/news-centre/submissions-to-enquiry	View All >
-per_domain_cap	https://www.aemc.gov.au/news-centre/submissions-to-inquiries	Submissions to Inquiries >
-per_domain_cap	https://www.aemc.gov.au/news-centre/videos/better-way-read-rules	Making solar, batteries and new energy technology work for everyone
-per_domain_cap	https://www.aemc.gov.au/news-centre/videos/making-solar-batteries-and-new-energy-technology-work-everyone	Making solar, batteries and new energy technology work for everyone
-per_domain_cap	https://www.aemc.gov.au/news-centre/videos/reconciliation-action-plan	Reconciliation action plan
-per_domain_cap	https://www.aemc.gov.au/our-work/changing-energy-rules	Changing the energy rules – a unique process
-per_domain_cap	https://www.aemc.gov.au/our-work/developing-electricity-guidelines-and-standards	Developing electricity guidelines, standards and schedules
-per_domain_cap	https://www.aemc.gov.au/our-work/market-reviews-and-advice	Market reviews and advice
-per_domain_cap	https://www.aemc.gov.au/regulation/electricity-guidelines-and-standards	Electricity guidelines, standards and schedules
-per_domain_cap	https://www.aemc.gov.au/regulation/national-governance	National energy governance
-per_domain_cap	https://www.aemc.gov.au/rule-changes/real-time-data-consumers	ERC0399
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-applies-new-emissions-reduction-objective	Emissions reduction objective
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-delivers-enhanced-consumer-protections-help-customers-find-better-energy-deals	Enhanced consumer protections
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-finalises-landmark-reform-accelerate-smart-meter-rollout	Rule to roll out smart meters by 2030
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-makes-final-rule-help-vulnerable-consumers-get-energy-bill-help-they-deserve	New rules help vulnerable consumers get energy bill help they deserve
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-starts-consultation-isp-review	AEMC’s final rule gives consumers smarter data options
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-undertake-critical-review-reconsider-role-electricity-networks-transition	AEMC to undertake critical review to reconsider the role of electricity networks in the transition
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemcs-final-rule-gives-consumers-smarter-data-options	AEMC to undertake critical review to reconsider the role of electricity networks in the transition
+undated	https://www.aemc.gov.au/news-centre/media-releases/electricity-pricing-reforms-target-fairness-lower-costs	Electricity pricing reforms target fairness, lower costs
+undated	https://www.aemc.gov.au/news-centre/media-releases/faster-renewable-buildout-and-electrification-key-affordable-energy-transition	Price Trends 2025 report published
+undated	https://www.aemc.gov.au/news-centre/speeches/aemcs-20th-anniversary	Redesigning the rules: How regulation can enable a smarter, fairer energy system
+undated	https://www.aemc.gov.au/news-centre/speeches/coordinating-transition-lower-household-energy-costs-navigating-known-unknowns	Access the full speech
+undated	https://www.aemc.gov.au/news-centre/speeches/energy-revolution-our-homes	The energy revolution in our homes
+undated	https://www.aemc.gov.au/news-centre/speeches/navigating-dual-trends-power-systems	Navigating dual trends in power systems
+undated	https://www.aemc.gov.au/news-centre/submissions-to-enquiry	View All >
+undated	https://www.aemc.gov.au/news-centre/submissions-to-inquiries	Submissions to Inquiries >
+undated	https://www.aemc.gov.au/news-centre/videos/better-way-read-rules	Making solar, batteries and new energy technology work for everyone
+undated	https://www.aemc.gov.au/news-centre/videos/making-solar-batteries-and-new-energy-technology-work-everyone	Making solar, batteries and new energy technology work for everyone
+undated	https://www.aemc.gov.au/news-centre/videos/reconciliation-action-plan	Reconciliation action plan
+undated	https://www.aemc.gov.au/our-work/changing-energy-rules	Changing the energy rules – a unique process
+undated	https://www.aemc.gov.au/our-work/developing-electricity-guidelines-and-standards	Developing electricity guidelines, standards and schedules
+undated	https://www.aemc.gov.au/our-work/market-reviews-and-advice	Market reviews and advice
+undated	https://www.aemc.gov.au/regulation/electricity-guidelines-and-standards	Electricity guidelines, standards and schedules
+undated	https://www.aemc.gov.au/regulation/national-governance	National energy governance
+undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers	ERC0399
 undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers-retail	RRC0057
 undated	https://www.aemc.gov.au/sites/default/files/2021-11/4145_AEMC-Price-Trends-2021_National%20A_v4.pdf	Improving certainty to enable the transmission needed for net zero
 undated	https://www.aemc.gov.au/sites/default/files/2022-10/EPR0087-%20Final%20report%20-%20stage%202%20-%20infographic.pdf	Improving certainty to enable the transmission needed for net zero
@@ -68,7 +72,91 @@ undated	https://www.aemc.gov.au/sites/default/files/2025-08/AEMC%20submission%20
 undated	https://www.aemc.gov.au/sites/default/files/2025-09/2025.09.17%20-%20AEMC%20submission%20to%20the%20NEM%20review%20draft%20report_final.pdf	Submission to the National Electricity Market wholesale market settings review draft report
 undated	https://www.aemc.gov.au/sites/default/files/2025-09/AEMC%20submission%20to%20PC%20interim%20report%20-%2015%20Sept%202025.pdf	Submission to Productivity Commission - Cheaper, cleaner energy and the net zero transformation – Interim report
 undated	https://www.aemc.gov.au/sites/default/files/2025-11/2024-25%20AEMC%20Annual%20Report%20final_0.pdf	AEMC Annual Report 2024-2025
-per_domain_cap	https://www.aemc.gov.au/you-can-be-anything-barbies-power-quest	ESS & system security - An update on AEMC reform work program
+undated	https://www.aemc.gov.au/you-can-be-anything-barbies-power-quest	ESS & system security - An update on AEMC reform work program
+undated	https://www.cer.gov.au/news-and-media/news	News | Clean Energy Regulator
+undated	https://www.energynetworks.com.au/news/	News
+undated	https://www.energynetworks.com.au/news/energy-insider/	See all Articles
+undated	https://www.energynetworks.com.au/news/media-releases/	See all Articles
+undated	https://www.energynetworks.com.au/news/speeches-op-eds/	Speeches / Op Eds
+out_of_range	https://www.energynetworks.com.au/news/energy-insider/what-australias-energy-system-wants-for-christmas/	18 Dec 2025 Energy Insider What Australia’s Energy System Wants for Christmas
+out_of_range	https://www.energynetworks.com.au/news/the-age-of-dso/	18 Dec 2025 News The Age of DSO
+out_of_range	https://www.energynetworks.com.au/news/meet-new-ena-chair-andrew-bills/	17 Dec 2025 News Meet new ENA Chair – Andrew Bills
+out_of_range	https://www.energynetworks.com.au/news/energy-insider/why-you-cant-miss-dan-gardner-at-en26/	17 Dec 2025 Energy Insider Why You Can’t Miss Dan Gardner at EN26
+out_of_range	https://www.energynetworks.com.au/news/media-releases/joint-statement-on-the-national-electricity-market-review/	16 Dec 2025 Media releases Joint Statement on the National Electricity Market Review
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-responds-to-aemc-pricing-review-released-today/	15 Dec 2025 Media releases Energy Networks Australia responds to AEMC pricing review released today
+out_of_range	https://www.energynetworks.com.au/news/draft-isp-aims-to-right-size-transmission-and-reinforces-networks-as-the-backbone-of-the-energy-transition/	10 Dec 2025 News Draft ISP aims to right-size transmission and reinforces networks as the backbone of the energy transition
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/changes-to-cheaper-home-batteries-program	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fifth-independent-review-hir-gateway-checks	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fixed-delivery-exit-arrangement-now-permanent	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/market-update-fixed-delivery-exit-arrangement	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/register-solar-water-heaters-version-56-now-available	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/renewable-energy-target-enforcement-action-against-mojo-power-east	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/2024-25-preliminary-safeguard-mechanism-insights-released	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/recall-issued-sigenergy-single-phase-81012-kw-energy-controllers	Read more
+undated	https://arena.gov.au/news/	Back to top
+undated	https://www.aemc.gov.au/about-us/chair-and-commissioners	Chair and commissioners
+undated	https://www.aemc.gov.au/about-us/executive-leadership-team	Executive leadership team
+undated	https://www.aemc.gov.au/about-us/mission-and-values	Vision, mission and values
+undated	https://www.aemc.gov.au/about-us/stakeholder-engagement	Stakeholder engagement
+undated	https://www.aemc.gov.au/charging-ahead-residential-batteries-are-growing-popularity-and-profitability	Charging ahead: Residential batteries are growing in popularity and profitability
+undated	https://www.aemc.gov.au/contact-us/propose-rule-change	Propose a rule change
+undated	https://www.aemc.gov.au/energeia-finds-cer-flexibility-could-deliver-45b-benefits-2050	Charging ahead: Residential batteries are growing in popularity and profitability
+undated	https://www.aemc.gov.au/ess-system-security-update-aemc-reform-work-program	Energeia finds that CER flexibility could deliver $45B in benefits by 2050
+undated	https://www.aemc.gov.au/market-reviews-advice/electricity-network-regulation-review	EPR0106
+undated	https://www.aemc.gov.au/market-reviews-advice/future-wholesale-market	​​EPR0093​
+undated	https://www.aemc.gov.au/market-reviews-advice/pricing-review-electricity-pricing-consumer-driven-future	​​EPR0097​
+undated	https://www.aemc.gov.au/market-reviews-advice/review-integrated-system-plan-framework	​​EPR0092​
+undated	https://www.aemc.gov.au/market-reviews-advice/transmission-planning-and-investment-review	EPR0087
+undated	https://www.aemc.gov.au/news-centre/corporate-publications	Corporate publications >
+undated	https://www.aemc.gov.au/news-centre/corporate-publications/joint-market-body-prioritisation-framework	Joint market body prioritisation framework
+undated	https://www.aemc.gov.au/news-centre/corporate-publications/prioritisation-regulatory-initiatives-stakeholder-consultation	Prioritisation of regulatory initiatives – stakeholder consultation
+undated	https://www.aemc.gov.au/news-centre/corporate-publications/prioritising-implementation-timeframes-more-detailed-view	Prioritising implementation timeframes - a more detailed view
+undated	https://www.aemc.gov.au/news-centre/corporate-publications/rule-drafting-philosophy	Rule drafting philosophy
+undated	https://www.aemc.gov.au/news-centre/infographics/improving-certainty-enable-transmission-needed-net-zero	Infographic | Improving certainty to enable the transmission needed for net zero
+undated	https://www.aemc.gov.au/news-centre/infographics/smart-meters-are-key-enabler-transition-net-zero	Infographic | Improving certainty to enable the transmission needed for net zero
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-applies-new-emissions-reduction-objective	Emissions reduction objective
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-delivers-enhanced-consumer-protections-help-customers-find-better-energy-deals	Enhanced consumer protections
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-finalises-landmark-reform-accelerate-smart-meter-rollout	Rule to roll out smart meters by 2030
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-makes-final-rule-help-vulnerable-consumers-get-energy-bill-help-they-deserve	New rules help vulnerable consumers get energy bill help they deserve
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-starts-consultation-isp-review	AEMC’s final rule gives consumers smarter data options
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemc-undertake-critical-review-reconsider-role-electricity-networks-transition	AEMC to undertake critical review to reconsider the role of electricity networks in the transition
+undated	https://www.aemc.gov.au/news-centre/media-releases/aemcs-final-rule-gives-consumers-smarter-data-options	AEMC to undertake critical review to reconsider the role of electricity networks in the transition
+undated	https://www.aemc.gov.au/news-centre/media-releases/electricity-pricing-reforms-target-fairness-lower-costs	Electricity pricing reforms target fairness, lower costs
+undated	https://www.aemc.gov.au/news-centre/media-releases/faster-renewable-buildout-and-electrification-key-affordable-energy-transition	Price Trends 2025 report published
+undated	https://www.aemc.gov.au/news-centre/speeches/aemcs-20th-anniversary	Redesigning the rules: How regulation can enable a smarter, fairer energy system
+undated	https://www.aemc.gov.au/news-centre/speeches/coordinating-transition-lower-household-energy-costs-navigating-known-unknowns	Access the full speech
+undated	https://www.aemc.gov.au/news-centre/speeches/energy-revolution-our-homes	The energy revolution in our homes
+undated	https://www.aemc.gov.au/news-centre/speeches/navigating-dual-trends-power-systems	Navigating dual trends in power systems
+undated	https://www.aemc.gov.au/news-centre/submissions-to-enquiry	View All >
+undated	https://www.aemc.gov.au/news-centre/submissions-to-inquiries	Submissions to Inquiries >
+undated	https://www.aemc.gov.au/news-centre/videos/better-way-read-rules	Making solar, batteries and new energy technology work for everyone
+undated	https://www.aemc.gov.au/news-centre/videos/making-solar-batteries-and-new-energy-technology-work-everyone	Making solar, batteries and new energy technology work for everyone
+undated	https://www.aemc.gov.au/news-centre/videos/reconciliation-action-plan	Reconciliation action plan
+undated	https://www.aemc.gov.au/our-work/changing-energy-rules	Changing the energy rules – a unique process
+undated	https://www.aemc.gov.au/our-work/developing-electricity-guidelines-and-standards	Developing electricity guidelines, standards and schedules
+undated	https://www.aemc.gov.au/our-work/market-reviews-and-advice	Market reviews and advice
+undated	https://www.aemc.gov.au/regulation/electricity-guidelines-and-standards	Electricity guidelines, standards and schedules
+undated	https://www.aemc.gov.au/regulation/national-governance	National energy governance
+undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers	ERC0399
+undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers-retail	RRC0057
+undated	https://www.aemc.gov.au/sites/default/files/2021-11/4145_AEMC-Price-Trends-2021_National%20A_v4.pdf	Improving certainty to enable the transmission needed for net zero
+undated	https://www.aemc.gov.au/sites/default/files/2022-10/EPR0087-%20Final%20report%20-%20stage%202%20-%20infographic.pdf	Improving certainty to enable the transmission needed for net zero
+undated	https://www.aemc.gov.au/sites/default/files/2022-12/AEMC%20Annual%20Report%202021%20-%202022.pdf	AEMC Annual Report 2021-2022
+undated	https://www.aemc.gov.au/sites/default/files/2023-05/EPR0087%20-%20final%20-%20infographic.pdf	Making transmission investment and delivery more timely and efficient – to enable the transition to net zero
+undated	https://www.aemc.gov.au/sites/default/files/2023-08/emo0040_-aemc_metering_services_infographic.pdf	Making transmission investment and delivery more timely and efficient – to enable the transition to net zero
+undated	https://www.aemc.gov.au/sites/default/files/2023-12/AEMC_annual_report_2022-23_web_v2.pdf	AEMC Annual Report 2022-2023
+undated	https://www.aemc.gov.au/sites/default/files/2024-12/AEMC_annual_report_2023-24.pdf	AEMC Annual Report 2023-2024
+undated	https://www.aemc.gov.au/sites/default/files/2025-08/20250725%20AEMC%20-%20Submission%20in%20response%20to%20the%20NSW%20Transmission%20Planning%20Review%20Interim%20Report.pdf	AEMC submission to the NSW Transmission Planning Review – Interim report
+undated	https://www.aemc.gov.au/sites/default/files/2025-08/AEMC%20submission%20to%20the%20CCA%202025%20Issues%20Paper.pdf	Submission to Productivity Commission - Cheaper, cleaner energy and the net zero transformation – Interim report
+undated	https://www.aemc.gov.au/sites/default/files/2025-09/2025.09.17%20-%20AEMC%20submission%20to%20the%20NEM%20review%20draft%20report_final.pdf	Submission to the National Electricity Market wholesale market settings review draft report
+undated	https://www.aemc.gov.au/sites/default/files/2025-09/AEMC%20submission%20to%20PC%20interim%20report%20-%2015%20Sept%202025.pdf	Submission to Productivity Commission - Cheaper, cleaner energy and the net zero transformation – Interim report
+undated	https://www.aemc.gov.au/sites/default/files/2025-11/2024-25%20AEMC%20Annual%20Report%20final_0.pdf	AEMC Annual Report 2024-2025
+undated	https://www.aemc.gov.au/you-can-be-anything-barbies-power-quest	ESS & system security - An update on AEMC reform work program
+undated	https://www.cer.gov.au/news-and-media/news	News | Clean Energy Regulator
+undated	https://www.energynetworks.com.au/news/	News
+undated	https://www.energynetworks.com.au/news/energy-insider/	See all Articles
+undated	https://www.energynetworks.com.au/news/media-releases/	See all Articles
+undated	https://www.energynetworks.com.au/news/speeches-op-eds/	Speeches / Op Eds
 out_of_range	https://www.efrag.org/en/news-and-calendar/news	News
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-11-february-2026	Read more about EFRAG FR TEG Online Meeting - 11 February 2026
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-12-february-2026	Read more about EFRAG SRB Online Meeting 12 February 2026
@@ -85,7 +173,7 @@ out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-due
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/new-educational-video-series-available-to-navigate-vsme-implementation	Read more about New educational video series available to navigate VSME implementation
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-calls-for-expression-of-interest-on-vsme-digital-tools-and-platforms	Read more about EFRAG calls for expression of interest on VSME digital tools and platforms
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-5-february-2026	Read more about EFRAG SR TEG Online Meeting 5 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-28-january-2026	Read more about EFRAG SRB Online Meeting 28 January 2026
+not_articleish	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A141	Vacancy
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-22-january-2026	Read more about EFRAG SR TEG Online Meeting 22 January 2026
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-21-january-2026	Read more about EFRAG FR TEG Online Meeting - 21 January 2026
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/join-the-first-sme-forum-meeting-of-2026	Read more about Join the First SME Forum Meeting of 2026
@@ -173,7 +261,7 @@ out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-due
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/new-educational-video-series-available-to-navigate-vsme-implementation	Read more about New educational video series available to navigate VSME implementation
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-calls-for-expression-of-interest-on-vsme-digital-tools-and-platforms	Read more about EFRAG calls for expression of interest on VSME digital tools and platforms
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-5-february-2026	Read more about EFRAG SR TEG Online Meeting 5 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-28-january-2026	Read more about EFRAG SRB Online Meeting 28 January 2026
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A141	Vacancy
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-22-january-2026	Read more about EFRAG SR TEG Online Meeting 22 January 2026
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-21-january-2026	Read more about EFRAG FR TEG Online Meeting - 21 January 2026
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/join-the-first-sme-forum-meeting-of-2026	Read more about Join the First SME Forum Meeting of 2026
@@ -297,39 +385,43 @@ out_of_range	https://arena.gov.au/funding/future-made-in-australia-innovation-fu
 out_of_range	https://arena.gov.au/funding/research-development-program/	Research and Development
 deny_title_regex	https://about.bnef.com/insights/climate-week-and-cop-public-research/	Discover BNEF's Climate Week and COP Public Research, freely available to non-subscribers.
 undated	https://about.bnef.com/insights/type/report/	All Reports
-per_domain_cap	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
-per_domain_cap	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
-per_domain_cap	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
-per_domain_cap	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
-per_domain_cap	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
-per_domain_cap	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
-per_domain_cap	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
-per_domain_cap	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
-per_domain_cap	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
-per_domain_cap	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
-per_domain_cap	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
-per_domain_cap	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
-per_domain_cap	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
-per_domain_cap	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
-per_domain_cap	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
-per_domain_cap	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
-per_domain_cap	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
-per_domain_cap	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
-per_domain_cap	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
-per_domain_cap	https://arena.gov.au/funding/power-system-services/	System Security
-per_domain_cap	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
-per_domain_cap	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
-per_domain_cap	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
-per_domain_cap	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
-per_domain_cap	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
-per_domain_cap	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
-per_domain_cap	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
-per_domain_cap	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
-per_domain_cap	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
-per_domain_cap	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
-per_domain_cap	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
-per_domain_cap	https://arena.gov.au/knowledge-bank	Funding Opportunities
-per_domain_cap	https://arena.gov.au/news	Funding Opportunities
+undated	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+undated	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+undated	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+undated	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+undated	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+undated	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+undated	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+undated	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+undated	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+undated	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+undated	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+undated	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+undated	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+undated	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+undated	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+undated	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+undated	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+undated	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+undated	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+undated	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+undated	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+undated	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+undated	https://arena.gov.au/funding/power-system-services/	System Security
+undated	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+undated	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+undated	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+undated	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+undated	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+undated	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+undated	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+undated	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+undated	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+undated	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+undated	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
+undated	https://arena.gov.au/news	Funding Opportunities
+undated	https://arena.gov.au/news/	Back to top
 undated	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
 deny_title_regex	https://www.ifrs.org/news-and-events/updates/issb/	Cookie details
 out_of_range	https://about.bnef.com/insights/commodities/transition-metal-outlook/	REPORT Transition Metals Outlook
@@ -384,38 +476,138 @@ out_of_range	https://arena.gov.au/funding/future-made-in-australia-innovation-fu
 out_of_range	https://arena.gov.au/funding/research-development-program/	Research and Development
 deny_title_regex	https://about.bnef.com/insights/climate-week-and-cop-public-research/	Discover BNEF's Climate Week and COP Public Research, freely available to non-subscribers.
 undated	https://about.bnef.com/insights/type/report/	All Reports
-per_domain_cap	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
-per_domain_cap	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
-per_domain_cap	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
-per_domain_cap	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
-per_domain_cap	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
-per_domain_cap	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
-per_domain_cap	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
-per_domain_cap	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
-per_domain_cap	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
-per_domain_cap	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
-per_domain_cap	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
-per_domain_cap	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
-per_domain_cap	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
-per_domain_cap	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
-per_domain_cap	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
-per_domain_cap	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
-per_domain_cap	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
-per_domain_cap	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
-per_domain_cap	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
-per_domain_cap	https://arena.gov.au/funding/power-system-services/	System Security
-per_domain_cap	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
-per_domain_cap	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
-per_domain_cap	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
-per_domain_cap	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
-per_domain_cap	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
-per_domain_cap	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
-per_domain_cap	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
-per_domain_cap	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
-per_domain_cap	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
-per_domain_cap	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
-per_domain_cap	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
-per_domain_cap	https://arena.gov.au/knowledge-bank	Funding Opportunities
-per_domain_cap	https://arena.gov.au/news	Funding Opportunities
+undated	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+undated	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+undated	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+undated	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+undated	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+undated	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+undated	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+undated	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+undated	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+undated	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+undated	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+undated	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+undated	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+undated	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+undated	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+undated	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+undated	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+undated	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+undated	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+undated	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+undated	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+undated	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+undated	https://arena.gov.au/funding/power-system-services/	System Security
+undated	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+undated	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+undated	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+undated	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+undated	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+undated	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+undated	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+undated	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+undated	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+undated	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+undated	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
+undated	https://arena.gov.au/news	Funding Opportunities
+undated	https://arena.gov.au/news/	Back to top
 undated	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
+deny_title_regex	https://www.ifrs.org/news-and-events/updates/issb/	Cookie details
+out_of_range	https://about.bnef.com/insights/commodities/transition-metal-outlook/	REPORT Transition Metals Outlook
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-december-2025.html	ISSB Update December 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-november-2025.html	ISSB Update November 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-october-2025.html	ISSB Update October 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html	ISSB Update September 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-july-2025.html	ISSB Update July 2025
+out_of_range	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/	REPORT Electric Vehicle Outlook
+out_of_range	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook/	Electric Vehicle Outlook
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-june-2025.html	ISSB Update June 2025
+out_of_range	https://about.bnef.com/insights/clean-energy/new-energy-outlook/	New Energy Outlook
+out_of_range	https://about.bnef.com/insights/uncategorized/new-energy-outlook/	REPORT New Energy Outlook
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-may-2025.html	ISSB Update May 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-april-2025.html	ISSB Update April 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-march-2025.html	ISSB Update March 2025
+out_of_range	https://about.bnef.com/insights/finance/energy-transition-investment-trends/	Energy Transition Investment Trends
+out_of_range	https://about.bnef.com/insights/uncategorized/energy-transition-investment-trends/	REPORT Energy Transition Investment Trends
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/iasb-issb/2025/iasb-issb-update-february-2025.html	IASB–ISSB Update February 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-february-2025.html	ISSB Update February 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html	ISSB Update January 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-december-2024.html	ISSB Update December 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-november-2024.html	ISSB Update November 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-october-2024.html	ISSB Update October 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-september-2024.html	ISSB Update September 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-july-2024.html	ISSB Update July 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-june-2024.html	ISSB Update June 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-may-2024.html	ISSB Update May 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-april-2024.html	ISSB Update April 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-march-2024.html	ISSB Update March 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-february-2024.html	ISSB Update February 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/joint-iasb-issb-update-january-2024.html	IASB–ISSB Update January 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-december-2023.html	ISSB Update December 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-november-2023.html	ISSB Update November 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-october-2023.html	ISSB Update October 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-september-2023.html	ISSB Update September 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-july-2023.html	ISSB Update July 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-may-2023.html	ISSB Update May 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-april-2023.html	ISSB Update April 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/supplementary-issb-update-april-2023.html	Supplementary ISSB Update April 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-march-2023.html	ISSB Update March 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-february-2023.html	ISSB Update February 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-january-2023.html	ISSB Update January 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-november-2022.html	ISSB Update November 2022
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/supplementary-issb-update-november-2022.html	Supplementary ISSB Update November 2022
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-october-2022.html	ISSB Update October 2022
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-september-2022.html	ISSB Update September 2022
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
+out_of_range	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+out_of_range	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+out_of_range	https://arena.gov.au/funding/research-development-program/	Research and Development
+deny_title_regex	https://about.bnef.com/insights/climate-week-and-cop-public-research/	Discover BNEF's Climate Week and COP Public Research, freely available to non-subscribers.
+undated	https://about.bnef.com/insights/type/report/	All Reports
+undated	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+undated	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+undated	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+undated	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+undated	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+undated	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+undated	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+undated	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+undated	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+undated	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+undated	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+undated	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+undated	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+undated	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+undated	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+undated	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+undated	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+undated	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+undated	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+undated	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+undated	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+undated	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+undated	https://arena.gov.au/funding/power-system-services/	System Security
+undated	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+undated	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+undated	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+undated	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+undated	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+undated	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+undated	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+undated	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+undated	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+undated	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+undated	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
+undated	https://arena.gov.au/news	Funding Opportunities
+undated	https://arena.gov.au/news/	Back to top
+undated	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
+deny_title_regex	https://www.ifrs.org/news-and-events/updates/issb/	Cookie details
+not_articleish	https://arena.gov.au/knowledge-bank	Funding Opportunities
+low_substance_last_resort	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+low_substance_last_resort	https://about.bnef.com/insights/type/report/	All Reports
+deny_title_regex	https://about.bnef.com/insights/climate-week-and-cop-public-research/	Discover BNEF's Climate Week and COP Public Research, freely available to non-subscribers.
 deny_title_regex	https://www.ifrs.org/news-and-events/updates/issb/	Cookie details

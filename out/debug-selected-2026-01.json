@@ -16,46 +16,6 @@
     "published_ts": 1767225600.0
   },
   {
-    "section": "Energy Transition",
-    "title": "Back to top",
-    "url": "https://arena.gov.au/news/",
-    "publisher": "arena.gov.au",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "Energy Transition",
-    "title": "Chair and commissioners",
-    "url": "https://www.aemc.gov.au/about-us/chair-and-commissioners",
-    "publisher": "aemc.gov.au",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "Energy Transition",
-    "title": "Vision, mission and values",
-    "url": "https://www.aemc.gov.au/about-us/mission-and-values",
-    "publisher": "aemc.gov.au",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "Energy Transition",
-    "title": "Stakeholder engagement",
-    "url": "https://www.aemc.gov.au/about-us/stakeholder-engagement",
-    "publisher": "aemc.gov.au",
-    "published": null,
-    "published_ts": null
-  },
-  {
-    "section": "Energy Transition",
-    "title": "News | Clean Energy Regulator",
-    "url": "https://www.cer.gov.au/news-and-media/news",
-    "publisher": "cer.gov.au",
-    "published": null,
-    "published_ts": null
-  },
-  {
     "section": "ESG Reporting",
     "title": "Read more about EFRAG FRB Online Meeting - 29 January 2026",
     "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-29-january-2026",
@@ -73,11 +33,11 @@
   },
   {
     "section": "ESG Reporting",
-    "title": "Vacancy",
-    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A141",
+    "title": "Read more about EFRAG SRB Online Meeting 28 January 2026",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-28-january-2026",
     "publisher": "efrag.org",
-    "published": "2026-01-27T12:00:00+00:00",
-    "published_ts": 1769515200.0
+    "published": "2026-01-26T12:00:00+00:00",
+    "published_ts": 1769428800.0
   },
   {
     "section": "ESG Reporting",
@@ -89,26 +49,58 @@
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Accelerated Step Change Initiative (ASCI)",
-    "url": "https://arena.gov.au/funding/accelerated-step-change-initiative-asci/",
-    "publisher": "arena.gov.au",
-    "published": null,
-    "published_ts": null
+    "title": "ISSB Update January 2023",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-january-2023.html",
+    "publisher": "ifrs.org",
+    "published": "2023-01-01T00:00:00+00:00",
+    "published_ts": 1672531200.0
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost",
-    "url": "https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/",
-    "publisher": "arena.gov.au",
-    "published": null,
-    "published_ts": null
+    "title": "ISSB Update October 2022",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-october-2022.html",
+    "publisher": "ifrs.org",
+    "published": "2022-10-01T00:00:00+00:00",
+    "published_ts": 1664582400.0
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Australian Solar Institute",
-    "url": "https://arena.gov.au/funding/australian-solar-institute/",
-    "publisher": "arena.gov.au",
-    "published": null,
-    "published_ts": null
+    "title": "ISSB Update December 2022",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html",
+    "publisher": "ifrs.org",
+    "published": "2022-12-01T00:00:00+00:00",
+    "published_ts": 1669852800.0
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "ISSB Update January 2025",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html",
+    "publisher": "ifrs.org",
+    "published": "2025-01-01T00:00:00+00:00",
+    "published_ts": 1735689600.0
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "ISSB Update September 2025",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html",
+    "publisher": "ifrs.org",
+    "published": "2025-09-01T00:00:00+00:00",
+    "published_ts": 1756684800.0
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "ISSB Update September 2022",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-september-2022.html",
+    "publisher": "ifrs.org",
+    "published": "2022-09-01T00:00:00+00:00",
+    "published_ts": 1661990400.0
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "ISSB Update November 2022",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-november-2022.html",
+    "publisher": "ifrs.org",
+    "published": "2022-11-01T00:00:00+00:00",
+    "published_ts": 1667260800.0
   }
 ]

@@ -1,111 +1,99 @@
 # Signals Digest — January 2026
 
 ## Top Lines
-- Energy Networks Australia emphasizes the need for equitable access to clean energy solutions for all Australians, particularly through initiatives like the Solar Sharer Offer.
-- The International Sustainability Standards Board (ISSB) is advancing its standard-setting project on nature-related risks, reflecting a growing focus on environmental accountability in corporate reporting.
-- EFRAG is actively seeking candidates for its Sustainability Reporting Technical Expert Group, highlighting the importance of diverse expertise in shaping future sustainability reporting standards.
+- Energy Networks Australia supports the Solar Sharer Offer to address energy inequity in the clean energy transition.
+- EFRAG is actively seeking candidates for its Sustainability Reporting Technical Expert Group to enhance ESG reporting standards.
+- The ISSB is progressing with standard-setting on nature-related risks and opportunities, emphasizing the importance of sustainability disclosures.
 
 ## Energy Transition
 ### Solar Sharer Offer Next Steps
 - **PUBLISHER:** energynetworks.com.au
 - **PUBLISHED:** 2026-01-23
-- **Summary:** Energy Networks Australia has welcomed the outcomes of the Solar Sharer Offer, which aims to address the disparity in access to clean energy solutions among Australian households. ENA CEO Dom van den Berg highlighted the importance of aligning policy, infrastructure investment, and energy tariffs to ensure the program's success. The initiative seeks to support households that cannot install rooftop solar or purchase electric vehicles, thereby promoting equity in the energy transition.
+- **Summary:** Energy Networks Australia (ENA) has welcomed the release of the Solar Sharer Offer outcomes paper, emphasizing the need to address energy inequity in Australia's clean energy transition. ENA CEO Dom van den Berg highlighted the importance of aligning policy, infrastructure investment, and energy tariffs to ensure the program's success. The Solar Sharer Offer aims to provide benefits to households unable to install rooftop solar or purchase electric vehicles, particularly renters. ENA is committed to working with the Australian Energy Regulator to create a pathway for lasting benefits for all Australians.
 - **Why it matters:** 
-  - It addresses energy inequity among households.
-  - Aligning policy and investment is crucial for program success.
+  - Addresses energy inequity among households in the clean energy transition.
+  - Aligns policy and infrastructure investment to maximize program benefits.
 - **Source:** https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-solar-sharer-offer-next-steps/
 
 ### Q4 2025 Carbon Market Report Data
 - **PUBLISHER:** cer.gov.au
 - **PUBLISHED:** 2026-01-01
-- **Summary:** The Q4 2025 Quarterly Carbon Market Report (QCMR) data workbook has been released, providing early access to information on the Australian carbon market. The full QCMR, which will include forecasts and commentary, is expected to be published by mid-March 2026. This initiative aims to enhance transparency and accessibility of carbon market data for stakeholders.
+- **Summary:** The Q4 2025 Quarterly Carbon Market Report (QCMR) data workbook has been released, providing early access to information on the Australian carbon market. The full QCMR, which will include forecasts and commentary, is expected to be published by mid-March 2026. The data workbook will be updated with additional data and charts once the full report is available.
 - **Why it matters:** 
-  - Early access to data supports informed decision-making.
-  - Enhances transparency in the carbon market.
+  - Offers timely insights into the carbon market for stakeholders.
+  - Supports informed decision-making in carbon trading and policy.
 - **Source:** https://www.cer.gov.au/news-and-media/news/2026/january/explore-q4-2025-qcmr-data-workbook
 
-### Accelerated Step Change Initiative
-- **PUBLISHER:** arena.gov.au
-- **PUBLISHED:** Unknown
-- **Summary:** The Accelerated Step Change Initiative (ASCI) by ARENA supports exceptional, breakthrough projects that do not fit existing funding programs. This initiative aims to foster innovation and accelerate the transition to renewable energy technologies.
-- **Why it matters:** 
-  - Encourages innovative projects in renewable energy.
-  - Aims to overcome funding barriers for breakthrough technologies.
-- **Source:** https://arena.gov.au/funding/accelerated-step-change-initiative-asci/
-
-### Addressing Solar PV End-of-Life Issues
-- **PUBLISHER:** arena.gov.au
-- **PUBLISHED:** Unknown
-- **Summary:** ARENA is providing up to $15 million to support research and development aimed at addressing end-of-life issues for solar PV panels and lowering their costs. The initiative focuses on innovative solutions for sustainable management of solar PV panels and aims to enhance the overall cost-effectiveness of solar technologies.
-- **Why it matters:** 
-  - Supports sustainable management of solar technologies.
-  - Aims to reduce costs associated with solar PV.
-- **Source:** https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/
-
 ## ESG Reporting
-### EFRAG FRB Online Meeting Announcement
+### EFRAG FRB Online Meeting
 - **PUBLISHER:** efrag.org
 - **PUBLISHED:** 2026-01-28
-- **Summary:** EFRAG has announced an online meeting for its Financial Reporting Board (FRB) scheduled for January 29, 2026. The agenda and supporting documents for the meeting are available, along with a registration form for those interested in attending the live webcast or accessing the on-demand recording.
+- **Summary:** The EFRAG Financial Reporting Board (FRB) will hold an online meeting on 29 January 2026. The agenda and supporting documents for the meeting are available, along with a registration form for those interested in watching the live webcast or accessing the on-demand recording.
 - **Why it matters:** 
-  - Provides stakeholders with insights into EFRAG's activities.
-  - Encourages participation in discussions on financial reporting.
+  - Provides an opportunity for stakeholders to engage with EFRAG's activities.
+  - Facilitates transparency in the development of sustainability reporting standards.
 - **Source:** https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-29-january-2026
 
 ### EFRAG Opens Call for Candidates
 - **PUBLISHER:** efrag.org
 - **PUBLISHED:** 2026-01-27
-- **Summary:** EFRAG has opened applications for its Sustainability Reporting Technical Expert Group (SR TEG), seeking professionals with expertise in ESG. Successful candidates will advise on the draft European Sustainability Reporting Standards (ESRS) and implementation support. Applications close on March 1, 2026.
+- **Summary:** EFRAG has opened applications for its Sustainability Reporting Technical Expert Group (SR TEG), inviting professionals with expertise in ESG to apply. The group will provide technical advice on the draft European Sustainability Reporting Standards (ESRS) and implementation support. Applications are open until 1 March 2026, and EFRAG emphasizes the importance of diversity in candidate selection.
 - **Why it matters:** 
-  - Aims to enhance the quality of sustainability reporting.
-  - Encourages diverse expertise in ESG standards development.
+  - Enhances the quality and relevance of sustainability reporting standards.
+  - Encourages diverse perspectives in the development of ESG frameworks.
 - **Source:** https://www.efrag.org/en/news-and-calendar/news/efrag-opens-call-for-candidates-to-join-its-sustainability-reporting-technical-expert-group
+
+### EFRAG SRB Online Meeting
+- **PUBLISHER:** efrag.org
+- **PUBLISHED:** 2026-01-26
+- **Summary:** An online meeting of the EFRAG Sustainability Reporting Board (SRB) is scheduled for 28 January 2026. The meeting will be open to registered observers, and the agenda and supporting documents are available for review. Participants can register to watch the live webcast or access the recording afterward.
+- **Why it matters:** 
+  - Promotes stakeholder engagement in sustainability reporting discussions.
+  - Provides insights into EFRAG's ongoing initiatives and decision-making processes.
+- **Source:** https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-28-january-2026
 
 ### ISSB Update January 2026
 - **PUBLISHER:** ifrs.org
 - **PUBLISHED:** 2026-01-01
-- **Summary:** The ISSB Update outlines preliminary decisions made by the International Sustainability Standards Board regarding its standard-setting project on nature-related risks and opportunities. The ISSB plans to continue discussions on developing defined terms for disclosure requirements.
+- **Summary:** The ISSB Update outlines preliminary decisions made by the International Sustainability Standards Board regarding its standard-setting projects. The ISSB is focusing on nature-related risks and opportunities, with discussions on developing defined terms for disclosure requirements. The board aims to enhance sustainability disclosures to meet user needs.
 - **Why it matters:** 
-  - Reflects the ISSB's commitment to enhancing sustainability disclosures.
-  - Addresses the growing importance of environmental factors in corporate reporting.
+  - Advances the development of standards for nature-related disclosures.
+  - Addresses the growing importance of sustainability in financial reporting.
 - **Source:** https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html
 
-### EFRAG Vacancy Announcement
-- **PUBLISHER:** efrag.org
-- **PUBLISHED:** 2026-01-27
-- **Summary:** EFRAG has announced a vacancy for its Sustainability Reporting Technical Expert Group, inviting applications from professionals with expertise in ESG. This initiative aims to strengthen the group's capacity to provide technical advice on sustainability reporting standards.
-- **Why it matters:** 
-  - Highlights the need for expert input in sustainability reporting.
-  - Aims to ensure diverse representation in the group.
-- **Source:** https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A141
-
 ## Sustainable Finance & Investment
-### Australian Solar Institute Overview
-- **PUBLISHER:** arena.gov.au
-- **PUBLISHED:** Unknown
-- **Summary:** The Australian Solar Institute (ASI), which operated until its merger into ARENA in 2012, developed a significant portfolio to support solar research and innovation in Australia. ASI aimed to reduce costs and enhance the competitiveness of solar technologies through various research initiatives.
+### ISSB Update January 2025
+- **PUBLISHER:** ifrs.org
+- **PUBLISHED:** 2025-01-01
+- **Summary:** The ISSB met to discuss updates on research projects related to biodiversity, ecosystems, and human capital. The board reviewed findings on investor interest in these areas and considered how entities might disclose relevant information in their financial statements. No decisions were made, but further updates are anticipated.
 - **Why it matters:** 
-  - Highlights Australia's commitment to solar research and innovation.
-  - Demonstrates the impact of government funding on renewable energy advancements.
-- **Source:** https://arena.gov.au/funding/australian-solar-institute/
+  - Highlights the increasing focus on biodiversity and ecosystems in financial reporting.
+  - Aims to improve transparency regarding sustainability-related risks and opportunities.
+- **Source:** https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html
 
-### Insufficient extract; see source.
-- **PUBLISHER:** arena.gov.au
-- **PUBLISHED:** Unknown
-- **Summary:** Insufficient extract; see source.
+### ISSB Update September 2025
+- **PUBLISHER:** ifrs.org
+- **PUBLISHED:** 2025-09-01
+- **Summary:** The ISSB Update highlights discussions on nature-related risks and opportunities, focusing on the common information needs of primary users of financial reports. The board is considering developing educational materials to support entities in disclosing relevant information. No decisions were made during the meetings.
 - **Why it matters:** 
-- **Source:** https://arena.gov.au/funding/australian-solar-institute/
+  - Addresses the need for improved disclosures on nature-related risks.
+  - Supports entities in aligning with evolving sustainability reporting standards.
+- **Source:** https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html
 
-### Insufficient extract; see source.
-- **PUBLISHER:** arena.gov.au
-- **PUBLISHED:** Unknown
-- **Summary:** Insufficient extract; see source.
+### ISSB Update October 2022
+- **PUBLISHER:** ifrs.org
+- **PUBLISHED:** 2022-10-01
+- **Summary:** The ISSB met to discuss redeliberations of its exposure drafts on sustainability-related disclosures. Key topics included the objectives of the drafts, requirements for disclosing greenhouse gas emissions, and the integration of industry-based materials into the work plan. The board aims to enhance interoperability between global and jurisdiction-specific requirements.
 - **Why it matters:** 
-- **Source:** https://arena.gov.au/funding/australian-solar-institute/
+  - Aims to improve the clarity and applicability of sustainability disclosure standards.
+  - Supports entities in meeting diverse reporting requirements.
+- **Source:** https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-october-2022.html
 
-### Insufficient extract; see source.
-- **PUBLISHER:** arena.gov.au
-- **PUBLISHED:** Unknown
-- **Summary:** Insufficient extract; see source.
+### ISSB Update November 2022
+- **PUBLISHER:** ifrs.org
+- **PUBLISHED:** 2022-11-01
+- **Summary:** The ISSB discussed feedback on its exposure drafts related to sustainability disclosures, focusing on the financial effects of sustainability-related risks and opportunities. The board is considering staff recommendations for improving the clarity and application of these requirements in future meetings.
 - **Why it matters:** 
-- **Source:** https://arena.gov.au/funding/australian-solar-institute/
+  - Enhances the relevance of sustainability disclosures for financial performance.
+  - Aims to provide clearer guidance for entities in reporting sustainability-related information.
+- **Source:** https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-november-2022.html
