@@ -79,6 +79,11 @@ BUILTIN_DENY_URL_SUBSTRINGS = [
     "oauth-redirect", "j_security_check", "login", "signin", "sign-in", "subscribe", "newsletter",
     "utm_", "fbclid=", "gclid=", "mc_cid=", "mc_eid=",
     "open.spotify.com", "spotify.com",
+    # non-content / evergreen
+    "about-us", "contact-us", "privacy", "terms", "cookies", "cookie-policy", "accessibility", "sitemap",
+    "careers", "jobs", "vacancies", "board", "governance", "annual-report", "annual-reports",
+    "events", "event", "webinar", "conference", "speakers", "our-people", "leadership",
+    "consultation", "consultations", "have-your-say", "submissions",
 ]
 
 BUILTIN_DENY_TITLE_REGEX = [
@@ -161,26 +166,6 @@ def _in_range(ts: Any, start: Any, end: Any) -> bool:
     if s2 is None or e2 is None:
         return True
     return s2 <= ts2 <= e2
-
-def _postfilter_selected(selected: List[Item], start_dt: datetime, end_dt: datetime) -> Tuple[List[Item], List[Dict[str, str]]]:
-    """Final safety filter to prevent out-of-range leakage from any fallback paths."""
-    drops: List[Dict[str, str]] = []
-    kept: List[Item] = []
-    for it in selected:
-        url = (it.url or "").strip()
-        ts = _effective_published_ts(it)
-        if ts is None:
-            if not ALLOW_UNDATED:
-                drops.append({"reason": "undated_postfilter", "url": url, "title": it.title or ""})
-                continue
-            kept.append(it)
-            continue
-        if not _in_range(ts, start_dt, end_dt):
-            drops.append({"reason": "out_of_range_postfilter", "url": url, "title": it.title or "", "meta": str(ts)})
-            continue
-        kept.append(it)
-    return kept, drops
-
 
 
 def _is_priority(url: str) -> bool:
@@ -766,10 +751,6 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
             )
             selected = [placeholder]
             all_drops.append({"reason": "placeholder_used", "url": "", "title": placeholder.title})
-
-        # Final safety filter: ensure no out-of-range items leak from fallbacks
-        selected, drops_pf = _postfilter_selected(selected, start_dt, end_dt)
-        all_drops.extend(drops_pf)
 
         print(f"[selected] {len(selected)} from {section}")
         all_selected.extend(selected)
