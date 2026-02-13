@@ -1,25 +1,113 @@
 [
   {
     "section": "Energy Transition",
-    "title": "Energy Transition: no retrievable items for 2026-01",
-    "url": "",
-    "publisher": "pipeline",
+    "title": "23 Jan 2026 News Energy Networks Australia welcomes Solar Sharer Offer next steps",
+    "url": "https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-solar-sharer-offer-next-steps/",
+    "publisher": "energynetworks.com.au",
+    "published": "2026-01-23T02:01:04+00:00",
+    "published_ts": 1769133664.0
+  },
+  {
+    "section": "Energy Transition",
+    "title": "Read more",
+    "url": "https://www.cer.gov.au/news-and-media/news/2026/january/explore-q4-2025-qcmr-data-workbook",
+    "publisher": "cer.gov.au",
+    "published": "2026-01-01T00:00:00+00:00",
+    "published_ts": 1767225600.0
+  },
+  {
+    "section": "Energy Transition",
+    "title": "Back to top",
+    "url": "https://arena.gov.au/news/",
+    "publisher": "arena.gov.au",
+    "published": null,
+    "published_ts": null
+  },
+  {
+    "section": "Energy Transition",
+    "title": "Chair and commissioners",
+    "url": "https://www.aemc.gov.au/about-us/chair-and-commissioners",
+    "publisher": "aemc.gov.au",
+    "published": null,
+    "published_ts": null
+  },
+  {
+    "section": "Energy Transition",
+    "title": "Vision, mission and values",
+    "url": "https://www.aemc.gov.au/about-us/mission-and-values",
+    "publisher": "aemc.gov.au",
+    "published": null,
+    "published_ts": null
+  },
+  {
+    "section": "Energy Transition",
+    "title": "Stakeholder engagement",
+    "url": "https://www.aemc.gov.au/about-us/stakeholder-engagement",
+    "publisher": "aemc.gov.au",
+    "published": null,
+    "published_ts": null
+  },
+  {
+    "section": "Energy Transition",
+    "title": "News | Clean Energy Regulator",
+    "url": "https://www.cer.gov.au/news-and-media/news",
+    "publisher": "cer.gov.au",
     "published": null,
     "published_ts": null
   },
   {
     "section": "ESG Reporting",
-    "title": "ESG Reporting: no retrievable items for 2026-01",
-    "url": "",
-    "publisher": "pipeline",
+    "title": "Read more about EFRAG FRB Online Meeting - 29 January 2026",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-29-january-2026",
+    "publisher": "efrag.org",
+    "published": "2026-01-28T12:00:00+00:00",
+    "published_ts": 1769601600.0
+  },
+  {
+    "section": "ESG Reporting",
+    "title": "Read more about EFRAG Opens Call for Candidates to Join its Sustainability Reporting Technical Expert Group",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-opens-call-for-candidates-to-join-its-sustainability-reporting-technical-expert-group",
+    "publisher": "efrag.org",
+    "published": "2026-01-27T12:00:00+00:00",
+    "published_ts": 1769515200.0
+  },
+  {
+    "section": "ESG Reporting",
+    "title": "Vacancy",
+    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A141",
+    "publisher": "efrag.org",
+    "published": "2026-01-27T12:00:00+00:00",
+    "published_ts": 1769515200.0
+  },
+  {
+    "section": "ESG Reporting",
+    "title": "ISSB Update January 2026",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html",
+    "publisher": "ifrs.org",
+    "published": "2026-01-01T00:00:00+00:00",
+    "published_ts": 1767225600.0
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "Accelerated Step Change Initiative (ASCI)",
+    "url": "https://arena.gov.au/funding/accelerated-step-change-initiative-asci/",
+    "publisher": "arena.gov.au",
     "published": null,
     "published_ts": null
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Sustainable Finance & Investment: no retrievable items for 2026-01",
-    "url": "",
-    "publisher": "pipeline",
+    "title": "Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost",
+    "url": "https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/",
+    "publisher": "arena.gov.au",
+    "published": null,
+    "published_ts": null
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "Australian Solar Institute",
+    "url": "https://arena.gov.au/funding/australian-solar-institute/",
+    "publisher": "arena.gov.au",
     "published": null,
     "published_ts": null
   }
