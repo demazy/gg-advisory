@@ -1,43 +1,40 @@
 sections:
   Energy Transition:
     rss:
-      - https://www.dcceew.gov.au/rss-feed
+    - https://www.dcceew.gov.au/rss-feed
     html:
-      - https://www.aemo.com.au/newsroom
-      - https://www.aemo.com.au/newsroom/media-release
-      - https://www.aemc.gov.au/news-centre
-      - https://www.aer.gov.au/news
-      - https://www.cer.gov.au/news-and-media/news
-      - https://arena.gov.au/news/
-      - https://www.cefc.com.au/media/?type=media+release
-      - https://www.energynetworks.com.au/news/
-      - https://www.infrastructureaustralia.gov.au/news-media
-      - https://www.iea.org/news
-      - https://www.irena.org/news
-      - https://www.irena.org/Newsroom/Articles
-      - https://www.dcceew.gov.au/energy/news
-      - https://ec.europa.eu/commission/presscorner/home/en
-
+    - https://www.aemo.com.au/newsroom
+    - https://www.aemo.com.au/newsroom/media-release
+    - https://www.aemc.gov.au/news-centre
+    - https://www.aer.gov.au/news
+    - https://www.cer.gov.au/news-and-media/news
+    - https://arena.gov.au/news/
+    - https://www.cefc.com.au/media/?type=media+release
+    - https://www.energynetworks.com.au/news/
+    - https://www.infrastructureaustralia.gov.au/news-media
+    - https://www.iea.org/news
+    - https://www.irena.org/news
+    - https://www.irena.org/Newsroom/Articles
+    - https://www.dcceew.gov.au/energy/news
+    - https://ec.europa.eu/commission/presscorner/home/en
   ESG Reporting:
     rss: []
     html:
-      - https://www.ifrs.org/news-and-events/updates/issb/
-      - https://www.ifrs.org/news-and-events/news/
-      - https://www.efrag.org/en/news-and-calendar/news
-      # - https://www.efrag.org/en/updates   # optional; tends to be noisy/duplicative
-      - https://www.globalreporting.org/news/news-center/
-      - https://asic.gov.au/newsroom/media-releases/
-      - https://www.dcceew.gov.au/environment/climate-change/news
-      - https://www.dcceew.gov.au/about/news
-
+    - https://www.ifrs.org/news-and-events/updates/issb/
+    - https://www.ifrs.org/news-and-events/news/
+    - https://www.efrag.org/en/news-and-calendar/news
+    - https://www.globalreporting.org/news/news-center/
+    - https://asic.gov.au/newsroom/media-releases/
+    - https://www.dcceew.gov.au/environment/climate-change/news
+    - https://www.dcceew.gov.au/about/news
   Sustainable Finance & Investment:
     rss: []
     html:
-      - https://arena.gov.au/funding/
-      - https://arena.gov.au/news/
-      - https://www.cefc.com.au/media/?type=media+release
-      - https://www.cleanenergyfinancecorp.com.au/media/?type=in+the+news
-      - https://www.australianinvestmentcouncil.com.au/news
-      - https://about.bnef.com/blog/
-      - https://www.irena.org/Newsroom/Articles
-      - https://www.ifrs.org/news-and-events/updates/issb/
+    - https://arena.gov.au/funding/
+    - https://arena.gov.au/news/
+    - https://www.cefc.com.au/media/?type=media+release
+    - https://www.cleanenergyfinancecorp.com.au/media/?type=in+the+news
+    - https://www.australianinvestmentcouncil.com.au/news
+    - https://about.bnef.com/blog/
+    - https://www.irena.org/Newsroom/Articles
+    - https://www.ifrs.org/news-and-events/updates/issb/
