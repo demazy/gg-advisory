@@ -40,11 +40,59 @@
     "published_ts": 1769515200.0
   },
   {
-    "section": "ESG Reporting",
-    "title": "ISSB Update January 2026",
-    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html",
-    "publisher": "ifrs.org",
-    "published": "2026-01-01T00:00:00+00:00",
-    "published_ts": 1767225600.0
+    "section": "Sustainable Finance & Investment",
+    "title": "New Energy Outlook",
+    "url": "https://about.bnef.com/insights/clean-energy/new-energy-outlook/",
+    "publisher": "about.bnef.com",
+    "published": "2025-05-19T08:54:33+00:00",
+    "published_ts": 1747644873.0
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "REPORT New Energy Outlook",
+    "url": "https://about.bnef.com/insights/uncategorized/new-energy-outlook/",
+    "publisher": "about.bnef.com",
+    "published": "2025-05-19T08:54:33+00:00",
+    "published_ts": 1747644873.0
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "Industrial Energy Transformation Studies (IETS) Program",
+    "url": "https://arena.gov.au/funding/industrial-energy-transformation-studies-program/",
+    "publisher": "arena.gov.au",
+    "published": null,
+    "published_ts": null
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "Advancing Renewables Program (ARP)",
+    "url": "https://arena.gov.au/funding/advancing-renewables-program/",
+    "publisher": "arena.gov.au",
+    "published": "2019-02-13T00:00:00+00:00",
+    "published_ts": 1550016000.0
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "Ultra Low-Cost Solar PV R&D Funding Round",
+    "url": "https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/",
+    "publisher": "arena.gov.au",
+    "published": null,
+    "published_ts": null
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "REPORT Electric Vehicle Outlook",
+    "url": "https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/",
+    "publisher": "about.bnef.com",
+    "published": "2025-06-18T10:50:26+00:00",
+    "published_ts": 1750243826.0
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "Electric Vehicle Outlook",
+    "url": "https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook/",
+    "publisher": "about.bnef.com",
+    "published": "2025-06-18T10:50:26+00:00",
+    "published_ts": 1750243826.0
   }
 ]
