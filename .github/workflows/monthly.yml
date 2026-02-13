@@ -69,6 +69,24 @@ jobs:
 
           print("OK: _in_range looks robust")
           PY
+      - name: Sanity check summarise.py is schema-tolerant (no .text references)
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import inspect
+          import src.summarise as s
+          print("Loaded:", s.__file__)
+
+          src = inspect.getsource(s)
+          if ".text" in src:
+            raise SystemExit("ERROR: src/summarise.py still references .text (will crash with fetch.Item)")
+
+          # Also ensure fallback uses the same safe getter (cheap invariant)
+          if "_get_text" not in src and "get_text" not in src:
+            raise SystemExit("ERROR: summarise.py missing a safe text getter for fallback/payload")
+
+          print("OK: summarise.py looks schema-tolerant")
+          PY
 
       - name: Compute target month (prev month in Australia/Melbourne, unless inputs provided)
         id: when
