@@ -192,6 +192,65 @@ def _substance_ok_relaxed(text: str) -> bool:
     return True
 
 
+
+def _is_bad_title(title: str) -> bool:
+    t = (title or "").strip().lower()
+    if not t:
+        return True
+    bad = {
+        "read more", "back to top", "view all", "view all >", "more", "learn more", "click here",
+        "cookie details", "cookies", "privacy", "terms", "access the full speech", "news", "media releases",
+    }
+    if t in bad:
+        return True
+    # very short generic
+    if len(t) <= 4:
+        return True
+    return False
+
+
+def _domain_path_score(url: str) -> float:
+    """Prefer high-signal content paths and penalise evergreen navigation pages."""
+    u = (url or "").lower()
+    if not u:
+        return -2.0
+    # strip query
+    u_clean = re.sub(r"[?#].*$", "", u)
+    path = re.sub(r"^https?://[^/]+", "", u_clean)
+    domain = normalise_domain(u_clean)
+
+    # Common negative paths
+    if any(seg in path for seg in ("/about", "/about-us", "/contact", "/privacy", "/terms", "/cookies", "/sitemap", "/search")):
+        return -1.5
+
+    # Domain-specific boosts
+    if domain == "aemc.gov.au":
+        if "/news-centre/media-releases/" in path: return 1.5
+        if "/news-centre/speeches/" in path: return 1.2
+        if "/news-centre/" in path: return 0.8
+        if "/rule-changes/" in path: return 0.6
+        if "/market-reviews-advice/" in path: return 0.4
+        return -0.8
+    if domain == "cer.gov.au":
+        if re.search(r"/news-and-media/news/\d{4}/[a-z]+/", path): return 1.2
+        if "/news-and-media/news/" in path: return 0.6
+        if path.rstrip("/") == "/news-and-media/news": return -1.2
+    if domain == "arena.gov.au":
+        if re.search(r"/news/\d{4}/", path): return 1.2
+        if path.rstrip("/") == "/news": return -0.8
+        if "/projects/" in path: return 0.9
+        if "/publications/" in path or "/knowledge-bank/" in path: return 0.8
+        if "/funding/" in path: return -0.2  # often evergreen; allow but low priority
+    if domain == "energynetworks.com.au":
+        if "/news/" in path: return 0.9
+        if "/news/media-releases/" in path: return 1.0
+    if domain == "efrag.org":
+        if "f%5b0%5d=" in u or "facets_query" in u: return -1.2
+    if domain == "ifrs.org":
+        if "/news-and-events/news/" in path: return 1.0
+        if "/news-and-events/updates/" in path: return 0.9
+    return 0.0
+
 def _looks_articleish(url: str) -> bool:
     """
     Heuristic: URL appears to be an actual *content item* (article/report/media release),
@@ -204,6 +263,10 @@ def _looks_articleish(url: str) -> bool:
     if not u:
         return False
     ul = u.lower()
+
+    # Faceted/search listing URLs are not content items
+    if any(x in ul for x in ("f%5b0%5d=", "f[0]=", "facets_query=", "?page=", "?sort=")):
+        return False
 
     if is_probably_taxonomy_or_hub(ul):
         return False
@@ -435,8 +498,11 @@ def _score_item(it: Item, text: str, section: str, flt: Filters, *, ignore_subst
     recency = (dt.timestamp() / 1e10) if dt is not None else 0.0
     substance = math.log(max(50, len(text)), 10)
     kw = _keyword_boost(it.title or "", section, flt)
-    articleish = 0.25 if _looks_articleish(it.url or "") else -0.35
-    return recency + substance + kw + articleish
+    articleish = 0.35 if _looks_articleish(it.url or "") else -0.6
+    path_score = _domain_path_score(it.url or "")
+    title_pen = -0.8 if _is_bad_title(it.title or "") else 0.0
+    undated_pen = -0.6 if (it.published_ts is None and not _is_priority(it.url)) else 0.0
+    return recency + substance + kw + articleishcleish + path_score + title_pen + undated_pencleish
 
 
 def _collect_section_pool(section: str, sec_cfg: Dict[str, Any]) -> Tuple[List[Item], List[Dict[str, str]]]:
@@ -525,35 +591,14 @@ def _select_from_pool(
             continue
 
         ts_eff = _effective_published_ts(it)
-        # Allow undated items only for trusted/public-sector domains when there is sufficient substance.
-        domain = normalise_domain(url)
-        allow_undated_this = False
         if ts_eff is None and (not ALLOW_UNDATED):
-            if AUTO_ALLOW_GOV_AU and (domain.endswith('.gov.au') or domain.endswith('.edu.au')):
-                allow_undated_this = True
-            if domain in AUTO_ALLOW_DOMAINS:
-                allow_undated_this = True
-            if allow_undated_this:
-                # Fetch text early to avoid selecting undated navigation shells.
-                text = text_cache.get(url, '')
-                if not text:
-                    try:
-                        text = (fetch_full_text(url) or '').strip()
-                    except Exception:
-                        text = ''
-                    text_cache[url] = text
-                if len(text) >= PRIORITY_MIN_CHARS:
-                    # Keep, but publish date will show as Unknown in the digest.
-                    pass
-                else:
-                    drops.append({'reason': 'undated', 'url': url, 'title': it.title or ''})
-                    continue
-            else:
-                drops.append({'reason': 'undated', 'url': url, 'title': it.title or ''})
-                continue
-        if ts_eff is not None and (not _in_range(ts_eff, start_dt, end_dt)):
-            drops.append({'reason': 'out_of_range', 'url': url, 'title': it.title or ''})
+            drops.append({"reason": "undated", "url": url, "title": it.title or ""})
             continue
+        if ts_eff is not None and (not _in_range(ts_eff, start_dt, end_dt)):
+            drops.append({"reason": "out_of_range", "url": url, "title": it.title or ""})
+            continue
+
+        domain = normalise_domain(url)
         if per_domain.get(domain, 0) >= per_domain_cap:
             drops.append({"reason": "per_domain_cap", "url": url, "title": it.title or "", "domain": domain})
             continue
