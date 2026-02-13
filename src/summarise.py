@@ -24,7 +24,7 @@ import os
 import re
 import time
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 import requests
 
@@ -48,7 +48,7 @@ OPENAI_RETRIES = int(os.getenv("OPENAI_RETRIES", "2"))
 OPENAI_BACKOFF = float(os.getenv("OPENAI_BACKOFF", "1.8"))
 
 # Response length control (used by chat-completions)
-OPENAI_MAX_TOKENS = int(os.getenv("OPENAI_MAX_TOKENS", "2800"))
+OPENAI_MAX_TOKENS = int(os.getenv("OPENAI_MAX_TOKENS", "900"))
 
 # Hard cap to prevent runaway prompt size
 MAX_TEXT_CHARS_PER_ITEM = int(os.getenv("MAX_TEXT_CHARS_PER_ITEM", "3500"))  # CHANGE: smaller prompt -> faster/less timeouts
@@ -121,16 +121,6 @@ def _prepare_items(items: List[Item]) -> List[Dict]:
             }
         )
     return out
-
-
-
-
-def _effective_max_tokens(n_items: int) -> int:
-    """Scale token budget with item count, within safe bounds."""
-    base = OPENAI_MAX_TOKENS
-    if n_items > 6:
-        base += (n_items - 6) * 120
-    return int(min(max(base, 1200), 3800))
 
 
 def _extractive_summary(raw: str, max_words: int = 140) -> str:
@@ -238,14 +228,16 @@ def _deterministic_structured_digest(date_label: str, items: List[Item], note: O
     return "\n".join(lines).strip() + "\n"
 
 
-def _openai_chat_completion(model: str, messages: List[Dict[str, str]], temperature: float = 0.2, max_tokens: Optional[int] = None) -> str:
+def _openai_chat_completion_raw(
+    model: str, messages: List[Dict[str, str]], temperature: float = 0.2
+) -> Tuple[str, str]:
     """
-    Call OpenAI Chat Completions via HTTPS.
+    Call OpenAI Chat Completions via HTTPS and return (content, finish_reason).
 
-    CHANGE (Feb 2026):
+    Robustness:
     - Retries with exponential backoff for transient timeouts.
     - Separate connect/read timeout and increased default.
-    - Bounded max_tokens for faster responses.
+    - max_tokens is configurable via OPENAI_MAX_TOKENS.
     """
     if not OPENAI_API_KEY:
         raise RuntimeError("OPENAI_API_KEY missing")
@@ -256,34 +248,34 @@ def _openai_chat_completion(model: str, messages: List[Dict[str, str]], temperat
         "model": model,
         "messages": messages,
         "temperature": temperature,
-        "max_tokens": int(max_tokens or OPENAI_MAX_TOKENS),
+        "max_tokens": OPENAI_MAX_TOKENS,
     }
 
     last_err: Optional[Exception] = None
     for attempt in range(max(1, OPENAI_RETRIES)):
         try:
-            # (connect timeout, read timeout)
             r = requests.post(url, headers=headers, json=payload, timeout=(10, OPENAI_TIMEOUT))
             r.raise_for_status()
             data = r.json()
-            choice = (data.get("choices") or [{}])[0]
-            content = ((choice.get("message") or {}).get("content") or "").strip()
-            finish = choice.get("finish_reason")
-            if finish == "length":
-                # Caller will validate structure; raise to trigger deterministic fallback.
-                raise RuntimeError("OpenAI output truncated (finish_reason=length)")
-            return content
+            choice = data["choices"][0]
+            content = (choice.get("message") or {}).get("content") or ""
+            finish_reason = choice.get("finish_reason") or "unknown"
+            return content.strip(), finish_reason
         except Exception as e:
             last_err = e
-            # backoff: 1s, 2s, 4s...
-            if attempt < max(1, OPENAI_RETRIES) - 1:
-                time.sleep(max(0.5, OPENAI_BACKOFF) ** attempt)
-                continue
-            break
+            # simple backoff
+            sleep_s = min(2 ** attempt, 10)
+            try:
+                time.sleep(sleep_s)
+            except Exception:
+                pass
+    raise RuntimeError(f"OpenAI request failed after retries: {last_err}")
 
-    raise RuntimeError(f"OpenAI call failed after {OPENAI_RETRIES} attempt(s): {last_err}")
 
-
+def _openai_chat_completion(model: str, messages: List[Dict[str, str]], temperature: float = 0.2) -> str:
+    """Backward-compatible wrapper returning only content."""
+    content, _ = _openai_chat_completion_raw(model=model, messages=messages, temperature=temperature)
+    return content
 def build_digest(ym: str, items: List[Item]) -> str:
     """
     Primary entry point used by generate_monthly.py: build_digest("YYYY-MM", items)
@@ -300,31 +292,36 @@ def build_digest(ym: str, items: List[Item]) -> str:
     items_json = json.dumps(payload, ensure_ascii=False, indent=2)
     user_msg = USER_TMPL.format(date_label=date_label, items_json=items_json)
 
-
-    REQUIRED_HEADINGS = [
-        "# Signals Digest",
-        "## Top Lines",
-        "## Energy Transition",
-        "## ESG Reporting",
-        "## Sustainable Finance & Investment",
-    ]
-
     try:
-        content = _openai_chat_completion(
+        content, finish_reason = _openai_chat_completion_raw(
             messages=[
                 {"role": "system", "content": SYSTEM},
                 {"role": "user", "content": user_msg},
             ],
             model=MODEL,
             temperature=TEMP,
-            max_tokens=_effective_max_tokens(len(items)),
         )
-        out = content.strip() + "\n"
-        # Validate structure to avoid silently publishing truncated digests
-        for h in REQUIRED_HEADINGS:
-            if h not in out:
-                raise RuntimeError(f"Missing heading: {h}")
-        return out
+        # Guardrails: reject truncated or structurally inconsistent output
+out = (content or "").strip()
+if finish_reason == "length":
+    return _deterministic_structured_digest(date_label, items, note="LLM output truncated; fallback used.")
+# Require key headings
+required = ["# Signals Digest", "## Top Lines", "## Energy Transition", "## ESG Reporting", "## Sustainable Finance"]
+if not all(r in out for r in required):
+    return _deterministic_structured_digest(date_label, items, note="LLM output missing required headings; fallback used.")
+# Ensure one-to-one mapping between input URLs and cited Sources to prevent omissions/duplication
+input_urls = [it.get("url") for it in items if it.get("url")]
+cited = re.findall(r"https?://[^\s)]+", out)
+cited_urls = [u.rstrip(".,") for u in cited]
+# check each input appears at least once
+if any(u not in cited_urls for u in input_urls):
+    return _deterministic_structured_digest(date_label, items, note="LLM output missing some sources; fallback used.")
+# prevent repeated same source blocks (common failure mode)
+from collections import Counter
+dup = [u for u,c in Counter(cited_urls).items() if c > 3]  # allow some repeats in top lines
+if dup:
+    return _deterministic_structured_digest(date_label, items, note="LLM output repeated sources excessively; fallback used.")
+return out + "\n"
     except Exception as e:
         return _deterministic_structured_digest(date_label, items, note=f"LLM summarisation failed; fallback used. Error: {e}")
 
