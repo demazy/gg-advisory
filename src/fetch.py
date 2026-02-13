@@ -6,15 +6,18 @@ Fetching utilities:
 - Full-text extraction (HTML/PDF) with robust fallbacks
 
 Design goals:
-- defensive (network failures return empty results rather than raising)
-- bounded runtime (caps on bytes, links, and optional per-link metadata)
-- stable API (key entry points accept **kwargs for forward compatibility)
+- Defensive: network failures return empty results rather than raising
+- Bounded runtime: caps on bytes, links, and optional per-link metadata resolution
+- Stable API: entry points accept **kwargs for forward compatibility
 
-Incremental improvements (Feb 2026):
-- Fix HTML index title extraction bug (each candidate URL now keeps its own anchor text).
-- Reduce garbage candidates (navigation/auth/utility/social/tracking URLs filtered early).
-- Optionally restrict HTML index extraction to same-site links by default.
-- Infer publish month from common URL patterns (YYYY/MM[/DD], YYYY/<monthname>/) to improve date filtering downstream.
+Incremental improvements (Feb 2026, run-6 -> run-7):
+1) Reduce "navigation noise" from HTML index pages:
+   - remove <header>/<nav>/<footer>/<aside>/<form> blocks before anchor extraction
+   - treat generic anchors ("Read more", icon labels) as empty and attempt nearby heading fallback
+2) Improve publish-date inference:
+   - extend URL-based inference to catch month names inside slugs (e.g., ".../2026/issb-update-january-2026.html")
+   - optional per-link metadata fetch (bounded by MAX_DATE_RESOLVE_FETCHES_PER_INDEX) to extract meta/JSON-LD dates
+3) Make downstream month filtering feasible for HTML-only sources by setting Item.published_ts/iso when detected.
 """
 
 from __future__ import annotations
@@ -27,12 +30,11 @@ import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
-from urllib.parse import urljoin, urldefrag, urlparse, parse_qs
+from urllib.parse import urljoin, urldefrag, urlparse, parse_qs, urlencode, unquote
 
 import requests
 from bs4 import BeautifulSoup
 
-# These deps are installed in your GH Action (per requirements.txt)
 import feedparser
 
 try:
@@ -44,6 +46,11 @@ try:
     import fitz  # PyMuPDF
 except Exception:  # pragma: no cover
     fitz = None
+
+try:
+    from dateutil import parser as dtparser  # type: ignore
+except Exception:  # pragma: no cover
+    dtparser = None
 
 
 # -----------------------------
@@ -57,18 +64,22 @@ UA = os.getenv(
 
 CONNECT_TIMEOUT = float(os.getenv("HTTP_CONNECT_TIMEOUT", "10"))
 READ_TIMEOUT = float(os.getenv("HTTP_READ_TIMEOUT", "25"))
+
 MAX_BYTES = int(os.getenv("HTTP_MAX_BYTES", str(2_000_000)))  # 2MB safety cap for HTML
 MAX_PDF_BYTES = int(os.getenv("HTTP_MAX_PDF_BYTES", str(6_000_000)))  # 6MB cap for PDFs
+
 RETRIES = int(os.getenv("HTTP_RETRIES", "2"))
 BACKOFF = float(os.getenv("HTTP_BACKOFF", "1.4"))
 
 MAX_LINKS_PER_INDEX = int(os.getenv("MAX_LINKS_PER_INDEX", "60"))
-MAX_INDEX_PAGES = int(os.getenv("MAX_INDEX_PAGES", "1"))  # reserved for future pagination
+MAX_INDEX_PAGES = int(os.getenv("MAX_INDEX_PAGES", "1"))
 MAX_DATE_RESOLVE_FETCHES_PER_INDEX = int(os.getenv("MAX_DATE_RESOLVE_FETCHES_PER_INDEX", "0"))
 
 # By default, only keep links on the same site as the index page.
-# Set to 1 if you intentionally want external links pulled from index pages.
 ALLOW_EXTERNAL_LINKS_FROM_INDEX = os.getenv("ALLOW_EXTERNAL_LINKS_FROM_INDEX", "0") == "1"
+
+# PDFs are expensive; optionally only allow PDFs from trusted domains.
+PDF_TRUSTED = {d.strip().lower() for d in os.getenv("PDF_TRUSTED", "").split(",") if d.strip()}
 
 
 # -----------------------------
@@ -94,6 +105,22 @@ class Item:
 # -----------------------------
 # Helpers
 # -----------------------------
+_MONTHS = {
+    "jan": 1, "january": 1,
+    "feb": 2, "february": 2,
+    "mar": 3, "march": 3,
+    "apr": 4, "april": 4,
+    "may": 5,
+    "jun": 6, "june": 6,
+    "jul": 7, "july": 7,
+    "aug": 8, "august": 8,
+    "sep": 9, "sept": 9, "september": 9,
+    "oct": 10, "october": 10,
+    "nov": 11, "november": 11,
+    "dec": 12, "december": 12,
+}
+
+
 def _sha1(s: str) -> str:
     return hashlib.sha1(s.encode("utf-8", errors="ignore")).hexdigest()
 
@@ -116,28 +143,27 @@ def _timeout():
 
 
 def _clean_url(u: str) -> str:
+    """
+    Normalise URL by stripping fragments and common tracking parameters.
+    (Keeps non-tracking query parameters as some sites use them for canonical routing.)
+    """
     u = (u or "").strip()
     if not u:
         return ""
     u, _frag = urldefrag(u)
 
-    # Drop common tracking query params to reduce duplicates.
     try:
         p = urlparse(u)
-        if p.query:
-            from urllib.parse import parse_qsl, urlencode, urlunparse
-            keep = []
-            for k, v in parse_qsl(p.query, keep_blank_values=True):
-                kl = (k or "").lower()
-                if kl.startswith("utm_") or kl in {"fbclid", "gclid", "mc_cid", "mc_eid"}:
-                    continue
-                keep.append((k, v))
-            new_q = urlencode(keep, doseq=True)
-            u = urlunparse((p.scheme, p.netloc, p.path, p.params, new_q, ""))  # fragment already removed
+        if not p.query:
+            return u
+        q = parse_qs(p.query, keep_blank_values=True)
+        # drop common tracking params
+        drop = {"utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid", "gclid", "mc_cid", "mc_eid"}
+        q2 = {k: v for k, v in q.items() if k not in drop and not k.lower().startswith("utm_")}
+        query = urlencode([(k, vv) for k, vs in q2.items() for vv in (vs or [""])], doseq=True)
+        return p._replace(query=query).geturl()
     except Exception:
-        pass
-
-    return u
+        return u
 
 
 def _norm_host(netloc: str) -> str:
@@ -154,97 +180,6 @@ def _same_site(a: str, b: str) -> bool:
     if not ha or not hb:
         return False
     return ha == hb or ha.endswith("." + hb) or hb.endswith("." + ha)
-
-# -----------------------------
-# Indirect / wrapper URL resolution
-# -----------------------------
-_GOOGLE_NEWS_HOSTS = {"news.google.com"}
-_GOOGLE_REDIRECT_HOSTS = {"www.google.com", "google.com"}
-
-def _resolve_google_redirect(u: str) -> str:
-    """Resolve classic Google redirect URLs (e.g., https://www.google.com/url?url=...)."""
-    try:
-        p = urlparse(u)
-        if _norm_host(p.netloc) not in _GOOGLE_REDIRECT_HOSTS:
-            return u
-        if not p.path.startswith("/url"):
-            return u
-        q = parse_qs(p.query)
-        cand = (q.get("url") or q.get("q") or [""])[0]
-        return cand or u
-    except Exception:
-        return u
-
-def resolve_indirect_url(u: str) -> str:
-    """
-    Attempt to unwrap known aggregator/wrapper URLs to their canonical target.
-    Currently supports Google redirect URLs and Google News article wrappers.
-    Returns the original URL on failure.
-    """
-    u = (u or "").strip()
-    if not u:
-        return u
-
-    u2 = _resolve_google_redirect(u)
-    if u2 and u2 != u:
-        return _clean_url(u2)
-
-    try:
-        p = urlparse(u)
-        host = _norm_host(p.netloc)
-        if host in _GOOGLE_NEWS_HOSTS and (p.path.startswith("/rss/articles") or p.path.startswith("/articles")):
-            # Fetch the wrapper page and try to extract a canonical external URL
-            resp = _http_get(u)
-            if resp is None:
-                return u
-            raw = _read_limited(resp, min(MAX_BYTES, 800_000))
-            if not raw:
-                return u
-            try:
-                html = raw.decode(resp.encoding or "utf-8", errors="replace")
-            except Exception:
-                html = raw.decode("utf-8", errors="replace")
-            soup = BeautifulSoup(html, "html.parser")
-
-            # Prefer explicit canonical/og:url
-            for sel in [
-                ("meta", {"property": "og:url"}),
-                ("meta", {"name": "og:url"}),
-            ]:
-                tag = soup.find(sel[0], sel[1])
-                if tag and tag.get("content"):
-                    cand = tag.get("content", "").strip()
-                    if cand and "news.google.com" not in cand:
-                        return _clean_url(cand)
-
-            link = soup.find("link", {"rel": "canonical"})
-            if link and link.get("href"):
-                cand = link.get("href", "").strip()
-                if cand and "news.google.com" not in cand:
-                    return _clean_url(cand)
-
-            # Heuristic: first external https link
-            for a in soup.find_all("a", href=True):
-                href = a.get("href", "").strip()
-                if not href.startswith("http"):
-                    continue
-                hhost = _norm_host(urlparse(href).netloc)
-                if not hhost or hhost in _GOOGLE_NEWS_HOSTS or hhost in _GOOGLE_REDIRECT_HOSTS:
-                    continue
-                if any(bad in href.lower() for bad in ["facebook.com", "twitter.com", "x.com", "linkedin.com"]):
-                    continue
-                return _clean_url(href)
-
-            # Regex fallback: look for url=https%3A%2F%2F... patterns
-            m = re.search(r"url=(https?%3A%2F%2F[^&\"'>]+)", html)
-            if m:
-                cand = unquote(m.group(1))
-                if cand and cand.startswith("http") and "news.google.com" not in cand:
-                    return _clean_url(cand)
-    except Exception:
-        return u
-
-    return u
 
 
 # Common non-content patterns that should never become digest items
@@ -265,84 +200,173 @@ _DENY_EXTENSIONS = (
 )
 
 
-_MONTHS = {
-    "january": 1, "jan": 1,
-    "february": 2, "feb": 2,
-    "march": 3, "mar": 3,
-    "april": 4, "apr": 4,
-    "may": 5,
-    "june": 6, "jun": 6,
-    "july": 7, "jul": 7,
-    "august": 8, "aug": 8,
-    "september": 9, "sep": 9, "sept": 9,
-    "october": 10, "oct": 10,
-    "november": 11, "nov": 11,
-    "december": 12, "dec": 12,
-}
+def _looks_like_asset_url(u: str) -> bool:
+    ul = (u or "").lower()
+    return any(ul.endswith(ext) for ext in _DENY_EXTENSIONS)
 
 
 
+def _looks_content_url(u: str) -> bool:
+    """Heuristic filter for index link extraction.
 
-def _find_date_in_text(text: str) -> Optional[datetime]:
-    """Last-resort date extraction from visible text.
-
-    Looks for common patterns like:
-    - 29 January 2026 / 29 Jan 2026
-    - January 29, 2026
-    - 2026-01-29
-    Returns a UTC datetime (midnight) on success.
+    Returns True if the URL *looks* like a content item (article/report), rather than a hub/listing/nav/asset.
+    This is intentionally conservative: it should avoid excluding real articles.
     """
-    t = (text or "").strip()
-    if not t:
-        return None
-    # collapse whitespace and keep it bounded
-    t = re.sub(r"\s+", " ", t)
-    t = t[:5000]
+    ul = (u or "").strip().lower()
+    if not ul:
+        return False
+    if _deny_from_index(ul):
+        return False
+    if is_probably_taxonomy_or_hub(ul):
+        return False
+    # common non-content endings
+    if ul.endswith(("/", "#")):
+        return False
+    return True
 
-    # ISO yyyy-mm-dd
-    m = re.search(r"\b(20\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\b", t)
-    if m:
+
+def resolve_indirect_url(url: str, max_bytes: int = 500_000) -> str:
+    """Best-effort unwrapping of indirect/tracking URLs to the canonical publisher URL.
+
+    This addresses Google News RSS wrapper URLs (news.google.com/rss/articles/...) and generic
+    google redirect links (google.com/url?q=...).
+
+    Returns the original URL if no better candidate is found.
+    """
+    u = _clean_url(url)
+    if not u:
+        return ""
+    ul = u.lower()
+
+    # google redirector: https://www.google.com/url?q=<target>&...
+    if "google.com/url" in ul:
         try:
-            y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
-            return datetime(y, mo, d, tzinfo=timezone.utc)
+            parsed = urlparse(u)
+            q = parse_qs(parsed.query or "")
+            if "q" in q and q["q"]:
+                cand = _clean_url(q["q"][0])
+                if cand and "google.com" not in cand.lower():
+                    return cand
         except Exception:
             pass
+        return u
 
-    # 29 January 2026 / 29 Jan 2026
-    m = re.search(r"\b(0?[1-9]|[12]\d|3[01])\s+(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:t|tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+(20\d{2})\b", t, re.I)
-    if m:
-        d = int(m.group(1))
-        mon = m.group(2).lower()
-        y = int(m.group(3))
-        mon_key = mon if mon in _MONTHS else mon[:3]
-        mo = _MONTHS.get(mon_key)
-        if mo:
+    # google news RSS wrapper: fetch HTML and extract embedded canonical/outbound URL
+    if "news.google.com" in ul:
+        try:
+            resp = _http_get(u)
+            if resp is None:
+                return u
+            raw = _read_limited(resp, max_bytes)
+            if not raw:
+                return u
             try:
-                return datetime(y, mo, d, tzinfo=timezone.utc)
+                html = raw.decode(resp.encoding or "utf-8", errors="replace")
             except Exception:
-                pass
+                html = raw.decode("utf-8", errors="replace")
 
-    # January 29, 2026
-    m = re.search(r"\b(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:t|tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+(0?[1-9]|[12]\d|3[01])(?:st|nd|rd|th)?[,]?\s+(20\d{2})\b", t, re.I)
-    if m:
-        mon = m.group(1).lower()
-        d = int(m.group(2))
-        y = int(m.group(3))
-        mon_key = mon if mon in _MONTHS else mon[:3]
-        mo = _MONTHS.get(mon_key)
-        if mo:
-            try:
-                return datetime(y, mo, d, tzinfo=timezone.utc)
-            except Exception:
-                pass
+            # 1) meta refresh: url=<...>
+            m = re.search(r"url=([^\"'>\s]+)", html, flags=re.IGNORECASE)
+            if m:
+                cand = unquote(m.group(1))
+                cand = _clean_url(cand)
+                if cand and "news.google.com" not in cand.lower():
+                    return cand
 
+            # 2) explicit url= param inside the HTML/JS
+            m2 = re.search(r"[?&]url=(https?%3A%2F%2F[^&\"']+)", html)
+            if m2:
+                cand = unquote(m2.group(1))
+                cand = _clean_url(cand)
+                if cand and "news.google.com" not in cand.lower():
+                    return cand
+
+            # 3) first outbound anchor that is not google/news
+            m3 = re.search(r"href=\"(https?://[^\"]+)\"", html, flags=re.IGNORECASE)
+            if m3:
+                cand = _clean_url(m3.group(1))
+                if cand and ("news.google.com" not in cand.lower()) and ("google.com" not in cand.lower()):
+                    return cand
+        except Exception:
+            return u
+
+    return u
+
+
+def _deny_from_index(u: str) -> bool:
+    ul = (u or "").lower()
+    if any(s in ul for s in _DENY_URL_SUBSTRINGS):
+        return True
+    if _looks_like_asset_url(ul):
+        return True
+    return False
+
+
+def _clean_anchor_text(t: str) -> str:
+    """
+    Clean anchor text. If it is boilerplate ("Read more") or icon glyph text, treat as empty.
+    """
+    t = (t or "").strip()
+    if not t:
+        return ""
+    t = re.sub(r"\s+", " ", t).strip()
+
+    tl = t.lower()
+    if tl in {"skip to content", "skip to main content", "read more", "learn more", "more"}:
+        return ""
+
+    # Common icon font labels leaking into text nodes
+    if tl in {"arrow_right_alt", "arrow_forward", "chevron_right", "chevron_left"}:
+        return ""
+
+    # If "Read more ..." keep only if it contains other meaningful words
+    if tl.startswith("read more"):
+        rest = tl.replace("read more", "").strip(" -–—:")
+        if len(rest) < 8:
+            return ""
+
+    # Remove obvious icon word tails
+    t = re.sub(r"\barrow_(right|left|forward|back)(?:_alt)?\b", "", t, flags=re.I).strip()
+    t = re.sub(r"\s+", " ", t).strip()
+    return t
+
+
+def _parse_dt(s: str) -> Optional[datetime]:
+    s = (s or "").strip()
+    if not s:
+        return None
+    # normalise Z
+    s2 = s.replace("Z", "+00:00")
+    try:
+        # fromisoformat accepts many ISO variants but not all
+        dt = datetime.fromisoformat(s2)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc)
+    except Exception:
+        pass
+    if dtparser is not None:
+        try:
+            dt = dtparser.parse(s)
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt.astimezone(timezone.utc)
+        except Exception:
+            return None
     return None
+
+
 def infer_published_ts_from_url(url: str) -> Optional[float]:
     """
     Best-effort inference of publish timestamp from URL path.
     Used to improve month-based filtering when RSS dates are missing.
 
-    We intentionally keep this conservative (month-level at best).
+    Conservative (month-level at best):
+    - YYYY-MM-DD
+    - /YYYY/MM/DD/
+    - /YYYY/<monthname>/
+    - /YYYY/MM/
+    - /YYYY/<slug containing monthname>/   (NEW)
     """
     u = (url or "").strip()
     if not u:
@@ -389,45 +413,27 @@ def infer_published_ts_from_url(url: str) -> Optional[float]:
             except Exception:
                 return None
 
-    # monthname-YYYY or YYYY-monthname in slug (e.g., .../issb-update-january-2026/)
-    m = re.search(r"(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t|tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)[-_ ]?(20\d{2})", path)
-    if m:
-        y = int(m.group(2))
-        mo = _MONTHS.get(m.group(1).lower()) or _MONTHS.get(m.group(1)[:3].lower())
-        if mo:
-            try:
-                return datetime(y, mo, 1, tzinfo=timezone.utc).timestamp()
-            except Exception:
-                return None
-
-    m = re.search(r"(20\d{2})[-_ ]?(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t|tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)", path)
+    # /YYYY/<slug with monthname>  (e.g., ".../2026/issb-update-january-2026.html")
+    m = re.search(r"/(20\d{2})/([^/]+)", path)
     if m:
         y = int(m.group(1))
-        mo = _MONTHS.get(m.group(2).lower()) or _MONTHS.get(m.group(2)[:3].lower())
-        if mo:
-            try:
-                return datetime(y, mo, 1, tzinfo=timezone.utc).timestamp()
-            except Exception:
-                return None
-
-    # YYYYMM (e.g., .../202601/...)
-    m = re.search(r"/(20\d{2})(0[1-9]|1[0-2])(?:/|$)", path)
-    if m:
-        y, mo = int(m.group(1)), int(m.group(2))
-        try:
-            return datetime(y, mo, 1, tzinfo=timezone.utc).timestamp()
-        except Exception:
-            return None
+        slug = m.group(2)
+        for name, mo in _MONTHS.items():
+            if re.search(rf"(^|[-_\.]){re.escape(name)}($|[-_\.])", slug):
+                try:
+                    return datetime(y, mo, 1, tzinfo=timezone.utc).timestamp()
+                except Exception:
+                    return None
 
     return None
 
+
 def is_probably_taxonomy_or_hub(url: str) -> bool:
     """
-    Heuristic: return True for URLs that are unlikely to be *content items* (listing pages,
+    Return True for URLs that are unlikely to be *content items* (listing pages,
     taxonomy pages, nav/utility pages, auth flows).
 
-    NOTE: This function is used both during index extraction and during selection filtering,
-    so keep it focused on obvious non-content URLs.
+    NOTE: used both during index extraction and selection filtering.
     """
     u = (url or "").strip()
     if not u:
@@ -441,40 +447,31 @@ def is_probably_taxonomy_or_hub(url: str) -> bool:
 
     # query-based searches / pagination
     q = parse_qs(parsed.query or "")
-
-    # facet/filter query params (common on EFRAG and other CMS listings)
-    if any(k.startswith("f[") for k in q.keys()):
-        return True
-    if any(k in {"category", "categories", "topic", "topics", "tag", "tags", "type", "types", "filter"} for k in q.keys()):
-        return True
     if "page" in q and (parsed.path.endswith("/news") or parsed.path.endswith("/news/")):
         return True
-    if "s" in q or "q" in q and parsed.path.endswith("/search"):
+    if ("s" in q or "q" in q) and parsed.path.endswith("/search"):
         return True
 
     path = parsed.path or "/"
-    # nav/utility endpoints
+    # nav/utility endpoints (only if the *last* segment is utility-ish)
     utility_segments = {
         "about", "contact", "privacy", "terms", "cookies", "accessibility", "sitemap",
-        "careers", "jobs", "vacancies", "pressroom", "newsroom", "media-releases", "media-release", "media-centre", "media-center", "news-centre", "news-center", "press-releases", "press-release", "announcements", "statement", "statements",
+        "careers", "jobs", "vacancies",
         "events", "event", "webinars", "webinar",
         "tag", "tags", "category", "categories", "topic", "topics",
         "author", "authors",
         "help", "support", "faq",
-        "board", "governance", "leadership", "executive", "executives", "management", "team", "teams",
-        "people", "our-people", "who-we-are", "organisation", "organization",
     }
     segs = [s for s in path.split("/") if s]
     if segs and segs[-1] in utility_segments:
         return True
+
     # taxonomy/listing patterns anywhere in path
     bad_parts = [
         "/tag/", "/tags/", "/category/", "/categories/", "/topic/", "/topics/",
         "/author/", "/authors/",
         "/search", "?s=", "/page/", "/index",
         "/events", "/event", "/webinars", "/webinar",
-        "/media-releases", "/media-release", "/press-releases", "/press-release", "/newsroom", "/pressroom", "/announcements",
-        "/board", "/governance", "/leadership", "/executive", "/executives", "/team", "/our-people", "/people",
     ]
     if any(p in ul for p in bad_parts):
         return True
@@ -504,214 +501,208 @@ def _http_get(url: str) -> Optional[requests.Response]:
                 allow_redirects=True,
                 stream=True,
             )
-            # Basic status filtering
+            # treat 4xx/5xx as failure (but don't raise)
             if r.status_code >= 400:
-                r.close()
-                last_err = Exception(f"HTTP {r.status_code}")
-                if attempt < RETRIES:
-                    time.sleep(BACKOFF ** attempt)
-                    continue
+                try:
+                    r.close()
+                except Exception:
+                    pass
                 return None
             return r
-        except Exception as e:
+        except Exception as e:  # pragma: no cover
             last_err = e
             if attempt < RETRIES:
                 time.sleep(BACKOFF ** attempt)
                 continue
-    return None
+            return None
 
 
 def _read_limited(resp: requests.Response, cap: int) -> bytes:
+    """
+    Read up to cap bytes from streaming response.
+    """
+    out = bytearray()
     try:
-        buf = bytearray()
         for chunk in resp.iter_content(chunk_size=64_000):
             if not chunk:
                 continue
-            buf.extend(chunk)
-            if len(buf) >= cap:
+            out.extend(chunk)
+            if len(out) >= cap:
                 break
-        return bytes(buf)
-    except Exception:
-        return b""
-    finally:
-        try:
-            resp.close()
-        except Exception:
-            pass
-
-
-def _content_type(resp: requests.Response) -> str:
+    except Exception:  # pragma: no cover
+        pass
     try:
-        return (resp.headers.get("Content-Type") or "").lower()
-    except Exception:
-        return ""
-
-
-def _parse_epoch_from_struct(st: Any) -> Optional[float]:
-    try:
-        # feedparser uses time.struct_time
-        return time.mktime(st)
-    except Exception:
-        return None
-
-
-def _clean_anchor_text(t: str) -> str:
-    t = (t or "").strip()
-    if not t:
-        return ""
-    t = re.sub(r"\s+", " ", t).strip()
-    # strip common icon tokens
-    t = t.replace("arrow_right_alt", "").strip()
-
-    # very common boilerplate link labels
-    if t.lower() in {"skip to content", "skip to main content", "read more", "learn more", "more", "continue reading"}:
-        return ""
-    return t
-
-_GENERIC_ANCHOR_RE = re.compile(r"^(read more|learn more|more|continue reading)$", re.I)
-
-
-def _best_anchor_title(a: Any) -> str:
-    """Recover a meaningful title for an <a>, even when the anchor text is generic."""
-    try:
-        txt = _clean_anchor_text(a.get_text(" ", strip=True) or "")
-    except Exception:
-        txt = ""
-    if txt and (not _GENERIC_ANCHOR_RE.match(txt)):
-        return txt
-
-    try:
-        parent = a
-        for _ in range(7):
-            parent = getattr(parent, "parent", None)
-            if parent is None:
-                break
-            if getattr(parent, "name", "") in {"article", "li", "div", "section"}:
-                h = parent.find(["h1", "h2", "h3", "h4"])
-                if h is not None:
-                    ht = _clean_anchor_text(h.get_text(" ", strip=True) or "")
-                    if ht and (not _GENERIC_ANCHOR_RE.match(ht)):
-                        return ht
+        resp.close()
     except Exception:
         pass
+    return bytes(out)
 
-    return txt or ""
 
-
-def _parse_dt_like(s: str) -> Optional[datetime]:
-    """Parse a date/datetime string in common web formats (best-effort, UTC)."""
-    if not s:
-        return None
-    ss = str(s).strip()
-    if not ss:
-        return None
-    ss = ss.replace("Z", "+00:00")
-    ss = re.sub(r"(\.\d{3,6})\+00:00$", "+00:00", ss)
-    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", ss):
-        try:
-            return datetime.fromisoformat(ss).replace(tzinfo=timezone.utc)
-        except Exception:
-            return None
-    try:
-        dt = datetime.fromisoformat(ss)
-        if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=timezone.utc)
-        return dt.astimezone(timezone.utc)
-    except Exception:
-        m = re.search(r"(20\d{2})-(\d{2})-(\d{2})", ss)
-        if m:
+def _strip_nav_blocks(soup: BeautifulSoup) -> None:
+    """
+    Remove typical navigation/utility blocks so we don't harvest header/footer links.
+    """
+    for sel in ("header", "nav", "footer", "aside", "form"):
+        for el in soup.select(sel):
             try:
-                return datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)), tzinfo=timezone.utc)
+                el.decompose()
             except Exception:
-                return None
-    return None
+                try:
+                    el.extract()
+                except Exception:
+                    pass
 
 
-def _resolve_published_ts_from_html(url: str) -> Optional[float]:
-    """Fetch a small slice of HTML and extract published date from meta/time/JSON-LD."""
-    resp = _http_get(url)
-    if resp is None:
-        return None
-    ctype = _content_type(resp)
-    raw = _read_limited(resp, min(MAX_BYTES, 400_000))
-    if not raw:
-        return None
-
-    last_mod = None
+def _heading_fallback(anchor) -> str:
+    """
+    If anchor text is generic, look for a nearby heading in the card/article/list item.
+    """
     try:
-        lm = resp.headers.get("Last-Modified") or ""
-        if lm:
-            dt = _parse_dt_like(lm)
-            if dt:
-                last_mod = dt.timestamp()
-    except Exception:
-        pass
+        # 1) heading inside the anchor
+        for tag in anchor.find_all(["h1", "h2", "h3", "h4", "h5", "h6"]):
+            t = _clean_anchor_text(tag.get_text(" ", strip=True))
+            if t:
+                return t
 
-    if ("application/pdf" in ctype) or url.lower().endswith(".pdf"):
-        return last_mod
+        # 2) closest container and pick first heading
+        container = anchor.find_parent(["article", "li", "div", "section"])
+        if container:
+            h = container.find(["h1", "h2", "h3", "h4", "h5", "h6"])
+            if h:
+                t = _clean_anchor_text(h.get_text(" ", strip=True))
+                if t:
+                    return t
+
+        # 3) previous sibling headings
+        prev = anchor
+        for _ in range(4):
+            prev = prev.find_previous(["h1", "h2", "h3", "h4", "h5", "h6"])
+            if not prev:
+                break
+            t = _clean_anchor_text(prev.get_text(" ", strip=True))
+            if t:
+                return t
+    except Exception:
+        return ""
+    return ""
+
+
+def _extract_title_and_date_from_html(html: str) -> Tuple[Optional[str], Optional[float]]:
+    """
+    Extract best-effort title + published_ts from HTML (meta tags, JSON-LD, <time datetime>).
+    """
+    if not html:
+        return None, None
 
     try:
-        html = raw.decode(resp.encoding or "utf-8", errors="replace")
+        soup = BeautifulSoup(html, "html.parser")
     except Exception:
-        html = raw.decode("utf-8", errors="replace")
+        return None, None
 
-    soup = BeautifulSoup(html, "html.parser")
+    title: Optional[str] = None
+    published_ts: Optional[float] = None
 
-    meta_attrs = [
-        {"property": "article:published_time"},
-        {"name": "article:published_time"},
-        {"name": "pubdate"},
-        {"name": "publishdate"},
-        {"name": "date"},
-        {"name": "dc.date"},
-        {"name": "dc.date.issued"},
-        {"property": "og:updated_time"},
-    ]
-    for attrs in meta_attrs:
-        el = soup.find("meta", attrs=attrs)
-        if el and el.get("content"):
-            dt = _parse_dt_like(el.get("content"))
-            if dt:
-                return dt.timestamp()
+    # Title: og:title > twitter:title > <title>
+    for sel, attr, key in [
+        ("meta[property='og:title']", "content", "og"),
+        ("meta[name='twitter:title']", "content", "twitter"),
+    ]:
+        tag = soup.select_one(sel)
+        if tag and tag.get(attr):
+            t = _clean_anchor_text(str(tag.get(attr)))
+            if t:
+                title = t
+                break
+    if not title:
+        ttag = soup.find("title")
+        if ttag:
+            t = _clean_anchor_text(ttag.get_text(" ", strip=True))
+            if t:
+                title = t
 
-    t = soup.find("time")
-    if t is not None:
-        dtattr = t.get("datetime") or ""
-        dt = _parse_dt_like(dtattr)
+    # Published date from meta tags
+    meta_candidates = []
+    for tag in soup.find_all("meta"):
+        k = (tag.get("property") or tag.get("name") or tag.get("itemprop") or "").strip().lower()
+        v = (tag.get("content") or "").strip()
+        if not k or not v:
+            continue
+        if any(x in k for x in ("published", "pubdate", "datepublished", "datecreated", "dc.date", "dcterms.issued", "article:published_time")):
+            meta_candidates.append(v)
+    for v in meta_candidates:
+        dt = _parse_dt(v)
         if dt:
-            return dt.timestamp()
+            published_ts = dt.timestamp()
+            break
 
-    for s in soup.find_all("script", attrs={"type": "application/ld+json"}):
-        try:
-            txt = (s.string or "").strip()
-            if not txt:
+    # <time datetime="...">
+    if published_ts is None:
+        for t in soup.find_all("time"):
+            dt_s = (t.get("datetime") or "").strip()
+            if not dt_s:
                 continue
-            data = json.loads(txt)
-            candidates = data if isinstance(data, list) else [data]
-            for obj in candidates:
+            dt = _parse_dt(dt_s)
+            if dt:
+                published_ts = dt.timestamp()
+                break
+
+    # JSON-LD
+    if published_ts is None:
+        for s in soup.find_all("script", attrs={"type": "application/ld+json"}):
+            try:
+                data = json.loads(s.get_text(" ", strip=True) or "{}")
+            except Exception:
+                continue
+            objs = data if isinstance(data, list) else [data]
+            for obj in objs:
                 if not isinstance(obj, dict):
                     continue
-                for key in ("datePublished", "dateCreated"):
-                    if key in obj:
-                        dt = _parse_dt_like(obj.get(key))
+                typ = obj.get("@type") or obj.get("['@type']")
+                # @type may be list
+                types = typ if isinstance(typ, list) else [typ]
+                if not any(t in ("NewsArticle", "Article", "Report", "WebPage") for t in types if isinstance(t, str)):
+                    # Some pages embed multiple blocks; don't require strict type
+                    pass
+                for k in ("datePublished", "dateCreated", "dateModified"):
+                    if k in obj:
+                        dt = _parse_dt(str(obj.get(k)))
                         if dt:
-                            return dt.timestamp()
-        except Exception:
-            continue
+                            published_ts = dt.timestamp()
+                            break
+                if published_ts is not None:
+                    break
+            if published_ts is not None:
+                break
 
-    return last_mod
-
-
-def _looks_like_asset_url(u: str) -> bool:
-    ul = (u or "").lower()
-    return any(ul.endswith(ext) for ext in _DENY_EXTENSIONS)
+    return title, published_ts
 
 
-def _deny_from_index(u: str) -> bool:
-    ul = (u or "").lower()
-    if any(s in ul for s in _DENY_URL_SUBSTRINGS):
+def _looks_content_url(u: str) -> bool:
+    """
+    Cheap heuristic to decide whether a link is worth per-link date resolution.
+    """
+    if not u:
+        return False
+    ul = u.lower()
+    if is_probably_taxonomy_or_hub(ul):
+        return False
+    if _deny_from_index(ul):
+        return False
+    path = urlparse(ul).path
+    segs = [s for s in path.split("/") if s]
+    if not segs:
+        return False
+    # evergreen / nav heavy sections
+    evergreen = {"about", "governance", "board", "leadership", "executive", "team", "contact", "privacy", "terms", "cookie", "legal"}
+    if any(s in evergreen for s in segs):
+        return False
+    # positive signals
+    if re.search(r"(20\d{2})", path):
         return True
-    if _looks_like_asset_url(ul):
+    if any(s in {"news", "media", "press", "blog", "insights", "updates", "publication", "publications", "knowledge-bank", "articles", "announcements"} for s in segs):
+        return True
+    # long slug
+    if segs and len(segs[-1]) >= 18:
         return True
     return False
 
@@ -737,218 +728,216 @@ def fetch_rss(feed_url: str, source_name: str = "", **kwargs) -> List[Item]:
 
     for e in parsed.entries or []:
         link = _clean_url(getattr(e, "link", "") or "")
+        link = resolve_indirect_url(link)
         title = (getattr(e, "title", "") or "").strip()
         if not link or not title:
             continue
         if _deny_from_index(link) or is_probably_taxonomy_or_hub(link):
             continue
 
-        summary = (getattr(e, "summary", "") or getattr(e, "description", "") or "").strip()
-
         published_ts = None
         published_iso = None
 
-        if getattr(e, "published_parsed", None):
-            published_ts = _parse_epoch_from_struct(e.published_parsed)
-        if getattr(e, "updated_parsed", None) and published_ts is None:
-            published_ts = _parse_epoch_from_struct(e.updated_parsed)
+        # feedparser populates published_parsed when possible
+        for attr in ("published_parsed", "updated_parsed"):
+            st = getattr(e, attr, None)
+            if st:
+                try:
+                    # time.struct_time -> seconds (UTC best-effort)
+                    published_ts = time.mktime(st)
+                    published_iso = datetime.fromtimestamp(published_ts, tz=timezone.utc).isoformat()
+                    break
+                except Exception:
+                    pass
 
+        # fallback: infer from URL
         if published_ts is None:
-            # lightweight fallback: infer month from URL if possible
             published_ts = infer_published_ts_from_url(link)
-            if published_ts is not None:
+            if published_ts:
                 published_iso = datetime.fromtimestamp(published_ts, tz=timezone.utc).isoformat()
 
-        if published_ts is not None and published_iso is None:
-            published_iso = datetime.fromtimestamp(published_ts, tz=timezone.utc).isoformat()
-
-        it = Item(
-            url=link,
-            title=title,
-            summary=summary,
-            source=(source_name or (getattr(parsed.feed, "title", "") or "")).strip(),
-            published_iso=published_iso,
-            published_ts=published_ts,
-            published_source="rss" if getattr(e, "published_parsed", None) or getattr(e, "updated_parsed", None) else ("url" if published_ts else None),
-            published_confidence=0.9 if getattr(e, "published_parsed", None) or getattr(e, "updated_parsed", None) else (0.4 if published_ts else None),
-            index_url=feed_url,
+        items.append(
+            Item(
+                url=link,
+                title=title,
+                summary=(getattr(e, "summary", "") or "").strip(),
+                source=source_name or _norm_host(urlparse(link).netloc),
+                published_iso=published_iso,
+                published_ts=published_ts,
+                published_source="rss" if published_ts else None,
+                published_confidence=0.8 if published_ts else None,
+                index_url=feed_url,
+            )
         )
-        items.append(it)
 
     return items
 
 
-
 def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[Item]:
-    """Fetch a hub/listing HTML page (optionally paginated) and extract likely content links."""
+    """
+    Extract candidate content links from an index/listing page.
+
+    Important: be conservative. It's better to return fewer, higher-signal candidates
+    than hundreds of header/footer navigation links.
+    """
     index_url = _clean_url(index_url)
     if not index_url:
         return []
 
+    # Pagination support: attempt up to MAX_INDEX_PAGES by following rel=next.
+    pages: List[str] = [index_url]
+    visited = {index_url.lower()}
+    if MAX_INDEX_PAGES > 1:
+        # We'll discover next links as we go.
+        pass
+
     title_by_url: Dict[str, str] = {}
-    ordered: List[str] = []
+    links_order: List[str] = []
 
-    next_url: Optional[str] = index_url
-    pages_seen: set[str] = set()
-
-    for page_no in range(max(1, MAX_INDEX_PAGES)):
-        if not next_url:
-            break
-        nu = _clean_url(next_url)
-        if not nu or nu.lower() in pages_seen:
-            break
-        pages_seen.add(nu.lower())
-
-        resp = _http_get(nu)
-        if resp is None:
-            break
-        raw = _read_limited(resp, MAX_BYTES)
-        if not raw:
-            break
-        try:
-            html = raw.decode(resp.encoding or "utf-8", errors="replace")
-        except Exception:
-            html = raw.decode("utf-8", errors="replace")
-
+    def harvest_from_html(html: str, base_url: str) -> Optional[str]:
+        """
+        Harvest anchors and return a 'next' URL if present.
+        """
+        if not html:
+            return None
         soup = BeautifulSoup(html, "html.parser")
 
-        # Drop obvious boilerplate containers to reduce navigation links
-        try:
-            for tag in soup(["script", "style", "noscript"]):
-                tag.decompose()
-            _strip_nav_blocks(soup)
-        except Exception:
-            pass
+        # NEW: strip header/footer/nav/aside/form
+        _strip_nav_blocks(soup)
 
-        # 1) JSON-LD ItemList (some sites hide links this way)
-        try:
-            for s in soup.find_all("script", attrs={"type": "application/ld+json"}):
-                try:
-                    data = json.loads(s.get_text(" ", strip=True) or "{}")
-                except Exception:
-                    continue
-                objs = data if isinstance(data, list) else [data]
-                for obj in objs:
-                    if not isinstance(obj, dict):
-                        continue
-                    if str(obj.get("@type") or "").lower() != "itemlist":
-                        continue
-                    elems = obj.get("itemListElement") or []
-                    if not isinstance(elems, list):
-                        continue
-                    for el in elems:
-                        if isinstance(el, dict):
-                            u = el.get("url") or (el.get("item") or {}).get("@id") if isinstance(el.get("item"), dict) else None
-                            if u:
-                                abs_url = _clean_url(urljoin(nu, str(u)))
-                                if abs_url.lower().startswith(("http://", "https://")):
-                                    ordered.append(abs_url)
-        except Exception:
-            pass
+        # Find <link rel="next"> or <a rel="next">
+        next_url: Optional[str] = None
+        link_next = soup.find("link", attrs={"rel": re.compile(r"\bnext\b", re.I)})
+        if link_next and link_next.get("href"):
+            next_url = _clean_url(urljoin(base_url, str(link_next.get("href"))))
+        if not next_url:
+            a_next = soup.find("a", attrs={"rel": re.compile(r"\bnext\b", re.I)})
+            if a_next and a_next.get("href"):
+                next_url = _clean_url(urljoin(base_url, str(a_next.get("href"))))
 
-        # 2) Anchor harvest
-        for a in soup.find_all("a"):
+        for a in soup.select("a[href]"):
             href = (a.get("href") or "").strip()
             if not href:
                 continue
-            if href.startswith("#") or href.lower().startswith(("mailto:", "javascript:")):
+            if href.startswith("mailto:") or href.startswith("javascript:"):
                 continue
 
-            abs_url = _clean_url(urljoin(nu, href))
-            if not abs_url.lower().startswith(("http://", "https://")):
+            abs_url = _clean_url(urljoin(base_url, href))
+            if not abs_url:
+                continue
+            if urlparse(abs_url).scheme not in ("http", "https"):
                 continue
 
-            if _deny_from_index(abs_url):
+            # Filter obvious non-content
+            if not _looks_content_url(abs_url):
                 continue
-            if is_probably_taxonomy_or_hub(abs_url):
-                continue
-            if (not ALLOW_EXTERNAL_LINKS_FROM_INDEX) and (not _same_site(abs_url, index_url)):
+            if _deny_from_index(abs_url) or is_probably_taxonomy_or_hub(abs_url):
                 continue
 
-            t = _best_anchor_title(a)
+            if (not ALLOW_EXTERNAL_LINKS_FROM_INDEX) and (not _same_site(abs_url, base_url)):
+                continue
+
+            # anchor text with fallback
+            t = _clean_anchor_text(a.get_text(" ", strip=True) or "")
             if not t:
-                continue
+                t = _heading_fallback(a)
+            if not t:
+                # still keep the URL but with empty title; we'll try per-link title later if enabled
+                t = ""
 
-            if abs_url not in title_by_url or (len(t) > len(title_by_url.get(abs_url, ""))):
-                title_by_url[abs_url] = t
+            # Keep best (longest) anchor text seen for a URL
+            if abs_url not in title_by_url or len(t) > len(title_by_url.get(abs_url, "")):
+                if t:
+                    title_by_url[abs_url] = t
 
-            ordered.append(abs_url)
+            links_order.append(abs_url)
 
-        # Find "next" page link (rel=next or common pagination patterns)
-        next_url_found: Optional[str] = None
+        return next_url
+
+    def fetch_html(url: str) -> str:
+        resp = _http_get(url)
+        if resp is None:
+            return ""
+        raw = _read_limited(resp, MAX_BYTES)
+        if not raw:
+            return ""
         try:
-            lnk = soup.find("link", attrs={"rel": re.compile(r"\bnext\b", re.I)})
-            if lnk and lnk.get("href"):
-                next_url_found = _clean_url(urljoin(nu, lnk.get("href")))
-            if not next_url_found:
-                a_next = soup.find("a", attrs={"rel": re.compile(r"\bnext\b", re.I)})
-                if a_next and a_next.get("href"):
-                    next_url_found = _clean_url(urljoin(nu, a_next.get("href")))
-            if not next_url_found:
-                # heuristic: anchor text "Next"
-                for a_next in soup.find_all("a"):
-                    txt = (a_next.get_text(" ", strip=True) or "").strip().lower()
-                    if txt in {"next", "next ›", "older", "older posts"} and a_next.get("href"):
-                        next_url_found = _clean_url(urljoin(nu, a_next.get("href")))
-                        break
+            return raw.decode(resp.encoding or "utf-8", errors="replace")
         except Exception:
-            next_url_found = None
+            return raw.decode("utf-8", errors="replace")
 
-        next_url = next_url_found
-        # stop if we've hit cap already
-        if len(ordered) >= MAX_LINKS_PER_INDEX:
+    next_url = None
+    for page_i in range(MAX_INDEX_PAGES):
+        cur = pages[-1]
+        html = fetch_html(cur)
+        if not html:
             break
+        next_url = harvest_from_html(html, cur)
 
-    # De-duplicate in-order
+        if not next_url:
+            break
+        if next_url.lower() in visited:
+            break
+        if not _same_site(next_url, index_url):
+            break
+        visited.add(next_url.lower())
+        pages.append(next_url)
+
+    # De-dupe, keep order
+    seen = set()
     uniq: List[str] = []
-    seen: set[str] = set()
-    for u in ordered:
-        ul = (u or "").lower()
-        if not ul or ul in seen:
+    for u in links_order:
+        key = u.lower()
+        if key in seen:
             continue
-        seen.add(ul)
+        seen.add(key)
         uniq.append(u)
 
     uniq = uniq[:MAX_LINKS_PER_INDEX]
 
-    items: List[Item] = []
-    resolve_budget = MAX_DATE_RESOLVE_FETCHES_PER_INDEX
+    # Optional per-link metadata resolution (bounded).
+    # We only do this for likely content URLs lacking URL-inferred dates (and/or generic titles).
+    resolve_budget = max(0, int(MAX_DATE_RESOLVE_FETCHES_PER_INDEX))
+    resolved_meta: Dict[str, Tuple[Optional[str], Optional[float]]] = {}
+    if resolve_budget > 0:
+        for u in uniq:
+            if resolve_budget <= 0:
+                break
+            # If we already inferred a date, we can skip resolving date (but may still need title if missing).
+            inferred_ts = infer_published_ts_from_url(u)
+            needs_title = not bool(title_by_url.get(u))
+            if inferred_ts is not None and not needs_title:
+                continue
+            if not _looks_content_url(u):
+                continue
 
-    # Prioritise higher-signal URLs for date resolution
-    def _prio(u: str) -> int:
-        p = urlparse(u).path.lower()
-        if re.search(r"/20\d{2}/", p) or re.search(r"/20\d{2}-\d{2}-\d{2}", p):
-            return 0
-        if any(seg in p for seg in ("/news/", "/media/", "/press/", "/blog/", "/insights/", "/updates/", "/publication", "/publications/")):
-            return 1
-        return 2
+            # fetch small page HTML; avoid PDFs here (handled later in full-text extraction)
+            if u.lower().endswith(".pdf"):
+                continue
 
-    uniq_sorted = sorted(uniq, key=_prio)
-    resolved_ts: Dict[str, Tuple[Optional[float], bool]] = {}
-
-    for u in uniq_sorted:
-        inferred_ts = infer_published_ts_from_url(u)
-        used_meta = False
-        if inferred_ts is None and resolve_budget > 0 and _looks_content_url(u):
-            try:
-                ts2 = _resolve_published_ts_from_html(u)
-            except Exception:
-                ts2 = None
+            html = fetch_html(u)
+            if not html:
+                continue
+            t2, ts2 = _extract_title_and_date_from_html(html)
+            if t2 or ts2:
+                resolved_meta[u] = (t2, ts2)
             resolve_budget -= 1
-            if ts2:
-                inferred_ts = ts2
-                used_meta = True
-        resolved_ts[u] = (inferred_ts, used_meta)
 
+    items: List[Item] = []
     for u in uniq:
-        inferred_ts, used_meta = resolved_ts.get(u, (infer_published_ts_from_url(u), False))
-        inferred_iso = datetime.fromtimestamp(inferred_ts, tz=timezone.utc).date().isoformat() if inferred_ts else None
+        inferred_ts = infer_published_ts_from_url(u)
+        t_meta, ts_meta = resolved_meta.get(u, (None, None))
 
-        title = title_by_url.get(u, "") or u
+        # Prefer meta date over URL inference (higher confidence)
+        final_ts = ts_meta if ts_meta is not None else inferred_ts
+        final_iso = datetime.fromtimestamp(final_ts, tz=timezone.utc).isoformat() if final_ts else None
 
+        # Source: prefer explicit source_name for same-site links, else fall back to the URL's host.
         src = source_name or _norm_host(urlparse(index_url).netloc)
         if not _same_site(u, index_url):
             src = _norm_host(urlparse(u).netloc)
+
+        title = title_by_url.get(u, "") or (t_meta or "") or u
 
         items.append(
             Item(
@@ -956,10 +945,10 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
                 title=title,
                 summary="",
                 source=src,
-                published_iso=inferred_iso,
-                published_ts=inferred_ts,
-                published_source=("meta" if used_meta else ("url" if inferred_ts else None)),
-                published_confidence=(0.6 if used_meta else (0.35 if inferred_ts else None)),
+                published_iso=final_iso,
+                published_ts=final_ts,
+                published_source=("meta" if ts_meta else ("url" if inferred_ts else None)),
+                published_confidence=(0.75 if ts_meta else (0.35 if inferred_ts else None)),
                 index_url=index_url,
             )
         )
@@ -967,75 +956,96 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
     return items
 
 
+def _pdf_allowed(url: str) -> bool:
+    if not url.lower().endswith(".pdf"):
+        return False
+    if not PDF_TRUSTED:
+        return True
+    host = _norm_host(urlparse(url).netloc)
+    return any(host == d or host.endswith("." + d) for d in PDF_TRUSTED)
+
+
 def fetch_full_text(url: str, **kwargs) -> str:
     """
-    Return extracted text for a URL (HTML or PDF).
-    Returns empty string on failure.
+    Fetch full text for a URL (HTML or PDF).
+
+    Returns extracted plain text (best-effort). Never raises.
     """
     url = _clean_url(url)
-    # Unwrap known aggregator URLs (e.g., Google News RSS wrappers)
     url = resolve_indirect_url(url)
-    url = _clean_url(url)
     if not url:
         return ""
 
-    # Hard stop for obvious non-content URLs (prevents wasting fetch budget downstream)
-    if _deny_from_index(url) or is_probably_taxonomy_or_hub(url):
-        return ""
+    # PDFs
+    if url.lower().endswith(".pdf"):
+        if not _pdf_allowed(url):
+            return ""
+        return _fetch_pdf_text(url)
 
+    # HTML
+    return _fetch_html_text(url)
+
+
+def _fetch_html_text(url: str) -> str:
     resp = _http_get(url)
     if resp is None:
         return ""
-
-    ctype = _content_type(resp)
-    is_pdf = ("application/pdf" in ctype) or url.lower().endswith(".pdf")
-
-    cap = MAX_PDF_BYTES if is_pdf else MAX_BYTES
-    raw = _read_limited(resp, cap)
+    raw = _read_limited(resp, MAX_BYTES)
     if not raw:
         return ""
 
-    if is_pdf:
-        if fitz is None:
-            return ""
-        try:
-            doc = fitz.open(stream=raw, filetype="pdf")
-            parts = []
-            for i in range(min(doc.page_count, 25)):
-                parts.append(doc.load_page(i).get_text("text"))
-            doc.close()
-            text = "\n".join(parts).strip()
-            return text
-        except Exception:
-            return ""
-
-    # HTML extraction
     try:
         html = raw.decode(resp.encoding or "utf-8", errors="replace")
     except Exception:
         html = raw.decode("utf-8", errors="replace")
 
-    # trafilatura first (best signal) – optional dependency in some environments
     if trafilatura is not None:
         try:
-            extracted = trafilatura.extract(
-                html,
-                include_comments=False,
-                include_tables=False,
-                favor_recall=True,
-            )
-            if extracted and extracted.strip():
-                return extracted.strip()
+            txt = trafilatura.extract(html, include_comments=False, include_tables=True) or ""
+            return (txt or "").strip()
         except Exception:
             pass
 
-    # fallback: soup text
+    # fallback: crude soup get_text
     try:
         soup = BeautifulSoup(html, "html.parser")
-        for tag in soup(["script", "style", "noscript"]):
-            tag.decompose()
-        txt = soup.get_text("\n")
-        txt = re.sub(r"\n{3,}", "\n\n", txt).strip()
+        _strip_nav_blocks(soup)
+        txt = soup.get_text(" ", strip=True)
+        txt = re.sub(r"\s+", " ", txt).strip()
         return txt
     except Exception:
         return ""
+
+
+def _fetch_pdf_text(url: str) -> str:
+    resp = _http_get(url)
+    if resp is None:
+        return ""
+    raw = _read_limited(resp, MAX_PDF_BYTES)
+    if not raw:
+        return ""
+
+    if fitz is None:
+        return ""
+
+    try:
+        doc = fitz.open(stream=raw, filetype="pdf")
+    except Exception:
+        return ""
+
+    out_parts: List[str] = []
+    try:
+        for page in doc:
+            try:
+                out_parts.append(page.get_text("text"))
+            except Exception:
+                continue
+    finally:
+        try:
+            doc.close()
+        except Exception:
+            pass
+
+    txt = "\n".join(out_parts)
+    txt = re.sub(r"\s+", " ", txt).strip()
+    return txt
