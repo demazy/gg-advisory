@@ -53,8 +53,7 @@ allow_domains:
 - about.bnef.com
 deny_domains: []
 domain_deny_substrings:
-  arena.gov.au:
-  - /renewable-energy/
+  arena.gov.au: []
   cefc.com.au:
   - /where-we-invest/
 title_deny_regex:
