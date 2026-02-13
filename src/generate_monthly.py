@@ -162,6 +162,26 @@ def _in_range(ts: Any, start: Any, end: Any) -> bool:
         return True
     return s2 <= ts2 <= e2
 
+def _postfilter_selected(selected: List[Item], start_dt: datetime, end_dt: datetime) -> Tuple[List[Item], List[Dict[str, str]]]:
+    """Final safety filter to prevent out-of-range leakage from any fallback paths."""
+    drops: List[Dict[str, str]] = []
+    kept: List[Item] = []
+    for it in selected:
+        url = (it.url or "").strip()
+        ts = _effective_published_ts(it)
+        if ts is None:
+            if not ALLOW_UNDATED:
+                drops.append({"reason": "undated_postfilter", "url": url, "title": it.title or ""})
+                continue
+            kept.append(it)
+            continue
+        if not _in_range(ts, start_dt, end_dt):
+            drops.append({"reason": "out_of_range_postfilter", "url": url, "title": it.title or "", "meta": str(ts)})
+            continue
+        kept.append(it)
+    return kept, drops
+
+
 
 def _is_priority(url: str) -> bool:
     d = normalise_domain(url)
@@ -192,65 +212,6 @@ def _substance_ok_relaxed(text: str) -> bool:
     return True
 
 
-
-def _is_bad_title(title: str) -> bool:
-    t = (title or "").strip().lower()
-    if not t:
-        return True
-    bad = {
-        "read more", "back to top", "view all", "view all >", "more", "learn more", "click here",
-        "cookie details", "cookies", "privacy", "terms", "access the full speech", "news", "media releases",
-    }
-    if t in bad:
-        return True
-    # very short generic
-    if len(t) <= 4:
-        return True
-    return False
-
-
-def _domain_path_score(url: str) -> float:
-    """Prefer high-signal content paths and penalise evergreen navigation pages."""
-    u = (url or "").lower()
-    if not u:
-        return -2.0
-    # strip query
-    u_clean = re.sub(r"[?#].*$", "", u)
-    path = re.sub(r"^https?://[^/]+", "", u_clean)
-    domain = normalise_domain(u_clean)
-
-    # Common negative paths
-    if any(seg in path for seg in ("/about", "/about-us", "/contact", "/privacy", "/terms", "/cookies", "/sitemap", "/search")):
-        return -1.5
-
-    # Domain-specific boosts
-    if domain == "aemc.gov.au":
-        if "/news-centre/media-releases/" in path: return 1.5
-        if "/news-centre/speeches/" in path: return 1.2
-        if "/news-centre/" in path: return 0.8
-        if "/rule-changes/" in path: return 0.6
-        if "/market-reviews-advice/" in path: return 0.4
-        return -0.8
-    if domain == "cer.gov.au":
-        if re.search(r"/news-and-media/news/\d{4}/[a-z]+/", path): return 1.2
-        if "/news-and-media/news/" in path: return 0.6
-        if path.rstrip("/") == "/news-and-media/news": return -1.2
-    if domain == "arena.gov.au":
-        if re.search(r"/news/\d{4}/", path): return 1.2
-        if path.rstrip("/") == "/news": return -0.8
-        if "/projects/" in path: return 0.9
-        if "/publications/" in path or "/knowledge-bank/" in path: return 0.8
-        if "/funding/" in path: return -0.2  # often evergreen; allow but low priority
-    if domain == "energynetworks.com.au":
-        if "/news/" in path: return 0.9
-        if "/news/media-releases/" in path: return 1.0
-    if domain == "efrag.org":
-        if "f%5b0%5d=" in u or "facets_query" in u: return -1.2
-    if domain == "ifrs.org":
-        if "/news-and-events/news/" in path: return 1.0
-        if "/news-and-events/updates/" in path: return 0.9
-    return 0.0
-
 def _looks_articleish(url: str) -> bool:
     """
     Heuristic: URL appears to be an actual *content item* (article/report/media release),
@@ -263,10 +224,6 @@ def _looks_articleish(url: str) -> bool:
     if not u:
         return False
     ul = u.lower()
-
-    # Faceted/search listing URLs are not content items
-    if any(x in ul for x in ("f%5b0%5d=", "f[0]=", "facets_query=", "?page=", "?sort=")):
-        return False
 
     if is_probably_taxonomy_or_hub(ul):
         return False
@@ -488,26 +445,19 @@ def _keyword_boost(title: str, section: str, flt: Filters) -> float:
 
 
 def _score_item(it: Item, text: str, section: str, flt: Filters, *, ignore_substance: bool = False) -> float:
-    try:
-        domain = normalise_domain(it.url)
-        if flt.domain_denied(domain):
-            return -1e9
-        if (not ignore_substance) and (not _substance_ok(text, _is_priority(it.url))):
-            return -1e9
-
-        dt = _effective_published_ts(it)
-        recency = (dt.timestamp() / 1e10) if dt is not None else 0.0
-        substance = math.log(max(50, len(text)), 10)
-        kw = _keyword_boost(it.title or "", section, flt)
-        articleish = 0.35 if _looks_articleish(it.url or "") else -0.6
-        path_score = _domain_path_score(it.url or "")
-        title_pen = -0.8 if _is_bad_title(it.title or "") else 0.0
-        undated_pen = -0.6 if (it.published_ts is None and not _is_priority(it.url)) else 0.0
-        return recency + substance + kw + articleish + path_score + title_pen + undated_pen
-
-    except Exception as e:
-        # Never fail the run due to a scoring bug; treat as very low score.
+    domain = normalise_domain(it.url)
+    if flt.domain_denied(domain):
         return -1e9
+    if (not ignore_substance) and (not _substance_ok(text, _is_priority(it.url))):
+        return -1e9
+
+    dt = _effective_published_ts(it)
+    recency = (dt.timestamp() / 1e10) if dt is not None else 0.0
+    substance = math.log(max(50, len(text)), 10)
+    kw = _keyword_boost(it.title or "", section, flt)
+    articleish = 0.25 if _looks_articleish(it.url or "") else -0.35
+    return recency + substance + kw + articleish
+
 
 def _collect_section_pool(section: str, sec_cfg: Dict[str, Any]) -> Tuple[List[Item], List[Dict[str, str]]]:
     drops: List[Dict[str, str]] = []
@@ -816,6 +766,10 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
             )
             selected = [placeholder]
             all_drops.append({"reason": "placeholder_used", "url": "", "title": placeholder.title})
+
+        # Final safety filter: ensure no out-of-range items leak from fallbacks
+        selected, drops_pf = _postfilter_selected(selected, start_dt, end_dt)
+        all_drops.extend(drops_pf)
 
         print(f"[selected] {len(selected)} from {section}")
         all_selected.extend(selected)
