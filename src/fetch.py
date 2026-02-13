@@ -30,7 +30,7 @@ import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
-from urllib.parse import urljoin, urldefrag, urlparse, parse_qs, urlencode, unquote
+from urllib.parse import urljoin, urldefrag, urlparse, parse_qs, urlencode
 
 import requests
 from bs4 import BeautifulSoup
@@ -51,6 +51,34 @@ try:
     from dateutil import parser as dtparser  # type: ignore
 except Exception:  # pragma: no cover
     dtparser = None
+
+
+# -----------------------------
+# Title normalisation
+# -----------------------------
+_GENERIC_TITLES = {
+    "read more", "read more about", "more", "article", "news", "press release", "media release"
+}
+
+def normalise_title(title: str, url: str) -> str:
+    """Replace generic feed titles (e.g., 'Read more') with a slug-derived title."""
+    t = (title or "").strip()
+    if t:
+        tl = re.sub(r"\s+", " ", t).strip().lower()
+        if tl not in _GENERIC_TITLES and len(t) >= 8:
+            return t.strip()
+    # derive from URL path
+    try:
+        path = urlparse(url).path or ""
+        seg = path.rstrip("/").split("/")[-1]
+        seg = re.sub(r"\.(html?|php|aspx?)$", "", seg, flags=re.I)
+        seg = seg.replace("-", " ").replace("_", " ").strip()
+        seg = re.sub(r"\s+", " ", seg)
+        if seg:
+            return seg[:1].upper() + seg[1:]
+    except Exception:
+        pass
+    return t.strip() or url
 
 
 # -----------------------------
@@ -203,94 +231,6 @@ _DENY_EXTENSIONS = (
 def _looks_like_asset_url(u: str) -> bool:
     ul = (u or "").lower()
     return any(ul.endswith(ext) for ext in _DENY_EXTENSIONS)
-
-
-
-def _looks_content_url(u: str) -> bool:
-    """Heuristic filter for index link extraction.
-
-    Returns True if the URL *looks* like a content item (article/report), rather than a hub/listing/nav/asset.
-    This is intentionally conservative: it should avoid excluding real articles.
-    """
-    ul = (u or "").strip().lower()
-    if not ul:
-        return False
-    if _deny_from_index(ul):
-        return False
-    if is_probably_taxonomy_or_hub(ul):
-        return False
-    # common non-content endings
-    if ul.endswith(("/", "#")):
-        return False
-    return True
-
-
-def resolve_indirect_url(url: str, max_bytes: int = 500_000) -> str:
-    """Best-effort unwrapping of indirect/tracking URLs to the canonical publisher URL.
-
-    This addresses Google News RSS wrapper URLs (news.google.com/rss/articles/...) and generic
-    google redirect links (google.com/url?q=...).
-
-    Returns the original URL if no better candidate is found.
-    """
-    u = _clean_url(url)
-    if not u:
-        return ""
-    ul = u.lower()
-
-    # google redirector: https://www.google.com/url?q=<target>&...
-    if "google.com/url" in ul:
-        try:
-            parsed = urlparse(u)
-            q = parse_qs(parsed.query or "")
-            if "q" in q and q["q"]:
-                cand = _clean_url(q["q"][0])
-                if cand and "google.com" not in cand.lower():
-                    return cand
-        except Exception:
-            pass
-        return u
-
-    # google news RSS wrapper: fetch HTML and extract embedded canonical/outbound URL
-    if "news.google.com" in ul:
-        try:
-            resp = _http_get(u)
-            if resp is None:
-                return u
-            raw = _read_limited(resp, max_bytes)
-            if not raw:
-                return u
-            try:
-                html = raw.decode(resp.encoding or "utf-8", errors="replace")
-            except Exception:
-                html = raw.decode("utf-8", errors="replace")
-
-            # 1) meta refresh: url=<...>
-            m = re.search(r"url=([^\"'>\s]+)", html, flags=re.IGNORECASE)
-            if m:
-                cand = unquote(m.group(1))
-                cand = _clean_url(cand)
-                if cand and "news.google.com" not in cand.lower():
-                    return cand
-
-            # 2) explicit url= param inside the HTML/JS
-            m2 = re.search(r"[?&]url=(https?%3A%2F%2F[^&\"']+)", html)
-            if m2:
-                cand = unquote(m2.group(1))
-                cand = _clean_url(cand)
-                if cand and "news.google.com" not in cand.lower():
-                    return cand
-
-            # 3) first outbound anchor that is not google/news
-            m3 = re.search(r"href=\"(https?://[^\"]+)\"", html, flags=re.IGNORECASE)
-            if m3:
-                cand = _clean_url(m3.group(1))
-                if cand and ("news.google.com" not in cand.lower()) and ("google.com" not in cand.lower()):
-                    return cand
-        except Exception:
-            return u
-
-    return u
 
 
 def _deny_from_index(u: str) -> bool:
@@ -728,7 +668,6 @@ def fetch_rss(feed_url: str, source_name: str = "", **kwargs) -> List[Item]:
 
     for e in parsed.entries or []:
         link = _clean_url(getattr(e, "link", "") or "")
-        link = resolve_indirect_url(link)
         title = (getattr(e, "title", "") or "").strip()
         if not link or not title:
             continue
@@ -759,7 +698,7 @@ def fetch_rss(feed_url: str, source_name: str = "", **kwargs) -> List[Item]:
         items.append(
             Item(
                 url=link,
-                title=title,
+                title=normalise_title(title, link),
                 summary=(getattr(e, "summary", "") or "").strip(),
                 source=source_name or _norm_host(urlparse(link).netloc),
                 published_iso=published_iso,
@@ -829,8 +768,6 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
                 continue
 
             # Filter obvious non-content
-            if not _looks_content_url(abs_url):
-                continue
             if _deny_from_index(abs_url) or is_probably_taxonomy_or_hub(abs_url):
                 continue
 
@@ -942,7 +879,7 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
         items.append(
             Item(
                 url=u,
-                title=title,
+                title=normalise_title(title, u),
                 summary="",
                 source=src,
                 published_iso=final_iso,
@@ -972,7 +909,6 @@ def fetch_full_text(url: str, **kwargs) -> str:
     Returns extracted plain text (best-effort). Never raises.
     """
     url = _clean_url(url)
-    url = resolve_indirect_url(url)
     if not url:
         return ""
 
