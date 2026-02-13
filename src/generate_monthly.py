@@ -855,7 +855,9 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
     with drops_path.open("w", encoding="utf-8") as f:
         f.write("# reason\turl\ttitle\n")
         for d in all_drops:
-            f.write(f"{d.get('reason','')}\t{d.get('url','')}\t{d.get('title','')}\n")
+            url = d.get('url','') or d.get('source','') or ''
+            title = d.get('title','') or d.get('detail','') or ''
+            f.write(f"{d.get('reason','')}\t{url}\t{title}\n")
 
     md = build_digest(ym, all_selected)
     out_path = OUT_DIR / f"monthly-digest-{ym}.md"
