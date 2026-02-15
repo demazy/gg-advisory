@@ -54,34 +54,6 @@ except Exception:  # pragma: no cover
 
 
 # -----------------------------
-# Title normalisation
-# -----------------------------
-_GENERIC_TITLES = {
-    "read more", "read more about", "more", "article", "news", "press release", "media release"
-}
-
-def normalise_title(title: str, url: str) -> str:
-    """Replace generic feed titles (e.g., 'Read more') with a slug-derived title."""
-    t = (title or "").strip()
-    if t:
-        tl = re.sub(r"\s+", " ", t).strip().lower()
-        if tl not in _GENERIC_TITLES and len(t) >= 8:
-            return t.strip()
-    # derive from URL path
-    try:
-        path = urlparse(url).path or ""
-        seg = path.rstrip("/").split("/")[-1]
-        seg = re.sub(r"\.(html?|php|aspx?)$", "", seg, flags=re.I)
-        seg = seg.replace("-", " ").replace("_", " ").strip()
-        seg = re.sub(r"\s+", " ", seg)
-        if seg:
-            return seg[:1].upper() + seg[1:]
-    except Exception:
-        pass
-    return t.strip() or url
-
-
-# -----------------------------
 # Config
 # -----------------------------
 UA = os.getenv(
@@ -698,7 +670,7 @@ def fetch_rss(feed_url: str, source_name: str = "", **kwargs) -> List[Item]:
         items.append(
             Item(
                 url=link,
-                title=normalise_title(title, link),
+                title=title,
                 summary=(getattr(e, "summary", "") or "").strip(),
                 source=source_name or _norm_host(urlparse(link).netloc),
                 published_iso=published_iso,
@@ -879,7 +851,7 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
         items.append(
             Item(
                 url=u,
-                title=normalise_title(title, u),
+                title=title,
                 summary="",
                 source=src,
                 published_iso=final_iso,
