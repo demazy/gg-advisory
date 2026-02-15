@@ -9,7 +9,7 @@
   },
   {
     "section": "Energy Transition",
-    "title": "Explore q4 2025 qcmr data workbook",
+    "title": "Read more",
     "url": "https://www.cer.gov.au/news-and-media/news/2026/january/explore-q4-2025-qcmr-data-workbook",
     "publisher": "cer.gov.au",
     "published": "2026-01-01T00:00:00+00:00",
@@ -33,27 +33,11 @@
   },
   {
     "section": "ESG Reporting",
-    "title": "News",
-    "url": "https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A141",
+    "title": "Read more about EFRAG SRB Online Meeting 28 January 2026",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-28-january-2026",
     "publisher": "efrag.org",
-    "published": "2026-01-27T12:00:00+00:00",
-    "published_ts": 1769515200.0
-  },
-  {
-    "section": "Sustainable Finance & Investment",
-    "title": "New Energy Outlook",
-    "url": "https://about.bnef.com/insights/clean-energy/new-energy-outlook/",
-    "publisher": "about.bnef.com",
-    "published": "2025-05-19T08:54:33+00:00",
-    "published_ts": 1747644873.0
-  },
-  {
-    "section": "Sustainable Finance & Investment",
-    "title": "REPORT New Energy Outlook",
-    "url": "https://about.bnef.com/insights/uncategorized/new-energy-outlook/",
-    "publisher": "about.bnef.com",
-    "published": "2025-05-19T08:54:33+00:00",
-    "published_ts": 1747644873.0
+    "published": "2026-01-26T12:00:00+00:00",
+    "published_ts": 1769428800.0
   },
   {
     "section": "Sustainable Finance & Investment",
@@ -65,14 +49,6 @@
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Advancing Renewables Program (ARP)",
-    "url": "https://arena.gov.au/funding/advancing-renewables-program/",
-    "publisher": "arena.gov.au",
-    "published": "2019-02-13T00:00:00+00:00",
-    "published_ts": 1550016000.0
-  },
-  {
-    "section": "Sustainable Finance & Investment",
     "title": "Ultra Low-Cost Solar PV R&D Funding Round",
     "url": "https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/",
     "publisher": "arena.gov.au",
@@ -81,18 +57,42 @@
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "REPORT Electric Vehicle Outlook",
-    "url": "https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/",
-    "publisher": "about.bnef.com",
-    "published": "2025-06-18T10:50:26+00:00",
-    "published_ts": 1750243826.0
+    "title": "National Industrial Transformation Program",
+    "url": "https://arena.gov.au/funding/national-industrial-transformation-program/",
+    "publisher": "arena.gov.au",
+    "published": null,
+    "published_ts": null
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Electric Vehicle Outlook",
-    "url": "https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook/",
-    "publisher": "about.bnef.com",
-    "published": "2025-06-18T10:50:26+00:00",
-    "published_ts": 1750243826.0
+    "title": "Powering the Regions Industrial Transformation Stream",
+    "url": "https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/",
+    "publisher": "arena.gov.au",
+    "published": null,
+    "published_ts": null
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "Community Batteries Funding Round 2",
+    "url": "https://arena.gov.au/funding/community-batteries-funding-round-2",
+    "publisher": "arena.gov.au",
+    "published": null,
+    "published_ts": null
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "Hydrogen Headstart Round 2",
+    "url": "https://arena.gov.au/funding/hydrogen-headstart-round2",
+    "publisher": "arena.gov.au",
+    "published": null,
+    "published_ts": null
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)",
+    "url": "https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/",
+    "publisher": "arena.gov.au",
+    "published": null,
+    "published_ts": null
   }
 ]

@@ -6,14 +6,14 @@ out_of_range	https://www.energynetworks.com.au/news/energy-insider/why-you-cant-
 out_of_range	https://www.energynetworks.com.au/news/media-releases/joint-statement-on-the-national-electricity-market-review/	16 Dec 2025 Media releases Joint Statement on the National Electricity Market Review
 out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-responds-to-aemc-pricing-review-released-today/	15 Dec 2025 Media releases Energy Networks Australia responds to AEMC pricing review released today
 out_of_range	https://www.energynetworks.com.au/news/draft-isp-aims-to-right-size-transmission-and-reinforces-networks-as-the-backbone-of-the-energy-transition/	10 Dec 2025 News Draft ISP aims to right-size transmission and reinforces networks as the backbone of the energy transition
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/changes-to-cheaper-home-batteries-program	Changes to cheaper home batteries program
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fifth-independent-review-hir-gateway-checks	Fifth independent review hir gateway checks
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fixed-delivery-exit-arrangement-now-permanent	Fixed delivery exit arrangement now permanent
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/market-update-fixed-delivery-exit-arrangement	Market update fixed delivery exit arrangement
-deny_title_regex	https://www.cer.gov.au/news-and-media/news/2025/december/register-solar-water-heaters-version-56-now-available	Register solar water heaters version 56 now available
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/renewable-energy-target-enforcement-action-against-mojo-power-east	Renewable energy target enforcement action against mojo power east
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/2024-25-preliminary-safeguard-mechanism-insights-released	2024 25 preliminary safeguard mechanism insights released
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/recall-issued-sigenergy-single-phase-81012-kw-energy-controllers	Recall issued sigenergy single phase 81012 kw energy controllers
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/changes-to-cheaper-home-batteries-program	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fifth-independent-review-hir-gateway-checks	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fixed-delivery-exit-arrangement-now-permanent	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/market-update-fixed-delivery-exit-arrangement	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/register-solar-water-heaters-version-56-now-available	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/renewable-energy-target-enforcement-action-against-mojo-power-east	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/2024-25-preliminary-safeguard-mechanism-insights-released	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/recall-issued-sigenergy-single-phase-81012-kw-energy-controllers	Read more
 undated	https://arena.gov.au/	Home
 undated	https://arena.gov.au/news/	Back to top
 deny_url_substring	https://www.aemc.gov.au/about-us	About Us
@@ -32,15 +32,15 @@ deny_url_substring	https://www.aemc.gov.au/contact-us/propose-rule-change	Propos
 undated	https://www.aemc.gov.au/energeia-finds-cer-flexibility-could-deliver-45b-benefits-2050	Charging ahead: Residential batteries are growing in popularity and profitability
 undated	https://www.aemc.gov.au/energy-system	Energy System
 undated	https://www.aemc.gov.au/energy-system/electricity	Electricity
-undated	https://www.aemc.gov.au/energy-system/energy-system	Energy system
+undated	https://www.aemc.gov.au/energy-system/energy-system	Gas
 undated	https://www.aemc.gov.au/energy-system/energy-system-0	Energy terminology
 undated	https://www.aemc.gov.au/energy-system/retail	Retail
 undated	https://www.aemc.gov.au/ess-system-security-update-aemc-reform-work-program	Energeia finds that CER flexibility could deliver $45B in benefits by 2050
-undated	https://www.aemc.gov.au/market-reviews-advice/electricity-network-regulation-review	Electricity network regulation review
+undated	https://www.aemc.gov.au/market-reviews-advice/electricity-network-regulation-review	EPR0106
 undated	https://www.aemc.gov.au/market-reviews-advice/future-wholesale-market	​​EPR0093​
 undated	https://www.aemc.gov.au/market-reviews-advice/pricing-review-electricity-pricing-consumer-driven-future	​​EPR0097​
 undated	https://www.aemc.gov.au/market-reviews-advice/review-integrated-system-plan-framework	​​EPR0092​
-undated	https://www.aemc.gov.au/market-reviews-advice/transmission-planning-and-investment-review	Transmission planning and investment review
+undated	https://www.aemc.gov.au/market-reviews-advice/transmission-planning-and-investment-review	EPR0087
 undated	https://www.aemc.gov.au/metering	https://www.aemc.gov.au/metering
 undated	https://www.aemc.gov.au/news-centre	News Centre
 deny_url_substring	https://www.aemc.gov.au/news-centre/annual-reports	Annual reports >
@@ -92,8 +92,8 @@ undated	https://www.aemc.gov.au/regulation/energy-rules/national-gas-rules/curre
 undated	https://www.aemc.gov.au/regulation/legislation	Legislation
 deny_url_substring	https://www.aemc.gov.au/regulation/national-governance	National energy governance
 undated	https://www.aemc.gov.au/regulation/neo	National Energy Objectives
-undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers	Real time data consumers
-undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers-retail	Real time data consumers retail
+undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers	ERC0399
+undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers-retail	RRC0057
 undated	https://www.aemc.gov.au/sites/default/files/2021-11/4145_AEMC-Price-Trends-2021_National%20A_v4.pdf	Improving certainty to enable the transmission needed for net zero
 undated	https://www.aemc.gov.au/sites/default/files/2022-10/EPR0087-%20Final%20report%20-%20stage%202%20-%20infographic.pdf	Improving certainty to enable the transmission needed for net zero
 undated	https://www.aemc.gov.au/sites/default/files/2022-12/AEMC%20Annual%20Report%202021%20-%202022.pdf	AEMC Annual Report 2021-2022
@@ -115,6 +115,8 @@ undated	https://www.energynetworks.com.au/news/	News
 undated	https://www.energynetworks.com.au/news/energy-insider/	See all Articles
 undated	https://www.energynetworks.com.au/news/media-releases/	See all Articles
 undated	https://www.energynetworks.com.au/news/speeches-op-eds/	Speeches / Op Eds
+duplicate_content	https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-solar-sharer-offer-next-steps/	23 Jan 2026 News Energy Networks Australia welcomes Solar Sharer Offer next steps
+duplicate_content	https://www.cer.gov.au/news-and-media/news/2026/january/explore-q4-2025-qcmr-data-workbook	Read more
 out_of_range	https://www.energynetworks.com.au/news/energy-insider/what-australias-energy-system-wants-for-christmas/	18 Dec 2025 Energy Insider What Australia’s Energy System Wants for Christmas
 out_of_range	https://www.energynetworks.com.au/news/the-age-of-dso/	18 Dec 2025 News The Age of DSO
 out_of_range	https://www.energynetworks.com.au/news/meet-new-ena-chair-andrew-bills/	17 Dec 2025 News Meet new ENA Chair – Andrew Bills
@@ -122,14 +124,14 @@ out_of_range	https://www.energynetworks.com.au/news/energy-insider/why-you-cant-
 out_of_range	https://www.energynetworks.com.au/news/media-releases/joint-statement-on-the-national-electricity-market-review/	16 Dec 2025 Media releases Joint Statement on the National Electricity Market Review
 out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-responds-to-aemc-pricing-review-released-today/	15 Dec 2025 Media releases Energy Networks Australia responds to AEMC pricing review released today
 out_of_range	https://www.energynetworks.com.au/news/draft-isp-aims-to-right-size-transmission-and-reinforces-networks-as-the-backbone-of-the-energy-transition/	10 Dec 2025 News Draft ISP aims to right-size transmission and reinforces networks as the backbone of the energy transition
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/changes-to-cheaper-home-batteries-program	Changes to cheaper home batteries program
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fifth-independent-review-hir-gateway-checks	Fifth independent review hir gateway checks
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fixed-delivery-exit-arrangement-now-permanent	Fixed delivery exit arrangement now permanent
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/market-update-fixed-delivery-exit-arrangement	Market update fixed delivery exit arrangement
-deny_title_regex	https://www.cer.gov.au/news-and-media/news/2025/december/register-solar-water-heaters-version-56-now-available	Register solar water heaters version 56 now available
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/renewable-energy-target-enforcement-action-against-mojo-power-east	Renewable energy target enforcement action against mojo power east
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/2024-25-preliminary-safeguard-mechanism-insights-released	2024 25 preliminary safeguard mechanism insights released
-out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/recall-issued-sigenergy-single-phase-81012-kw-energy-controllers	Recall issued sigenergy single phase 81012 kw energy controllers
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/changes-to-cheaper-home-batteries-program	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fifth-independent-review-hir-gateway-checks	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fixed-delivery-exit-arrangement-now-permanent	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/market-update-fixed-delivery-exit-arrangement	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/register-solar-water-heaters-version-56-now-available	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/renewable-energy-target-enforcement-action-against-mojo-power-east	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/2024-25-preliminary-safeguard-mechanism-insights-released	Read more
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/november/recall-issued-sigenergy-single-phase-81012-kw-energy-controllers	Read more
 undated	https://arena.gov.au/	Home
 undated	https://arena.gov.au/news/	Back to top
 deny_url_substring	https://www.aemc.gov.au/about-us	About Us
@@ -148,15 +150,15 @@ deny_url_substring	https://www.aemc.gov.au/contact-us/propose-rule-change	Propos
 undated	https://www.aemc.gov.au/energeia-finds-cer-flexibility-could-deliver-45b-benefits-2050	Charging ahead: Residential batteries are growing in popularity and profitability
 undated	https://www.aemc.gov.au/energy-system	Energy System
 undated	https://www.aemc.gov.au/energy-system/electricity	Electricity
-undated	https://www.aemc.gov.au/energy-system/energy-system	Energy system
+undated	https://www.aemc.gov.au/energy-system/energy-system	Gas
 undated	https://www.aemc.gov.au/energy-system/energy-system-0	Energy terminology
 undated	https://www.aemc.gov.au/energy-system/retail	Retail
 undated	https://www.aemc.gov.au/ess-system-security-update-aemc-reform-work-program	Energeia finds that CER flexibility could deliver $45B in benefits by 2050
-undated	https://www.aemc.gov.au/market-reviews-advice/electricity-network-regulation-review	Electricity network regulation review
+undated	https://www.aemc.gov.au/market-reviews-advice/electricity-network-regulation-review	EPR0106
 undated	https://www.aemc.gov.au/market-reviews-advice/future-wholesale-market	​​EPR0093​
 undated	https://www.aemc.gov.au/market-reviews-advice/pricing-review-electricity-pricing-consumer-driven-future	​​EPR0097​
 undated	https://www.aemc.gov.au/market-reviews-advice/review-integrated-system-plan-framework	​​EPR0092​
-undated	https://www.aemc.gov.au/market-reviews-advice/transmission-planning-and-investment-review	Transmission planning and investment review
+undated	https://www.aemc.gov.au/market-reviews-advice/transmission-planning-and-investment-review	EPR0087
 undated	https://www.aemc.gov.au/metering	https://www.aemc.gov.au/metering
 undated	https://www.aemc.gov.au/news-centre	News Centre
 deny_url_substring	https://www.aemc.gov.au/news-centre/annual-reports	Annual reports >
@@ -208,8 +210,8 @@ undated	https://www.aemc.gov.au/regulation/energy-rules/national-gas-rules/curre
 undated	https://www.aemc.gov.au/regulation/legislation	Legislation
 deny_url_substring	https://www.aemc.gov.au/regulation/national-governance	National energy governance
 undated	https://www.aemc.gov.au/regulation/neo	National Energy Objectives
-undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers	Real time data consumers
-undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers-retail	Real time data consumers retail
+undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers	ERC0399
+undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers-retail	RRC0057
 undated	https://www.aemc.gov.au/sites/default/files/2021-11/4145_AEMC-Price-Trends-2021_National%20A_v4.pdf	Improving certainty to enable the transmission needed for net zero
 undated	https://www.aemc.gov.au/sites/default/files/2022-10/EPR0087-%20Final%20report%20-%20stage%202%20-%20infographic.pdf	Improving certainty to enable the transmission needed for net zero
 undated	https://www.aemc.gov.au/sites/default/files/2022-12/AEMC%20Annual%20Report%202021%20-%202022.pdf	AEMC Annual Report 2021-2022
@@ -234,58 +236,58 @@ undated	https://www.energynetworks.com.au/news/speeches-op-eds/	Speeches / Op Ed
 out_of_range	https://www.efrag.org/en/news-and-calendar/news	News
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-11-february-2026	Read more about EFRAG FR TEG Online Meeting - 11 February 2026
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-12-february-2026	Read more about EFRAG SRB Online Meeting 12 February 2026
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A108	Invitation to comment
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A138	News
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A8	Financial
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A9	Sustainability
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?facets_query=	(-) All news
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A108	Invitation to comment
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A138	Meeting
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A8	Financial
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A9	Sustainability
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?facets_query=	(-) All news
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-the-new-gri-labor-standards-exposure-drafts-join-efrags-workshops	Read more about Help Shape Europe’s Voice on the New GRI Labor Standards Exposure Drafts: Join EFRAG's workshops
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A139	Outreach event
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A139	Outreach event
 deny_url_substring	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-conference-report-on-draft-simplified-esrs	Read more about EFRAG releases conference report on Draft Simplified ESRS
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A103	Sustainability Reporting
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A103	Sustainability Reporting
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-due-process-procedures-for-financial-reporting-activities	Read more about EFRAG publishes Due Process Procedures for Financial Reporting Activities
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/new-educational-video-series-available-to-navigate-vsme-implementation	Read more about New educational video series available to navigate VSME implementation
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-calls-for-expression-of-interest-on-vsme-digital-tools-and-platforms	Read more about EFRAG calls for expression of interest on VSME digital tools and platforms
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-5-february-2026	Read more about EFRAG SR TEG Online Meeting 5 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-28-january-2026	Read more about EFRAG SRB Online Meeting 28 January 2026
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A141	Vacancy
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-22-january-2026	Read more about EFRAG SR TEG Online Meeting 22 January 2026
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-21-january-2026	Read more about EFRAG FR TEG Online Meeting - 21 January 2026
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/join-the-first-sme-forum-meeting-of-2026	Read more about Join the First SME Forum Meeting of 2026
 deny_url_substring	https://www.efrag.org/en/news-and-calendar/news/efrag-administrative-board-online-meeting-20-january-2026	Read more about EFRAG Administrative Board Online Meeting - 20 January 2026
 deny_url_substring	https://www.efrag.org/en/news-and-calendar/news/join-the-webinar-circular-economy-reporting-in-focus-the-draft-simplified-esrs-e5	Read more about Join the Webinar “Circular Economy Reporting in Focus: The Draft Simplified ESRS E5”
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A112	Corporate
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A112	Corporate
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-21-january-2026	Read more about EFRAG SRB Online Meeting 21 January 2026
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-15-january-2026	Read more about EFRAG FR TEG Online Meeting - 15 January 2026
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/deadline-extended-for-applications-to-the-efrag-financial-reporting-technical-expert-group	Read more about Deadline Extended for Applications to the EFRAG Financial Reporting Technical Expert Group
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A42	Financial Reporting
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A42	Financial Reporting
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/apply-now-to-join-efrags-financial-reporting-technical-expert-group	Read more about Apply Now to Join EFRAG’s Financial Reporting Technical Expert Group
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A115	Vacancies
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A115	Vacancies
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html	ISSB Update January 2026
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-complementary-materials-supporting-the-draft-simplified-esrs	Read more about EFRAG publishes complementary materials supporting the draft simplified ESRS
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-summary-report-on-workshop-series-on-users-needs-for-intangibles-reporting	Read more about EFRAG Releases Summary Report on Workshop Series on Users’ Needs for Intangibles Reporting
 deny_url_substring	https://www.efrag.org/en/news-and-calendar/news/efrag-general-assembly-decisions-on-governance-appointments	Read more about EFRAG General Assembly Decisions on Governance Appointments
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A164	News
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A164	EFRAG
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-issues-endorsement-advice-on-amendments-to-the-reduced-disclosure-standard	Read more about EFRAG issues Endorsement Advice on Amendments to the Reduced Disclosure Standard
 deny_url_substring	https://www.efrag.org/en/news-and-calendar/news/efrag-launches-consultation-on-draft-endorsement-advice-for-amendments-to-ias-21	Read more about EFRAG launches consultation on Draft Endorsement Advice for Amendments to IAS 21
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-discussion-paper-on-connectivity-of-financial-and-sustainability-reporting	Read more about EFRAG Publishes Discussion Paper on Connectivity of Financial and Sustainability Reporting
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/new-efrag-update-podcast-episode-available-november-edition	Read more about New EFRAG Update Podcast Episode Available: November Edition
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A104	Corporate
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A104	Corporate
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-feedback-statement-on-its-discussion-paper-the-statement-of-cash-flowsobjectives	Read more about EFRAG Publishes Feedback Statement on its Discussion Paper ‘The Statement of Cash Flows–Objectives, Usages and Issues’
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-update-november-edition-now-available	Read more about EFRAG Update: November Edition Now Available
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A137	News
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A137	Project
 out_of_range	https://www.efrag.org/en/updates	the EFRAG Update
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-december-2025.html	ISSB Update December 2025
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A106	Endorsement status
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A106	Endorsement status
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-november-2025.html	ISSB Update November 2025
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-october-2025.html	ISSB Update October 2025
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html	ISSB Update September 2025
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-july-2025.html	ISSB Update July 2025
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A43	News
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A43	Public
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-june-2025.html	ISSB Update June 2025
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-may-2025.html	ISSB Update May 2025
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-april-2025.html	ISSB Update April 2025
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-march-2025.html	ISSB Update March 2025
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A140	Decision
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A140	Decision
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/iasb-issb/2025/iasb-issb-update-february-2025.html	IASB–ISSB Update February 2025
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-february-2025.html	ISSB Update February 2025
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html	ISSB Update January 2025
@@ -326,58 +328,61 @@ deny_url_substring	https://www.ifrs.org/news-and-events/updates/issb/	Cookie det
 out_of_range	https://www.efrag.org/en/news-and-calendar/news	News
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-11-february-2026	Read more about EFRAG FR TEG Online Meeting - 11 February 2026
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-12-february-2026	Read more about EFRAG SRB Online Meeting 12 February 2026
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A108	Invitation to comment
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A138	News
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A8	Financial
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A9	Sustainability
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?facets_query=	(-) All news
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A108	Invitation to comment
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A138	Meeting
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A8	Financial
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A9	Sustainability
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?facets_query=	(-) All news
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-the-new-gri-labor-standards-exposure-drafts-join-efrags-workshops	Read more about Help Shape Europe’s Voice on the New GRI Labor Standards Exposure Drafts: Join EFRAG's workshops
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A139	Outreach event
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A139	Outreach event
 deny_url_substring	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-conference-report-on-draft-simplified-esrs	Read more about EFRAG releases conference report on Draft Simplified ESRS
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A103	Sustainability Reporting
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A103	Sustainability Reporting
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-due-process-procedures-for-financial-reporting-activities	Read more about EFRAG publishes Due Process Procedures for Financial Reporting Activities
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/new-educational-video-series-available-to-navigate-vsme-implementation	Read more about New educational video series available to navigate VSME implementation
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-calls-for-expression-of-interest-on-vsme-digital-tools-and-platforms	Read more about EFRAG calls for expression of interest on VSME digital tools and platforms
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-5-february-2026	Read more about EFRAG SR TEG Online Meeting 5 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-28-january-2026	Read more about EFRAG SRB Online Meeting 28 January 2026
+duplicate_content	https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-29-january-2026	Read more about EFRAG FRB Online Meeting - 29 January 2026
+duplicate_content	https://www.efrag.org/en/news-and-calendar/news/efrag-opens-call-for-candidates-to-join-its-sustainability-reporting-technical-expert-group	Read more about EFRAG Opens Call for Candidates to Join its Sustainability Reporting Technical Expert Group
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A141	Vacancy
+duplicate_content	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-28-january-2026	Read more about EFRAG SRB Online Meeting 28 January 2026
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-22-january-2026	Read more about EFRAG SR TEG Online Meeting 22 January 2026
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-21-january-2026	Read more about EFRAG FR TEG Online Meeting - 21 January 2026
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/join-the-first-sme-forum-meeting-of-2026	Read more about Join the First SME Forum Meeting of 2026
 deny_url_substring	https://www.efrag.org/en/news-and-calendar/news/efrag-administrative-board-online-meeting-20-january-2026	Read more about EFRAG Administrative Board Online Meeting - 20 January 2026
 deny_url_substring	https://www.efrag.org/en/news-and-calendar/news/join-the-webinar-circular-economy-reporting-in-focus-the-draft-simplified-esrs-e5	Read more about Join the Webinar “Circular Economy Reporting in Focus: The Draft Simplified ESRS E5”
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A112	Corporate
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=department%3A112	Corporate
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-21-january-2026	Read more about EFRAG SRB Online Meeting 21 January 2026
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-15-january-2026	Read more about EFRAG FR TEG Online Meeting - 15 January 2026
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/deadline-extended-for-applications-to-the-efrag-financial-reporting-technical-expert-group	Read more about Deadline Extended for Applications to the EFRAG Financial Reporting Technical Expert Group
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A42	Financial Reporting
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A42	Financial Reporting
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/apply-now-to-join-efrags-financial-reporting-technical-expert-group	Read more about Apply Now to Join EFRAG’s Financial Reporting Technical Expert Group
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A115	Vacancies
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A115	Vacancies
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html	ISSB Update January 2026
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-complementary-materials-supporting-the-draft-simplified-esrs	Read more about EFRAG publishes complementary materials supporting the draft simplified ESRS
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-summary-report-on-workshop-series-on-users-needs-for-intangibles-reporting	Read more about EFRAG Releases Summary Report on Workshop Series on Users’ Needs for Intangibles Reporting
 deny_url_substring	https://www.efrag.org/en/news-and-calendar/news/efrag-general-assembly-decisions-on-governance-appointments	Read more about EFRAG General Assembly Decisions on Governance Appointments
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A164	News
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A164	EFRAG
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-issues-endorsement-advice-on-amendments-to-the-reduced-disclosure-standard	Read more about EFRAG issues Endorsement Advice on Amendments to the Reduced Disclosure Standard
 deny_url_substring	https://www.efrag.org/en/news-and-calendar/news/efrag-launches-consultation-on-draft-endorsement-advice-for-amendments-to-ias-21	Read more about EFRAG launches consultation on Draft Endorsement Advice for Amendments to IAS 21
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-discussion-paper-on-connectivity-of-financial-and-sustainability-reporting	Read more about EFRAG Publishes Discussion Paper on Connectivity of Financial and Sustainability Reporting
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/new-efrag-update-podcast-episode-available-november-edition	Read more about New EFRAG Update Podcast Episode Available: November Edition
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A104	Corporate
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A104	Corporate
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-feedback-statement-on-its-discussion-paper-the-statement-of-cash-flowsobjectives	Read more about EFRAG Publishes Feedback Statement on its Discussion Paper ‘The Statement of Cash Flows–Objectives, Usages and Issues’
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-update-november-edition-now-available	Read more about EFRAG Update: November Edition Now Available
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A137	News
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A137	Project
 out_of_range	https://www.efrag.org/en/updates	the EFRAG Update
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-december-2025.html	ISSB Update December 2025
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A106	Endorsement status
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A106	Endorsement status
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-november-2025.html	ISSB Update November 2025
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-october-2025.html	ISSB Update October 2025
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html	ISSB Update September 2025
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-july-2025.html	ISSB Update July 2025
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A43	News
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A43	Public
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-june-2025.html	ISSB Update June 2025
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-may-2025.html	ISSB Update May 2025
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-april-2025.html	ISSB Update April 2025
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-march-2025.html	ISSB Update March 2025
-out_of_range	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A140	Decision
+deny_url_substring	https://www.efrag.org/en/news-and-calendar/news?f%5B0%5D=category%3A140	Decision
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/iasb-issb/2025/iasb-issb-update-february-2025.html	IASB–ISSB Update February 2025
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-february-2025.html	ISSB Update February 2025
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html	ISSB Update January 2025
@@ -515,7 +520,7 @@ undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
 undated	https://arena.gov.au/news	Funding Opportunities
 undated	https://arena.gov.au/news/	Back to top
 undated	https://arena.gov.au/projects	Funding Opportunities
-undated	https://arenanet.arena.gov.au/s/funding-advice	Funding advice
+undated	https://arenanet.arena.gov.au/s/funding-advice	here
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
 undated	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	The work plan
@@ -620,7 +625,7 @@ undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
 undated	https://arena.gov.au/news	Funding Opportunities
 undated	https://arena.gov.au/news/	Back to top
 undated	https://arena.gov.au/projects	Funding Opportunities
-undated	https://arenanet.arena.gov.au/s/funding-advice	Funding advice
+undated	https://arenanet.arena.gov.au/s/funding-advice	here
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
 undated	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	The work plan
@@ -725,7 +730,7 @@ undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
 undated	https://arena.gov.au/news	Funding Opportunities
 undated	https://arena.gov.au/news/	Back to top
 undated	https://arena.gov.au/projects	Funding Opportunities
-undated	https://arenanet.arena.gov.au/s/funding-advice	Funding advice
+undated	https://arenanet.arena.gov.au/s/funding-advice	here
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
 undated	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	The work plan
@@ -733,60 +738,72 @@ deny_url_substring	https://www.ifrs.org/news-and-events/updates/issb/	Cookie det
 not_articleish	https://arena.gov.au/funding/	Back to top
 not_articleish	https://arena.gov.au/	Home
 not_articleish	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
-not_articleish	https://arenanet.arena.gov.au/s/funding-advice	Funding advice
+not_articleish	https://arenanet.arena.gov.au/s/funding-advice	here
+out_of_range_last_resort	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
 not_articleish	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+out_of_range_last_resort	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+not_articleish	https://arena.gov.au/news	Funding Opportunities
 not_articleish	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
 not_articleish	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+out_of_range_last_resort	https://arena.gov.au/funding/research-development-program/	Research and Development
 not_articleish	https://arena.gov.au/projects	Funding Opportunities
 not_articleish	https://arena.gov.au/knowledge-bank	Funding Opportunities
 not_articleish	https://arena.gov.au/funding/demand-response/	Demand Response
 not_articleish	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
 not_articleish	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
 low_substance_last_resort	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+not_articleish	https://arena.gov.au/news/	Back to top
 low_substance_last_resort	https://about.bnef.com/insights/type/report/	All Reports
+out_of_range_last_resort	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/	REPORT Electric Vehicle Outlook
+out_of_range_last_resort	https://about.bnef.com/insights/commodities/transition-metal-outlook/	REPORT Transition Metals Outlook
+out_of_range_last_resort	https://about.bnef.com/insights/uncategorized/energy-transition-investment-trends/	REPORT Energy Transition Investment Trends
+out_of_range_last_resort	https://about.bnef.com/insights/uncategorized/new-energy-outlook/	REPORT New Energy Outlook
+out_of_range_last_resort	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook/	Electric Vehicle Outlook
+out_of_range_last_resort	https://about.bnef.com/insights/finance/energy-transition-investment-trends/	Energy Transition Investment Trends
+out_of_range_last_resort	https://about.bnef.com/insights/clean-energy/new-energy-outlook/	New Energy Outlook
 deny_title_regex	https://about.bnef.com/insights/climate-week-and-cop-public-research/	Discover BNEF's Climate Week and COP Public Research, freely available to non-subscribers.
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
 not_articleish	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	The work plan
 deny_url_substring	https://www.ifrs.org/news-and-events/updates/issb/	Cookie details
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html	ISSB Update January 2026
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html	ISSB Update January 2025
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-february-2025.html	ISSB Update February 2025
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-march-2025.html	ISSB Update March 2025
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-april-2025.html	ISSB Update April 2025
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-june-2025.html	ISSB Update June 2025
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-july-2025.html	ISSB Update July 2025
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html	ISSB Update September 2025
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-november-2025.html	ISSB Update November 2025
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/iasb-issb/2025/iasb-issb-update-february-2025.html	IASB–ISSB Update February 2025
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-october-2025.html	ISSB Update October 2025
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-may-2025.html	ISSB Update May 2025
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-december-2025.html	ISSB Update December 2025
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/joint-iasb-issb-update-january-2024.html	IASB–ISSB Update January 2024
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-february-2024.html	ISSB Update February 2024
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-april-2024.html	ISSB Update April 2024
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-july-2024.html	ISSB Update July 2024
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-june-2024.html	ISSB Update June 2024
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-may-2024.html	ISSB Update May 2024
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-march-2024.html	ISSB Update March 2024
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-september-2024.html	ISSB Update September 2024
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-october-2024.html	ISSB Update October 2024
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-november-2024.html	ISSB Update November 2024
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-december-2024.html	ISSB Update December 2024
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/supplementary-issb-update-april-2023.html	Supplementary ISSB Update April 2023
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-january-2023.html	ISSB Update January 2023
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-february-2023.html	ISSB Update February 2023
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-may-2023.html	ISSB Update May 2023
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-july-2023.html	ISSB Update July 2023
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-september-2023.html	ISSB Update September 2023
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-october-2023.html	ISSB Update October 2023
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-march-2023.html	ISSB Update March 2023
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-december-2023.html	ISSB Update December 2023
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-november-2023.html	ISSB Update November 2023
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-april-2023.html	ISSB Update April 2023
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/supplementary-issb-update-november-2022.html	Supplementary ISSB Update November 2022
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-september-2022.html	ISSB Update September 2022
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-november-2022.html	ISSB Update November 2022
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-october-2022.html	ISSB Update October 2022
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
-deny_url_substring	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html	ISSB Update January 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-february-2025.html	ISSB Update February 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-march-2025.html	ISSB Update March 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-april-2025.html	ISSB Update April 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-june-2025.html	ISSB Update June 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-july-2025.html	ISSB Update July 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html	ISSB Update September 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-november-2025.html	ISSB Update November 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/iasb-issb/2025/iasb-issb-update-february-2025.html	IASB–ISSB Update February 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-october-2025.html	ISSB Update October 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-may-2025.html	ISSB Update May 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-december-2025.html	ISSB Update December 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/joint-iasb-issb-update-january-2024.html	IASB–ISSB Update January 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-february-2024.html	ISSB Update February 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-april-2024.html	ISSB Update April 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-july-2024.html	ISSB Update July 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-june-2024.html	ISSB Update June 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-may-2024.html	ISSB Update May 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-march-2024.html	ISSB Update March 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-september-2024.html	ISSB Update September 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-october-2024.html	ISSB Update October 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-november-2024.html	ISSB Update November 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-december-2024.html	ISSB Update December 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/supplementary-issb-update-april-2023.html	Supplementary ISSB Update April 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-january-2023.html	ISSB Update January 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-february-2023.html	ISSB Update February 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-may-2023.html	ISSB Update May 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-july-2023.html	ISSB Update July 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-september-2023.html	ISSB Update September 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-october-2023.html	ISSB Update October 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-march-2023.html	ISSB Update March 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-december-2023.html	ISSB Update December 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-november-2023.html	ISSB Update November 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-april-2023.html	ISSB Update April 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/supplementary-issb-update-november-2022.html	Supplementary ISSB Update November 2022
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-september-2022.html	ISSB Update September 2022
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-november-2022.html	ISSB Update November 2022
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-october-2022.html	ISSB Update October 2022
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
 deny_url_substring	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
