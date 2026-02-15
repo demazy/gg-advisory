@@ -20,6 +20,23 @@ from __future__ import annotations
 
 import json
 import math
+
+# ----------------------------
+# Dedupe helpers
+# ----------------------------
+def _norm_title(t: str) -> str:
+    t = (t or '').lower().strip()
+    t = re.sub(r"\s+", " ", t)
+    t = re.sub(r"[^a-z0-9 ]+", "", t)
+    return t[:160]
+
+def _content_key(it: 'Item') -> str:
+    """Stable key to dedupe near-identical items across different URLs."""
+    dom = normalise_domain(it.url or '')
+    dt = _effective_published_ts(it)
+    ds = dt.date().isoformat() if dt else 'undated'
+    return f"{dom}|{ds}|{_norm_title(it.title or '')}"
+
 import os
 import re
 from collections import Counter
@@ -213,6 +230,7 @@ def _looks_articleish(url: str) -> bool:
     if is_probably_taxonomy_or_hub(ul):
         return False
 
+    has_query = ("?" in ul)
     clean = re.sub(r"[?#].*$", "", ul)
     path = re.sub(r"^https?://[^/]+", "", clean) or "/"
     if path in ("", "/"):
@@ -235,6 +253,14 @@ def _looks_articleish(url: str) -> bool:
         return False
 
     slug = segs[-1]
+    listing_slugs = {
+        'news','news-centre','news-center','media','media-releases','media-release','releases',
+        'press','press-releases','events','calendar'
+    }
+    if slug in listing_slugs and not re.search(r'(20\d{2})', path):
+        return False
+    if has_query and (not re.search(r'(20\d{2})', path)) and (len(slug) < 25):
+        return False
     if re.search(
         r"(executive[-_]?leadership|leadership[-_]?team|board[-_]?members?|advisory[-_]?panel|our[-_]?people|executive[-_]?team)",
         slug,
@@ -494,6 +520,7 @@ def _select_from_pool(
     strict: bool,
     bypass_allow: bool = False,
     exclude_urls: Optional[Set[str]] = None,
+    exclude_keys: Optional[Set[str]] = None,
     initial_per_domain: Optional[Dict[str, int]] = None,
 ) -> Tuple[List[Item], List[Dict[str, str]]]:
     """
@@ -518,6 +545,10 @@ def _select_from_pool(
 
     for it in sorted(pool, key=sort_key):
         url = (it.url or "").strip()
+        ck = _content_key(it)
+        if exclude_keys and ck in exclude_keys:
+            drops.append({"reason": "duplicate_content", "url": url, "title": it.title or ""})
+            continue
         if not url:
             drops.append({"reason": "missing_url", "url": "", "title": it.title or ""})
             continue
@@ -579,7 +610,7 @@ def _select_from_pool(
     return selected, drops
 
 
-def _last_resort_pick(pool: Sequence[Item], section: str, flt: Filters, *, items_needed: int) -> Tuple[List[Item], List[Dict[str, str]]]:
+def _last_resort_pick(pool: Sequence[Item], section: str, start_dt: datetime, end_dt: datetime, flt: Filters, *, items_needed: int) -> Tuple[List[Item], List[Dict[str, str]]]:
     """
     Emergency picker used only when strict+relaxed selection yields nothing.
     Still rejects obvious non-content URLs/titles and requires at least minimal extract.
@@ -589,6 +620,12 @@ def _last_resort_pick(pool: Sequence[Item], section: str, flt: Filters, *, items
 
     for it in pool:
         url = (it.url or "").strip()
+        dt = _effective_published_ts(it)
+        if dt is not None:
+            # Keep last-resort within a tight window; we prefer fewer items over stale content.
+            if dt < (start_dt - timedelta(days=7)) or dt > (end_dt + timedelta(days=7)):
+                drops.append({"reason": "out_of_range_last_resort", "url": url, "title": it.title or ""})
+                continue
         if not url:
             continue
 
@@ -615,6 +652,11 @@ def _last_resort_pick(pool: Sequence[Item], section: str, flt: Filters, *, items
             continue
 
         it.summary = text
+        ck = _content_key(it)
+        # Do not admit near-duplicate content in last resort.
+        if ck in getattr(flt, '_runtime_used_keys', set()):
+            drops.append({"reason": "duplicate_content_last_resort", "url": url, "title": it.title or ""})
+            continue
         sc = _score_item(it, text, section, flt, ignore_substance=True)
         scored.append((sc, it))
 
@@ -647,6 +689,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
     all_selected: List[Item] = []
     all_drops: List[Dict[str, str]] = []
     global_used_urls: Set[str] = set()
+    global_used_keys: Set[str] = set()
 
     sections: Dict[str, Any] = cfg_sources.get("sections") or {}
     for section, sec_cfg in sections.items():
@@ -667,11 +710,13 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
             per_domain_cap=PER_DOMAIN_CAP,
             strict=True,
             exclude_urls=global_used_urls,
+            exclude_keys=global_used_keys,
         )
         all_drops.extend(drops1)
         for it in selected:
             if it.url:
                 global_used_urls.add(it.url.strip().lower())
+                global_used_keys.add(_content_key(it))
 
         # Pass 2 (relaxed fill): only to top up to quota, and still enforces minimum substance
         if len(selected) < ITEMS_PER_SECTION:
@@ -683,6 +728,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
                 per_domain_cap=PER_DOMAIN_CAP,
                 strict=False,
                 exclude_urls=global_used_urls,
+                exclude_keys=global_used_keys,
                 initial_per_domain=dict(per_dom),
             )
             all_drops.extend(drops2)
@@ -690,6 +736,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
             for it in filler:
                 if it.url:
                     global_used_urls.add(it.url.strip().lower())
+                global_used_keys.add(_content_key(it))
 
         # Wider date window (still strict+relaxed)
         if not selected:
@@ -712,7 +759,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
         # Last resort: pick only content-like URLs with minimal extract
         if not selected:
             print("[warn] Still no items after fallback; last-resort pick (ignoring dates).")
-            picked, drops4 = _last_resort_pick(pool, section, flt, items_needed=ITEMS_PER_SECTION)
+            picked, drops4 = _last_resort_pick(pool, section, start_dt, end_dt, flt, items_needed=ITEMS_PER_SECTION)
             all_drops.extend(drops4)
             picked2: List[Item] = []
             for it in picked:
