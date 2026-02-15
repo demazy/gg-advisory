@@ -53,7 +53,8 @@ allow_domains:
 - about.bnef.com
 deny_domains: []
 domain_deny_substrings:
-  arena.gov.au: []
+  arena.gov.au:
+  - /renewable-energy/
   cefc.com.au:
   - /where-we-invest/
 title_deny_regex:
@@ -146,3 +147,8 @@ section_keywords:
   - portfolio
   - capital allocation
   - financed emissions
+deny_url_substrings:
+- facets_query=
+- '%5B0%5D='
+- /news-and-calendar/news?
+- /news?f%5B0%5D=
