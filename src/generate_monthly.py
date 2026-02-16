@@ -415,6 +415,12 @@ def _passes_filters(it: Item, flt: Filters, section: str, *, bypass_allow: bool 
         if rx.search(title):
             return False, "deny_title_regex"
 
+    # Domain-specific evergreen suppression: avoid selecting undated program/funding landing pages
+    # (these often look relevant but are not month-specific publications).
+    if it.published is None and domain.endswith("arena.gov.au"):
+        if ("/funding" in u or "/program" in u or "/programs" in u or "/grants" in u) and ("/news" not in u) and ("/media" not in u):
+            return False, "arena_evergreen_undated"
+
     return True, ""
 
 
@@ -613,8 +619,8 @@ def _last_resort_pick(
 
         # Avoid evergreen program/funding pages unless they have an in-range date.
         ul = url.lower()
-        if ("/funding/" in ul or "/program" in ul) and not it.published:
-            drops.append({"reason": "evergreen_funding_undated", "url": url, "title": it.title or ""})
+        if (("arena.gov.au" in ul) and ("/funding" in ul or "/program" in ul or "/programs" in ul or "/grants" in ul) and ("/news" not in ul) and ("/media" not in ul) and (not it.published)):
+            drops.append({"reason": "arena_evergreen_undated", "url": url, "title": it.title or ""})
             continue
 
         # Keep the same article-ish heuristics used in normal passes.
@@ -736,8 +742,8 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
 
         # Last resort: pick only content-like URLs with minimal extract
         if not selected:
-            print("[warn] Still no items after fallback; last-resort pick (ignoring dates).")
-            picked, drops4 = _last_resort_pick(pool, section, flt, start=start, end=end, items_needed=ITEMS_PER_SECTION)
+            print("[warn] Still no items after fallback; last-resort pick (tight window).")
+            picked, drops4 = _last_resort_pick(pool, section, flt, start=start_dt, end=end_dt, items_needed=ITEMS_PER_SECTION)
             all_drops.extend(drops4)
             picked2: List[Item] = []
             for it in picked:
@@ -753,7 +759,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
         if not selected:
             print("[warn] No candidates available; trying emergency RSS.")
             epool = _emergency_pool(section)
-            picked, drops5 = _last_resort_pick(epool, section, flt, start=start, end=end, items_needed=max(1, ITEMS_PER_SECTION // 2))
+            picked, drops5 = _last_resort_pick(epool, section, flt, start=start_dt, end=end_dt, items_needed=max(1, ITEMS_PER_SECTION // 2))
             all_drops.extend(drops5)
             picked2: List[Item] = []
             for it in picked:
