@@ -49,13 +49,11 @@ MIN_TOTAL_ITEMS = int(os.getenv("MIN_TOTAL_ITEMS", "1"))
 
 # Relaxed pass still enforces substance; it just lowers the minimum.
 RELAXED_MIN_TEXT_CHARS = int(os.getenv("RELAXED_MIN_TEXT_CHARS", str(max(300, MIN_TEXT_CHARS // 3))))
-# Include late-previous-month items (common around holidays / reporting cycles)
-RANGE_PAD_DAYS = int(os.getenv("RANGE_PAD_DAYS", "14"))
-
 
 ALLOW_UNDATED = os.getenv("ALLOW_UNDATED", "0") == "1"
 ALLOW_PLACEHOLDER = os.getenv("ALLOW_PLACEHOLDER", "1") == "1"
 FALLBACK_WINDOW_DAYS = int(os.getenv("FALLBACK_WINDOW_DAYS", "3"))
+RANGE_PAD_DAYS = int(os.getenv("RANGE_PAD_DAYS", "14"))  # include late previous-month items
 DEBUG = os.getenv("DEBUG", "0") == "1"
 
 # Auto-allow: expands an allowlist without requiring config changes (safe defaults).
@@ -122,6 +120,24 @@ def _month_range(ym: str) -> Tuple[date, date]:
         end = date(y, mo + 1, 1) - timedelta(days=1)
     return start, end
 
+
+
+def _pad_range(start: date, end: date) -> Tuple[date, date]:
+    """Expand the month window to include near-boundary items (e.g., late Dec for Jan digest)."""
+    if RANGE_PAD_DAYS <= 0:
+        return start, end
+    return start - timedelta(days=RANGE_PAD_DAYS), end + timedelta(days=RANGE_PAD_DAYS)
+
+
+def _item_is_undated(it: Item) -> bool:
+    # Accept multiple schemas: published_ts (float), published_iso (str), published (alias property)
+    if getattr(it, "published_ts", None) is not None:
+        return False
+    if getattr(it, "published_iso", None):
+        return False
+    if getattr(it, "published", None):
+        return False
+    return True
 
 def _coerce_ts(ts: Any) -> Optional[datetime]:
     if ts is None:
@@ -400,6 +416,12 @@ def _passes_filters(it: Item, flt: Filters, section: str, *, bypass_allow: bool 
 
     u = url.lower()
 
+    # Drop low-signal evergreen funding/program landing pages (esp. for ARENA) when undated.
+    # This avoids "filling" a month with program pages that are not publications.
+    if domain.endswith("arena.gov.au") and _item_is_undated(it):
+        if ("/funding/" in u) or ("/renewable-energy/" in u) or ("/grants" in u) or ("funding" in u and "/news/" not in u):
+            return False, "evergreen_program_page"
+
     # Per-domain URL substring denylists (filters.yaml)
     for dom_pat, subs in (flt.domain_deny_substrings or {}).items():
         if flt._match_domain_pattern(domain, dom_pat):
@@ -414,12 +436,6 @@ def _passes_filters(it: Item, flt: Filters, section: str, *, bypass_allow: bool 
     for rx in flt.deny_title_regex:
         if rx.search(title):
             return False, "deny_title_regex"
-
-    # Domain-specific evergreen suppression: avoid selecting undated program/funding landing pages
-    # (these often look relevant but are not month-specific publications).
-    if it.published is None and domain.endswith("arena.gov.au"):
-        if ("/funding" in u or "/program" in u or "/programs" in u or "/grants" in u) and ("/news" not in u) and ("/media" not in u):
-            return False, "arena_evergreen_undated"
 
     return True, ""
 
@@ -583,54 +599,30 @@ def _select_from_pool(
     return selected, drops
 
 
-def _last_resort_pick(
-    pool: Sequence[Item],
-    section: str,
-    flt: Filters,
-    *,
-    start: datetime,
-    end: datetime,
-    items_needed: int,
-) -> Tuple[List[Item], List[Dict[str, str]]]:
+def _last_resort_pick(pool: Sequence[Item], section: str, flt: Filters, *, start: datetime, end: datetime, items_needed: int) -> Tuple[List[Item], List[Dict[str, str]]]:
     """
     Emergency picker used only when strict+relaxed selection yields nothing.
-
-    Design goals:
-    - **Never** bypass allow/deny rules (especially undated policy and hub detection).
-    - Still prefer in-range dated content; optionally apply RANGE_PAD_DAYS.
-    - Do not force-pick items: returning 0 items is better than publishing evergreen noise.
+    Still rejects obvious non-content URLs/titles and requires at least minimal extract.
     """
     drops: List[Dict[str, str]] = []
     scored: List[Tuple[float, Item]] = []
-
-    # Allow a small pad to capture end-of-previous-month items that often contain relevant policy news.
-    start_pad = start - timedelta(days=max(0, RANGE_PAD_DAYS))
 
     for it in pool:
         url = (it.url or "").strip()
         if not url:
             continue
 
-        # Do NOT bypass allow/deny logic here.
-        ok, why = _passes_filters(it, flt, section, bypass_allow=False)
+        ok, why = _passes_filters(it, flt, section, bypass_allow=True)
         if not ok:
             drops.append({"reason": why, "url": url, "title": it.title or ""})
             continue
-
-        # Avoid evergreen program/funding pages unless they have an in-range date.
-        ul = url.lower()
-        if (("arena.gov.au" in ul) and ("/funding" in ul or "/program" in ul or "/programs" in ul or "/grants" in ul) and ("/news" not in ul) and ("/media" not in ul) and (not it.published)):
-            drops.append({"reason": "arena_evergreen_undated", "url": url, "title": it.title or ""})
+        # Enforce date window in last-resort too (unless explicitly allowing undated)
+        if (not ALLOW_UNDATED) and (not _in_range(getattr(it, 'published_ts', None), start, end)):
+            drops.append({'reason': 'out_of_range', 'url': it.url})
             continue
 
-        # Keep the same article-ish heuristics used in normal passes.
         if not _looks_articleish(url):
             drops.append({"reason": "not_articleish", "url": url, "title": it.title or ""})
-            continue
-
-        # Enforce date window if we have a date; undated is governed by ALLOW_UNDATED.
-        if not _in_range(it.published, start_pad, end):
-            drops.append({"reason": "out_of_range_last_resort", "url": url, "title": it.title or ""})
             continue
 
         text = ""
@@ -641,6 +633,7 @@ def _last_resort_pick(
         if not text:
             text = (it.summary or "").strip()
 
+        # require at least some substance even in last resort
         if not _substance_ok_relaxed(text):
             drops.append({"reason": "low_substance_last_resort", "url": url, "title": it.title or ""})
             continue
@@ -650,7 +643,7 @@ def _last_resort_pick(
         scored.append((sc, it))
 
     scored.sort(key=lambda x: (-x[0], (x[1].url or "")))
-    picked: List[Item] = [it for _, it in scored[: max(0, items_needed)]]
+    picked: List[Item] = [it for _, it in scored[: max(1, items_needed)]]
     return picked, drops
 
 
@@ -670,6 +663,7 @@ def _emergency_pool(section: str) -> List[Item]:
 def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     start_d, end_d = _month_range(ym)
+    start_d, end_d = _pad_range(start_d, end_d)
     start_dt = datetime(start_d.year, start_d.month, start_d.day, tzinfo=timezone.utc)
     end_dt = datetime(end_d.year, end_d.month, end_d.day, 23, 59, 59, tzinfo=timezone.utc)
 
@@ -742,7 +736,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
 
         # Last resort: pick only content-like URLs with minimal extract
         if not selected:
-            print("[warn] Still no items after fallback; last-resort pick (tight window).")
+            print("[warn] Still no items after fallback; last-resort pick (ignoring dates).")
             picked, drops4 = _last_resort_pick(pool, section, flt, start=start_dt, end=end_dt, items_needed=ITEMS_PER_SECTION)
             all_drops.extend(drops4)
             picked2: List[Item] = []
