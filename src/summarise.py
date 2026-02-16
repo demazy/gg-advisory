@@ -28,25 +28,6 @@ from typing import Dict, List, Optional
 
 import requests
 
-
-
-def _get_text(it) -> str:
-    """Schema-tolerant access to item body text.
-
-    fetch.Item has `summary`; older versions sometimes carried `text`/`content`.
-    This helper keeps summarisation resilient across schema changes.
-    """
-    if isinstance(it, dict):
-        for k in ("text","full_text","content","body","summary","description"):
-            v=it.get(k)
-            if isinstance(v,str) and v.strip():
-                return v
-        return ""
-    for k in ("text","full_text","content","body","summary","description"):
-        v=getattr(it,k,None)
-        if isinstance(v,str) and v.strip():
-            return v
-    return ""
 from .fetch import Item
 
 # ----------------------------
