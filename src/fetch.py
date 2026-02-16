@@ -359,6 +359,9 @@ def is_probably_taxonomy_or_hub(url: str) -> bool:
 
     # query-based searches / pagination
     q = parse_qs(parsed.query or "")
+    # EFRAG-style filter parameters (e.g., ?f[0]=category:...) indicate listing pages
+    if any(k.startswith("f[") for k in q.keys()):
+        return True
     if "page" in q and (parsed.path.endswith("/news") or parsed.path.endswith("/news/")):
         return True
     if ("s" in q or "q" in q) and parsed.path.endswith("/search"):
