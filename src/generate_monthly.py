@@ -36,6 +36,18 @@ from .summarise import build_digest
 from .utils import normalise_domain
 
 
+
+def _norm_title(s: str) -> str:
+    """Normalize titles for dedupe keys (stable, language-agnostic)."""
+    s = (s or "").strip().lower()
+    for p in ("report:", "report -", "report ", "media release:", "media release -", "announcement:", "update:"):
+        if s.startswith(p):
+            s = s[len(p):].strip()
+    s = re.sub(r"[^\w\s]+", " ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    return s
+
+
 OUT_DIR = Path(os.getenv("OUT_DIR", "out"))
 CFG_SOURCES = Path(os.getenv("CFG_SOURCES", "config/sources.yaml"))
 CFG_FILTERS = Path(os.getenv("CFG_FILTERS", "config/filters.yaml"))
