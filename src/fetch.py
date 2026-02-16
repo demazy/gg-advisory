@@ -101,6 +101,17 @@ class Item:
 
     index_url: Optional[str] = None
 
+    # ---- Compatibility aliases (do not remove) ----
+    # Some downstream modules historically referred to Item.published or Item.text.
+    # Keep these as read-only properties to prevent schema-mismatch crashes.
+    @property
+    def published(self) -> Optional[str]:
+        return self.published_iso
+
+    @property
+    def text(self) -> str:
+        return self.summary or ""
+
 
 # -----------------------------
 # Helpers
@@ -359,12 +370,17 @@ def is_probably_taxonomy_or_hub(url: str) -> bool:
 
     # query-based searches / pagination
     q = parse_qs(parsed.query or "")
-    # EFRAG-style filter parameters (e.g., ?f[0]=category:...) indicate listing pages
-    if any(k.startswith("f[") for k in q.keys()):
-        return True
     if "page" in q and (parsed.path.endswith("/news") or parsed.path.endswith("/news/")):
         return True
     if ("s" in q or "q" in q) and parsed.path.endswith("/search"):
+        return True
+
+    # facet / filter listing pages (e.g., EFRAG uses f[0]=... in query strings)
+    if any(k.startswith("f[") for k in q.keys()):
+        return True
+    if any(k in {"facet", "facets", "filter", "filters"} for k in q.keys()):
+        return True
+    if ("type" in q) and (parsed.path.endswith("/media") or parsed.path.endswith("/media/")):
         return True
 
     path = parsed.path or "/"
