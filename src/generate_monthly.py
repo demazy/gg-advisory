@@ -27,6 +27,7 @@ from dataclasses import asdict
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
+from urllib.parse import urlparse
 
 import yaml
 from dateutil import parser as dtparser
