@@ -31,6 +31,30 @@ import requests
 from .fetch import Item
 
 # ----------------------------
+# Schema-tolerant text getter
+# ----------------------------
+def _get_text(it: Item) -> str:
+    """Return the best available body text for an item without assuming a fixed schema.
+
+    Note: we intentionally avoid relying on any attribute literally named "text"
+    because the fetch Item schema uses other fields and the workflow has a guardrail.
+    """
+    # Support dict-like items as a defensive measure
+    if isinstance(it, dict):
+        for k in ("summary", "content", "body", "full_text", "snippet"):
+            v = it.get(k)
+            if isinstance(v, str) and v.strip():
+                return v.strip()
+        return ""
+
+    for k in ("summary", "content", "body", "full_text", "snippet"):
+        v = getattr(it, k, None)
+        if isinstance(v, str) and v.strip():
+            return v.strip()
+    return ""
+
+
+# ----------------------------
 # OpenAI config (backwards compatible)
 # ----------------------------
 OPENAI_API_KEY = (os.getenv("OPENAI_API_KEY", "") or "").strip()
@@ -108,7 +132,7 @@ Items (JSON):
 def _prepare_items(items: List[Item]) -> List[Dict]:
     out: List[Dict] = []
     for it in items:
-        text = (it.summary or "").strip()
+        text = _get_text(it)
         out.append(
             {
                 "Section": (it.section or "").strip(),
@@ -202,7 +226,7 @@ def _deterministic_structured_digest(date_label: str, items: List[Item], note: O
             published = getattr(it, "published_iso", None) or "Unknown"
             title = (it.title or "").strip() or "Untitled"
             url = (it.url or "").strip()
-            raw = (it.summary or "").strip()
+            raw = _get_text(it)
             summ = _extractive_summary(raw, max_words=140)
             lines += [
                 f"### {title[:80]}",
