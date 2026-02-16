@@ -50,10 +50,29 @@ MIN_TOTAL_ITEMS = int(os.getenv("MIN_TOTAL_ITEMS", "1"))
 # Relaxed pass still enforces substance; it just lowers the minimum.
 RELAXED_MIN_TEXT_CHARS = int(os.getenv("RELAXED_MIN_TEXT_CHARS", str(max(300, MIN_TEXT_CHARS // 3))))
 
+
 ALLOW_UNDATED = os.getenv("ALLOW_UNDATED", "0") == "1"
+# Allow placeholder digest generation even if item count is low/zero.
+# This should not hard-fail unless FAIL_ON_BELOW_MIN_TOTAL=1 is set.
 ALLOW_PLACEHOLDER = os.getenv("ALLOW_PLACEHOLDER", "1") == "1"
+
+# Date window padding around the target month.
+# Use asymmetric defaults: allow late previous-month releases, but avoid pulling future-month content.
+RANGE_PAD_BEFORE_DAYS = int(os.getenv("RANGE_PAD_BEFORE_DAYS", os.getenv("RANGE_PAD_DAYS", "14")))
+RANGE_PAD_AFTER_DAYS = int(os.getenv("RANGE_PAD_AFTER_DAYS", os.getenv("RANGE_PAD_DAYS", "2")))
+
+# Scoring/selection budget: how many candidates per section we spend full-text fetch on.
+MAX_SCORE_FETCHES_PER_SECTION = int(os.getenv("MAX_SCORE_FETCHES_PER_SECTION", "60"))
+
+# Last-resort backfill (only used when a section returns zero items after strict+relaxed).
+LAST_RESORT_BACKFILL_DAYS = int(os.getenv("LAST_RESORT_BACKFILL_DAYS", "45"))
+LAST_RESORT_MAX_STALENESS_DAYS = int(os.getenv("LAST_RESORT_MAX_STALENESS_DAYS", "120"))
+LAST_RESORT_MAX_FETCHES = int(os.getenv("LAST_RESORT_MAX_FETCHES", "40"))
+
+# If selected_total < MIN_TOTAL_ITEMS, only fail if explicitly configured.
+FAIL_ON_BELOW_MIN_TOTAL = os.getenv("FAIL_ON_BELOW_MIN_TOTAL", "0") == "1"
+
 FALLBACK_WINDOW_DAYS = int(os.getenv("FALLBACK_WINDOW_DAYS", "3"))
-RANGE_PAD_DAYS = int(os.getenv("RANGE_PAD_DAYS", "14"))  # include late previous-month items
 DEBUG = os.getenv("DEBUG", "0") == "1"
 
 # Auto-allow: expands an allowlist without requiring config changes (safe defaults).
@@ -120,24 +139,6 @@ def _month_range(ym: str) -> Tuple[date, date]:
         end = date(y, mo + 1, 1) - timedelta(days=1)
     return start, end
 
-
-
-def _pad_range(start: date, end: date) -> Tuple[date, date]:
-    """Expand the month window to include near-boundary items (e.g., late Dec for Jan digest)."""
-    if RANGE_PAD_DAYS <= 0:
-        return start, end
-    return start - timedelta(days=RANGE_PAD_DAYS), end + timedelta(days=RANGE_PAD_DAYS)
-
-
-def _item_is_undated(it: Item) -> bool:
-    # Accept multiple schemas: published_ts (float), published_iso (str), published (alias property)
-    if getattr(it, "published_ts", None) is not None:
-        return False
-    if getattr(it, "published_iso", None):
-        return False
-    if getattr(it, "published", None):
-        return False
-    return True
 
 def _coerce_ts(ts: Any) -> Optional[datetime]:
     if ts is None:
@@ -416,12 +417,6 @@ def _passes_filters(it: Item, flt: Filters, section: str, *, bypass_allow: bool 
 
     u = url.lower()
 
-    # Drop low-signal evergreen funding/program landing pages (esp. for ARENA) when undated.
-    # This avoids "filling" a month with program pages that are not publications.
-    if domain.endswith("arena.gov.au") and _item_is_undated(it):
-        if ("/funding/" in u) or ("/renewable-energy/" in u) or ("/grants" in u) or ("funding" in u and "/news/" not in u):
-            return False, "evergreen_program_page"
-
     # Per-domain URL substring denylists (filters.yaml)
     for dom_pat, subs in (flt.domain_deny_substrings or {}).items():
         if flt._match_domain_pattern(domain, dom_pat):
@@ -437,6 +432,19 @@ def _passes_filters(it: Item, flt: Filters, section: str, *, bypass_allow: bool 
         if rx.search(title):
             return False, "deny_title_regex"
 
+    
+    # Reject known evergreen program/listing pages that pollute monthly digests.
+    # (soft rules with explicit reasons, for traceability)
+    if domain.endswith("arena.gov.au") and _item_is_undated(it):
+        if any(s in u for s in ("/funding", "/opportunities", "/programs", "/initiative", "/grants")):
+            return False, "evergreen_program_page"
+    if domain.endswith("efrag.org") and (urlparse(url.lower()).path.rstrip("/") in ("/en/news-and-calendar/news", "/en/news-and-calendar/events")):
+        return False, "hub_url"
+
+    # Generic / non-informative titles should not be selected even if URL looks OK.
+    if title.strip().lower() in ("read more", "news", "media release", "press release"):
+        return False, "generic_title"
+
     return True, ""
 
 
@@ -449,21 +457,126 @@ def _keyword_boost(title: str, section: str, flt: Filters) -> float:
     return min(1.0, hits * 0.15)
 
 
-def _score_item(it: Item, text: str, section: str, flt: Filters, *, ignore_substance: bool = False) -> float:
-    domain = normalise_domain(it.url)
-    if flt.domain_denied(domain):
-        return -1e9
-    if (not ignore_substance) and (not _substance_ok(text, _is_priority(it.url))):
-        return -1e9
 
-    dt = _effective_published_ts(it)
-    recency = (dt.timestamp() / 1e10) if dt is not None else 0.0
-    substance = math.log(max(50, len(text)), 10)
-    kw = _keyword_boost(it.title or "", section, flt)
-    articleish = 0.25 if _looks_articleish(it.url or "") else -0.35
-    return recency + substance + kw + articleish
+def _kw_hits(text: str, kws: Sequence[str]) -> int:
+    t = (text or "").lower()
+    if not t or not kws:
+        return 0
+    hits = 0
+    for w in kws:
+        ww = (w or "").strip().lower()
+        if not ww:
+            continue
+        if ww in t:
+            hits += 1
+    return hits
 
 
+def _title_quality_penalty(title: str) -> float:
+    tl = (title or "").strip().lower()
+    if not tl:
+        return -1.0
+    if tl in {"read more", "news", "media release", "press release"}:
+        return -1.0
+    # meeting/webinar/event style titles (penalise, not hard-drop)
+    if any(k in tl for k in ("meeting", "webinar", "workshop", "agenda", "minutes", "calendar", "event")):
+        return -0.6
+    # overly short / non-descriptive
+    if len(tl) < 12:
+        return -0.4
+    return 0.0
+
+
+def _url_type_penalty(url: str) -> float:
+    ul = (url or "").lower()
+    if not ul:
+        return -1.0
+    parsed = urlparse(ul)
+    q = parse_qs(parsed.query or "")
+    # listing-like query facets/pagination
+    if any(k.startswith("f[") for k in q.keys()) or any(k in q for k in ("facet", "facets", "filter", "filters", "page")):
+        return -0.5
+    path = parsed.path or "/"
+    # known non-article paths
+    if any(seg in path for seg in ("/events", "/event", "/webinars", "/webinar", "/calendar")):
+        return -0.6
+    if is_probably_taxonomy_or_hub(url):
+        return -0.8
+    # weak signal: top-level /news index
+    if path.rstrip("/") in ("/news", "/media", "/press", "/updates"):
+        return -0.3
+    return 0.0
+
+
+def _recency_score(ts: Optional[datetime], start_dt: datetime, end_dt: datetime) -> float:
+    if ts is None:
+        return -0.25  # undated penalty (soft)
+    # Prefer items within the month; allow padded window but discount it.
+    if start_dt <= ts <= end_dt:
+        days_from_end = (end_dt - ts).total_seconds() / 86400.0
+        # within-month: 0.8..0.2 roughly over a month
+        return max(0.2, 0.8 - (days_from_end / 45.0))
+    # padded window (should be rare): lower score
+    days = abs((ts - end_dt).total_seconds()) / 86400.0
+    return max(-0.4, 0.15 - (days / 60.0))
+
+
+def _text_signal(text: str) -> float:
+    t = (text or "").strip()
+    if not t:
+        return -0.8
+    n = len(t)
+    # log-like growth; cap at ~1.0
+    sig = min(1.0, math.log(max(50, n), 10))
+    # reward presence of numbers/units (often indicates substance)
+    if re.search(r"\b\d{2,}\b", t):
+        sig += 0.15
+    if re.search(r"\b(MW|GW|MWh|GWh|A\$|€|USD|AUD|%|\btonnes?\b|\btCO2e\b)\b", t, re.I):
+        sig += 0.15
+    return sig
+
+
+def _pre_score(it: Item, section: str, flt: Filters, start_dt: datetime, end_dt: datetime) -> float:
+    # Cheap score for deciding fetch budget.
+    title = (it.title or "")
+    url = (it.url or "")
+    ts = _effective_published_ts(it)
+    rec = _recency_score(ts, start_dt, end_dt)
+    prio = 0.35 if _is_priority(url) else 0.0
+    kw = 0.05 * _kw_hits(title + " " + url, flt.section_keywords.get(section, []))
+    tq = _title_quality_penalty(title)
+    ut = _url_type_penalty(url)
+    return rec + prio + kw + tq + ut
+
+
+def _score_item(it: Item, text: str, section: str, flt: Filters, start_dt: datetime, end_dt: datetime) -> Tuple[float, Dict[str, Any]]:
+    url = it.url or ""
+    title = it.title or ""
+    ts = _effective_published_ts(it)
+
+    rec = _recency_score(ts, start_dt, end_dt)
+    prio = 0.35 if _is_priority(url) else 0.0
+    kw_hits = _kw_hits((title or "") + " " + (text or "") + " " + (url or ""), flt.section_keywords.get(section, []))
+    kw = min(0.6, 0.06 * kw_hits)  # cap
+    tq = _title_quality_penalty(title)
+    ut = _url_type_penalty(url)
+    sig = _text_signal(text)
+    agg = -0.45 if "news.google.com" in (url or "").lower() else 0.0
+
+    total = rec + prio + kw + tq + ut + sig + agg
+    meta = {
+        "recency": rec,
+        "priority": prio,
+        "kw_hits": kw_hits,
+        "kw": kw,
+        "title_q": tq,
+        "url_t": ut,
+        "signal": sig,
+        "agg": agg,
+        "text_chars": len((text or "").strip()),
+        "published_ts": ts.timestamp() if ts else None,
+    }
+    return total, meta
 def _collect_section_pool(section: str, sec_cfg: Dict[str, Any]) -> Tuple[List[Item], List[Dict[str, str]]]:
     drops: List[Dict[str, str]] = []
     pool: List[Item] = []
@@ -502,6 +615,7 @@ def _collect_section_pool(section: str, sec_cfg: Dict[str, Any]) -> Tuple[List[I
     return deduped, drops
 
 
+
 def _select_from_pool(
     pool: Sequence[Item],
     section: str,
@@ -517,31 +631,34 @@ def _select_from_pool(
     initial_per_domain: Optional[Dict[str, int]] = None,
 ) -> Tuple[List[Item], List[Dict[str, str]]]:
     """
-    Select up to items_needed items from pool.
+    Score-driven selector (deterministic):
+    - Filters first (deny lists, hub URLs, allowlist unless bypassed)
+    - Enforces date window (unless ALLOW_UNDATED)
+    - Uses a bounded fetch budget to retrieve full text for top pre-scored candidates
+    - Scores candidates and selects greedily by score while respecting PER_DOMAIN_CAP and dedupe
 
-    strict=True:
-      - requires _looks_articleish AND _substance_ok
-    strict=False (relaxed):
-      - still requires _looks_articleish AND _substance_ok_relaxed
-        (previously it could select arbitrarily short/non-content pages)
+    strict=True: enforces MIN_TEXT_CHARS / PRIORITY_MIN_CHARS via _substance_ok()
+    strict=False: enforces RELAXED_MIN_TEXT_CHARS via _substance_ok_relaxed()
     """
     drops: List[Dict[str, str]] = []
     selected: List[Item] = []
     per_domain: Dict[str, int] = dict(initial_per_domain or {})
     ex: Set[str] = set((u or "").strip().lower() for u in (exclude_urls or set()) if str(u).strip())
     text_cache: Dict[str, str] = {}
+    seen_keys: Set[str] = set()
 
-    def sort_key(it: Item):
-        dt = _effective_published_ts(it)
-        ts = dt.timestamp() if dt else 0.0
-        return (-ts, (it.url or ""))
+    window_start = start_dt - timedelta(days=max(0, RANGE_PAD_BEFORE_DAYS))
+    window_end = end_dt + timedelta(days=max(0, RANGE_PAD_AFTER_DAYS))
 
-    for it in sorted(pool, key=sort_key):
+    # 1) Filter + pre-score
+    cand: List[Tuple[float, str, Item]] = []
+    for it in pool:
         url = (it.url or "").strip()
         if not url:
             drops.append({"reason": "missing_url", "url": "", "title": it.title or ""})
             continue
-        if url.lower() in ex:
+        ul = url.lower()
+        if ul in ex:
             continue
 
         ok, why = _passes_filters(it, flt, section, bypass_allow=bypass_allow)
@@ -553,32 +670,48 @@ def _select_from_pool(
         if ts_eff is None and (not ALLOW_UNDATED):
             drops.append({"reason": "undated", "url": url, "title": it.title or ""})
             continue
-        if ts_eff is not None and (not _in_range(ts_eff, start_dt, end_dt)):
+        if ts_eff is not None and (not _in_range(ts_eff, window_start, window_end)):
             drops.append({"reason": "out_of_range", "url": url, "title": it.title or ""})
             continue
 
-        domain = normalise_domain(url)
-        if per_domain.get(domain, 0) >= per_domain_cap:
-            drops.append({"reason": "per_domain_cap", "url": url, "title": it.title or "", "domain": domain})
-            continue
+        ps = _pre_score(it, section, flt, start_dt, end_dt)
+        cand.append((ps, ul, it))
 
-        if not _looks_articleish(url):
-            drops.append({"reason": "not_articleish", "url": url, "title": it.title or ""})
-            continue
+    # deterministic ordering: score desc, url asc
+    cand.sort(key=lambda x: (-x[0], x[1]))
 
-        text = text_cache.get(url, "")
-        if not text:
+    # 2) Fetch budget: attempt full text for top candidates (only if needed)
+    budget = max(0, MAX_SCORE_FETCHES_PER_SECTION)
+    to_fetch = cand[:budget]
+    for _, _, it in to_fetch:
+        url = (it.url or "").strip()
+        if not url:
+            continue
+        if url in text_cache:
+            continue
+        # If we already have a reasonable summary, we may skip fetch unless strict.
+        base_text = (it.summary or "").strip()
+        need_fetch = strict or (len(base_text) < max(200, RELAXED_MIN_TEXT_CHARS))
+        text = base_text
+        if need_fetch:
             try:
                 text = (fetch_full_text(url) or "").strip()
             except Exception:
                 text = ""
             if not text:
-                text = (it.summary or "").strip()
-            text_cache[url] = text
+                text = base_text
+        text_cache[url] = text
 
+    # 3) Full scoring
+    scored: List[Tuple[float, str, Item, Dict[str, Any], str]] = []
+    for _, ul, it in cand:
+        url = (it.url or "").strip()
+        text = text_cache.get(url, "") or (it.summary or "")
+        text = (text or "").strip()
+
+        # substance gates (still deterministic and section-agnostic)
         if strict:
-            prio = _is_priority(url)
-            if not _substance_ok(text, prio):
+            if not _substance_ok(text, _is_priority(url)):
                 drops.append({"reason": "low_substance", "url": url, "title": it.title or ""})
                 continue
         else:
@@ -586,12 +719,42 @@ def _select_from_pool(
                 drops.append({"reason": "low_substance_relaxed", "url": url, "title": it.title or ""})
                 continue
 
-        if text:
-            it.summary = text
+        sc, meta = _score_item(it, text, section, flt, start_dt, end_dt)
+
+        # Stable dedupe key: domain + published day + normalised title (fallback to url)
+        dt = _effective_published_ts(it)
+        day = dt.strftime("%Y-%m-%d") if dt else "undated"
+        key = f"{normalise_domain(url)}|{day}|{_norm_title(it.title or '')}"
+        scored.append((sc, ul, it, meta, key))
+
+    scored.sort(key=lambda x: (-x[0], x[1]))
+
+    # 4) Greedy pick by score with caps + dedupe
+    for sc, ul, it, meta, key in scored:
+        url = (it.url or "").strip()
+        if not url:
+            continue
+        domain = normalise_domain(url)
+        if per_domain.get(domain, 0) >= per_domain_cap:
+            drops.append({"reason": "per_domain_cap", "url": url, "title": it.title or "", "domain": domain})
+            continue
+        if key in seen_keys:
+            drops.append({"reason": "dedup_key", "url": url, "title": it.title or ""})
+            continue
+
+        # attach score/meta for debug writer
+        setattr(it, "_score", float(sc))
+        setattr(it, "_score_meta", meta)
+        setattr(it, "_used_text_chars", meta.get("text_chars"))
+
+        # keep the best available text as summary for downstream digest
+        text = text_cache.get(url, "") or (it.summary or "")
+        it.summary = (text or "").strip()
 
         selected.append(it)
         per_domain[domain] = per_domain.get(domain, 0) + 1
-        ex.add(url.lower())
+        seen_keys.add(key)
+        ex.add(ul)
 
         if len(selected) >= max(0, items_needed):
             break
@@ -599,54 +762,98 @@ def _select_from_pool(
     return selected, drops
 
 
-def _last_resort_pick(pool: Sequence[Item], section: str, flt: Filters, *, start: datetime, end: datetime, items_needed: int) -> Tuple[List[Item], List[Dict[str, str]]]:
+def _last_resort_pick(
+    pool: Sequence[Item],
+    section: str,
+    flt: Filters,
+    *,
+    start_dt: datetime,
+    end_dt: datetime,
+    items_needed: int,
+) -> Tuple[List[Item], List[Dict[str, str]]]:
     """
-    Emergency picker used only when strict+relaxed selection yields nothing.
-    Still rejects obvious non-content URLs/titles and requires at least minimal extract.
+    Last-resort picker used only when strict+relaxed yield zero for a section.
+
+    It still:
+    - avoids hub URLs and deny patterns
+    - enforces a bounded *backfill* window (prefer earlier, not future)
+    - enforces relaxed substance
+
+    Goal: avoid 'selected=0' while not pulling obvious garbage.
     """
     drops: List[Dict[str, str]] = []
-    scored: List[Tuple[float, Item]] = []
+    scored: List[Tuple[float, str, Item, Dict[str, Any]]] = []
+
+    backfill_start = start_dt - timedelta(days=max(0, LAST_RESORT_BACKFILL_DAYS))
+    backfill_end = end_dt  # do not go into the future
+
+    fetches = 0
 
     for it in pool:
         url = (it.url or "").strip()
         if not url:
             continue
+        ul = url.lower()
 
         ok, why = _passes_filters(it, flt, section, bypass_allow=True)
         if not ok:
             drops.append({"reason": why, "url": url, "title": it.title or ""})
             continue
-        # Enforce date window in last-resort too (unless explicitly allowing undated)
-        if (not ALLOW_UNDATED) and (not _in_range(getattr(it, 'published_ts', None), start, end)):
-            drops.append({'reason': 'out_of_range', 'url': it.url})
+
+        ts_eff = _effective_published_ts(it)
+        if ts_eff is not None:
+            # avoid extremely stale content in last resort
+            if (end_dt - ts_eff).total_seconds() / 86400.0 > max(0, LAST_RESORT_MAX_STALENESS_DAYS) and (not _is_priority(url)):
+                drops.append({"reason": "too_stale_last_resort", "url": url, "title": it.title or ""})
+                continue
+            if not _in_range(ts_eff, backfill_start, backfill_end):
+                drops.append({"reason": "out_of_range_last_resort", "url": url, "title": it.title or ""})
+                continue
+        elif not ALLOW_UNDATED:
+            drops.append({"reason": "undated_last_resort", "url": url, "title": it.title or ""})
             continue
 
-        if not _looks_articleish(url):
-            drops.append({"reason": "not_articleish", "url": url, "title": it.title or ""})
-            continue
+        text = (it.summary or "").strip()
+        if (len(text) < max(150, RELAXED_MIN_TEXT_CHARS)) and fetches < max(0, LAST_RESORT_MAX_FETCHES):
+            fetches += 1
+            try:
+                ft = (fetch_full_text(url) or "").strip()
+            except Exception:
+                ft = ""
+            if ft:
+                text = ft
 
-        text = ""
-        try:
-            text = (fetch_full_text(url) or "").strip()
-        except Exception:
-            text = ""
-        if not text:
-            text = (it.summary or "").strip()
-
-        # require at least some substance even in last resort
         if not _substance_ok_relaxed(text):
             drops.append({"reason": "low_substance_last_resort", "url": url, "title": it.title or ""})
             continue
 
-        it.summary = text
-        sc = _score_item(it, text, section, flt, ignore_substance=True)
-        scored.append((sc, it))
+        sc, meta = _score_item(it, text, section, flt, backfill_start, backfill_end)
+        meta["last_resort"] = True
+        scored.append((sc, ul, it, meta))
 
-    scored.sort(key=lambda x: (-x[0], (x[1].url or "")))
-    picked: List[Item] = [it for _, it in scored[: max(1, items_needed)]]
+    scored.sort(key=lambda x: (-x[0], x[1]))
+    picked: List[Item] = []
+    seen: Set[str] = set()
+    per_dom: Dict[str, int] = {}
+
+    for sc, ul, it, meta in scored:
+        url = (it.url or "").strip()
+        dom = normalise_domain(url)
+        if per_dom.get(dom, 0) >= PER_DOMAIN_CAP:
+            continue
+        k = f"{dom}|{_norm_title(it.title or '')}|{_effective_published_ts(it).strftime('%Y-%m-%d') if _effective_published_ts(it) else 'undated'}"
+        if k in seen:
+            continue
+        setattr(it, "_score", float(sc))
+        setattr(it, "_score_meta", meta)
+        it.summary = (it.summary or "").strip()
+        picked.append(it)
+        seen.add(k)
+        per_dom[dom] = per_dom.get(dom, 0) + 1
+        if len(picked) >= max(1, items_needed):
+            break
+
     return picked, drops
-
-
 def _emergency_pool(section: str) -> List[Item]:
     rss = EMERGENCY_RSS.get(section)
     if not rss:
@@ -663,7 +870,6 @@ def _emergency_pool(section: str) -> List[Item]:
 def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     start_d, end_d = _month_range(ym)
-    start_d, end_d = _pad_range(start_d, end_d)
     start_dt = datetime(start_d.year, start_d.month, start_d.day, tzinfo=timezone.utc)
     end_dt = datetime(end_d.year, end_d.month, end_d.day, 23, 59, 59, tzinfo=timezone.utc)
 
@@ -736,8 +942,8 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
 
         # Last resort: pick only content-like URLs with minimal extract
         if not selected:
-            print("[warn] Still no items after fallback; last-resort pick (ignoring dates).")
-            picked, drops4 = _last_resort_pick(pool, section, flt, start=start_dt, end=end_dt, items_needed=ITEMS_PER_SECTION)
+            print("[warn] Still no items after fallback; last-resort pick (bounded backfill, no future).")
+            picked, drops4 = _last_resort_pick(pool, section, flt, start_dt=start_dt, end_dt=end_dt, items_needed=ITEMS_PER_SECTION)
             all_drops.extend(drops4)
             picked2: List[Item] = []
             for it in picked:
@@ -753,7 +959,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
         if not selected:
             print("[warn] No candidates available; trying emergency RSS.")
             epool = _emergency_pool(section)
-            picked, drops5 = _last_resort_pick(epool, section, flt, start=start_dt, end=end_dt, items_needed=max(1, ITEMS_PER_SECTION // 2))
+            picked, drops5 = _last_resort_pick(epool, section, flt, start_dt=start_dt, end_dt=end_dt, items_needed=max(1, ITEMS_PER_SECTION // 2))
             all_drops.extend(drops5)
             picked2: List[Item] = []
             for it in picked:
@@ -790,19 +996,12 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
         )
         all_selected = [placeholder]
         all_drops.append({"reason": "global_placeholder_used", "url": "", "title": placeholder.title})
-
-    # Ensure we meet MIN_TOTAL_ITEMS (avoids downstream guardrails failing)
-    if len(all_selected) < MIN_TOTAL_ITEMS and ALLOW_PLACEHOLDER:
-        for k in range(MIN_TOTAL_ITEMS - len(all_selected)):
-            ph = Item(
-                url="",
-                title=f"Monthly digest {ym}: additional fallback item {k+1}",
-                summary="Fallback placeholder added to satisfy MIN_TOTAL_ITEMS.",
-                source="pipeline",
-                section="General",
-            )
-            all_selected.append(ph)
-            all_drops.append({"reason": "min_total_placeholder_used", "url": "", "title": ph.title})
+    # MIN_TOTAL_ITEMS guard: never fabricate items. Only hard-fail if explicitly configured.
+    below_min_total = len(all_selected) < MIN_TOTAL_ITEMS
+    if below_min_total:
+        all_drops.append({"reason": "below_min_total", "url": "", "title": f"selected={len(all_selected)} < MIN_TOTAL_ITEMS={MIN_TOTAL_ITEMS}"})
+        if FAIL_ON_BELOW_MIN_TOTAL:
+            raise SystemExit(f"ERROR: selected items is {len(all_selected)} but MIN_TOTAL_ITEMS={MIN_TOTAL_ITEMS}")
 
     sel_path = OUT_DIR / f"debug-selected-{ym}.json"
     sel_path.write_text(
@@ -834,6 +1033,12 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
                 f"per_domain_cap={PER_DOMAIN_CAP}",
                 f"allow_undated={ALLOW_UNDATED}",
                 f"allow_placeholder={ALLOW_PLACEHOLDER}",
+f"fail_on_below_min_total={FAIL_ON_BELOW_MIN_TOTAL}",
+f"range_pad_before_days={RANGE_PAD_BEFORE_DAYS}",
+f"range_pad_after_days={RANGE_PAD_AFTER_DAYS}",
+f"max_score_fetches_per_section={MAX_SCORE_FETCHES_PER_SECTION}",
+f"last_resort_backfill_days={LAST_RESORT_BACKFILL_DAYS}",
+f"last_resort_max_staleness_days={LAST_RESORT_MAX_STALENESS_DAYS}",
                 f"relaxed_min_text_chars={RELAXED_MIN_TEXT_CHARS}",
                 f"auto_allow_gov_au={AUTO_ALLOW_GOV_AU}",
                 f"auto_allow_domains={','.join(sorted(AUTO_ALLOW_DOMAINS)) if AUTO_ALLOW_DOMAINS else ''}",
