@@ -20,23 +20,6 @@ from __future__ import annotations
 
 import json
 import math
-
-# ----------------------------
-# Dedupe helpers
-# ----------------------------
-def _norm_title(t: str) -> str:
-    t = (t or '').lower().strip()
-    t = re.sub(r"\s+", " ", t)
-    t = re.sub(r"[^a-z0-9 ]+", "", t)
-    return t[:160]
-
-def _content_key(it: 'Item') -> str:
-    """Stable key to dedupe near-identical items across different URLs."""
-    dom = normalise_domain(it.url or '')
-    dt = _effective_published_ts(it)
-    ds = dt.date().isoformat() if dt else 'undated'
-    return f"{dom}|{ds}|{_norm_title(it.title or '')}"
-
 import os
 import re
 from collections import Counter
@@ -66,6 +49,9 @@ MIN_TOTAL_ITEMS = int(os.getenv("MIN_TOTAL_ITEMS", "1"))
 
 # Relaxed pass still enforces substance; it just lowers the minimum.
 RELAXED_MIN_TEXT_CHARS = int(os.getenv("RELAXED_MIN_TEXT_CHARS", str(max(300, MIN_TEXT_CHARS // 3))))
+# Include late-previous-month items (common around holidays / reporting cycles)
+RANGE_PAD_DAYS = int(os.getenv("RANGE_PAD_DAYS", "14"))
+
 
 ALLOW_UNDATED = os.getenv("ALLOW_UNDATED", "0") == "1"
 ALLOW_PLACEHOLDER = os.getenv("ALLOW_PLACEHOLDER", "1") == "1"
@@ -96,11 +82,6 @@ BUILTIN_DENY_URL_SUBSTRINGS = [
     "oauth-redirect", "j_security_check", "login", "signin", "sign-in", "subscribe", "newsletter",
     "utm_", "fbclid=", "gclid=", "mc_cid=", "mc_eid=",
     "open.spotify.com", "spotify.com",
-    # non-content / evergreen
-    "about-us", "contact-us", "privacy", "terms", "cookies", "cookie-policy", "accessibility", "sitemap",
-    "careers", "jobs", "vacancies", "board", "governance", "annual-report", "annual-reports",
-    "events", "event", "webinar", "conference", "speakers", "our-people", "leadership",
-    "consultation", "consultations", "have-your-say", "submissions",
 ]
 
 BUILTIN_DENY_TITLE_REGEX = [
@@ -230,7 +211,6 @@ def _looks_articleish(url: str) -> bool:
     if is_probably_taxonomy_or_hub(ul):
         return False
 
-    has_query = ("?" in ul)
     clean = re.sub(r"[?#].*$", "", ul)
     path = re.sub(r"^https?://[^/]+", "", clean) or "/"
     if path in ("", "/"):
@@ -253,14 +233,6 @@ def _looks_articleish(url: str) -> bool:
         return False
 
     slug = segs[-1]
-    listing_slugs = {
-        'news','news-centre','news-center','media','media-releases','media-release','releases',
-        'press','press-releases','events','calendar'
-    }
-    if slug in listing_slugs and not re.search(r'(20\d{2})', path):
-        return False
-    if has_query and (not re.search(r'(20\d{2})', path)) and (len(slug) < 25):
-        return False
     if re.search(
         r"(executive[-_]?leadership|leadership[-_]?team|board[-_]?members?|advisory[-_]?panel|our[-_]?people|executive[-_]?team)",
         slug,
@@ -520,7 +492,6 @@ def _select_from_pool(
     strict: bool,
     bypass_allow: bool = False,
     exclude_urls: Optional[Set[str]] = None,
-    exclude_keys: Optional[Set[str]] = None,
     initial_per_domain: Optional[Dict[str, int]] = None,
 ) -> Tuple[List[Item], List[Dict[str, str]]]:
     """
@@ -545,10 +516,6 @@ def _select_from_pool(
 
     for it in sorted(pool, key=sort_key):
         url = (it.url or "").strip()
-        ck = _content_key(it)
-        if exclude_keys and ck in exclude_keys:
-            drops.append({"reason": "duplicate_content", "url": url, "title": it.title or ""})
-            continue
         if not url:
             drops.append({"reason": "missing_url", "url": "", "title": it.title or ""})
             continue
@@ -610,32 +577,54 @@ def _select_from_pool(
     return selected, drops
 
 
-def _last_resort_pick(pool: Sequence[Item], section: str, start_dt: datetime, end_dt: datetime, flt: Filters, *, items_needed: int) -> Tuple[List[Item], List[Dict[str, str]]]:
+def _last_resort_pick(
+    pool: Sequence[Item],
+    section: str,
+    flt: Filters,
+    *,
+    start: datetime,
+    end: datetime,
+    items_needed: int,
+) -> Tuple[List[Item], List[Dict[str, str]]]:
     """
     Emergency picker used only when strict+relaxed selection yields nothing.
-    Still rejects obvious non-content URLs/titles and requires at least minimal extract.
+
+    Design goals:
+    - **Never** bypass allow/deny rules (especially undated policy and hub detection).
+    - Still prefer in-range dated content; optionally apply RANGE_PAD_DAYS.
+    - Do not force-pick items: returning 0 items is better than publishing evergreen noise.
     """
     drops: List[Dict[str, str]] = []
     scored: List[Tuple[float, Item]] = []
 
+    # Allow a small pad to capture end-of-previous-month items that often contain relevant policy news.
+    start_pad = start - timedelta(days=max(0, RANGE_PAD_DAYS))
+
     for it in pool:
         url = (it.url or "").strip()
-        dt = _effective_published_ts(it)
-        if dt is not None:
-            # Keep last-resort within a tight window; we prefer fewer items over stale content.
-            if dt < (start_dt - timedelta(days=7)) or dt > (end_dt + timedelta(days=7)):
-                drops.append({"reason": "out_of_range_last_resort", "url": url, "title": it.title or ""})
-                continue
         if not url:
             continue
 
-        ok, why = _passes_filters(it, flt, section, bypass_allow=True)
+        # Do NOT bypass allow/deny logic here.
+        ok, why = _passes_filters(it, flt, section, bypass_allow=False)
         if not ok:
             drops.append({"reason": why, "url": url, "title": it.title or ""})
             continue
 
+        # Avoid evergreen program/funding pages unless they have an in-range date.
+        ul = url.lower()
+        if ("/funding/" in ul or "/program" in ul) and not it.published:
+            drops.append({"reason": "evergreen_funding_undated", "url": url, "title": it.title or ""})
+            continue
+
+        # Keep the same article-ish heuristics used in normal passes.
         if not _looks_articleish(url):
             drops.append({"reason": "not_articleish", "url": url, "title": it.title or ""})
+            continue
+
+        # Enforce date window if we have a date; undated is governed by ALLOW_UNDATED.
+        if not _in_range(it.published, start_pad, end):
+            drops.append({"reason": "out_of_range_last_resort", "url": url, "title": it.title or ""})
             continue
 
         text = ""
@@ -646,22 +635,16 @@ def _last_resort_pick(pool: Sequence[Item], section: str, start_dt: datetime, en
         if not text:
             text = (it.summary or "").strip()
 
-        # require at least some substance even in last resort
         if not _substance_ok_relaxed(text):
             drops.append({"reason": "low_substance_last_resort", "url": url, "title": it.title or ""})
             continue
 
         it.summary = text
-        ck = _content_key(it)
-        # Do not admit near-duplicate content in last resort.
-        if ck in getattr(flt, '_runtime_used_keys', set()):
-            drops.append({"reason": "duplicate_content_last_resort", "url": url, "title": it.title or ""})
-            continue
         sc = _score_item(it, text, section, flt, ignore_substance=True)
         scored.append((sc, it))
 
     scored.sort(key=lambda x: (-x[0], (x[1].url or "")))
-    picked: List[Item] = [it for _, it in scored[: max(1, items_needed)]]
+    picked: List[Item] = [it for _, it in scored[: max(0, items_needed)]]
     return picked, drops
 
 
@@ -689,7 +672,6 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
     all_selected: List[Item] = []
     all_drops: List[Dict[str, str]] = []
     global_used_urls: Set[str] = set()
-    global_used_keys: Set[str] = set()
 
     sections: Dict[str, Any] = cfg_sources.get("sections") or {}
     for section, sec_cfg in sections.items():
@@ -710,13 +692,11 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
             per_domain_cap=PER_DOMAIN_CAP,
             strict=True,
             exclude_urls=global_used_urls,
-            exclude_keys=global_used_keys,
         )
         all_drops.extend(drops1)
         for it in selected:
             if it.url:
                 global_used_urls.add(it.url.strip().lower())
-                global_used_keys.add(_content_key(it))
 
         # Pass 2 (relaxed fill): only to top up to quota, and still enforces minimum substance
         if len(selected) < ITEMS_PER_SECTION:
@@ -728,7 +708,6 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
                 per_domain_cap=PER_DOMAIN_CAP,
                 strict=False,
                 exclude_urls=global_used_urls,
-                exclude_keys=global_used_keys,
                 initial_per_domain=dict(per_dom),
             )
             all_drops.extend(drops2)
@@ -736,7 +715,6 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
             for it in filler:
                 if it.url:
                     global_used_urls.add(it.url.strip().lower())
-                global_used_keys.add(_content_key(it))
 
         # Wider date window (still strict+relaxed)
         if not selected:
@@ -759,7 +737,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
         # Last resort: pick only content-like URLs with minimal extract
         if not selected:
             print("[warn] Still no items after fallback; last-resort pick (ignoring dates).")
-            picked, drops4 = _last_resort_pick(pool, section, start_dt, end_dt, flt, items_needed=ITEMS_PER_SECTION)
+            picked, drops4 = _last_resort_pick(pool, section, flt, start=start, end=end, items_needed=ITEMS_PER_SECTION)
             all_drops.extend(drops4)
             picked2: List[Item] = []
             for it in picked:
@@ -775,7 +753,7 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
         if not selected:
             print("[warn] No candidates available; trying emergency RSS.")
             epool = _emergency_pool(section)
-            picked, drops5 = _last_resort_pick(epool, section, flt, items_needed=max(1, ITEMS_PER_SECTION // 2))
+            picked, drops5 = _last_resort_pick(epool, section, flt, start=start, end=end, items_needed=max(1, ITEMS_PER_SECTION // 2))
             all_drops.extend(drops5)
             picked2: List[Item] = []
             for it in picked:
