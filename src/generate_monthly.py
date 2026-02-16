@@ -169,7 +169,21 @@ def _coerce_ts(ts: Any) -> Optional[datetime]:
 
 
 def _effective_published_ts(it: Item) -> Optional[datetime]:
-    return _coerce_ts(getattr(it, "published_ts", None))
+    """Return a UTC datetime if we can determine a publish timestamp for the item.
+
+    Be schema-tolerant: prefer published_ts but fall back to published_iso / published (if present).
+    """
+    for attr in ("published_ts", "published_iso", "published"):
+        dt = _coerce_ts(getattr(it, attr, None))
+        if dt is not None:
+            return dt
+    return None
+
+def _item_is_undated(it: Item) -> bool:
+    """True if item has no usable publish timestamp."""
+    return _effective_published_ts(it) is None
+
+
 
 
 def _in_range(ts: Any, start: Any, end: Any) -> bool:
