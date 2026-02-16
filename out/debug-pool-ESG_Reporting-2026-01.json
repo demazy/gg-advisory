@@ -552,18 +552,6 @@
     "index_url": "https://www.ifrs.org/news-and-events/news/"
   },
   {
-    "url": "https://www.efrag.org/en/news-and-calendar/news",
-    "title": "News",
-    "summary": "",
-    "source": "efrag.org",
-    "section": "ESG Reporting",
-    "published_iso": "2026-02-10T12:00:00+00:00",
-    "published_ts": 1770724800.0,
-    "published_source": "meta",
-    "published_confidence": 0.75,
-    "index_url": "https://www.efrag.org/en/news-and-calendar/news"
-  },
-  {
     "url": "https://www.efrag.org/en",
     "title": "https://www.efrag.org/en",
     "summary": "",
@@ -583,18 +571,6 @@
     "section": "ESG Reporting",
     "published_iso": "2025-12-10T12:00:00+00:00",
     "published_ts": 1765368000.0,
-    "published_source": "meta",
-    "published_confidence": 0.75,
-    "index_url": "https://www.efrag.org/en/news-and-calendar/news"
-  },
-  {
-    "url": "https://www.efrag.org/en/news-and-calendar/news?facets_query=",
-    "title": "(-) All news",
-    "summary": "",
-    "source": "efrag.org",
-    "section": "ESG Reporting",
-    "published_iso": "2026-02-10T12:00:00+00:00",
-    "published_ts": 1770724800.0,
     "published_source": "meta",
     "published_confidence": 0.75,
     "index_url": "https://www.efrag.org/en/news-and-calendar/news"

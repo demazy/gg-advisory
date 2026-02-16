@@ -9,14 +9,6 @@
   },
   {
     "section": "Energy Transition",
-    "title": "Read more",
-    "url": "https://www.cer.gov.au/news-and-media/news/2026/january/explore-q4-2025-qcmr-data-workbook",
-    "publisher": "cer.gov.au",
-    "published": "2026-01-01T00:00:00+00:00",
-    "published_ts": 1767225600.0
-  },
-  {
-    "section": "Energy Transition",
     "title": "18 Dec 2025 Energy Insider What Australia’s Energy System Wants for Christmas",
     "url": "https://www.energynetworks.com.au/news/energy-insider/what-australias-energy-system-wants-for-christmas/",
     "publisher": "energynetworks.com.au",
@@ -25,27 +17,11 @@
   },
   {
     "section": "ESG Reporting",
-    "title": "News",
-    "url": "https://www.efrag.org/en/news-and-calendar/news",
+    "title": "Read more about EFRAG Opens Call for Candidates to Join its Sustainability Reporting Technical Expert Group",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-opens-call-for-candidates-to-join-its-sustainability-reporting-technical-expert-group",
     "publisher": "efrag.org",
-    "published": "2026-02-10T12:00:00+00:00",
-    "published_ts": 1770724800.0
-  },
-  {
-    "section": "ESG Reporting",
-    "title": "Read more about EFRAG FR TEG Online Meeting - 11 February 2026",
-    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-11-february-2026",
-    "publisher": "efrag.org",
-    "published": "2026-02-10T12:00:00+00:00",
-    "published_ts": 1770724800.0
-  },
-  {
-    "section": "ESG Reporting",
-    "title": "Read more about EFRAG SRB Online Meeting 12 February 2026",
-    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-12-february-2026",
-    "publisher": "efrag.org",
-    "published": "2026-02-10T12:00:00+00:00",
-    "published_ts": 1770724800.0
+    "published": "2026-01-27T12:00:00+00:00",
+    "published_ts": 1769515200.0
   },
   {
     "section": "ESG Reporting",
@@ -56,27 +32,35 @@
     "published_ts": 1767225600.0
   },
   {
-    "section": "Sustainable Finance & Investment",
-    "title": "Sustainable Debt Round up: Q4 2025 & European Green Bond label deep dive - Environmental Finance",
-    "url": "https://news.google.com/rss/articles/CBMipAJBVV95cUxQYnlocEptblhHUGVYckd2aXFqeXBuMUlidEdnNURoNmQ2N3EtRWladHlFR1FNMFo0dE1ZbzRFdWtibzNhdnRhUWJLYjhoWTlqSlFpZlN2RWt6SmdVNHhPWTdXV3ZLczkwUThrZXFYOE5MVlRBUkJjVzM2QWg0bEttVk9TSXN0c0p2QXBPSkxnVnJjOThwQTRwZHg3d1EycnMyTmE0M2tXbEpFeUpoNm5abUhRamNGM2RLWkEwSTZMcUdUajVmemVqWklwMzVpRGJoMXFDZU9XbjFpalpZWWRFMC1JNUUyYTNTMFh5X3cxQ2ItVUo0VGlxWjVZd0w0Q2pSQW5IMkFIRHZhX2ZYdXkwbi0wU053c3ZKS2U4X05qQnVXNzB0?oc=5",
-    "publisher": "Google News",
-    "published": "2026-01-16T11:23:01+00:00",
-    "published_ts": 1768562581.0
+    "section": "ESG Reporting",
+    "title": "Read more about Deadline Extended for Applications to the EFRAG Financial Reporting Technical Expert Group",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/deadline-extended-for-applications-to-the-efrag-financial-reporting-technical-expert-group",
+    "publisher": "efrag.org",
+    "published": "2026-01-12T12:00:00+00:00",
+    "published_ts": 1768219200.0
+  },
+  {
+    "section": "ESG Reporting",
+    "title": "Read more about Apply Now to Join EFRAG’s Financial Reporting Technical Expert Group",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/apply-now-to-join-efrags-financial-reporting-technical-expert-group",
+    "publisher": "efrag.org",
+    "published": "2026-01-05T12:00:00+00:00",
+    "published_ts": 1767614400.0
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "How Standard Chartered's €1 Billion Green Bond Is Scaling Climate Finance in Emerging Markets - CarbonCredits.com",
-    "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPUHRFVjhrRFhoclJOV2JCOXlUMFRBZDR3UDNPM2xPZnJDbDVvQUZMOHl2THFJUEdoSnZ5bVc4cnI2cFhrTW9zZG8yMlRJNE9lcGQzV0RnR2hVR3pHeHR1TFNsTzF5VVQ3a09yYUNYYzd4OGhBN01OaTFWbUdZVEtEblBFd2RnSG40MWh1Si1UWVRBcDllSG5GX3JaMXV0Q1AwRmQtd1pWa2pGcUpVRFdfdlJZWjhmR0lYRk9j?oc=5",
-    "publisher": "Google News",
-    "published": "2026-01-14T08:00:00+00:00",
-    "published_ts": 1768377600.0
+    "title": "ISSB Update December 2025",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-december-2025.html",
+    "publisher": "ifrs.org",
+    "published": "2025-12-01T00:00:00+00:00",
+    "published_ts": 1764547200.0
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Standard Chartered Issues €1 Billion Green Bond to Finance Clean Energy, Green Building Projects - ESG Today",
-    "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPamN5b09TTTgyanVwd0JYU0R0Z1M2Vmh0UlVsV1hrU0pQajlpT1djUk5tdVZ5REdPeUoxQlVTYlZ5eGZRXzlHbDZ0SEFwMDI0My1IaVVvdTZzSFFOZkNEZDlWWktqaGpxdV95Y0lNaTBPZ3ctcXpyQ2NUTDgtVE5wSnhCVmdJaFpfTGRxUl9wVmdkOGRYOV9PU0pzUUNFRzJNUmlWb1pWYmJUSi1tQUJCN1pONUxnMUxPMWFzd1lR?oc=5",
-    "publisher": "Google News",
-    "published": "2026-01-08T08:00:00+00:00",
-    "published_ts": 1767859200.0
+    "title": "REPORT Transition Metals Outlook",
+    "url": "https://about.bnef.com/insights/commodities/transition-metal-outlook/",
+    "publisher": "about.bnef.com",
+    "published": "2025-12-05T09:38:00+00:00",
+    "published_ts": 1764927480.0
   }
 ]
