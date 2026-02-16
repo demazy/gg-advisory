@@ -49,6 +49,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python -c "import src.generate_monthly, src.fetch, src.summarise; print('imports ok')"
+          python -m py_compile src/generate_monthly.py src/fetch.py src/summarise.py
 
       - name: Sanity check generate_monthly has robust _in_range
         run: |
