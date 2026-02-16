@@ -101,9 +101,10 @@ class Item:
 
     index_url: Optional[str] = None
 
-    # ---- Compatibility aliases (do not remove) ----
-    # Some downstream modules historically referred to Item.published or Item.text.
-    # Keep these as read-only properties to prevent schema-mismatch crashes.
+
+
+    # Compatibility aliases (avoid schema drift across modules/patches)
+    # - Some historical versions used `published` and `text`.
     @property
     def published(self) -> Optional[str]:
         return self.published_iso
@@ -111,8 +112,6 @@ class Item:
     @property
     def text(self) -> str:
         return self.summary or ""
-
-
 # -----------------------------
 # Helpers
 # -----------------------------
@@ -370,20 +369,19 @@ def is_probably_taxonomy_or_hub(url: str) -> bool:
 
     # query-based searches / pagination
     q = parse_qs(parsed.query or "")
+
+    # Faceted listing pages (common on CMS/standards sites): ?f[0]=... or ?facet=...
+    if any(k.startswith('f[') for k in q.keys()) or any(k in q for k in ('facet', 'facets', 'filter', 'filters')):
+        return True
     if "page" in q and (parsed.path.endswith("/news") or parsed.path.endswith("/news/")):
         return True
     if ("s" in q or "q" in q) and parsed.path.endswith("/search"):
         return True
 
-    # facet / filter listing pages (e.g., EFRAG uses f[0]=... in query strings)
-    if any(k.startswith("f[") for k in q.keys()):
-        return True
-    if any(k in {"facet", "facets", "filter", "filters"} for k in q.keys()):
-        return True
-    if ("type" in q) and (parsed.path.endswith("/media") or parsed.path.endswith("/media/")):
-        return True
-
     path = parsed.path or "/"
+    # Known listing hubs that look like content URLs
+    if parsed.netloc.endswith('efrag.org') and path.rstrip('/') in ('/en/news-and-calendar/news', '/en/news-and-calendar/events'):
+        return True
     # nav/utility endpoints (only if the *last* segment is utility-ish)
     utility_segments = {
         "about", "contact", "privacy", "terms", "cookies", "accessibility", "sitemap",
@@ -659,6 +657,16 @@ def fetch_rss(feed_url: str, source_name: str = "", **kwargs) -> List[Item]:
 
     for e in parsed.entries or []:
         link = _clean_url(getattr(e, "link", "") or "")
+        # Google News RSS often points to an aggregator URL; prefer the publisher URL if provided.
+        try:
+            if link and "news.google.com" in urlparse(link.lower()).netloc:
+                src = getattr(e, "source", None)
+                href = getattr(src, "href", "") if src is not None else ""
+                href = _clean_url(href)
+                if href:
+                    link = href
+        except Exception:
+            pass
         title = (getattr(e, "title", "") or "").strip()
         if not link or not title:
             continue
