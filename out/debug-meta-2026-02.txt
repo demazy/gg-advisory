@@ -1,0 +1,15 @@
+ym=2026-02
+selected_total=5
+items_per_section=7
+per_domain_cap=3
+allow_undated=False
+allow_placeholder=True
+fail_on_below_min_total=False
+range_pad_before_days=14
+range_pad_after_days=2
+max_score_fetches_per_section=60
+last_resort_backfill_days=45
+last_resort_max_staleness_days=120
+relaxed_min_text_chars=300
+auto_allow_gov_au=True
+auto_allow_domains=efrag.org
