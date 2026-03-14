@@ -15,11 +15,11 @@ import requests
 # Env / config
 # ----------------------------
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "").strip()
-MODEL = os.getenv("MODEL", "gpt-4o-mini").strip()
+MODEL = os.getenv("MODEL", "gpt-4o").strip()
 TEMP = float(os.getenv("TEMP", "0.2"))
-OPENAI_MAX_TOKENS = int(os.getenv("OPENAI_MAX_TOKENS", "1800"))
+OPENAI_MAX_TOKENS = int(os.getenv("OPENAI_MAX_TOKENS", "4000"))
 
-MAX_TEXT_CHARS_PER_ITEM = int(os.getenv("MAX_TEXT_CHARS_PER_ITEM", "3200"))
+MAX_TEXT_CHARS_PER_ITEM = int(os.getenv("MAX_TEXT_CHARS_PER_ITEM", "8000"))
 DEBUG = os.getenv("DEBUG", "0") == "1"
 
 SECTIONS = [
@@ -234,9 +234,33 @@ def build_digest(date_label: str, items: Sequence[Any]) -> str:
         return _deterministic_structured_digest(date_label, items, note="OpenAI not configured; deterministic fallback used.")
 
     system = (
-        "You are an executive editor for GG Advisory. Create a concise monthly digest ONLY from the items provided. "
-        "Rules: (1) Do NOT invent items or details, (2) Use only facts contained in each item's text field, "
-        "(3) Keep tone factual and professional, (4) Include Sources with ONLY the URLs provided per item."
+        "You are a senior strategic analyst and executive editor for GG Advisory, an Australian advisory firm "
+        "that helps businesses, investors, and institutions navigate the energy transition, mandatory "
+        "ESG/sustainability reporting, and sustainable finance markets.\n\n"
+        "Your audience is Australian C-suite executives (CFOs, CEOs, Chief Sustainability Officers), board "
+        "directors, institutional investors, and sustainability professionals who need precise, high-signal "
+        "intelligence to make time-sensitive strategic decisions.\n\n"
+        "Quality standards for every digest:\n"
+        "1. Extract and cite specific data: dollar figures, MW/GW capacity, percentages, timelines, regulatory "
+        "thresholds, entity names, and jurisdictions. Generic statements without specifics are unacceptable.\n"
+        "2. Distinguish mandatory from voluntary developments and flag Australian applicability explicitly.\n"
+        "3. For regulatory and policy items, state what changes, when it takes effect, and who is affected.\n"
+        "4. The 'Why it matters' line must name a specific decision or action an Australian executive, "
+        "investor, or board should take — or a concrete risk or deadline they must track. "
+        "NEVER use phrases like 'this is significant', 'this highlights', 'this is important', "
+        "'this will enhance', or 'stakeholders should be aware'. Instead, write: "
+        "'CFOs at entities with >$50M revenue must lodge by [date]', or "
+        "'Boards should review [specific exposure] given this rule change', or "
+        "'Investors in [sector] face [specific risk] by [date]'.\n"
+        "5. Prioritise: (a) regulatory/policy changes with binding effect, "
+        "(b) significant financial transactions or market moves with quantified impact, "
+        "(c) major reports or standards with specific quantified findings.\n\n"
+        "Absolute rules:\n"
+        "- Use ONLY facts from the provided item text fields. Do NOT invent figures, dates, or details.\n"
+        "- Do NOT include items not in the payload.\n"
+        "- Do NOT speculate beyond what the source text explicitly supports.\n"
+        "- If an item's text field is too thin (under 100 words with no specific data), skip it entirely "
+        "rather than producing a vague summary."
     )
 
     user = {
@@ -247,26 +271,35 @@ def build_digest(date_label: str, items: Sequence[Any]) -> str:
 
     user_msg = textwrap.dedent(
         """\
-        Using the JSON payload below, write a markdown digest:
+        Using the JSON payload below, write a monthly digest in markdown.
 
-        Output structure:
-        - **Signals Digest — {date_label}**
-        - **Top Lines** — 3 bullets (macro takeaways)
-        - Then 3 sections (use exactly these headings):
-          ## Energy Transition
-          ## ESG Reporting
-          ## Sustainable Finance & Investment
+        Required structure:
 
-        Under each section, include 2–6 bullets (if available) where each bullet has:
-        - **Headline** (<= 10 words)
-        - PUBLISHED: <ISO date> (if provided)
-        - Summary: 90–140 words, purely factual, using numbers/dates/jurisdictions present
-        - Why it matters: 1 sentence, factual (no speculation)
+        **Signals Digest — {date_label}**
 
-        Finish with:
+        **Top Lines**
+        - [Macro takeaway 1 — cite a specific figure, policy name, or regulatory deadline]
+        - [Macro takeaway 2 — cite a specific figure, policy name, or regulatory deadline]
+        - [Macro takeaway 3 — cite a specific figure, policy name, or regulatory deadline]
+
+        ## Energy Transition
+        ## ESG Reporting
+        ## Sustainable Finance & Investment
+
+        Under each section, write 2–5 bullets. Each bullet must follow this exact format:
+
+        **[Concise headline, max 12 words]**
+        PUBLISHED: [ISO date if available, otherwise omit this line]
+        Summary: [100–150 words. Must include: what happened, key figures/amounts/dates/entities/jurisdictions, regulatory status, and geographic scope. Be precise — no vague language.]
+        Why it matters: [1–2 sentences. State the concrete strategic implication for Australian businesses or investors. Avoid phrases like "this is significant because" — instead, say what decision-makers should do or watch for.]
+
+        Only include a bullet if the item's text contains enough substance for a meaningful summary.
+        If a section has fewer than 2 good items, write what is available — do not pad or invent.
+
+        End with:
         ---
         **Sources**
-        - <url> per item (unique)
+        - [one unique URL per item used]
 
         JSON payload:
         {json}
