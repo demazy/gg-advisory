@@ -606,6 +606,29 @@ def _extract_title_and_date_from_html(html: str) -> Tuple[Optional[str], Optiona
     return title, published_ts
 
 
+def _title_from_url_slug(url: str) -> str:
+    """
+    Derive a human-readable title from the URL's last path segment.
+    E.g. '/news/2026/february/2024-25-national-greenhouse-and-energy-reporting-data'
+         → '2024-25 National Greenhouse And Energy Reporting Data'
+    Only returns a non-empty string if the slug looks meaningful (not a short ID).
+    """
+    try:
+        path = urlparse(url).path.rstrip("/")
+        slug = path.split("/")[-1] if path else ""
+        # Remove file extension
+        slug = re.sub(r"\.[a-z]{2,5}$", "", slug)
+        if not slug or len(slug) < 10:
+            return ""
+        # Skip slugs that look like IDs or codes (e.g. "GRC0077", "ERC0399")
+        if re.match(r"^[A-Z]{2,6}\d{4,}$", slug, re.I):
+            return ""
+        text = re.sub(r"[-_]+", " ", slug).strip()
+        return text.title()
+    except Exception:
+        return ""
+
+
 def _looks_content_url(u: str) -> bool:
     """
     Cheap heuristic to decide whether a link is worth per-link date resolution.
@@ -833,6 +856,9 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
 
     # Optional per-link metadata resolution (bounded).
     # We only do this for likely content URLs lacking URL-inferred dates (and/or generic titles).
+    # Titles that are useless and should trigger per-link resolution even if the date is known.
+    _GENERIC_TITLE_LC = {"read more", "learn more", "more", "news", "media release", "press release", "view all"}
+
     resolve_budget = max(0, int(MAX_DATE_RESOLVE_FETCHES_PER_INDEX))
     resolved_meta: Dict[str, Tuple[Optional[str], Optional[float]]] = {}
     if resolve_budget > 0:
@@ -841,7 +867,8 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
                 break
             # If we already inferred a date, we can skip resolving date (but may still need title if missing).
             inferred_ts = infer_published_ts_from_url(u)
-            needs_title = not bool(title_by_url.get(u))
+            current_title = title_by_url.get(u, "").strip().lower()
+            needs_title = not current_title or current_title in _GENERIC_TITLE_LC
             if inferred_ts is not None and not needs_title:
                 continue
             if not _looks_content_url(u):
@@ -873,7 +900,11 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
         if not _same_site(u, index_url):
             src = _norm_host(urlparse(u).netloc)
 
-        title = title_by_url.get(u, "") or (t_meta or "") or u
+        title = title_by_url.get(u, "") or (t_meta or "")
+        # If title is still empty or generic, try deriving from URL slug before falling back to URL.
+        if not title or title.strip().lower() in {"read more", "learn more", "more", "news", "media release", "press release", "view all"}:
+            slug_title = _title_from_url_slug(u)
+            title = slug_title if slug_title else (title or u)
 
         items.append(
             Item(
