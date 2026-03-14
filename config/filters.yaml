@@ -51,6 +51,17 @@ allow_domains:
 - asic.gov.au
 - globalreporting.org
 - about.bnef.com
+- australianinvestmentcouncil.com.au
+- cleanenergyfinancecorp.com.au
+- climatechangeauthority.gov.au
+- climateactive.org.au
+- asfi.org.au
+- energynetworks.com.au
+- csiro.au
+- igcc.org.au
+- responsibleinvestment.org
+- climateworks.com.au
+- pc.gov.au
 deny_domains: []
 domain_deny_substrings:
   arena.gov.au:
@@ -60,6 +71,15 @@ domain_deny_substrings:
 title_deny_regex:
 - (cookie|privacy|terms|subscribe|sign\s?up|login|careers|jobs)
 - (webinar|tickets|register)
+# Reject pure accounting/financial-reporting articles that are not sustainability-related.
+# These mostly come from EFRAG/IASB and are not relevant to energy, ESG, or sustainable finance.
+# Note: \bIFRS\s+\d+\b matches "IFRS 17" but NOT "IFRS S1" or "IFRS S2" (the sustainability standards).
+- '\bIAS\s+\d+\b'
+- '\bIFRS\s+\d+\b'
+- hyperinflat
+- 'endorsement advice'
+- 'financial reporting technical expert'
+- 'fair value option for investments'
 keep_keywords:
 - energy
 - electricity
@@ -102,6 +122,7 @@ section_keywords:
   - NEM
   - AEMO
   - AER
+  - AEMC
   - system strength
   - inertia
   - frequency
@@ -118,6 +139,28 @@ section_keywords:
   - storage
   - renewable
   - hydrogen
+  - solar
+  - wind
+  - offshore wind
+  - pumped hydro
+  - BESS
+  - demand response
+  - virtual power plant
+  - VPP
+  - electrification
+  - decarbonisation
+  - net zero
+  - clean energy
+  - generation
+  - megawatt
+  - gigawatt
+  - grid stability
+  - market operator
+  - electricity market
+  - capacity mechanism
+  - Snowy
+  - electric vehicle
+  - EV charging
   ESG Reporting:
   - ISSB
   - IFRS S1
@@ -125,6 +168,8 @@ section_keywords:
   - ASRS
   - GRI
   - SASB
+  - TCFD
+  - TNFD
   - assurance
   - materiality
   - double materiality
@@ -134,6 +179,20 @@ section_keywords:
   - scope 1
   - scope 2
   - scope 3
+  - mandatory reporting
+  - sustainability reporting
+  - climate disclosure
+  - greenwashing
+  - nature-related
+  - biodiversity
+  - ASIC enforcement
+  - audit
+  - verification
+  - integrated report
+  - annual report
+  - reporting standard
+  - AASB
+  - APRA
   Sustainable Finance & Investment:
   - green bond
   - sustainability-linked
@@ -143,7 +202,23 @@ section_keywords:
   - fiduciary
   - climate risk
   - physical risk
+  - transition risk
   - scenario analysis
   - portfolio
   - capital allocation
   - financed emissions
+  - net zero
+  - impact investing
+  - ESG fund
+  - ESG investing
+  - institutional investor
+  - superannuation
+  - infrastructure fund
+  - private equity
+  - blended finance
+  - climate finance
+  - green loan
+  - labelled bond
+  - APRA
+  - sustainable investment
+  - responsible investment
