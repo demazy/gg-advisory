@@ -51,6 +51,78 @@ def _norm_title(s: str) -> str:
 OUT_DIR = Path(os.getenv("OUT_DIR", "out"))
 CFG_SOURCES = Path(os.getenv("CFG_SOURCES", "config/sources.yaml"))
 CFG_FILTERS = Path(os.getenv("CFG_FILTERS", "config/filters.yaml"))
+STATE_FILE = Path(os.getenv("STATE_FILE", "state/seen_urls.json"))
+
+# Cross-month deduplication: track URLs selected in previous monthly runs.
+# Set CROSS_MONTH_DEDUP=0 to disable (e.g. for backfill runs where dedup is unwanted).
+CROSS_MONTH_DEDUP = os.getenv("CROSS_MONTH_DEDUP", "1") == "1"
+# Purge entries older than this many days from state to prevent the list growing unbounded.
+SEEN_URL_TTL_DAYS = int(os.getenv("SEEN_URL_TTL_DAYS", "90"))
+
+
+def _load_seen_urls() -> Set[str]:
+    """Load previously selected URLs from persistent state."""
+    if not STATE_FILE.exists():
+        return set()
+    try:
+        data = json.loads(STATE_FILE.read_text(encoding="utf-8"))
+        entries = data.get("urls", [])
+        cutoff_ts = (datetime.now(timezone.utc) - timedelta(days=SEEN_URL_TTL_DAYS)).timestamp()
+        # entries may be plain strings (URL) or dicts {url, ts}
+        result: Set[str] = set()
+        for e in entries:
+            if isinstance(e, str):
+                result.add(e.strip().lower())
+            elif isinstance(e, dict):
+                u = (e.get("url") or "").strip().lower()
+                ts = e.get("ts")
+                if u and (ts is None or float(ts) >= cutoff_ts):
+                    result.add(u)
+        return result
+    except Exception:
+        return set()
+
+
+def _save_seen_urls(new_urls: Set[str]) -> None:
+    """Merge new_urls into state, preserving timestamps, pruning old entries."""
+    STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    now_ts = datetime.now(timezone.utc).timestamp()
+    cutoff_ts = now_ts - SEEN_URL_TTL_DAYS * 86400
+
+    existing: List[Dict] = []
+    if STATE_FILE.exists():
+        try:
+            data = json.loads(STATE_FILE.read_text(encoding="utf-8"))
+            raw = data.get("urls", [])
+            for e in raw:
+                if isinstance(e, str):
+                    existing.append({"url": e.lower(), "ts": None})
+                elif isinstance(e, dict):
+                    existing.append(e)
+        except Exception:
+            pass
+
+    # Purge stale + build lookup
+    kept: Dict[str, float] = {}
+    for e in existing:
+        u = (e.get("url") or "").strip().lower()
+        ts = e.get("ts")
+        if not u:
+            continue
+        if ts is not None and float(ts) < cutoff_ts:
+            continue  # too old
+        kept[u] = float(ts) if ts else now_ts
+
+    for u in new_urls:
+        u = u.strip().lower()
+        if u:
+            kept[u] = now_ts  # refresh timestamp
+
+    out = [{"url": u, "ts": ts} for u, ts in sorted(kept.items())]
+    try:
+        STATE_FILE.write_text(json.dumps({"urls": out}, ensure_ascii=False, indent=2), encoding="utf-8")
+    except Exception:
+        pass
 
 ITEMS_PER_SECTION = int(os.getenv("ITEMS_PER_SECTION", "5"))
 PER_DOMAIN_CAP = int(os.getenv("PER_DOMAIN_CAP", "2"))
@@ -95,9 +167,14 @@ AUTO_ALLOW_DOMAINS = {
     if d.strip()
 }
 
+_DEFAULT_PRIORITY_DOMAINS = (
+    "aemo.com.au,asic.gov.au,aer.gov.au,aemc.gov.au,"
+    "ifrs.org,efrag.org,arena.gov.au,cefc.com.au,"
+    "apra.gov.au,treasury.gov.au,rba.gov.au"
+)
 PRIORITY_DOMAINS = {
     d.strip().lower()
-    for d in os.getenv("PRIORITY_DOMAINS", "").split(",")
+    for d in os.getenv("PRIORITY_DOMAINS", _DEFAULT_PRIORITY_DOMAINS).split(",")
     if d.strip()
 }
 
@@ -305,34 +382,6 @@ def _looks_articleish(url: str) -> bool:
         return has_long_slug
 
     return has_long_slug
-
-
-    # must have meaningful path beyond root
-    path = re.sub(r"[?#].*$", "", ul)
-    # strip scheme+domain
-    path = re.sub(r"^https?://[^/]+", "", path)
-    if path in ("", "/"):
-        return False
-
-    # deny common nav segments (segment-based, to avoid false positives like ".../about-energy...")
-    bad_segments = {
-        "about", "contact", "privacy", "terms", "cookies", "accessibility", "sitemap",
-        "careers", "jobs", "vacancies",
-    }
-    segs = [s for s in path.split("/") if s]
-    if segs and segs[-1] in bad_segments:
-        return False
-
-    # require at least one "signal": depth, date-like digits, or a long slug
-    depth = len(segs)
-    if depth >= 2:
-        return True
-    if re.search(r"(20\d{2})", path):
-        return True
-    if segs and len(segs[-1]) >= 18:
-        return True
-
-    return False
 
 
 class Filters:
@@ -905,6 +954,13 @@ def generate_for_month(ym: str, cfg_sources: Dict[str, Any], flt: Filters) -> No
     all_drops: List[Dict[str, str]] = []
     global_used_urls: Set[str] = set()
 
+    # Seed global_used_urls with URLs selected in previous months to avoid cross-month duplicates.
+    if CROSS_MONTH_DEDUP:
+        prev_seen = _load_seen_urls()
+        global_used_urls.update(prev_seen)
+        if DEBUG and prev_seen:
+            print(f"[dedup] loaded {len(prev_seen)} previously-seen URLs from state")
+
     sections: Dict[str, Any] = cfg_sources.get("sections") or {}
     for section, sec_cfg in sections.items():
         print(f" {section}")
@@ -1079,6 +1135,13 @@ f"last_resort_max_staleness_days={LAST_RESORT_MAX_STALENESS_DAYS}",
         f.write("# reason\turl\ttitle\n")
         for d in all_drops:
             f.write(f"{d.get('reason','')}\t{d.get('url','')}\t{d.get('title','')}\n")
+
+    # Persist selected URLs so future runs skip them.
+    if CROSS_MONTH_DEDUP:
+        selected_urls = {it.url.strip().lower() for it in all_selected if (it.url or "").strip()}
+        _save_seen_urls(selected_urls)
+        if DEBUG:
+            print(f"[dedup] persisted {len(selected_urls)} URLs to state")
 
     md = build_digest(ym, all_selected)
     out_path = OUT_DIR / f"monthly-digest-{ym}.md"
