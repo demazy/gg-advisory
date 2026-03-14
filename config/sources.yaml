@@ -2,15 +2,35 @@ sections:
   Energy Transition:
     rss:
       - https://www.dcceew.gov.au/rss-feed
+      # AEMO RSS for media releases, ISP updates, market notices
+      - https://aemo.com.au/en/newsroom/rss
     html:
+      # --- Australian market operators & regulators ---
       - https://www.aemo.com.au/newsroom
       - https://www.aemo.com.au/newsroom/media-release
-      - https://www.aemc.gov.au/news-centre
+      # AEMO periodic PDF reports: Quarterly Energy Dynamics, ESOO, ISP
+      # The scraper picks up PDF links from these index pages (PDF_TRUSTED=aemo.com.au)
+      - https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/quarterly-energy-dynamics
+      - https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/planning-and-forecasting/nem-electricity-statement-of-opportunities
+      # Use media-releases subpage instead of top-level news-centre to avoid nav page flood
+      - https://www.aemc.gov.au/news-centre/media-releases
+      - https://www.aemc.gov.au/news-centre/speeches
       - https://www.aer.gov.au/news
+      - https://www.aer.gov.au/newsroom
+      # AER annual State of the Energy Market report (PDF)
+      - https://www.aer.gov.au/publications/state-of-the-energy-market
       - https://www.cer.gov.au/news-and-media/news
+      - https://www.cer.gov.au/news-and-media/media-centre/media-releases
+      # CER Quarterly Carbon Market Report (QCMR) — quarterly PDF
+      - https://www.cleanenergyregulator.gov.au/RET/About-the-Renewable-Energy-Target/Progress-reports/Quarterly-Carbon-Market-Report
       - https://arena.gov.au/news/
       - https://www.cefc.com.au/media/?type=media+release
       - https://www.energynetworks.com.au/news/
+      - https://www.energynetworks.com.au/news/media-releases/
+      - https://www.climatechangeauthority.gov.au/news-media
+      # --- CSIRO: GenCost annual report (solar/wind/storage cost projections) ---
+      - https://www.csiro.au/en/research/technology-space/energy/energy-data-modelling/gencost
+      # --- International bodies ---
       - https://www.infrastructureaustralia.gov.au/news-media
       - https://www.iea.org/news
       - https://www.irena.org/news
@@ -19,16 +39,30 @@ sections:
       - https://ec.europa.eu/commission/presscorner/home/en
 
   ESG Reporting:
-    rss: []
+    rss:
+      # ASIC RSS for media releases — primary source for Australian mandatory ESG/climate disclosure
+      - https://asic.gov.au/news-centre/media-releases/media-release-rss-feeds/media-releases-rss/
     html:
       - https://www.ifrs.org/news-and-events/updates/issb/
       - https://www.ifrs.org/news-and-events/news/
       - https://www.efrag.org/en/news-and-calendar/news
-      # - https://www.efrag.org/en/updates   # optional; tends to be noisy/duplicative
       - https://www.globalreporting.org/news/news-center/
       - https://asic.gov.au/newsroom/media-releases/
+      # ASIC reports on corporate governance & climate disclosure compliance
+      - https://asic.gov.au/regulatory-resources/find-a-document/reports/
       - https://www.dcceew.gov.au/environment/climate-change/news
       - https://www.dcceew.gov.au/about/news
+      # Treasury: mandatory climate-related financial disclosure policy
+      - https://treasury.gov.au/news-and-media
+      - https://www.apra.gov.au/news-and-publications
+      # APRA climate risk publications (CPG 229, CVA, climate stress tests)
+      - https://www.apra.gov.au/climate-risk
+      - https://aasb.gov.au/news/
+      - https://tnfd.global/news/
+      - https://www.climatechangeauthority.gov.au/news-media
+      - https://www.climateactive.org.au/news
+      # Productivity Commission: periodic reviews on ESG / disclosure regulation
+      - https://www.pc.gov.au/news
 
   Sustainable Finance & Investment:
     rss: []
@@ -38,6 +72,21 @@ sections:
       - https://www.cefc.com.au/media/?type=media+release
       - https://www.cleanenergyfinancecorp.com.au/media/?type=in+the+news
       - https://www.australianinvestmentcouncil.com.au/news
+      # BNEF blog: green finance, new energy investment
       - https://about.bnef.com/blog/
       - https://www.irena.org/Newsroom/Articles
       - https://www.ifrs.org/news-and-events/updates/issb/
+      - https://www.apra.gov.au/news-and-publications
+      # RBA: climate-related financial stability publications
+      - https://www.rba.gov.au/publications/
+      - https://tnfd.global/news/
+      # IGCC (Investor Group on Climate Change): quarterly investor briefs, policy submissions
+      - https://igcc.org.au/news/
+      # RIAA (Responsible Investment Association Australasia): annual benchmark + news
+      - https://responsibleinvestment.org/news-and-events/
+      # ASFI: peak body for Australian sustainable finance
+      - https://www.asfi.org.au/media
+      # Treasury: sustainable finance taxonomy, green bond framework
+      - https://treasury.gov.au/news-and-media
+      # Climateworks Centre: net zero pathway research (publishes periodic PDFs)
+      - https://www.climateworks.com.au/news/
