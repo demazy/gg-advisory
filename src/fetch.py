@@ -879,6 +879,12 @@ def fetch_html_index(index_url: str, source_name: str = "", max_date_resolve_fet
 
     resolve_budget = max(0, int(max_date_resolve_fetches if max_date_resolve_fetches is not None else MAX_DATE_RESOLVE_FETCHES_PER_INDEX))
     resolved_meta: Dict[str, Tuple[Optional[str], Optional[float]]] = {}
+    # For path-prefix filtering: only resolve links that are "sub-pages" of the index URL.
+    # This prevents navigation links (about-us, regulation, etc.) from burning the resolve budget
+    # before actual article links are reached (critical for sites like AEMC whose media-releases
+    # page contains a rich site-wide nav).
+    _index_path_prefix = urlparse(index_url).path.rstrip("/")
+
     if resolve_budget > 0:
         for u in uniq:
             if resolve_budget <= 0:
@@ -890,6 +896,9 @@ def fetch_html_index(index_url: str, source_name: str = "", max_date_resolve_fet
             if inferred_ts is not None and not needs_title:
                 continue
             if not _looks_content_url(u):
+                continue
+            # Skip links that don't fall under the index URL's path (navigation links from other sections).
+            if _index_path_prefix and not urlparse(u).path.startswith(_index_path_prefix + "/"):
                 continue
 
             # fetch small page HTML; avoid PDFs here (handled later in full-text extraction)
