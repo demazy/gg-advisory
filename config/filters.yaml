@@ -79,6 +79,7 @@ deny_domains: []
 domain_deny_substrings:
   arena.gov.au:
   - /renewable-energy/
+  - /funding/
   cefc.com.au:
   - /where-we-invest/
 title_deny_regex:

@@ -115,10 +115,10 @@ sections:
       - https://www.esgtoday.com/
 
   Cleantech & Start-up Ecosystem:
-    rss: []
+    rss:
+      # DCCEEW RSS: Rewiring the Nation, Hydrogen Headstart, Future Made in Australia news
+      - https://www.dcceew.gov.au/rss-feed
     html:
-      # ARENA: open funding rounds and new grant announcements
-      - https://arena.gov.au/funding/
       # ARENA news: start-up / early-stage project and program announcements
       - https://arena.gov.au/news/
       # CEFC: clean energy investment announcements and co-investment rounds
