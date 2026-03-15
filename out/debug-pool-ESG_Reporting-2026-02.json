@@ -29,10 +29,10 @@
     "summary": "",
     "source": "ifrs.org",
     "section": "ESG Reporting",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
+    "published_iso": "2025-05-15T00:00:00+00:00",
+    "published_ts": 1747267200.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
     "index_url": "https://www.ifrs.org/news-and-events/updates/issb/"
   },
   {

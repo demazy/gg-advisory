@@ -1,6 +1,30 @@
 [
   {
     "section": "Energy Transition",
+    "title": "Energy security: Keeping the lights on through the energy transition (QLD)",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/energy-security-keeping-lights-through-energy-transition-qld",
+    "publisher": "AEMC",
+    "published": "2026-02-26T00:00:00+00:00",
+    "published_ts": 1772064000.0
+  },
+  {
+    "section": "Energy Transition",
+    "title": "Energy security: Keeping the lights on through the energy transition (NSW)",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/energy-security-keeping-lights-through-energy-transition-nsw",
+    "publisher": "AEMC",
+    "published": "2026-02-24T00:00:00+00:00",
+    "published_ts": 1771891200.0
+  },
+  {
+    "section": "Energy Transition",
+    "title": "Watt's ahead: Understanding the future behind the bill",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/watts-ahead-understanding-future-behind-bill",
+    "publisher": "AEMC",
+    "published": "2026-02-18T00:00:00+00:00",
+    "published_ts": 1771372800.0
+  },
+  {
+    "section": "Energy Transition",
     "title": "Carbon Abatement Schemes Deliver Emissions Reductions Comparable To Year Road Transport",
     "url": "https://www.cer.gov.au/news-and-media/media/2026/february/carbon-abatement-schemes-deliver-emissions-reductions-comparable-to-year-road-transport",
     "publisher": "cer.gov.au",
@@ -17,19 +41,19 @@
   },
   {
     "section": "Energy Transition",
-    "title": "Transparency Non Negotiable To Protect Integrity Clean Energy Schemes",
-    "url": "https://www.cer.gov.au/news-and-media/media/2026/february/transparency-non-negotiable-to-protect-integrity-clean-energy-schemes",
+    "title": "Changes To Rebate Solar Batteries 1 May",
+    "url": "https://www.cer.gov.au/news-and-media/news/2026/february/changes-to-rebate-solar-batteries-1-may",
     "publisher": "cer.gov.au",
-    "published": "2026-02-01T00:00:00+00:00",
-    "published_ts": 1769904000.0
+    "published": "2026-02-17T00:00:00+00:00",
+    "published_ts": 1771286400.0
   },
   {
     "section": "Energy Transition",
-    "title": "Energy Networks Australia welcomes Solar Sharer Offer next steps",
-    "url": "https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-solar-sharer-offer-next-steps/",
-    "publisher": "energynetworks.com.au",
-    "published": "2026-01-23T02:01:04+00:00",
-    "published_ts": 1769133664.0
+    "title": "What Small Businesses Telling Us About Electrification What Needs Change",
+    "url": "https://energyconsumersaustralia.com.au/news/what-small-businesses-telling-us-about-electrification-what-needs-change",
+    "publisher": "Energy Consumers Australia",
+    "published": "2026-01-22T00:00:00+00:00",
+    "published_ts": 1769040000.0
   },
   {
     "section": "ESG Reporting",
@@ -65,34 +89,18 @@
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "Sustainable Finance Market to Hit $27 Trillion by 2031 as Green Bonds Held 53%+ Share in 2025, Says a 2026 Mordor Intelligence Report - Yahoo Finance",
-    "url": "https://finance.yahoo.com",
-    "publisher": "Google News",
-    "published": "2026-02-22T08:00:00+00:00",
-    "published_ts": 1771747200.0
-  },
-  {
-    "section": "Sustainable Finance & Investment",
-    "title": "Sustainability Insights: Sustainable Bonds Global Outlook 2026: Consolidation, Not Expansion - S&P Global",
-    "url": "https://www.spglobal.com",
-    "publisher": "Google News",
-    "published": "2026-02-12T08:00:00+00:00",
-    "published_ts": 1770883200.0
-  },
-  {
-    "section": "Sustainable Finance & Investment",
-    "title": "'Unbelievable' response to pioneering Aussie Taxonomy green bond - Environmental Finance",
-    "url": "https://www.environmental-finance.com",
-    "publisher": "Google News",
-    "published": "2026-02-05T08:00:00+00:00",
-    "published_ts": 1770278400.0
+    "title": "Statement on Monetary Policy",
+    "url": "https://www.rba.gov.au/publications/smp/",
+    "publisher": "rba.gov.au",
+    "published": "2026-02-03T00:00:00+00:00",
+    "published_ts": 1770076800.0
   },
   {
     "section": "Cleantech & Start-up Ecosystem",
-    "title": "Cleantech & Start-up Ecosystem: no retrievable items for 2026-02",
-    "url": "",
-    "publisher": "pipeline",
-    "published": null,
-    "published_ts": null
+    "title": "Luxembourg cleantech startup closes milestone funding with Nato investment - Luxembourg Times",
+    "url": "https://www.luxtimes.lu",
+    "publisher": "Google News",
+    "published": "2026-02-05T08:00:00+00:00",
+    "published_ts": 1770278400.0
   }
 ]
