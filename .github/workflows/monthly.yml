@@ -122,15 +122,27 @@ jobs:
           PRIORITY_MIN_CHARS: "200"
           MIN_TOTAL_ITEMS: "1"
 
-          PRIORITY_DOMAINS: "aemo.com.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au,ec.europa.eu,commission.europa.eu"
-          MODEL: "gpt-4o-mini"
+          PRIORITY_DOMAINS: "aemo.com.au,aemc.gov.au,aer.gov.au,arena.gov.au,cefc.com.au,ifrs.org,efrag.org,dcceew.gov.au,apra.gov.au,asic.gov.au,ec.europa.eu"
+          MODEL: "gpt-4o"
           TEMP: "0.2"
+          OPENAI_MAX_TOKENS: "4000"
 
           MAX_PDF_BYTES: "5242880"
-          PDF_TRUSTED: "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org"
+          PDF_TRUSTED: "aemo.com.au,ifrs.org,efrag.org,dcceew.gov.au,arena.gov.au,cefc.com.au,irena.org,aemc.gov.au,aer.gov.au,cleanenergyregulator.gov.au,csiro.au,apra.gov.au,pc.gov.au,igcc.org.au,climateworks.com.au"
 
           DEBUG: "1"
-          
+
+          # Reduce cross-month padding: 14 days was causing articles from the previous month
+          # to appear in both the prior month's and the current month's digests.
+          # 2-day before-pad handles timezone jitter only (AU content published late on the last day of the
+          # month in AEST may land as the previous day in UTC). Cross-month dedup via seen_urls.json
+          # is the primary guard against duplicates, so the pad can now be minimal.
+          RANGE_PAD_BEFORE_DAYS: "2"
+          RANGE_PAD_AFTER_DAYS: "2"
+
+          # Cross-month deduplication via state/seen_urls.json
+          CROSS_MONTH_DEDUP: "1"
+
           # Make HTML index scraping robust against months buried behind pagination
           MAX_LINKS_PER_INDEX: "250"
           MAX_INDEX_PAGES: "5"
@@ -180,6 +192,8 @@ jobs:
           git add -f "out/debug-selected-${YM}.json" 2>/dev/null || true
           git add -f "out/debug-drops-${YM}.txt" 2>/dev/null || true
           git add -f "out/debug-meta-${YM}.txt" 2>/dev/null || true
+          # Persist cross-month deduplication state
+          git add -f "state/seen_urls.json" 2>/dev/null || true
 
           shopt -s nullglob
           pool_files=(out/debug-pool-*-"${YM}".json)

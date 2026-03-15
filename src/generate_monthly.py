@@ -149,8 +149,10 @@ RANGE_PAD_AFTER_DAYS = int(os.getenv("RANGE_PAD_AFTER_DAYS", os.getenv("RANGE_PA
 MAX_SCORE_FETCHES_PER_SECTION = int(os.getenv("MAX_SCORE_FETCHES_PER_SECTION", "60"))
 
 # Last-resort backfill (only used when a section returns zero items after strict+relaxed).
-LAST_RESORT_BACKFILL_DAYS = int(os.getenv("LAST_RESORT_BACKFILL_DAYS", "45"))
-LAST_RESORT_MAX_STALENESS_DAYS = int(os.getenv("LAST_RESORT_MAX_STALENESS_DAYS", "120"))
+# Kept tight (14 days) so that last-resort articles don't stray into the previous month.
+# Enough to reach a quiet news week at the start of the target month.
+LAST_RESORT_BACKFILL_DAYS = int(os.getenv("LAST_RESORT_BACKFILL_DAYS", "14"))
+LAST_RESORT_MAX_STALENESS_DAYS = int(os.getenv("LAST_RESORT_MAX_STALENESS_DAYS", "60"))
 LAST_RESORT_MAX_FETCHES = int(os.getenv("LAST_RESORT_MAX_FETCHES", "40"))
 
 # If selected_total < MIN_TOTAL_ITEMS, only fail if explicitly configured.
@@ -589,11 +591,14 @@ def _recency_score(ts: Optional[datetime], start_dt: datetime, end_dt: datetime)
     # Prefer items within the month; allow padded window but discount it.
     if start_dt <= ts <= end_dt:
         days_from_end = (end_dt - ts).total_seconds() / 86400.0
-        # within-month: 0.8..0.2 roughly over a month
-        return max(0.2, 0.8 - (days_from_end / 45.0))
+        # Compressed range: 0.6 (very recent) → 0.3 (start of month).
+        # Previously 0.8→0.2 (gap 0.6) — that let a late-month off-topic article
+        # outscore an early-month on-topic one by a margin keywords couldn't overcome.
+        # With gap ~0.3, two keyword hits (≈0.16) are now enough to flip the order.
+        return max(0.3, 0.6 - (days_from_end / 100.0))
     # padded window (should be rare): lower score
     days = abs((ts - end_dt).total_seconds()) / 86400.0
-    return max(-0.4, 0.15 - (days / 60.0))
+    return max(-0.4, 0.1 - (days / 60.0))
 
 
 def _text_signal(text: str) -> float:
@@ -632,7 +637,7 @@ def _score_item(it: Item, text: str, section: str, flt: Filters, start_dt: datet
     rec = _recency_score(ts, start_dt, end_dt)
     prio = 0.35 if _is_priority(url) else 0.0
     kw_hits = _kw_hits((title or "") + " " + (text or "") + " " + (url or ""), flt.section_keywords.get(section, []))
-    kw = min(0.6, 0.06 * kw_hits)  # cap
+    kw = min(0.6, 0.09 * kw_hits)  # raised from 0.06 to better balance against recency
     tq = _title_quality_penalty(title)
     ut = _url_type_penalty(url)
     sig = _text_signal(text)
