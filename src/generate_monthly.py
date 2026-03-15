@@ -1169,6 +1169,33 @@ f"last_resort_max_staleness_days={LAST_RESORT_MAX_STALENESS_DAYS}",
     out_path.write_text(md, encoding="utf-8")
     print(f"[write] {out_path.resolve()}")
 
+    # Build Word document alongside the markdown
+    try:
+        from .build_digest_docx import build_docx
+        docx_path = OUT_DIR / f"monthly-digest-{ym}.docx"
+        build_docx(out_path, docx_path)
+        print(f"[write] {docx_path.resolve()}")
+    except Exception as e:
+        print(f"[warn] DOCX generation skipped: {e}")
+
+    # Build standalone Grants & Accelerators Radar Word document
+    try:
+        from .build_grants_docx import build_grants_docx
+        grants_docx_path = OUT_DIR / f"grants-radar-{ym}.docx"
+        build_grants_docx(CFG_GRANTS, grants_docx_path, ym)
+        print(f"[write] {grants_docx_path.resolve()}")
+    except Exception as e:
+        print(f"[warn] Grants DOCX generation skipped: {e}")
+
+    # Build standalone Grants & Accelerators Radar HTML snippet (for Squarespace Code Block)
+    try:
+        from .build_grants_html import build_grants_html
+        grants_html_path = OUT_DIR / f"grants-radar-{ym}.html"
+        build_grants_html(CFG_GRANTS, grants_html_path, ym)
+        print(f"[write] {grants_html_path.resolve()}")
+    except Exception as e:
+        print(f"[warn] Grants HTML generation skipped: {e}")
+
 
 # ─── Grants & Accelerators Radar ────────────────────────────────────────────
 

@@ -1,6 +1,7 @@
 # === src/summarise.py ===
 from __future__ import annotations
 
+import calendar
 import json
 import os
 import re
@@ -65,6 +66,31 @@ def _get(obj: Any, key: str, default: Any = None) -> Any:
     return getattr(obj, key, default)
 
 
+def _format_month_year(date_label: str) -> str:
+    """
+    Convert a YYYY-MM date label to a human-readable "Month YYYY" string.
+    Falls back to the raw label if parsing fails.
+    """
+    try:
+        parts = date_label.strip().split("-")
+        y, m = int(parts[0]), int(parts[1])
+        return f"{calendar.month_name[m]} {y}"
+    except Exception:
+        return date_label
+
+
+def _format_pub_date(iso: str) -> str:
+    """
+    Convert an ISO date string (YYYY-MM-DD or timestamp) to "D Month YYYY".
+    E.g. "2026-02-26" → "26 February 2026"
+    """
+    try:
+        d = datetime.fromisoformat(iso[:10])
+        return f"{d.day} {calendar.month_name[d.month]} {d.year}"
+    except Exception:
+        return iso
+
+
 def _iso_date(ts: Any) -> str:
     if ts is None:
         return ""
@@ -98,13 +124,11 @@ def _extractive_summary(raw: str, max_words: int = 150) -> str:
 
 
 def _deterministic_structured_digest(date_label: str, items: Sequence[Any], note: str = "") -> str:
-    # Stable ordering: section then published desc then url
+    # Stable ordering: section then published asc then url
     def key(it: Any) -> Tuple[int, str, str]:
         sec = _get(it, "section", "") or ""
         sidx = SECTIONS.index(sec) if sec in SECTIONS else 999
-        # use published_iso or published_ts for ordering
         p = _get(it, "published_iso", "") or _iso_date(_get(it, "published_ts"))
-        # invert by using negative string sort is awkward; use p as string and reverse later
         u = _get(it, "url", "") or ""
         return (sidx, p, u)
 
@@ -114,26 +138,26 @@ def _deterministic_structured_digest(date_label: str, items: Sequence[Any], note
     for it in rows:
         sec = _get(it, "section", "") or ""
         if sec not in by_sec:
-            # ignore unknown sections
             continue
         by_sec[sec].append(it)
 
+    month_year = _format_month_year(date_label)
     out: List[str] = []
-    out.append(f"**Signals Digest — {date_label}**")
+    out.append(f"# {month_year}")
     if note:
         out.append(f"\n> {note}\n")
     out.append("\n**Top Lines**")
     out.append("- Limited high-signal items were available in this range; see section lists below.")
     out.append("- Selection is constrained by source availability and in-range publication dates.")
-    out.append("- Diagnostics (debug outputs) indicate where content was dropped and why.\n")
+    out.append("- Diagnostics (debug outputs) indicate where content was dropped and why.")
 
-    out.append("## Energy Transition")
+    out.append("\n---\n## Energy Transition")
     out.extend(_render_items(by_sec["Energy Transition"]))
 
-    out.append("\n## ESG Reporting")
+    out.append("\n---\n## ESG Reporting")
     out.extend(_render_items(by_sec["ESG Reporting"]))
 
-    out.append("\n## Sustainable Finance & Investment")
+    out.append("\n---\n## Sustainable Finance & Investment")
     out.extend(_render_items(by_sec["Sustainable Finance & Investment"]))
 
     return "\n".join(out).strip() + "\n"
@@ -146,19 +170,20 @@ def _render_items(items: Sequence[Any]) -> List[str]:
     for it in items:
         title = (_get(it, "title", "") or "").strip()[:120]
         url = (_get(it, "url", "") or "").strip()
-        pub = (_get(it, "published_iso", "") or _iso_date(_get(it, "published_ts"))).strip()
+        raw_pub = (_get(it, "published_iso", "") or _iso_date(_get(it, "published_ts"))).strip()
+        pub = _format_pub_date(raw_pub) if raw_pub else ""
         summ = _extractive_summary(_get_text(it), max_words=150)
 
-        if title:
-            lines.append(f"\n**{title}**")
-        else:
-            lines.append("\n**(Untitled)**")
+        lines.append("")
+        lines.append(f"**{title or '(Untitled)'}**")
         if pub:
-            lines.append(f"PUBLISHED: {pub}")
+            lines.append(f"Published: {pub}")
         if summ:
             lines.append(f"Summary: {summ}")
+        # Why it matters and Signals to watch cannot be generated deterministically —
+        # they will be populated by the LLM path.
         if url:
-            lines.append(f"Sources: {url}")
+            lines.append(f"Source: {url}")
     return lines
 
 
@@ -258,39 +283,56 @@ def build_digest(date_label: str, items: Sequence[Any]) -> str:
         "items": payload,
     }
 
+    month_year = _format_month_year(date_label)
+
     user_msg = textwrap.dedent(
         """\
         Using the JSON payload below, write a monthly digest in markdown.
 
-        Required structure:
+        Required structure — reproduce these headings exactly:
 
-        **Signals Digest — {date_label}**
+        # {month_year}
 
         **Top Lines**
         - [Macro takeaway 1 — cite a specific figure, policy name, or regulatory deadline]
         - [Macro takeaway 2 — cite a specific figure, policy name, or regulatory deadline]
         - [Macro takeaway 3 — cite a specific figure, policy name, or regulatory deadline]
 
+        ---
         ## Energy Transition
+
+        [items]
+
+        ---
         ## ESG Reporting
+
+        [items]
+
+        ---
         ## Sustainable Finance & Investment
 
-        Under each section, write 2–5 bullets. Each bullet must follow this exact format:
+        [items]
+
+        Each [items] block contains 2–5 entries. Every entry must follow this exact 6-field format
+        with a blank line between entries:
 
         **[Concise headline, max 12 words]**
-        PUBLISHED: [ISO date if available, otherwise omit this line]
-        Summary: [100–150 words. Must include: what happened, key figures/amounts/dates/entities/jurisdictions, regulatory status, and geographic scope. Be precise — no vague language.]
-        Why it matters: [1–2 sentences. State the concrete strategic implication for Australian businesses or investors. Avoid phrases like "this is significant because" — instead, say what decision-makers should do or watch for.]
-        Sources: [the URL for this item]
+        Published: [D Month YYYY — e.g. "26 February 2026"; omit this line if date unavailable]
+        Summary: [100–150 words. Include: what happened, specific figures/amounts/dates/entities/jurisdictions, regulatory status, geographic scope. No vague language.]
+        Why it matters: [1–2 sentences. Name the concrete decision, deadline, or risk for an Australian executive, board, or investor. Never write "this is significant" or "stakeholders should be aware".]
+        Signals to watch: [1 sentence. Name the next concrete trigger — an upcoming consultation close, effective date, rule decision, or policy announcement to track.]
+        Source: [the URL for this item]
 
-        Only include a bullet if the item's text contains enough substance for a meaningful summary.
-        If a section has fewer than 2 good items, write what is available — do not pad or invent.
-        Do NOT include a sources list at the bottom — each item already carries its own Sources line.
+        Rules:
+        - Only include an entry if the item text has enough substance for a meaningful summary.
+        - If a section has fewer than 2 good items, write what is available — do not pad or invent.
+        - Do NOT add a sources list at the bottom.
+        - Use ONLY facts from the provided item text. Do not invent figures, dates, or details.
 
         JSON payload:
         {json}
         """
-    ).format(date_label=date_label, json=json.dumps(user, ensure_ascii=False))
+    ).format(month_year=month_year, json=json.dumps(user, ensure_ascii=False))
 
     try:
         content = _openai_chat_completion(

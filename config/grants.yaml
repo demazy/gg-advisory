@@ -373,3 +373,330 @@ grants:
       compared to standard accelerators. Clean energy and recycling sectors particularly well served.
     show_from: "2026-01-01"
     show_until: null
+
+  # ─── WA: Fixed-deadline programs (urgent) ────────────────────────────────────
+
+  - id: wa-ceff-round4
+    name: "WA: Clean Energy Future Fund — Round 4"
+    admin: "Department of Water and Environmental Regulation (DWER) / Energy Policy WA"
+    level: wa
+    type: grant
+    amount: "$100,000–$4,000,000 per project (from $9M pool)"
+    deadline: "2026-04-20"
+    deadline_type: fixed
+    deadline_label: "20 April 2026"
+    target_stage: "Any stage; incorporated Australian entity with ABN"
+    url: "https://www.wa.gov.au/service/environment/environment-information-services/clean-energy-future-fund"
+    description: >
+      The WA Government's $9 million Round 4 provides grants of $100,000–$4,000,000 for clean energy
+      projects that reduce greenhouse gas emissions. Priority areas include decarbonisation of heavy
+      industry, long-duration energy storage, green exports, renewable energy supply, and projects with
+      demonstrated benefits to First Nations peoples. Part of a $37M total CEFF commitment to 2030–31.
+      Co-contribution required; exact ratio varies by project.
+    why_it_matters: >
+      The largest competitive clean energy grant currently open in WA. Well-suited for startups with
+      deployable technology in energy storage, electrification, or renewable manufacturing seeking
+      first in-market project funding.
+    show_from: "2026-01-01"
+    show_until: "2026-04-30"
+
+  # ─── VIC: Fixed-deadline programs (urgent) ───────────────────────────────────
+
+  - id: vic-circular-economy-rmf-r6
+    name: "VIC: Circular Economy Recycling Modernisation Fund — Round 6"
+    admin: "Sustainability Victoria (SV)"
+    level: vic
+    type: grant
+    amount: "From $6M pool; co-contribution ratio 1:2 SV:applicant (for-profit businesses)"
+    deadline: "2026-07-01"
+    deadline_type: fixed
+    deadline_label: "1 July 2026 midnight AEST"
+    target_stage: "SME to established business; recycling, resource recovery, circular economy"
+    url: "https://www.sustainability.vic.gov.au/grants-funding-and-investment/grants-and-funding/victorian-circular-economy-recycling-modernisation-fund"
+    description: >
+      Sustainability Victoria's Round 6 opens $6 million for capital investment in recycling
+      infrastructure, remanufacturing, and resource recovery. For-profit applicants must co-contribute
+      $2 for every $1 of SV funding; local government and not-for-profits match 1:1. Applications
+      submitted via SmartyGrants. Note: Sustainability Victoria is scheduled to be abolished in 2026
+      following the Silver Review — this may be one of its final grant rounds.
+    why_it_matters: >
+      A critical window for Victorian cleantech businesses in the circular economy space, especially
+      given SV's likely abolition. The 1:2 co-contribution requirement means applicants need substantial
+      internal capital or co-investors lined up before applying.
+    signals: >
+      With SV's abolition flagged for 2026, monitor the Victorian Government for announcements on which
+      agency will absorb the circular economy grant function post-SV.
+    show_from: "2026-03-01"
+    show_until: "2026-07-31"
+
+  # ─── NATIONAL: Major rolling programs (previously missing) ───────────────────
+
+  - id: rd-tax-incentive
+    name: "R&D Tax Incentive (R&DTI)"
+    admin: "ATO + Department of Industry, Science and Resources (DISR)"
+    level: national
+    type: grant
+    amount: "43.5% refundable tax offset (SMEs, turnover < $20M); 38.5%+ non-refundable (larger companies)"
+    deadline: null
+    deadline_type: rolling
+    deadline_label: "Register within 10 months of financial year end (e.g. 30 April 2026 for FY25)"
+    target_stage: "Any incorporated Australian company conducting eligible R&D activities"
+    url: "https://business.gov.au/grants-and-programs/research-and-development-tax-incentive"
+    description: >
+      Australia's largest innovation incentive offers a 43.5% refundable tax offset on eligible R&D
+      expenditure for SMEs with turnover under $20M — effectively a cash rebate on R&D costs. Eligible
+      costs include wages for R&D staff, contractor costs, and materials used in trials. Larger companies
+      receive a non-refundable offset based on R&D intensity. Register R&D activities with DISR (via
+      business.gov.au) before claiming in your tax return; registration must be lodged within 10 months
+      of financial year end. The eligible expenditure cap was increased to $150M in recent amendments.
+    why_it_matters: >
+      For any climate-tech startup conducting genuine technical experimentation — hardware prototypes,
+      novel software, new materials processes — this is the single most accessible cash injection
+      available. It's not a competitive grant; all eligible companies receive the offset.
+    signals: >
+      Consult an R&D tax specialist before lodging — the ATO audits R&D claims closely and requires
+      contemporaneous records of technical uncertainty, hypothesis, experiments, and outcomes.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: nrf-net-zero-fund
+    name: "National Reconstruction Fund — Net Zero Fund"
+    admin: "NRF Corporation (NRFC) / Department of Industry, Science and Resources"
+    level: national
+    type: debt_equity
+    amount: "$5 billion (concessional debt, equity, and guarantees; target return: 5-yr bond rate minus 1%)"
+    deadline: null
+    deadline_type: tbc
+    deadline_label: "Implementation expected mid-2026 — monitor nrf.gov.au"
+    target_stage: "Growth to industrial scale; large-scale industrial decarbonisation and manufacturing"
+    url: "https://www.nrf.gov.au/"
+    description: >
+      The federal government's $5 billion Net Zero Fund within the NRF will provide highly concessional
+      debt, equity, and guarantees to support industrial decarbonisation and scale-up of domestic
+      low-emissions manufacturing. It targets large-scale facilities decarbonising operations and
+      hard-to-abate sectors. Unlike the Industry Growth Program (which suits SMEs), this fund is
+      designed for capital-intensive projects requiring tens to hundreds of millions of dollars.
+      Full design has been finalised; implementation expected mid-2026.
+    why_it_matters: >
+      The most significant new source of concessional growth-stage finance for deep industrial
+      decarbonisation in Australia's history. Climate-tech ventures in green metals, sustainable fuels,
+      or large-scale manufacturing should begin relationship-building with NRFC now.
+    signals: >
+      The NRFC general portfolio (NRF priority areas, commercial terms) is already open. The Net Zero
+      sub-fund will layer on additional concessionality from mid-2026. Register interest at nrf.gov.au.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: hydrogen-headstart-round2
+    name: "Hydrogen Headstart — Round 2"
+    admin: "Australian Renewable Energy Agency (ARENA)"
+    level: national
+    type: grant
+    amount: "Up to $2 billion total (Headstart Production Credits, per-kg revenue support over 10 years)"
+    deadline: null
+    deadline_type: rolling
+    deadline_label: "EOI open — see arena.gov.au for key dates"
+    target_stage: "Greenfield to commercial scale; renewable hydrogen and derivatives (ammonia, methanol, green metals)"
+    url: "https://arena.gov.au/funding/hydrogen-headstart-round2/"
+    description: >
+      Round 2 of ARENA's Hydrogen Headstart program provides up to $2 billion in Headstart Production
+      Credits — revenue support per kilogram of renewable hydrogen produced over a 10-year operational
+      period. Structured as a two-stage competitive process (EOI then Full Application). Eligible
+      projects produce renewable hydrogen or derivatives such as green ammonia, methanol, or green
+      metals at commercial scale. Part of the Future Made in Australia plan.
+    why_it_matters: >
+      The primary federal subsidy mechanism for first-mover commercial-scale green hydrogen projects.
+      The per-kg production credit structure de-risks offtake economics for large projects. Contact
+      ARENA early via hydrogenheadstart@arena.gov.au before submitting an EOI.
+    signals: >
+      The Hydrogen Production Tax Incentive ($2/kg refundable tax offset from 1 July 2027) is designed
+      to complement Headstart, bridging the revenue gap until market prices reach parity.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: aea-ignite-innovate
+    name: "Australia's Economic Accelerator (AEA) — Ignite & Innovate"
+    admin: "Department of Education / Australian Government"
+    level: national
+    type: grant
+    amount: "Ignite: up to $500,000 (12 months); Innovate: up to $5,000,000 (proof-of-scale)"
+    deadline: null
+    deadline_type: rolling
+    deadline_label: "Rolling rounds — monitor aea.gov.au for next opening"
+    target_stage: "University research teams with industry co-applicant (Ignite: proof-of-concept; Innovate: proof-of-scale)"
+    url: "https://www.aea.gov.au/researcher-applicant/grants"
+    description: >
+      Australia's $1.6 billion Economic Accelerator funds university research commercialisation through
+      two streams. Ignite grants (up to $500K, 12 months) support proof-of-concept and laboratory
+      testing; Innovate grants (up to $5M) advance technologies from lab to proof-of-scale via
+      industry-university collaboration. Round 1 allocated over $130M across 194 projects. Climate-tech,
+      energy, and materials ventures regularly feature. Requires a university lead applicant with an
+      industry co-applicant.
+    why_it_matters: >
+      The primary pathway for deep-tech climate startups spun out of Australian universities to access
+      non-dilutive federal commercialisation funding. Investors and founders with university IP should
+      engage their tech-transfer office about a joint AEA application.
+    signals: >
+      Round 2 details and opening dates are published on aea.gov.au. The $1.6B envelope means multiple
+      rounds are expected across 2026–2030.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: startmate-accelerator
+    name: "Startmate Accelerator — Winter 2026"
+    admin: "Startmate"
+    level: national
+    type: accelerator
+    amount: "$120,000 AUD equity investment (post-money valuation: $1.5M for first-time raisers)"
+    deadline: null
+    deadline_type: tbc
+    deadline_label: "Winter cohort applications expected ~June–July 2026 (program Aug–Nov)"
+    target_stage: "Pre-seed to seed; idea-stage to early traction (67% of cohort pre-revenue)"
+    url: "https://www.startmate.com/accelerator/program"
+    description: >
+      Startmate runs Australia and New Zealand's most prominent 12-week accelerator twice per year
+      (Summer: Feb–May; Winter: Aug–Nov). Climate-tech is a recognised priority sector and previous
+      cohorts received CEFC Innovation Fund backing of $50K per company. Applications for the Winter
+      2026 cohort are expected to open June–July 2026. Startmate invests $120K for equity; valuation
+      matched to prior rounds for founders who have already raised. Selection is mentor-driven across
+      3 stages over 3 weeks.
+    why_it_matters: >
+      The highest-profile generalist accelerator in Australia with a strong climate-tech track record.
+      Strong network effects: the Startmate community of founders, operators, and investors is one of
+      Australia's most active and supportive.
+    show_from: "2026-03-01"
+    show_until: null
+
+  - id: brinc-artesian-cleantech
+    name: "Brinc / Artesian Clean Energy Accelerator"
+    admin: "Brinc + Artesian Venture Partners"
+    level: national
+    type: accelerator
+    amount: "$150,000 cash + $110,000 program support in exchange for equity ($30K participation fee deducted from investment)"
+    deadline: null
+    deadline_type: rolling
+    deadline_label: "Rolling — applications accepted year-round"
+    target_stage: "Commercialisation-ready; validated product; min. 2 co-founders; Australian incorporated"
+    url: "https://www.brinc.io/programs/accelerators/australia-cleantech-accelerator-program/"
+    description: >
+      A 100% online 3-month accelerator backed by Artesian's Clean Energy Seed Fund, accepting
+      Australian cleantech startups on a rolling basis. Startups receive $150K cash plus $110K in
+      program support in exchange for equity, with follow-on capital of $200K–$2M available for
+      high performers. Focuses on energy transition, renewable energy, and environmental impact
+      reduction. Unique feature: a $30K participation fee is deducted from the investment at acceptance.
+    why_it_matters: >
+      One of the few cleantech-exclusive accelerators in Australia with a rolling application process
+      and clear follow-on capital pathway via Artesian. The online format removes geography barriers.
+    signals: >
+      Artesian's Clean Energy Seed Fund can follow with $200K–$2M. Artesian is also active in
+      CEFC-backed co-investment mandates, providing access to further institutional capital.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: mseq-fund3
+    name: "Main Sequence Ventures — Fund III"
+    admin: "Main Sequence Ventures (MSEQ)"
+    level: national
+    type: equity
+    amount: "A$450M fund (A$1B under management total); invests seed to Series B in deeptech"
+    deadline: null
+    deadline_type: rolling
+    deadline_label: "Ongoing — apply directly to Main Sequence via mseq.vc"
+    target_stage: "Seed to Series B; research-driven deeptech with clear decarbonisation or industrial transformation thesis"
+    url: "https://www.mseq.vc/"
+    description: >
+      Main Sequence Ventures, the CSIRO-founded deeptech VC, completed the first close of its
+      A$450M Fund III in 2025 with LPs including CSIRO, Hostplus, Australian Ethical Investment,
+      Temasek, and the Grantham Foundation. Fund III focuses on fibres, food, decarbonisation, and
+      advanced manufacturing. MSEQ leverages CSIRO's research network to identify and back
+      scientists turning discovery-stage research into transformative businesses. Total AUM now A$1B.
+    why_it_matters: >
+      The most credible path to institutional equity for CSIRO-affiliated or research-backed
+      climate and materials startups. MSEQ's CSIRO connection provides unique IP access, lab
+      infrastructure, and strategic validation that no other Australian VC can replicate.
+    signals: >
+      MSEQ is the largest LP in CSIRO's A$150M commitment through Australia's Economic Accelerator
+      (AEA). Startups coming through AEA Ignite/Innovate have a natural pathway to MSEQ consideration.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: nsw-nzmi
+    name: "NSW Net Zero Manufacturing Initiative (NZMI)"
+    admin: "NSW Climate and Energy Action / energy.nsw.gov.au"
+    level: nsw
+    type: grant
+    amount: "CTI stream: $250,000–$5,000,000 (50% co-contribution); LCPM/RM streams: $50K–$50M"
+    deadline: null
+    deadline_type: tbc
+    deadline_label: "Round 2 in development — register interest at energy.nsw.gov.au/NZMI"
+    target_stage: "Innovation to manufacturing scale; cleantech, low-carbon products, renewable manufacturing"
+    url: "https://business.gov.au/grants-and-programs/net-zero-manufacturing-initiative-low-carbon-product-manufacturing-nsw"
+    description: >
+      The NSW Government's $275 million Net Zero Manufacturing Initiative spans three streams:
+      Clean Technology Innovation (CTI, $250K–$5M for R&D and commercialisation), Low Carbon Product
+      Manufacturing (LCPM, $50K–$20M for expanding manufacturing capacity), and Renewable Manufacturing
+      (RM, $5M–$50M for renewable energy component production). Round 1 recipients have been announced;
+      Round 2 details are being finalised. All streams require 50% co-contribution from non-NSW
+      Government sources (cash only; in-kind excluded).
+    why_it_matters: >
+      The most substantial manufacturing-focused cleantech grant program in NSW. CTI's
+      commercialisation stream ($250K–$5M) is directly relevant to startups with validated technology
+      seeking production scale-up capital.
+    signals: >
+      Register interest at energy.nsw.gov.au/NZMI for Round 2 notification. Round 2 construction-ready
+      streams expected to carry larger pools than Round 1.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: act-energy-innovation-fund
+    name: "ACT: Energy Innovation Fund"
+    admin: "ACT Government — Environment, Planning and Sustainable Development Directorate (EPSDD)"
+    level: act
+    type: grant
+    amount: "Technology Demo: up to $10M pool, grants vary; Policy Challenge: $3.75M pool; Innovation Ecosystem: $3.25M pool"
+    deadline: null
+    deadline_type: rolling
+    deadline_label: "Technology Demo stream: open year-round, assessed quarterly"
+    target_stage: "Businesses, research institutions, and non-profits; energy transition innovation in the ACT"
+    url: "https://www.climatechoices.act.gov.au/policy-programs/energy-innovation-fund"
+    description: >
+      The ACT's Energy Innovation Fund (formerly the Renewable Energy Innovation Fund / REIF) has
+      invested $12M since 2016 and was expanded with an additional $19M commitment. Three streams:
+      Technology Demonstration (up to $10M over 5 years, quarterly rolling assessment for energy
+      tech businesses), Policy Challenge ($3.75M for solutions to ACT energy transition policy
+      barriers), and Innovation Ecosystem ($3.25M for accelerator and ecosystem programs).
+      Applications via SmartyGrants.
+    why_it_matters: >
+      The ACT's primary grant channel for early-stage energy innovation, particularly valuable
+      for startups seeking a smaller pilot-scale test market before national rollout. The quarterly
+      rolling assessment means no fixed deadline pressure.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: i2n-cleantech-accelerator
+    name: "NSW: I2N Cleantech Accelerator — University of Newcastle"
+    admin: "Integrated Innovation Network (I2N) / University of Newcastle"
+    level: nsw
+    type: accelerator
+    amount: "Non-dilutive program support; IP support via Davies Collison Cave"
+    deadline: null
+    deadline_type: tbc
+    deadline_label: "Next cohort applications expected ~April–July 2026 (programme Aug–Nov)"
+    target_stage: "Pre-Series A; any founder (not UNSW-affiliated required); Hunter/Central Coast focus but open nationally"
+    url: "https://www.newcastle.edu.au/engage/business-and-industry/integrated-innovation-network-i2n/programs/accelerators/i2n-cleantech-accelerator"
+    description: >
+      A 13-week cleantech-specific accelerator run by the University of Newcastle's I2N, backed by
+      the federal Trailblazer for Recycling and Clean Energy (TRaCE) program. Accepts up to 12 teams
+      per cohort across clean energy, recycling, water, transport, and supply chains. All founders
+      receive IP and trademark support from Davies Collison Cave. The programme culminates in a
+      Showcase event; selected companies enter an incubator phase through to June 2027.
+      Open to any founder — no university affiliation required.
+    why_it_matters: >
+      One of the only sector-specific cleantech accelerators outside Sydney and Melbourne, with
+      genuine depth in clean energy and recycling commercialisation. TRaCE funding gives it stronger
+      resource backing than typical university accelerators.
+    signals: >
+      Applications typically open April, with an info session in May and programme starting August.
+      Monitor hunternewenergy.com.au for next cohort announcements.
+    show_from: "2026-01-01"
+    show_until: null
