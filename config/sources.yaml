@@ -34,9 +34,14 @@ sections:
       - https://www.energynetworks.com.au/news/media-releases/
       - https://www.climatechangeauthority.gov.au/news-media
       # Clean Energy Council: primary AU clean energy industry body (Solar Quarterly, Wind Quarterly, Outlook)
-      - https://www.cleanenergycouncil.org.au/news
+      # NOTE: CEC article pages have NO date metadata (no meta tags, time elements, JSON-LD, or visible date text).
+      # Items will be undated and filtered; retained for future CMS improvements or manual date signals.
+      - https://www.cleanenergycouncil.org.au/news-resources
       # Energy Consumers Australia: consumer advocacy, Energy Consumer Sentiment Survey
-      - https://energyconsumersaustralia.com.au/news
+      # date_resolve_fetches: ECA URLs have no year/month → per-link HTML fetch needed for date extraction
+      - url: https://energyconsumersaustralia.com.au/news
+        name: Energy Consumers Australia
+        date_resolve_fetches: 5
       # Geoscience Australia: critical minerals, offshore energy, hydrogen geology
       - https://www.ga.gov.au/news-and-media
       # --- CSIRO: GenCost annual report (solar/wind/storage cost projections) ---

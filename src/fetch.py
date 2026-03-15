@@ -621,6 +621,39 @@ def _extract_title_and_date_from_html(html: str) -> Tuple[Optional[str], Optiona
             if published_ts is not None:
                 break
 
+    # Body-text date fallback: some sites (e.g. AEMC) embed no date metadata at all but
+    # display the publish date as visible text immediately after the article headline.
+    # Pattern: "DD Month YYYY" or "Month DD, YYYY" — take the FIRST occurrence in visible text.
+    if published_ts is None:
+        try:
+            _strip_nav_blocks(soup)  # remove nav so event/deadline dates in sidebars don't fire first
+            body_text = soup.get_text(" ", strip=True)
+            body_text = re.sub(r"\s+", " ", body_text)
+            _month_names = (
+                "January|February|March|April|May|June|July|August|September|October|November|December"
+            )
+            # DD Month YYYY
+            m = re.search(
+                rf"\b(\d{{1,2}})\s+({_month_names})\s+(20\d{{2}})\b",
+                body_text,
+            )
+            if m:
+                dt = _parse_dt(f"{m.group(1)} {m.group(2)} {m.group(3)}")
+                if dt:
+                    published_ts = dt.timestamp()
+            if published_ts is None:
+                # Month DD, YYYY
+                m = re.search(
+                    rf"\b({_month_names})\s+(\d{{1,2}}),?\s+(20\d{{2}})\b",
+                    body_text,
+                )
+                if m:
+                    dt = _parse_dt(f"{m.group(1)} {m.group(2)} {m.group(3)}")
+                    if dt:
+                        published_ts = dt.timestamp()
+        except Exception:
+            pass
+
     return title, published_ts
 
 
