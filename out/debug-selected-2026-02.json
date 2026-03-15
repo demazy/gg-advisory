@@ -1,27 +1,35 @@
 [
   {
     "section": "Energy Transition",
+    "title": "Carbon Abatement Schemes Deliver Emissions Reductions Comparable To Year Road Transport",
+    "url": "https://www.cer.gov.au/news-and-media/media/2026/february/carbon-abatement-schemes-deliver-emissions-reductions-comparable-to-year-road-transport",
+    "publisher": "cer.gov.au",
+    "published": "2026-02-01T00:00:00+00:00",
+    "published_ts": 1769904000.0
+  },
+  {
+    "section": "Energy Transition",
+    "title": "Safety Priority Solar Battery Installations Surge",
+    "url": "https://www.cer.gov.au/news-and-media/media/2026/february/safety-priority-solar-battery-installations-surge",
+    "publisher": "cer.gov.au",
+    "published": "2026-02-01T00:00:00+00:00",
+    "published_ts": 1769904000.0
+  },
+  {
+    "section": "Energy Transition",
+    "title": "Transparency Non Negotiable To Protect Integrity Clean Energy Schemes",
+    "url": "https://www.cer.gov.au/news-and-media/media/2026/february/transparency-non-negotiable-to-protect-integrity-clean-energy-schemes",
+    "publisher": "cer.gov.au",
+    "published": "2026-02-01T00:00:00+00:00",
+    "published_ts": 1769904000.0
+  },
+  {
+    "section": "Energy Transition",
     "title": "23 Jan 2026 News Energy Networks Australia welcomes Solar Sharer Offer next steps",
     "url": "https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-solar-sharer-offer-next-steps/",
     "publisher": "energynetworks.com.au",
     "published": "2026-01-23T02:01:04+00:00",
     "published_ts": 1769133664.0
-  },
-  {
-    "section": "ESG Reporting",
-    "title": "Read more about EFRAG releases Draft Comment Letter on IASB´s Proposed amendments to IAS 28 on the Fair Value Option for Investments in Associates and Joint Ventures",
-    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-releases-draft-comment-letter-on-iasbs-proposed-amendments-to-ias-28-on-the-fair-value-option",
-    "publisher": "efrag.org",
-    "published": "2026-02-27T12:00:00+00:00",
-    "published_ts": 1772193600.0
-  },
-  {
-    "section": "ESG Reporting",
-    "title": "Read more about EFRAG issues Endorsement Advice on Amendments to IAS 21",
-    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-issues-endorsement-advice-on-amendments-to-ias-21",
-    "publisher": "efrag.org",
-    "published": "2026-02-27T12:00:00+00:00",
-    "published_ts": 1772193600.0
   },
   {
     "section": "ESG Reporting",
@@ -32,11 +40,59 @@
     "published_ts": 1771588800.0
   },
   {
-    "section": "Sustainable Finance & Investment",
-    "title": "ISSB Update January 2026",
-    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html",
+    "section": "ESG Reporting",
+    "title": "Read more about EFRAG Adds Dutch and Irish to VSME Digital Template & Launches Data Migration Tool",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-adds-dutch-and-irish-to-vsme-digital-template-launches-data-migration-tool",
+    "publisher": "efrag.org",
+    "published": "2026-02-26T12:00:00+00:00",
+    "published_ts": 1772107200.0
+  },
+  {
+    "section": "ESG Reporting",
+    "title": "Read more about EFRAG runs the 20km of Brussels",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-runs-the-20km-of-brussels",
+    "publisher": "efrag.org",
+    "published": "2026-02-18T12:00:00+00:00",
+    "published_ts": 1771416000.0
+  },
+  {
+    "section": "ESG Reporting",
+    "title": "ISSB Update February 2026",
+    "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-february-2026.html",
     "publisher": "ifrs.org",
-    "published": "2026-01-01T00:00:00+00:00",
-    "published_ts": 1767225600.0
+    "published": "2026-02-01T00:00:00+00:00",
+    "published_ts": 1769904000.0
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "Annual Report 2025: Investors’ Progress in a Year of Global Turmoil",
+    "url": "https://igcc.org.au/annual-report-2025-investors-progress-through-a-year-of-global-turmoil/",
+    "publisher": "igcc.org.au",
+    "published": "2026-02-19T00:51:50+00:00",
+    "published_ts": 1771462310.0
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "IGCC’s 2030 Strategy: A Clear Plan For This Decade",
+    "url": "https://igcc.org.au/igcc-2030-strategy/",
+    "publisher": "igcc.org.au",
+    "published": "2026-02-19T05:00:16+00:00",
+    "published_ts": 1771477216.0
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "Submission: Community Benefits Principles for a Future Made in Australia",
+    "url": "https://igcc.org.au/submission-community-benefits-principles-for-fmia/",
+    "publisher": "igcc.org.au",
+    "published": "2026-02-10T02:15:30+00:00",
+    "published_ts": 1770689730.0
+  },
+  {
+    "section": "Sustainable Finance & Investment",
+    "title": "Bulletin",
+    "url": "https://www.rba.gov.au/publications/bulletin/",
+    "publisher": "rba.gov.au",
+    "published": "2026-02-26T00:00:00+00:00",
+    "published_ts": 1772064000.0
   }
 ]

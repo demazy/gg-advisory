@@ -1,47 +1,54 @@
-# Signals Digest — 2026-02
+**Signals Digest — 2026-02**
 
 **Top Lines**
-- Energy Networks Australia supports the Solar Sharer Offer to enhance equity in energy access.
-- EFRAG releases draft comment letters on IASB amendments and GHG Protocol changes.
-- ISSB provides updates on sustainable finance initiatives.
+- CER's carbon abatement schemes reduced emissions by 83.7 million tonnes in 2025.
+- 1,000 solar battery inspections completed; new photo requirements start 1 March 2026.
+- IGCC's 2025 Annual Report highlights a shift to net zero investment practices.
 
 ## Energy Transition
-- **Solar Sharer Offer Welcomed**
-  - PUBLISHED: 2026-01-23
-  - Summary: Energy Networks Australia (ENA) has welcomed the Solar Sharer Offer outcomes paper, emphasizing the need to bridge the energy access gap in Australia. ENA CEO Dom van den Berg highlighted the importance of aligning policy, infrastructure investment, and energy tariffs for the program's success. The initiative aims to assist households without access to solar technology, thereby promoting equity in the clean energy transition.
-  - Why it matters: This initiative addresses energy inequality and aims to enhance access to renewable energy solutions for all Australians.
-  - [Source](https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-solar-sharer-offer-next-steps/)
+**Carbon Abatement Schemes Deliver Major Emissions Reductions**  
+PUBLISHED: 2026-02-01  
+Summary: The Clean Energy Regulator (CER) reported that emissions reductions from the Australian Carbon Credit Unit (ACCU) Scheme and the Renewable Energy Target (RET) reached approximately 83.7 million tonnes of CO2-e in 2025, equivalent to removing all cars and trucks from the road for a year. In 2025, 6.8 GW of renewable energy was added, with 4 GW from large-scale power stations and 2.8 GW from small-scale rooftop solar. ACCU issuances hit a record 21.7 million, with expectations of 22 to 26 million in 2026.  
+Why it matters: CFOs at companies with significant emissions must prepare for increased ACCU demand as baselines decline under the Safeguard Mechanism.
+
+**Safety Priority Solar Battery Installations Surge**  
+PUBLISHED: 2026-02-01  
+Summary: The CER has conducted 1,000 inspections of solar battery installations under the Cheaper Home Batteries Program, ensuring compliance with safety standards. Starting 1 March 2026, installers must provide geotagged and timestamped photos of critical labelling. Nearly 250,000 households have installed solar batteries, contributing around 6 GWh of storage capacity. Demand for installations is expected to rise as discounts change from 1 May 2026.  
+Why it matters: Installers must comply with new photo requirements to avoid delays in small-scale technology certificate claims.
+
+**Transparency Non-Negotiable to Protect Integrity of Clean Energy Schemes**  
+PUBLISHED: 2026-02-01  
+Summary: The CER emphasized the importance of compliance in emissions reduction schemes, warning participants to meet obligations or face enforcement actions. The latest compliance update revealed that 21 projects were removed from the ACCU Scheme for failing to report on time. Facilities under the Safeguard Mechanism must comply with baselines by 31 March 2026 or surrender ACCUs.  
+Why it matters: Boards should ensure compliance with reporting obligations to avoid penalties and maintain program participation.
 
 ## ESG Reporting
-- **EFRAG Draft Comment Letter on IASB Amendments**
-  - PUBLISHED: 2026-02-27
-  - Summary: EFRAG has published a Draft Comment Letter on the IASB's proposed amendments to IAS 28 regarding the Fair Value Option for Investments in Associates and Joint Ventures. Stakeholders are invited to comment by April 7, 2026. EFRAG supports the amendments, which aim to resolve issues related to the classification of entities under IFRS.
-  - Why it matters: The proposed amendments seek to enhance clarity and consistency in financial reporting for investments in associates and joint ventures.
-  - [Source](https://www.efrag.org/en/news-and-calendar/news/efrag-releases-draft-comment-letter-on-iasbs-proposed-amendments-to-ias-28-on-the-fair-value-option)
+**EFRAG Calls for Balanced Approach to GHG Protocol Scope 2 Changes**  
+PUBLISHED: 2026-02-20  
+Summary: EFRAG submitted feedback on proposed changes to the GHG Protocol Scope 2 Guidance, advocating for clarity and proportionality in the consultation process. They stressed the need for a balanced approach to avoid unnecessary complexity and costs, recommending a minimum consultation period of 120 days. EFRAG aims to ensure that changes are implementable across various regulatory contexts.  
+Why it matters: Australian companies must prepare for potential changes in Scope 2 reporting requirements that could impact compliance and disclosure practices.
 
-- **EFRAG Endorsement Advice on IAS 21**
-  - PUBLISHED: 2026-02-27
-  - Summary: EFRAG has submitted its final endorsement advice to the European Commission regarding the proposed EU adoption of amendments to IAS 21, which change translation procedures for entities in hyperinflationary currencies. The amendments aim to improve the relevance and comparability of financial information.
-  - Why it matters: These changes will enhance the accuracy of financial reporting for entities operating in hyperinflationary environments.
-  - [Source](https://www.efrag.org/en/news-and-calendar/news/efrag-issues-endorsement-advice-on-amendments-to-ias-21)
-
-- **EFRAG Calls for GHG Protocol Scope 2 Changes**
-  - PUBLISHED: 2026-02-20
-  - Summary: EFRAG has responded to the Greenhouse Gas Protocol's consultation on proposed changes to Scope 2 Guidance, advocating for a balanced approach that emphasizes clarity and cost-effectiveness. EFRAG supports improved comparability but raises concerns about the complexity of the proposed changes.
-  - Why it matters: The feedback aims to ensure that changes to the GHG Protocol are practical and beneficial for diverse regulatory contexts.
-  - [Source](https://www.efrag.org/en/news-and-calendar/news/efrag-calls-for-balanced-and-cost-effective-approach-to-proposed-ghg-protocol-scope-2-changes)
+**ISSB Update Highlights Key Decisions on Sustainability Standards**  
+PUBLISHED: 2026-02-01  
+Summary: The ISSB met to discuss amendments to IFRS Sustainability Disclosure Standards, tentatively deciding to set an effective date for changes 12–18 months post-issuance. The ISSB aims to enhance alignment with climate-related content in SASB Standards. Stakeholder feedback on the Exposure Draft will be analyzed, with a prospective exposure draft expected in March 2026.  
+Why it matters: CFOs should track the ISSB's timeline for amendments to ensure timely compliance with evolving sustainability disclosure standards.
 
 ## Sustainable Finance & Investment
-- **ISSB Update January 2026**
-  - PUBLISHED: 2026-01-01
-  - Summary: The ISSB provided updates on its initiatives related to sustainable finance and investment, although specific details were not included in the provided text.
-  - Why it matters: Ongoing updates from the ISSB are crucial for stakeholders engaged in sustainable finance, as they reflect the evolving landscape of sustainability reporting standards.
-  - [Source](https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html)
+**Annual Report 2025: Investors’ Progress in a Year of Global Turmoil**  
+PUBLISHED: 2026-02-19  
+Summary: The IGCC's 2025 Annual Report reflects a year of active climate policy engagement amidst global challenges. It highlights the shift from climate ambition to implementation among investors, with a focus on net zero investment practices. The report outlines significant policy advocacy efforts and the establishment of a 2035 emissions reduction target of 62–70%.  
+Why it matters: Institutional investors must align their strategies with the IGCC's findings to effectively manage climate risks and capitalize on emerging opportunities.
 
---- 
+**IGCC’s 2030 Strategy: A Clear Plan For This Decade**  
+PUBLISHED: 2026-02-19  
+Summary: The IGCC has released its Strategy to 2030, focusing on accelerating the energy transition, reducing emissions, and addressing physical climate risks. The strategy emphasizes the importance of aligning fiduciary duties with climate action and aims to mobilize capital for sustainable investments.  
+Why it matters: Investors should integrate IGCC's strategic priorities into their investment frameworks to ensure alignment with long-term climate goals.
+
+---
 **Sources**
-- https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-solar-sharer-offer-next-steps/
-- https://www.efrag.org/en/news-and-calendar/news/efrag-releases-draft-comment-letter-on-iasbs-proposed-amendments-to-ias-28-on-the-fair-value-option
-- https://www.efrag.org/en/news-and-calendar/news/efrag-issues-endorsement-advice-on-amendments-to-ias-21
-- https://www.efrag.org/en/news-and-calendar/news/efrag-calls-for-balanced-and-cost-effective-approach-to-proposed-ghg-protocol-scope-2-changes
-- https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html
+- [Carbon Abatement Schemes Deliver Emissions Reductions Comparable To Year Road Transport](https://www.cer.gov.au/news-and-media/media/2026/february/carbon-abatement-schemes-deliver-emissions-reductions-comparable-to-year-road-transport)
+- [Safety Priority Solar Battery Installations Surge](https://www.cer.gov.au/news-and-media/media/2026/february/safety-priority-solar-battery-installations-surge)
+- [Transparency Non Negotiable To Protect Integrity Clean Energy Schemes](https://www.cer.gov.au/news-and-media/media/2026/february/transparency-non-negotiable-to-protect-integrity-clean-energy-schemes)
+- [EFRAG Calls for Balanced and Cost-Effective Approach to Proposed GHG Protocol Scope 2 Changes](https://www.efrag.org/en/news-and-calendar/news/efrag-calls-for-balanced-and-costeffective-approach-to-proposed-ghg-protocol-scope-2-changes)
+- [ISSB Update February 2026](https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-february-2026.html)
+- [Annual Report 2025: Investors’ Progress in a Year of Global Turmoil](https://igcc.org.au/annual-report-2025-investors-progress-through-a-year-of-global-turmoil/)
+- [IGCC’s 2030 Strategy: A Clear Plan For This Decade](https://igcc.org.au/igcc-2030-strategy/)

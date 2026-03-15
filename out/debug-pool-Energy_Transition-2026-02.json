@@ -1,7 +1,7 @@
 [
   {
-    "url": "https://www.aemc.gov.au/news-centre",
-    "title": "News Centre",
+    "url": "https://www.aemc.gov.au/news-centre/media-releases",
+    "title": "Media Releases",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -9,7 +9,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/about-us/chair-and-commissioners",
@@ -21,7 +21,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/about-us/executive-leadership-team",
@@ -33,7 +33,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/about-us/our-governance",
@@ -45,7 +45,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/about-us/reliability-panel",
@@ -57,7 +57,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/about-us/stakeholder-engagement",
@@ -69,7 +69,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/about-us/mission-and-values",
@@ -81,7 +81,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/about-us/history",
@@ -93,7 +93,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/energy-system/electricity",
@@ -105,7 +105,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/energy-system/energy-system",
@@ -117,7 +117,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/energy-system/retail",
@@ -129,7 +129,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/energy-system/energy-system-0",
@@ -141,7 +141,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/regulation/national-governance",
@@ -153,7 +153,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/regulation/neo",
@@ -165,7 +165,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/regulation/legislation",
@@ -177,7 +177,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/regulation/energy-rules",
@@ -189,7 +189,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/regulation/energy-rules/national-electricity-rules/current",
@@ -201,7 +201,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/regulation/energy-rules/national-gas-rules/current",
@@ -213,7 +213,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/regulation/energy-rules/national-energy-retail-rules/current",
@@ -225,7 +225,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/regulation/electricity-guidelines-and-standards",
@@ -237,7 +237,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/our-work/our-priorities",
@@ -249,7 +249,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/our-work/changing-energy-rules/rule-changes",
@@ -261,7 +261,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/our-work/market-reviews-and-advice",
@@ -273,7 +273,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/our-work/developing-electricity-guidelines-and-standards",
@@ -285,7 +285,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/our-work/changing-energy-rules",
@@ -297,7 +297,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/our-work/research",
@@ -309,7 +309,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/our-work/compensation",
@@ -321,23 +321,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
-  },
-  {
-    "url": "https://www.aemc.gov.au/news-centre/media-releases",
-    "title": "Media Releases >",
-    "summary": "",
-    "source": "aemc.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/speeches",
-    "title": "Speeches >",
+    "title": "Speeches",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -345,11 +333,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/infographics",
-    "title": "Infographics >",
+    "title": "Infographics",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -357,11 +345,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/corporate-publications",
-    "title": "Corporate publications >",
+    "title": "Corporate publications",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -369,11 +357,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/submissions-to-inquiries",
-    "title": "Submissions to Inquiries >",
+    "title": "Submissions to Inquiries",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -381,11 +369,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/perspectives",
-    "title": "Perspectives >",
+    "title": "Perspectives",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -393,11 +381,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/annual-reports",
-    "title": "Annual reports >",
+    "title": "Annual reports",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -405,11 +393,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/data-portal",
-    "title": "Data portal >",
+    "title": "Data portal",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -417,11 +405,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/videos",
-    "title": "View All >",
+    "title": "Videos",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -429,7 +417,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/contact-us/lodge-submission",
@@ -441,7 +429,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/contact-us/propose-rule-change",
@@ -453,7 +441,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/about-us",
@@ -465,7 +453,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/energy-system",
@@ -477,7 +465,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/regulation",
@@ -489,7 +477,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/our-work",
@@ -501,7 +489,19 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre",
+    "title": "News Centre",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/contact-us",
@@ -513,7 +513,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/metering",
@@ -525,7 +525,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/calendar",
@@ -537,11 +537,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/media-releases/faster-renewable-buildout-and-electrification-key-affordable-energy-transition",
-    "title": "Price Trends 2025 report published",
+    "url": "https://www.aemc.gov.au/news-centre/media-releases?title=&items_per_page=10&order=title&sort=asc",
+    "title": "Title",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -549,11 +549,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-makes-final-rule-help-vulnerable-consumers-get-energy-bill-help-they-deserve",
-    "title": "New rules help vulnerable consumers get energy bill help they deserve",
+    "url": "https://www.aemc.gov.au/news-centre/media-releases?title=&items_per_page=10&order=created&sort=asc",
+    "title": "Date Sort ascending",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -561,11 +561,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/speeches/coordinating-transition-lower-household-energy-costs-navigating-known-unknowns",
-    "title": "Access the full speech",
+    "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-proposes-new-grid-standards-data-centre-connections",
+    "title": "AEMC proposes new grid standards for data centre connections",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -573,11 +573,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-delivers-enhanced-consumer-protections-help-customers-find-better-energy-deals",
-    "title": "Enhanced consumer protections",
+    "url": "https://www.aemc.gov.au/rule-changes/improving-nem-access-standards-package-2",
+    "title": "ERC0394",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -585,11 +585,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-finalises-landmark-reform-accelerate-smart-meter-rollout",
-    "title": "Rule to roll out smart meters by 2030",
+    "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-proposes-improvements-life-support-customer-processes",
+    "title": "AEMC proposes improvements to life support customer processes",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -597,11 +597,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-applies-new-emissions-reduction-objective",
-    "title": "Emissions reduction objective",
+    "url": "https://www.aemc.gov.au/rule-changes/improving-life-support-processes",
+    "title": "RRC0064",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -609,7 +609,19 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-updates-market-price-cap-2026-27",
+    "title": "AEMC updates market price cap for 2026-27",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-proposes-clearer-rules-manage-gas-supply-risks-during-australias-energy-transition",
@@ -621,7 +633,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/rule-changes/ecgs-supplier-last-resort-mechanism",
@@ -633,7 +645,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/rule-changes/ecgs-enhancing-reliability-supply-adequacy-arrangements",
@@ -645,11 +657,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-updates-market-price-cap-2026-27",
-    "title": "AEMC proposes clearer rules to manage gas supply risks during Australia's energy transition",
+    "url": "https://www.aemc.gov.au/news-centre/media-releases/new-version-242-and-243-national-elevtricity-rules",
+    "title": "New Version 242 and 243 of the National Elevtricity Rules",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -657,11 +669,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-undertake-critical-review-reconsider-role-electricity-networks-transition",
-    "title": "AEMC to undertake critical review to reconsider the role of electricity networks in the transition",
+    "url": "https://www.aemc.gov.au/rule-changes/integrating-price-responsive-resources-nem",
+    "title": "ERC0352",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -669,23 +681,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
-  },
-  {
-    "url": "https://www.aemc.gov.au/market-reviews-advice/electricity-network-regulation-review",
-    "title": "EPR0106",
-    "summary": "",
-    "source": "aemc.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/media-releases/aemcs-final-rule-gives-consumers-smarter-data-options",
-    "title": "AEMC to undertake critical review to reconsider the role of electricity networks in the transition",
+    "title": "AEMC’s final rule gives consumers smarter data options",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -693,7 +693,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/rule-changes/real-time-data-consumers",
@@ -705,7 +705,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/rule-changes/real-time-data-consumers-retail",
@@ -717,11 +717,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/charging-ahead-residential-batteries-are-growing-popularity-and-profitability",
-    "title": "Charging ahead: Residential batteries are growing in popularity and profitability",
+    "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-undertake-critical-review-reconsider-role-electricity-networks-transition",
+    "title": "AEMC to undertake critical review to reconsider the role of electricity networks in the transition",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -729,11 +729,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/energeia-finds-cer-flexibility-could-deliver-45b-benefits-2050",
-    "title": "Charging ahead: Residential batteries are growing in popularity and profitability",
+    "url": "https://www.aemc.gov.au/market-reviews-advice/electricity-network-regulation-review",
+    "title": "EPR0106",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -741,11 +741,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/ess-system-security-update-aemc-reform-work-program",
-    "title": "Energeia finds that CER flexibility could deliver $45B in benefits by 2050",
+    "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-starts-consultation-isp-review",
+    "title": "AEMC starts consultation on the ISP Review",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -753,11 +753,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/you-can-be-anything-barbies-power-quest",
-    "title": "ESS & system security - An update on AEMC reform work program",
+    "url": "https://www.aemc.gov.au/market-reviews-advice/review-integrated-system-plan-framework",
+    "title": "​​EPR0092​",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -765,11 +765,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/sites/default/files/2023-05/EPR0087%20-%20final%20-%20infographic.pdf",
-    "title": "Making transmission investment and delivery more timely and efficient – to enable the transition to net zero",
+    "url": "https://www.aemc.gov.au/news-centre/media-releases/electricity-pricing-reforms-target-fairness-lower-costs",
+    "title": "Electricity pricing reforms target fairness, lower costs",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -777,11 +777,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/market-reviews-advice/transmission-planning-and-investment-review",
-    "title": "EPR0087",
+    "url": "https://www.aemc.gov.au/market-reviews-advice/pricing-review-electricity-pricing-consumer-driven-future",
+    "title": "​​EPR0097​",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -789,11 +789,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/sites/default/files/2023-08/emo0040_-aemc_metering_services_infographic.pdf",
-    "title": "Making transmission investment and delivery more timely and efficient – to enable the transition to net zero",
+    "url": "https://www.aemc.gov.au/news-centre/media-releases/reliability-panel-delivers-final-recommendations-strengthen-system-restart-preparedness",
+    "title": "Reliability Panel delivers final recommendations to strengthen System Restart Preparedness",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -801,11 +801,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/sites/default/files/2022-10/EPR0087-%20Final%20report%20-%20stage%202%20-%20infographic.pdf",
-    "title": "Improving certainty to enable the transmission needed for net zero",
+    "url": "https://www.aemc.gov.au/market-reviews-advice/review-system-restart-standard-0",
+    "title": "REL0091",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -813,19 +813,7 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
-  },
-  {
-    "url": "https://www.aemc.gov.au/sites/default/files/2021-11/4145_AEMC-Price-Trends-2021_National%20A_v4.pdf",
-    "title": "Improving certainty to enable the transmission needed for net zero",
-    "summary": "",
-    "source": "aemc.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/speeches/energy-security-keeping-lights-through-energy-transition-qld",
@@ -837,22 +825,10 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
     "url": "https://www.aemc.gov.au/news-centre/speeches/energy-security-keeping-lights-through-energy-transition-nsw",
-    "title": "Energy security: Keeping the lights on through the energy transition (QLD)",
-    "summary": "",
-    "source": "aemc.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
-  },
-  {
-    "url": "https://www.aemc.gov.au/news-centre/speeches/watts-ahead-understanding-future-behind-bill",
     "title": "Energy security: Keeping the lights on through the energy transition (NSW)",
     "summary": "",
     "source": "aemc.gov.au",
@@ -861,10 +837,10 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/speeches/energy-revolution-our-homes",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/watts-ahead-understanding-future-behind-bill",
     "title": "Watt's ahead: Understanding the future behind the bill",
     "summary": "",
     "source": "aemc.gov.au",
@@ -873,11 +849,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/infographics/smart-meters-are-key-enabler-transition-net-zero",
-    "title": "Infographic | Improving certainty to enable the transmission needed for net zero",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/energy-revolution-our-homes",
+    "title": "The energy revolution in our homes",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -885,11 +861,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/infographics/improving-certainty-enable-transmission-needed-net-zero",
-    "title": "Infographic | Improving certainty to enable the transmission needed for net zero",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/aemcs-20th-anniversary",
+    "title": "AEMC's 20th anniversary",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -897,11 +873,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/videos/reconciliation-action-plan",
-    "title": "Reconciliation action plan",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/navigating-dual-trends-power-systems",
+    "title": "Navigating dual trends in power systems",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -909,11 +885,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/videos/making-solar-batteries-and-new-energy-technology-work-everyone",
-    "title": "Making solar, batteries and new energy technology work for everyone",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/navigating-energy-trilemma-challenges-and-opportunities-transitioning-low-carbon-energy-future",
+    "title": "Navigating the Energy Trilemma – Challenges and Opportunities Transitioning to a Low-Carbon Energy Future",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -921,11 +897,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/videos/better-way-read-rules",
-    "title": "Making solar, batteries and new energy technology work for everyone",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/powering-transition",
+    "title": "Powering the transition",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -933,11 +909,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/submissions-to-enquiry",
-    "title": "View All >",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/bird-who-feasts-knowledge",
+    "title": "The bird who feasts on knowledge",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -945,11 +921,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/sites/default/files/2025-09/2025.09.17%20-%20AEMC%20submission%20to%20the%20NEM%20review%20draft%20report_final.pdf",
-    "title": "Submission to the National Electricity Market wholesale market settings review draft report",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/recommending-pricing-reforms-necessary-deliver-needs-future-consumers",
+    "title": "Recommending the pricing reforms necessary to deliver for the needs of future consumers",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -957,11 +933,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/market-reviews-advice/future-wholesale-market",
-    "title": "​​EPR0093​",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/coordinating-transition-lower-household-energy-costs-navigating-known-unknowns",
+    "title": "Coordinating the transition to lower household energy costs – navigating the known unknowns",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -969,11 +945,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/sites/default/files/2025-09/AEMC%20submission%20to%20PC%20interim%20report%20-%2015%20Sept%202025.pdf",
-    "title": "Submission to Productivity Commission - Cheaper, cleaner energy and the net zero transformation – Interim report",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/practical-approaches-rez-and-nem-decisions-during-energy-transition",
+    "title": "Practical approaches – REZ and NEM decisions during the energy transition",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -981,11 +957,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/sites/default/files/2025-08/AEMC%20submission%20to%20the%20CCA%202025%20Issues%20Paper.pdf",
-    "title": "Submission to Productivity Commission - Cheaper, cleaner energy and the net zero transformation – Interim report",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/energy-security-transition",
+    "title": "Energy security in the transition",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -993,11 +969,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/sites/default/files/2025-08/20250725%20AEMC%20-%20Submission%20in%20response%20to%20the%20NSW%20Transmission%20Planning%20Review%20Interim%20Report.pdf",
-    "title": "AEMC submission to the NSW Transmission Planning Review – Interim report",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/navigating-uncertainties-and-capitalising-opportunities-rapidly-transforming-electricity-market",
+    "title": "Navigating uncertainties and capitalising on opportunities in a rapidly transforming electricity market",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1005,11 +981,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/sites/default/files/2025-11/2024-25%20AEMC%20Annual%20Report%20final_0.pdf",
-    "title": "AEMC Annual Report 2024-2025",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/beyond-here-there-be-batteries",
+    "title": "Beyond here, there be batteries",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1017,11 +993,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/sites/default/files/2024-12/AEMC_annual_report_2023-24.pdf",
-    "title": "AEMC Annual Report 2023-2024",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/strengthening-australias-energy-renewables-workforce-challenges-opportunities-changing-status-quo",
+    "title": "Strengthening Australia’s energy & renewables workforce: challenges, opportunities & changing the status quo",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1029,11 +1005,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/sites/default/files/2023-12/AEMC_annual_report_2022-23_web_v2.pdf",
-    "title": "AEMC Annual Report 2022-2023",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/keynote-supporting-consumers-journey-net-zero-no-hero-walks-alone",
+    "title": "Keynote: Supporting consumers’ journey to net zero: no hero walks alone",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1041,11 +1017,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/sites/default/files/2022-12/AEMC%20Annual%20Report%202021%20-%202022.pdf",
-    "title": "AEMC Annual Report 2021-2022",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/delivering-consumer-value-at-pace",
+    "title": "Delivering consumer value at pace",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1053,11 +1029,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/corporate-publications/rule-drafting-philosophy",
-    "title": "Rule drafting philosophy",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/consumers-hero-road-net-zero",
+    "title": "Consumers the hero on the road to net zero",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1065,11 +1041,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/corporate-publications/prioritisation-regulatory-initiatives-stakeholder-consultation",
-    "title": "Prioritisation of regulatory initiatives – stakeholder consultation",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/networks-supporting-future-energy-system",
+    "title": "Networks supporting the future energy system",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1077,11 +1053,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/corporate-publications/joint-market-body-prioritisation-framework",
-    "title": "Joint market body prioritisation framework",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/criticial-regulatory-reforms-affecting-wind-energy-projects",
+    "title": "Criticial regulatory reforms affecting wind energy projects",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1089,11 +1065,11 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/corporate-publications/prioritising-implementation-timeframes-more-detailed-view",
-    "title": "Prioritising implementation timeframes - a more detailed view",
+    "url": "https://www.aemc.gov.au/news-centre/speeches/solving-energy-puzzle-together",
+    "title": "Solving the energy puzzle, together",
     "summary": "",
     "source": "aemc.gov.au",
     "section": "Energy Transition",
@@ -1101,7 +1077,187 @@
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre"
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre/speeches/helping-us-help-you-opportunities-large-energy-users-transformation",
+    "title": "Helping us to help you: opportunities for large energy users in the transformation",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre/speeches/imagination-meets-opportunity-thinking-differently-about-building-our-energy-future",
+    "title": "Imagination meets opportunity – thinking differently about building our energy future",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre/speeches/women-energy-targets-and-transformation",
+    "title": "Women in Energy: Targets and transformation",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre/speeches/energy-storage-systems-and-nem",
+    "title": "Energy storage systems and the NEM",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre/speeches/smarter-faster-better-consumers",
+    "title": "Smarter, faster, better for consumers",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre/speeches/benn-barr-ce-state-energy-research-conference-erica",
+    "title": "Benn Barr, CE at State of Energy Research Conference ERICA",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre/speeches/empowering-consumer-net-zero-world",
+    "title": "Empowering the consumer for a net zero world",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre/speeches/developing-hydrogen-nem",
+    "title": "Developing hydrogen in the NEM",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre/speeches/implementing-esbs-post-2025-market-design-reforms",
+    "title": "Implementing the ESB’s post-2025 market design reforms",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre/speeches/hydrogen-and-enabling-innovation",
+    "title": "Hydrogen and enabling innovation",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre/speeches/aemc-update-approaches-managing-energy-transition-opening-keynote",
+    "title": "An AEMC update on approaches to managing the energy transition: Opening Keynote",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre/speeches/looking-back-now-viewing-energy-transition-through-future-lens",
+    "title": "Looking back at now: viewing the energy transition through a future lens",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre/speeches/australian-energy-week-keynote-speech",
+    "title": "Australian Energy Week: Keynote Speech",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre/speeches/renewable-energy-integration-our-national-electricity-market",
+    "title": "Renewable energy integration in our national electricity market",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
+  },
+  {
+    "url": "https://www.aemc.gov.au/news-centre/speeches/perspective-australias-microeconomic-reform-journey",
+    "title": "A perspective on Australia's microeconomic reform journey",
+    "summary": "",
+    "source": "aemc.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news",
@@ -1128,8 +1284,44 @@
     "index_url": "https://www.cer.gov.au/news-and-media/news"
   },
   {
+    "url": "https://www.cer.gov.au/news-and-media/news/2026/march/phenix-tradings-registration-permanently-suspended",
+    "title": "Phenix Tradings Registration Permanently Suspended",
+    "summary": "",
+    "source": "cer.gov.au",
+    "section": "Energy Transition",
+    "published_iso": "2026-03-01T00:00:00+00:00",
+    "published_ts": 1772323200.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
+    "index_url": "https://www.cer.gov.au/news-and-media/news"
+  },
+  {
+    "url": "https://www.cer.gov.au/news-and-media/news/2026/march/identity-verification-made-simpler-scheme-participants",
+    "title": "Identity Verification Made Simpler Scheme Participants",
+    "summary": "",
+    "source": "cer.gov.au",
+    "section": "Energy Transition",
+    "published_iso": "2026-03-01T00:00:00+00:00",
+    "published_ts": 1772323200.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
+    "index_url": "https://www.cer.gov.au/news-and-media/news"
+  },
+  {
+    "url": "https://www.cer.gov.au/news-and-media/news/2026/march/new-solar-battery-photo-requirements-now-place",
+    "title": "New Solar Battery Photo Requirements Now Place",
+    "summary": "",
+    "source": "cer.gov.au",
+    "section": "Energy Transition",
+    "published_iso": "2026-03-01T00:00:00+00:00",
+    "published_ts": 1772323200.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
+    "index_url": "https://www.cer.gov.au/news-and-media/news"
+  },
+  {
     "url": "https://www.cer.gov.au/news-and-media/news/2026/february/2024-25-national-greenhouse-and-energy-reporting-data-now-available",
-    "title": "Read more",
+    "title": "2024 25 National Greenhouse And Energy Reporting Data Now Available",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1141,7 +1333,7 @@
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news/2026/february/changes-to-rebate-solar-batteries-1-may",
-    "title": "Read more",
+    "title": "Changes To Rebate Solar Batteries 1 May",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1153,7 +1345,7 @@
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news/2026/january/explore-q4-2025-qcmr-data-workbook",
-    "title": "Read more",
+    "title": "Explore Q4 2025 Qcmr Data Workbook",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1165,7 +1357,7 @@
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news/2025/december/fifth-independent-review-hir-gateway-checks",
-    "title": "Read more",
+    "title": "Fifth Independent Review Hir Gateway Checks",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1177,7 +1369,7 @@
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news/2025/december/changes-to-cheaper-home-batteries-program",
-    "title": "Read more",
+    "title": "Changes To Cheaper Home Batteries Program",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1189,7 +1381,7 @@
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news/2025/december/register-solar-water-heaters-version-56-now-available",
-    "title": "Read more",
+    "title": "Register Solar Water Heaters Version 56 Now Available",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1200,40 +1392,136 @@
     "index_url": "https://www.cer.gov.au/news-and-media/news"
   },
   {
-    "url": "https://www.cer.gov.au/news-and-media/news/2025/december/fixed-delivery-exit-arrangement-now-permanent",
-    "title": "Read more",
+    "url": "https://www.cer.gov.au/news-and-media/media-centre",
+    "title": "media centre",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
-    "published_iso": "2025-12-01T00:00:00+00:00",
-    "published_ts": 1764547200.0,
-    "published_source": "url",
-    "published_confidence": 0.35,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.cer.gov.au/news-and-media/media-centre/media-releases"
   },
   {
-    "url": "https://www.cer.gov.au/news-and-media/news/2025/december/market-update-fixed-delivery-exit-arrangement",
-    "title": "Read more",
+    "url": "https://www.cer.gov.au/news-and-media/media/2026/february/carbon-abatement-schemes-deliver-emissions-reductions-comparable-to-year-road-transport",
+    "title": "Carbon Abatement Schemes Deliver Emissions Reductions Comparable To Year Road Transport",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
-    "published_iso": "2025-12-01T00:00:00+00:00",
-    "published_ts": 1764547200.0,
+    "published_iso": "2026-02-01T00:00:00+00:00",
+    "published_ts": 1769904000.0,
     "published_source": "url",
     "published_confidence": 0.35,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
+    "index_url": "https://www.cer.gov.au/news-and-media/media-centre/media-releases"
   },
   {
-    "url": "https://www.cer.gov.au/news-and-media/news/2025/december/renewable-energy-target-enforcement-action-against-mojo-power-east",
-    "title": "Read more",
+    "url": "https://www.cer.gov.au/news-and-media/media/2026/february/safety-priority-solar-battery-installations-surge",
+    "title": "Safety Priority Solar Battery Installations Surge",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
-    "published_iso": "2025-12-01T00:00:00+00:00",
-    "published_ts": 1764547200.0,
+    "published_iso": "2026-02-01T00:00:00+00:00",
+    "published_ts": 1769904000.0,
     "published_source": "url",
     "published_confidence": 0.35,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
+    "index_url": "https://www.cer.gov.au/news-and-media/media-centre/media-releases"
+  },
+  {
+    "url": "https://www.cer.gov.au/news-and-media/media/2026/february/transparency-non-negotiable-to-protect-integrity-clean-energy-schemes",
+    "title": "Transparency Non Negotiable To Protect Integrity Clean Energy Schemes",
+    "summary": "",
+    "source": "cer.gov.au",
+    "section": "Energy Transition",
+    "published_iso": "2026-02-01T00:00:00+00:00",
+    "published_ts": 1769904000.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
+    "index_url": "https://www.cer.gov.au/news-and-media/media-centre/media-releases"
+  },
+  {
+    "url": "https://www.cer.gov.au/news-and-media/media/2025/november/carbon-markets-continue-to-support-australias-climate-change-goals",
+    "title": "Carbon Markets Continue To Support Australias Climate Change Goals",
+    "summary": "",
+    "source": "cer.gov.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-11-01T00:00:00+00:00",
+    "published_ts": 1761955200.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
+    "index_url": "https://www.cer.gov.au/news-and-media/media-centre/media-releases"
+  },
+  {
+    "url": "https://www.cer.gov.au/news-and-media/media/2025/november/guarantee-origin-launched-to-drive-climate-friendly-industries",
+    "title": "Guarantee Origin Launched To Drive Climate Friendly Industries",
+    "summary": "",
+    "source": "cer.gov.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-11-01T00:00:00+00:00",
+    "published_ts": 1761955200.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
+    "index_url": "https://www.cer.gov.au/news-and-media/media-centre/media-releases"
+  },
+  {
+    "url": "https://www.cer.gov.au/news-and-media/media/2025/november/first-accu-issuance-carbon-capture-and-storage-project",
+    "title": "First Accu Issuance Carbon Capture And Storage Project",
+    "summary": "",
+    "source": "cer.gov.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-11-01T00:00:00+00:00",
+    "published_ts": 1761955200.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
+    "index_url": "https://www.cer.gov.au/news-and-media/media-centre/media-releases"
+  },
+  {
+    "url": "https://www.cer.gov.au/news-and-media/media/2025/september/cheaper-home-batteries-surpass-australias-biggest-battery",
+    "title": "Cheaper Home Batteries Surpass Australias Biggest Battery",
+    "summary": "",
+    "source": "cer.gov.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-09-01T00:00:00+00:00",
+    "published_ts": 1756684800.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
+    "index_url": "https://www.cer.gov.au/news-and-media/media-centre/media-releases"
+  },
+  {
+    "url": "https://www.cer.gov.au/news-and-media/media/2025/august/strong-solar-battery-uptake-first-month",
+    "title": "Strong Solar Battery Uptake First Month",
+    "summary": "",
+    "source": "cer.gov.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-08-01T00:00:00+00:00",
+    "published_ts": 1754006400.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
+    "index_url": "https://www.cer.gov.au/news-and-media/media-centre/media-releases"
+  },
+  {
+    "url": "https://www.cer.gov.au/news-and-media/media/2025/june/strong-year-expected-carbon-markets",
+    "title": "Strong Year Expected Carbon Markets",
+    "summary": "",
+    "source": "cer.gov.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-06-01T00:00:00+00:00",
+    "published_ts": 1748736000.0,
+    "published_source": "url",
+    "published_confidence": 0.35,
+    "index_url": "https://www.cer.gov.au/news-and-media/media-centre/media-releases"
+  },
+  {
+    "url": "https://www.cer.gov.au/news-and-media",
+    "title": "News and media",
+    "summary": "",
+    "source": "cer.gov.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.cer.gov.au/news-and-media/media-centre/media-releases"
   },
   {
     "url": "https://arena.gov.au/news/",
@@ -1426,5 +1714,701 @@
     "published_source": "meta",
     "published_confidence": 0.75,
     "index_url": "https://www.energynetworks.com.au/news/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/resources/",
+    "title": "Resources",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/guidelines/",
+    "title": "Guidelines",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/15031/",
+    "title": "4 Dec 2025 Media releases Dom van den Berg, Chief Executive Energy Networks Australia responds to AEMC’s residential price outlook",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-12-04T04:00:40+00:00",
+    "published_ts": 1764820840.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-new-chair-and-board-directors/",
+    "title": "5 Nov 2025 News Energy Networks Australia welcomes new Chair and Board Directors",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-11-05T00:31:00+00:00",
+    "published_ts": 1762302660.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/ena-welcomes-establishment-of-national-energy-cybersecurity-body-nepki/",
+    "title": "1 Oct 2025 Media releases ENA welcomes establishment of national energy cybersecurity body (NEPKI)",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-10-01T05:17:16+00:00",
+    "published_ts": 1759295836.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/ena-statement-on-2035-emissions-reduction-target/",
+    "title": "18 Sep 2025 Media releases ENA statement on 2035 emissions reduction target",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-09-18T03:19:14+00:00",
+    "published_ts": 1758165554.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/energy-networks-awards-honour-outstanding-sector-contributions/",
+    "title": "12 Sep 2025 Media releases Energy networks awards honour outstanding sector contributions",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-09-12T02:11:26+00:00",
+    "published_ts": 1757643086.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/ausgrid-wins-2025-energy-networks-consumer-engagement-award/",
+    "title": "12 Sep 2025 Media releases Ausgrid wins 2025 Energy Networks Consumer Engagement Award",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-09-12T01:37:42+00:00",
+    "published_ts": 1757641062.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/finalists-announced-fro-2025-energy-networks-awards/",
+    "title": "20 Aug 2025 Media releases Finalists announced for 2025 Energy Networks Awards",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-08-19T23:06:15+00:00",
+    "published_ts": 1755644775.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/biomethane-breakthrough-turning-waste-into-energy-new-report-calls-for-biomethane-expansion/",
+    "title": "31 Jul 2025 Media releases Biomethane breakthrough: Turning waste into energy, new report calls for biomethane expansion",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-07-30T23:03:44+00:00",
+    "published_ts": 1753916624.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-statement-from-ceo-on-victorian-energy-policy/",
+    "title": "24 Jun 2025 Media releases Energy Networks Australia – Statement from CEO on Victorian energy policy",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-06-24T03:23:43+00:00",
+    "published_ts": 1750735423.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/russell-pendlebury-appointed-ena-general-manager-economic-regulation/",
+    "title": "19 May 2025 Media releases Russell Pendlebury Appointed ENA General Manager – Economic Regulation",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-05-19T03:54:49+00:00",
+    "published_ts": 1747626889.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/ena-welcomes-government-re-election-calls-for-continued-focus-on-energy-transition/",
+    "title": "13 May 2025 Media releases ENA welcomes Government re-election, calls for continued focus on energy transition",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-05-13T02:20:24+00:00",
+    "published_ts": 1747102824.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/energy-networks-election-wish-list-includes-calls-to-remove-tax-on-landholders/",
+    "title": "16 Apr 2025 Media releases Energy Networks’ election wish list includes call to remove landholder tax",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-04-15T20:00:59+00:00",
+    "published_ts": 1744747259.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/the-hidden-cost-of-forced-electrification-in-victoria/",
+    "title": "27 Feb 2025 Media releases The hidden cost of forced electrification in Victoria",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2025-02-26T20:00:59+00:00",
+    "published_ts": 1740600059.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/victorian-governments-electrification-plan-risks-higher-costs-and-grid-strain/",
+    "title": "13 Dec 2024 Media releases Victorian Government’s electrification plan risks higher costs and grid strain",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2024-12-13T01:33:53+00:00",
+    "published_ts": 1734053633.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/two-new-board-appointments-for-energy-networks-australia/",
+    "title": "2 Dec 2024 Media releases Two new board appointments for Energy Networks Australia",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2024-12-02T03:07:38+00:00",
+    "published_ts": 1733108858.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/climate-change-authority-acknowledge-the-power-of-the-distribution-grid/",
+    "title": "28 Nov 2024 Media releases Climate Change Authority acknowledge the power of the distribution grid",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2024-11-27T22:14:06+00:00",
+    "published_ts": 1732745646.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/dana-boxall-of-powerlink-wins-inaugural-women-in-networks-award/",
+    "title": "20 Sep 2024 Media releases Dana Boxall of Powerlink wins inaugural Women in Networks Award",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2024-09-20T00:40:14+00:00",
+    "published_ts": 1726792814.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/endeavour-energy-wins-energy-networks-consumer-engagement-award/",
+    "title": "20 Sep 2024 Media releases Endeavour Energy wins Energy Networks Consumer Engagement Award",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2024-09-20T00:38:29+00:00",
+    "published_ts": 1726792709.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/electranet-wins-energy-networks-industry-innovation-award/",
+    "title": "20 Sep 2024 Media releases ElectraNet wins Energy Networks Industry Innovation Award",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2024-09-20T00:38:23+00:00",
+    "published_ts": 1726792703.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/sa-power-networks-james-brown-wins-energy-networks-individual-contribution-award/",
+    "title": "20 Sep 2024 Media releases SA Power Networks’ James Brown wins Energy Networks Individual Contribution Award",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2024-09-20T00:37:28+00:00",
+    "published_ts": 1726792648.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/ena-welcomes-nsw-consumer-energy-strategy/",
+    "title": "16 Sep 2024 Media releases ENA welcomes NSW Consumer Energy Strategy",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2024-09-16T06:16:41+00:00",
+    "published_ts": 1726467401.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/the-time-is-now-to-get-smarter-with-the-local-grid/",
+    "title": "6 Aug 2024 Media releases The time is now to get smarter with the local grid",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2024-08-05T20:00:42+00:00",
+    "published_ts": 1722888042.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/renewable-gas-for-a-future-made-in-australia/",
+    "title": "15 Jul 2024 Media releases Renewable gas for a future made in Australia",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2024-07-15T02:19:10+00:00",
+    "published_ts": 1721009950.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/energy-networks-australia-ceo-response-to-2024-isp/",
+    "title": "26 Jun 2024 News Energy Networks Australia CEO response to 2024 ISP",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2024-06-25T23:40:47+00:00",
+    "published_ts": 1719358847.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/ena-response-to-2024-25-final-dmo-decision/",
+    "title": "23 May 2024 News Energy Networks Australia response to 2024-25 final DMO decision",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2024-05-22T23:30:06+00:00",
+    "published_ts": 1716420606.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/all-pathways-lead-to-renewable-gas-for-australian-industry/",
+    "title": "30 Apr 2024 News All pathways lead to renewable gas for Australian industry",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2024-04-29T23:43:26+00:00",
+    "published_ts": 1714434206.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/new-award-to-spotlight-role-of-women-in-energy/",
+    "title": "8 Mar 2024 Media releases New award to spotlight role of women in energy",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2024-03-07T22:14:15+00:00",
+    "published_ts": 1709849655.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ena-welcomes-the-australian-energy-market-operators-aemo-draft-2024-integrated-system-plan-isp/",
+    "title": "18 Dec 2023 Media releases Energy Networks Australia (ENA) welcomes the Australian Energy Market Operator’s (AEMO) Draft 2024 Integrated System Plan (ISP)",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-12-17T21:17:15+00:00",
+    "published_ts": 1702847835.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ceo-dom-van-den-bergs-statement-on-victorian-gas-substitution-roadmap/",
+    "title": "15 Dec 2023 Media releases Energy Networks Australia CEO Dom van den Berg’s statement on Victorian Gas Substitution Roadmap",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-12-14T21:35:40+00:00",
+    "published_ts": 1702589740.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/ena-joins-industry-and-government-partnership-to-secure-financial-counselling-services/",
+    "title": "22 Nov 2023 Media releases ENA joins industry and government partnership to secure financial counselling services",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-11-22T02:55:09+00:00",
+    "published_ts": 1700621709.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/flawed-super-profits-claims-are-misleading/",
+    "title": "22 Nov 2023 Media releases Flawed ‘Super Profits’ claims are misleading",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-11-21T21:45:21+00:00",
+    "published_ts": 1700603121.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/2023-industry-innovation-award-winner-announced/",
+    "title": "19 Sep 2023 Media releases 2023 Industry Innovation Award winner announced",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-09-18T22:40:10+00:00",
+    "published_ts": 1695076810.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/2023-consumer-engagement-award-winners-announced/",
+    "title": "19 Sep 2023 Media releases 2023 Consumer Engagement Award winners announced",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-09-18T22:27:12+00:00",
+    "published_ts": 1695076032.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/aemcs-metering-review-puts-customers-at-the-centre-of-the-transition/",
+    "title": "30 Aug 2023 Media releases AEMC’s metering review puts customers at the centre of the transition",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-08-29T23:14:31+00:00",
+    "published_ts": 1693350871.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/energy-networks-thanks-frank-tudor/",
+    "title": "25 Aug 2023 Media releases Energy Networks thanks Frank Tudor",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-08-24T22:41:28+00:00",
+    "published_ts": 1692916888.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/consumer-engagement-awards-shortlist-announced/",
+    "title": "18 Aug 2023 Media releases Consumer engagement awards shortlist announced",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-08-17T23:38:27+00:00",
+    "published_ts": 1692315507.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/innovation-shortlist-announced-for-industry-awards/",
+    "title": "18 Aug 2023 Media releases Innovation shortlist announced for industry awards",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-08-17T23:25:55+00:00",
+    "published_ts": 1692314755.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/industry-calls-for-policy-consultation/",
+    "title": "28 Jul 2023 Media releases Industry calls for policy consultation",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-07-28T04:01:09+00:00",
+    "published_ts": 1690516869.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/reliability-and-service-top-performers/",
+    "title": "7 Jul 2023 Media releases Reliability and service top performers",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-07-07T02:01:57+00:00",
+    "published_ts": 1688695317.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/fast-tracked-vni-west-is-vital-for-energy-transition/",
+    "title": "29 May 2023 Media releases Fast tracked VNI West is vital for energy transition",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-05-29T01:05:41+00:00",
+    "published_ts": 1685322341.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/energy-bill-relief-and-budget-initiatives-welcomed-by-energy-networks/",
+    "title": "10 May 2023 News Energy bill relief and budget initiatives welcomed by energy networks",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-05-09T23:39:25+00:00",
+    "published_ts": 1683675565.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/electricity-networks-to-fuel-new-wave-of-electric-vehicles-in-australia/",
+    "title": "19 Apr 2023 Media releases Electricity networks to ‘fuel’ new wave of electric vehicles in Australia",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-04-18T23:56:31+00:00",
+    "published_ts": 1681862191.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/renewable-gas-target-could-supercharge-hydrogen/",
+    "title": "13 Apr 2023 Media releases Renewable gas target could supercharge hydrogen",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-04-13T02:17:16+00:00",
+    "published_ts": 1681352236.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ceo-appointment/",
+    "title": "17 Mar 2023 Media releases Energy Networks Australia CEO appointment",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-03-17T00:14:38+00:00",
+    "published_ts": 1679012078.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/community-infrastructure-payments-welcomed/",
+    "title": "24 Feb 2023 Media releases Community infrastructure payments welcomed",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-02-24T00:52:09+00:00",
+    "published_ts": 1677199929.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/the-test-of-rate-of-return-ruling-will-be-its-impact-on-investment/",
+    "title": "24 Feb 2023 Media releases The test of rate of return ruling will be its impact on investment",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-02-23T23:22:14+00:00",
+    "published_ts": 1677194534.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/report-highlights-the-future-of-gas-in-australia/",
+    "title": "2 Feb 2023 Media releases Report highlights the future of gas in Australia",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-02-02T00:47:14+00:00",
+    "published_ts": 1675298834.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/the-challenge-of-extreme-weather-and-maintaining-power-supply/",
+    "title": "12 Jan 2023 Media releases The challenge of extreme weather and maintaining power supply",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2023-01-11T22:14:55+00:00",
+    "published_ts": 1673475295.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/industry-welcomes-vital-transmission-infrastructure-funding/",
+    "title": "21 Dec 2022 Media releases Industry welcomes vital transmission infrastructure funding",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2022-12-21T00:52:23+00:00",
+    "published_ts": 1671583943.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/network-productivity-continues-to-increase/",
+    "title": "1 Dec 2022 Media releases Network productivity continues to increase",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2022-12-01T01:12:05+00:00",
+    "published_ts": 1669857125.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/how-to-make-electric-vehicles-and-the-power-grid-work-new-report/",
+    "title": "10 Nov 2022 Media releases How to make electric vehicles and the power grid work: New report",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2022-11-09T21:43:49+00:00",
+    "published_ts": 1668030229.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/accelerated-smart-meter-rollout-to-benefit-consumers/",
+    "title": "3 Nov 2022 Media releases Accelerated smart meter rollout to benefit consumers",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2022-11-02T21:15:02+00:00",
+    "published_ts": 1667423702.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/benefit-payments-for-nsw-landowners-welcomed/",
+    "title": "25 Oct 2022 Media releases Benefit payments for NSW landowners welcomed",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2022-10-24T23:52:50+00:00",
+    "published_ts": 1666655570.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/industry-welcomes-transmission-investment/",
+    "title": "19 Oct 2022 Media releases Industry welcomes transmission investment",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2022-10-18T22:10:08+00:00",
+    "published_ts": 1666131008.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/misguided-report-needs-fact-check-network-prices-lowest-in-10-years/",
+    "title": "5 Oct 2022 Media releases Misguided report needs fact check-network prices lowest in 10 years",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2022-10-05T03:19:26+00:00",
+    "published_ts": 1664939966.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
+  },
+  {
+    "url": "https://www.energynetworks.com.au/news/media-releases/stable-regulation-essential-to-deliver-energy-transition/",
+    "title": "29 Sep 2022 Media releases Stable regulation essential to deliver energy transition",
+    "summary": "",
+    "source": "energynetworks.com.au",
+    "section": "Energy Transition",
+    "published_iso": "2022-09-29T02:42:04+00:00",
+    "published_ts": 1664419324.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
   }
 ]
