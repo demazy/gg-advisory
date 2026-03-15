@@ -109,7 +109,7 @@ undated	https://www.cer.gov.au/news-and-media/media-centre/media-releases	media 
 out_of_range	https://www.cer.gov.au/news-and-media/news/2026/january/explore-q4-2025-qcmr-data-workbook	Explore Q4 2025 Qcmr Data Workbook
 out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fifth-independent-review-hir-gateway-checks	Fifth Independent Review Hir Gateway Checks
 out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/changes-to-cheaper-home-batteries-program	Changes To Cheaper Home Batteries Program
-deny_title_regex	https://www.cer.gov.au/news-and-media/news/2025/december/register-solar-water-heaters-version-56-now-available	Register Solar Water Heaters Version 56 Now Available
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/register-solar-water-heaters-version-56-now-available	Register Solar Water Heaters Version 56 Now Available
 undated	https://www.cer.gov.au/news-and-media/media-centre	media centre
 out_of_range	https://www.cer.gov.au/news-and-media/media/2025/november/carbon-markets-continue-to-support-australias-climate-change-goals	Carbon Markets Continue To Support Australias Climate Change Goals
 out_of_range	https://www.cer.gov.au/news-and-media/media/2025/november/guarantee-origin-launched-to-drive-climate-friendly-industries	Guarantee Origin Launched To Drive Climate Friendly Industries
@@ -126,71 +126,337 @@ undated	https://www.energynetworks.com.au/news/energy-insider/	See all Articles
 undated	https://www.energynetworks.com.au/news/speeches-op-eds/	Speeches / Op Eds
 undated	https://www.energynetworks.com.au/about/energy-networks-australia/media-enquiries/	Media enquiries
 undated	https://www.energynetworks.com.au	News & Resources
-out_of_range	https://www.energynetworks.com.au/news/media-releases/joint-statement-on-the-national-electricity-market-review/	16 Dec 2025 Media releases Joint Statement on the National Electricity Market Review
-out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-responds-to-aemc-pricing-review-released-today/	15 Dec 2025 Media releases Energy Networks Australia responds to AEMC pricing review released today
-out_of_range	https://www.energynetworks.com.au/news/draft-isp-aims-to-right-size-transmission-and-reinforces-networks-as-the-backbone-of-the-energy-transition/	10 Dec 2025 News Draft ISP aims to right-size transmission and reinforces networks as the backbone of the energy transition
-out_of_range	https://www.energynetworks.com.au/news/energy-insider/what-australias-energy-system-wants-for-christmas/	18 Dec 2025 Energy Insider What Australia’s Energy System Wants for Christmas
-out_of_range	https://www.energynetworks.com.au/news/the-age-of-dso/	18 Dec 2025 News The Age of DSO
-out_of_range	https://www.energynetworks.com.au/news/meet-new-ena-chair-andrew-bills/	17 Dec 2025 News Meet new ENA Chair – Andrew Bills
-out_of_range	https://www.energynetworks.com.au/news/energy-insider/why-you-cant-miss-dan-gardner-at-en26/	17 Dec 2025 Energy Insider Why You Can’t Miss Dan Gardner at EN26
+out_of_range	https://www.energynetworks.com.au/news/media-releases/joint-statement-on-the-national-electricity-market-review/	Joint Statement on the National Electricity Market Review
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-responds-to-aemc-pricing-review-released-today/	Energy Networks Australia responds to AEMC pricing review released today
+out_of_range	https://www.energynetworks.com.au/news/draft-isp-aims-to-right-size-transmission-and-reinforces-networks-as-the-backbone-of-the-energy-transition/	Draft ISP aims to right-size transmission and reinforces networks as the backbone of the energy transition
+out_of_range	https://www.energynetworks.com.au/news/energy-insider/what-australias-energy-system-wants-for-christmas/	What Australia’s Energy System Wants for Christmas
+out_of_range	https://www.energynetworks.com.au/news/the-age-of-dso/	The Age of DSO
+out_of_range	https://www.energynetworks.com.au/news/meet-new-ena-chair-andrew-bills/	Meet new ENA Chair – Andrew Bills
+out_of_range	https://www.energynetworks.com.au/news/energy-insider/why-you-cant-miss-dan-gardner-at-en26/	Why You Can’t Miss Dan Gardner at EN26
 undated	https://www.energynetworks.com.au/resources/	Resources
 undated	https://www.energynetworks.com.au/guidelines/	Guidelines
-out_of_range	https://www.energynetworks.com.au/news/media-releases/15031/	4 Dec 2025 Media releases Dom van den Berg, Chief Executive Energy Networks Australia responds to AEMC’s residential price outlook
-out_of_range	https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-new-chair-and-board-directors/	5 Nov 2025 News Energy Networks Australia welcomes new Chair and Board Directors
-out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-establishment-of-national-energy-cybersecurity-body-nepki/	1 Oct 2025 Media releases ENA welcomes establishment of national energy cybersecurity body (NEPKI)
-out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-statement-on-2035-emissions-reduction-target/	18 Sep 2025 Media releases ENA statement on 2035 emissions reduction target
-out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-awards-honour-outstanding-sector-contributions/	12 Sep 2025 Media releases Energy networks awards honour outstanding sector contributions
-out_of_range	https://www.energynetworks.com.au/news/media-releases/ausgrid-wins-2025-energy-networks-consumer-engagement-award/	12 Sep 2025 Media releases Ausgrid wins 2025 Energy Networks Consumer Engagement Award
-out_of_range	https://www.energynetworks.com.au/news/media-releases/finalists-announced-fro-2025-energy-networks-awards/	20 Aug 2025 Media releases Finalists announced for 2025 Energy Networks Awards
-out_of_range	https://www.energynetworks.com.au/news/media-releases/biomethane-breakthrough-turning-waste-into-energy-new-report-calls-for-biomethane-expansion/	31 Jul 2025 Media releases Biomethane breakthrough: Turning waste into energy, new report calls for biomethane expansion
-out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-statement-from-ceo-on-victorian-energy-policy/	24 Jun 2025 Media releases Energy Networks Australia – Statement from CEO on Victorian energy policy
-out_of_range	https://www.energynetworks.com.au/news/media-releases/russell-pendlebury-appointed-ena-general-manager-economic-regulation/	19 May 2025 Media releases Russell Pendlebury Appointed ENA General Manager – Economic Regulation
-out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-government-re-election-calls-for-continued-focus-on-energy-transition/	13 May 2025 Media releases ENA welcomes Government re-election, calls for continued focus on energy transition
-out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-election-wish-list-includes-calls-to-remove-tax-on-landholders/	16 Apr 2025 Media releases Energy Networks’ election wish list includes call to remove landholder tax
-out_of_range	https://www.energynetworks.com.au/news/media-releases/the-hidden-cost-of-forced-electrification-in-victoria/	27 Feb 2025 Media releases The hidden cost of forced electrification in Victoria
-out_of_range	https://www.energynetworks.com.au/news/media-releases/victorian-governments-electrification-plan-risks-higher-costs-and-grid-strain/	13 Dec 2024 Media releases Victorian Government’s electrification plan risks higher costs and grid strain
-out_of_range	https://www.energynetworks.com.au/news/media-releases/two-new-board-appointments-for-energy-networks-australia/	2 Dec 2024 Media releases Two new board appointments for Energy Networks Australia
-out_of_range	https://www.energynetworks.com.au/news/media-releases/climate-change-authority-acknowledge-the-power-of-the-distribution-grid/	28 Nov 2024 Media releases Climate Change Authority acknowledge the power of the distribution grid
-out_of_range	https://www.energynetworks.com.au/news/media-releases/dana-boxall-of-powerlink-wins-inaugural-women-in-networks-award/	20 Sep 2024 Media releases Dana Boxall of Powerlink wins inaugural Women in Networks Award
-out_of_range	https://www.energynetworks.com.au/news/media-releases/endeavour-energy-wins-energy-networks-consumer-engagement-award/	20 Sep 2024 Media releases Endeavour Energy wins Energy Networks Consumer Engagement Award
-out_of_range	https://www.energynetworks.com.au/news/media-releases/electranet-wins-energy-networks-industry-innovation-award/	20 Sep 2024 Media releases ElectraNet wins Energy Networks Industry Innovation Award
-out_of_range	https://www.energynetworks.com.au/news/media-releases/sa-power-networks-james-brown-wins-energy-networks-individual-contribution-award/	20 Sep 2024 Media releases SA Power Networks’ James Brown wins Energy Networks Individual Contribution Award
-out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-nsw-consumer-energy-strategy/	16 Sep 2024 Media releases ENA welcomes NSW Consumer Energy Strategy
-out_of_range	https://www.energynetworks.com.au/news/media-releases/the-time-is-now-to-get-smarter-with-the-local-grid/	6 Aug 2024 Media releases The time is now to get smarter with the local grid
-out_of_range	https://www.energynetworks.com.au/news/media-releases/renewable-gas-for-a-future-made-in-australia/	15 Jul 2024 Media releases Renewable gas for a future made in Australia
-out_of_range	https://www.energynetworks.com.au/news/energy-networks-australia-ceo-response-to-2024-isp/	26 Jun 2024 News Energy Networks Australia CEO response to 2024 ISP
-out_of_range	https://www.energynetworks.com.au/news/ena-response-to-2024-25-final-dmo-decision/	23 May 2024 News Energy Networks Australia response to 2024-25 final DMO decision
-out_of_range	https://www.energynetworks.com.au/news/all-pathways-lead-to-renewable-gas-for-australian-industry/	30 Apr 2024 News All pathways lead to renewable gas for Australian industry
-out_of_range	https://www.energynetworks.com.au/news/media-releases/new-award-to-spotlight-role-of-women-in-energy/	8 Mar 2024 Media releases New award to spotlight role of women in energy
-out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ena-welcomes-the-australian-energy-market-operators-aemo-draft-2024-integrated-system-plan-isp/	18 Dec 2023 Media releases Energy Networks Australia (ENA) welcomes the Australian Energy Market Operator’s (AEMO) Draft 2024 Integrated System Plan (ISP)
-out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ceo-dom-van-den-bergs-statement-on-victorian-gas-substitution-roadmap/	15 Dec 2023 Media releases Energy Networks Australia CEO Dom van den Berg’s statement on Victorian Gas Substitution Roadmap
-out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-joins-industry-and-government-partnership-to-secure-financial-counselling-services/	22 Nov 2023 Media releases ENA joins industry and government partnership to secure financial counselling services
-out_of_range	https://www.energynetworks.com.au/news/media-releases/flawed-super-profits-claims-are-misleading/	22 Nov 2023 Media releases Flawed ‘Super Profits’ claims are misleading
-out_of_range	https://www.energynetworks.com.au/news/media-releases/2023-industry-innovation-award-winner-announced/	19 Sep 2023 Media releases 2023 Industry Innovation Award winner announced
-out_of_range	https://www.energynetworks.com.au/news/media-releases/2023-consumer-engagement-award-winners-announced/	19 Sep 2023 Media releases 2023 Consumer Engagement Award winners announced
-out_of_range	https://www.energynetworks.com.au/news/media-releases/aemcs-metering-review-puts-customers-at-the-centre-of-the-transition/	30 Aug 2023 Media releases AEMC’s metering review puts customers at the centre of the transition
-out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-thanks-frank-tudor/	25 Aug 2023 Media releases Energy Networks thanks Frank Tudor
-out_of_range	https://www.energynetworks.com.au/news/media-releases/consumer-engagement-awards-shortlist-announced/	18 Aug 2023 Media releases Consumer engagement awards shortlist announced
-out_of_range	https://www.energynetworks.com.au/news/media-releases/innovation-shortlist-announced-for-industry-awards/	18 Aug 2023 Media releases Innovation shortlist announced for industry awards
-out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-calls-for-policy-consultation/	28 Jul 2023 Media releases Industry calls for policy consultation
-out_of_range	https://www.energynetworks.com.au/news/media-releases/reliability-and-service-top-performers/	7 Jul 2023 Media releases Reliability and service top performers
-out_of_range	https://www.energynetworks.com.au/news/media-releases/fast-tracked-vni-west-is-vital-for-energy-transition/	29 May 2023 Media releases Fast tracked VNI West is vital for energy transition
-out_of_range	https://www.energynetworks.com.au/news/energy-bill-relief-and-budget-initiatives-welcomed-by-energy-networks/	10 May 2023 News Energy bill relief and budget initiatives welcomed by energy networks
-out_of_range	https://www.energynetworks.com.au/news/media-releases/electricity-networks-to-fuel-new-wave-of-electric-vehicles-in-australia/	19 Apr 2023 Media releases Electricity networks to ‘fuel’ new wave of electric vehicles in Australia
-out_of_range	https://www.energynetworks.com.au/news/media-releases/renewable-gas-target-could-supercharge-hydrogen/	13 Apr 2023 Media releases Renewable gas target could supercharge hydrogen
-out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ceo-appointment/	17 Mar 2023 Media releases Energy Networks Australia CEO appointment
-out_of_range	https://www.energynetworks.com.au/news/media-releases/community-infrastructure-payments-welcomed/	24 Feb 2023 Media releases Community infrastructure payments welcomed
-out_of_range	https://www.energynetworks.com.au/news/media-releases/the-test-of-rate-of-return-ruling-will-be-its-impact-on-investment/	24 Feb 2023 Media releases The test of rate of return ruling will be its impact on investment
-out_of_range	https://www.energynetworks.com.au/news/media-releases/report-highlights-the-future-of-gas-in-australia/	2 Feb 2023 Media releases Report highlights the future of gas in Australia
-out_of_range	https://www.energynetworks.com.au/news/media-releases/the-challenge-of-extreme-weather-and-maintaining-power-supply/	12 Jan 2023 Media releases The challenge of extreme weather and maintaining power supply
-out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-welcomes-vital-transmission-infrastructure-funding/	21 Dec 2022 Media releases Industry welcomes vital transmission infrastructure funding
-out_of_range	https://www.energynetworks.com.au/news/media-releases/network-productivity-continues-to-increase/	1 Dec 2022 Media releases Network productivity continues to increase
-out_of_range	https://www.energynetworks.com.au/news/media-releases/how-to-make-electric-vehicles-and-the-power-grid-work-new-report/	10 Nov 2022 Media releases How to make electric vehicles and the power grid work: New report
-out_of_range	https://www.energynetworks.com.au/news/media-releases/accelerated-smart-meter-rollout-to-benefit-consumers/	3 Nov 2022 Media releases Accelerated smart meter rollout to benefit consumers
-out_of_range	https://www.energynetworks.com.au/news/media-releases/benefit-payments-for-nsw-landowners-welcomed/	25 Oct 2022 Media releases Benefit payments for NSW landowners welcomed
-out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-welcomes-transmission-investment/	19 Oct 2022 Media releases Industry welcomes transmission investment
-out_of_range	https://www.energynetworks.com.au/news/media-releases/misguided-report-needs-fact-check-network-prices-lowest-in-10-years/	5 Oct 2022 Media releases Misguided report needs fact check-network prices lowest in 10 years
-out_of_range	https://www.energynetworks.com.au/news/media-releases/stable-regulation-essential-to-deliver-energy-transition/	29 Sep 2022 Media releases Stable regulation essential to deliver energy transition
+out_of_range	https://www.energynetworks.com.au/news/media-releases/15031/	Dom van den Berg, Chief Executive Energy Networks Australia responds to AEMC’s residential price outlook
+out_of_range	https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-new-chair-and-board-directors/	Energy Networks Australia welcomes new Chair and Board Directors
+out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-establishment-of-national-energy-cybersecurity-body-nepki/	ENA welcomes establishment of national energy cybersecurity body (NEPKI)
+out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-statement-on-2035-emissions-reduction-target/	ENA statement on 2035 emissions reduction target
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-awards-honour-outstanding-sector-contributions/	Energy networks awards honour outstanding sector contributions
+out_of_range	https://www.energynetworks.com.au/news/media-releases/ausgrid-wins-2025-energy-networks-consumer-engagement-award/	Ausgrid wins 2025 Energy Networks Consumer Engagement Award
+out_of_range	https://www.energynetworks.com.au/news/media-releases/finalists-announced-fro-2025-energy-networks-awards/	Finalists announced for 2025 Energy Networks Awards
+out_of_range	https://www.energynetworks.com.au/news/media-releases/biomethane-breakthrough-turning-waste-into-energy-new-report-calls-for-biomethane-expansion/	Biomethane breakthrough: Turning waste into energy, new report calls for biomethane expansion
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-statement-from-ceo-on-victorian-energy-policy/	Energy Networks Australia – Statement from CEO on Victorian energy policy
+out_of_range	https://www.energynetworks.com.au/news/media-releases/russell-pendlebury-appointed-ena-general-manager-economic-regulation/	Russell Pendlebury Appointed ENA General Manager – Economic Regulation
+out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-government-re-election-calls-for-continued-focus-on-energy-transition/	ENA welcomes Government re-election, calls for continued focus on energy transition
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-election-wish-list-includes-calls-to-remove-tax-on-landholders/	Energy Networks’ election wish list includes call to remove landholder tax
+out_of_range	https://www.energynetworks.com.au/news/media-releases/the-hidden-cost-of-forced-electrification-in-victoria/	The hidden cost of forced electrification in Victoria
+out_of_range	https://www.energynetworks.com.au/news/media-releases/victorian-governments-electrification-plan-risks-higher-costs-and-grid-strain/	Victorian Government’s electrification plan risks higher costs and grid strain
+out_of_range	https://www.energynetworks.com.au/news/media-releases/two-new-board-appointments-for-energy-networks-australia/	Two new board appointments for Energy Networks Australia
+out_of_range	https://www.energynetworks.com.au/news/media-releases/climate-change-authority-acknowledge-the-power-of-the-distribution-grid/	Climate Change Authority acknowledge the power of the distribution grid
+out_of_range	https://www.energynetworks.com.au/news/media-releases/dana-boxall-of-powerlink-wins-inaugural-women-in-networks-award/	Dana Boxall of Powerlink wins inaugural Women in Networks Award
+out_of_range	https://www.energynetworks.com.au/news/media-releases/endeavour-energy-wins-energy-networks-consumer-engagement-award/	Endeavour Energy wins Energy Networks Consumer Engagement Award
+out_of_range	https://www.energynetworks.com.au/news/media-releases/electranet-wins-energy-networks-industry-innovation-award/	ElectraNet wins Energy Networks Industry Innovation Award
+out_of_range	https://www.energynetworks.com.au/news/media-releases/sa-power-networks-james-brown-wins-energy-networks-individual-contribution-award/	SA Power Networks’ James Brown wins Energy Networks Individual Contribution Award
+out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-nsw-consumer-energy-strategy/	ENA welcomes NSW Consumer Energy Strategy
+out_of_range	https://www.energynetworks.com.au/news/media-releases/the-time-is-now-to-get-smarter-with-the-local-grid/	The time is now to get smarter with the local grid
+out_of_range	https://www.energynetworks.com.au/news/media-releases/renewable-gas-for-a-future-made-in-australia/	Renewable gas for a future made in Australia
+out_of_range	https://www.energynetworks.com.au/news/energy-networks-australia-ceo-response-to-2024-isp/	Energy Networks Australia CEO response to 2024 ISP
+out_of_range	https://www.energynetworks.com.au/news/ena-response-to-2024-25-final-dmo-decision/	Energy Networks Australia response to 2024-25 final DMO decision
+out_of_range	https://www.energynetworks.com.au/news/all-pathways-lead-to-renewable-gas-for-australian-industry/	All pathways lead to renewable gas for Australian industry
+out_of_range	https://www.energynetworks.com.au/news/media-releases/new-award-to-spotlight-role-of-women-in-energy/	New award to spotlight role of women in energy
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ena-welcomes-the-australian-energy-market-operators-aemo-draft-2024-integrated-system-plan-isp/	Energy Networks Australia (ENA) welcomes the Australian Energy Market Operator’s (AEMO) Draft 2024 Integrated System Plan (ISP)
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ceo-dom-van-den-bergs-statement-on-victorian-gas-substitution-roadmap/	Energy Networks Australia CEO Dom van den Berg’s statement on Victorian Gas Substitution Roadmap
+out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-joins-industry-and-government-partnership-to-secure-financial-counselling-services/	ENA joins industry and government partnership to secure financial counselling services
+out_of_range	https://www.energynetworks.com.au/news/media-releases/flawed-super-profits-claims-are-misleading/	Flawed ‘Super Profits’ claims are misleading
+out_of_range	https://www.energynetworks.com.au/news/media-releases/2023-industry-innovation-award-winner-announced/	2023 Industry Innovation Award winner announced
+out_of_range	https://www.energynetworks.com.au/news/media-releases/2023-consumer-engagement-award-winners-announced/	2023 Consumer Engagement Award winners announced
+out_of_range	https://www.energynetworks.com.au/news/media-releases/aemcs-metering-review-puts-customers-at-the-centre-of-the-transition/	AEMC’s metering review puts customers at the centre of the transition
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-thanks-frank-tudor/	Energy Networks thanks Frank Tudor
+out_of_range	https://www.energynetworks.com.au/news/media-releases/consumer-engagement-awards-shortlist-announced/	Consumer engagement awards shortlist announced
+out_of_range	https://www.energynetworks.com.au/news/media-releases/innovation-shortlist-announced-for-industry-awards/	Innovation shortlist announced for industry awards
+out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-calls-for-policy-consultation/	Industry calls for policy consultation
+out_of_range	https://www.energynetworks.com.au/news/media-releases/reliability-and-service-top-performers/	Reliability and service top performers
+out_of_range	https://www.energynetworks.com.au/news/media-releases/fast-tracked-vni-west-is-vital-for-energy-transition/	Fast tracked VNI West is vital for energy transition
+out_of_range	https://www.energynetworks.com.au/news/energy-bill-relief-and-budget-initiatives-welcomed-by-energy-networks/	Energy bill relief and budget initiatives welcomed by energy networks
+out_of_range	https://www.energynetworks.com.au/news/media-releases/electricity-networks-to-fuel-new-wave-of-electric-vehicles-in-australia/	Electricity networks to ‘fuel’ new wave of electric vehicles in Australia
+out_of_range	https://www.energynetworks.com.au/news/media-releases/renewable-gas-target-could-supercharge-hydrogen/	Renewable gas target could supercharge hydrogen
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ceo-appointment/	Energy Networks Australia CEO appointment
+out_of_range	https://www.energynetworks.com.au/news/media-releases/community-infrastructure-payments-welcomed/	Community infrastructure payments welcomed
+out_of_range	https://www.energynetworks.com.au/news/media-releases/the-test-of-rate-of-return-ruling-will-be-its-impact-on-investment/	The test of rate of return ruling will be its impact on investment
+out_of_range	https://www.energynetworks.com.au/news/media-releases/report-highlights-the-future-of-gas-in-australia/	Report highlights the future of gas in Australia
+out_of_range	https://www.energynetworks.com.au/news/media-releases/the-challenge-of-extreme-weather-and-maintaining-power-supply/	The challenge of extreme weather and maintaining power supply
+out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-welcomes-vital-transmission-infrastructure-funding/	Industry welcomes vital transmission infrastructure funding
+out_of_range	https://www.energynetworks.com.au/news/media-releases/network-productivity-continues-to-increase/	Network productivity continues to increase
+out_of_range	https://www.energynetworks.com.au/news/media-releases/how-to-make-electric-vehicles-and-the-power-grid-work-new-report/	How to make electric vehicles and the power grid work: New report
+out_of_range	https://www.energynetworks.com.au/news/media-releases/accelerated-smart-meter-rollout-to-benefit-consumers/	Accelerated smart meter rollout to benefit consumers
+out_of_range	https://www.energynetworks.com.au/news/media-releases/benefit-payments-for-nsw-landowners-welcomed/	Benefit payments for NSW landowners welcomed
+out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-welcomes-transmission-investment/	Industry welcomes transmission investment
+out_of_range	https://www.energynetworks.com.au/news/media-releases/misguided-report-needs-fact-check-network-prices-lowest-in-10-years/	Misguided report needs fact check-network prices lowest in 10 years
+out_of_range	https://www.energynetworks.com.au/news/media-releases/stable-regulation-essential-to-deliver-energy-transition/	Stable regulation essential to deliver energy transition
+undated	https://www.cleanenergycouncil.org.au/news	News Listing | Clean Energy Council
+undated	https://www.cleanenergycouncil.org.au/	/ Home
+undated	https://www.cleanenergycouncil.org.au/news-resources	/ News and resources
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-australia-2024-report	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cec-response-to-energy-climate-change-ministerial-council-communique	Find out more
+undated	https://www.cleanenergycouncil.org.au/privacy-policy	Find out more
+undated	https://www.cleanenergycouncil.org.au/legal	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/first-nations-engagement-guide-for-renewables-industry	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/renewable-projects-quarterly-report-q4-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/expanded-capacity-investment-scheme-design-paper-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australias-offshore-wind-industry-convenes-in-melbourne	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/starting-pistol-fired-for-gippsland-offshore-wind-projects	Find out more
+undated	https://www.cleanenergycouncil.org.au/membership/member-terms-and-code-of-conduct	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/victorian-energy-jobs-plan-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/its-time-to-back-home-batteries-home-battery-incentive-would-reduce-cost-of-living	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/new-solar-installer-and-designer-accreditation-provider-appointed	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-urges-federal-budget-to-think-big-on-renewables	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australias-response-to-us-inflation-reduction-act-looks-promising	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-from-clean-energy-council-ceo-kane-thornton	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-forum-to-showcase-was-renewable-energy-future	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-shortlisted-hydrogen-headstart-projects	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-planned-expansion-of-the-central-west-orana-renewable-energy-zone-nsw	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/aemo-planning-places-renewables-in-pole-position-in-the-race-to-net-zero	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-statement-on-the-passage-of-final-cop28-agreement	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-passage-of-the-nsw-climate-change-net-zero-future-bill-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-federal-governments-capacity-investment-scheme-announcement	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-prepares-for-installer-accreditation-scheme-operator-transition	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/victorian-premier-announces-detail-of-energy-strategy-at-clean-energy-council-conference	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/solar-design-and-installation-award-winners-announced-for-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/chloe-munro-scholarship-2023-recipients-announced	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-supports-step-up-of-hydrogen-headstart	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-releases-power-playbook	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/jobs-report-guides-future-for-the-clean-energy-workforce	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/time-to-remove-handbrakes-on-clean-energy-projects	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-industry-warns-eraring-uncertainty-could-chill-investment	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/new-investment-smashes-big-battery-records	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/nsw-anti-slavery-commissioner-and-clean-energy-council-join-forces-to-tackle-modern-slavery-risks-in	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cer-update-on-accreditation-scheme-operators	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/victorias-gas-connection-ban-in-new-homes-heralds-the-era-of-electrification	Find out more
+undated	https://www.cleanenergycouncil.org.au/energising-australia	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australian-energy-employment-report-the-key-to-unlocking-renewable-workforce-potential	Find out more
+undated	https://www.cleanenergycouncil.org.au/education-at-cec/discover-the-renewable-energy-industry	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/empowering-everyone-diversity-in-the-australian-clean-energy-sector	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/first-nations-voices-central-to-clean-energy-transition	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/neoens-alicia-webb-awarded-women-in-renewables-2023-aicd-scholarship	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/new-report-vast-majority-of-wind-turbines-can-avoid-landfill-in-australia	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/approved-pv-modules-changeover-is-coming-to-meet-new-standards	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australian-rooftop-solar-breaks-new-ground-in-2022-clean-energy-australia-report	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/skilling-the-energy-transition	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-roundtable-turbocharges-future-workforce-cooperation-between-universities-and-industry	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/agrisolar	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australias-big-clean-energy-build-hits-record-highs-clean-energy-australia-report	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-federal-governments-solar-sunshot-manufacturing-announcement	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-welcomes-project-planning-reforms-for-victorian-renewables-projects	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/new-inverter-standard-to-improve-grid-stability	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-report-webinar	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/renewable-energy-powering-australian-education	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/maximes-golden-ticket-from-event-entry-to-dream-job-at-clean-energy-council	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-federal-governments-future-made-in-australia-announcement	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australia-sets-new-summer-rooftop-solar-record	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australia-at-risk-of-being-locked-out-of-global-superpower-race	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/energy-ministers-signal-moves-to-support-australia-becoming-a-clean-energy-superpower	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/bidens-clean-energy-arms-race-puts-australian-economy-on-the-back-foot	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/women-in-renewables-kristal-bartlett	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/students-clean-energy-career-supercharged-after-attending-industry-event	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/women-in-renewables-inez-zheng	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cadetship-provides-trail-blazing-opportunity	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/community-connectedness-through-rooftop-solar	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/energy-sharing-clean-energy-on-country	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/vocational-training-renewables-update	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-unlocking-cer-benefits-flexible-trading-draft-determination	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/road-less-travelled-a-source-of-pride	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/it-all-starts-with-the-right-piece-of-land	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/taking-family-life-to-great-new-heights	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/winds-of-change-blow-into-colac	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/sticking-with-solar	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/kane-thornton-opening-address-to-the-australian-clean-energy-summit	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/women-in-renewables-luncheon-to-showcase-the-value-of-mentorship-at-australian-clean-energy-summit-2	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australian-clean-energy-summit-2023-set-to-electrify-renewable-superpower-ambitions	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-construction-peaks-as-investment-pipeline-battles-headwinds	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/nsw-transmission-build-critical-to-delivering-low-cost-clean-energy	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/connections-reform-initiative-delivering-much-needed-change-for-clean-energy-investors	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/energy-ministers-getting-on-with-the-clean-energy-transition	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australias-energy-transition-needs-new-rules-for-grid-connections	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/federal-budget-kick-starts-clean-energy-superpower-masterplan-with-4-billion-new-funding	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/net-zero-authority-gives-more-australians-a-chance-to-prosper-from-renewables	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/wind-industry-summit-best-practice-into-the-spotlight	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/victoria-puts-industry-and-consumers-first-with-netcc-mandate	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/offshore-wind-focus-to-bolster-2023-australian-wind-industry-summit	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/positive-signs-for-clean-energy-investment-but-it-wont-be-enough-to-reach-australias-82-per-cent-tar	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/solar-month-launches-to-encourage-australians-to-use-their-solar-superpowers-to-fight-rising-energy	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/neo-reform-to-keep-costs-down-for-consumers	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/the-new-energy-tech-consumer-code-netcc-is-here-to-raise-consumer-protection-standards	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/fixing-the-system-strength-frameworks-discussion-paper	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/erarings-early-closure	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/capacity-investment-scheme	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/report-highlights-need-for-transmission-investment-reform	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-to-the-draft-report-on-reserve-level-declaration-guidelines	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-australia-report-2024	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-the-new-vehicle-efficiency-standard-nves-design	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-the-nsw-consumer-energy-strategy	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/resources-hub-submission-to-aemos-draft-2024-isp	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-to-treasurys-climate-disclosure-unit	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/jobs-and-skills-australia-work-plan-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/federal-budget-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/nsw-draft-energy-policy-framework	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/draft-export-limit-interim-guidance-note	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-to-the-sustainable-finance-strategy	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-the-benchmark-reserve-capacity-price-brcp	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/renewable-projects-quarterly-investment-report-q3-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-the-new-south-wales-vocational-education-and-training-review	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/nsw-peak-demand-reduction-scheme-rule-change-2	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/briefing-note-to-energy-and-climate-change-ministerial-council-november-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/resources-hub-clean-energy-council-security-frameworks-review	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/ubmission-in-response-to-the-renewable-electricity-guarantee-of-origin-approach-paper	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/resources-hub-submission-to-investment-certainty-rule-change	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-vicgrid-options-assessment-method-to-offshore-wind-transmission-in-gippsland-and-portl	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-the-essential-services-commissions-land-access-code-of-practice-draft-determination	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-in-response-to-proposed-southern-ocean-region-offshore-wind-area	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/senate-inquiry-into-residential-electrification-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-community-engagement-review-australian-energy-infrastructure-commissioner-aeic	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/resources-hub-aemc-price-responsiveness-and-the-nem	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/aemc-cer-flexible-trading	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/national-electricity-amendment-clarifying-mandatory-pfr-obligations-for-bidirectional-units-rule-202	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/capacity-investment-scheme-consultation-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-inquiry-into-workforce-development-in-northern-australia-issues-paper	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-universities-accord-interim-report	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cec-submission-to-consultation-paper-on-energy-security-boards-network-visibility-project	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cecs-submission-to-green-paper-on-the-energy-transition	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-in-response-to-proposed-harmonisation-of-energy-rules-with-updated-energy-objectives	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cec-submission-hydrogen-headstart-design-august-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-submission-to-wired-for-change-small-electrical-products-and-solar-pv-systems	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/victorias-emergency-backstop-mechanism	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/resources-hub-renewable-projects-quarterly-report-q2-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cec-feedback-on-draft-queensland-electricity-and-connection-manual	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/energy-safe-victoria-esv-consultation-paper-introducing-a-new-class-of-lei-for-renewables	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cec-submission-south-australias-h2-and-re-bill	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/renewable-projects-quarterly-report-q1-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/rooftop-solar-generates-over-10-per-cent-of-australias-electricity	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/energy-security	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australian-guide-to-agrisolar-for-large-scale-solar	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/new-guide-showcases-the-potential-of-agrisolar	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/review-into-consumer-energy-resources-technical-standards-emo0045	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-in-response-to-the-energy-security-boards-transmission-access-reform-consultation-paper	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-to-nsw-sw-rez-access-scheme-position-paper	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/rule-change-request-investor-certainty-in-the-r1-process	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/vicgrid-offshore-wind-transmission-development-and-engagement-roadmap-gippsland-and-portland	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-in-response-to-proposed-hunter-region-offshore-wind-area	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-capacity-study	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/a-renewable-energy-master-plan-is-critical-to-the-clean-energy-transition-op-ed	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-submission-to-the-aer-draft-export-service-incentive-scheme	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-submission-to-draft-queensland-e-products-action-plan	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-technical-requirements-for-connection-draft-report	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-comment-on-the-efficient-provision-of-inertia-rule-change	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/the-clean-energy-council-welcomes-the-opportunity-to-make-a-submission-on-the-national-battery-strat	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/national-battery-strategy-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cec-circular-economy-submission-march-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-renewable-projects-quarterly-report-q4-2022	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-the-draft-2023-inputs-assumptions-and-scenarios-review	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cecs-response-to-epbc-cost-recovery-consultation	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-in-response-to-the-psmg-review-consultation	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-unlocking-cer-benefits-through-flexible-trading-consultation-paper	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/greenhouse-gas-emissions-in-national-energy-objectives	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/landmark-policy-proposal	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/aone-window-to-government-licencing-and-regulatory-system-for-the-lifecycle-of-large-scale-hydrogen	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/new-guarantee-of-origin-framework-for-australia	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/essential-data-is-needed-to-inform-the-planning-of-ev-infrastructure	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/comment-on-the-reliability-panels-draft-determination-on-the-frequency-operating-standard	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/resources-hub-pre-budget-submission-2023-24	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/powering-the-regions-fund-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/critical-minerals-strategy-discussion-paper	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/inquiry-into-national-energy-transition-authority-bill-2022	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/review-of-the-regulatory-framework-for-metering-services-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-capacity-study-terms-of-reference	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/response-to-the-joint-select-committee-on-northern-australia-on-workforce-development	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/community-engagement-guidelines-for-the-australian-wind-industry	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/benefit-sharing-for-renewable-energy-projects	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/enhancing-positive-social-outcomes	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/connections-reform-initiative	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-awards-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/welcome-tracey-stinson-to-the-policy-and-impact-team	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/women-in-renewables-we-need-a-systemic-shift	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/wir-profile-celia-vdm	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/iwd-and-beyond	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/meet-the-women-in-renewables-catherine-fetherstonhaugh-1	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/meet-the-women-in-renewables-tegan-doblinger-1-1	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/supporting-australian-solar	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/supporting-a-respectful-referendum-and-a-yes-to-a-first-nations-voice-to-parliament	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/res-clean-energy-is-for-everyone	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-appoints-morgan-rossiter-as-policy-director-for-offshore-wind	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/meet-the-women-in-renewables-satya-tanner	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/keeping-on-top-of-changes-in-regulations-and-standards-as-the-industry-grows	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/energy-day-at-cop28-australia	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-leadership	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/view-photos-from-all-energy-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cec-at-apac	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cms-23-launch	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/building-the-clean-energy-workforce-of-the-future	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-industry-awards-winners-announced-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cec-awards-finalists-announced	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/aces-2023-18-19-july-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-supports-voice-to-parliament-referendum	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australia-remains-in-the-race-to-meet-europes-growing-green-energy-demand-for-now	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/good-for-investors-good-for-consumers	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/skilling-the-energy-transition-report-provides-solutions-to-australias-skills-and-labour-challenges	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/2023-chloe-munroe-scholarship-recipients	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-at-work-report-2020	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/2021-chloe-munroe-scholarship-recipients	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/transmission-ring-fencing-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/service-target-incentive-performance-scheme-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/advocacy/best-practice-charter	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/women-in-renewables-scholarship-story	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/the-australian-institute-of-company-directors-scholarship-2023-recipient	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/2022-chloe-munroe-scholarship-recipients	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/embracing-all-abilities-for-affordable-and-clean-energy	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-federal-governments-renewable-energy-tender-announcement	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/template-resource	Find out more
+undated	https://www.cleanenergycouncil.org.au/industry-programs/products-program/products-terms-and-conditions	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-energy-and-electricity-sector-plan	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-draft-south-australian-hydrogen-and-renewable-energy-regulations	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-federal-environmental-law-reform	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/hydropower-the-backbone-of-a-reliable-renewable-energy-system	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/battery-storage-the-new-clean-peaker	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/international-womens-day-10-years-of-women-in-renewables	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-sa-power-networks-determination	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-federal-epbc-act-reform-legislation	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-nsw-governments-home-battery-incentive-program-announcement	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-nsw-governments-grid-connection-grants-announcement	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-csiro-2023-24-gencost-report	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-federal-government-s-expanded-new-energy-apprenticeships-program	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-csiro-2023-24-gencost-report-bf1d7b964df6f844d53a2b1e2f230537-6fd9d815333813f56b9b2983d9fed319	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/new-independent-research-nuclear-six-times-the-cost-of-renewables	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/federal-government-delivers-historic-budget	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/careers-for-net-zero-is-coming-to-regional-queensland-in-2024	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/improving-understanding-of-wind-farm-biodiversity-impacts-an-important-step	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/kane-thornton-abc-future-made-in-australia-act	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/landmark-report-highlights-key-role-of-long-duration-storage-for-australias-energy-security	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/new-report-all-australians-win-from-more-rooftop-solar-home-batteries-and-electrification	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/national-consumer-energy-resources-roadmap	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-nsw-governments-eraring-closure-announcement	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-energy-and-electricity-sector-plan-2d5f33704ce1b682c057500549ede720-9fa5b5b4af851b626aa912848e657197	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-creates-new-national-park	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/renewable-projects-quarterly-report-q1-2024	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-accelerating-smart-meter-deployment-draft-determination	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-the-climate-change-authoritys-targets-pathways-and-progress-issues-paper	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-illawarra-offshore-wind-zone	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australias-leading-solar-and-storage-forum-set-to-light-up-brisbane	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/levelised-cost-of-electricity-review	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-to-bass-strait-proposed-offshore-wind-area	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/response-to-the-future-gas-strategy-consultation-paper	Find out more
+generic_title	https://energyconsumersaustralia.com.au/news	News
+undated	https://energyconsumersaustralia.com.au/news?sort_by=published_at&sort_order=DESC	Newest
+undated	https://energyconsumersaustralia.com.au/news?sort_by=published_at&sort_order=ASC	Oldest
+undated	https://energyconsumersaustralia.com.au/news?sort_by=title&sort_order=ASC	Title (A-Z)
+undated	https://energyconsumersaustralia.com.au/news?sort_by=title&sort_order=DESC	Title (Z-A)
+undated	https://energyconsumersaustralia.com.au/news/media-release-gas-rule-change-significant-win-consumers-eca-says	Media Release Gas Rule Change Significant Win Consumers Eca Says
+undated	https://energyconsumersaustralia.com.au/news/new-research-underlines-need-minimum-energy-efficiency-standards-australias-rental-properties	New Research Underlines Need Minimum Energy Efficiency Standards Australias Rental Properties
+undated	https://energyconsumersaustralia.com.au/news/what-small-businesses-telling-us-about-electrification-what-needs-change	What Small Businesses Telling Us About Electrification What Needs Change
+undated	https://energyconsumersaustralia.com.au/news/smart-meter-real-time-data-decision-win-consumers-eca-says	Smart Meter Real Time Data Decision Win Consumers Eca Says
+undated	https://energyconsumersaustralia.com.au/news/ceo-november-2025	Ceo November 2025
+undated	https://energyconsumersaustralia.com.au/news/ceo-october-2025	Ceo October 2025
+undated	https://energyconsumersaustralia.com.au/news/new-grants-supporting-better-energy-outcomes-consumers	New Grants Supporting Better Energy Outcomes Consumers
+undated	https://energyconsumersaustralia.com.au/news/simplicity-doesnt-equal-higher-engagement	Simplicity Doesnt Equal Higher Engagement
+undated	https://energyconsumersaustralia.com.au/news/how-data-centres-are-reshaping-australias-energy-landscape	How Data Centres Are Reshaping Australias Energy Landscape
+undated	https://energyconsumersaustralia.com.au/news/ceo-september-2025	Ceo September 2025
+undated	https://energyconsumersaustralia.com.au/news/ceo-august-2025	Ceo August 2025
 per_domain_cap	https://www.cer.gov.au/news-and-media/news/2026/february/changes-to-rebate-solar-batteries-1-may	Changes To Rebate Solar Batteries 1 May
 per_domain_cap	https://www.cer.gov.au/news-and-media/news/2026/february/2024-25-national-greenhouse-and-energy-reporting-data-now-available	2024 25 National Greenhouse And Energy Reporting Data Now Available
 per_domain_cap	https://www.cer.gov.au/news-and-media/news/2026/march/new-solar-battery-photo-requirements-now-place	New Solar Battery Photo Requirements Now Place
@@ -306,7 +572,7 @@ undated	https://www.cer.gov.au/news-and-media/media-centre/media-releases	media 
 out_of_range	https://www.cer.gov.au/news-and-media/news/2026/january/explore-q4-2025-qcmr-data-workbook	Explore Q4 2025 Qcmr Data Workbook
 out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fifth-independent-review-hir-gateway-checks	Fifth Independent Review Hir Gateway Checks
 out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/changes-to-cheaper-home-batteries-program	Changes To Cheaper Home Batteries Program
-deny_title_regex	https://www.cer.gov.au/news-and-media/news/2025/december/register-solar-water-heaters-version-56-now-available	Register Solar Water Heaters Version 56 Now Available
+out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/register-solar-water-heaters-version-56-now-available	Register Solar Water Heaters Version 56 Now Available
 undated	https://www.cer.gov.au/news-and-media/media-centre	media centre
 out_of_range	https://www.cer.gov.au/news-and-media/media/2025/november/carbon-markets-continue-to-support-australias-climate-change-goals	Carbon Markets Continue To Support Australias Climate Change Goals
 out_of_range	https://www.cer.gov.au/news-and-media/media/2025/november/guarantee-origin-launched-to-drive-climate-friendly-industries	Guarantee Origin Launched To Drive Climate Friendly Industries
@@ -323,71 +589,337 @@ undated	https://www.energynetworks.com.au/news/energy-insider/	See all Articles
 undated	https://www.energynetworks.com.au/news/speeches-op-eds/	Speeches / Op Eds
 undated	https://www.energynetworks.com.au/about/energy-networks-australia/media-enquiries/	Media enquiries
 undated	https://www.energynetworks.com.au	News & Resources
-out_of_range	https://www.energynetworks.com.au/news/media-releases/joint-statement-on-the-national-electricity-market-review/	16 Dec 2025 Media releases Joint Statement on the National Electricity Market Review
-out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-responds-to-aemc-pricing-review-released-today/	15 Dec 2025 Media releases Energy Networks Australia responds to AEMC pricing review released today
-out_of_range	https://www.energynetworks.com.au/news/draft-isp-aims-to-right-size-transmission-and-reinforces-networks-as-the-backbone-of-the-energy-transition/	10 Dec 2025 News Draft ISP aims to right-size transmission and reinforces networks as the backbone of the energy transition
-out_of_range	https://www.energynetworks.com.au/news/energy-insider/what-australias-energy-system-wants-for-christmas/	18 Dec 2025 Energy Insider What Australia’s Energy System Wants for Christmas
-out_of_range	https://www.energynetworks.com.au/news/the-age-of-dso/	18 Dec 2025 News The Age of DSO
-out_of_range	https://www.energynetworks.com.au/news/meet-new-ena-chair-andrew-bills/	17 Dec 2025 News Meet new ENA Chair – Andrew Bills
-out_of_range	https://www.energynetworks.com.au/news/energy-insider/why-you-cant-miss-dan-gardner-at-en26/	17 Dec 2025 Energy Insider Why You Can’t Miss Dan Gardner at EN26
+out_of_range	https://www.energynetworks.com.au/news/media-releases/joint-statement-on-the-national-electricity-market-review/	Joint Statement on the National Electricity Market Review
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-responds-to-aemc-pricing-review-released-today/	Energy Networks Australia responds to AEMC pricing review released today
+out_of_range	https://www.energynetworks.com.au/news/draft-isp-aims-to-right-size-transmission-and-reinforces-networks-as-the-backbone-of-the-energy-transition/	Draft ISP aims to right-size transmission and reinforces networks as the backbone of the energy transition
+out_of_range	https://www.energynetworks.com.au/news/energy-insider/what-australias-energy-system-wants-for-christmas/	What Australia’s Energy System Wants for Christmas
+out_of_range	https://www.energynetworks.com.au/news/the-age-of-dso/	The Age of DSO
+out_of_range	https://www.energynetworks.com.au/news/meet-new-ena-chair-andrew-bills/	Meet new ENA Chair – Andrew Bills
+out_of_range	https://www.energynetworks.com.au/news/energy-insider/why-you-cant-miss-dan-gardner-at-en26/	Why You Can’t Miss Dan Gardner at EN26
 undated	https://www.energynetworks.com.au/resources/	Resources
 undated	https://www.energynetworks.com.au/guidelines/	Guidelines
-out_of_range	https://www.energynetworks.com.au/news/media-releases/15031/	4 Dec 2025 Media releases Dom van den Berg, Chief Executive Energy Networks Australia responds to AEMC’s residential price outlook
-out_of_range	https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-new-chair-and-board-directors/	5 Nov 2025 News Energy Networks Australia welcomes new Chair and Board Directors
-out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-establishment-of-national-energy-cybersecurity-body-nepki/	1 Oct 2025 Media releases ENA welcomes establishment of national energy cybersecurity body (NEPKI)
-out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-statement-on-2035-emissions-reduction-target/	18 Sep 2025 Media releases ENA statement on 2035 emissions reduction target
-out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-awards-honour-outstanding-sector-contributions/	12 Sep 2025 Media releases Energy networks awards honour outstanding sector contributions
-out_of_range	https://www.energynetworks.com.au/news/media-releases/ausgrid-wins-2025-energy-networks-consumer-engagement-award/	12 Sep 2025 Media releases Ausgrid wins 2025 Energy Networks Consumer Engagement Award
-out_of_range	https://www.energynetworks.com.au/news/media-releases/finalists-announced-fro-2025-energy-networks-awards/	20 Aug 2025 Media releases Finalists announced for 2025 Energy Networks Awards
-out_of_range	https://www.energynetworks.com.au/news/media-releases/biomethane-breakthrough-turning-waste-into-energy-new-report-calls-for-biomethane-expansion/	31 Jul 2025 Media releases Biomethane breakthrough: Turning waste into energy, new report calls for biomethane expansion
-out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-statement-from-ceo-on-victorian-energy-policy/	24 Jun 2025 Media releases Energy Networks Australia – Statement from CEO on Victorian energy policy
-out_of_range	https://www.energynetworks.com.au/news/media-releases/russell-pendlebury-appointed-ena-general-manager-economic-regulation/	19 May 2025 Media releases Russell Pendlebury Appointed ENA General Manager – Economic Regulation
-out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-government-re-election-calls-for-continued-focus-on-energy-transition/	13 May 2025 Media releases ENA welcomes Government re-election, calls for continued focus on energy transition
-out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-election-wish-list-includes-calls-to-remove-tax-on-landholders/	16 Apr 2025 Media releases Energy Networks’ election wish list includes call to remove landholder tax
-out_of_range	https://www.energynetworks.com.au/news/media-releases/the-hidden-cost-of-forced-electrification-in-victoria/	27 Feb 2025 Media releases The hidden cost of forced electrification in Victoria
-out_of_range	https://www.energynetworks.com.au/news/media-releases/victorian-governments-electrification-plan-risks-higher-costs-and-grid-strain/	13 Dec 2024 Media releases Victorian Government’s electrification plan risks higher costs and grid strain
-out_of_range	https://www.energynetworks.com.au/news/media-releases/two-new-board-appointments-for-energy-networks-australia/	2 Dec 2024 Media releases Two new board appointments for Energy Networks Australia
-out_of_range	https://www.energynetworks.com.au/news/media-releases/climate-change-authority-acknowledge-the-power-of-the-distribution-grid/	28 Nov 2024 Media releases Climate Change Authority acknowledge the power of the distribution grid
-out_of_range	https://www.energynetworks.com.au/news/media-releases/dana-boxall-of-powerlink-wins-inaugural-women-in-networks-award/	20 Sep 2024 Media releases Dana Boxall of Powerlink wins inaugural Women in Networks Award
-out_of_range	https://www.energynetworks.com.au/news/media-releases/endeavour-energy-wins-energy-networks-consumer-engagement-award/	20 Sep 2024 Media releases Endeavour Energy wins Energy Networks Consumer Engagement Award
-out_of_range	https://www.energynetworks.com.au/news/media-releases/electranet-wins-energy-networks-industry-innovation-award/	20 Sep 2024 Media releases ElectraNet wins Energy Networks Industry Innovation Award
-out_of_range	https://www.energynetworks.com.au/news/media-releases/sa-power-networks-james-brown-wins-energy-networks-individual-contribution-award/	20 Sep 2024 Media releases SA Power Networks’ James Brown wins Energy Networks Individual Contribution Award
-out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-nsw-consumer-energy-strategy/	16 Sep 2024 Media releases ENA welcomes NSW Consumer Energy Strategy
-out_of_range	https://www.energynetworks.com.au/news/media-releases/the-time-is-now-to-get-smarter-with-the-local-grid/	6 Aug 2024 Media releases The time is now to get smarter with the local grid
-out_of_range	https://www.energynetworks.com.au/news/media-releases/renewable-gas-for-a-future-made-in-australia/	15 Jul 2024 Media releases Renewable gas for a future made in Australia
-out_of_range	https://www.energynetworks.com.au/news/energy-networks-australia-ceo-response-to-2024-isp/	26 Jun 2024 News Energy Networks Australia CEO response to 2024 ISP
-out_of_range	https://www.energynetworks.com.au/news/ena-response-to-2024-25-final-dmo-decision/	23 May 2024 News Energy Networks Australia response to 2024-25 final DMO decision
-out_of_range	https://www.energynetworks.com.au/news/all-pathways-lead-to-renewable-gas-for-australian-industry/	30 Apr 2024 News All pathways lead to renewable gas for Australian industry
-out_of_range	https://www.energynetworks.com.au/news/media-releases/new-award-to-spotlight-role-of-women-in-energy/	8 Mar 2024 Media releases New award to spotlight role of women in energy
-out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ena-welcomes-the-australian-energy-market-operators-aemo-draft-2024-integrated-system-plan-isp/	18 Dec 2023 Media releases Energy Networks Australia (ENA) welcomes the Australian Energy Market Operator’s (AEMO) Draft 2024 Integrated System Plan (ISP)
-out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ceo-dom-van-den-bergs-statement-on-victorian-gas-substitution-roadmap/	15 Dec 2023 Media releases Energy Networks Australia CEO Dom van den Berg’s statement on Victorian Gas Substitution Roadmap
-out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-joins-industry-and-government-partnership-to-secure-financial-counselling-services/	22 Nov 2023 Media releases ENA joins industry and government partnership to secure financial counselling services
-out_of_range	https://www.energynetworks.com.au/news/media-releases/flawed-super-profits-claims-are-misleading/	22 Nov 2023 Media releases Flawed ‘Super Profits’ claims are misleading
-out_of_range	https://www.energynetworks.com.au/news/media-releases/2023-industry-innovation-award-winner-announced/	19 Sep 2023 Media releases 2023 Industry Innovation Award winner announced
-out_of_range	https://www.energynetworks.com.au/news/media-releases/2023-consumer-engagement-award-winners-announced/	19 Sep 2023 Media releases 2023 Consumer Engagement Award winners announced
-out_of_range	https://www.energynetworks.com.au/news/media-releases/aemcs-metering-review-puts-customers-at-the-centre-of-the-transition/	30 Aug 2023 Media releases AEMC’s metering review puts customers at the centre of the transition
-out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-thanks-frank-tudor/	25 Aug 2023 Media releases Energy Networks thanks Frank Tudor
-out_of_range	https://www.energynetworks.com.au/news/media-releases/consumer-engagement-awards-shortlist-announced/	18 Aug 2023 Media releases Consumer engagement awards shortlist announced
-out_of_range	https://www.energynetworks.com.au/news/media-releases/innovation-shortlist-announced-for-industry-awards/	18 Aug 2023 Media releases Innovation shortlist announced for industry awards
-out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-calls-for-policy-consultation/	28 Jul 2023 Media releases Industry calls for policy consultation
-out_of_range	https://www.energynetworks.com.au/news/media-releases/reliability-and-service-top-performers/	7 Jul 2023 Media releases Reliability and service top performers
-out_of_range	https://www.energynetworks.com.au/news/media-releases/fast-tracked-vni-west-is-vital-for-energy-transition/	29 May 2023 Media releases Fast tracked VNI West is vital for energy transition
-out_of_range	https://www.energynetworks.com.au/news/energy-bill-relief-and-budget-initiatives-welcomed-by-energy-networks/	10 May 2023 News Energy bill relief and budget initiatives welcomed by energy networks
-out_of_range	https://www.energynetworks.com.au/news/media-releases/electricity-networks-to-fuel-new-wave-of-electric-vehicles-in-australia/	19 Apr 2023 Media releases Electricity networks to ‘fuel’ new wave of electric vehicles in Australia
-out_of_range	https://www.energynetworks.com.au/news/media-releases/renewable-gas-target-could-supercharge-hydrogen/	13 Apr 2023 Media releases Renewable gas target could supercharge hydrogen
-out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ceo-appointment/	17 Mar 2023 Media releases Energy Networks Australia CEO appointment
-out_of_range	https://www.energynetworks.com.au/news/media-releases/community-infrastructure-payments-welcomed/	24 Feb 2023 Media releases Community infrastructure payments welcomed
-out_of_range	https://www.energynetworks.com.au/news/media-releases/the-test-of-rate-of-return-ruling-will-be-its-impact-on-investment/	24 Feb 2023 Media releases The test of rate of return ruling will be its impact on investment
-out_of_range	https://www.energynetworks.com.au/news/media-releases/report-highlights-the-future-of-gas-in-australia/	2 Feb 2023 Media releases Report highlights the future of gas in Australia
-out_of_range	https://www.energynetworks.com.au/news/media-releases/the-challenge-of-extreme-weather-and-maintaining-power-supply/	12 Jan 2023 Media releases The challenge of extreme weather and maintaining power supply
-out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-welcomes-vital-transmission-infrastructure-funding/	21 Dec 2022 Media releases Industry welcomes vital transmission infrastructure funding
-out_of_range	https://www.energynetworks.com.au/news/media-releases/network-productivity-continues-to-increase/	1 Dec 2022 Media releases Network productivity continues to increase
-out_of_range	https://www.energynetworks.com.au/news/media-releases/how-to-make-electric-vehicles-and-the-power-grid-work-new-report/	10 Nov 2022 Media releases How to make electric vehicles and the power grid work: New report
-out_of_range	https://www.energynetworks.com.au/news/media-releases/accelerated-smart-meter-rollout-to-benefit-consumers/	3 Nov 2022 Media releases Accelerated smart meter rollout to benefit consumers
-out_of_range	https://www.energynetworks.com.au/news/media-releases/benefit-payments-for-nsw-landowners-welcomed/	25 Oct 2022 Media releases Benefit payments for NSW landowners welcomed
-out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-welcomes-transmission-investment/	19 Oct 2022 Media releases Industry welcomes transmission investment
-out_of_range	https://www.energynetworks.com.au/news/media-releases/misguided-report-needs-fact-check-network-prices-lowest-in-10-years/	5 Oct 2022 Media releases Misguided report needs fact check-network prices lowest in 10 years
-out_of_range	https://www.energynetworks.com.au/news/media-releases/stable-regulation-essential-to-deliver-energy-transition/	29 Sep 2022 Media releases Stable regulation essential to deliver energy transition
+out_of_range	https://www.energynetworks.com.au/news/media-releases/15031/	Dom van den Berg, Chief Executive Energy Networks Australia responds to AEMC’s residential price outlook
+out_of_range	https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-new-chair-and-board-directors/	Energy Networks Australia welcomes new Chair and Board Directors
+out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-establishment-of-national-energy-cybersecurity-body-nepki/	ENA welcomes establishment of national energy cybersecurity body (NEPKI)
+out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-statement-on-2035-emissions-reduction-target/	ENA statement on 2035 emissions reduction target
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-awards-honour-outstanding-sector-contributions/	Energy networks awards honour outstanding sector contributions
+out_of_range	https://www.energynetworks.com.au/news/media-releases/ausgrid-wins-2025-energy-networks-consumer-engagement-award/	Ausgrid wins 2025 Energy Networks Consumer Engagement Award
+out_of_range	https://www.energynetworks.com.au/news/media-releases/finalists-announced-fro-2025-energy-networks-awards/	Finalists announced for 2025 Energy Networks Awards
+out_of_range	https://www.energynetworks.com.au/news/media-releases/biomethane-breakthrough-turning-waste-into-energy-new-report-calls-for-biomethane-expansion/	Biomethane breakthrough: Turning waste into energy, new report calls for biomethane expansion
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-statement-from-ceo-on-victorian-energy-policy/	Energy Networks Australia – Statement from CEO on Victorian energy policy
+out_of_range	https://www.energynetworks.com.au/news/media-releases/russell-pendlebury-appointed-ena-general-manager-economic-regulation/	Russell Pendlebury Appointed ENA General Manager – Economic Regulation
+out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-government-re-election-calls-for-continued-focus-on-energy-transition/	ENA welcomes Government re-election, calls for continued focus on energy transition
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-election-wish-list-includes-calls-to-remove-tax-on-landholders/	Energy Networks’ election wish list includes call to remove landholder tax
+out_of_range	https://www.energynetworks.com.au/news/media-releases/the-hidden-cost-of-forced-electrification-in-victoria/	The hidden cost of forced electrification in Victoria
+out_of_range	https://www.energynetworks.com.au/news/media-releases/victorian-governments-electrification-plan-risks-higher-costs-and-grid-strain/	Victorian Government’s electrification plan risks higher costs and grid strain
+out_of_range	https://www.energynetworks.com.au/news/media-releases/two-new-board-appointments-for-energy-networks-australia/	Two new board appointments for Energy Networks Australia
+out_of_range	https://www.energynetworks.com.au/news/media-releases/climate-change-authority-acknowledge-the-power-of-the-distribution-grid/	Climate Change Authority acknowledge the power of the distribution grid
+out_of_range	https://www.energynetworks.com.au/news/media-releases/dana-boxall-of-powerlink-wins-inaugural-women-in-networks-award/	Dana Boxall of Powerlink wins inaugural Women in Networks Award
+out_of_range	https://www.energynetworks.com.au/news/media-releases/endeavour-energy-wins-energy-networks-consumer-engagement-award/	Endeavour Energy wins Energy Networks Consumer Engagement Award
+out_of_range	https://www.energynetworks.com.au/news/media-releases/electranet-wins-energy-networks-industry-innovation-award/	ElectraNet wins Energy Networks Industry Innovation Award
+out_of_range	https://www.energynetworks.com.au/news/media-releases/sa-power-networks-james-brown-wins-energy-networks-individual-contribution-award/	SA Power Networks’ James Brown wins Energy Networks Individual Contribution Award
+out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-nsw-consumer-energy-strategy/	ENA welcomes NSW Consumer Energy Strategy
+out_of_range	https://www.energynetworks.com.au/news/media-releases/the-time-is-now-to-get-smarter-with-the-local-grid/	The time is now to get smarter with the local grid
+out_of_range	https://www.energynetworks.com.au/news/media-releases/renewable-gas-for-a-future-made-in-australia/	Renewable gas for a future made in Australia
+out_of_range	https://www.energynetworks.com.au/news/energy-networks-australia-ceo-response-to-2024-isp/	Energy Networks Australia CEO response to 2024 ISP
+out_of_range	https://www.energynetworks.com.au/news/ena-response-to-2024-25-final-dmo-decision/	Energy Networks Australia response to 2024-25 final DMO decision
+out_of_range	https://www.energynetworks.com.au/news/all-pathways-lead-to-renewable-gas-for-australian-industry/	All pathways lead to renewable gas for Australian industry
+out_of_range	https://www.energynetworks.com.au/news/media-releases/new-award-to-spotlight-role-of-women-in-energy/	New award to spotlight role of women in energy
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ena-welcomes-the-australian-energy-market-operators-aemo-draft-2024-integrated-system-plan-isp/	Energy Networks Australia (ENA) welcomes the Australian Energy Market Operator’s (AEMO) Draft 2024 Integrated System Plan (ISP)
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ceo-dom-van-den-bergs-statement-on-victorian-gas-substitution-roadmap/	Energy Networks Australia CEO Dom van den Berg’s statement on Victorian Gas Substitution Roadmap
+out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-joins-industry-and-government-partnership-to-secure-financial-counselling-services/	ENA joins industry and government partnership to secure financial counselling services
+out_of_range	https://www.energynetworks.com.au/news/media-releases/flawed-super-profits-claims-are-misleading/	Flawed ‘Super Profits’ claims are misleading
+out_of_range	https://www.energynetworks.com.au/news/media-releases/2023-industry-innovation-award-winner-announced/	2023 Industry Innovation Award winner announced
+out_of_range	https://www.energynetworks.com.au/news/media-releases/2023-consumer-engagement-award-winners-announced/	2023 Consumer Engagement Award winners announced
+out_of_range	https://www.energynetworks.com.au/news/media-releases/aemcs-metering-review-puts-customers-at-the-centre-of-the-transition/	AEMC’s metering review puts customers at the centre of the transition
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-thanks-frank-tudor/	Energy Networks thanks Frank Tudor
+out_of_range	https://www.energynetworks.com.au/news/media-releases/consumer-engagement-awards-shortlist-announced/	Consumer engagement awards shortlist announced
+out_of_range	https://www.energynetworks.com.au/news/media-releases/innovation-shortlist-announced-for-industry-awards/	Innovation shortlist announced for industry awards
+out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-calls-for-policy-consultation/	Industry calls for policy consultation
+out_of_range	https://www.energynetworks.com.au/news/media-releases/reliability-and-service-top-performers/	Reliability and service top performers
+out_of_range	https://www.energynetworks.com.au/news/media-releases/fast-tracked-vni-west-is-vital-for-energy-transition/	Fast tracked VNI West is vital for energy transition
+out_of_range	https://www.energynetworks.com.au/news/energy-bill-relief-and-budget-initiatives-welcomed-by-energy-networks/	Energy bill relief and budget initiatives welcomed by energy networks
+out_of_range	https://www.energynetworks.com.au/news/media-releases/electricity-networks-to-fuel-new-wave-of-electric-vehicles-in-australia/	Electricity networks to ‘fuel’ new wave of electric vehicles in Australia
+out_of_range	https://www.energynetworks.com.au/news/media-releases/renewable-gas-target-could-supercharge-hydrogen/	Renewable gas target could supercharge hydrogen
+out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ceo-appointment/	Energy Networks Australia CEO appointment
+out_of_range	https://www.energynetworks.com.au/news/media-releases/community-infrastructure-payments-welcomed/	Community infrastructure payments welcomed
+out_of_range	https://www.energynetworks.com.au/news/media-releases/the-test-of-rate-of-return-ruling-will-be-its-impact-on-investment/	The test of rate of return ruling will be its impact on investment
+out_of_range	https://www.energynetworks.com.au/news/media-releases/report-highlights-the-future-of-gas-in-australia/	Report highlights the future of gas in Australia
+out_of_range	https://www.energynetworks.com.au/news/media-releases/the-challenge-of-extreme-weather-and-maintaining-power-supply/	The challenge of extreme weather and maintaining power supply
+out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-welcomes-vital-transmission-infrastructure-funding/	Industry welcomes vital transmission infrastructure funding
+out_of_range	https://www.energynetworks.com.au/news/media-releases/network-productivity-continues-to-increase/	Network productivity continues to increase
+out_of_range	https://www.energynetworks.com.au/news/media-releases/how-to-make-electric-vehicles-and-the-power-grid-work-new-report/	How to make electric vehicles and the power grid work: New report
+out_of_range	https://www.energynetworks.com.au/news/media-releases/accelerated-smart-meter-rollout-to-benefit-consumers/	Accelerated smart meter rollout to benefit consumers
+out_of_range	https://www.energynetworks.com.au/news/media-releases/benefit-payments-for-nsw-landowners-welcomed/	Benefit payments for NSW landowners welcomed
+out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-welcomes-transmission-investment/	Industry welcomes transmission investment
+out_of_range	https://www.energynetworks.com.au/news/media-releases/misguided-report-needs-fact-check-network-prices-lowest-in-10-years/	Misguided report needs fact check-network prices lowest in 10 years
+out_of_range	https://www.energynetworks.com.au/news/media-releases/stable-regulation-essential-to-deliver-energy-transition/	Stable regulation essential to deliver energy transition
+undated	https://www.cleanenergycouncil.org.au/news	News Listing | Clean Energy Council
+undated	https://www.cleanenergycouncil.org.au/	/ Home
+undated	https://www.cleanenergycouncil.org.au/news-resources	/ News and resources
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-australia-2024-report	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cec-response-to-energy-climate-change-ministerial-council-communique	Find out more
+undated	https://www.cleanenergycouncil.org.au/privacy-policy	Find out more
+undated	https://www.cleanenergycouncil.org.au/legal	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/first-nations-engagement-guide-for-renewables-industry	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/renewable-projects-quarterly-report-q4-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/expanded-capacity-investment-scheme-design-paper-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australias-offshore-wind-industry-convenes-in-melbourne	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/starting-pistol-fired-for-gippsland-offshore-wind-projects	Find out more
+undated	https://www.cleanenergycouncil.org.au/membership/member-terms-and-code-of-conduct	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/victorian-energy-jobs-plan-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/its-time-to-back-home-batteries-home-battery-incentive-would-reduce-cost-of-living	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/new-solar-installer-and-designer-accreditation-provider-appointed	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-urges-federal-budget-to-think-big-on-renewables	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australias-response-to-us-inflation-reduction-act-looks-promising	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-from-clean-energy-council-ceo-kane-thornton	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-forum-to-showcase-was-renewable-energy-future	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-shortlisted-hydrogen-headstart-projects	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-planned-expansion-of-the-central-west-orana-renewable-energy-zone-nsw	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/aemo-planning-places-renewables-in-pole-position-in-the-race-to-net-zero	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-statement-on-the-passage-of-final-cop28-agreement	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-passage-of-the-nsw-climate-change-net-zero-future-bill-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-federal-governments-capacity-investment-scheme-announcement	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-prepares-for-installer-accreditation-scheme-operator-transition	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/victorian-premier-announces-detail-of-energy-strategy-at-clean-energy-council-conference	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/solar-design-and-installation-award-winners-announced-for-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/chloe-munro-scholarship-2023-recipients-announced	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-supports-step-up-of-hydrogen-headstart	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-releases-power-playbook	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/jobs-report-guides-future-for-the-clean-energy-workforce	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/time-to-remove-handbrakes-on-clean-energy-projects	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-industry-warns-eraring-uncertainty-could-chill-investment	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/new-investment-smashes-big-battery-records	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/nsw-anti-slavery-commissioner-and-clean-energy-council-join-forces-to-tackle-modern-slavery-risks-in	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cer-update-on-accreditation-scheme-operators	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/victorias-gas-connection-ban-in-new-homes-heralds-the-era-of-electrification	Find out more
+undated	https://www.cleanenergycouncil.org.au/energising-australia	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australian-energy-employment-report-the-key-to-unlocking-renewable-workforce-potential	Find out more
+undated	https://www.cleanenergycouncil.org.au/education-at-cec/discover-the-renewable-energy-industry	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/empowering-everyone-diversity-in-the-australian-clean-energy-sector	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/first-nations-voices-central-to-clean-energy-transition	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/neoens-alicia-webb-awarded-women-in-renewables-2023-aicd-scholarship	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/new-report-vast-majority-of-wind-turbines-can-avoid-landfill-in-australia	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/approved-pv-modules-changeover-is-coming-to-meet-new-standards	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australian-rooftop-solar-breaks-new-ground-in-2022-clean-energy-australia-report	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/skilling-the-energy-transition	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-roundtable-turbocharges-future-workforce-cooperation-between-universities-and-industry	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/agrisolar	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australias-big-clean-energy-build-hits-record-highs-clean-energy-australia-report	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-federal-governments-solar-sunshot-manufacturing-announcement	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-welcomes-project-planning-reforms-for-victorian-renewables-projects	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/new-inverter-standard-to-improve-grid-stability	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-report-webinar	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/renewable-energy-powering-australian-education	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/maximes-golden-ticket-from-event-entry-to-dream-job-at-clean-energy-council	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-federal-governments-future-made-in-australia-announcement	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australia-sets-new-summer-rooftop-solar-record	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australia-at-risk-of-being-locked-out-of-global-superpower-race	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/energy-ministers-signal-moves-to-support-australia-becoming-a-clean-energy-superpower	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/bidens-clean-energy-arms-race-puts-australian-economy-on-the-back-foot	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/women-in-renewables-kristal-bartlett	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/students-clean-energy-career-supercharged-after-attending-industry-event	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/women-in-renewables-inez-zheng	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cadetship-provides-trail-blazing-opportunity	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/community-connectedness-through-rooftop-solar	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/energy-sharing-clean-energy-on-country	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/vocational-training-renewables-update	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-unlocking-cer-benefits-flexible-trading-draft-determination	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/road-less-travelled-a-source-of-pride	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/it-all-starts-with-the-right-piece-of-land	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/taking-family-life-to-great-new-heights	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/winds-of-change-blow-into-colac	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/sticking-with-solar	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/kane-thornton-opening-address-to-the-australian-clean-energy-summit	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/women-in-renewables-luncheon-to-showcase-the-value-of-mentorship-at-australian-clean-energy-summit-2	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australian-clean-energy-summit-2023-set-to-electrify-renewable-superpower-ambitions	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-construction-peaks-as-investment-pipeline-battles-headwinds	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/nsw-transmission-build-critical-to-delivering-low-cost-clean-energy	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/connections-reform-initiative-delivering-much-needed-change-for-clean-energy-investors	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/energy-ministers-getting-on-with-the-clean-energy-transition	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australias-energy-transition-needs-new-rules-for-grid-connections	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/federal-budget-kick-starts-clean-energy-superpower-masterplan-with-4-billion-new-funding	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/net-zero-authority-gives-more-australians-a-chance-to-prosper-from-renewables	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/wind-industry-summit-best-practice-into-the-spotlight	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/victoria-puts-industry-and-consumers-first-with-netcc-mandate	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/offshore-wind-focus-to-bolster-2023-australian-wind-industry-summit	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/positive-signs-for-clean-energy-investment-but-it-wont-be-enough-to-reach-australias-82-per-cent-tar	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/solar-month-launches-to-encourage-australians-to-use-their-solar-superpowers-to-fight-rising-energy	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/neo-reform-to-keep-costs-down-for-consumers	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/the-new-energy-tech-consumer-code-netcc-is-here-to-raise-consumer-protection-standards	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/fixing-the-system-strength-frameworks-discussion-paper	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/erarings-early-closure	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/capacity-investment-scheme	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/report-highlights-need-for-transmission-investment-reform	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-to-the-draft-report-on-reserve-level-declaration-guidelines	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-australia-report-2024	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-the-new-vehicle-efficiency-standard-nves-design	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-the-nsw-consumer-energy-strategy	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/resources-hub-submission-to-aemos-draft-2024-isp	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-to-treasurys-climate-disclosure-unit	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/jobs-and-skills-australia-work-plan-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/federal-budget-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/nsw-draft-energy-policy-framework	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/draft-export-limit-interim-guidance-note	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-to-the-sustainable-finance-strategy	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-the-benchmark-reserve-capacity-price-brcp	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/renewable-projects-quarterly-investment-report-q3-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-the-new-south-wales-vocational-education-and-training-review	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/nsw-peak-demand-reduction-scheme-rule-change-2	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/briefing-note-to-energy-and-climate-change-ministerial-council-november-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/resources-hub-clean-energy-council-security-frameworks-review	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/ubmission-in-response-to-the-renewable-electricity-guarantee-of-origin-approach-paper	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/resources-hub-submission-to-investment-certainty-rule-change	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-vicgrid-options-assessment-method-to-offshore-wind-transmission-in-gippsland-and-portl	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-the-essential-services-commissions-land-access-code-of-practice-draft-determination	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-in-response-to-proposed-southern-ocean-region-offshore-wind-area	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/senate-inquiry-into-residential-electrification-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-community-engagement-review-australian-energy-infrastructure-commissioner-aeic	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/resources-hub-aemc-price-responsiveness-and-the-nem	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/aemc-cer-flexible-trading	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/national-electricity-amendment-clarifying-mandatory-pfr-obligations-for-bidirectional-units-rule-202	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/capacity-investment-scheme-consultation-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-inquiry-into-workforce-development-in-northern-australia-issues-paper	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-universities-accord-interim-report	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cec-submission-to-consultation-paper-on-energy-security-boards-network-visibility-project	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cecs-submission-to-green-paper-on-the-energy-transition	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-in-response-to-proposed-harmonisation-of-energy-rules-with-updated-energy-objectives	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cec-submission-hydrogen-headstart-design-august-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-submission-to-wired-for-change-small-electrical-products-and-solar-pv-systems	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/victorias-emergency-backstop-mechanism	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/resources-hub-renewable-projects-quarterly-report-q2-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cec-feedback-on-draft-queensland-electricity-and-connection-manual	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/energy-safe-victoria-esv-consultation-paper-introducing-a-new-class-of-lei-for-renewables	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cec-submission-south-australias-h2-and-re-bill	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/renewable-projects-quarterly-report-q1-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/rooftop-solar-generates-over-10-per-cent-of-australias-electricity	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/energy-security	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australian-guide-to-agrisolar-for-large-scale-solar	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/new-guide-showcases-the-potential-of-agrisolar	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/review-into-consumer-energy-resources-technical-standards-emo0045	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-in-response-to-the-energy-security-boards-transmission-access-reform-consultation-paper	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-to-nsw-sw-rez-access-scheme-position-paper	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/rule-change-request-investor-certainty-in-the-r1-process	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/vicgrid-offshore-wind-transmission-development-and-engagement-roadmap-gippsland-and-portland	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-in-response-to-proposed-hunter-region-offshore-wind-area	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-capacity-study	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/a-renewable-energy-master-plan-is-critical-to-the-clean-energy-transition-op-ed	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-submission-to-the-aer-draft-export-service-incentive-scheme	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-submission-to-draft-queensland-e-products-action-plan	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-technical-requirements-for-connection-draft-report	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-comment-on-the-efficient-provision-of-inertia-rule-change	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/the-clean-energy-council-welcomes-the-opportunity-to-make-a-submission-on-the-national-battery-strat	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/national-battery-strategy-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cec-circular-economy-submission-march-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-renewable-projects-quarterly-report-q4-2022	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-the-draft-2023-inputs-assumptions-and-scenarios-review	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cecs-response-to-epbc-cost-recovery-consultation	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-in-response-to-the-psmg-review-consultation	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-unlocking-cer-benefits-through-flexible-trading-consultation-paper	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/greenhouse-gas-emissions-in-national-energy-objectives	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/landmark-policy-proposal	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/aone-window-to-government-licencing-and-regulatory-system-for-the-lifecycle-of-large-scale-hydrogen	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/new-guarantee-of-origin-framework-for-australia	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/essential-data-is-needed-to-inform-the-planning-of-ev-infrastructure	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/comment-on-the-reliability-panels-draft-determination-on-the-frequency-operating-standard	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/resources-hub-pre-budget-submission-2023-24	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/powering-the-regions-fund-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/critical-minerals-strategy-discussion-paper	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/inquiry-into-national-energy-transition-authority-bill-2022	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/review-of-the-regulatory-framework-for-metering-services-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-capacity-study-terms-of-reference	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/response-to-the-joint-select-committee-on-northern-australia-on-workforce-development	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/community-engagement-guidelines-for-the-australian-wind-industry	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/benefit-sharing-for-renewable-energy-projects	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/enhancing-positive-social-outcomes	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/connections-reform-initiative	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-awards-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/welcome-tracey-stinson-to-the-policy-and-impact-team	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/women-in-renewables-we-need-a-systemic-shift	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/wir-profile-celia-vdm	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/iwd-and-beyond	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/meet-the-women-in-renewables-catherine-fetherstonhaugh-1	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/meet-the-women-in-renewables-tegan-doblinger-1-1	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/supporting-australian-solar	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/supporting-a-respectful-referendum-and-a-yes-to-a-first-nations-voice-to-parliament	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/res-clean-energy-is-for-everyone	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-appoints-morgan-rossiter-as-policy-director-for-offshore-wind	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/meet-the-women-in-renewables-satya-tanner	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/keeping-on-top-of-changes-in-regulations-and-standards-as-the-industry-grows	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/energy-day-at-cop28-australia	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-leadership	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/view-photos-from-all-energy-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cec-at-apac	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cms-23-launch	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/building-the-clean-energy-workforce-of-the-future	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-industry-awards-winners-announced-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/cec-awards-finalists-announced	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/aces-2023-18-19-july-2023	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-council-supports-voice-to-parliament-referendum	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australia-remains-in-the-race-to-meet-europes-growing-green-energy-demand-for-now	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/good-for-investors-good-for-consumers	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/skilling-the-energy-transition-report-provides-solutions-to-australias-skills-and-labour-challenges	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/2023-chloe-munroe-scholarship-recipients	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-at-work-report-2020	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/2021-chloe-munroe-scholarship-recipients	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/transmission-ring-fencing-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/service-target-incentive-performance-scheme-submission	Find out more
+undated	https://www.cleanenergycouncil.org.au/advocacy/best-practice-charter	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/women-in-renewables-scholarship-story	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/the-australian-institute-of-company-directors-scholarship-2023-recipient	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/2022-chloe-munroe-scholarship-recipients	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/embracing-all-abilities-for-affordable-and-clean-energy	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-federal-governments-renewable-energy-tender-announcement	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/template-resource	Find out more
+undated	https://www.cleanenergycouncil.org.au/industry-programs/products-program/products-terms-and-conditions	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-energy-and-electricity-sector-plan	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-draft-south-australian-hydrogen-and-renewable-energy-regulations	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-federal-environmental-law-reform	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/hydropower-the-backbone-of-a-reliable-renewable-energy-system	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/battery-storage-the-new-clean-peaker	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/international-womens-day-10-years-of-women-in-renewables	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-sa-power-networks-determination	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-federal-epbc-act-reform-legislation	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-nsw-governments-home-battery-incentive-program-announcement	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-nsw-governments-grid-connection-grants-announcement	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-csiro-2023-24-gencost-report	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-federal-government-s-expanded-new-energy-apprenticeships-program	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-csiro-2023-24-gencost-report-bf1d7b964df6f844d53a2b1e2f230537-6fd9d815333813f56b9b2983d9fed319	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/new-independent-research-nuclear-six-times-the-cost-of-renewables	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/federal-government-delivers-historic-budget	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/careers-for-net-zero-is-coming-to-regional-queensland-in-2024	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/improving-understanding-of-wind-farm-biodiversity-impacts-an-important-step	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/kane-thornton-abc-future-made-in-australia-act	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/landmark-report-highlights-key-role-of-long-duration-storage-for-australias-energy-security	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/new-report-all-australians-win-from-more-rooftop-solar-home-batteries-and-electrification	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/national-consumer-energy-resources-roadmap	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-nsw-governments-eraring-closure-announcement	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-energy-and-electricity-sector-plan-2d5f33704ce1b682c057500549ede720-9fa5b5b4af851b626aa912848e657197	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-creates-new-national-park	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/renewable-projects-quarterly-report-q1-2024	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-accelerating-smart-meter-deployment-draft-determination	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-on-the-climate-change-authoritys-targets-pathways-and-progress-issues-paper	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/statement-on-the-illawarra-offshore-wind-zone	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/australias-leading-solar-and-storage-forum-set-to-light-up-brisbane	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/levelised-cost-of-electricity-review	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/submission-to-bass-strait-proposed-offshore-wind-area	Find out more
+undated	https://www.cleanenergycouncil.org.au/news-resources/response-to-the-future-gas-strategy-consultation-paper	Find out more
+generic_title	https://energyconsumersaustralia.com.au/news	News
+undated	https://energyconsumersaustralia.com.au/news?sort_by=published_at&sort_order=DESC	Newest
+undated	https://energyconsumersaustralia.com.au/news?sort_by=published_at&sort_order=ASC	Oldest
+undated	https://energyconsumersaustralia.com.au/news?sort_by=title&sort_order=ASC	Title (A-Z)
+undated	https://energyconsumersaustralia.com.au/news?sort_by=title&sort_order=DESC	Title (Z-A)
+undated	https://energyconsumersaustralia.com.au/news/media-release-gas-rule-change-significant-win-consumers-eca-says	Media Release Gas Rule Change Significant Win Consumers Eca Says
+undated	https://energyconsumersaustralia.com.au/news/new-research-underlines-need-minimum-energy-efficiency-standards-australias-rental-properties	New Research Underlines Need Minimum Energy Efficiency Standards Australias Rental Properties
+undated	https://energyconsumersaustralia.com.au/news/what-small-businesses-telling-us-about-electrification-what-needs-change	What Small Businesses Telling Us About Electrification What Needs Change
+undated	https://energyconsumersaustralia.com.au/news/smart-meter-real-time-data-decision-win-consumers-eca-says	Smart Meter Real Time Data Decision Win Consumers Eca Says
+undated	https://energyconsumersaustralia.com.au/news/ceo-november-2025	Ceo November 2025
+undated	https://energyconsumersaustralia.com.au/news/ceo-october-2025	Ceo October 2025
+undated	https://energyconsumersaustralia.com.au/news/new-grants-supporting-better-energy-outcomes-consumers	New Grants Supporting Better Energy Outcomes Consumers
+undated	https://energyconsumersaustralia.com.au/news/simplicity-doesnt-equal-higher-engagement	Simplicity Doesnt Equal Higher Engagement
+undated	https://energyconsumersaustralia.com.au/news/how-data-centres-are-reshaping-australias-energy-landscape	How Data Centres Are Reshaping Australias Energy Landscape
+undated	https://energyconsumersaustralia.com.au/news/ceo-september-2025	Ceo September 2025
+undated	https://energyconsumersaustralia.com.au/news/ceo-august-2025	Ceo August 2025
 per_domain_cap	https://www.cer.gov.au/news-and-media/news/2026/february/changes-to-rebate-solar-batteries-1-may	Changes To Rebate Solar Batteries 1 May
 per_domain_cap	https://www.cer.gov.au/news-and-media/news/2026/february/2024-25-national-greenhouse-and-energy-reporting-data-now-available	2024 25 National Greenhouse And Energy Reporting Data Now Available
 per_domain_cap	https://www.cer.gov.au/news-and-media/news/2026/march/new-solar-battery-photo-requirements-now-place	New Solar Battery Photo Requirements Now Place
@@ -441,31 +973,31 @@ deny_title_regex	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	priva
 deny_title_regex	https://www.ifrs.org/news-and-events/news/	Cookie details
 undated	https://www.efrag.org/en	https://www.efrag.org/en
 out_of_range	https://www.efrag.org/en/updates	the EFRAG Update
-deny_title_regex	https://www.efrag.org/en/node/20565	Read more about EFRAG publishes Feedback Statement on Post-Implementation Review of IFRS 16 Leases
-deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-launches-interactive-draft-simplified-esrs-on-the-knowledge-hub-register-now-to-explore	Read more about EFRAG launches interactive Draft Simplified ESRS on the Knowledge Hub: register now to explore!
-out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-16-march-2026	Read more about EFRAG SR TEG Online Meeting 16 March 2026
-out_of_range	https://www.efrag.org/en/news-and-calendar/news/contribute-to-europes-sme-sustainability-journey-share-your-vsme-sustainability-report-with-efrag	Read more about Contribute to Europe’s SME Sustainability Journey: Share Your VSME Sustainability Report with EFRAG
-out_of_range	https://www.efrag.org/en/news-and-calendar/news/new-efrag-update-podcast-episode-available-december-2025-january-2026-edition	Read more about New EFRAG Update Podcast Episode Available: December 2025 & January 2026 Edition
-out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-update-december-2025-january-2026-edition-now-available	Read more about EFRAG Update: December 2025 & January 2026 Edition Now Available
-deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-draft-comment-letter-on-iasbs-proposed-amendments-to-ias-28-on-the-fair-value-option	Read more about EFRAG releases Draft Comment Letter on IASB´s Proposed amendments to IAS 28 on the Fair Value Option for Investments in Associates and Joint Ventures
-deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-issues-endorsement-advice-on-amendments-to-ias-21	Read more about EFRAG issues Endorsement Advice on Amendments to IAS 21
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-adds-dutch-and-irish-to-vsme-digital-template-launches-data-migration-tool	Read more about EFRAG Adds Dutch and Irish to VSME Digital Template & Launches Data Migration Tool
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-runs-the-20km-of-brussels	Read more about EFRAG runs the 20km of Brussels
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-conference-report-on-draft-simplified-esrs	Read more about EFRAG releases conference report on Draft Simplified ESRS
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/new-educational-video-series-available-to-navigate-vsme-implementation	Read more about New educational video series available to navigate VSME implementation
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-due-process-procedures-for-financial-reporting-activities	Read more about EFRAG publishes Due Process Procedures for Financial Reporting Activities
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-business-conduct-reporting-join-efrags-workshops	Read more about Help Shape Europe’s Voice on Business Conduct Reporting: Join EFRAG's Workshops
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/new-composition-of-the-efrag-user-panel	Read more about New composition of the EFRAG User Panel
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-the-new-gri-labor-standards-exposure-drafts-join-efrags-workshops	Read more about Help Shape Europe’s Voice on the New GRI Labor Standards Exposure Drafts: Join EFRAG's workshops
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-meeting-3-march-2026	Read more about EFRAG SR TEG Meeting 3 March 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-11-march-2026-0	Read more about EFRAG SRB Online Meeting 11 March 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-sr-teg-online-meeting-11-march-2026	Read more about EFRAG SRB & SR TEG Online Meeting 11 March 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-opens-call-for-candidates-to-join-its-sustainability-reporting-technical-expert-group	Read more about EFRAG Opens Call for Candidates to Join its Sustainability Reporting Technical Expert Group
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-11-february-2026	Read more about EFRAG FR TEG Online Meeting - 11 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-26-february-2026	Read more about EFRAG FRB Online Meeting - 26 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-12-february-2026	Read more about EFRAG SRB Online Meeting 12 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-5-february-2026	Read more about EFRAG SR TEG Online Meeting 5 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-29-january-2026	Read more about EFRAG FRB Online Meeting - 29 January 2026
+deny_title_regex	https://www.efrag.org/en/node/20565	EFRAG publishes Feedback Statement on Post-Implementation Review of IFRS 16 Leases
+out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-launches-interactive-draft-simplified-esrs-on-the-knowledge-hub-register-now-to-explore	EFRAG launches interactive Draft Simplified ESRS on the Knowledge Hub: register now to explore!
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-16-march-2026	EFRAG SR TEG Online Meeting 16 March 2026
+out_of_range	https://www.efrag.org/en/news-and-calendar/news/contribute-to-europes-sme-sustainability-journey-share-your-vsme-sustainability-report-with-efrag	Contribute to Europe’s SME Sustainability Journey: Share Your VSME Sustainability Report with EFRAG
+out_of_range	https://www.efrag.org/en/news-and-calendar/news/new-efrag-update-podcast-episode-available-december-2025-january-2026-edition	New EFRAG Update Podcast Episode Available: December 2025 & January 2026 Edition
+out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-update-december-2025-january-2026-edition-now-available	EFRAG Update: December 2025 & January 2026 Edition Now Available
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-draft-comment-letter-on-iasbs-proposed-amendments-to-ias-28-on-the-fair-value-option	EFRAG releases Draft Comment Letter on IASB´s Proposed amendments to IAS 28 on the Fair Value Option for Investments in Associates and Joint Ventures
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-issues-endorsement-advice-on-amendments-to-ias-21	EFRAG issues Endorsement Advice on Amendments to IAS 21
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-11-march-2026-0	EFRAG SRB Online Meeting 11 March 2026
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-meeting-3-march-2026	EFRAG SR TEG Meeting 3 March 2026
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-26-february-2026	EFRAG FRB Online Meeting - 26 February 2026
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-11-february-2026	EFRAG FR TEG Online Meeting - 11 February 2026
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-12-february-2026	EFRAG SRB Online Meeting 12 February 2026
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-5-february-2026	EFRAG SR TEG Online Meeting 5 February 2026
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-29-january-2026	EFRAG FRB Online Meeting - 29 January 2026
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-adds-dutch-and-irish-to-vsme-digital-template-launches-data-migration-tool	EFRAG Adds Dutch and Irish to VSME Digital Template & Launches Data Migration Tool
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-runs-the-20km-of-brussels	EFRAG runs the 20km of Brussels
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-conference-report-on-draft-simplified-esrs	EFRAG releases conference report on Draft Simplified ESRS
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/new-educational-video-series-available-to-navigate-vsme-implementation	New educational video series available to navigate VSME implementation
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-due-process-procedures-for-financial-reporting-activities	EFRAG publishes Due Process Procedures for Financial Reporting Activities
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-business-conduct-reporting-join-efrags-workshops	Help Shape Europe’s Voice on Business Conduct Reporting: Join EFRAG's Workshops
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/new-composition-of-the-efrag-user-panel	New composition of the EFRAG User Panel
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-the-new-gri-labor-standards-exposure-drafts-join-efrags-workshops	Help Shape Europe’s Voice on the New GRI Labor Standards Exposure Drafts: Join EFRAG's workshops
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-sr-teg-online-meeting-11-march-2026	EFRAG SRB & SR TEG Online Meeting 11 March 2026
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-opens-call-for-candidates-to-join-its-sustainability-reporting-technical-expert-group	EFRAG Opens Call for Candidates to Join its Sustainability Reporting Technical Expert Group
 undated	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
 undated	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	The work plan
 deny_title_regex	https://www.ifrs.org/news-and-events/updates/issb/	Cookie details
@@ -514,31 +1046,31 @@ deny_title_regex	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	priva
 deny_title_regex	https://www.ifrs.org/news-and-events/news/	Cookie details
 undated	https://www.efrag.org/en	https://www.efrag.org/en
 out_of_range	https://www.efrag.org/en/updates	the EFRAG Update
-deny_title_regex	https://www.efrag.org/en/node/20565	Read more about EFRAG publishes Feedback Statement on Post-Implementation Review of IFRS 16 Leases
-deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-launches-interactive-draft-simplified-esrs-on-the-knowledge-hub-register-now-to-explore	Read more about EFRAG launches interactive Draft Simplified ESRS on the Knowledge Hub: register now to explore!
-out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-16-march-2026	Read more about EFRAG SR TEG Online Meeting 16 March 2026
-out_of_range	https://www.efrag.org/en/news-and-calendar/news/contribute-to-europes-sme-sustainability-journey-share-your-vsme-sustainability-report-with-efrag	Read more about Contribute to Europe’s SME Sustainability Journey: Share Your VSME Sustainability Report with EFRAG
-out_of_range	https://www.efrag.org/en/news-and-calendar/news/new-efrag-update-podcast-episode-available-december-2025-january-2026-edition	Read more about New EFRAG Update Podcast Episode Available: December 2025 & January 2026 Edition
-out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-update-december-2025-january-2026-edition-now-available	Read more about EFRAG Update: December 2025 & January 2026 Edition Now Available
-deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-draft-comment-letter-on-iasbs-proposed-amendments-to-ias-28-on-the-fair-value-option	Read more about EFRAG releases Draft Comment Letter on IASB´s Proposed amendments to IAS 28 on the Fair Value Option for Investments in Associates and Joint Ventures
-deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-issues-endorsement-advice-on-amendments-to-ias-21	Read more about EFRAG issues Endorsement Advice on Amendments to IAS 21
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-adds-dutch-and-irish-to-vsme-digital-template-launches-data-migration-tool	Read more about EFRAG Adds Dutch and Irish to VSME Digital Template & Launches Data Migration Tool
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-runs-the-20km-of-brussels	Read more about EFRAG runs the 20km of Brussels
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-conference-report-on-draft-simplified-esrs	Read more about EFRAG releases conference report on Draft Simplified ESRS
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/new-educational-video-series-available-to-navigate-vsme-implementation	Read more about New educational video series available to navigate VSME implementation
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-due-process-procedures-for-financial-reporting-activities	Read more about EFRAG publishes Due Process Procedures for Financial Reporting Activities
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-business-conduct-reporting-join-efrags-workshops	Read more about Help Shape Europe’s Voice on Business Conduct Reporting: Join EFRAG's Workshops
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/new-composition-of-the-efrag-user-panel	Read more about New composition of the EFRAG User Panel
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-the-new-gri-labor-standards-exposure-drafts-join-efrags-workshops	Read more about Help Shape Europe’s Voice on the New GRI Labor Standards Exposure Drafts: Join EFRAG's workshops
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-meeting-3-march-2026	Read more about EFRAG SR TEG Meeting 3 March 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-11-march-2026-0	Read more about EFRAG SRB Online Meeting 11 March 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-sr-teg-online-meeting-11-march-2026	Read more about EFRAG SRB & SR TEG Online Meeting 11 March 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-opens-call-for-candidates-to-join-its-sustainability-reporting-technical-expert-group	Read more about EFRAG Opens Call for Candidates to Join its Sustainability Reporting Technical Expert Group
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-11-february-2026	Read more about EFRAG FR TEG Online Meeting - 11 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-26-february-2026	Read more about EFRAG FRB Online Meeting - 26 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-12-february-2026	Read more about EFRAG SRB Online Meeting 12 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-5-february-2026	Read more about EFRAG SR TEG Online Meeting 5 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-29-january-2026	Read more about EFRAG FRB Online Meeting - 29 January 2026
+deny_title_regex	https://www.efrag.org/en/node/20565	EFRAG publishes Feedback Statement on Post-Implementation Review of IFRS 16 Leases
+out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-launches-interactive-draft-simplified-esrs-on-the-knowledge-hub-register-now-to-explore	EFRAG launches interactive Draft Simplified ESRS on the Knowledge Hub: register now to explore!
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-16-march-2026	EFRAG SR TEG Online Meeting 16 March 2026
+out_of_range	https://www.efrag.org/en/news-and-calendar/news/contribute-to-europes-sme-sustainability-journey-share-your-vsme-sustainability-report-with-efrag	Contribute to Europe’s SME Sustainability Journey: Share Your VSME Sustainability Report with EFRAG
+out_of_range	https://www.efrag.org/en/news-and-calendar/news/new-efrag-update-podcast-episode-available-december-2025-january-2026-edition	New EFRAG Update Podcast Episode Available: December 2025 & January 2026 Edition
+out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-update-december-2025-january-2026-edition-now-available	EFRAG Update: December 2025 & January 2026 Edition Now Available
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-draft-comment-letter-on-iasbs-proposed-amendments-to-ias-28-on-the-fair-value-option	EFRAG releases Draft Comment Letter on IASB´s Proposed amendments to IAS 28 on the Fair Value Option for Investments in Associates and Joint Ventures
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-issues-endorsement-advice-on-amendments-to-ias-21	EFRAG issues Endorsement Advice on Amendments to IAS 21
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-11-march-2026-0	EFRAG SRB Online Meeting 11 March 2026
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-meeting-3-march-2026	EFRAG SR TEG Meeting 3 March 2026
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-26-february-2026	EFRAG FRB Online Meeting - 26 February 2026
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-11-february-2026	EFRAG FR TEG Online Meeting - 11 February 2026
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-online-meeting-12-february-2026	EFRAG SRB Online Meeting 12 February 2026
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-5-february-2026	EFRAG SR TEG Online Meeting 5 February 2026
+deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-29-january-2026	EFRAG FRB Online Meeting - 29 January 2026
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-adds-dutch-and-irish-to-vsme-digital-template-launches-data-migration-tool	EFRAG Adds Dutch and Irish to VSME Digital Template & Launches Data Migration Tool
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-runs-the-20km-of-brussels	EFRAG runs the 20km of Brussels
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-releases-conference-report-on-draft-simplified-esrs	EFRAG releases conference report on Draft Simplified ESRS
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/new-educational-video-series-available-to-navigate-vsme-implementation	New educational video series available to navigate VSME implementation
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-due-process-procedures-for-financial-reporting-activities	EFRAG publishes Due Process Procedures for Financial Reporting Activities
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-business-conduct-reporting-join-efrags-workshops	Help Shape Europe’s Voice on Business Conduct Reporting: Join EFRAG's Workshops
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/new-composition-of-the-efrag-user-panel	New composition of the EFRAG User Panel
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-the-new-gri-labor-standards-exposure-drafts-join-efrags-workshops	Help Shape Europe’s Voice on the New GRI Labor Standards Exposure Drafts: Join EFRAG's workshops
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-srb-sr-teg-online-meeting-11-march-2026	EFRAG SRB & SR TEG Online Meeting 11 March 2026
+per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-opens-call-for-candidates-to-join-its-sustainability-reporting-technical-expert-group	EFRAG Opens Call for Candidates to Join its Sustainability Reporting Technical Expert Group
 evergreen_program_page	https://arena.gov.au/funding/	Back to top
 undated	https://arena.gov.au/	Home
 undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
@@ -646,6 +1178,7 @@ out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb
 deny_title_regex	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
 undated	https://www.rba.gov.au/publications/smp/	Statement on Monetary Policy
 undated	https://www.rba.gov.au/publications/fsr/	Financial Stability Review
+generic_title	https://www.rba.gov.au/publications/bulletin/	Bulletin
 undated	https://www.rba.gov.au/publications/rdp/	Research Discussion Papers
 undated	https://www.rba.gov.au/publications/confs/	Conferences
 undated	https://www.rba.gov.au/publications/workshops/	Workshops
@@ -782,6 +1315,7 @@ out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb
 deny_title_regex	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
 undated	https://www.rba.gov.au/publications/smp/	Statement on Monetary Policy
 undated	https://www.rba.gov.au/publications/fsr/	Financial Stability Review
+generic_title	https://www.rba.gov.au/publications/bulletin/	Bulletin
 undated	https://www.rba.gov.au/publications/rdp/	Research Discussion Papers
 undated	https://www.rba.gov.au/publications/confs/	Conferences
 undated	https://www.rba.gov.au/publications/workshops/	Workshops
@@ -811,3 +1345,278 @@ out_of_range	https://igcc.org.au/australian-cop-president-negotiations-has-poten
 out_of_range	https://igcc.org.au/igccs-climate-leaders-awards-go-to-john-thwaites-alison-ewings-ros-mckay-and-rick-walters/	IGCC’s Climate Leaders’ Awards go to John Thwaites, Alison Ewings, Ros McKay and Rick Walters
 undated	https://igcc.org.au/working_group/investor-practice/	Investor Practice Working Group
 out_of_range	https://igcc.org.au/igcc-summit-2025-decoding-the-transition-key-moments/	IGCC Summit 2025: Decoding the Transition: Key Moments
+evergreen_program_page	https://arena.gov.au/funding/	Back to top
+undated	https://arena.gov.au/	Home
+undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+evergreen_program_page	https://arenanet.arena.gov.au/s/funding-advice	here
+evergreen_program_page	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+evergreen_program_page	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+out_of_range	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+evergreen_program_page	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+out_of_range	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+evergreen_program_page	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+undated	https://arena.gov.au/news	Funding Opportunities
+evergreen_program_page	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+evergreen_program_page	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+evergreen_program_page	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+evergreen_program_page	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+evergreen_program_page	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+evergreen_program_page	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+evergreen_program_page	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+evergreen_program_page	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+evergreen_program_page	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+evergreen_program_page	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+evergreen_program_page	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+out_of_range	https://arena.gov.au/funding/research-development-program/	Research and Development
+evergreen_program_page	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+evergreen_program_page	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated	https://arena.gov.au/projects	Funding Opportunities
+undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
+evergreen_program_page	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+evergreen_program_page	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+evergreen_program_page	https://arena.gov.au/funding/power-system-services/	System Security
+evergreen_program_page	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+evergreen_program_page	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+evergreen_program_page	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+evergreen_program_page	https://arena.gov.au/funding/demand-response/	Demand Response
+evergreen_program_page	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+evergreen_program_page	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+evergreen_program_page	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+evergreen_program_page	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+evergreen_program_page	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+evergreen_program_page	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+evergreen_program_page	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+evergreen_program_page	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+evergreen_program_page	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+evergreen_program_page	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+evergreen_program_page	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+evergreen_program_page	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+evergreen_program_page	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+undated	https://arena.gov.au/news/	Back to top
+undated	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
+undated	https://www.newenergynexus.com/impact/	Explore impact
+undated	https://www.newenergynexus.com/portfolio/	View our portfolio
+undated	https://www.newenergynexus.com/news-and-stories/	News & Stories
+evergreen_program_page	https://arena.gov.au/funding/	Back to top
+undated	https://arena.gov.au/	Home
+undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+evergreen_program_page	https://arenanet.arena.gov.au/s/funding-advice	here
+evergreen_program_page	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+evergreen_program_page	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+out_of_range	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+evergreen_program_page	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+out_of_range	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+evergreen_program_page	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+undated	https://arena.gov.au/news	Funding Opportunities
+evergreen_program_page	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+evergreen_program_page	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+evergreen_program_page	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+evergreen_program_page	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+evergreen_program_page	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+evergreen_program_page	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+evergreen_program_page	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+evergreen_program_page	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+evergreen_program_page	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+evergreen_program_page	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+evergreen_program_page	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+out_of_range	https://arena.gov.au/funding/research-development-program/	Research and Development
+evergreen_program_page	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+evergreen_program_page	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated	https://arena.gov.au/projects	Funding Opportunities
+undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
+evergreen_program_page	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+evergreen_program_page	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+evergreen_program_page	https://arena.gov.au/funding/power-system-services/	System Security
+evergreen_program_page	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+evergreen_program_page	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+evergreen_program_page	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+evergreen_program_page	https://arena.gov.au/funding/demand-response/	Demand Response
+evergreen_program_page	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+evergreen_program_page	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+evergreen_program_page	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+evergreen_program_page	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+evergreen_program_page	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+evergreen_program_page	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+evergreen_program_page	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+evergreen_program_page	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+evergreen_program_page	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+evergreen_program_page	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+evergreen_program_page	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+evergreen_program_page	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+evergreen_program_page	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+undated	https://arena.gov.au/news/	Back to top
+undated	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
+undated	https://www.newenergynexus.com/impact/	Explore impact
+undated	https://www.newenergynexus.com/portfolio/	View our portfolio
+undated	https://www.newenergynexus.com/news-and-stories/	News & Stories
+evergreen_program_page	https://arena.gov.au/funding/	Back to top
+undated	https://arena.gov.au/	Home
+undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+evergreen_program_page	https://arenanet.arena.gov.au/s/funding-advice	here
+evergreen_program_page	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+evergreen_program_page	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+out_of_range	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+evergreen_program_page	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+out_of_range	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+evergreen_program_page	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+undated	https://arena.gov.au/news	Funding Opportunities
+evergreen_program_page	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+evergreen_program_page	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+evergreen_program_page	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+evergreen_program_page	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+evergreen_program_page	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+evergreen_program_page	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+evergreen_program_page	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+evergreen_program_page	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+evergreen_program_page	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+evergreen_program_page	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+evergreen_program_page	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+out_of_range	https://arena.gov.au/funding/research-development-program/	Research and Development
+evergreen_program_page	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+evergreen_program_page	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated	https://arena.gov.au/projects	Funding Opportunities
+undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
+evergreen_program_page	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+evergreen_program_page	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+evergreen_program_page	https://arena.gov.au/funding/power-system-services/	System Security
+evergreen_program_page	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+evergreen_program_page	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+evergreen_program_page	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+evergreen_program_page	https://arena.gov.au/funding/demand-response/	Demand Response
+evergreen_program_page	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+evergreen_program_page	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+evergreen_program_page	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+evergreen_program_page	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+evergreen_program_page	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+evergreen_program_page	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+evergreen_program_page	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+evergreen_program_page	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+evergreen_program_page	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+evergreen_program_page	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+evergreen_program_page	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+evergreen_program_page	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+evergreen_program_page	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+undated	https://arena.gov.au/news/	Back to top
+undated	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
+undated	https://www.newenergynexus.com/impact/	Explore impact
+undated	https://www.newenergynexus.com/portfolio/	View our portfolio
+undated	https://www.newenergynexus.com/news-and-stories/	News & Stories
+evergreen_program_page	https://arena.gov.au/funding/	Back to top
+undated_last_resort	https://arena.gov.au/	Home
+undated_last_resort	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+evergreen_program_page	https://arenanet.arena.gov.au/s/funding-advice	here
+evergreen_program_page	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+evergreen_program_page	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+out_of_range_last_resort	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+evergreen_program_page	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+out_of_range_last_resort	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+evergreen_program_page	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+undated_last_resort	https://arena.gov.au/news	Funding Opportunities
+evergreen_program_page	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+evergreen_program_page	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+evergreen_program_page	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+evergreen_program_page	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+evergreen_program_page	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+evergreen_program_page	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+evergreen_program_page	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+evergreen_program_page	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+evergreen_program_page	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+evergreen_program_page	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+evergreen_program_page	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+out_of_range_last_resort	https://arena.gov.au/funding/research-development-program/	Research and Development
+evergreen_program_page	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+evergreen_program_page	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated_last_resort	https://arena.gov.au/projects	Funding Opportunities
+undated_last_resort	https://arena.gov.au/knowledge-bank	Funding Opportunities
+evergreen_program_page	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+evergreen_program_page	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+evergreen_program_page	https://arena.gov.au/funding/power-system-services/	System Security
+evergreen_program_page	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+evergreen_program_page	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+evergreen_program_page	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+evergreen_program_page	https://arena.gov.au/funding/demand-response/	Demand Response
+evergreen_program_page	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+evergreen_program_page	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+evergreen_program_page	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+evergreen_program_page	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+evergreen_program_page	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+evergreen_program_page	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+evergreen_program_page	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+evergreen_program_page	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+evergreen_program_page	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+evergreen_program_page	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+evergreen_program_page	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+evergreen_program_page	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+evergreen_program_page	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+undated_last_resort	https://arena.gov.au/news/	Back to top
+undated_last_resort	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
+undated_last_resort	https://www.newenergynexus.com/impact/	Explore impact
+undated_last_resort	https://www.newenergynexus.com/portfolio/	View our portfolio
+undated_last_resort	https://www.newenergynexus.com/news-and-stories/	News & Stories
+too_stale_last_resort	https://esdnews.com.au	Applications open for ARENA Renewables Start-up Showcase - Energy Source & Distribution
+too_stale_last_resort	https://www.smartcompany.com.au	Samsara Eco to Amber Electric: The 39 climate tech startups tipped to be the next Aussie unicorns - SmartCompany
+too_stale_last_resort	https://www.techinasia.com	Australian cleantech startup RayGen bags $79.8m series D - Tech in Asia
+too_stale_last_resort	https://vocal.media	Australia Venture Capital Market: Growth, Trends, and Regional Reach - vocal.media
+too_stale_last_resort	https://www.smartcompany.com.au	Queensland startup funding bounces back with $417 million raised over financial year - SmartCompany
+out_of_range_last_resort	https://arena.gov.au	Don’t Miss Out on This Year’s Innovation Bay - Australian Renewable Energy Agency (ARENA)
+too_stale_last_resort	https://www.greenqueen.com.hk	Wildfire Energy: Australian Cleantech Startup Turns Waste Into Renewables - Green Queen
+too_stale_last_resort	https://www.energymagazine.com.au	ARENA spotlights innovative renewable startups - Energy Magazine
+too_stale_last_resort	https://www.startupdaily.net	MGA Thermal recharges pre-Series B again with $200,000 from Electrifi Ventures - Startup Daily
+too_stale_last_resort	https://investingnews.com	From Policy Shifts to Breakthroughs: Cleantech Market Update for Q1 2025 - Investing News Network
+too_stale_last_resort	https://www.afr.com	Technology: Clean Energy Finance Corporation spins off $200m private sector fund - AFR
+too_stale_last_resort	https://www.theaustralian.com.au	Tritium co-founder takes a punt on new green finance venture - The Australian
+too_stale_last_resort	https://www.canarymedia.com	The cleantech companies that didn’t make it through 2024 - Canary Media
+too_stale_last_resort	https://www.startupdaily.net	Why Singapore is Australia’s Silicon Valley for climate tech founders - Startup Daily
+too_stale_last_resort	https://www.smartcompany.com.au	Australia well placed to lure US clean tech investment - SmartCompany
+too_stale_last_resort	https://www.startupdaily.net	Australia's leading sustainability VCs are gathering in Melbourne for the Climate Investor Forum - Startup Daily
+too_stale_last_resort	https://www.smartcompany.com.au	Wollongong green hydrogen startup Hysata raises $172 million in Series B funding - SmartCompany
+too_stale_last_resort	https://www.startupdaily.net	Series A-focused climate tech VC hits $50 million for fund’s 1st close - Startup Daily
+too_stale_last_resort	https://www.smartcompany.com.au	Nine Aussie startups that raised $233.5 million this week - SmartCompany
+too_stale_last_resort	https://www.smartcompany.com.au	Cut Through's latest funding report says international investment in Aussie startups isn't as bad as it seems - SmartCompany
+too_stale_last_resort	https://www.startupdaily.net	Green hydrogen startup Hysata pockets record $172 million Series B - Startup Daily
+too_stale_last_resort	https://www.smartcompany.com.au	EcoJoule Energy lands $15 million to power smart grid and battery tech - SmartCompany
+too_stale_last_resort	https://www.startupdaily.net	‘There’s huge demand’: FootprintLab seizes the fintech opportunity in India - Startup Daily
+too_stale_last_resort	https://investingnews.com	Discover the Top 10 ASX Cleantech Stocks for Sustainable Investing - Investing News Network
+too_stale_last_resort	https://www.forbes.com.au	Surprising way this clean-tech startup plans to capture a billion tonnes of CO2 by 2040 - Forbes Australia
+too_stale_last_resort	https://cfotech.com.au	Hadean Energy's hydrogen tech named global New Energy finalist - CFOtech Australia
+too_stale_last_resort	https://techcrunch.com	Australian clean tech Endua fixes renewable energy’s intermittency problem - TechCrunch
+too_stale_last_resort	https://www.startupdaily.net	Nominations for the 2024 Startup Daily Best in Tech Awards are now open - Startup Daily
+too_stale_last_resort	https://www.startupdaily.net	Melt Ventures launches $20 million Advanced Manufacturing Venture Fund - Startup Daily
+too_stale_last_resort	https://agfundernews.com	The good oil: Australian innovation delivers game-changing alternatives to petroleum & palm - AgFunderNews
+too_stale_last_resort	https://www.nzte.govt.nz	New Zealand Cleantech Startups Making Global Waves - NZTE
+too_stale_last_resort	https://www.esgtoday.com	Green Hydrogen Startup Hysata Raises $111 Million - ESG Today
+too_stale_last_resort	https://www.startupdaily.net	Flexicar founder and Wavemaker Impact investor Monique Conheady joins Hysata Board - Startup Daily
+too_stale_last_resort	https://thefifthestate.com.au	Deloitte hires John O’Brien in sign that cleantech is going mainstream - thefifthestate.com.au
+too_stale_last_resort	https://www.smartcompany.com.au	Six Aussie startups that raised $56 million this week - SmartCompany
+too_stale_last_resort	https://im-mining.com	RHI Magnesita to use MCi Carbon’s CCUS technology at refractory operations - International Mining
+too_stale_last_resort	https://www.thelawyermag.com	LegalVision helps tech startups net $20m in Series A capital raises - Australasian Lawyer
+too_stale_last_resort	https://www.startupdaily.net	Re-Seeded: Tidal backs renewables startup Orkestra again in new $2 million raise - Startup Daily
+too_stale_last_resort	https://www.startupdaily.net	WA startup ULUU raises A$1.3M to replace plastic with a biodegradable alternative made from seaweed - Startup Daily
+too_stale_last_resort	https://www.startupdaily.net	SVB Capital founder Aaron Gershenberg, who raised $10 billion in VC funds, headlines West Tech Fest - Startup Daily
+too_stale_last_resort	https://news.crunchbase.com	Hydrogen Startup Funding Continues To Boom - Crunchbase News
+too_stale_last_resort	https://www.startupdaily.net	Nothing ventured, plenty gained: EV charging startup Jolt borrows $214 million for Canada roll out - Startup Daily
+too_stale_last_resort	https://www.kedglobal.com	Shinhan, POSCO invest $20 mn in Australian hydrogen startup Hysata - The Korea Economic Daily Global Edition
+too_stale_last_resort	https://www.afr.com	Singapore, Apple legends back $250m Aussie start up fund - AFR
+too_stale_last_resort	https://news.crunchbase.com	Sustainability-Focused Startup Equity Funding Fell In H1 2024 - Crunchbase News
+too_stale_last_resort	https://investingnews.com	"Discover the Top Cleantech Ventures in BC: 2025 Awards Finalists Revealed!" #Cleantech #BC #Sustainability - Investing News Network
+too_stale_last_resort	https://anthillonline.com	The Entrepreneur vs. Venture Capitalist - - Anthill Magazine
+too_stale_last_resort	https://www.businessinsider.com	Private investors poured $10.5 billion into clean energy in 2019. These are the top funds making bets on the industry. - Business Insider
+too_stale_last_resort	https://www.nucamp.co	Inside Australia's Thriving Tech Hub: Startups and Success Stories - nucamp.co
+too_stale_last_resort	https://www.techinasia.com	New $15m fund launched for Australian startups wanting to expand to China - Tech in Asia
+too_stale_last_resort	https://m.economictimes.com	Cleantech startup QuantE Energy raises $500,000 seed funding from TDV Partners, angel investors - The Economic Times
+too_stale_last_resort	https://news.crunchbase.com	Aerial Robotics Startup Infravision Raises $91M Series B As Funding To Sector Surges - Crunchbase News
+too_stale_last_resort	https://www.techcircle.in	Urban Company buys Australian on-demand beauty startup Glamazon - Techcircle
+too_stale_last_resort	https://m.economictimes.com	Clean-tech startup EdgeGrid raises $6 million funding led by Lightrock - The Economic Times
+too_stale_last_resort	https://m.economictimes.com	Cleantech startup Indra raises $4 million in funding led by Mela Ventures - The Economic Times
