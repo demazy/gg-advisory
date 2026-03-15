@@ -136,17 +136,6 @@ def _deterministic_structured_digest(date_label: str, items: Sequence[Any], note
     out.append("\n## Sustainable Finance & Investment")
     out.extend(_render_items(by_sec["Sustainable Finance & Investment"]))
 
-    # Sources block (URLs only, deterministic)
-    urls = []
-    for it in items:
-        u = (_get(it, "url", "") or "").strip()
-        if u and u not in urls:
-            urls.append(u)
-    if urls:
-        out.append("\n---\n**Sources**")
-        for u in urls:
-            out.append(f"- {u}")
-
     return "\n".join(out).strip() + "\n"
 
 
@@ -161,15 +150,15 @@ def _render_items(items: Sequence[Any]) -> List[str]:
         summ = _extractive_summary(_get_text(it), max_words=150)
 
         if title:
-            lines.append(f"\n- **{title}**")
+            lines.append(f"\n**{title}**")
         else:
-            lines.append("\n- **(Untitled)**")
+            lines.append("\n**(Untitled)**")
         if pub:
-            lines.append(f"  - PUBLISHED: {pub}")
-        if url:
-            lines.append(f"  - URL: {url}")
+            lines.append(f"PUBLISHED: {pub}")
         if summ:
-            lines.append(f"  - Summary: {summ}")
+            lines.append(f"Summary: {summ}")
+        if url:
+            lines.append(f"Sources: {url}")
     return lines
 
 
@@ -292,14 +281,11 @@ def build_digest(date_label: str, items: Sequence[Any]) -> str:
         PUBLISHED: [ISO date if available, otherwise omit this line]
         Summary: [100–150 words. Must include: what happened, key figures/amounts/dates/entities/jurisdictions, regulatory status, and geographic scope. Be precise — no vague language.]
         Why it matters: [1–2 sentences. State the concrete strategic implication for Australian businesses or investors. Avoid phrases like "this is significant because" — instead, say what decision-makers should do or watch for.]
+        Sources: [the URL for this item]
 
         Only include a bullet if the item's text contains enough substance for a meaningful summary.
         If a section has fewer than 2 good items, write what is available — do not pad or invent.
-
-        End with:
-        ---
-        **Sources**
-        - [one unique URL per item used]
+        Do NOT include a sources list at the bottom — each item already carries its own Sources line.
 
         JSON payload:
         {json}
@@ -318,8 +304,6 @@ def build_digest(date_label: str, items: Sequence[Any]) -> str:
         missing = [h for h in ("## Energy Transition", "## ESG Reporting", "## Sustainable Finance & Investment") if h not in out]
         if missing:
             raise RuntimeError(f"LLM output missing section headings: {', '.join(missing)}")
-        if "**Sources**" not in out:
-            raise RuntimeError("LLM output missing Sources section")
         return out + ("\n" if not out.endswith("\n") else "")
     except Exception as e:
         return _deterministic_structured_digest(date_label, items, note=f"LLM summarisation failed; deterministic fallback used. Error: {e}")
