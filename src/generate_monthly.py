@@ -1162,9 +1162,170 @@ f"last_resort_max_staleness_days={LAST_RESORT_MAX_STALENESS_DAYS}",
             print(f"[dedup] persisted {len(selected_urls)} URLs to state")
 
     md = build_digest(ym, all_selected)
+    grants_section = _generate_grants_radar(ym)
+    if grants_section:
+        md = md.rstrip() + "\n\n" + grants_section + "\n"
     out_path = OUT_DIR / f"monthly-digest-{ym}.md"
     out_path.write_text(md, encoding="utf-8")
     print(f"[write] {out_path.resolve()}")
+
+
+# ─── Grants & Accelerators Radar ────────────────────────────────────────────
+
+CFG_GRANTS = Path(os.getenv("CFG_GRANTS", "config/grants.yaml"))
+
+# How many days before a fixed deadline it appears in the "Urgent" group.
+GRANTS_URGENT_DAYS = int(os.getenv("GRANTS_URGENT_DAYS", "60"))
+
+
+def _generate_grants_radar(ym: str) -> str:
+    """
+    Read config/grants.yaml and produce a markdown section listing grants and
+    accelerators that are active (open, upcoming, or rolling) for the given month.
+
+    Visibility logic:
+    - ref_date = last day of target month + 7 days (approximate "publish" date)
+    - A grant is included when show_from <= ref_date AND (show_until is None OR show_until >= ref_date)
+    - Fixed-deadline grants whose deadline has passed by ref_date are excluded.
+
+    Grouping order:
+    1. Urgent: fixed deadline within GRANTS_URGENT_DAYS days of ref_date (sorted soonest-first)
+    2. National rolling / TBC programs (sorted by id for stability)
+    3. State/territory programs (sorted by level, then id)
+    """
+    if not CFG_GRANTS.exists():
+        return ""
+
+    try:
+        raw = yaml.safe_load(CFG_GRANTS.read_text(encoding="utf-8")) or {}
+    except Exception as e:
+        print(f"[grants] failed to load {CFG_GRANTS}: {e}")
+        return ""
+
+    entries = raw.get("grants") or []
+    if not entries:
+        return ""
+
+    y, mo = _parse_ym(ym)
+    # Approximate publish date: last day of the target month + 7 days
+    if mo == 12:
+        last_day = date(y + 1, 1, 1) - timedelta(days=1)
+    else:
+        last_day = date(y, mo + 1, 1) - timedelta(days=1)
+    ref_date = last_day + timedelta(days=7)
+
+    def _parse_date(s: Any) -> Optional[date]:
+        if not s:
+            return None
+        try:
+            return date.fromisoformat(str(s)[:10])
+        except Exception:
+            return None
+
+    urgent: List[Dict] = []
+    national_rolling: List[Dict] = []
+    state_programs: List[Dict] = []
+
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+
+        show_from = _parse_date(entry.get("show_from"))
+        show_until = _parse_date(entry.get("show_until"))
+        deadline = _parse_date(entry.get("deadline"))
+        deadline_type = str(entry.get("deadline_type") or "rolling").strip().lower()
+        level = str(entry.get("level") or "national").strip().lower()
+
+        # Visibility window
+        if show_from and ref_date < show_from:
+            continue
+        if show_until and ref_date > show_until:
+            continue
+
+        # Skip fixed-deadline entries whose deadline has already passed
+        if deadline_type == "fixed" and deadline and deadline < ref_date:
+            continue
+
+        # Classify
+        if deadline_type == "fixed" and deadline:
+            days_until = (deadline - ref_date).days
+            if -7 <= days_until <= GRANTS_URGENT_DAYS:
+                entry = dict(entry, _days_until=days_until, _deadline_obj=deadline)
+                urgent.append(entry)
+            else:
+                # Fixed deadline more than GRANTS_URGENT_DAYS out → treat as national/state rolling
+                if level == "national":
+                    national_rolling.append(entry)
+                else:
+                    state_programs.append(entry)
+        elif level == "national":
+            national_rolling.append(entry)
+        else:
+            state_programs.append(entry)
+
+    urgent.sort(key=lambda e: e.get("_deadline_obj") or date.max)
+    national_rolling.sort(key=lambda e: str(e.get("id") or ""))
+    state_programs.sort(key=lambda e: (str(e.get("level") or ""), str(e.get("id") or "")))
+
+    if not urgent and not national_rolling and not state_programs:
+        return ""
+
+    # ── Render ────────────────────────────────────────────────────────────────
+
+    def _clean(s: Any) -> str:
+        return re.sub(r"\s+", " ", str(s or "")).strip()
+
+    def _render_entry(e: Dict, show_deadline_label: bool = True) -> str:
+        name = _clean(e.get("name"))
+        admin = _clean(e.get("admin"))
+        amount = _clean(e.get("amount"))
+        deadline_label = _clean(e.get("deadline_label"))
+        target_stage = _clean(e.get("target_stage"))
+        url = _clean(e.get("url"))
+        description = _clean(e.get("description"))
+        why = _clean(e.get("why_it_matters"))
+        signals = _clean(e.get("signals"))
+
+        lines = [f"**{name}**"]
+        if admin:
+            lines.append(f"Administrator: {admin}")
+        if amount:
+            lines.append(f"Funding: {amount}")
+        if show_deadline_label and deadline_label:
+            lines.append(f"Deadline: {deadline_label}")
+        if target_stage:
+            lines.append(f"Stage: {target_stage}")
+        if description:
+            lines.append(f"Summary: {description}")
+        if why:
+            lines.append(f"Why it matters: {why}")
+        if signals:
+            lines.append(f"Signals to watch: {signals}")
+        if url:
+            lines.append(f"Sources: {url}")
+        return "\n".join(lines)
+
+    parts = ["## Cleantech & Start-up Ecosystem — Grants & Accelerators Radar"]
+
+    if urgent:
+        parts.append("\n**Closing soon — deadlines within the next 60 days**\n")
+        for e in urgent:
+            parts.append(_render_entry(e, show_deadline_label=True))
+            parts.append("")
+
+    if national_rolling:
+        parts.append("\n**National programs — open on a rolling basis**\n")
+        for e in national_rolling:
+            parts.append(_render_entry(e, show_deadline_label=True))
+            parts.append("")
+
+    if state_programs:
+        parts.append("\n**State & territory programs**\n")
+        for e in state_programs:
+            parts.append(_render_entry(e, show_deadline_label=True))
+            parts.append("")
+
+    return "\n".join(parts)
 
 
 def _iter_months(start_ym: str, end_ym: str) -> List[str]:

@@ -1,0 +1,375 @@
+# config/grants.yaml — Cleantech & Start-up Ecosystem: Grants & Accelerators Radar
+#
+# Each entry is shown in the monthly digest when the current month falls within its
+# visibility window (show_from..show_until).
+#
+# Fields:
+#   id            — unique slug (used for dedup and ordering)
+#   name          — program name (used as section heading)
+#   admin         — administering organisation
+#   level         — national | vic | nsw | qld | sa | wa | tas | act | nt
+#   type          — grant | repayable_grant | equity | accelerator | incubator | debt_equity
+#   amount        — human-readable funding range string
+#   deadline      — ISO date (YYYY-MM-DD) if fixed; omit or null if rolling/tbc
+#   deadline_type — fixed | rolling | tbc
+#   deadline_label — human-readable deadline string (overrides auto-generated label)
+#   target_stage  — string describing eligible startup stage
+#   url           — canonical program URL
+#   description   — 2-4 sentence summary (used as body text in digest)
+#   why_it_matters — 1-2 sentence rationale for founders/investors
+#   signals       — optional: what to watch next (e.g. next round, next cohort)
+#   show_from     — ISO date: first digest month to include this entry (YYYY-MM-DD)
+#   show_until    — ISO date: last digest month to include; omit/null = show indefinitely
+#
+# To retire an entry: set show_until to the month it expired (e.g. 2026-03-31).
+# To add a new round: duplicate the entry, update deadline and show_from/show_until.
+
+grants:
+
+  # ─── NATIONAL: Fixed-deadline programs ──────────────────────────────────────
+
+  - id: energylab-accelerator-2026
+    name: "EnergyLab Climate Solutions Accelerator 2026"
+    admin: "EnergyLab"
+    level: national
+    type: accelerator
+    amount: "$80,000–$100,000 equity investment per accepted startup"
+    deadline: "2026-03-15"
+    deadline_type: fixed
+    deadline_label: "15 March 2026"
+    target_stage: "Early-stage to growth-stage"
+    url: "https://energylab.org.au/programs/acceleration/"
+    description: >
+      Australia's largest cleantech accelerator offers early-stage and growth-stage climate-tech
+      companies $80,000–$100,000 equity investment plus access to EnergyLab's investor network,
+      mentors, and corporate partners. The 2026 cohort runs May–October. Any Australian startup
+      is eligible; no sector restriction within climate/clean energy.
+    why_it_matters: >
+      Australia's highest-profile pathway for climate-tech founders seeking institutional backing
+      and market entry. First-round interviews run 6–24 April 2026 for shortlisted applicants.
+    signals: >
+      EnergyLab also runs a separate Scaleup Program for later-stage companies (June–October 2026,
+      non-dilutive); applications remain open after the accelerator closes.
+    show_from: "2026-01-01"
+    show_until: "2026-03-31"
+
+  - id: act-icon-grant-2026
+    name: "ACT Innovation Connect (ICON) Grant"
+    admin: "Canberra Innovation Network (CBRIN) / ACT Government"
+    level: act
+    type: grant
+    amount: "$10,000–$30,000 matched (dollar-for-dollar)"
+    deadline: "2026-04-10"
+    deadline_type: fixed
+    deadline_label: "10 April 2026 (EOI)"
+    target_stage: "Early-stage; concept to market-ready (turnover under $2M)"
+    url: "https://cbrin.com.au/icon/"
+    description: >
+      The ACT Government's Innovation Connect grant provides $10,000–$30,000 in matched funding
+      to early-stage Canberra-based businesses. Eligible costs include prototyping, market testing,
+      IP/legal and commercialisation activities. The EOI round closes 10 April 2026.
+    why_it_matters: >
+      One of the few grants with a firm April deadline. Climate-tech founders based in or willing
+      to establish in the ACT should apply immediately.
+    show_from: "2026-01-01"
+    show_until: "2026-04-30"
+
+  - id: nsw-etcf-2026
+    name: "NSW Emerging Technology Commercialisation Fund (ETCF) 2026"
+    admin: "NSW Office of the Chief Scientist and Engineer"
+    level: nsw
+    type: repayable_grant
+    amount: "$500,000–$2,000,000 per project (repayable grant; $20M pool)"
+    deadline: "2026-04-29"
+    deadline_type: fixed
+    deadline_label: "29 April 2026, 10:00 AM AEST"
+    target_stage: "TRL 3–7; deep-tech commercialisation"
+    url: "https://chiefscientist.smartygrants.com.au/ETCF2026"
+    description: >
+      The NSW Office of the Chief Scientist and Engineer offers $500,000–$2M per project from a
+      $20M pool. Priority sectors include net-zero technologies, local manufacturing, and housing
+      innovation. Funding is a repayable grant (repayment triggered when EBITDA exceeds $500K).
+      Matched funding required. Full applications due July 2026; outcomes October 2026.
+    why_it_matters: >
+      One of the largest state-level deep-tech commercialisation grants in Australia this year.
+      Apply via SmartyGrants — the expression of interest stage closes 29 April.
+    show_from: "2026-03-01"
+    show_until: "2026-04-30"
+
+  - id: csiro-on-accelerate-cohort12
+    name: "CSIRO ON Accelerate — Cohort 12"
+    admin: "CSIRO"
+    level: national
+    type: accelerator
+    amount: "Up to $80,000 cash per team (non-dilutive); program valued at $150K+"
+    deadline: null
+    deadline_type: tbc
+    deadline_label: "~Mid-2026 (subscribe: on@csiro.au)"
+    target_stage: "Pre-seed; research-driven ventures"
+    url: "https://www.csiro.au/en/work-with-us/funding-programs/innovation-programs/on-accelerate"
+    description: >
+      Australia's premier deep-tech non-dilutive accelerator for research-driven startups.
+      Top teams receive up to $80,000 cash from the program's internal fund. Cohort 11 is
+      underway with a showcase on 11 June 2026 in Melbourne. Cohort 12 applications are
+      expected to open mid-2026. Climate-tech, energy, and materials ventures regularly feature.
+    why_it_matters: >
+      The most prestigious non-dilutive pathway for early-stage deep-tech founders in Australia.
+      Subscribe to on@csiro.au for early notification when Cohort 12 opens.
+    show_from: "2026-03-01"
+    show_until: "2027-03-31"
+
+  # ─── NATIONAL: Rolling / always-open programs ────────────────────────────────
+
+  - id: arena-fmia-innovation-fund
+    name: "Future Made in Australia (FMIA) Innovation Fund — ARENA"
+    admin: "Australian Renewable Energy Agency (ARENA)"
+    level: national
+    type: grant
+    amount: "$1.5 billion total pool; no per-project maximum (min 50% co-contribution)"
+    deadline: null
+    deadline_type: rolling
+    deadline_label: "Rolling — no fixed close date (launched December 2025)"
+    target_stage: "Demonstration to commercialisation (TRL 3+)"
+    url: "https://arena.gov.au/funding/future-made-in-australia-innovation-fund/"
+    description: >
+      ARENA's flagship $1.5 billion fund targets three priority streams: Green Metals ($750M for
+      iron, steel, alumina, aluminium), Renewable Energy Technology Manufacturing ($200M for
+      batteries, solar components, electrolysers), and Low Carbon Liquid Fuels ($250M for
+      sustainable aviation fuel and renewable diesel). Minimum 50% co-contribution required.
+      Grants above $50M require ministerial sign-off. Submit via Expression of Interest in ARENANet.
+    why_it_matters: >
+      The largest single cleantech manufacturing opportunity in Australia's history. ARENA encourages
+      early engagement before submitting an EOI — contact their team first.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: arena-advancing-renewables
+    name: "ARENA Advancing Renewables Program"
+    admin: "Australian Renewable Energy Agency (ARENA)"
+    level: national
+    type: grant
+    amount: "Flexible, no fixed cap per project"
+    deadline: null
+    deadline_type: rolling
+    deadline_label: "Always open"
+    target_stage: "Development, demonstration, pre-commercial deployment (TRL 4+)"
+    url: "https://arena.gov.au/funding/advancing-renewables-program/"
+    description: >
+      ARENA's foundational program funds development, demonstration, and pre-commercial deployment
+      across all renewable energy and grid technologies. No fixed cap per project; milestone-based
+      disbursement. Submit an EOI in ARENANet — ARENA staff recommend calling before submitting.
+      Recent examples include $5M to a Queensland critical minerals startup (February 2026).
+    why_it_matters: >
+      Covers the widest range of clean energy technologies of any national program. Suitable for
+      companies with working prototypes ready for demonstration at scale.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: industry-growth-program
+    name: "Industry Growth Program (IGP)"
+    admin: "Department of Industry, Science and Resources / business.gov.au"
+    level: national
+    type: grant
+    amount: "$50,000–$5.25M matched grants (two tiers)"
+    deadline: null
+    deadline_type: rolling
+    deadline_label: "Rolling — ~90% of initial pool projected spent by June 2026"
+    target_stage: "Early-stage commercialisation to growth"
+    url: "https://business.gov.au/grants-and-programs/industry-growth-program"
+    description: >
+      The federal government's primary SME commercialisation program offers matched grants aligned
+      with National Reconstruction Fund priorities including renewables, low-emissions technologies,
+      and critical minerals. Tier 1: Early-Stage Commercialisation ($50K–$250K, dollar-for-dollar
+      matched). Tier 2: Commercialisation & Growth ($100K–$5M). Applications are always open but
+      approximately 90% of the initial funding pool was projected to be spent by June 2026.
+    why_it_matters: >
+      One of the only national programs directly supporting cleantech SMEs at early stage. Apply
+      urgently — the pool is depleting. The NRF Net Zero Fund (concessional debt/equity, $3B+)
+      is expected to open mid-2026 as a growth-stage complement.
+    signals: >
+      NRF Net Zero Fund expected to open mid-2026 for larger growth-stage capital needs.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: cefc-virescent-fund2
+    name: "CEFC / Virescent Ventures Fund II"
+    admin: "Clean Energy Finance Corporation (CEFC) via Virescent Ventures"
+    level: national
+    type: equity
+    amount: "$150M+ fund; invests pre-seed to late stage"
+    deadline: null
+    deadline_type: rolling
+    deadline_label: "Ongoing — apply directly to Virescent Ventures"
+    target_stage: "Pre-seed to late stage"
+    url: "https://www.virescent.vc/"
+    description: >
+      Australia's largest dedicated climate-tech venture fund, backed by CEFC, Westpac, QIC, and
+      Breakthrough Victoria. Virescent Ventures Fund II invests from pre-seed to late stage across
+      climate hardware, software, and services. Apply directly to Virescent; no fixed application
+      rounds or deadlines. VIC-based companies benefit from Breakthrough Victoria's 25% allocation
+      requirement.
+    why_it_matters: >
+      For startups that have cleared product-market fit and are ready for institutional equity, this
+      is the most relevant Australian climate-tech fund currently deploying capital.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: energylab-scaleup-2026
+    name: "EnergyLab Scaleup Program 2026"
+    admin: "EnergyLab"
+    level: national
+    type: accelerator
+    amount: "Non-dilutive; structured 3-module program"
+    deadline: null
+    deadline_type: rolling
+    deadline_label: "Open now — program runs June–October 2026"
+    target_stage: "Scale-up; startups ready to deploy technology commercially"
+    url: "https://energylab.org.au/programs/scaleup/"
+    description: >
+      EnergyLab's non-dilutive Scaleup Program runs June–October 2026 across three structured
+      modules, culminating in a public showcase at the AllEnergy Conference in October 2026.
+      Designed for startups and energy companies with market-ready technology seeking to accelerate
+      commercial deployment. Applications are currently open.
+    why_it_matters: >
+      An ideal companion to the Climate Solutions Accelerator for later-stage founders. Non-dilutive
+      and free to apply — the AllEnergy showcase provides direct access to energy sector buyers.
+    show_from: "2026-03-01"
+    show_until: "2026-07-31"
+
+  # ─── STATE / TERRITORY PROGRAMS ─────────────────────────────────────────────
+
+  - id: vic-breakthrough-victoria
+    name: "VIC: Breakthrough Victoria — Clean Economy Fund"
+    admin: "Breakthrough Victoria (Victorian Government)"
+    level: vic
+    type: equity
+    amount: "$75M committed to VC funds; 25% must deploy into Victorian companies"
+    deadline: null
+    deadline_type: rolling
+    deadline_label: "Ongoing — apply to backed funds (Virescent Ventures, Boson Ventures)"
+    target_stage: "Seed to growth"
+    url: "https://breakthroughvictoria.com/growth-sectors/clean-economy/"
+    description: >
+      Breakthrough Victoria has committed $75M across five VC funds including Virescent Ventures
+      Fund II. All BV-backed funds must deploy at least 25% of capital into Victorian companies.
+      Startups apply directly to the VC funds (Virescent Ventures, Boson Ventures, etc.), not to
+      BV directly. Clean economy is a priority sector.
+    why_it_matters: >
+      Victorian cleantech founders should prioritise Virescent Ventures and Boson Ventures as their
+      first equity contacts — BV's co-investment mandate increases deal size and credibility.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: wa-founders-factory-nature-tech
+    name: "WA: Founders Factory Nature Tech Accelerator"
+    admin: "Founders Factory / WA Government ($7.2M, 3-year commitment)"
+    level: wa
+    type: accelerator
+    amount: "$50,000 per startup + 4-month operational support"
+    deadline: null
+    deadline_type: tbc
+    deadline_label: "Next cohort TBC — Feb 2026 cohort underway"
+    target_stage: "Pre-seed to seed"
+    url: "https://foundersfactory.com/western-australia-government-nature-tech-accelerator/"
+    description: >
+      The WA Government has committed $7.2M over 3 years to Founders Factory's dedicated Nature
+      Tech Accelerator. Each accepted startup receives $50,000 plus 4 months of product development,
+      commercialisation, and fundraising support from the Founders Factory team. Eligible sectors:
+      environmental technologies, nature-based solutions, cleantech, biofuels. The February 2026
+      cohort is underway; next intake dates are to be confirmed.
+    why_it_matters: >
+      Western Australia's most direct pathway for early-stage environmental-tech founders.
+      The $7.2M multi-year commitment signals ongoing cohort delivery — monitor foundersfactory.com
+      for next intake.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: qld-advance-ignite-ideas
+    name: "QLD: Advance Queensland — Ignite Ideas Fund"
+    admin: "Advance Queensland (Queensland Government)"
+    level: qld
+    type: grant
+    amount: "Up to $100,000 (Tier 1) or $100,001–$200,000 (Tier 2); 20% matched contribution"
+    deadline: null
+    deadline_type: tbc
+    deadline_label: "Next round TBC — monitor advance.qld.gov.au"
+    target_stage: "MVP to early commercialisation"
+    url: "https://advance.qld.gov.au/grants-and-programs/ignite-ideas-fund"
+    description: >
+      Provides up to $200,000 to Queensland-based startups at MVP to early commercialisation stage.
+      Cleantech is an eligible priority sector. The current round is closed; Round 13 is expected
+      to open in 2026. Pre-MVP ventures should also watch the Ignite Spark program ($50K–$75K for
+      concept/prototype stage). 20% matched cash contribution required (10% for Indigenous businesses
+      or regional applicants).
+    why_it_matters: >
+      The primary non-dilutive commercialisation grant for Queensland startups. Monitor
+      advance.qld.gov.au for Round 13 opening dates.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: sa-green-industries-grants
+    name: "SA: Green Industries SA — Circular Economy Grants"
+    admin: "Green Industries SA (GISA)"
+    level: sa
+    type: grant
+    amount: "Up to $100,000 (Business & Market Development) or $200,000–$2M (Circular Infrastructure)"
+    deadline: null
+    deadline_type: tbc
+    deadline_label: "Check greenindustries.sa.gov.au for 2026 round status"
+    target_stage: "SME to established business; circular economy and recycling focus"
+    url: "https://www.greenindustries.sa.gov.au/funding"
+    description: >
+      Two grant streams available to South Australian businesses, councils, and research institutes.
+      Business & Market Development grants (up to $100,000) support circular economy business
+      development. Circular Infrastructure grants ($200,000–$2M, 50% co-contribution) fund
+      recycling, resource recovery, and materials processing infrastructure. Check GISA's website
+      for 2026 round opening dates.
+    why_it_matters: >
+      SA's primary cleantech/circular economy grant channel. Businesses in materials, waste-to-energy,
+      and recycling sectors should register their interest with GISA directly.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: tas-recfit-climate-grants
+    name: "TAS: ReCFIT Climate Change Business Innovation Grants"
+    admin: "Renewables, Climate and Future Industries Tasmania (ReCFIT)"
+    level: tas
+    type: grant
+    amount: "$25,000–$100,000; 30% cash co-contribution required"
+    deadline: null
+    deadline_type: tbc
+    deadline_label: "Next round expected early–mid 2026"
+    target_stage: "SME ($500K–$55M turnover); climate action and low-emissions tech"
+    url: "https://www.recfit.tas.gov.au/grants_programs/climate-change/climate-change-business-innovation-grants"
+    description: >
+      Tasmanian businesses with $500K–$55M annual turnover can access $25,000–$100,000 for climate
+      action and low-emissions technology projects ($550,000 total pool per round; 30% cash
+      co-contribution required). The previous round closed November 2025; outcomes and the next
+      round opening are expected in early to mid-2026.
+    why_it_matters: >
+      Tasmania's primary cleantech SME grant. Relatively small pool — early applications are
+      advantaged. Monitor recfit.tas.gov.au for the 2026 round.
+    show_from: "2026-01-01"
+    show_until: null
+
+  - id: nsw-unsw-climate-10x
+    name: "NSW: UNSW Climate 10x Accelerator (TRaCE Trailblazer)"
+    admin: "UNSW Founders (federally funded via Trailblazer for Recycling and Clean Energy)"
+    level: nsw
+    type: accelerator
+    amount: "Equity and/or non-dilutive support (details on application)"
+    deadline: null
+    deadline_type: tbc
+    deadline_label: "Check unswfounders.com/accelerators for current intake"
+    target_stage: "Early-stage; clean energy and recycling startups"
+    url: "https://unswfounders.com/accelerators"
+    description: >
+      A two-phase accelerator funded by the federal Trailblazer for Recycling and Clean Energy
+      (TRaCE) program. Phase 1 (Pre-X, 4 weeks) accepts 15 teams; Phase 2 (Accelerator, 10 weeks)
+      takes the strongest through to investment readiness. Open to any Australian startup — no
+      UNSW affiliation required.
+    why_it_matters: >
+      Federal Trailblazer funding means this program has significant resources for participants
+      compared to standard accelerators. Clean energy and recycling sectors particularly well served.
+    show_from: "2026-01-01"
+    show_until: null
