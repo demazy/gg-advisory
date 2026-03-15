@@ -581,10 +581,10 @@
     "summary": "",
     "source": "efrag.org",
     "section": "ESG Reporting",
-    "published_iso": "2026-03-04T12:00:00+00:00",
-    "published_ts": 1772625600.0,
-    "published_source": "meta",
-    "published_confidence": 0.75,
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
     "index_url": "https://www.efrag.org/en/news-and-calendar/news"
   },
   {
@@ -593,10 +593,10 @@
     "summary": "",
     "source": "efrag.org",
     "section": "ESG Reporting",
-    "published_iso": "2026-03-12T12:00:00+00:00",
-    "published_ts": 1773316800.0,
-    "published_source": "meta",
-    "published_confidence": 0.75,
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
     "index_url": "https://www.efrag.org/en/news-and-calendar/news"
   },
   {

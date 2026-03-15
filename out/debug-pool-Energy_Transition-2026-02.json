@@ -1261,7 +1261,7 @@
   },
   {
     "url": "https://www.cer.gov.au/news-and-media/news",
-    "title": "News | Clean Energy Regulator",
+    "title": "https://www.cer.gov.au/news-and-media/news",
     "summary": "",
     "source": "cer.gov.au",
     "section": "Energy Transition",
@@ -1757,10 +1757,10 @@
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
-    "published_iso": "2025-11-05T00:31:00+00:00",
-    "published_ts": 1762302660.0,
-    "published_source": "meta",
-    "published_confidence": 0.75,
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
     "index_url": "https://www.energynetworks.com.au/news/media-releases/"
   },
   {
@@ -2021,10 +2021,10 @@
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
-    "published_iso": "2024-06-25T23:40:47+00:00",
-    "published_ts": 1719358847.0,
-    "published_source": "meta",
-    "published_confidence": 0.75,
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
     "index_url": "https://www.energynetworks.com.au/news/media-releases/"
   },
   {
@@ -2033,10 +2033,10 @@
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
-    "published_iso": "2024-05-22T23:30:06+00:00",
-    "published_ts": 1716420606.0,
-    "published_source": "meta",
-    "published_confidence": 0.75,
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
     "index_url": "https://www.energynetworks.com.au/news/media-releases/"
   },
   {
@@ -2045,10 +2045,10 @@
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
-    "published_iso": "2024-04-29T23:43:26+00:00",
-    "published_ts": 1714434206.0,
-    "published_source": "meta",
-    "published_confidence": 0.75,
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
     "index_url": "https://www.energynetworks.com.au/news/media-releases/"
   },
   {
@@ -2225,10 +2225,10 @@
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
-    "published_iso": "2023-05-09T23:39:25+00:00",
-    "published_ts": 1683675565.0,
-    "published_source": "meta",
-    "published_confidence": 0.75,
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
     "index_url": "https://www.energynetworks.com.au/news/media-releases/"
   },
   {
@@ -2413,7 +2413,7 @@
   },
   {
     "url": "https://www.cleanenergycouncil.org.au/news",
-    "title": "News Listing | Clean Energy Council",
+    "title": "https://www.cleanenergycouncil.org.au/news",
     "summary": "",
     "source": "cleanenergycouncil.org.au",
     "section": "Energy Transition",
@@ -5413,7 +5413,7 @@
   },
   {
     "url": "https://energyconsumersaustralia.com.au/news",
-    "title": "News",
+    "title": "https://energyconsumersaustralia.com.au/news",
     "summary": "",
     "source": "energyconsumersaustralia.com.au",
     "section": "Energy Transition",

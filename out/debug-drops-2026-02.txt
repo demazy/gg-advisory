@@ -104,7 +104,7 @@ undated	https://www.aemc.gov.au/news-centre/speeches/looking-back-now-viewing-en
 undated	https://www.aemc.gov.au/news-centre/speeches/australian-energy-week-keynote-speech	Australian Energy Week: Keynote Speech
 undated	https://www.aemc.gov.au/news-centre/speeches/renewable-energy-integration-our-national-electricity-market	Renewable energy integration in our national electricity market
 undated	https://www.aemc.gov.au/news-centre/speeches/perspective-australias-microeconomic-reform-journey	A perspective on Australia's microeconomic reform journey
-undated	https://www.cer.gov.au/news-and-media/news	News | Clean Energy Regulator
+undated	https://www.cer.gov.au/news-and-media/news	https://www.cer.gov.au/news-and-media/news
 undated	https://www.cer.gov.au/news-and-media/media-centre/media-releases	media releases
 out_of_range	https://www.cer.gov.au/news-and-media/news/2026/january/explore-q4-2025-qcmr-data-workbook	Explore Q4 2025 Qcmr Data Workbook
 out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fifth-independent-review-hir-gateway-checks	Fifth Independent Review Hir Gateway Checks
@@ -136,7 +136,7 @@ out_of_range	https://www.energynetworks.com.au/news/energy-insider/why-you-cant-
 undated	https://www.energynetworks.com.au/resources/	Resources
 undated	https://www.energynetworks.com.au/guidelines/	Guidelines
 out_of_range	https://www.energynetworks.com.au/news/media-releases/15031/	Dom van den Berg, Chief Executive Energy Networks Australia responds to AEMC’s residential price outlook
-out_of_range	https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-new-chair-and-board-directors/	Energy Networks Australia welcomes new Chair and Board Directors
+undated	https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-new-chair-and-board-directors/	Energy Networks Australia welcomes new Chair and Board Directors
 out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-establishment-of-national-energy-cybersecurity-body-nepki/	ENA welcomes establishment of national energy cybersecurity body (NEPKI)
 out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-statement-on-2035-emissions-reduction-target/	ENA statement on 2035 emissions reduction target
 out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-awards-honour-outstanding-sector-contributions/	Energy networks awards honour outstanding sector contributions
@@ -158,9 +158,9 @@ out_of_range	https://www.energynetworks.com.au/news/media-releases/sa-power-netw
 out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-nsw-consumer-energy-strategy/	ENA welcomes NSW Consumer Energy Strategy
 out_of_range	https://www.energynetworks.com.au/news/media-releases/the-time-is-now-to-get-smarter-with-the-local-grid/	The time is now to get smarter with the local grid
 out_of_range	https://www.energynetworks.com.au/news/media-releases/renewable-gas-for-a-future-made-in-australia/	Renewable gas for a future made in Australia
-out_of_range	https://www.energynetworks.com.au/news/energy-networks-australia-ceo-response-to-2024-isp/	Energy Networks Australia CEO response to 2024 ISP
-out_of_range	https://www.energynetworks.com.au/news/ena-response-to-2024-25-final-dmo-decision/	Energy Networks Australia response to 2024-25 final DMO decision
-out_of_range	https://www.energynetworks.com.au/news/all-pathways-lead-to-renewable-gas-for-australian-industry/	All pathways lead to renewable gas for Australian industry
+undated	https://www.energynetworks.com.au/news/energy-networks-australia-ceo-response-to-2024-isp/	Energy Networks Australia CEO response to 2024 ISP
+undated	https://www.energynetworks.com.au/news/ena-response-to-2024-25-final-dmo-decision/	Energy Networks Australia response to 2024-25 final DMO decision
+undated	https://www.energynetworks.com.au/news/all-pathways-lead-to-renewable-gas-for-australian-industry/	All pathways lead to renewable gas for Australian industry
 out_of_range	https://www.energynetworks.com.au/news/media-releases/new-award-to-spotlight-role-of-women-in-energy/	New award to spotlight role of women in energy
 out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ena-welcomes-the-australian-energy-market-operators-aemo-draft-2024-integrated-system-plan-isp/	Energy Networks Australia (ENA) welcomes the Australian Energy Market Operator’s (AEMO) Draft 2024 Integrated System Plan (ISP)
 out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ceo-dom-van-den-bergs-statement-on-victorian-gas-substitution-roadmap/	Energy Networks Australia CEO Dom van den Berg’s statement on Victorian Gas Substitution Roadmap
@@ -175,7 +175,7 @@ out_of_range	https://www.energynetworks.com.au/news/media-releases/innovation-sh
 out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-calls-for-policy-consultation/	Industry calls for policy consultation
 out_of_range	https://www.energynetworks.com.au/news/media-releases/reliability-and-service-top-performers/	Reliability and service top performers
 out_of_range	https://www.energynetworks.com.au/news/media-releases/fast-tracked-vni-west-is-vital-for-energy-transition/	Fast tracked VNI West is vital for energy transition
-out_of_range	https://www.energynetworks.com.au/news/energy-bill-relief-and-budget-initiatives-welcomed-by-energy-networks/	Energy bill relief and budget initiatives welcomed by energy networks
+undated	https://www.energynetworks.com.au/news/energy-bill-relief-and-budget-initiatives-welcomed-by-energy-networks/	Energy bill relief and budget initiatives welcomed by energy networks
 out_of_range	https://www.energynetworks.com.au/news/media-releases/electricity-networks-to-fuel-new-wave-of-electric-vehicles-in-australia/	Electricity networks to ‘fuel’ new wave of electric vehicles in Australia
 out_of_range	https://www.energynetworks.com.au/news/media-releases/renewable-gas-target-could-supercharge-hydrogen/	Renewable gas target could supercharge hydrogen
 out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ceo-appointment/	Energy Networks Australia CEO appointment
@@ -191,7 +191,7 @@ out_of_range	https://www.energynetworks.com.au/news/media-releases/benefit-payme
 out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-welcomes-transmission-investment/	Industry welcomes transmission investment
 out_of_range	https://www.energynetworks.com.au/news/media-releases/misguided-report-needs-fact-check-network-prices-lowest-in-10-years/	Misguided report needs fact check-network prices lowest in 10 years
 out_of_range	https://www.energynetworks.com.au/news/media-releases/stable-regulation-essential-to-deliver-energy-transition/	Stable regulation essential to deliver energy transition
-undated	https://www.cleanenergycouncil.org.au/news	News Listing | Clean Energy Council
+undated	https://www.cleanenergycouncil.org.au/news	https://www.cleanenergycouncil.org.au/news
 undated	https://www.cleanenergycouncil.org.au/	/ Home
 undated	https://www.cleanenergycouncil.org.au/news-resources	/ News and resources
 undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-australia-2024-report	Find out more
@@ -441,7 +441,7 @@ undated	https://www.cleanenergycouncil.org.au/news-resources/australias-leading-
 undated	https://www.cleanenergycouncil.org.au/news-resources/levelised-cost-of-electricity-review	Find out more
 undated	https://www.cleanenergycouncil.org.au/news-resources/submission-to-bass-strait-proposed-offshore-wind-area	Find out more
 undated	https://www.cleanenergycouncil.org.au/news-resources/response-to-the-future-gas-strategy-consultation-paper	Find out more
-generic_title	https://energyconsumersaustralia.com.au/news	News
+undated	https://energyconsumersaustralia.com.au/news	https://energyconsumersaustralia.com.au/news
 undated	https://energyconsumersaustralia.com.au/news?sort_by=published_at&sort_order=DESC	Newest
 undated	https://energyconsumersaustralia.com.au/news?sort_by=published_at&sort_order=ASC	Oldest
 undated	https://energyconsumersaustralia.com.au/news?sort_by=title&sort_order=ASC	Title (A-Z)
@@ -567,7 +567,7 @@ undated	https://www.aemc.gov.au/news-centre/speeches/looking-back-now-viewing-en
 undated	https://www.aemc.gov.au/news-centre/speeches/australian-energy-week-keynote-speech	Australian Energy Week: Keynote Speech
 undated	https://www.aemc.gov.au/news-centre/speeches/renewable-energy-integration-our-national-electricity-market	Renewable energy integration in our national electricity market
 undated	https://www.aemc.gov.au/news-centre/speeches/perspective-australias-microeconomic-reform-journey	A perspective on Australia's microeconomic reform journey
-undated	https://www.cer.gov.au/news-and-media/news	News | Clean Energy Regulator
+undated	https://www.cer.gov.au/news-and-media/news	https://www.cer.gov.au/news-and-media/news
 undated	https://www.cer.gov.au/news-and-media/media-centre/media-releases	media releases
 out_of_range	https://www.cer.gov.au/news-and-media/news/2026/january/explore-q4-2025-qcmr-data-workbook	Explore Q4 2025 Qcmr Data Workbook
 out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fifth-independent-review-hir-gateway-checks	Fifth Independent Review Hir Gateway Checks
@@ -599,7 +599,7 @@ out_of_range	https://www.energynetworks.com.au/news/energy-insider/why-you-cant-
 undated	https://www.energynetworks.com.au/resources/	Resources
 undated	https://www.energynetworks.com.au/guidelines/	Guidelines
 out_of_range	https://www.energynetworks.com.au/news/media-releases/15031/	Dom van den Berg, Chief Executive Energy Networks Australia responds to AEMC’s residential price outlook
-out_of_range	https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-new-chair-and-board-directors/	Energy Networks Australia welcomes new Chair and Board Directors
+undated	https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-new-chair-and-board-directors/	Energy Networks Australia welcomes new Chair and Board Directors
 out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-establishment-of-national-energy-cybersecurity-body-nepki/	ENA welcomes establishment of national energy cybersecurity body (NEPKI)
 out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-statement-on-2035-emissions-reduction-target/	ENA statement on 2035 emissions reduction target
 out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-awards-honour-outstanding-sector-contributions/	Energy networks awards honour outstanding sector contributions
@@ -621,9 +621,9 @@ out_of_range	https://www.energynetworks.com.au/news/media-releases/sa-power-netw
 out_of_range	https://www.energynetworks.com.au/news/media-releases/ena-welcomes-nsw-consumer-energy-strategy/	ENA welcomes NSW Consumer Energy Strategy
 out_of_range	https://www.energynetworks.com.au/news/media-releases/the-time-is-now-to-get-smarter-with-the-local-grid/	The time is now to get smarter with the local grid
 out_of_range	https://www.energynetworks.com.au/news/media-releases/renewable-gas-for-a-future-made-in-australia/	Renewable gas for a future made in Australia
-out_of_range	https://www.energynetworks.com.au/news/energy-networks-australia-ceo-response-to-2024-isp/	Energy Networks Australia CEO response to 2024 ISP
-out_of_range	https://www.energynetworks.com.au/news/ena-response-to-2024-25-final-dmo-decision/	Energy Networks Australia response to 2024-25 final DMO decision
-out_of_range	https://www.energynetworks.com.au/news/all-pathways-lead-to-renewable-gas-for-australian-industry/	All pathways lead to renewable gas for Australian industry
+undated	https://www.energynetworks.com.au/news/energy-networks-australia-ceo-response-to-2024-isp/	Energy Networks Australia CEO response to 2024 ISP
+undated	https://www.energynetworks.com.au/news/ena-response-to-2024-25-final-dmo-decision/	Energy Networks Australia response to 2024-25 final DMO decision
+undated	https://www.energynetworks.com.au/news/all-pathways-lead-to-renewable-gas-for-australian-industry/	All pathways lead to renewable gas for Australian industry
 out_of_range	https://www.energynetworks.com.au/news/media-releases/new-award-to-spotlight-role-of-women-in-energy/	New award to spotlight role of women in energy
 out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ena-welcomes-the-australian-energy-market-operators-aemo-draft-2024-integrated-system-plan-isp/	Energy Networks Australia (ENA) welcomes the Australian Energy Market Operator’s (AEMO) Draft 2024 Integrated System Plan (ISP)
 out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ceo-dom-van-den-bergs-statement-on-victorian-gas-substitution-roadmap/	Energy Networks Australia CEO Dom van den Berg’s statement on Victorian Gas Substitution Roadmap
@@ -638,7 +638,7 @@ out_of_range	https://www.energynetworks.com.au/news/media-releases/innovation-sh
 out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-calls-for-policy-consultation/	Industry calls for policy consultation
 out_of_range	https://www.energynetworks.com.au/news/media-releases/reliability-and-service-top-performers/	Reliability and service top performers
 out_of_range	https://www.energynetworks.com.au/news/media-releases/fast-tracked-vni-west-is-vital-for-energy-transition/	Fast tracked VNI West is vital for energy transition
-out_of_range	https://www.energynetworks.com.au/news/energy-bill-relief-and-budget-initiatives-welcomed-by-energy-networks/	Energy bill relief and budget initiatives welcomed by energy networks
+undated	https://www.energynetworks.com.au/news/energy-bill-relief-and-budget-initiatives-welcomed-by-energy-networks/	Energy bill relief and budget initiatives welcomed by energy networks
 out_of_range	https://www.energynetworks.com.au/news/media-releases/electricity-networks-to-fuel-new-wave-of-electric-vehicles-in-australia/	Electricity networks to ‘fuel’ new wave of electric vehicles in Australia
 out_of_range	https://www.energynetworks.com.au/news/media-releases/renewable-gas-target-could-supercharge-hydrogen/	Renewable gas target could supercharge hydrogen
 out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-ceo-appointment/	Energy Networks Australia CEO appointment
@@ -654,7 +654,7 @@ out_of_range	https://www.energynetworks.com.au/news/media-releases/benefit-payme
 out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-welcomes-transmission-investment/	Industry welcomes transmission investment
 out_of_range	https://www.energynetworks.com.au/news/media-releases/misguided-report-needs-fact-check-network-prices-lowest-in-10-years/	Misguided report needs fact check-network prices lowest in 10 years
 out_of_range	https://www.energynetworks.com.au/news/media-releases/stable-regulation-essential-to-deliver-energy-transition/	Stable regulation essential to deliver energy transition
-undated	https://www.cleanenergycouncil.org.au/news	News Listing | Clean Energy Council
+undated	https://www.cleanenergycouncil.org.au/news	https://www.cleanenergycouncil.org.au/news
 undated	https://www.cleanenergycouncil.org.au/	/ Home
 undated	https://www.cleanenergycouncil.org.au/news-resources	/ News and resources
 undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-australia-2024-report	Find out more
@@ -904,7 +904,7 @@ undated	https://www.cleanenergycouncil.org.au/news-resources/australias-leading-
 undated	https://www.cleanenergycouncil.org.au/news-resources/levelised-cost-of-electricity-review	Find out more
 undated	https://www.cleanenergycouncil.org.au/news-resources/submission-to-bass-strait-proposed-offshore-wind-area	Find out more
 undated	https://www.cleanenergycouncil.org.au/news-resources/response-to-the-future-gas-strategy-consultation-paper	Find out more
-generic_title	https://energyconsumersaustralia.com.au/news	News
+undated	https://energyconsumersaustralia.com.au/news	https://energyconsumersaustralia.com.au/news
 undated	https://energyconsumersaustralia.com.au/news?sort_by=published_at&sort_order=DESC	Newest
 undated	https://energyconsumersaustralia.com.au/news?sort_by=published_at&sort_order=ASC	Oldest
 undated	https://energyconsumersaustralia.com.au/news?sort_by=title&sort_order=ASC	Title (A-Z)
@@ -972,7 +972,7 @@ out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb
 deny_title_regex	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
 deny_title_regex	https://www.ifrs.org/news-and-events/news/	Cookie details
 undated	https://www.efrag.org/en	https://www.efrag.org/en
-out_of_range	https://www.efrag.org/en/updates	the EFRAG Update
+undated	https://www.efrag.org/en/updates	the EFRAG Update
 deny_title_regex	https://www.efrag.org/en/node/20565	EFRAG publishes Feedback Statement on Post-Implementation Review of IFRS 16 Leases
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-launches-interactive-draft-simplified-esrs-on-the-knowledge-hub-register-now-to-explore	EFRAG launches interactive Draft Simplified ESRS on the Knowledge Hub: register now to explore!
 deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-16-march-2026	EFRAG SR TEG Online Meeting 16 March 2026
@@ -1045,7 +1045,7 @@ out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb
 deny_title_regex	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
 deny_title_regex	https://www.ifrs.org/news-and-events/news/	Cookie details
 undated	https://www.efrag.org/en	https://www.efrag.org/en
-out_of_range	https://www.efrag.org/en/updates	the EFRAG Update
+undated	https://www.efrag.org/en/updates	the EFRAG Update
 deny_title_regex	https://www.efrag.org/en/node/20565	EFRAG publishes Feedback Statement on Post-Implementation Review of IFRS 16 Leases
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-launches-interactive-draft-simplified-esrs-on-the-knowledge-hub-register-now-to-explore	EFRAG launches interactive Draft Simplified ESRS on the Knowledge Hub: register now to explore!
 deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-16-march-2026	EFRAG SR TEG Online Meeting 16 March 2026
@@ -1123,13 +1123,13 @@ evergreen_program_page	https://arena.gov.au/funding/australian-solar-institute/	
 evergreen_program_page	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
 undated	https://arena.gov.au/news/	Back to top
 undated	https://about.bnef.com/insights/type/report/	All Reports
-out_of_range	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/	REPORT Electric Vehicle Outlook
-out_of_range	https://about.bnef.com/insights/commodities/transition-metal-outlook/	REPORT Transition Metals Outlook
-out_of_range	https://about.bnef.com/insights/uncategorized/energy-transition-investment-trends/	REPORT Energy Transition Investment Trends
-out_of_range	https://about.bnef.com/insights/uncategorized/new-energy-outlook/	REPORT New Energy Outlook
-out_of_range	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook/	Electric Vehicle Outlook
-out_of_range	https://about.bnef.com/insights/finance/energy-transition-investment-trends/	Energy Transition Investment Trends
-out_of_range	https://about.bnef.com/insights/clean-energy/new-energy-outlook/	New Energy Outlook
+undated	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/	REPORT Electric Vehicle Outlook
+undated	https://about.bnef.com/insights/commodities/transition-metal-outlook/	REPORT Transition Metals Outlook
+undated	https://about.bnef.com/insights/uncategorized/energy-transition-investment-trends/	REPORT Energy Transition Investment Trends
+undated	https://about.bnef.com/insights/uncategorized/new-energy-outlook/	REPORT New Energy Outlook
+undated	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook/	Electric Vehicle Outlook
+undated	https://about.bnef.com/insights/finance/energy-transition-investment-trends/	Energy Transition Investment Trends
+undated	https://about.bnef.com/insights/clean-energy/new-energy-outlook/	New Energy Outlook
 deny_title_regex	https://about.bnef.com/insights/climate-week-and-cop-public-research/	Discover BNEF's Climate Week and COP Public Research, freely available to non-subscribers.
 undated	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
 undated	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	The work plan
@@ -1191,23 +1191,26 @@ undated	https://www.rba.gov.au/publications/consultations/	Consultations
 undated	https://www.rba.gov.au/payments-and-infrastructure/financial-market-infrastructure/assessments/	Payments and Market Infrastructure Assessments
 out_of_range	https://www.rba.gov.au/publications/podcast/	Podcasts
 undated	https://igcc.org.au/news/	News - Investor Group on Climate Change
-out_of_range	https://igcc.org.au/were-hiring-special-policy-advisor-methane-initiative/	We’re Hiring: Methane Engagement and Policy Advisor
+undated	https://igcc.org.au/were-hiring-special-policy-advisor-methane-initiative/	We’re Hiring: Methane Engagement and Policy Advisor
 undated	https://igcc.org.au/workstream/corporate-engagement/	Corporate Engagement
 undated	https://igcc.org.au/workstream/policy-advocacy/	Policy & Advocacy
+undated	https://igcc.org.au/igcc-2030-strategy/	IGCC’s 2030 Strategy: A Clear Plan For This Decade
 undated	https://igcc.org.au/market/australia/	Australia
 undated	https://igcc.org.au/workstream/investor-practice/	Investor Practice
 undated	https://igcc.org.au/market/new-zealand/	New Zealand
+undated	https://igcc.org.au/annual-report-2025-investors-progress-through-a-year-of-global-turmoil/	Annual Report 2025: Investors’ Progress in a Year of Global Turmoil
+undated	https://igcc.org.au/submission-community-benefits-principles-for-fmia/	Submission: Community Benefits Principles for a Future Made in Australia
 undated	https://igcc.org.au/working_group/energy-transition/	Energy Transition Working Group
 undated	https://igcc.org.au/working_group/policy-advocacy/	Policy & Advocacy Working Group
-out_of_range	https://igcc.org.au/systems-level-engagement/	New IGCC Report: Investors Must Engage the Wider System to Tackle Climate Risks Threatening Market-Wide Returns
+undated	https://igcc.org.au/systems-level-engagement/	New IGCC Report: Investors Must Engage the Wider System to Tackle Climate Risks Threatening Market-Wide Returns
 undated	https://igcc.org.au/working_group/corporate-engagement/	Corporate Engagement Working Group
-out_of_range	https://igcc.org.au/igcc-appears-before-aotearoa-new-zealand-parliamentary-committee-international-capital-wants-climate-reporting/	IGCC appears before Aotearoa New Zealand Parliamentary Committee: International capital wants climate reporting
-out_of_range	https://igcc.org.au/australias-60bn-public-capital-system-and-the-climate-investment-opportunity-2/	Our $60bn Public Capital System and Climate
+undated	https://igcc.org.au/igcc-appears-before-aotearoa-new-zealand-parliamentary-committee-international-capital-wants-climate-reporting/	IGCC appears before Aotearoa New Zealand Parliamentary Committee: International capital wants climate reporting
+undated	https://igcc.org.au/australias-60bn-public-capital-system-and-the-climate-investment-opportunity-2/	Our $60bn Public Capital System and Climate
 undated	https://igcc.org.au/working_group/climate-solutions-swg/	Climate Solutions Subworking Group
-out_of_range	https://igcc.org.au/australian-cop-president-negotiations-has-potential-for-economic-wins/	Australian COP President (Negotiations) has Potential for Economic Wins
-out_of_range	https://igcc.org.au/igccs-climate-leaders-awards-go-to-john-thwaites-alison-ewings-ros-mckay-and-rick-walters/	IGCC’s Climate Leaders’ Awards go to John Thwaites, Alison Ewings, Ros McKay and Rick Walters
+undated	https://igcc.org.au/australian-cop-president-negotiations-has-potential-for-economic-wins/	Australian COP President (Negotiations) has Potential for Economic Wins
+undated	https://igcc.org.au/igccs-climate-leaders-awards-go-to-john-thwaites-alison-ewings-ros-mckay-and-rick-walters/	IGCC’s Climate Leaders’ Awards go to John Thwaites, Alison Ewings, Ros McKay and Rick Walters
 undated	https://igcc.org.au/working_group/investor-practice/	Investor Practice Working Group
-out_of_range	https://igcc.org.au/igcc-summit-2025-decoding-the-transition-key-moments/	IGCC Summit 2025: Decoding the Transition: Key Moments
+undated	https://igcc.org.au/igcc-summit-2025-decoding-the-transition-key-moments/	IGCC Summit 2025: Decoding the Transition: Key Moments
 evergreen_program_page	https://arena.gov.au/funding/	Back to top
 undated	https://arena.gov.au/	Home
 undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
@@ -1260,13 +1263,13 @@ evergreen_program_page	https://arena.gov.au/funding/australian-solar-institute/	
 evergreen_program_page	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
 undated	https://arena.gov.au/news/	Back to top
 undated	https://about.bnef.com/insights/type/report/	All Reports
-out_of_range	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/	REPORT Electric Vehicle Outlook
-out_of_range	https://about.bnef.com/insights/commodities/transition-metal-outlook/	REPORT Transition Metals Outlook
-out_of_range	https://about.bnef.com/insights/uncategorized/energy-transition-investment-trends/	REPORT Energy Transition Investment Trends
-out_of_range	https://about.bnef.com/insights/uncategorized/new-energy-outlook/	REPORT New Energy Outlook
-out_of_range	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook/	Electric Vehicle Outlook
-out_of_range	https://about.bnef.com/insights/finance/energy-transition-investment-trends/	Energy Transition Investment Trends
-out_of_range	https://about.bnef.com/insights/clean-energy/new-energy-outlook/	New Energy Outlook
+undated	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/	REPORT Electric Vehicle Outlook
+undated	https://about.bnef.com/insights/commodities/transition-metal-outlook/	REPORT Transition Metals Outlook
+undated	https://about.bnef.com/insights/uncategorized/energy-transition-investment-trends/	REPORT Energy Transition Investment Trends
+undated	https://about.bnef.com/insights/uncategorized/new-energy-outlook/	REPORT New Energy Outlook
+undated	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook/	Electric Vehicle Outlook
+undated	https://about.bnef.com/insights/finance/energy-transition-investment-trends/	Energy Transition Investment Trends
+undated	https://about.bnef.com/insights/clean-energy/new-energy-outlook/	New Energy Outlook
 deny_title_regex	https://about.bnef.com/insights/climate-week-and-cop-public-research/	Discover BNEF's Climate Week and COP Public Research, freely available to non-subscribers.
 undated	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
 undated	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	The work plan
@@ -1328,23 +1331,397 @@ undated	https://www.rba.gov.au/publications/consultations/	Consultations
 undated	https://www.rba.gov.au/payments-and-infrastructure/financial-market-infrastructure/assessments/	Payments and Market Infrastructure Assessments
 out_of_range	https://www.rba.gov.au/publications/podcast/	Podcasts
 undated	https://igcc.org.au/news/	News - Investor Group on Climate Change
-out_of_range	https://igcc.org.au/were-hiring-special-policy-advisor-methane-initiative/	We’re Hiring: Methane Engagement and Policy Advisor
+undated	https://igcc.org.au/were-hiring-special-policy-advisor-methane-initiative/	We’re Hiring: Methane Engagement and Policy Advisor
 undated	https://igcc.org.au/workstream/corporate-engagement/	Corporate Engagement
 undated	https://igcc.org.au/workstream/policy-advocacy/	Policy & Advocacy
+undated	https://igcc.org.au/igcc-2030-strategy/	IGCC’s 2030 Strategy: A Clear Plan For This Decade
 undated	https://igcc.org.au/market/australia/	Australia
 undated	https://igcc.org.au/workstream/investor-practice/	Investor Practice
 undated	https://igcc.org.au/market/new-zealand/	New Zealand
+undated	https://igcc.org.au/annual-report-2025-investors-progress-through-a-year-of-global-turmoil/	Annual Report 2025: Investors’ Progress in a Year of Global Turmoil
+undated	https://igcc.org.au/submission-community-benefits-principles-for-fmia/	Submission: Community Benefits Principles for a Future Made in Australia
 undated	https://igcc.org.au/working_group/energy-transition/	Energy Transition Working Group
 undated	https://igcc.org.au/working_group/policy-advocacy/	Policy & Advocacy Working Group
-out_of_range	https://igcc.org.au/systems-level-engagement/	New IGCC Report: Investors Must Engage the Wider System to Tackle Climate Risks Threatening Market-Wide Returns
+undated	https://igcc.org.au/systems-level-engagement/	New IGCC Report: Investors Must Engage the Wider System to Tackle Climate Risks Threatening Market-Wide Returns
 undated	https://igcc.org.au/working_group/corporate-engagement/	Corporate Engagement Working Group
-out_of_range	https://igcc.org.au/igcc-appears-before-aotearoa-new-zealand-parliamentary-committee-international-capital-wants-climate-reporting/	IGCC appears before Aotearoa New Zealand Parliamentary Committee: International capital wants climate reporting
-out_of_range	https://igcc.org.au/australias-60bn-public-capital-system-and-the-climate-investment-opportunity-2/	Our $60bn Public Capital System and Climate
+undated	https://igcc.org.au/igcc-appears-before-aotearoa-new-zealand-parliamentary-committee-international-capital-wants-climate-reporting/	IGCC appears before Aotearoa New Zealand Parliamentary Committee: International capital wants climate reporting
+undated	https://igcc.org.au/australias-60bn-public-capital-system-and-the-climate-investment-opportunity-2/	Our $60bn Public Capital System and Climate
 undated	https://igcc.org.au/working_group/climate-solutions-swg/	Climate Solutions Subworking Group
-out_of_range	https://igcc.org.au/australian-cop-president-negotiations-has-potential-for-economic-wins/	Australian COP President (Negotiations) has Potential for Economic Wins
-out_of_range	https://igcc.org.au/igccs-climate-leaders-awards-go-to-john-thwaites-alison-ewings-ros-mckay-and-rick-walters/	IGCC’s Climate Leaders’ Awards go to John Thwaites, Alison Ewings, Ros McKay and Rick Walters
+undated	https://igcc.org.au/australian-cop-president-negotiations-has-potential-for-economic-wins/	Australian COP President (Negotiations) has Potential for Economic Wins
+undated	https://igcc.org.au/igccs-climate-leaders-awards-go-to-john-thwaites-alison-ewings-ros-mckay-and-rick-walters/	IGCC’s Climate Leaders’ Awards go to John Thwaites, Alison Ewings, Ros McKay and Rick Walters
 undated	https://igcc.org.au/working_group/investor-practice/	Investor Practice Working Group
-out_of_range	https://igcc.org.au/igcc-summit-2025-decoding-the-transition-key-moments/	IGCC Summit 2025: Decoding the Transition: Key Moments
+undated	https://igcc.org.au/igcc-summit-2025-decoding-the-transition-key-moments/	IGCC Summit 2025: Decoding the Transition: Key Moments
+evergreen_program_page	https://arena.gov.au/funding/	Back to top
+undated	https://arena.gov.au/	Home
+undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+evergreen_program_page	https://arenanet.arena.gov.au/s/funding-advice	here
+evergreen_program_page	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+evergreen_program_page	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+out_of_range	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+evergreen_program_page	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+out_of_range	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+evergreen_program_page	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+undated	https://arena.gov.au/news	Funding Opportunities
+evergreen_program_page	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+evergreen_program_page	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+evergreen_program_page	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+evergreen_program_page	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+evergreen_program_page	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+evergreen_program_page	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+evergreen_program_page	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+evergreen_program_page	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+evergreen_program_page	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+evergreen_program_page	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+evergreen_program_page	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+out_of_range	https://arena.gov.au/funding/research-development-program/	Research and Development
+evergreen_program_page	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+evergreen_program_page	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated	https://arena.gov.au/projects	Funding Opportunities
+undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
+evergreen_program_page	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+evergreen_program_page	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+evergreen_program_page	https://arena.gov.au/funding/power-system-services/	System Security
+evergreen_program_page	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+evergreen_program_page	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+evergreen_program_page	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+evergreen_program_page	https://arena.gov.au/funding/demand-response/	Demand Response
+evergreen_program_page	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+evergreen_program_page	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+evergreen_program_page	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+evergreen_program_page	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+evergreen_program_page	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+evergreen_program_page	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+evergreen_program_page	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+evergreen_program_page	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+evergreen_program_page	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+evergreen_program_page	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+evergreen_program_page	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+evergreen_program_page	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+evergreen_program_page	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+undated	https://arena.gov.au/news/	Back to top
+undated	https://about.bnef.com/insights/type/report/	All Reports
+undated	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/	REPORT Electric Vehicle Outlook
+undated	https://about.bnef.com/insights/commodities/transition-metal-outlook/	REPORT Transition Metals Outlook
+undated	https://about.bnef.com/insights/uncategorized/energy-transition-investment-trends/	REPORT Energy Transition Investment Trends
+undated	https://about.bnef.com/insights/uncategorized/new-energy-outlook/	REPORT New Energy Outlook
+undated	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook/	Electric Vehicle Outlook
+undated	https://about.bnef.com/insights/finance/energy-transition-investment-trends/	Energy Transition Investment Trends
+undated	https://about.bnef.com/insights/clean-energy/new-energy-outlook/	New Energy Outlook
+deny_title_regex	https://about.bnef.com/insights/climate-week-and-cop-public-research/	Discover BNEF's Climate Week and COP Public Research, freely available to non-subscribers.
+undated	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
+undated	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	The work plan
+deny_title_regex	https://www.ifrs.org/news-and-events/updates/issb/	Cookie details
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html	ISSB Update January 2026
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html	ISSB Update January 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-february-2025.html	ISSB Update February 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-march-2025.html	ISSB Update March 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-april-2025.html	ISSB Update April 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-june-2025.html	ISSB Update June 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-july-2025.html	ISSB Update July 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html	ISSB Update September 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-november-2025.html	ISSB Update November 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/iasb-issb/2025/iasb-issb-update-february-2025.html	IASB–ISSB Update February 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-october-2025.html	ISSB Update October 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-may-2025.html	ISSB Update May 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-december-2025.html	ISSB Update December 2025
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/joint-iasb-issb-update-january-2024.html	IASB–ISSB Update January 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-february-2024.html	ISSB Update February 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-april-2024.html	ISSB Update April 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-july-2024.html	ISSB Update July 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-june-2024.html	ISSB Update June 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-may-2024.html	ISSB Update May 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-march-2024.html	ISSB Update March 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-september-2024.html	ISSB Update September 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-october-2024.html	ISSB Update October 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-november-2024.html	ISSB Update November 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-december-2024.html	ISSB Update December 2024
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/supplementary-issb-update-april-2023.html	Supplementary ISSB Update April 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-january-2023.html	ISSB Update January 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-february-2023.html	ISSB Update February 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-may-2023.html	ISSB Update May 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-july-2023.html	ISSB Update July 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-september-2023.html	ISSB Update September 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-october-2023.html	ISSB Update October 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-march-2023.html	ISSB Update March 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-december-2023.html	ISSB Update December 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-november-2023.html	ISSB Update November 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-april-2023.html	ISSB Update April 2023
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/supplementary-issb-update-november-2022.html	Supplementary ISSB Update November 2022
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-september-2022.html	ISSB Update September 2022
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-november-2022.html	ISSB Update November 2022
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-october-2022.html	ISSB Update October 2022
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
+out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
+deny_title_regex	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
+undated	https://www.rba.gov.au/publications/smp/	Statement on Monetary Policy
+undated	https://www.rba.gov.au/publications/fsr/	Financial Stability Review
+generic_title	https://www.rba.gov.au/publications/bulletin/	Bulletin
+undated	https://www.rba.gov.au/publications/rdp/	Research Discussion Papers
+undated	https://www.rba.gov.au/publications/confs/	Conferences
+undated	https://www.rba.gov.au/publications/workshops/	Workshops
+out_of_range	https://www.rba.gov.au/publications/annual-reports/rba/	RBA Annual Report
+out_of_range	https://www.rba.gov.au/publications/annual-reports/psb/	PSB Annual Report
+undated	https://www.rba.gov.au/about-rba/corporate-plan	Corporate Plan
+undated	https://www.rba.gov.au/publications/technical-notes/	Technical Notes
+out_of_range	https://www.rba.gov.au/publications/submissions/	Submissions
+undated	https://www.rba.gov.au/publications/consultations/	Consultations
+undated	https://www.rba.gov.au/payments-and-infrastructure/financial-market-infrastructure/assessments/	Payments and Market Infrastructure Assessments
+out_of_range	https://www.rba.gov.au/publications/podcast/	Podcasts
+undated	https://igcc.org.au/news/	News - Investor Group on Climate Change
+undated	https://igcc.org.au/were-hiring-special-policy-advisor-methane-initiative/	We’re Hiring: Methane Engagement and Policy Advisor
+undated	https://igcc.org.au/workstream/corporate-engagement/	Corporate Engagement
+undated	https://igcc.org.au/workstream/policy-advocacy/	Policy & Advocacy
+undated	https://igcc.org.au/igcc-2030-strategy/	IGCC’s 2030 Strategy: A Clear Plan For This Decade
+undated	https://igcc.org.au/market/australia/	Australia
+undated	https://igcc.org.au/workstream/investor-practice/	Investor Practice
+undated	https://igcc.org.au/market/new-zealand/	New Zealand
+undated	https://igcc.org.au/annual-report-2025-investors-progress-through-a-year-of-global-turmoil/	Annual Report 2025: Investors’ Progress in a Year of Global Turmoil
+undated	https://igcc.org.au/submission-community-benefits-principles-for-fmia/	Submission: Community Benefits Principles for a Future Made in Australia
+undated	https://igcc.org.au/working_group/energy-transition/	Energy Transition Working Group
+undated	https://igcc.org.au/working_group/policy-advocacy/	Policy & Advocacy Working Group
+undated	https://igcc.org.au/systems-level-engagement/	New IGCC Report: Investors Must Engage the Wider System to Tackle Climate Risks Threatening Market-Wide Returns
+undated	https://igcc.org.au/working_group/corporate-engagement/	Corporate Engagement Working Group
+undated	https://igcc.org.au/igcc-appears-before-aotearoa-new-zealand-parliamentary-committee-international-capital-wants-climate-reporting/	IGCC appears before Aotearoa New Zealand Parliamentary Committee: International capital wants climate reporting
+undated	https://igcc.org.au/australias-60bn-public-capital-system-and-the-climate-investment-opportunity-2/	Our $60bn Public Capital System and Climate
+undated	https://igcc.org.au/working_group/climate-solutions-swg/	Climate Solutions Subworking Group
+undated	https://igcc.org.au/australian-cop-president-negotiations-has-potential-for-economic-wins/	Australian COP President (Negotiations) has Potential for Economic Wins
+undated	https://igcc.org.au/igccs-climate-leaders-awards-go-to-john-thwaites-alison-ewings-ros-mckay-and-rick-walters/	IGCC’s Climate Leaders’ Awards go to John Thwaites, Alison Ewings, Ros McKay and Rick Walters
+undated	https://igcc.org.au/working_group/investor-practice/	Investor Practice Working Group
+undated	https://igcc.org.au/igcc-summit-2025-decoding-the-transition-key-moments/	IGCC Summit 2025: Decoding the Transition: Key Moments
+evergreen_program_page	https://arena.gov.au/funding/	Back to top
+undated_last_resort	https://arena.gov.au/	Home
+undated_last_resort	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+evergreen_program_page	https://arenanet.arena.gov.au/s/funding-advice	here
+evergreen_program_page	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+evergreen_program_page	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+out_of_range_last_resort	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+evergreen_program_page	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+out_of_range_last_resort	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+evergreen_program_page	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+undated_last_resort	https://arena.gov.au/news	Funding Opportunities
+evergreen_program_page	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+evergreen_program_page	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+evergreen_program_page	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+evergreen_program_page	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+evergreen_program_page	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+evergreen_program_page	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+evergreen_program_page	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+evergreen_program_page	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+evergreen_program_page	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+evergreen_program_page	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+evergreen_program_page	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+evergreen_program_page	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+out_of_range_last_resort	https://arena.gov.au/funding/research-development-program/	Research and Development
+evergreen_program_page	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+evergreen_program_page	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated_last_resort	https://arena.gov.au/projects	Funding Opportunities
+undated_last_resort	https://arena.gov.au/knowledge-bank	Funding Opportunities
+evergreen_program_page	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+evergreen_program_page	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+evergreen_program_page	https://arena.gov.au/funding/power-system-services/	System Security
+evergreen_program_page	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+evergreen_program_page	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+evergreen_program_page	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+evergreen_program_page	https://arena.gov.au/funding/demand-response/	Demand Response
+evergreen_program_page	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+evergreen_program_page	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+evergreen_program_page	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+evergreen_program_page	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+evergreen_program_page	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+evergreen_program_page	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+evergreen_program_page	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+evergreen_program_page	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+evergreen_program_page	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+evergreen_program_page	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+evergreen_program_page	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+evergreen_program_page	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+evergreen_program_page	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+undated_last_resort	https://arena.gov.au/news/	Back to top
+undated_last_resort	https://about.bnef.com/insights/type/report/	All Reports
+undated_last_resort	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/	REPORT Electric Vehicle Outlook
+undated_last_resort	https://about.bnef.com/insights/commodities/transition-metal-outlook/	REPORT Transition Metals Outlook
+undated_last_resort	https://about.bnef.com/insights/uncategorized/energy-transition-investment-trends/	REPORT Energy Transition Investment Trends
+undated_last_resort	https://about.bnef.com/insights/uncategorized/new-energy-outlook/	REPORT New Energy Outlook
+undated_last_resort	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook/	Electric Vehicle Outlook
+undated_last_resort	https://about.bnef.com/insights/finance/energy-transition-investment-trends/	Energy Transition Investment Trends
+undated_last_resort	https://about.bnef.com/insights/clean-energy/new-energy-outlook/	New Energy Outlook
+deny_title_regex	https://about.bnef.com/insights/climate-week-and-cop-public-research/	Discover BNEF's Climate Week and COP Public Research, freely available to non-subscribers.
+undated_last_resort	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
+undated_last_resort	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	The work plan
+deny_title_regex	https://www.ifrs.org/news-and-events/updates/issb/	Cookie details
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-january-2026.html	ISSB Update January 2026
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-january-2025.html	ISSB Update January 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-february-2025.html	ISSB Update February 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-march-2025.html	ISSB Update March 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-april-2025.html	ISSB Update April 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-june-2025.html	ISSB Update June 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-july-2025.html	ISSB Update July 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-september-2025.html	ISSB Update September 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-november-2025.html	ISSB Update November 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/iasb-issb/2025/iasb-issb-update-february-2025.html	IASB–ISSB Update February 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-october-2025.html	ISSB Update October 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-may-2025.html	ISSB Update May 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2025/issb-update-december-2025.html	ISSB Update December 2025
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/joint-iasb-issb-update-january-2024.html	IASB–ISSB Update January 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-february-2024.html	ISSB Update February 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-april-2024.html	ISSB Update April 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-july-2024.html	ISSB Update July 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-june-2024.html	ISSB Update June 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-may-2024.html	ISSB Update May 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-march-2024.html	ISSB Update March 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-september-2024.html	ISSB Update September 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-october-2024.html	ISSB Update October 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-november-2024.html	ISSB Update November 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2024/issb-update-december-2024.html	ISSB Update December 2024
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/supplementary-issb-update-april-2023.html	Supplementary ISSB Update April 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-january-2023.html	ISSB Update January 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-february-2023.html	ISSB Update February 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-may-2023.html	ISSB Update May 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-july-2023.html	ISSB Update July 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-september-2023.html	ISSB Update September 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-october-2023.html	ISSB Update October 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-march-2023.html	ISSB Update March 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-december-2023.html	ISSB Update December 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-november-2023.html	ISSB Update November 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2023/issb-update-april-2023.html	ISSB Update April 2023
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/supplementary-issb-update-november-2022.html	Supplementary ISSB Update November 2022
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-september-2022.html	ISSB Update September 2022
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-november-2022.html	ISSB Update November 2022
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-october-2022.html	ISSB Update October 2022
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
+out_of_range_last_resort	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
+deny_title_regex	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
+undated_last_resort	https://www.rba.gov.au/publications/smp/	Statement on Monetary Policy
+undated_last_resort	https://www.rba.gov.au/publications/fsr/	Financial Stability Review
+generic_title	https://www.rba.gov.au/publications/bulletin/	Bulletin
+undated_last_resort	https://www.rba.gov.au/publications/rdp/	Research Discussion Papers
+undated_last_resort	https://www.rba.gov.au/publications/confs/	Conferences
+undated_last_resort	https://www.rba.gov.au/publications/workshops/	Workshops
+too_stale_last_resort	https://www.rba.gov.au/publications/annual-reports/rba/	RBA Annual Report
+too_stale_last_resort	https://www.rba.gov.au/publications/annual-reports/psb/	PSB Annual Report
+undated_last_resort	https://www.rba.gov.au/about-rba/corporate-plan	Corporate Plan
+undated_last_resort	https://www.rba.gov.au/publications/technical-notes/	Technical Notes
+too_stale_last_resort	https://www.rba.gov.au/publications/submissions/	Submissions
+undated_last_resort	https://www.rba.gov.au/publications/consultations/	Consultations
+undated_last_resort	https://www.rba.gov.au/payments-and-infrastructure/financial-market-infrastructure/assessments/	Payments and Market Infrastructure Assessments
+out_of_range_last_resort	https://www.rba.gov.au/publications/podcast/	Podcasts
+undated_last_resort	https://igcc.org.au/news/	News - Investor Group on Climate Change
+undated_last_resort	https://igcc.org.au/were-hiring-special-policy-advisor-methane-initiative/	We’re Hiring: Methane Engagement and Policy Advisor
+undated_last_resort	https://igcc.org.au/workstream/corporate-engagement/	Corporate Engagement
+undated_last_resort	https://igcc.org.au/workstream/policy-advocacy/	Policy & Advocacy
+undated_last_resort	https://igcc.org.au/igcc-2030-strategy/	IGCC’s 2030 Strategy: A Clear Plan For This Decade
+undated_last_resort	https://igcc.org.au/market/australia/	Australia
+undated_last_resort	https://igcc.org.au/workstream/investor-practice/	Investor Practice
+undated_last_resort	https://igcc.org.au/market/new-zealand/	New Zealand
+undated_last_resort	https://igcc.org.au/annual-report-2025-investors-progress-through-a-year-of-global-turmoil/	Annual Report 2025: Investors’ Progress in a Year of Global Turmoil
+undated_last_resort	https://igcc.org.au/submission-community-benefits-principles-for-fmia/	Submission: Community Benefits Principles for a Future Made in Australia
+undated_last_resort	https://igcc.org.au/working_group/energy-transition/	Energy Transition Working Group
+undated_last_resort	https://igcc.org.au/working_group/policy-advocacy/	Policy & Advocacy Working Group
+undated_last_resort	https://igcc.org.au/systems-level-engagement/	New IGCC Report: Investors Must Engage the Wider System to Tackle Climate Risks Threatening Market-Wide Returns
+undated_last_resort	https://igcc.org.au/working_group/corporate-engagement/	Corporate Engagement Working Group
+undated_last_resort	https://igcc.org.au/igcc-appears-before-aotearoa-new-zealand-parliamentary-committee-international-capital-wants-climate-reporting/	IGCC appears before Aotearoa New Zealand Parliamentary Committee: International capital wants climate reporting
+undated_last_resort	https://igcc.org.au/australias-60bn-public-capital-system-and-the-climate-investment-opportunity-2/	Our $60bn Public Capital System and Climate
+undated_last_resort	https://igcc.org.au/working_group/climate-solutions-swg/	Climate Solutions Subworking Group
+undated_last_resort	https://igcc.org.au/australian-cop-president-negotiations-has-potential-for-economic-wins/	Australian COP President (Negotiations) has Potential for Economic Wins
+undated_last_resort	https://igcc.org.au/igccs-climate-leaders-awards-go-to-john-thwaites-alison-ewings-ros-mckay-and-rick-walters/	IGCC’s Climate Leaders’ Awards go to John Thwaites, Alison Ewings, Ros McKay and Rick Walters
+undated_last_resort	https://igcc.org.au/working_group/investor-practice/	Investor Practice Working Group
+undated_last_resort	https://igcc.org.au/igcc-summit-2025-decoding-the-transition-key-moments/	IGCC Summit 2025: Decoding the Transition: Key Moments
+out_of_range_last_resort	https://www.tdsecurities.com	Sustainable Finance 2025 in Review and 2026 Outlook - TD Securities
+out_of_range_last_resort	https://www.environmental-finance.com	Sustainable bonds 2026: welcome to the new reality - Environmental Finance
+out_of_range_last_resort	https://gfmag.com	Sustainable Finance Awards 2026: Global Winners - Global Finance Magazine
+out_of_range_last_resort	https://www.kiplinger.com	How Green and Sustainable Bonds Can Help Your Portfolio and the Planet - Kiplinger
+out_of_range_last_resort	https://www.globalbankingandfinance.com	Nominations Open for the Best Green Bond Issuer Portugal 2026 - Global Banking & Finance Review®
+too_stale_last_resort	https://www.morganstanley.com	Three Reasons Why Green Bonds Still Matter: Unlocking Climate-related Investment Opportunities in Fixed Income - Morgan Stanley
+out_of_range_last_resort	https://www.openpr.com	Sustainable Finance Market Expected to Reach US$5,064.94 - openPR.com
+too_stale_last_resort	https://www.cepal.org	Sustainable Bonds in Latin America and the Caribbean: A Decade of Growth (2014–2024) - Comisión Económica para América Latina y el Caribe
+too_stale_last_resort	https://www.lseg.com	Green debt market passes $3 trillion milestone - LSEG
+too_stale_last_resort	https://www.lw.com	EU Sustainability: State of Play — Sustainable Finance - Latham & Watkins LLP
+too_stale_last_resort	https://www.climatebonds.net	Expanding Green Finance in Asia - Climate Bonds
+too_stale_last_resort	https://www.unescap.org	Unlocking Cambodia’s Sustainable Finance: From Green Bonds to Climate Investment Pathways - ESCAP
+too_stale_last_resort	https://www.ft.com	China’s green bond market races ahead of global peers - Financial Times
+out_of_range_last_resort	https://www.environmental-finance.com	The 'Four Rs' of sustainable finance: how growth, risk and resilience are reshaping the sustainable bond market - Environmental Finance
+too_stale_last_resort	https://gfmag.com	RBI: Why Sustainable Finance Is Here to Stay - Global Finance Magazine
+too_stale_last_resort	https://www.environmental-finance.com	11 trends set to shape sustainable debt in 2026 - Environmental Finance
+too_stale_last_resort	https://latinlawyer.com	Mexico’s sustainable finance transformation: green, blue and social bonds driving Latin America’s transformation - Latin Lawyer
+out_of_range_last_resort	https://carboncredits.com	How Standard Chartered's €1 Billion Green Bond Is Scaling Climate Finance in Emerging Markets - CarbonCredits.com
+too_stale_last_resort	https://www.climatebonds.net	Hong Kong Sustainable Debt Market Briefing 2024 - Climate Bonds
+too_stale_last_resort	https://about.bnef.com	Sustainable Debt Plays Key Role in Scaling Climate Finance for Emerging Markets - BloombergNEF
+too_stale_last_resort	https://cepr.org	Green versus conventional corporate debt: Financing choices and climate outcomes - CEPR
+too_stale_last_resort	https://www.rwe.com	Sustainable Finance - RWE
+too_stale_last_resort	https://www.climatebonds.net	India’s sustainable debt market tops USD 55.9 billion – new MUFG-CBI report maps rapid growth and pathways to 2030 - Climate Bonds
+too_stale_last_resort	https://ieefa.org	Green bonds key to climate finance, but challenges remain - IEEFA | Institute for Energy Economics and Financial Analysis
+too_stale_last_resort	https://carboncredits.com	Qatar Issues $2.5B Green Bonds: A New Era for Gulf Sustainable Finance - CarbonCredits.com
+too_stale_last_resort	https://www.worldbank.org	Viet Nam and the Sustainable Finance Facility - World Bank
+too_stale_last_resort	https://www.ifc.org	IFC and FRC Expand Partnership to Build Sustainable Finance Market in Mongolia - International Finance Corporation (IFC)
+too_stale_last_resort	https://greenfinancelac.org	CAF places its first Sustainable Bond - Green Finance LAC
+too_stale_last_resort	https://think.ing.com	Global sustainable finance 2025: mixed results highlight regional differences - ING THINK economic and financial analysis | ING THINK
+too_stale_last_resort	https://www.environmental-finance.com	Data-driven impact: Unlocking the power of sustainable bond markets - Environmental Finance
+out_of_range_last_resort	https://www.environmental-finance.com	Sustainable bond market is resilient despite US rout - Environmental Finance
+too_stale_last_resort	https://greencentralbanking.com	China updates green taxonomy to increase energy transition finance - Green Central Banking
+too_stale_last_resort	https://www.climatebonds.net	Global sustainable debt volume aligned with Climate Bonds definitions hits USD6 trillion - Climate Bonds
+too_stale_last_resort	https://sustainabilitymag.com	Your Guide to the US$6tn Green Bonds Market - Sustainability Magazine
+out_of_range_last_resort	https://www.esgtoday.com	Standard Chartered Issues €1 Billion Green Bond to Finance Clean Energy, Green Building Projects - ESG Today
+too_stale_last_resort	https://www.triodos-im.com	insight EU Green Bond Standard: insights from early adopters - Triodos Investment Management
+too_stale_last_resort	https://www.environmental-finance.com	Sustainable Debt Americas 2025 conference round-up - Environmental Finance
+too_stale_last_resort	https://ieefa.org	Disappearing greenium, global turbulence and pricing realities: What the RBI’s shelved green bond really shows us - IEEFA | Institute for Energy Economics and Financial Analysis
+too_stale_last_resort	https://www.environmental-finance.com	Sustainable debt 2026 forecast: Transition in focus - Environmental Finance
+too_stale_last_resort	https://www.veolia.com	Sustainable finance - Veolia
+too_stale_last_resort	https://www.environmental-finance.com	Sustainable Debt Americas 2025 - Environmental Finance
+too_stale_last_resort	https://www.climatebonds.net	Australian Sustainable Finance Taxonomy released |… - Climate Bonds
+too_stale_last_resort	https://www.ifc.org	Nepal Signs Landmark Green Bond Deal to Drive Sustainable Growth - International Finance Corporation (IFC)
+out_of_range_last_resort	https://www.environmental-finance.com	Sustainable Debt Round up: Q4 2025 & European Green Bond label deep dive - Environmental Finance
+too_stale_last_resort	https://www.climatebonds.net	Hong Kong Leads Asia’s GSS+ Bond Market as Policy and Issuer Landscape Evolves - Climate Bonds
+out_of_range_last_resort	https://www.eqs-news.com	HDBank completes issuance of US$100 million green bonds to international investors | Corporate - EQS News
+too_stale_last_resort	https://ieefa.org	Green bonds: Issues, incentives, and the green premium debate - IEEFA | Institute for Energy Economics and Financial Analysis
+too_stale_last_resort	https://www.sustainalytics.com	SFDR 2.0 in Figures: Impact Analysis - Sustainalytics
+too_stale_last_resort	https://www.caf.com	CAF Issues Its First Sustainable Bond for EUR 1.5 Billion - CAF -banco
+too_stale_last_resort	https://www.climatebonds.net	Methane Abatement - Climate Bonds
+out_of_range_last_resort	https://themorningcontext.com	BOB's Rs 10,000-crore green bond cracks open a new market for Indian banks - The Morning Context
+too_stale_last_resort	https://www.climatebonds.net	Global sustainable debt volume aligned with Climate Bonds definition hits USD6 trillion milestone - Climate Bonds
+too_stale_last_resort	https://www.bbva.com	BBVA increases green bond allocation by 20 percent in 2024 - BBVA
+too_stale_last_resort	https://www.climatebonds.net	ASEAN Sustainable Finance State of the Market 2022 - Climate Bonds
+too_stale_last_resort	https://www.nomuraholdings.com	Making Sustainable Finance a Strength for Regional Areas - nomuraholdings.com
+too_stale_last_resort	https://www.esgtoday.com	Deutsche Bank Reports Strongest Sustainable Finance Quarter Since 2021 - ESG Today
+too_stale_last_resort	https://gfmag.com	Hong Kong Issues One Of The Biggest Digital Green Bonds - Global Finance Magazine
+too_stale_last_resort	https://www.esgtoday.com	China Releases New Green Finance Taxonomy - ESG Today
+too_stale_last_resort	https://www.uniper.energy	Uniper publishes inaugural Green Finance Framework to finance the energy transition - Uniper
+too_stale_last_resort	https://www.environmental-finance.com	The role of stock exchanges in sustainable finance - Environmental Finance
+too_stale_last_resort	https://www.reuters.com	Poland updates green bond framework ahead of possible first issuance in six years - Reuters
+too_stale_last_resort	https://www.lse.ac.uk	The Cali Fund in operation: the potential of sustainable finance instruments and next steps - The London School of Economics and Political Science
+too_stale_last_resort	https://www.lseg.com	Sustainable bonds on the London Stock Exchange – a decade of innovation - LSEG
+too_stale_last_resort	https://greenfinancelac.org	Development Bank of Ecuador launches its Green Bond Framework - Green Finance LAC
+too_stale_last_resort	https://www.nordea.com	Denmark launches pioneering sovereign green bond with Nordea’s support - Nordea
+too_stale_last_resort	https://www.climatebonds.net	Climate Bonds CONNECT 2026 - Climate Bonds
+out_of_range_last_resort	https://www.edie.net	Standard Chartered issues €1bn green bond - edie.net
+too_stale_last_resort	https://www.spglobal.com	Second Party Opinions - S&P Global
+too_stale_last_resort	https://www.jpmorgan.com	J.P. Morgan Steps Up for Landmark Saudi Arabia Green Bond - J.P. Morgan
+too_stale_last_resort	https://www.environmental-finance.com	Green bond of the year - sovereign: Australia's Green Treasury Bond - Environmental Finance
+too_stale_last_resort	https://greencentralbanking.com	Hong Kong: the missing link for Asia’s green finance boom - Green Central Banking
+too_stale_last_resort	https://www.environmental-finance.com	Sustainable Debt EMEA 2026 - Environmental Finance
+too_stale_last_resort	https://www.orfonline.org	Breaking the Trap: Debt Dynamics and Sustainable Finance in the Global South - orfonline.org
+out_of_range_last_resort	https://sustainabilityonline.net	Standard Chartered raises €1 billion in inaugural green bond - Sustainability Online
+too_stale_last_resort	https://www.tdsecurities.com	Sustainable Finance Year in Review and 2025 Outlook - TD Securities
+too_stale_last_resort	https://www.ifc.org	Harmonized Circular Economy Finance Guidelines - International Finance Corporation (IFC)
+too_stale_last_resort	https://www.environmental-finance.com	Green bond of the year - corporate (APAC): IDI Sao Mai - Environmental Finance
+too_stale_last_resort	https://www.esgtoday.com	China Issues its First Sovereign Green Bonds - ESG Today
+too_stale_last_resort	https://www.environmental-finance.com	Green bond of the year - corporate (EMEA): DP World - Environmental Finance
+too_stale_last_resort	https://sustainablefutures.linklaters.com	ICMA publishes new materials at Annual General Meeting of Green, Social, Sustainability and Sustainability-Linked Bond Principles - Linklaters - Sustainable Futures
+too_stale_last_resort	https://www.environmental-finance.com	Gulf Transition & Sustainable Finance 2025 - Environmental Finance
+too_stale_last_resort	https://www.thinkbusiness.ie	Bank drives €30bn sustainable finance target - Think Business
+too_stale_last_resort	https://www.krungsri.com	Green Financing: Accelerating the Green Transition - krungsri.com
+too_stale_last_resort	https://www.reuters.com	China's to sell first global green sovereign bond on Wednesday - Reuters
+too_stale_last_resort	https://www.iflr.com	Fuelling India's green future: the pivotal role of sustainable finance - IFLR
+too_stale_last_resort	https://www.unescap.org	Cambodia Sustainable Bond Accelerator Phase III - ESCAP
+too_stale_last_resort	https://www.environmental-finance.com	Sustainable Debt EMEA 2025 conference round-up - Environmental Finance
+out_of_range_last_resort	https://africasustainabilitymatters.com	Egypt expands climate finance with $750 million green bond backed by EIB and UNDP - Africa Sustainability Matters
+too_stale_last_resort	https://www.tradeweb.com	Sustainability Data & Trading Insights - Tradeweb
+too_stale_last_resort	https://www.environmental-finance.com	Green bond of the year - supranational: Nordic Investment Bank - Environmental Finance
+too_stale_last_resort	https://www.cliffedekkerhofmeyr.com	Sustainability bonds and the debt market of the future: Are we ready? - Cliffe Dekker Hofmeyr
 evergreen_program_page	https://arena.gov.au/funding/	Back to top
 undated	https://arena.gov.au/	Home
 undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
@@ -1572,22 +1949,22 @@ too_stale_last_resort	https://vocal.media	Australia Venture Capital Market: Grow
 too_stale_last_resort	https://www.smartcompany.com.au	Queensland startup funding bounces back with $417 million raised over financial year - SmartCompany
 out_of_range_last_resort	https://arena.gov.au	Don’t Miss Out on This Year’s Innovation Bay - Australian Renewable Energy Agency (ARENA)
 too_stale_last_resort	https://www.greenqueen.com.hk	Wildfire Energy: Australian Cleantech Startup Turns Waste Into Renewables - Green Queen
+too_stale_last_resort	https://www.thailand-business-news.com	Cleantech in Asia: Leading the Global Green Transition - Thailand Business News
 too_stale_last_resort	https://www.energymagazine.com.au	ARENA spotlights innovative renewable startups - Energy Magazine
 too_stale_last_resort	https://www.startupdaily.net	MGA Thermal recharges pre-Series B again with $200,000 from Electrifi Ventures - Startup Daily
 too_stale_last_resort	https://investingnews.com	From Policy Shifts to Breakthroughs: Cleantech Market Update for Q1 2025 - Investing News Network
 too_stale_last_resort	https://www.afr.com	Technology: Clean Energy Finance Corporation spins off $200m private sector fund - AFR
 too_stale_last_resort	https://www.theaustralian.com.au	Tritium co-founder takes a punt on new green finance venture - The Australian
-too_stale_last_resort	https://www.canarymedia.com	The cleantech companies that didn’t make it through 2024 - Canary Media
 too_stale_last_resort	https://www.startupdaily.net	Why Singapore is Australia’s Silicon Valley for climate tech founders - Startup Daily
 too_stale_last_resort	https://www.smartcompany.com.au	Australia well placed to lure US clean tech investment - SmartCompany
-too_stale_last_resort	https://www.startupdaily.net	Australia's leading sustainability VCs are gathering in Melbourne for the Climate Investor Forum - Startup Daily
-too_stale_last_resort	https://www.smartcompany.com.au	Wollongong green hydrogen startup Hysata raises $172 million in Series B funding - SmartCompany
 too_stale_last_resort	https://www.startupdaily.net	Series A-focused climate tech VC hits $50 million for fund’s 1st close - Startup Daily
+too_stale_last_resort	https://www.smartcompany.com.au	Wollongong green hydrogen startup Hysata raises $172 million in Series B funding - SmartCompany
+too_stale_last_resort	https://www.startupdaily.net	Green hydrogen startup Hysata pockets record $172 million Series B - Startup Daily
 too_stale_last_resort	https://www.smartcompany.com.au	Nine Aussie startups that raised $233.5 million this week - SmartCompany
 too_stale_last_resort	https://www.smartcompany.com.au	Cut Through's latest funding report says international investment in Aussie startups isn't as bad as it seems - SmartCompany
-too_stale_last_resort	https://www.startupdaily.net	Green hydrogen startup Hysata pockets record $172 million Series B - Startup Daily
 too_stale_last_resort	https://www.smartcompany.com.au	EcoJoule Energy lands $15 million to power smart grid and battery tech - SmartCompany
 too_stale_last_resort	https://www.startupdaily.net	‘There’s huge demand’: FootprintLab seizes the fintech opportunity in India - Startup Daily
+too_stale_last_resort	https://www.startupdaily.net	Australia's leading sustainability VCs are gathering in Melbourne for the Climate Investor Forum - Startup Daily
 too_stale_last_resort	https://investingnews.com	Discover the Top 10 ASX Cleantech Stocks for Sustainable Investing - Investing News Network
 too_stale_last_resort	https://www.forbes.com.au	Surprising way this clean-tech startup plans to capture a billion tonnes of CO2 by 2040 - Forbes Australia
 too_stale_last_resort	https://cfotech.com.au	Hadean Energy's hydrogen tech named global New Energy finalist - CFOtech Australia
@@ -1599,24 +1976,26 @@ too_stale_last_resort	https://www.nzte.govt.nz	New Zealand Cleantech Startups Ma
 too_stale_last_resort	https://www.esgtoday.com	Green Hydrogen Startup Hysata Raises $111 Million - ESG Today
 too_stale_last_resort	https://www.startupdaily.net	Flexicar founder and Wavemaker Impact investor Monique Conheady joins Hysata Board - Startup Daily
 too_stale_last_resort	https://thefifthestate.com.au	Deloitte hires John O’Brien in sign that cleantech is going mainstream - thefifthestate.com.au
+too_stale_last_resort	https://www.canarymedia.com	The cleantech companies that didn’t make it through 2024 - Canary Media
 too_stale_last_resort	https://www.smartcompany.com.au	Six Aussie startups that raised $56 million this week - SmartCompany
 too_stale_last_resort	https://im-mining.com	RHI Magnesita to use MCi Carbon’s CCUS technology at refractory operations - International Mining
 too_stale_last_resort	https://www.thelawyermag.com	LegalVision helps tech startups net $20m in Series A capital raises - Australasian Lawyer
 too_stale_last_resort	https://www.startupdaily.net	Re-Seeded: Tidal backs renewables startup Orkestra again in new $2 million raise - Startup Daily
 too_stale_last_resort	https://www.startupdaily.net	WA startup ULUU raises A$1.3M to replace plastic with a biodegradable alternative made from seaweed - Startup Daily
-too_stale_last_resort	https://www.startupdaily.net	SVB Capital founder Aaron Gershenberg, who raised $10 billion in VC funds, headlines West Tech Fest - Startup Daily
 too_stale_last_resort	https://news.crunchbase.com	Hydrogen Startup Funding Continues To Boom - Crunchbase News
+too_stale_last_resort	https://www.startupdaily.net	Suzuki drives $21 million raise for electric vehicle software startup Applied EV - Startup Daily
 too_stale_last_resort	https://www.startupdaily.net	Nothing ventured, plenty gained: EV charging startup Jolt borrows $214 million for Canada roll out - Startup Daily
 too_stale_last_resort	https://www.kedglobal.com	Shinhan, POSCO invest $20 mn in Australian hydrogen startup Hysata - The Korea Economic Daily Global Edition
+too_stale_last_resort	https://cleantechnica.com	Phase-Shifting Hot Bricks Pack More Energy Storage Punch Into Smaller Spaces - CleanTechnica
 too_stale_last_resort	https://www.afr.com	Singapore, Apple legends back $250m Aussie start up fund - AFR
-too_stale_last_resort	https://news.crunchbase.com	Sustainability-Focused Startup Equity Funding Fell In H1 2024 - Crunchbase News
-too_stale_last_resort	https://investingnews.com	"Discover the Top Cleantech Ventures in BC: 2025 Awards Finalists Revealed!" #Cleantech #BC #Sustainability - Investing News Network
 too_stale_last_resort	https://anthillonline.com	The Entrepreneur vs. Venture Capitalist - - Anthill Magazine
 too_stale_last_resort	https://www.businessinsider.com	Private investors poured $10.5 billion into clean energy in 2019. These are the top funds making bets on the industry. - Business Insider
 too_stale_last_resort	https://www.nucamp.co	Inside Australia's Thriving Tech Hub: Startups and Success Stories - nucamp.co
 too_stale_last_resort	https://www.techinasia.com	New $15m fund launched for Australian startups wanting to expand to China - Tech in Asia
 too_stale_last_resort	https://m.economictimes.com	Cleantech startup QuantE Energy raises $500,000 seed funding from TDV Partners, angel investors - The Economic Times
+too_stale_last_resort	https://financialpost.com	Microsoft signs 10-year deal with Canadian cleantech company that turns CO2 into rocks - Financial Post
 too_stale_last_resort	https://news.crunchbase.com	Aerial Robotics Startup Infravision Raises $91M Series B As Funding To Sector Surges - Crunchbase News
 too_stale_last_resort	https://www.techcircle.in	Urban Company buys Australian on-demand beauty startup Glamazon - Techcircle
 too_stale_last_resort	https://m.economictimes.com	Clean-tech startup EdgeGrid raises $6 million funding led by Lightrock - The Economic Times
 too_stale_last_resort	https://m.economictimes.com	Cleantech startup Indra raises $4 million in funding led by Mela Ventures - The Economic Times
+placeholder_used		Cleantech & Start-up Ecosystem: no retrievable items for 2026-02
