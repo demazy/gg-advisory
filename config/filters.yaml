@@ -62,6 +62,19 @@ allow_domains:
 - responsibleinvestment.org
 - climateworks.com.au
 - pc.gov.au
+# Energy Transition additions
+- cleanenergycouncil.org.au
+- energyconsumersaustralia.com.au
+# ESG Reporting additions
+- asx.com.au
+- cpaaustralia.com.au
+# Sustainable Finance & Cleantech additions
+- impactinvestingaustralia.com
+- acsi.org.au
+- esgtoday.com
+- techcouncil.com.au
+- newenergynexus.com
+- smartenergy.org.au
 deny_domains: []
 domain_deny_substrings:
   arena.gov.au:
@@ -70,7 +83,9 @@ domain_deny_substrings:
   - /where-we-invest/
 title_deny_regex:
 - (cookie|privacy|terms|subscribe|sign\s?up|login|careers|jobs)
-- (webinar|tickets|register)
+- '(webinar|tickets|register\s+(?:for|to\s+attend|your\s+place|now\s+for))'
+# Filter EFRAG internal governance meeting notices (SR TEG, SRB, FRB, FR TEG)
+- 'EFRAG\s+(?:SR\s+TEG|SRB|FRB|FR\s+TEG)\s+(?:Online\s+)?Meeting'
 # Reject pure accounting/financial-reporting articles that are not sustainability-related.
 # These mostly come from EFRAG/IASB and are not relevant to energy, ESG, or sustainable finance.
 # Note: \bIFRS\s+\d+\b matches "IFRS 17" but NOT "IFRS S1" or "IFRS S2" (the sustainability standards).
@@ -117,6 +132,20 @@ keep_keywords:
 - sustainable finance
 - TCFD
 - TNFD
+- critical minerals
+- investment readiness
+- climate tech
+- cleantech
+- start-up
+- impact invest
+- AUASB
+- assurance standard
+- cleantech
+- climate tech
+- accelerator
+- grant program
+- start-up
+- startup
 section_keywords:
   Energy Transition:
   - NEM
@@ -161,6 +190,9 @@ section_keywords:
   - Snowy
   - electric vehicle
   - EV charging
+  - critical minerals
+  - clean energy zone
+  - supply chain transformation
   ESG Reporting:
   - ISSB
   - IFRS S1
@@ -193,6 +225,15 @@ section_keywords:
   - reporting standard
   - AASB
   - APRA
+  - AUASB
+  - assurance standard
+  - limited assurance
+  - reasonable assurance
+  - audit committee
+  - ASX listing
+  - listing rule
+  - AASB S1
+  - AASB S2
   Sustainable Finance & Investment:
   - green bond
   - sustainability-linked
@@ -222,3 +263,41 @@ section_keywords:
   - APRA
   - sustainable investment
   - responsible investment
+  Cleantech & Start-up Ecosystem:
+  - climate tech
+  - cleantech
+  - start-up
+  - startup
+  - venture capital
+  - seed funding
+  - Series A
+  - investment readiness
+  - impact investment
+  - due diligence
+  - co-investment
+  - accelerator
+  - incubator
+  - scale-up
+  - commercialisation
+  - deep tech
+  - ARENA grant
+  - CEFC investment
+  - National Reconstruction Fund
+  - Future Made in Australia
+  - clean energy fund
+  - green finance
+  - critical minerals
+  - energy storage technology
+  - EV technology
+  - accelerator program
+  - incubator program
+  - grant program
+  - funding round
+  - Hydrogen Headstart
+  - Rewiring the Nation
+  - National Reconstruction Fund
+  - Future Made in Australia
+  - CSIRO Accelerate
+  - industry grant
+  - pilot project
+  - demonstration project

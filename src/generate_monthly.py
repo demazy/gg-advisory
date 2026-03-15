@@ -14,6 +14,17 @@ Incremental improvements (Feb 2026):
 - Add "auto-allow" support for trusted public domains (e.g. *.gov.au, specific standards bodies)
   to reduce drops caused by an overly narrow allowlist.
 - Add built-in deny patterns for common social/tracking/auth URLs to reduce noise.
+
+Incremental improvements (Mar 2026):
+- Per-source date_resolve_fetches config (sources.yaml) to enable per-link HTML date extraction
+  for sources whose URLs contain no year/month (e.g. AEMC). Previously all AEMC content was
+  dropped as "undated"; this unlocks a high-value Energy Transition source.
+- Extended generic_title filter: "bulletin", "update", "newsletter", "circular" now rejected
+  to prevent low-signal hub-listing pages (e.g. RBA /publications/bulletin/) from being selected.
+- fetch.py: "Read more about [title]" anchor prefix is stripped → actual title extracted.
+- fetch.py: Listing-page date+section prefix (e.g. "23 Jan 2026 News ...") is cleaned from titles.
+- filters.yaml: EFRAG internal governance meeting notices (SR TEG, SRB, FRB) are denied by title.
+- filters.yaml: "register" deny pattern narrowed to require context words to avoid false positives.
 """
 
 from __future__ import annotations
@@ -201,6 +212,7 @@ EMERGENCY_RSS = {
     "Energy Transition": "https://news.google.com/rss/search?q=Australia%20energy%20transition&hl=en-AU&gl=AU&ceid=AU:en",
     "ESG Reporting": "https://news.google.com/rss/search?q=ISSB%20ESG%20reporting&hl=en&gl=US&ceid=US:en",
     "Sustainable Finance & Investment": "https://news.google.com/rss/search?q=sustainable%20finance%20green%20bond&hl=en&gl=US&ceid=US:en",
+    "Cleantech & Start-up Ecosystem": "https://news.google.com/rss/search?q=Australia%20cleantech%20startup%20investment&hl=en-AU&gl=AU&ceid=AU:en",
 }
 
 
@@ -519,7 +531,7 @@ def _passes_filters(it: Item, flt: Filters, section: str, *, bypass_allow: bool 
         return False, "hub_url"
 
     # Generic / non-informative titles should not be selected even if URL looks OK.
-    if title.strip().lower() in ("read more", "news", "media release", "press release"):
+    if title.strip().lower() in ("read more", "news", "media release", "press release", "bulletin", "update", "newsletter", "circular"):
         return False, "generic_title"
 
     return True, ""
@@ -678,7 +690,8 @@ def _collect_section_pool(section: str, sec_cfg: Dict[str, Any]) -> Tuple[List[I
         try:
             url = entry.get("url") if isinstance(entry, dict) else str(entry)
             name = entry.get("name") if isinstance(entry, dict) else ""
-            add_items(fetch_html_index(str(url), source_name=str(name or normalise_domain(str(url)))))
+            date_resolve = entry.get("date_resolve_fetches") if isinstance(entry, dict) else None
+            add_items(fetch_html_index(str(url), source_name=str(name or normalise_domain(str(url))), max_date_resolve_fetches=date_resolve))
         except Exception as e:
             drops.append({"reason": "html_index_error", "source": str(entry), "detail": str(e)})
 

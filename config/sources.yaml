@@ -13,8 +13,13 @@ sections:
       - https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/quarterly-energy-dynamics
       - https://aemo.com.au/energy-systems/electricity/national-electricity-market-nem/planning-and-forecasting/nem-electricity-statement-of-opportunities
       # Use media-releases subpage instead of top-level news-centre to avoid nav page flood
-      - https://www.aemc.gov.au/news-centre/media-releases
-      - https://www.aemc.gov.au/news-centre/speeches
+      # date_resolve_fetches: AEMC URLs have no year/month → per-link HTML fetch needed for date extraction
+      - url: https://www.aemc.gov.au/news-centre/media-releases
+        name: AEMC
+        date_resolve_fetches: 10
+      - url: https://www.aemc.gov.au/news-centre/speeches
+        name: AEMC
+        date_resolve_fetches: 5
       - https://www.aer.gov.au/news
       - https://www.aer.gov.au/newsroom
       # AER annual State of the Energy Market report (PDF)
@@ -28,6 +33,12 @@ sections:
       - https://www.energynetworks.com.au/news/
       - https://www.energynetworks.com.au/news/media-releases/
       - https://www.climatechangeauthority.gov.au/news-media
+      # Clean Energy Council: primary AU clean energy industry body (Solar Quarterly, Wind Quarterly, Outlook)
+      - https://www.cleanenergycouncil.org.au/news
+      # Energy Consumers Australia: consumer advocacy, Energy Consumer Sentiment Survey
+      - https://energyconsumersaustralia.com.au/news
+      # Geoscience Australia: critical minerals, offshore energy, hydrogen geology
+      - https://www.ga.gov.au/news-and-media
       # --- CSIRO: GenCost annual report (solar/wind/storage cost projections) ---
       - https://www.csiro.au/en/research/technology-space/energy/energy-data-modelling/gencost
       # --- International bodies ---
@@ -63,6 +74,12 @@ sections:
       - https://www.climateactive.org.au/news
       # Productivity Commission: periodic reviews on ESG / disclosure regulation
       - https://www.pc.gov.au/news
+      # AUASB: assurance standards for sustainability/climate reporting under ASRS
+      - https://auasb.gov.au/news/
+      # ASX: listing rule updates, climate disclosure guidance and enforcement
+      - https://www2.asx.com.au/about/regulation/asx-regulatory-update
+      # CPA Australia: practitioner guidance on sustainability reporting
+      - https://www.cpaaustralia.com.au/news
 
   Sustainable Finance & Investment:
     rss: []
@@ -90,3 +107,35 @@ sections:
       - https://treasury.gov.au/news-and-media
       # Climateworks Centre: net zero pathway research (publishes periodic PDFs)
       - https://www.climateworks.com.au/news/
+      # Impact Investing Australia: annual benchmark report, market data
+      - https://impactinvestingaustralia.com/resources/
+      # ACSI (Australian Council of Superannuation Investors): stewardship, ESG engagement reports
+      - https://acsi.org.au/research-resources/
+      # ESG Today: global daily ESG/cleantech news including AU investment rounds
+      - https://www.esgtoday.com/
+
+  Cleantech & Start-up Ecosystem:
+    rss: []
+    html:
+      # ARENA: open funding rounds and new grant announcements
+      - https://arena.gov.au/funding/
+      # ARENA news: start-up / early-stage project and program announcements
+      - https://arena.gov.au/news/
+      # CEFC: clean energy investment announcements and co-investment rounds
+      - https://www.cefc.com.au/media/?type=media+release
+      # CSIRO ON / Accelerate programs + broader research commercialisation news
+      - https://www.csiro.au/en/news/all
+      # National Reconstruction Fund: manufacturing & clean energy industry grants
+      - https://www.industry.gov.au/news
+      # DCCEEW: new grant programs, Rewiring the Nation, Hydrogen Headstart, etc.
+      - https://www.dcceew.gov.au/about/news
+      # Tech Council of Australia: policy and funding for tech scale-ups
+      - https://techcouncil.com.au/news/
+      # New Energy Nexus: global cleantech accelerator programs with AU presence
+      - https://www.newenergynexus.com/blog/
+      # Smart Energy Council: cleantech industry news, project and program launches
+      - https://smartenergy.org.au/news/
+      # Impact Investing Australia: benchmark report, fund launches, market data
+      - https://impactinvestingaustralia.com/resources/
+      # Australian Investment Council: PE/VC deal flow including cleantech
+      - https://www.australianinvestmentcouncil.com.au/news

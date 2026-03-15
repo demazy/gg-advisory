@@ -241,6 +241,13 @@ def _clean_anchor_text(t: str) -> str:
     if tl in {"arrow_right_alt", "arrow_forward", "chevron_right", "chevron_left"}:
         return ""
 
+    # Strip "Read more about [actual title]" → return just the actual title
+    if tl.startswith("read more about "):
+        rest = t[len("Read more about "):].strip()
+        if len(rest) >= 8:
+            return rest
+        return ""
+
     # If "Read more ..." keep only if it contains other meaningful words
     if tl.startswith("read more"):
         rest = tl.replace("read more", "").strip(" -–—:")
@@ -250,6 +257,17 @@ def _clean_anchor_text(t: str) -> str:
     # Remove obvious icon word tails
     t = re.sub(r"\barrow_(right|left|forward|back)(?:_alt)?\b", "", t, flags=re.I).strip()
     t = re.sub(r"\s+", " ", t).strip()
+
+    # Strip listing-page date+section prefix injected by CMS templates,
+    # e.g. "23 Jan 2026 News Energy Networks Australia welcomes..."
+    #      "4 Dec 2025 Media releases Dom van den Berg..."
+    t = re.sub(
+        r"^\d{1,2}\s+[A-Za-z]{3,9}\s+\d{4}\s+"
+        r"(?:News|Media releases?|Energy Insider|Speeches?\s*/\s*Op[\s\-]Eds?)\s+",
+        "", t, flags=re.I,
+    ).strip()
+    t = re.sub(r"\s+", " ", t).strip()
+
     return t
 
 
@@ -734,7 +752,7 @@ def fetch_rss(feed_url: str, source_name: str = "", **kwargs) -> List[Item]:
     return items
 
 
-def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[Item]:
+def fetch_html_index(index_url: str, source_name: str = "", max_date_resolve_fetches: Optional[int] = None, **kwargs) -> List[Item]:
     """
     Extract candidate content links from an index/listing page.
 
@@ -859,7 +877,7 @@ def fetch_html_index(index_url: str, source_name: str = "", **kwargs) -> List[It
     # Titles that are useless and should trigger per-link resolution even if the date is known.
     _GENERIC_TITLE_LC = {"read more", "learn more", "more", "news", "media release", "press release", "view all"}
 
-    resolve_budget = max(0, int(MAX_DATE_RESOLVE_FETCHES_PER_INDEX))
+    resolve_budget = max(0, int(max_date_resolve_fetches if max_date_resolve_fetches is not None else MAX_DATE_RESOLVE_FETCHES_PER_INDEX))
     resolved_meta: Dict[str, Tuple[Optional[str], Optional[float]]] = {}
     if resolve_budget > 0:
         for u in uniq:
