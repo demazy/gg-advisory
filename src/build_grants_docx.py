@@ -271,9 +271,11 @@ def _grant_card(doc, entry: Dict, accent: RGBColor, rule_hex: str):
             (admin,               False, False, MID_GREY),
         ])
 
-    # ── 4. Description ────────────────────────────────────────────────────
+    # ── 4. Description — labelled to match visual language of other fields ────
     if description:
         p_sum = _para(doc, space_before=8, space_after=4)
+        rl = p_sum.add_run("Overview:  ")
+        _set_font(rl, 10.5, bold=True, italic=True, color=accent)
         _set_font(p_sum.add_run(description), 10.5, color=DARK_GREY)
 
     # ── 5. Why it matters — bullet ────────────────────────────────────────
@@ -299,8 +301,11 @@ def _grant_card(doc, entry: Dict, accent: RGBColor, rule_hex: str):
         _set_font(rl, 10.5, bold=True, color=MID_GREY)
         _hyperlink(p_src, url, url, size_pt=10.5)
 
-    # ── Card separator ────────────────────────────────────────────────────
-    _add_rule(doc, color_hex=rule_hex, thickness=4, space_before=12, space_after=4)
+    # ── Card separator — Unicode text line ────────────────────────────────
+    # Word paragraph border rules don't paste into B12; use text characters instead
+    p_sep = _para(doc, space_before=14, space_after=2)
+    r_sep = p_sep.add_run("─" * 54)
+    _set_font(r_sep, 8, color=MID_GREY)
 
 
 # ── Data loading & classification ─────────────────────────────────────────────
