@@ -1,29 +1,61 @@
 # ARK Intelligence Brief — February 2026
 
 **Executive Summary**
-- No specific grant amounts, policy changes, or company names were retrieved.
-- No specific grant amounts, policy changes, or company names were retrieved.
-- No specific grant amounts, policy changes, or company names were retrieved.
+- _No specific grant amount, policy change, or company name available for this period._
+- _No specific grant amount, policy change, or company name available for this period._
+- _No specific grant amount, policy change, or company name available for this period._
 
 ---
-## Grants & Funding
+## SECTION: grants_funding
 
-No items could be retrieved for Grants & Funding in 2026-02.
+### Updates This Month
 
----
-## Market & Policy
+_No items could be retrieved for Grants & Funding in 2026-02._
 
-No items could be retrieved for Market & Policy in 2026-02.
+### Changes Since Last Issue
 
----
-## Competitors
-
-No items could be retrieved for Competitors in 2026-02.
+_Inaugural issue — Changes section will be populated from the second issue onwards._
 
 ---
-## Partners & Buyers
+## SECTION: market_policy
 
-No items could be retrieved for Partners & Buyers in 2026-02.
+### Updates This Month
+
+_No items could be retrieved for Market & Policy in 2026-02._
+
+### Changes Since Last Issue
+
+_Inaugural issue — Changes section will be populated from the second issue onwards._
+
+---
+## SECTION: competitors
+
+### Updates This Month
+
+_No items could be retrieved for Competitors in 2026-02._
+
+### Changes Since Last Issue
+
+_Inaugural issue — Changes section will be populated from the second issue onwards._
+
+---
+## SECTION: partners_buyers
+
+### Updates This Month
+
+_No items could be retrieved for Partners & Buyers in 2026-02._
+
+### Changes Since Last Issue
+
+_Inaugural issue — Changes section will be populated from the second issue onwards._
+
+---BASELINE_DELTA_START---
+{
+  "period": "2026-02",
+  "generated_at": "<current ISO timestamp>",
+  "items": []
+}
+---BASELINE_DELTA_END---
 
 ## Cleantech & Start-up Ecosystem — Grants & Accelerators Radar
 
