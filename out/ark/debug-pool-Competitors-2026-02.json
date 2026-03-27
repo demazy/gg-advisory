@@ -142,5 +142,53 @@
     "published_source": null,
     "published_confidence": null,
     "index_url": "https://arena.gov.au/news/"
+  },
+  {
+    "url": "https://www.newenergynexus.com/for-entrepreneurs/",
+    "title": "Find a program",
+    "summary": "",
+    "source": "newenergynexus.com",
+    "section": "Competitors",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.newenergynexus.com/blog/"
+  },
+  {
+    "url": "https://www.newenergynexus.com/impact/",
+    "title": "Explore impact",
+    "summary": "",
+    "source": "newenergynexus.com",
+    "section": "Competitors",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.newenergynexus.com/blog/"
+  },
+  {
+    "url": "https://www.newenergynexus.com/portfolio/",
+    "title": "View our portfolio",
+    "summary": "",
+    "source": "newenergynexus.com",
+    "section": "Competitors",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.newenergynexus.com/blog/"
+  },
+  {
+    "url": "https://www.newenergynexus.com/news-and-stories/",
+    "title": "News & Stories",
+    "summary": "",
+    "source": "newenergynexus.com",
+    "section": "Competitors",
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
+    "index_url": "https://www.newenergynexus.com/blog/"
   }
 ]
