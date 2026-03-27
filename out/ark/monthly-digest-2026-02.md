@@ -1,9 +1,9 @@
 # ARK Intelligence Brief — February 2026
 
 **Executive Summary**
-- _No specific grant amount, policy change, or company name available for this period._
-- _No specific grant amount, policy change, or company name available for this period._
-- _No specific grant amount, policy change, or company name available for this period._
+- _No specific grants, policy changes, or company names available for this period._
+- _No specific grants, policy changes, or company names available for this period._
+- _No specific grants, policy changes, or company names available for this period._
 
 ---
 ## SECTION: grants_funding
