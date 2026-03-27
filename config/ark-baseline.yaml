@@ -76,8 +76,8 @@ sections:
         label: "ARENA — Industrial Transformation Stream (ITS) Round 3"
         stability: dynamic
         status: active
-        tag: null
-        tag_color: null
+        tag: "OPEN | ROLLING"
+        tag_color: "teal"
         last_verified: "2026-03-27"
         source_url: "https://arena.gov.au/funding/industrial-transformation/"
         changelog: []
@@ -90,8 +90,8 @@ sections:
         label: "Emissions Reduction Fund / ACCU Scheme"
         stability: dynamic
         status: active
-        tag: null
-        tag_color: null
+        tag: "REVENUE MECHANISM"
+        tag_color: "navy"
         last_verified: "2026-03-27"
         source_url: "https://www.cleanenergyregulator.gov.au/ERF/Pages/default.aspx"
         changelog: []
@@ -105,8 +105,8 @@ sections:
         label: "Clean Energy Finance Corporation (CEFC)"
         stability: stable
         status: active
-        tag: null
-        tag_color: null
+        tag: "CO-INVESTMENT"
+        tag_color: "navy"
         last_verified: "2026-03-27"
         source_url: "https://www.cefc.com.au/where-we-invest/sector/industrial/"
         changelog: []
@@ -118,8 +118,8 @@ sections:
         label: "R&D Tax Incentive"
         stability: stable
         status: active
-        tag: null
-        tag_color: null
+        tag: "TAX INCENTIVE"
+        tag_color: "grey"
         last_verified: "2026-03-27"
         source_url: "https://business.gov.au/grants-and-programs/research-and-development-tax-incentive"
         changelog: []
@@ -136,8 +136,8 @@ sections:
         label: "Regulatory Driver — Safeguard Mechanism"
         stability: dynamic
         status: active
-        tag: null
-        tag_color: null
+        tag: "REGULATORY DRIVER"
+        tag_color: "navy"
         last_verified: "2026-03-27"
         source_url: "https://www.cleanenergyregulator.gov.au/Safeguard/Pages/default.aspx"
         changelog: []
@@ -153,8 +153,8 @@ sections:
         label: "National Climate Targets"
         stability: dynamic
         status: active
-        tag: null
-        tag_color: null
+        tag: "POLICY"
+        tag_color: "navy"
         last_verified: "2026-03-27"
         source_url: "https://www.dcceew.gov.au/climate-change/international/targets"
         changelog: []
@@ -167,8 +167,8 @@ sections:
         label: "Electricity Prices — Relevance to ARK's Fully-Electric Model"
         stability: dynamic
         status: active
-        tag: null
-        tag_color: null
+        tag: "MARKET DRIVER"
+        tag_color: "teal"
         last_verified: "2026-03-27"
         source_url: "https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/aggregate-prices"
         changelog: []
@@ -182,8 +182,8 @@ sections:
         label: "Key Emitting Sectors"
         stability: stable
         status: active
-        tag: null
-        tag_color: null
+        tag: "OPPORTUNITY SECTORS"
+        tag_color: "teal"
         last_verified: "2026-03-27"
         source_url: "https://www.industry.gov.au/publications/australias-long-term-emissions-reduction-plan"
         changelog: []
@@ -197,8 +197,8 @@ sections:
         label: "CCS Storage Infrastructure"
         stability: dynamic
         status: active
-        tag: null
-        tag_color: null
+        tag: "INFRASTRUCTURE"
+        tag_color: "grey"
         last_verified: "2026-03-27"
         source_url: "https://www.globalccsinstitute.com/resources/global-status-of-ccs/"
         changelog: []
@@ -216,8 +216,8 @@ sections:
         label: "Amine / MEA Post-Combustion Capture"
         stability: stable
         status: active
-        tag: null
-        tag_color: null
+        tag: "INCUMBENT TECH"
+        tag_color: "grey"
         last_verified: "2026-03-27"
         source_url: "https://www.iea.org/reports/carbon-capture-utilisation-and-storage-2"
         changelog: []
@@ -225,14 +225,14 @@ sections:
           - "Mature technology; capture efficiency up to 95% but requires continuous steam for solvent regeneration — cost and energy penalty increases sharply at lower CO₂ concentrations"
           - "ARK states capture cost at low concentrations is €90–156/tonne CO₂ for amine scrubbing (company-stated benchmark; no independent Australian cost study found)"
           - "Cannot exploit low/negative electricity price periods"
-          - "Not commercially deployed for WtE or biomass flue gas in Australia as of March 2026"
+          - "Not commercially deployed for WtE or biomass flue gas in Australia as of Q1 2026"
 
       - id: "co-002"
         label: "Calix / LEILAC — Complementary, Not Competing"
         stability: dynamic
         status: active
-        tag: null
-        tag_color: null
+        tag: "COMPLEMENTARY"
+        tag_color: "teal"
         last_verified: "2026-03-27"
         source_url: "https://www.calix.com.au/our-projects/leilac/"
         changelog: []
@@ -247,51 +247,51 @@ sections:
         label: "Membrane Separation"
         stability: stable
         status: active
-        tag: null
-        tag_color: null
+        tag: "EMERGING TECH"
+        tag_color: "grey"
         last_verified: "2026-03-27"
         source_url: "https://www.iea.org/reports/carbon-capture-utilisation-and-storage-2"
         changelog: []
         bullets:
-          - "Emerging technology; not commercially deployed at industrial scale for flue gas streams below ~10% CO₂ in Australia as of March 2026"
+          - "Emerging technology; not commercially deployed at industrial scale for flue gas streams below ~10% CO₂ in Australia as of Q1 2026"
 
       - id: "co-004"
         label: "Cryogenic Separation"
         stability: stable
         status: active
-        tag: null
-        tag_color: null
+        tag: "EMERGING TECH"
+        tag_color: "grey"
         last_verified: "2026-03-27"
         source_url: "https://www.iea.org/reports/carbon-capture-utilisation-and-storage-2"
         changelog: []
         bullets:
-          - "Fully electric process; suited to contaminated flue streams in principle; very high electricity consumption per tonne CO₂; not commercially deployed at WtE or biomass scale in Australia as of March 2026"
+          - "Fully electric process; suited to contaminated flue streams in principle; very high electricity consumption per tonne CO₂; not commercially deployed at WtE or biomass scale in Australia as of Q1 2026"
 
       - id: "co-005"
         label: "CSIRO — Amine-Based PCC Research"
         stability: dynamic
         status: active
-        tag: null
-        tag_color: null
+        tag: "ACTIVE R&D"
+        tag_color: "navy"
         last_verified: "2026-03-27"
         source_url: "https://www.csiro.au/en/research/natural-environment/atmosphere/carbon-capture"
         changelog: []
         bullets:
           - "CSIRO has developed proprietary cyclic amine absorbents with claimed lower energy requirements than conventional MEA; partnership with US-based ION Clean Energy for commercialisation"
-          - "Active R&D programme targeting post-combustion capture across concentration ranges; no commercial deployment in Australia identified as of March 2026"
+          - "Active R&D programme targeting post-combustion capture across concentration ranges; no commercial deployment in Australia identified as of Q1 2026"
           - "Also relevant as a potential CCTP Round 2 lead partner for ARK (CSIRO is an ABN-holding eligible lead applicant)"
 
       - id: "co-006"
         label: "Competitive Position Summary"
         stability: stable
         status: active
-        tag: null
-        tag_color: null
+        tag: "SUMMARY"
+        tag_color: "navy"
         last_verified: "2026-03-27"
         source_url: "https://www.arkcapturesolutions.com"
         changelog: []
         bullets:
-          - "No clear public evidence of a competing commercial technology deployed for low-concentration flue gas capture at WtE, biomass or cement combustion flue gas scale in Australia as of March 2026"
+          - "No clear public evidence of a competing commercial technology deployed for low-concentration flue gas capture at WtE, biomass or cement combustion flue gas scale in Australia as of Q1 2026"
           - "ARK's claim of cost leadership in the 4–15% CO₂ range is directionally credible based on publicly available information"
           - "Publication of independent pilot performance data from the Belgian 50 t/yr plant would be the single most important step toward commercial credibility with Australian buyers and grant panels"
 
@@ -328,7 +328,7 @@ sections:
         bullets:
           - "Approved capacity: 300,000 t/year; 29 MW; AUD $511M project (AUD $18M ARENA grant, AUD $57.5M CEFC debt)"
           - "Currently in voluntary administration and receivership; ACCIONA's proposed acquisition was withdrawn on 13 October 2025 following ACCC competition concerns"
-          - "As of March 2026, no new buyer or resolution has been publicly announced; operational timeline and ownership entirely uncertain"
+          - "As of Q1 2026, no new buyer or resolution has been publicly announced; operational timeline and ownership entirely uncertain"
           - "GG Advisory recommendation: do not engage until administration and ownership are fully resolved"
 
       - id: "pb-003"
