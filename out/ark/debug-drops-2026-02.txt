@@ -217,10 +217,6 @@ out_of_range	https://www.esgtoday.com/church-of-england-pensions-board-to-vote-a
 out_of_range	https://www.esgtoday.com/brookfield-la-caisse-acquire-clean-energy-platform-boralex-for-6-5-billion/	Brookfield, La Caisse Acquire Clean Energy Platform Boralex for $6.5 Billion
 undated	https://arena.gov.au/news/	Back to top
 undated	https://arena.gov.au/	Home
-undated	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
-undated	https://www.newenergynexus.com/impact/	Explore impact
-undated	https://www.newenergynexus.com/portfolio/	View our portfolio
-undated	https://www.newenergynexus.com/news-and-stories/	News & Stories
 out_of_range	https://www.esgtoday.com/ifrs-foundation-proposes-updates-to-agriculture-power-sector-sustainability-reporting-standards/	IFRS Foundation Proposes Updates to Agriculture, Power Sector Sustainability Reporting Standards
 out_of_range	https://www.esgtoday.com/lasalle-raises-370-million-for-new-real-estate-decarbonization-fund/	LaSalle Raises $370 Million for New Real Estate Decarbonization Fund
 out_of_range	https://www.esgtoday.com/textile-recycling-tech-startup-renasens-raises-e10-million/	Textile Recycling Tech Startup Renasens Raises €10 Million
@@ -233,10 +229,6 @@ out_of_range	https://www.esgtoday.com/church-of-england-pensions-board-to-vote-a
 out_of_range	https://www.esgtoday.com/brookfield-la-caisse-acquire-clean-energy-platform-boralex-for-6-5-billion/	Brookfield, La Caisse Acquire Clean Energy Platform Boralex for $6.5 Billion
 undated	https://arena.gov.au/news/	Back to top
 undated	https://arena.gov.au/	Home
-undated	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
-undated	https://www.newenergynexus.com/impact/	Explore impact
-undated	https://www.newenergynexus.com/portfolio/	View our portfolio
-undated	https://www.newenergynexus.com/news-and-stories/	News & Stories
 out_of_range	https://www.esgtoday.com/ifrs-foundation-proposes-updates-to-agriculture-power-sector-sustainability-reporting-standards/	IFRS Foundation Proposes Updates to Agriculture, Power Sector Sustainability Reporting Standards
 out_of_range	https://www.esgtoday.com/lasalle-raises-370-million-for-new-real-estate-decarbonization-fund/	LaSalle Raises $370 Million for New Real Estate Decarbonization Fund
 out_of_range	https://www.esgtoday.com/textile-recycling-tech-startup-renasens-raises-e10-million/	Textile Recycling Tech Startup Renasens Raises €10 Million
@@ -249,10 +241,6 @@ out_of_range	https://www.esgtoday.com/church-of-england-pensions-board-to-vote-a
 out_of_range	https://www.esgtoday.com/brookfield-la-caisse-acquire-clean-energy-platform-boralex-for-6-5-billion/	Brookfield, La Caisse Acquire Clean Energy Platform Boralex for $6.5 Billion
 undated	https://arena.gov.au/news/	Back to top
 undated	https://arena.gov.au/	Home
-undated	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
-undated	https://www.newenergynexus.com/impact/	Explore impact
-undated	https://www.newenergynexus.com/portfolio/	View our portfolio
-undated	https://www.newenergynexus.com/news-and-stories/	News & Stories
 out_of_range_last_resort	https://www.esgtoday.com/ifrs-foundation-proposes-updates-to-agriculture-power-sector-sustainability-reporting-standards/	IFRS Foundation Proposes Updates to Agriculture, Power Sector Sustainability Reporting Standards
 out_of_range_last_resort	https://www.esgtoday.com/lasalle-raises-370-million-for-new-real-estate-decarbonization-fund/	LaSalle Raises $370 Million for New Real Estate Decarbonization Fund
 out_of_range_last_resort	https://www.esgtoday.com/textile-recycling-tech-startup-renasens-raises-e10-million/	Textile Recycling Tech Startup Renasens Raises €10 Million
@@ -265,10 +253,6 @@ out_of_range_last_resort	https://www.esgtoday.com/church-of-england-pensions-boa
 out_of_range_last_resort	https://www.esgtoday.com/brookfield-la-caisse-acquire-clean-energy-platform-boralex-for-6-5-billion/	Brookfield, La Caisse Acquire Clean Energy Platform Boralex for $6.5 Billion
 undated_last_resort	https://arena.gov.au/news/	Back to top
 undated_last_resort	https://arena.gov.au/	Home
-undated_last_resort	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
-undated_last_resort	https://www.newenergynexus.com/impact/	Explore impact
-undated_last_resort	https://www.newenergynexus.com/portfolio/	View our portfolio
-undated_last_resort	https://www.newenergynexus.com/news-and-stories/	News & Stories
 placeholder_used		Competitors: no retrievable items for 2026-02
 undated	https://www.agl.com.au/about-agl/media-centre/asx-and-media-releases	Asx And Media Releases
 undated	https://www.agl.com.au/about-agl/news-centre?giha9n=hrd26h	NSW

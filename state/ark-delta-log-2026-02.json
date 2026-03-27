@@ -1,0 +1,13 @@
+{
+  "period": "2026-02",
+  "generated_at": "2026-03-27T07:17:44.158267+00:00",
+  "digest_file": "out/ark/monthly-digest-2026-02.md",
+  "status": "empty_delta",
+  "changes": [],
+  "summary": {
+    "auto_applied": 0,
+    "draft_pending": 0,
+    "flagged": 0,
+    "skipped": 0
+  }
+}
