@@ -1,0 +1,325 @@
+name: ark-monthly-intelligence
+
+on:
+  schedule:
+    - cron: "30 0 2 * *" # 00:30 UTC on the 2nd of each month (offset from main digest)
+  workflow_dispatch:
+    inputs:
+      year:
+        description: "Year to backfill (e.g., 2025)"
+        required: false
+        default: ""
+      month:
+        description: "Month to backfill (01..12)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ark-monthly-intelligence
+  cancel-in-progress: false
+
+jobs:
+  run-ark-monthly:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync with main (before generation)
+        if: github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git pull --rebase origin main
+
+      - name: Setup Python (with pip cache)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python -c "
+          import src.generate_monthly, src.fetch, src.summarise
+          import src.ark_summarise, src.generate_ark
+          import src.build_ark_newsletter, src.ark_update_sources
+          print('imports ok')
+          "
+          python -m py_compile \
+            src/generate_monthly.py src/fetch.py src/summarise.py \
+            src/ark_summarise.py src/generate_ark.py \
+            src/build_ark_newsletter.py src/ark_update_sources.py
+
+      - name: Sanity check generate_monthly has robust _in_range
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import inspect
+          import src.generate_monthly as gm
+          src = inspect.getsource(gm._in_range)
+          if "return start_ts <= ts <= end_ts" in src:
+            raise SystemExit("ERROR: old _in_range() still present")
+          if "_coerce_ts" not in src:
+            raise SystemExit("ERROR: _in_range() is not coercing timestamp types")
+          print("OK: _in_range looks robust")
+          PY
+
+      - name: Compute target month (prev month in Australia/Melbourne, unless inputs provided)
+        id: when
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          IN_YEAR="${{ github.event.inputs.year || '' }}"
+          IN_MONTH="${{ github.event.inputs.month || '' }}"
+
+          if [[ -n "$IN_YEAR" && -n "$IN_MONTH" ]]; then
+            YM="$(printf "%04d-%02d" "$IN_YEAR" "$IN_MONTH")"
+          else
+            LAST_PREV=$(TZ=Australia/Melbourne date -d "$(TZ=Australia/Melbourne date +%Y-%m-01) -1 day" +%Y-%m-%d)
+            YM=$(TZ=Australia/Melbourne date -d "$LAST_PREV" +%Y-%m)
+          fi
+
+          echo "ym=$YM" >> "$GITHUB_OUTPUT"
+          echo "Chosen month: $YM"
+
+      # ── Step 1: Update sources (discover new domains via Google News + OpenAI) ──
+      - name: Update ARK sources (dynamic discovery)
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ARK_SOURCES_BASE: config/ark-sources.yaml
+          ARK_SOURCES_OUT: config/ark-sources-current.yaml
+          MODEL: "gpt-4o"
+        run: |
+          python -m src.ark_update_sources
+
+      # ── Step 2: Run the ARK intelligence pipeline ─────────────────────────────
+      - name: Generate ARK intelligence brief
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MODE: backfill-months
+          START_YM: ${{ steps.when.outputs.ym }}
+          END_YM: ${{ steps.when.outputs.ym }}
+
+          # Use the dynamically-updated sources file
+          CFG_SOURCES: config/ark-sources-current.yaml
+          CFG_FILTERS: config/ark-filters.yaml
+          STATE_FILE: state/ark-seen_urls.json
+          OUT_DIR: out/ark
+
+          # Content tuning
+          ITEMS_PER_SECTION: "5"
+          PER_DOMAIN_CAP: "2"
+          MIN_TEXT_CHARS: "300"
+          PRIORITY_MIN_CHARS: "200"
+          MIN_TOTAL_ITEMS: "1"
+
+          # Priority domains: CCUS authority + AU government + key industrial
+          PRIORITY_DOMAINS: "globalccsinstitute.com,arena.gov.au,cefc.com.au,dcceew.gov.au,cleanenergyregulator.gov.au,iea.org,csiro.au,calix.com.au,industry.gov.au"
+
+          MODEL: "gpt-4o"
+          TEMP: "0.2"
+          OPENAI_MAX_TOKENS: "4000"
+
+          MAX_PDF_BYTES: "5242880"
+          PDF_TRUSTED: "globalccsinstitute.com,arena.gov.au,cefc.com.au,dcceew.gov.au,cleanenergyregulator.gov.au,iea.org,csiro.au,ga.gov.au,industry.gov.au,treasury.gov.au,carbonbrief.org"
+
+          DEBUG: "1"
+
+          RANGE_PAD_BEFORE_DAYS: "2"
+          RANGE_PAD_AFTER_DAYS: "2"
+          CROSS_MONTH_DEDUP: "1"
+
+          MAX_LINKS_PER_INDEX: "150"
+          MAX_INDEX_PAGES: "3"
+          MAX_DATE_RESOLVE_FETCHES_PER_INDEX: "40"
+
+          AUTO_ALLOW_GOV_AU: "1"
+          AUTO_ALLOW_DOMAINS: "globalccsinstitute.com,carbonbrief.org,esgtoday.com,calix.com.au,netzeroaustralia.net.au,bluescopesteel.com,santos.com,woodside.com,agl.com.au,originenergy.com.au,vivaenergy.com.au,boral.com,boral.com.au,appea.com.au,minerals.org.au,steel.org.au,igcc.org.au"
+
+        run: |
+          mkdir -p out/ark
+          python -m src.generate_ark
+
+      # ── Hallucination guard ────────────────────────────────────────────────────
+      # Verify every Source: URL in the newsletter markdown appears in the debug-selected
+      # JSON (i.e. was actually fetched from a real source this run).
+      # Any invented URL causes a hard failure — this brief goes to an external client.
+      - name: Hallucination guard — verify all Source URLs are real
+        env:
+          YM: ${{ steps.when.outputs.ym }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          DIGEST="out/ark/monthly-digest-${YM}.md"
+          SELECTED="out/ark/debug-selected-${YM}.json"
+
+          if [[ ! -f "$DIGEST" || ! -f "$SELECTED" ]]; then
+            echo "SKIP: digest or selected file missing."
+            exit 0
+          fi
+
+          python - <<'PY'
+          import json, os, sys
+          from pathlib import Path
+
+          ym = os.environ["YM"]
+          digest   = Path(f"out/ark/monthly-digest-{ym}.md").read_text(encoding="utf-8")
+          selected = json.loads(Path(f"out/ark/debug-selected-{ym}.json").read_text(encoding="utf-8"))
+
+          allowed = {(item.get("url") or "").strip().rstrip("/").lower() for item in selected}
+
+          violations = []
+          for line in digest.splitlines():
+              s = line.strip()
+              if s.lower().startswith("source:"):
+                  url = s[len("Source:"):].strip().rstrip("/").lower()
+                  if url and url not in allowed:
+                      violations.append(url)
+
+          if violations:
+              print(f"HALLUCINATION DETECTED: {len(violations)} Source URL(s) in the brief were NOT in the fetched source set:")
+              for v in violations:
+                  print(f"  x {v}")
+              sys.exit(1)
+          else:
+              print(f"OK: all Source URLs verified against {len(allowed)} fetched items.")
+          PY
+
+      - name: Guardrail — require at least 1 selected item
+        shell: bash
+        run: |
+          set -euo pipefail
+          YM="${{ steps.when.outputs.ym }}"
+          f="out/ark/debug-selected-${YM}.json"
+
+          if [[ ! -f "$f" ]]; then
+            echo "Missing selected file: $f"
+            exit 1
+          fi
+
+          n="$(jq -r 'length' "$f")"
+          echo "selected_count=$n"
+          if [[ "$n" -lt 1 ]]; then
+            echo "ERROR: 0 items selected. Failing run."
+            exit 1
+          fi
+
+      # ── Step 3: Commit outputs + updated sources ───────────────────────────────
+      - name: Commit outputs
+        if: github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "content-bot"
+          git config user.email "content-bot@example.com"
+
+          YM="${{ steps.when.outputs.ym }}"
+          DIGEST="out/ark/monthly-digest-${YM}.md"
+          NEWSLETTER="out/ark/ark-intelligence-brief-${YM}.docx"
+
+          test -f "$DIGEST" || { echo "Digest not found: $DIGEST"; exit 1; }
+
+          rm -rf src/__pycache__ || true
+
+          # Digest + newsletter
+          git add -f "$DIGEST"
+          [[ -f "$NEWSLETTER" ]] && git add -f "$NEWSLETTER" || true
+
+          # Debug outputs
+          git add -f "out/ark/debug-selected-${YM}.json" 2>/dev/null || true
+          git add -f "out/ark/debug-drops-${YM}.txt"     2>/dev/null || true
+          git add -f "out/ark/debug-meta-${YM}.txt"      2>/dev/null || true
+
+          # Updated sources (grows over time as new domains are discovered)
+          git add -f "config/ark-sources-current.yaml" 2>/dev/null || true
+
+          # Cross-month dedup state
+          git add -f "state/ark-seen_urls.json" 2>/dev/null || true
+
+          shopt -s nullglob
+          pool_files=(out/ark/debug-pool-*-"${YM}".json)
+          if (( ${#pool_files[@]} )); then
+            git add -f "${pool_files[@]}"
+          fi
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          echo "---- git status (porcelain) ----"
+          git status --porcelain
+
+          git commit -m "ark: intelligence brief ${YM} + source update"
+          git push origin HEAD:main
+
+      - name: Prepare debug bundle
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          YM="${{ steps.when.outputs.ym }}"
+
+          rm -rf _ark_artifact && mkdir -p _ark_artifact
+
+          cp -f "out/ark/debug-selected-${YM}.json" _ark_artifact/ 2>/dev/null || true
+          cp -f "out/ark/debug-drops-${YM}.txt"     _ark_artifact/ 2>/dev/null || true
+          cp -f "out/ark/debug-meta-${YM}.txt"      _ark_artifact/ 2>/dev/null || true
+
+          shopt -s nullglob
+          for f in out/ark/debug-pool-*-"${YM}".json; do
+            cp -f "$f" _ark_artifact/ || true
+          done
+
+          echo "Artifact files:"
+          ls -lah _ark_artifact || true
+
+      - name: Upload debug bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ark-debug-${{ steps.when.outputs.ym }}
+          path: _ark_artifact
+          if-no-files-found: warn
+          retention-days: 30
+
+      # ── Step 4: Email the newsletter to GG Advisory ───────────────────────────
+      - name: Email ARK intelligence brief
+        if: success()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.mail.me.com
+          server_port: 587
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "ARK Capture Solutions | APAC Intelligence Brief (${{ steps.when.outputs.ym }})"
+          from: "GG Advisory <${{ secrets.MAIL_USERNAME }}>"
+          to: "a.demazy_de_fortet@icloud.com"
+          body: |
+            ARK Capture Solutions — Monthly APAC Intelligence Brief
+            Period: ${{ steps.when.outputs.ym }}
+
+            Sections covered:
+            ▸ Grants & Funding — AU/APAC programs for CCUS and industrial decarbonisation
+            ▸ Market & Policy  — Safeguard Mechanism, CCUS regulation, policy developments
+            ▸ Competitors      — Carbon capture companies and funded projects in AU/APAC
+            ▸ Partners & Buyers — Industrial companies (steel, glass, biogas, gas-fired power)
+
+            The attached .docx is ready to forward directly to ARK.
+
+            Debug / selected items: see attached JSON.
+            Repo: https://github.com/${{ github.repository }}/tree/main/out/ark
+          attachments: |
+            out/ark/ark-intelligence-brief-${{ steps.when.outputs.ym }}.docx
+            out/ark/debug-selected-${{ steps.when.outputs.ym }}.json

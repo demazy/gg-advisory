@@ -1,0 +1,275 @@
+# Filters for ARK Capture Solutions monthly intelligence brief
+# Focus: CCUS, industrial decarbonisation, carbon capture in AU/APAC
+
+allow_domains:
+# Australian government
+- '*.gov.au'
+- '*.edu.au'
+- dcceew.gov.au
+- arena.gov.au
+- cleanenergyregulator.gov.au
+- industry.gov.au
+- treasury.gov.au
+- csiro.au
+- ga.gov.au
+# CEFC & clean energy bodies
+- cefc.com.au
+- cleanenergyfinancecorp.com.au
+# Global CCUS authority (Melbourne HQ)
+- globalccsinstitute.com
+# International bodies
+- iea.org
+- irena.org
+- ipieca.org
+# Net Zero
+- netzeroaustralia.net.au
+# Industry bodies
+- appea.com.au
+- minerals.org.au
+- steel.org.au
+- ccaa.com.au
+- aibn.com.au
+- australianinvestmentcouncil.com.au
+# Industrial companies (potential buyers)
+- bluescopesteel.com
+- santos.com
+- woodside.com
+- agl.com.au
+- originenergy.com.au
+- vivaenergy.com.au
+- boral.com
+- boral.com.au
+# Competitor / market intelligence
+- calix.com.au
+- carbonbrief.org
+- esgtoday.com
+- climatecouncil.org.au
+- igcc.org.au
+- newenergynexus.com
+- techcouncil.com.au
+- smartenergy.org.au
+
+deny_domains: []
+
+domain_deny_substrings:
+  arena.gov.au:
+    - /renewable-energy/
+  cefc.com.au:
+    - /where-we-invest/
+
+title_deny_regex:
+  - (cookie|privacy|terms|subscribe|sign\s?up|login|careers|jobs)
+  - '(webinar|tickets|register\s+(?:for|to\s+attend|your\s+place|now\s+for))'
+  # Reject purely financial results (not decarbonisation-related)
+  - '^\s*(quarterly|annual|half.year)\s+(results|earnings|report)\s*$'
+  - 'dividend|share\s+buyback|capital\s+raising'
+
+keep_keywords:
+  - carbon capture
+  - carbon dioxide capture
+  - CO2 capture
+  - CCS
+  - CCUS
+  - carbon storage
+  - carbon sequestration
+  - point source
+  - flue gas
+  - industrial decarbonisation
+  - decarbonise
+  - net zero
+  - emissions reduction
+  - Safeguard Mechanism
+  - industrial emissions
+  - low-carbon
+  - clean energy
+  - green hydrogen
+  - carbon credit
+  - ACCU
+  - ERF
+  - climate tech
+  - cleantech
+  - accelerator
+  - grant program
+  - funding round
+  - investment round
+  - biogas
+  - biomethane
+  - BECCS
+  - bioenergy
+  - gas-fired
+  - steel
+  - cement
+  - glass
+  - petrochemical
+  - Future Made in Australia
+  - National Reconstruction Fund
+  - ARENA
+  - CEFC
+
+section_keywords:
+  Grants & Funding:
+    - ARENA grant
+    - CEFC investment
+    - CEFC finance
+    - grant program
+    - grant funding
+    - co-investment
+    - funding round
+    - government grant
+    - National Reconstruction Fund
+    - Future Made in Australia
+    - Safeguard Mechanism
+    - industrial decarbonisation fund
+    - carbon capture grant
+    - CCS funding
+    - CCUS funding
+    - clean energy grant
+    - innovation grant
+    - accelerator program
+    - pilot project funding
+    - demonstration project
+    - commercialisation grant
+    - R&D grant
+    - Hydrogen Headstart
+    - Rewiring the Nation
+    - net zero grant
+    - emissions reduction grant
+    - ERF
+    - ACCU
+    - carbon credit program
+    - biogas grant
+    - CSIRO Accelerate
+    - CSIRO ON
+    - Net Zero Economy Authority
+
+  Market & Policy:
+    - Safeguard Mechanism
+    - industrial baseline
+    - CCUS policy
+    - CCS policy
+    - carbon capture regulation
+    - carbon storage regulation
+    - industrial emissions policy
+    - decarbonisation roadmap
+    - net zero strategy
+    - climate policy
+    - Future Made in Australia
+    - industrial transformation
+    - carbon price
+    - carbon market
+    - CO2 storage
+    - geological storage
+    - storage site
+    - offshore storage
+    - ACCU
+    - carbon credit market
+    - emission reduction
+    - industrial decarbonisation
+    - biogas regulation
+    - gas-fired power
+    - steel decarbonisation
+    - cement decarbonisation
+    - hard-to-abate
+    - scope 1 emissions
+    - scope 3 emissions
+    - abatement
+    - direct air capture
+    - point source capture
+    - flue gas treatment
+    - CCUS readiness
+    - CCS project
+    - CCUS project
+    - carbon offset
+    - Paris Agreement
+    - 1.5 degrees
+    - net negative
+
+  Competitors:
+    - carbon capture company
+    - carbon capture startup
+    - carbon capture technology
+    - CCS technology
+    - CCUS technology
+    - carbon capture project
+    - post-combustion capture
+    - pre-combustion capture
+    - oxy-fuel combustion
+    - direct air capture
+    - DAC
+    - solvent capture
+    - membrane capture
+    - chemical looping
+    - modular carbon capture
+    - point source capture
+    - low-concentration capture
+    - Calix
+    - carbon capture pilot
+    - carbon capture demonstration
+    - CCUS investment
+    - CCS investment
+    - carbon capture funding
+    - ARENA carbon capture
+    - carbon capture partnership
+    - Moomba CCS
+    - Gorgon CCS
+    - Darwin CCS
+    - carbon capture commercialisation
+    - Series A
+    - seed funding
+    - venture capital
+    - cleantech investment
+    - climate tech investment
+    - CO2 utilisation
+    - CCU
+    - mineralisation
+    - carbon mineralisation
+    - accelerator cohort
+    - New Energy Nexus
+    - CSIRO carbon
+
+  Partners & Buyers:
+    - BlueScope
+    - BlueScope Steel
+    - steel decarbonisation
+    - steel emissions
+    - steel net zero
+    - InfraBuild
+    - OneSteel
+    - Santos CCS
+    - Santos decarbonisation
+    - Woodside decarbonisation
+    - Woodside CCS
+    - Gorgon CCS
+    - AGL decarbonisation
+    - Origin Energy decarbonisation
+    - gas-fired power decarbonisation
+    - gas plant emissions
+    - Viva Energy
+    - Geelong refinery
+    - Boral decarbonisation
+    - cement decarbonisation
+    - clinker emissions
+    - glass manufacturing emissions
+    - industrial flue gas
+    - flue gas CO2
+    - low-concentration CO2
+    - biogas upgrading
+    - biomethane production
+    - BECCS
+    - bioenergy with carbon capture
+    - Safeguard Mechanism facility
+    - liable facility
+    - hard-to-abate sector
+    - industrial carbon offset
+    - scope 1 abatement
+    - industrial climate target
+    - decarbonisation partnership
+    - technology partnership
+    - net zero commitment
+    - emission reduction target
+    - carbon neutral
+    - climate transition plan
+    - APPEA
+    - LNG carbon footprint
+    - petrochemical emissions
+    - refinery decarbonisation
