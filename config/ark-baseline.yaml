@@ -1,0 +1,432 @@
+# ARK Capture Solutions — Intelligence Baseline
+# Maintained by GG Advisory. Auto-updated via Tier 2 delta pipeline.
+#
+# stability: stable  → never auto-updated; passively monitored for contradiction flags only
+# stability: dynamic → Tier 1 URL-verified monthly + Tier 2 GPT-4o delta applied
+# status: active     → included in newsletter Market Background
+# status: draft      → pending GG Advisory review before promotion to active
+# status: deprecated → no longer included; archived for reference
+#
+# Confidence gate (ark_apply_baseline_delta.py):
+#   >= 0.85  → auto-applied to baseline (changelog entry added)
+#   0.60–0.85 → applied as status: draft (shown in internal review report)
+#   < 0.60   → flagged only, not applied (shown in internal review report)
+#
+# last_reviewed: date GG Advisory last manually reviewed this file
+
+meta:
+  version: "1.1"
+  last_reviewed: "2026-03-27"
+  reviewed_by: "GG Advisory"
+  auto_apply_min_confidence: 0.85
+  draft_gate_confidence: 0.60
+  staleness_alert_days: 90
+
+# ── Executive Summary context ─────────────────────────────────────────────────
+executive_summary:
+  context:
+    stability: stable
+    last_verified: "2026-03-27"
+    source_url: "https://www.arkcapturesolutions.com"
+    changelog: []
+    paragraphs:
+      - >-
+        ARK Capture Solutions (Belgium) has developed a fully-electric,
+        post-combustion carbon capture system targeting low-concentration flue
+        gas from industrial sources including waste-to-energy, cement, biomass
+        co-generation, and gas-fired plants. ARK states the technology operates
+        without chemical solvents, with modular design and autonomous operation,
+        and claims approximately 50% lower capture costs versus conventional
+        amine scrubbing at low CO₂ concentrations (company-stated; no
+        independent peer-reviewed validation published to date).
+      - >-
+        A 50 t/year pilot plant recently commenced operation in Belgium under
+        the €5.6M CO₂ Disrupt Project (partners: Aperam, Industeel, Cinergie).
+        ARK's strategic entry into Australia is supported by GG Advisory and
+        targets the country's growing industrial decarbonisation mandate, active
+        grant programmes, and a small number of high-fit early adopters in
+        Western Australia and New South Wales.
+
+# ── Sections ──────────────────────────────────────────────────────────────────
+sections:
+
+  # ── Grants & Funding ────────────────────────────────────────────────────────
+  grants_funding:
+    entries:
+
+      - id: "gf-001"
+        label: "Carbon Capture Technologies Programme (CCTP) — Round 2"
+        stability: dynamic
+        status: active
+        tag: "TIME-CRITICAL"
+        tag_color: "red"
+        last_verified: "2026-03-27"
+        source_url: "https://business.gov.au/grants-and-programs/carbon-capture-technologies-programme-round-2"
+        changelog: []
+        bullets:
+          - "Administered by DCCEEW / business.gov.au; open now, closes 5:00 pm AEST Wednesday 6 May 2026"
+          - "Total pool: AUD $32.6 million; grants from AUD $1M to AUD $10M per project; minimum eligible project expenditure AUD $2M"
+          - "Two-stage process: Expression of Interest (Stage 1) → invited full application (Stage 2)"
+          - "Eligible lead applicants: any entity incorporated in Australia with an ABN; foreign technology providers such as ARK must partner with an eligible Australian lead"
+          - "Partnering with CSIRO Energy is the recommended pathway — provides ABN eligibility, independent credibility and technology validation in a single step (GG Advisory recommendation; not a programme rule)"
+          - "Projects must be located in Australia, complete by 31 March 2031, and must not consist solely of a feasibility or engineering study; prior Round 1 recipients are ineligible"
+          - "Strategic fit for ARK: HIGH — programme explicitly targets novel and emerging carbon management technologies for hard-to-abate industrial emitters"
+
+      - id: "gf-002"
+        label: "ARENA — Industrial Transformation Stream (ITS) Round 3"
+        stability: dynamic
+        status: active
+        tag: null
+        tag_color: null
+        last_verified: "2026-03-27"
+        source_url: "https://arena.gov.au/funding/industrial-transformation/"
+        changelog: []
+        bullets:
+          - "Open and ongoing since September 2025; AUD $180M available; no hard deadline — applications assessed on rolling basis"
+          - "Supports feasibility studies, FEED, trials, demonstrations and full deployment for industrial decarbonisation"
+          - "Complementary to CCTP: can fund project-development stages before or alongside a CCTP grant"
+
+      - id: "gf-003"
+        label: "Emissions Reduction Fund / ACCU Scheme"
+        stability: dynamic
+        status: active
+        tag: null
+        tag_color: null
+        last_verified: "2026-03-27"
+        source_url: "https://www.cleanenergyregulator.gov.au/ERF/Pages/default.aspx"
+        changelog: []
+        bullets:
+          - "Verified carbon abatement from eligible CCS projects can generate Australian Carbon Credit Units (ACCUs)"
+          - "Spot price Q1 2026: approximately AUD $30–42/t (elevated ahead of March Safeguard compliance deadline); live prices paywalled"
+          - "Long-term outlook: flat at AUD $30–35/t to at least 2028, projected to rise toward AUD $70/t by 2035 (EY Net Zero Centre, January 2026)"
+          - "ACCU revenue is conditional on project structure, CER method compliance and grant funding arrangements — treat as potential upside only"
+
+      - id: "gf-004"
+        label: "Clean Energy Finance Corporation (CEFC)"
+        stability: stable
+        status: active
+        tag: null
+        tag_color: null
+        last_verified: "2026-03-27"
+        source_url: "https://www.cefc.com.au/where-we-invest/sector/industrial/"
+        changelog: []
+        bullets:
+          - "Provides debt and equity co-investment for clean energy projects; relevant at construction/deployment stage"
+          - "Has co-invested alongside ARENA in industrial decarbonisation (e.g. AUD $57.5M subordinated debt into East Rockingham WtE)"
+
+      - id: "gf-005"
+        label: "R&D Tax Incentive"
+        stability: stable
+        status: active
+        tag: null
+        tag_color: null
+        last_verified: "2026-03-27"
+        source_url: "https://business.gov.au/grants-and-programs/research-and-development-tax-incentive"
+        changelog: []
+        bullets:
+          - "Companies with aggregated turnover below AUD $20M: refundable offset at corporate tax rate + 18.5% premium (= 43.5% at the standard 25% rate); excess refunded as cash"
+          - "Companies with aggregated turnover AUD $20M or above: non-refundable offset at corporate tax rate + 8.5% (0–2% R&D intensity) or + 16.5% (above 2% R&D intensity)"
+          - "Relevant for ARK once an Australian entity is established; registration deadline within 10 months of income year end"
+
+  # ── Market & Policy ─────────────────────────────────────────────────────────
+  market_policy:
+    entries:
+
+      - id: "mp-001"
+        label: "Regulatory Driver — Safeguard Mechanism"
+        stability: dynamic
+        status: active
+        tag: null
+        tag_color: null
+        last_verified: "2026-03-27"
+        source_url: "https://www.cleanenergyregulator.gov.au/Safeguard/Pages/default.aspx"
+        changelog: []
+        bullets:
+          - "Applies to 219 facilities (confirmed 2023-24; 2024-25 final data due to CER by 15 April 2026, current estimate ~220) emitting more than 100,000 tCO₂e/year"
+          - "Covers mining, manufacturing, domestic transport, oil, gas and waste sectors"
+          - "Default baselines decline at 4.9% per year through to 30 June 2030; trade-exposed baseline-adjusted (TEBA) facilities may qualify for a reduced minimum decline rate of 1–2%"
+          - "Facilities in excess must surrender ACCUs or Safeguard Mechanism Credits (SMCs) by 31 March each year"
+          - "The scheme's aggregate trajectory requires that net emissions from all Safeguard facilities do not exceed 100 MtCO₂e in 2029-30"
+          - "A mandatory government review of Safeguard policy settings is scheduled for 2026-27, covering post-2030 trajectory, ACCU/SMC limits, use of international offsets, and calibration to Australia's updated NDC — outcome could materially affect compliance costs and the value of on-site capture investments"
+
+      - id: "mp-002"
+        label: "National Climate Targets"
+        stability: dynamic
+        status: active
+        tag: null
+        tag_color: null
+        last_verified: "2026-03-27"
+        source_url: "https://www.dcceew.gov.au/climate-change/international/targets"
+        changelog: []
+        bullets:
+          - "Legislated 2030 target: 43% reduction below 2005 levels; net zero by 2050"
+          - "Updated NDC submitted to the UN in September 2025: 62–70% below 2005 levels by 2035 — substantially increases pressure on hard-to-abate industrial sectors beyond 2030"
+          - "Scale of CCS required: the 2023 Net Zero Australia study (cited in the government's Future Gas Strategy, May 2024) projects that Australia will need to achieve geological sequestration of approximately 150 Mtpa CO₂ by 2040 in most net-zero scenarios"
+
+      - id: "mp-003"
+        label: "Electricity Prices — Relevance to ARK's Fully-Electric Model"
+        stability: dynamic
+        status: active
+        tag: null
+        tag_color: null
+        last_verified: "2026-03-27"
+        source_url: "https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/aggregate-prices"
+        changelog: []
+        bullets:
+          - "NEM wholesale average fell to approximately AUD $50/MWh in Q4 2025 (down ~44% year-on-year), driven by record renewable penetration exceeding 50% of NEM demand for the first time"
+          - "Negative and near-zero wholesale price periods are increasing in all mainland NEM regions: AEMO recorded negative prices in 48.4% of intervals in South Australia and 43.1% in Victoria in Q4 2025"
+          - "ARK's flexible electric system can operate preferentially during low/negative-price periods; amine scrubbing cannot (requires continuous steam)"
+          - "Delivered industrial electricity cost varies significantly by state and contract structure — site-specific energy modelling is required for any client proposal"
+
+      - id: "mp-004"
+        label: "Key Emitting Sectors"
+        stability: stable
+        status: active
+        tag: null
+        tag_color: null
+        last_verified: "2026-03-27"
+        source_url: "https://www.industry.gov.au/publications/australias-long-term-emissions-reduction-plan"
+        changelog: []
+        bullets:
+          - "Waste-to-energy: combustion flue gas CO₂ typically 8–12%; Kwinana (Perth, WA) is Australia's only operational WtE facility (opened November 2025)"
+          - "Cement and lime: ~4.7 Mt CO₂/year from Australian integrated cement production (2020-21); of this ~60% is process/calcination CO₂ (LEILAC domain), ~28% is thermal combustion flue gas at 14–25% CO₂ (ARK's domain), ~12% is indirect electricity emissions"
+          - "Biomass / sugar co-generation: flue gas CO₂ typically 10–14%; Queensland bagasse mills are medium-term targets after an Australian ARK reference project is established"
+          - "Gas-fired power: flue gas CO₂ typically 4–9% — lowest concentration, most challenging economic case; longer-term opportunity"
+
+      - id: "mp-005"
+        label: "CCS Storage Infrastructure"
+        stability: dynamic
+        status: active
+        tag: null
+        tag_color: null
+        last_verified: "2026-03-27"
+        source_url: "https://www.globalccsinstitute.com/resources/global-status-of-ccs/"
+        changelog: []
+        bullets:
+          - "Gorgon CCS (WA, Chevron): Australia's first commercial CCS project; stored more than 11 Mt CO₂ to July 2025"
+          - "Moomba CCS (SA, Santos): operational since October 2024; storing approximately 1.7 Mtpa CO₂ in depleted Cooper Basin gas fields"
+          - "South West Hub (WA): proposed regional CO₂ storage hub in the Perth Basin; relevant to Kwinana/Adbri/ARK cluster"
+          - "10 offshore storage acreage areas released in 2023 across Bonaparte, Browse, Northern Carnarvon, Perth, Otway, Bass and Gippsland basins"
+
+  # ── Competitors ─────────────────────────────────────────────────────────────
+  competitors:
+    entries:
+
+      - id: "co-001"
+        label: "Amine / MEA Post-Combustion Capture"
+        stability: stable
+        status: active
+        tag: null
+        tag_color: null
+        last_verified: "2026-03-27"
+        source_url: "https://www.iea.org/reports/carbon-capture-utilisation-and-storage-2"
+        changelog: []
+        bullets:
+          - "Mature technology; capture efficiency up to 95% but requires continuous steam for solvent regeneration — cost and energy penalty increases sharply at lower CO₂ concentrations"
+          - "ARK states capture cost at low concentrations is €90–156/tonne CO₂ for amine scrubbing (company-stated benchmark; no independent Australian cost study found)"
+          - "Cannot exploit low/negative electricity price periods"
+          - "Not commercially deployed for WtE or biomass flue gas in Australia as of March 2026"
+
+      - id: "co-002"
+        label: "Calix / LEILAC — Complementary, Not Competing"
+        stability: dynamic
+        status: active
+        tag: null
+        tag_color: null
+        last_verified: "2026-03-27"
+        source_url: "https://www.calix.com.au/our-projects/leilac/"
+        changelog: []
+        bullets:
+          - "LEILAC uses indirect heating to capture unavoidable process/calcination CO₂ (~60% of integrated cement plant emissions) — it does not address combustion flue gas"
+          - "ARK addresses the thermal combustion flue gas portion (~28% of cement plant emissions, 14–25% CO₂ concentration) which LEILAC does not capture"
+          - "A combined LEILAC + ARK proposal for a cement or lime plant covers whole-plant decarbonisation — the strongest possible CCTP Round 2 application structure"
+          - "Current Australian status: AUD $15M CCTP Round 1 grant for Project ZETA (lime CCU demonstration, South Australia); pre-FEED completed 26 September 2025; now at FEED stage, on budget and on schedule"
+          - "Heidelberg Materials (Cement Australia's parent) holds an indefinite global LEILAC licence; LEILAC-2 commissioning in Germany (Ennigerloh) targeted mid-2026"
+
+      - id: "co-003"
+        label: "Membrane Separation"
+        stability: stable
+        status: active
+        tag: null
+        tag_color: null
+        last_verified: "2026-03-27"
+        source_url: "https://www.iea.org/reports/carbon-capture-utilisation-and-storage-2"
+        changelog: []
+        bullets:
+          - "Emerging technology; not commercially deployed at industrial scale for flue gas streams below ~10% CO₂ in Australia as of March 2026"
+
+      - id: "co-004"
+        label: "Cryogenic Separation"
+        stability: stable
+        status: active
+        tag: null
+        tag_color: null
+        last_verified: "2026-03-27"
+        source_url: "https://www.iea.org/reports/carbon-capture-utilisation-and-storage-2"
+        changelog: []
+        bullets:
+          - "Fully electric process; suited to contaminated flue streams in principle; very high electricity consumption per tonne CO₂; not commercially deployed at WtE or biomass scale in Australia as of March 2026"
+
+      - id: "co-005"
+        label: "CSIRO — Amine-Based PCC Research"
+        stability: dynamic
+        status: active
+        tag: null
+        tag_color: null
+        last_verified: "2026-03-27"
+        source_url: "https://www.csiro.au/en/research/natural-environment/atmosphere/carbon-capture"
+        changelog: []
+        bullets:
+          - "CSIRO has developed proprietary cyclic amine absorbents with claimed lower energy requirements than conventional MEA; partnership with US-based ION Clean Energy for commercialisation"
+          - "Active R&D programme targeting post-combustion capture across concentration ranges; no commercial deployment in Australia identified as of March 2026"
+          - "Also relevant as a potential CCTP Round 2 lead partner for ARK (CSIRO is an ABN-holding eligible lead applicant)"
+
+      - id: "co-006"
+        label: "Competitive Position Summary"
+        stability: stable
+        status: active
+        tag: null
+        tag_color: null
+        last_verified: "2026-03-27"
+        source_url: "https://www.arkcapturesolutions.com"
+        changelog: []
+        bullets:
+          - "No clear public evidence of a competing commercial technology deployed for low-concentration flue gas capture at WtE, biomass or cement combustion flue gas scale in Australia as of March 2026"
+          - "ARK's claim of cost leadership in the 4–15% CO₂ range is directionally credible based on publicly available information"
+          - "Publication of independent pilot performance data from the Belgian 50 t/yr plant would be the single most important step toward commercial credibility with Australian buyers and grant panels"
+
+  # ── Partners & Buyers ────────────────────────────────────────────────────────
+  partners_buyers:
+    entries:
+
+      - id: "pb-001"
+        label: "Kwinana Energy Recovery — Perth, WA"
+        stability: dynamic
+        status: active
+        tag: "PRIORITY 1 | WtE"
+        tag_color: "teal"
+        last_verified: "2026-03-27"
+        source_url: "https://www.acciona.com.au/projects/kwinana-energy-recovery/"
+        changelog: []
+        bullets:
+          - "Owner: ACCIONA (100% since March 2024); day-to-day operations and maintenance: Veolia (long-term O&M services contract)"
+          - "Capacity: 460,000 tonnes/year non-recyclable waste; 38 MW baseload electricity output"
+          - "Officially opened 14 November 2025; processed 90,000+ tonnes in first three months of operation"
+          - "Flue gas CO₂ concentration: approximately 8–12% — directly within ARK's target range"
+          - "Australia's only operational WtE facility; ACCC (July 2025): no other WtE facility likely to become operational in WA within the next decade"
+          - "Highest near-term priority: ACCIONA has strong incentive to lead on decarbonisation at its flagship asset; Veolia operates 65 similar facilities globally and has direct interest in green credentials"
+
+      - id: "pb-002"
+        label: "East Rockingham Resource Recovery Facility — Perth, WA"
+        stability: dynamic
+        status: active
+        tag: "WATCHLIST"
+        tag_color: "orange"
+        last_verified: "2026-03-27"
+        source_url: "https://www.kordamentha.com/creditors/east-rockingham"
+        changelog: []
+        bullets:
+          - "Approved capacity: 300,000 t/year; 29 MW; AUD $511M project (AUD $18M ARENA grant, AUD $57.5M CEFC debt)"
+          - "Currently in voluntary administration and receivership; ACCIONA's proposed acquisition was withdrawn on 13 October 2025 following ACCC competition concerns"
+          - "As of March 2026, no new buyer or resolution has been publicly announced; operational timeline and ownership entirely uncertain"
+          - "GG Advisory recommendation: do not engage until administration and ownership are fully resolved"
+
+      - id: "pb-003"
+        label: "Boral — Berrima Cement Works, NSW"
+        stability: dynamic
+        status: active
+        tag: "PRIORITY 1 | CEMENT"
+        tag_color: "teal"
+        last_verified: "2026-03-27"
+        source_url: "https://www.boral.com.au/sustainability/climate-and-energy"
+        changelog: []
+        bullets:
+          - "Supplies approximately 40% of NSW and ACT cement (Boral, December 2024); combustion flue gas at approximately 14–25% CO₂"
+          - "Current CCS activity: a recarbonation-based CCS pilot plant operational at Berrima (different and complementary mechanism to ARK, not competing)"
+          - "AUD $25.45M NSW State Government funding secured for alternative fuels transition (coal → alternative fuels, targeting 60% non-coal kiln energy within 3 years); smaller federal fund supports the recarbonation pilot"
+          - "Note: an earlier AUD $30M federal Calix/LEILAC project at Berrima was under the CCUS Hubs and Technologies Programme, cancelled by the federal government in October 2022; that project did not proceed"
+          - "CEO confirmed CCS is part of the company's long-term net-zero-by-2050 strategy alongside near-term fuel switching"
+          - "GG Advisory recommendation: approach after ARK has established a Calix partnership"
+
+      - id: "pb-004"
+        label: "Adbri / Cockburn Cement — Kwinana, WA"
+        stability: dynamic
+        status: active
+        tag: "PRIORITY 1 | CEMENT"
+        tag_color: "teal"
+        last_verified: "2026-03-27"
+        source_url: "https://www.adbri.com.au/sustainability/climate-action"
+        changelog: []
+        bullets:
+          - "Majority-owned by CRH plc (acquisition completed 2024; Adbri delisted from ASX); Barro Group retains minority stake"
+          - "Co-located with Kwinana Energy Recovery facility"
+          - "Active LEILAC lime partnership: Calix awarded AUD $11M federal grant for a LEILAC low-emissions lime demonstration at Kwinana with Adbri (calcination CO₂); ARK would address combustion flue gas CO₂ remaining"
+          - "Kwinana Upgrade Project: AUD $199M investment consolidating two cement sites; ~20% CO₂ reduction versus legacy operations; combustion emissions remain unaddressed"
+
+      - id: "pb-005"
+        label: "Cement Australia — Gladstone, QLD"
+        stability: dynamic
+        status: active
+        tag: "PRIORITY 2 | CEMENT"
+        tag_color: "navy"
+        last_verified: "2026-03-27"
+        source_url: "https://www.cementaustralia.com.au/sustainability"
+        changelog: []
+        bullets:
+          - "Joint venture of Holcim and Heidelberg Materials (Heidelberg holds indefinite global LEILAC licence)"
+          - "Gladstone plant: MoU with Mitsubishi Gas Chemical Company (October 2022) to study green methanol production using captured CO₂ and green hydrogen (Carbopath™); Phase 1 — targeted AUD $150M first-stage plant, ~100,000 t/yr methanol — has a targeted Phase 1 commercial operation start of mid-2028 per Queensland Government; no Final Investment Decision confirmed publicly; treat as MoU/feasibility stage"
+          - "ACCC approved Cement Australia's acquisition of BGC Cementitious in September 2025"
+          - "GG Advisory recommendation: medium-term; combustion flue gas remains a potential ARK opportunity regardless of Gladstone methanol project outcome"
+
+      - id: "pb-006"
+        label: "CSIRO"
+        stability: stable
+        status: active
+        tag: "GRANT PARTNER"
+        tag_color: "teal"
+        last_verified: "2026-03-27"
+        source_url: "https://www.csiro.au/en/work-with-us/licensing-and-commercialisation"
+        changelog: []
+        bullets:
+          - "National science agency; ABN holder; eligible CCTP Round 2 lead applicant"
+          - "Provides independent technology validation — critical for ARK's credibility with Australian buyers and grant panels"
+          - "Recommended first contact: CSIRO Energy group (Newcastle)"
+
+      - id: "pb-007"
+        label: "Calix Limited (ASX: CXL)"
+        stability: dynamic
+        status: active
+        tag: "STRATEGIC PARTNER"
+        tag_color: "teal"
+        last_verified: "2026-03-27"
+        source_url: "https://www.calix.com.au/our-projects/leilac/"
+        changelog: []
+        bullets:
+          - "Australian-listed company; Project ZETA pre-FEED completed 26 September 2025; now at FEED stage; AUD $15M CCTP Round 1 grant"
+          - "Natural strategic partner: combined Calix (calcination CO₂) + ARK (combustion CO₂) covers whole-plant cement/lime decarbonisation — strongest possible CCTP Round 2 application"
+
+      - id: "pb-008"
+        label: "HILT CRC"
+        stability: stable
+        status: active
+        tag: "GRANT PARTNER"
+        tag_color: "teal"
+        last_verified: "2026-03-27"
+        source_url: "https://www.hiltcrc.com.au/"
+        changelog: []
+        bullets:
+          - "Heavy Industry Low-Carbon Transition CRC; members include Adbri, Calix, University of Adelaide"
+          - "Provides industry network access and potential co-applicant status for grant applications"
+
+      - id: "pb-009"
+        label: "Wilmar Sugar / MSF Sugar — Queensland"
+        stability: stable
+        status: active
+        tag: "PRIORITY 3 | BIOMASS"
+        tag_color: "grey"
+        last_verified: "2026-03-27"
+        source_url: "https://www.wilmarsugar.com.au/sustainability"
+        changelog: []
+        bullets:
+          - "Operate bagasse co-generation mills producing approximately 10–14% CO₂ flue gas"
+          - "GG Advisory recommendation: viable ARK target after an Australian reference project is established — do not engage before ARK pilot results available"

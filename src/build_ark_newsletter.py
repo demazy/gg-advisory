@@ -2,47 +2,75 @@
 """
 Build a professional Word newsletter for ARK Capture Solutions.
 
+Document structure per section:
+  ├── Market Background  (baseline bullets from ark-baseline.yaml)
+  ├── Updates This Month (GPT-4o article entries from digest markdown)
+  └── Changes Since Last Issue (from digest markdown)
+
 Designed to be sent directly to ARK's leadership team (CEO/CTO/BD).
 Branding: "Prepared by GG Advisory for ARK Capture Solutions"
 
-Sections:
-  - Executive Summary (bullet points)
-  - Grants & Funding
-  - Market & Policy
-  - Competitors
-  - Partners & Buyers
-
 Usage:
     python -m src.build_ark_newsletter out/ark/monthly-digest-2026-03.md
+
+Env vars:
+    CFG_BASELINE=config/ark-baseline.yaml
 """
 from __future__ import annotations
 
+import os
 import re
 import sys
 from datetime import datetime
 from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
 
+import yaml
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Inches, Pt, RGBColor
 
+CFG_BASELINE = os.getenv("CFG_BASELINE", "config/ark-baseline.yaml")
+
 # ── Brand palette ─────────────────────────────────────────────────────────────
-# GG Advisory teal (primary) + professional navy for headings
-GG_TEAL     = RGBColor(0x1B, 0x7A, 0x6B)   # GG Advisory green/teal
-GG_NAVY     = RGBColor(0x0D, 0x2D, 0x4A)   # deep navy for section headings
-DARK_GREY   = RGBColor(0x2C, 0x2C, 0x2C)   # near-black body text
-MID_GREY    = RGBColor(0x55, 0x55, 0x55)   # labels / dates
-LIGHT_GREY  = RGBColor(0x88, 0x88, 0x88)   # footer / secondary text
-LINK_BLUE   = RGBColor(0x00, 0x5E, 0xA2)   # hyperlinks
-ACCENT_AMBER = RGBColor(0xE0, 0x8A, 0x00)  # subtle accent for "Why it matters" label
+GG_TEAL      = RGBColor(0x1B, 0x7A, 0x6B)   # GG Advisory teal
+GG_NAVY      = RGBColor(0x0D, 0x2D, 0x4A)   # deep navy for headings
+DARK_GREY    = RGBColor(0x2C, 0x2C, 0x2C)   # body text
+MID_GREY     = RGBColor(0x55, 0x55, 0x55)   # labels / dates
+LIGHT_GREY   = RGBColor(0x88, 0x88, 0x88)   # footer text
+LINK_BLUE    = RGBColor(0x00, 0x5E, 0xA2)   # hyperlinks
+ACCENT_AMBER = RGBColor(0xE0, 0x8A, 0x00)   # "Why it matters" label
+LIGHT_TEAL_BG = "D6EDE9"                     # shading hex for placeholder boxes
+
+# Priority tag palette
+_TAG_COLORS: Dict[str, Tuple[str, str]] = {
+    "teal":   ("1B7A6B", "FFFFFF"),
+    "navy":   ("0D2D4A", "FFFFFF"),
+    "red":    ("C0392B", "FFFFFF"),
+    "orange": ("E67E22", "FFFFFF"),
+    "grey":   ("888888", "FFFFFF"),
+}
+
+_SECTION_DISPLAY: Dict[str, str] = {
+    "grants_funding":  "Grants & Funding",
+    "market_policy":   "Market & Policy",
+    "competitors":     "Competitors",
+    "partners_buyers": "Partners & Buyers",
+}
+
+_SECTION_ORDER = ["grants_funding", "market_policy", "competitors", "partners_buyers"]
 
 
 # ── Low-level helpers ─────────────────────────────────────────────────────────
 
+def _cm_to_emu(cm: float) -> int:
+    return int(cm * 914400 / 2.54)
+
+
 def _font(run, size_pt: float, bold=False, italic=False,
-          color: RGBColor | None = None, underline=False):
+          color: Optional[RGBColor] = None, underline=False):
     run.font.name = "Calibri"
     run.font.size = Pt(size_pt)
     run.font.bold = bold
@@ -68,7 +96,7 @@ def _hrule(doc, color_hex: str = "1B7A6B", thickness: int = 12):
     p = doc.add_paragraph()
     p.paragraph_format.space_before = Pt(1)
     p.paragraph_format.space_after  = Pt(1)
-    pPr = p._p.get_or_add_pPr()
+    pPr  = p._p.get_or_add_pPr()
     pBdr = OxmlElement("w:pBdr")
     bottom = OxmlElement("w:bottom")
     bottom.set(qn("w:val"),   "single")
@@ -80,6 +108,26 @@ def _hrule(doc, color_hex: str = "1B7A6B", thickness: int = 12):
     return p
 
 
+def _shaded_para(doc, text: str, bg_hex: str = LIGHT_TEAL_BG,
+                 italic=True, size_pt=10):
+    """A paragraph with a solid background colour (e.g. light teal box)."""
+    p = doc.add_paragraph()
+    p.paragraph_format.space_before = Pt(4)
+    p.paragraph_format.space_after  = Pt(4)
+    p.paragraph_format.left_indent  = Inches(0.15)
+    p.paragraph_format.right_indent = Inches(0.15)
+    # Apply shading to paragraph
+    pPr = p._p.get_or_add_pPr()
+    shd = OxmlElement("w:shd")
+    shd.set(qn("w:val"),   "clear")
+    shd.set(qn("w:color"), "auto")
+    shd.set(qn("w:fill"),  bg_hex)
+    pPr.append(shd)
+    r = p.add_run(text)
+    _font(r, size_pt, italic=italic, color=DARK_GREY)
+    return p
+
+
 def _hyperlink(paragraph, url: str, display: str):
     """Insert a clickable hyperlink run into an existing paragraph."""
     part = paragraph.part
@@ -88,20 +136,17 @@ def _hyperlink(paragraph, url: str, display: str):
         "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
         is_external=True,
     )
-    hl = OxmlElement("w:hyperlink")
-    hl.set(qn("r:id"), r_id)
+    hl  = OxmlElement("w:hyperlink")
+    hl.set(qn("r:id"),      r_id)
     hl.set(qn("w:history"), "1")
-    run = OxmlElement("w:r")
-    rPr = OxmlElement("w:rPr")
-    rStyle = OxmlElement("w:rStyle")
-    rStyle.set(qn("w:val"), "Hyperlink")
-    rPr.append(rStyle)
+    run  = OxmlElement("w:r")
+    rPr  = OxmlElement("w:rPr")
     color_el = OxmlElement("w:color")
     color_el.set(qn("w:val"), "005EA2")
     rPr.append(color_el)
     for sz_tag in ("w:sz", "w:szCs"):
         sz = OxmlElement(sz_tag)
-        sz.set(qn("w:val"), "20")   # 10pt
+        sz.set(qn("w:val"), "20")
         rPr.append(sz)
     run.append(rPr)
     t = OxmlElement("w:t")
@@ -111,43 +156,94 @@ def _hyperlink(paragraph, url: str, display: str):
     paragraph._p.append(hl)
 
 
-def _label_body(doc, label: str, body: str,
-                label_color: RGBColor | None = None,
-                body_color: RGBColor | None = None):
-    p = _para(doc, space_before=2, space_after=3)
-    rl = p.add_run(label)
-    _font(rl, 10.5, bold=True, color=label_color or DARK_GREY)
-    rb = p.add_run(body)
-    _font(rb, 10.5, color=body_color or DARK_GREY)
+def _tag_run(paragraph, tag_text: str, bg_hex: str, fg_hex: str):
+    """Inline coloured tag chip (simulated via shaded run)."""
+    r = paragraph.add_run(f"  {tag_text}  ")
+    r.font.name  = "Calibri"
+    r.font.size  = Pt(8)
+    r.font.bold  = True
+    rPr = r._r.get_or_add_rPr()
+    shd = OxmlElement("w:shd")
+    shd.set(qn("w:val"),   "clear")
+    shd.set(qn("w:color"), "auto")
+    shd.set(qn("w:fill"),  bg_hex)
+    rPr.append(shd)
+    color_el = OxmlElement("w:color")
+    color_el.set(qn("w:val"), fg_hex)
+    rPr.append(color_el)
+
+
+def _left_border_para(doc, space_before=10, space_after=4, border_color="1B7A6B"):
+    """Paragraph with a teal left border for subsection headings."""
+    p = doc.add_paragraph()
+    p.paragraph_format.space_before = Pt(space_before)
+    p.paragraph_format.space_after  = Pt(space_after)
+    p.paragraph_format.left_indent  = Inches(0.15)
+    pPr  = p._p.get_or_add_pPr()
+    pBdr = OxmlElement("w:pBdr")
+    left = OxmlElement("w:left")
+    left.set(qn("w:val"),   "single")
+    left.set(qn("w:sz"),    "18")
+    left.set(qn("w:space"), "6")
+    left.set(qn("w:color"), border_color)
+    pBdr.append(left)
+    pPr.append(pBdr)
     return p
 
 
-# ── Section & article builders ────────────────────────────────────────────────
+# ── Section & content builders ────────────────────────────────────────────────
 
-_SECTION_ICONS = {
-    "Grants & Funding":  "GRANTS & FUNDING",
-    "Market & Policy":   "MARKET & POLICY",
-    "Competitors":       "COMPETITORS",
-    "Partners & Buyers": "PARTNERS & BUYERS",
-}
-
-def _section_heading(doc, title: str):
+def _section_heading(doc, display_name: str):
+    """Top-level section heading (navy, bold) with a rule below."""
     _para(doc, space_before=16, space_after=0)
-    p = _para(doc, space_before=0, space_after=4)
-    label = _SECTION_ICONS.get(title, title.upper())
-    r = p.add_run(label)
-    _font(r, 12, bold=True, color=GG_NAVY, underline=False)
+    p = doc.add_paragraph()
+    p.paragraph_format.space_before = Pt(0)
+    p.paragraph_format.space_after  = Pt(4)
+    r = p.add_run(display_name.upper())
+    _font(r, 12, bold=True, color=GG_NAVY)
     _hrule(doc, color_hex="0D2D4A", thickness=10)
+
+
+def _subsection_heading(doc, title: str, size_pt=10.5,
+                        color: Optional[RGBColor] = None):
+    """Subsection heading with teal left border."""
+    p = _left_border_para(doc, space_before=10, space_after=4)
+    r = p.add_run(title)
+    _font(r, size_pt, bold=True, color=color or GG_TEAL)
+    return p
+
+
+def _baseline_entry(doc, entry: Dict):
+    """Render one baseline entry: label (+ tag chip) + bullet list."""
+    # Label line
+    p = _para(doc, space_before=8, space_after=2)
+    r = p.add_run(entry.get("label", ""))
+    _font(r, 10.5, bold=True, color=DARK_GREY)
+
+    tag = entry.get("tag")
+    if tag:
+        tag_color_key = entry.get("tag_color", "teal")
+        bg_hex, fg_hex = _TAG_COLORS.get(tag_color_key, _TAG_COLORS["teal"])
+        p.add_run("  ")
+        _tag_run(p, tag, bg_hex, fg_hex)
+
+    # Bullet points
+    for bullet in entry.get("bullets", []):
+        pb = doc.add_paragraph(style="List Bullet")
+        pb.paragraph_format.space_before = Pt(1)
+        pb.paragraph_format.space_after  = Pt(1)
+        pb.paragraph_format.left_indent  = Inches(0.25)
+        r = pb.add_run(bullet)
+        _font(r, 10, color=DARK_GREY)
 
 
 def _article(doc, title: str, published: str, summary: str,
              why: str, signals: str, source_url: str):
-    # Title
+    """Render one GPT-4o article entry."""
     p_title = _para(doc, space_before=10, space_after=2)
     r = p_title.add_run(title)
     _font(r, 11, bold=True, color=DARK_GREY)
 
-    # Published date
     if published:
         p = _para(doc, space_before=0, space_after=2)
         rl = p.add_run("Published:  ")
@@ -155,20 +251,27 @@ def _article(doc, title: str, published: str, summary: str,
         rv = p.add_run(published)
         _font(rv, 10, italic=True, color=MID_GREY)
 
-    # Summary
     if summary:
-        _label_body(doc, "Summary:  ", summary)
+        p = _para(doc, space_before=2, space_after=3)
+        rl = p.add_run("Summary:  ")
+        _font(rl, 10.5, bold=True, color=DARK_GREY)
+        rb = p.add_run(summary)
+        _font(rb, 10.5, color=DARK_GREY)
 
-    # Why it matters for ARK (accent label)
     if why:
-        _label_body(doc, "Why it matters for ARK:  ", why,
-                    label_color=ACCENT_AMBER)
+        p = _para(doc, space_before=2, space_after=3)
+        rl = p.add_run("Why it matters for ARK:  ")
+        _font(rl, 10.5, bold=True, color=ACCENT_AMBER)
+        rb = p.add_run(why)
+        _font(rb, 10.5, color=DARK_GREY)
 
-    # Signals
     if signals:
-        _label_body(doc, "Signals to watch:  ", signals, label_color=MID_GREY)
+        p = _para(doc, space_before=2, space_after=3)
+        rl = p.add_run("Signals to watch:  ")
+        _font(rl, 10.5, bold=True, color=MID_GREY)
+        rb = p.add_run(signals)
+        _font(rb, 10.5, color=DARK_GREY)
 
-    # Source hyperlink
     if source_url:
         p = _para(doc, space_before=2, space_after=6)
         rl = p.add_run("Source:  ")
@@ -176,73 +279,127 @@ def _article(doc, title: str, published: str, summary: str,
         _hyperlink(p, source_url, source_url)
 
 
-# ── Markdown parser ───────────────────────────────────────────────────────────
+# ── Baseline loader ───────────────────────────────────────────────────────────
 
-def _parse(md_text: str) -> dict:
+def _load_baseline(path: str) -> Dict:
+    p = Path(path)
+    if not p.exists():
+        return {}
+    with open(path, encoding="utf-8") as f:
+        return yaml.safe_load(f) or {}
+
+
+def _active_entries(baseline: Dict, section_key: str) -> List[Dict]:
+    section = baseline.get("sections", {}).get(section_key, {})
+    return [
+        e for e in section.get("entries", [])
+        if e.get("status") in ("active",)
+    ]
+
+
+# ── Digest parser ─────────────────────────────────────────────────────────────
+
+def _parse_digest(md_text: str) -> Dict:
     """
-    Parse ARK brief markdown into:
-      { 'title': str, 'exec_summary': [str], 'sections': [{'heading', 'articles': [...]}] }
+    Parse the new-format ARK digest markdown into:
+    {
+      'title': str,
+      'exec_summary': [str],
+      'sections': {
+        'grants_funding': {
+          'articles': [{'title','published','summary','why','signals','source'}],
+          'changes':  [str],   # raw change lines
+        },
+        ...
+      }
+    }
     """
-    lines = md_text.splitlines()
-    result = {"title": "", "exec_summary": [], "sections": []}
-    cur_sec = None
-    cur_art = None
+    # Strip BASELINE_DELTA block
+    md_text = re.sub(
+        r"---BASELINE_DELTA_START---.*?---BASELINE_DELTA_END---",
+        "",
+        md_text,
+        flags=re.DOTALL,
+    )
+
+    result: Dict = {
+        "title":        "",
+        "exec_summary": [],
+        "sections":     {k: {"articles": [], "changes": []} for k in _SECTION_ORDER},
+    }
+
+    lines    = md_text.splitlines()
+    cur_sec  = None   # section key string
+    cur_sub  = None   # "updates" or "changes"
+    cur_art  = None   # dict being built
+
+    def _flush_art():
+        if cur_sec and cur_art and cur_art.get("title"):
+            result["sections"][cur_sec]["articles"].append(dict(cur_art))
+
     in_exec = False
-
-    def _flush():
-        if cur_sec is not None and cur_art:
-            cur_sec["articles"].append(dict(cur_art))
-
     i = 0
     while i < len(lines):
         raw = lines[i]
-        s = raw.strip()
+        s   = raw.strip()
 
+        # Document title
         if s.startswith("# ") and not s.startswith("## "):
             result["title"] = s[2:].strip()
-            i += 1
-            continue
+            i += 1; continue
 
+        # Executive summary
         if s == "**Executive Summary**":
             in_exec = True
-            i += 1
-            continue
-
+            i += 1; continue
         if in_exec and s.startswith("- "):
             result["exec_summary"].append(s[2:].strip())
-            i += 1
-            continue
+            i += 1; continue
 
+        # Section marker: ## SECTION: grants_funding
+        sec_m = re.match(r"^##\s+SECTION:\s+(\w+)$", s)
+        if sec_m:
+            _flush_art()
+            cur_art = None
+            in_exec = False
+            cur_sec = sec_m.group(1) if sec_m.group(1) in _SECTION_ORDER else None
+            cur_sub = None
+            i += 1; continue
+
+        # Sub-section markers
+        if s == "### Updates This Month":
+            _flush_art(); cur_art = None
+            cur_sub = "updates"
+            i += 1; continue
+        if s == "### Changes Since Last Issue":
+            _flush_art(); cur_art = None
+            cur_sub = "changes"
+            i += 1; continue
+
+        # Horizontal rule / separator
         if s == "---":
             in_exec = False
-            i += 1
-            continue
+            i += 1; continue
 
-        if s.startswith("## "):
-            in_exec = False
-            _flush()
-            cur_art = None
-            cur_sec = {"heading": s[3:].strip(), "articles": []}
-            result["sections"].append(cur_sec)
-            i += 1
-            continue
-
-        if s.startswith("**") and s.endswith("**") and cur_sec is not None:
-            in_exec = False
-            _flush()
+        # Article title (bold line inside Updates block)
+        if (cur_sec and cur_sub == "updates"
+                and s.startswith("**") and s.endswith("**")
+                and not s.startswith("**Executive")):
+            _flush_art()
             cur_art = {
                 "title": s[2:-2].strip(),
-                "published": "", "summary": "", "why": "", "signals": "", "source": "",
+                "published": "", "summary": "",
+                "why": "", "signals": "", "source": "",
             }
-            i += 1
-            continue
+            i += 1; continue
 
+        # Article fields
         if cur_art is not None:
             for prefix, field in (
                 ("Published:", "published"),
                 ("Summary:", "summary"),
                 ("Why it matters for ARK:", "why"),
-                ("Why it matters:", "why"),   # fallback
+                ("Why it matters:", "why"),
                 ("Signals to watch:", "signals"),
                 ("Source:", "source"),
             ):
@@ -250,101 +407,172 @@ def _parse(md_text: str) -> dict:
                     cur_art[field] = s[len(prefix):].strip()
                     break
 
+        # Change lines
+        if cur_sec and cur_sub == "changes" and s and not s.startswith("###"):
+            result["sections"][cur_sec]["changes"].append(s)
+
         i += 1
 
-    _flush()
+    _flush_art()
     return result
 
 
 # ── Main builder ──────────────────────────────────────────────────────────────
 
-def build_newsletter(md_path: Path, out_path: Path) -> None:
-    md_text = md_path.read_text(encoding="utf-8")
-    brief   = _parse(md_text)
+def build_newsletter(md_path: Path, out_path: Path,
+                     baseline_path: Optional[str] = None) -> None:
+    md_text  = md_path.read_text(encoding="utf-8")
+    brief    = _parse_digest(md_text)
+    baseline = _load_baseline(baseline_path or CFG_BASELINE)
+
+    # Derive period label from title or filename
+    period_label = ""
+    title_m = re.search(r"ARK Intelligence Brief\s+—\s+(.+)", brief.get("title", ""))
+    if title_m:
+        period_label = title_m.group(1).strip()
+    if not period_label:
+        period_label = md_path.stem.replace("monthly-digest-", "")
 
     doc = Document()
 
-    # Page margins — generous for a client doc
+    # Page setup — A4
     for sec in doc.sections:
-        sec.top_margin    = Inches(1.0)
-        sec.bottom_margin = Inches(1.0)
-        sec.left_margin   = Inches(1.1)
-        sec.right_margin  = Inches(1.1)
+        sec.page_width   = _cm_to_emu(21.0)
+        sec.page_height  = _cm_to_emu(29.7)
+        sec.top_margin   = _cm_to_emu(2.0)
+        sec.bottom_margin= _cm_to_emu(2.0)
+        sec.left_margin  = _cm_to_emu(2.5)
+        sec.right_margin = _cm_to_emu(2.5)
 
-    # Default font
+    # Default style
     style = doc.styles["Normal"]
     style.font.name = "Calibri"
-    style.font.size = Pt(11)
+    style.font.size = Pt(10)
     style.font.color.rgb = DARK_GREY
 
-    # ── Letterhead ────────────────────────────────────────────────────────────
-    p_from = doc.add_paragraph()
-    p_from.paragraph_format.space_before = Pt(0)
-    p_from.paragraph_format.space_after  = Pt(2)
-    r = p_from.add_run("GG Advisory  |  APAC Carbon Capture Intelligence")
-    _font(r, 9, color=MID_GREY)
-
-    p_for = doc.add_paragraph()
-    p_for.paragraph_format.space_before = Pt(0)
-    p_for.paragraph_format.space_after  = Pt(6)
-    r = p_for.add_run("Prepared for ARK Capture Solutions  |  Confidential")
-    _font(r, 9, italic=True, color=MID_GREY)
-
-    _hrule(doc, color_hex="1B7A6B", thickness=20)
-
-    # ── Title ─────────────────────────────────────────────────────────────────
-    p_title = doc.add_paragraph()
-    p_title.paragraph_format.space_before = Pt(8)
-    p_title.paragraph_format.space_after  = Pt(2)
-    title_text = brief["title"] or "ARK Intelligence Brief"
-    r = p_title.add_run(title_text)
-    _font(r, 20, bold=True, color=GG_TEAL)
+    # ── Letterhead ─────────────────────────────────────────────────────────────
+    p_co = doc.add_paragraph()
+    p_co.paragraph_format.space_before = Pt(0)
+    p_co.paragraph_format.space_after  = Pt(2)
+    r = p_co.add_run("ARK Capture Solutions")
+    _font(r, 22, bold=True, color=GG_NAVY)
 
     p_sub = doc.add_paragraph()
     p_sub.paragraph_format.space_before = Pt(0)
-    p_sub.paragraph_format.space_after  = Pt(10)
-    r = p_sub.add_run(
-        "Monthly AU/APAC intelligence on grants, policy, competitors, and industrial partners"
+    p_sub.paragraph_format.space_after  = Pt(2)
+    r = p_sub.add_run("Monthly Intelligence Brief — Australia & APAC")
+    _font(r, 11, italic=True, color=GG_TEAL)
+
+    p_prep = doc.add_paragraph()
+    p_prep.paragraph_format.space_before = Pt(0)
+    p_prep.paragraph_format.space_after  = Pt(6)
+    r = p_prep.add_run(
+        f"Prepared by GG Advisory  |  {period_label}  |  Confidential"
     )
-    _font(r, 10.5, italic=True, color=MID_GREY)
+    _font(r, 9, color=MID_GREY)
+
+    _hrule(doc, color_hex="1B7A6B", thickness=20)
+
+    # ── Document title ─────────────────────────────────────────────────────────
+    p_title = doc.add_paragraph()
+    p_title.paragraph_format.space_before = Pt(8)
+    p_title.paragraph_format.space_after  = Pt(2)
+    p_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    title_text = brief.get("title") or f"ARK Intelligence Brief — {period_label}"
+    r = p_title.add_run(title_text)
+    _font(r, 16, bold=True, color=GG_NAVY)
 
     _hrule(doc, color_hex="1B7A6B", thickness=8)
 
-    # ── Executive Summary ─────────────────────────────────────────────────────
-    p_es = _para(doc, space_before=12, space_after=4)
-    r = p_es.add_run("Executive Summary")
-    _font(r, 12, bold=True, color=GG_NAVY)
+    # ── Executive Summary ──────────────────────────────────────────────────────
+    _subsection_heading(doc, "Executive Summary", size_pt=13, color=GG_NAVY)
 
-    bullets = brief["exec_summary"]
-    if not bullets:
-        bullets = ["No executive summary available — see section details below."]
-    for bt in bullets:
-        p = doc.add_paragraph(style="List Bullet")
-        p.paragraph_format.space_before = Pt(2)
-        p.paragraph_format.space_after  = Pt(2)
-        r = p.add_run(bt)
-        _font(r, 10.5, color=DARK_GREY)
+    # Context paragraphs from baseline
+    exec_ctx = baseline.get("executive_summary", {}).get("context", {})
+    for para_text in exec_ctx.get("paragraphs", []):
+        p = _para(doc, space_before=2, space_after=4)
+        r = p.add_run(para_text)
+        _font(r, 10, color=DARK_GREY)
 
-    # ── Sections ──────────────────────────────────────────────────────────────
-    for sec_data in brief["sections"]:
-        _section_heading(doc, sec_data["heading"])
-        if not sec_data["articles"]:
+    # Key takeaways from digest
+    bullets = brief.get("exec_summary", [])
+    if bullets:
+        p_kd = _para(doc, space_before=6, space_after=2)
+        r = p_kd.add_run("Key Developments This Month")
+        _font(r, 10.5, bold=True, color=GG_TEAL)
+
+        if (len(bullets) == 1 and "inaugural" in bullets[0].lower()):
+            _shaded_para(doc,
+                "— Inaugural issue. No prior newsletter to compare against. —",
+                italic=True)
+        else:
+            for bt in bullets:
+                pb = doc.add_paragraph(style="List Bullet")
+                pb.paragraph_format.space_before = Pt(2)
+                pb.paragraph_format.space_after  = Pt(2)
+                r = pb.add_run(bt)
+                _font(r, 10, color=DARK_GREY)
+
+    _hrule(doc, color_hex="1B7A6B", thickness=6)
+
+    # ── Sections ───────────────────────────────────────────────────────────────
+    for section_key in _SECTION_ORDER:
+        display_name = _SECTION_DISPLAY.get(section_key, section_key)
+        _section_heading(doc, display_name)
+
+        sec_data = brief.get("sections", {}).get(section_key, {})
+        articles = sec_data.get("articles", [])
+        changes  = sec_data.get("changes", [])
+
+        # Market Background (from baseline)
+        _subsection_heading(doc, "Market Background")
+        active = _active_entries(baseline, section_key)
+        if active:
+            for entry in active:
+                _baseline_entry(doc, entry)
+        else:
+            _shaded_para(doc, "— Baseline entries not available. —", italic=True)
+
+        # Updates This Month (from digest)
+        _subsection_heading(doc, "Updates This Month")
+        if articles:
+            for art in articles:
+                _article(
+                    doc,
+                    title=art.get("title", ""),
+                    published=art.get("published", ""),
+                    summary=art.get("summary", ""),
+                    why=art.get("why", ""),
+                    signals=art.get("signals", ""),
+                    source_url=art.get("source", ""),
+                )
+        else:
             p = _para(doc, space_before=4, space_after=4)
-            r = p.add_run("No in-range items selected for this section.")
-            _font(r, 10.5, italic=True, color=MID_GREY)
-        for art in sec_data["articles"]:
-            _article(
-                doc,
-                title      = art["title"],
-                published  = art["published"],
-                summary    = art["summary"],
-                why        = art["why"],
-                signals    = art["signals"],
-                source_url = art["source"],
-            )
+            r = p.add_run("No new items identified this period.")
+            _font(r, 10, italic=True, color=MID_GREY)
 
-    # ── Footer ────────────────────────────────────────────────────────────────
-    _para(doc, space_before=18, space_after=0)
+        # Changes Since Last Issue
+        _subsection_heading(doc, "Changes Since Last Issue")
+        if not changes or all(
+            c.strip().startswith("_") and c.strip().endswith("_") for c in changes
+        ):
+            _shaded_para(doc,
+                "— Inaugural issue. Changes section will be populated from the second issue onwards. —",
+                italic=True)
+        else:
+            for ch_line in changes:
+                clean = ch_line.strip().lstrip("- ").lstrip("CHANGE:").strip()
+                if clean and not clean.startswith("_No changes"):
+                    pb = doc.add_paragraph(style="List Bullet")
+                    pb.paragraph_format.space_before = Pt(1)
+                    pb.paragraph_format.space_after  = Pt(2)
+                    r = pb.add_run(clean)
+                    _font(r, 10, color=DARK_GREY)
+
+        _hrule(doc, color_hex="1B7A6B", thickness=6)
+
+    # ── Footer ─────────────────────────────────────────────────────────────────
+    _para(doc, space_before=10, space_after=0)
     _hrule(doc, color_hex="AAAAAA", thickness=6)
     p_footer = _para(doc, space_before=4, space_after=2)
     r = p_footer.add_run(
@@ -354,18 +582,18 @@ def build_newsletter(md_path: Path, out_path: Path) -> None:
     )
     _font(r, 8.5, italic=True, color=LIGHT_GREY)
 
-    p_date = _para(doc, space_before=0, space_after=0)
-    r = p_date.add_run(f"Generated: {datetime.now().strftime('%d %B %Y')}")
+    p_gen = _para(doc, space_before=0, space_after=0)
+    r = p_gen.add_run(f"Generated: {datetime.now().strftime('%d %B %Y')}")
     _font(r, 8.5, color=LIGHT_GREY)
 
     doc.save(out_path)
     print(f"[ark-newsletter] Saved: {out_path}")
 
 
-# ── CLI ───────────────────────────────────────────────────────────────────────
+# ── CLI ────────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    md_in = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("out/ark/monthly-digest-2026-03.md")
+    md_in  = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("out/ark/monthly-digest-2026-03.md")
     doc_out = Path(sys.argv[2]) if len(sys.argv) > 2 else md_in.with_name(
         md_in.stem.replace("monthly-digest", "ark-intelligence-brief") + ".docx"
     )
