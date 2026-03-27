@@ -62,6 +62,14 @@ _SECTION_DISPLAY: Dict[str, str] = {
 
 _SECTION_ORDER = ["grants_funding", "market_policy", "competitors", "partners_buyers"]
 
+# Reverse map: old-format display name → section key (backward compat with pre-v1.1 digests)
+_LEGACY_SECTION_MAP: Dict[str, str] = {
+    "grants & funding":  "grants_funding",
+    "market & policy":   "market_policy",
+    "competitors":       "competitors",
+    "partners & buyers": "partners_buyers",
+}
+
 
 # ── Low-level helpers ─────────────────────────────────────────────────────────
 
@@ -299,16 +307,27 @@ def _active_entries(baseline: Dict, section_key: str) -> List[Dict]:
 
 # ── Digest parser ─────────────────────────────────────────────────────────────
 
+_PLACEHOLDER_PATTERNS = re.compile(
+    r"no (specific|items|retrievable)|no .*(available|retrieved|selected|found)|"
+    r"not available|could not be retrieved|_no in-range|_no changes",
+    re.IGNORECASE,
+)
+
+
 def _parse_digest(md_text: str) -> Dict:
     """
-    Parse the new-format ARK digest markdown into:
+    Parse ARK digest markdown — handles BOTH formats:
+      New (v1.1+): ## SECTION: grants_funding  /  ### Updates This Month
+      Legacy (pre-v1.1): ## Grants & Funding  (articles inline, no sub-sections)
+
+    Returns:
     {
       'title': str,
-      'exec_summary': [str],
+      'exec_summary': [str],   # empty list if only placeholders
       'sections': {
         'grants_funding': {
           'articles': [{'title','published','summary','why','signals','source'}],
-          'changes':  [str],   # raw change lines
+          'changes':  [str],
         },
         ...
       }
@@ -330,12 +349,16 @@ def _parse_digest(md_text: str) -> Dict:
 
     lines    = md_text.splitlines()
     cur_sec  = None   # section key string
-    cur_sub  = None   # "updates" or "changes"
+    cur_sub  = None   # "updates" | "changes" | "legacy" (old flat format)
     cur_art  = None   # dict being built
 
     def _flush_art():
+        nonlocal cur_art
         if cur_sec and cur_art and cur_art.get("title"):
-            result["sections"][cur_sec]["articles"].append(dict(cur_art))
+            # Only add if it has real content (not a placeholder entry)
+            if not _PLACEHOLDER_PATTERNS.search(cur_art.get("title", "")):
+                result["sections"][cur_sec]["articles"].append(dict(cur_art))
+        cur_art = None
 
     in_exec = False
     i = 0
@@ -343,7 +366,7 @@ def _parse_digest(md_text: str) -> Dict:
         raw = lines[i]
         s   = raw.strip()
 
-        # Document title
+        # Document title (# heading)
         if s.startswith("# ") and not s.startswith("## "):
             result["title"] = s[2:].strip()
             i += 1; continue
@@ -353,27 +376,52 @@ def _parse_digest(md_text: str) -> Dict:
             in_exec = True
             i += 1; continue
         if in_exec and s.startswith("- "):
-            result["exec_summary"].append(s[2:].strip())
+            bullet = s[2:].strip()
+            # Skip placeholder bullets
+            if not _PLACEHOLDER_PATTERNS.search(bullet):
+                result["exec_summary"].append(bullet)
             i += 1; continue
 
-        # Section marker: ## SECTION: grants_funding
+        # NEW FORMAT section marker: ## SECTION: grants_funding
         sec_m = re.match(r"^##\s+SECTION:\s+(\w+)$", s)
         if sec_m:
             _flush_art()
-            cur_art = None
             in_exec = False
-            cur_sec = sec_m.group(1) if sec_m.group(1) in _SECTION_ORDER else None
-            cur_sub = None
+            sec_key = sec_m.group(1)
+            cur_sec = sec_key if sec_key in _SECTION_ORDER else None
+            cur_sub = "legacy"  # default until we see ### subsection
             i += 1; continue
 
-        # Sub-section markers
+        # LEGACY FORMAT section header: ## Grants & Funding
+        if s.startswith("## ") and not sec_m:
+            heading_lc = s[3:].strip().lower()
+            _flush_art()
+            in_exec = False
+            matched_key = _LEGACY_SECTION_MAP.get(heading_lc)
+            if matched_key:
+                cur_sec = matched_key
+                cur_sub = "legacy"
+            else:
+                # Unknown ## section (e.g. "## Cleantech & Start-up Ecosystem")
+                # Stop collecting into any ARK section to prevent content bleed
+                cur_sec = None
+                cur_sub = None
+            i += 1; continue
+
+        # Sub-section markers (new format only)
         if s == "### Updates This Month":
-            _flush_art(); cur_art = None
+            _flush_art()
             cur_sub = "updates"
             i += 1; continue
         if s == "### Changes Since Last Issue":
-            _flush_art(); cur_art = None
+            _flush_art()
             cur_sub = "changes"
+            i += 1; continue
+
+        # Any other ### heading — stop collecting
+        if s.startswith("### "):
+            _flush_art()
+            cur_sub = None
             i += 1; continue
 
         # Horizontal rule / separator
@@ -381,15 +429,17 @@ def _parse_digest(md_text: str) -> Dict:
             in_exec = False
             i += 1; continue
 
-        # Article title (bold line inside Updates block)
-        if (cur_sec and cur_sub == "updates"
+        # Article title: bold line when in an article-collecting sub-section
+        collecting_articles = cur_sec and cur_sub in ("updates", "legacy")
+        if (collecting_articles
                 and s.startswith("**") and s.endswith("**")
+                and len(s) > 4
                 and not s.startswith("**Executive")):
             _flush_art()
             cur_art = {
-                "title": s[2:-2].strip(),
+                "title":     s[2:-2].strip(),
                 "published": "", "summary": "",
-                "why": "", "signals": "", "source": "",
+                "why":       "", "signals": "", "source": "",
             }
             i += 1; continue
 
@@ -401,15 +451,21 @@ def _parse_digest(md_text: str) -> Dict:
                 ("Why it matters for ARK:", "why"),
                 ("Why it matters:", "why"),
                 ("Signals to watch:", "signals"),
+                ("Sources:", "source"),    # legacy uses plural "Sources:"
                 ("Source:", "source"),
             ):
                 if s.startswith(prefix):
-                    cur_art[field] = s[len(prefix):].strip()
+                    val = s[len(prefix):].strip()
+                    # For source/sources, take only the first URL if multiple
+                    if field == "source" and val.startswith("http"):
+                        val = val.split()[0]
+                    cur_art[field] = val
                     break
 
-        # Change lines
-        if cur_sec and cur_sub == "changes" and s and not s.startswith("###"):
-            result["sections"][cur_sec]["changes"].append(s)
+        # Change lines (new format changes sub-section)
+        if cur_sec and cur_sub == "changes" and s and not s.startswith("#"):
+            if not _PLACEHOLDER_PATTERNS.search(s):
+                result["sections"][cur_sec]["changes"].append(s)
 
         i += 1
 
@@ -495,23 +551,23 @@ def build_newsletter(md_path: Path, out_path: Path,
         _font(r, 10, color=DARK_GREY)
 
     # Key takeaways from digest
-    bullets = brief.get("exec_summary", [])
-    if bullets:
-        p_kd = _para(doc, space_before=6, space_after=2)
-        r = p_kd.add_run("Key Developments This Month")
-        _font(r, 10.5, bold=True, color=GG_TEAL)
+    p_kd = _para(doc, space_before=6, space_after=2)
+    r = p_kd.add_run("Key Developments This Month")
+    _font(r, 10.5, bold=True, color=GG_TEAL)
 
-        if (len(bullets) == 1 and "inaugural" in bullets[0].lower()):
-            _shaded_para(doc,
-                "— Inaugural issue. No prior newsletter to compare against. —",
-                italic=True)
-        else:
-            for bt in bullets:
-                pb = doc.add_paragraph(style="List Bullet")
-                pb.paragraph_format.space_before = Pt(2)
-                pb.paragraph_format.space_after  = Pt(2)
-                r = pb.add_run(bt)
-                _font(r, 10, color=DARK_GREY)
+    bullets = [b for b in brief.get("exec_summary", [])
+               if not _PLACEHOLDER_PATTERNS.search(b)]
+    if bullets:
+        for bt in bullets:
+            pb = doc.add_paragraph(style="List Bullet")
+            pb.paragraph_format.space_before = Pt(2)
+            pb.paragraph_format.space_after  = Pt(2)
+            r = pb.add_run(bt)
+            _font(r, 10, color=DARK_GREY)
+    else:
+        _shaded_para(doc,
+            "— Inaugural issue. No prior newsletter to compare against. —",
+            italic=True)
 
     _hrule(doc, color_hex="1B7A6B", thickness=6)
 
