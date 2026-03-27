@@ -1,29 +1,29 @@
 # ARK Intelligence Brief — February 2026
 
 **Executive Summary**
-- No specific grants, policy changes, or company names available for February 2026.
-- No specific grants, policy changes, or company names available for February 2026.
-- No specific grants, policy changes, or company names available for February 2026.
+- No specific grant amounts, policy changes, or company names were retrieved.
+- No specific grant amounts, policy changes, or company names were retrieved.
+- No specific grant amounts, policy changes, or company names were retrieved.
 
 ---
 ## Grants & Funding
 
-No items could be retrieved for Grants & Funding in February 2026.
+No items could be retrieved for Grants & Funding in 2026-02.
 
 ---
 ## Market & Policy
 
-No items could be retrieved for Market & Policy in February 2026.
+No items could be retrieved for Market & Policy in 2026-02.
 
 ---
 ## Competitors
 
-No items could be retrieved for Competitors in February 2026.
+No items could be retrieved for Competitors in 2026-02.
 
 ---
 ## Partners & Buyers
 
-No items could be retrieved for Partners & Buyers in February 2026.
+No items could be retrieved for Partners & Buyers in 2026-02.
 
 ## Cleantech & Start-up Ecosystem — Grants & Accelerators Radar
 
