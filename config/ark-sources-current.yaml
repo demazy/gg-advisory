@@ -1,0 +1,151 @@
+# Sources for ARK Capture Solutions monthly intelligence brief
+# Focus: AU/APAC grants, CCUS policy, competitors, and potential industrial partners/buyers
+# ARK product: modular point-source carbon capture for low-concentration industrial flue gases
+# Target industries: biogas, gas-fired power, petrochemicals, glass, steel, cement
+
+sections:
+
+  Grants & Funding:
+    # Grant programs and funding rounds relevant to CCUS / industrial decarbonisation in AU/APAC
+    rss:
+      # ARENA: key AU funder for carbon capture & industrial clean energy projects
+      - https://arena.gov.au/rss/news/
+      # DCCEEW: Future Made in Australia, Hydrogen Headstart, industrial decarbonisation grants
+      - https://www.dcceew.gov.au/rss-feed
+    html:
+      # ARENA grant announcements and funding rounds
+      - https://arena.gov.au/news/
+      - https://arena.gov.au/funding/
+      # CEFC: co-investment and debt finance for industrial decarbonisation projects
+      - https://www.cefc.com.au/media/?type=media+release
+      - https://www.cefc.com.au/media/?type=in+the+news
+      # Dept of Industry: National Reconstruction Fund, industrial grants
+      - https://www.industry.gov.au/news
+      # DCCEEW: Future Made in Australia, climate programs, CCS-related policy grants
+      - https://www.dcceew.gov.au/about/news
+      - https://www.dcceew.gov.au/environment/climate-change/news
+      # Clean Energy Regulator: Safeguard Mechanism, carbon credits, ERF
+      - https://www.cleanenergyregulator.gov.au/news-centre/news
+      # CSIRO: research translation grants, ON Accelerate, mineral/carbon programs
+      - https://www.csiro.au/en/news/all
+      # Net Zero Australia: CCUS project tracking and funding intelligence
+      - https://www.netzeroaustralia.net.au/news/
+      # Global CCS Institute (Melbourne-based): CCUS project grants, government funding news
+      - https://www.globalccsinstitute.com/news-and-views/
+      - https://www.globalccsinstitute.com/news-and-views/insights/
+      # IEA: CCUS financing programs, APAC-relevant
+      - https://www.iea.org/topics/carbon-capture-utilisation-and-storage
+      # Treasury: carbon pricing, Safeguard Mechanism, decarbonisation incentives
+      - https://treasury.gov.au/news-and-media
+
+  Market & Policy:
+    # Policy, regulation, and market developments affecting CCUS deployment in AU/APAC
+    rss:
+      - https://www.dcceew.gov.au/rss-feed
+      - https://asic.gov.au/news-centre/media-releases/media-release-rss-feeds/media-releases-rss/
+    html:
+      # Global CCS Institute: policy analysis, CCUS readiness, project updates
+      - https://www.globalccsinstitute.com/news-and-views/
+      - https://www.globalccsinstitute.com/news-and-views/insights/
+      # IEA CCUS tracker and reports
+      - https://www.iea.org/news
+      - https://www.iea.org/topics/carbon-capture-utilisation-and-storage
+      # Clean Energy Regulator: Safeguard Mechanism, industrial baselines, ERF/ACCU market
+      - https://www.cleanenergyregulator.gov.au/news-centre/news
+      - https://www.cleanenergyregulator.gov.au/Infohub/Legislation
+      # DCCEEW: industrial decarbonisation policy, Future Made in Australia
+      - https://www.dcceew.gov.au/about/news
+      - https://www.dcceew.gov.au/energy/news
+      # CSIRO: CCS research, carbon capture technology assessments
+      - https://www.csiro.au/en/news/all
+      # Department of Industry: industrial transformation policy
+      - https://www.industry.gov.au/news
+      # Carbon Brief: CCUS policy analysis (global, APAC-relevant)
+      - https://www.carbonbrief.org/
+      # Climate Council: Australian climate and industrial policy
+      - https://www.climatecouncil.org.au/news/
+      # Geoscience Australia: CO2 storage sites, geological assessments
+      - https://www.ga.gov.au/news-and-media
+      # APPEA (oil & gas): upstream CCUS projects (Santos, Woodside, Chevron Gorgon)
+      - https://www.appea.com.au/media_releases/
+      # IEA CCUS special reports
+      - https://www.iea.org/reports
+
+  Competitors:
+    # Carbon capture companies, projects, and investment rounds in AU/APAC
+    rss:
+      # ESG Today: daily coverage of CCUS deals, investment rounds, partnerships
+      - https://www.esgtoday.com/feed/
+      # DCCEEW for industrial program announcements
+      - https://www.dcceew.gov.au/rss-feed
+    html:
+      # Global CCS Institute: CCUS projects database news (includes direct competitors)
+      - https://www.globalccsinstitute.com/news-and-views/
+      # Calix Ltd (ASX:CLX): Australian competitor, modular lime/carbon capture technology
+      - https://www.calix.com.au/news/
+      - https://www.calix.com.au/news/media-releases/
+      # ARENA: funded carbon capture projects (identifies funded competitors in AU)
+      - https://arena.gov.au/news/
+      # CSIRO: carbon capture research and pilot projects
+      - https://www.csiro.au/en/news/all
+      # IEA: CCUS project announcements globally including APAC
+      - https://www.iea.org/news
+      # ESG Today: cleantech deals, CCUS investment and M&A
+      - https://www.esgtoday.com/
+      # Carbon Brief: CCUS company/project news
+      - https://www.carbonbrief.org/
+      # Santos: CCS projects (Moomba, Darwin)
+      - https://www.santos.com/news-and-media/media-releases/
+      # Woodside: CCS and industrial decarbonisation projects
+      - https://www.woodside.com/news-and-media/media-releases
+      # Glencore / BlueScope / OneSteel carbon capture pilots
+      - https://www.bluescopesteel.com/news
+      # Net Zero Australia: tracks CCS/CCUS projects and entrants
+      - https://www.netzeroaustralia.net.au/news/
+      # Australian Investment Council: cleantech VC/PE rounds including CCUS
+      - https://www.australianinvestmentcouncil.com.au/news
+      # New Energy Nexus: accelerator cohorts with carbon capture startups
+      - https://www.newenergynexus.com/blog/
+
+  Partners & Buyers:
+    # Potential industrial customers and partners in AU/APAC
+    # Target industries: steel, glass, cement, biogas, gas-fired power, petrochemicals
+    rss:
+      - https://www.dcceew.gov.au/rss-feed
+    html:
+      # BlueScope Steel: Australia's largest steelmaker, heavy CO2 emitter, decarbonisation targets
+      - https://www.bluescopesteel.com/news
+      # Minerals Council of Australia: steel, mining & industrial decarbonisation
+      - https://www.minerals.org.au/news/
+      # Australian Steel Institute: industry body, decarbonisation roadmaps
+      - https://steel.org.au/news/
+      # Santos: gas processing + CCS, potential CCUS co-developer
+      - https://www.santos.com/news-and-media/media-releases/
+      # Woodside: LNG + industrial decarbonisation, CCS aspirations
+      - https://www.woodside.com/news-and-media/media-releases
+      # AGL: gas-fired power plants, potential retrofit customer
+      - https://www.agl.com.au/about-agl/media-centre/asx-and-media-releases
+      # Origin Energy: gas-fired power, industrial gas supply
+      - https://www.originenergy.com.au/about/investors-media/media-centre/
+      # APPEA: upstream oil & gas, industrial CO2 capture requirements
+      - https://www.appea.com.au/media_releases/
+      # Viva Energy: refinery operations (Geelong), potential point-source capture
+      - https://www.vivaenergy.com.au/news-and-media/media-releases
+      # Boral: cement and building materials, large CO2 emitter in AU
+      - https://www.boral.com/media/media-releases
+      # Cement Concrete & Aggregates Australia: cement sector decarbonisation
+      - https://www.ccaa.com.au/news/
+      # DCCEEW: Safeguard Mechanism liable facilities list and compliance news
+      - https://www.dcceew.gov.au/environment/climate-change/news
+      # Clean Energy Regulator: Safeguard Mechanism facility updates
+      - https://www.cleanenergyregulator.gov.au/news-centre/news
+      # CSIRO biogas/bioenergy research (bioenergy with CCS — BECCS opportunity)
+      - https://www.csiro.au/en/news/all
+      # Net Zero Australia: industrial transition tracking
+      - https://www.netzeroaustralia.net.au/news/
+      # Biogas Association: AU biogas operators — natural carbon capture opportunity
+      - https://www.aibn.com.au/news
+      # ESG Today: corporate decarbonisation commitments and technology partnerships
+      - https://www.esgtoday.com/
+      # IGCC: investor pressure on industrial companies to decarbonise (creates buyer urgency)
+      - https://igcc.org.au/news/

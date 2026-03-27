@@ -1,0 +1,15 @@
+ym=2026-02
+selected_total=4
+items_per_section=5
+per_domain_cap=2
+allow_undated=False
+allow_placeholder=True
+fail_on_below_min_total=False
+range_pad_before_days=2
+range_pad_after_days=2
+max_score_fetches_per_section=60
+last_resort_backfill_days=14
+last_resort_max_staleness_days=60
+relaxed_min_text_chars=300
+auto_allow_gov_au=True
+auto_allow_domains=agl.com.au,appea.com.au,bluescopesteel.com,boral.com,boral.com.au,calix.com.au,carbonbrief.org,esgtoday.com,globalccsinstitute.com,igcc.org.au,minerals.org.au,netzeroaustralia.net.au,originenergy.com.au,santos.com,steel.org.au,vivaenergy.com.au,woodside.com
