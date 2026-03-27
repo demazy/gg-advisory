@@ -52,12 +52,16 @@ jobs:
           import src.generate_monthly, src.fetch, src.summarise
           import src.ark_summarise, src.generate_ark
           import src.build_ark_newsletter, src.ark_update_sources
+          import src.ark_tier1_verify, src.ark_apply_baseline_delta
+          import src.build_ark_review_report
           print('imports ok')
           "
           python -m py_compile \
             src/generate_monthly.py src/fetch.py src/summarise.py \
             src/ark_summarise.py src/generate_ark.py \
-            src/build_ark_newsletter.py src/ark_update_sources.py
+            src/build_ark_newsletter.py src/ark_update_sources.py \
+            src/ark_tier1_verify.py src/ark_apply_baseline_delta.py \
+            src/build_ark_review_report.py
 
       - name: Sanity check generate_monthly has robust _in_range
         run: |
@@ -92,6 +96,11 @@ jobs:
           echo "ym=$YM" >> "$GITHUB_OUTPUT"
           echo "Chosen month: $YM"
 
+          # Compute previous month (for PREV_DIGEST_FILE)
+          PREV_YM=$(date -d "${YM}-01 -1 month" +%Y-%m 2>/dev/null || true)
+          echo "prev_ym=$PREV_YM" >> "$GITHUB_OUTPUT"
+          echo "Previous month: $PREV_YM"
+
       # ── Step 1: Update sources (discover new domains via Google News + OpenAI) ──
       - name: Update ARK sources (dynamic discovery)
         env:
@@ -102,7 +111,19 @@ jobs:
         run: |
           python -m src.ark_update_sources
 
-      # ── Step 2: Run the ARK intelligence pipeline ─────────────────────────────
+      # ── Step 2: Tier-1 — verify dynamic baseline source URLs ──────────────────
+      - name: Tier-1 baseline verification (fetch dynamic source URLs)
+        env:
+          CFG_BASELINE: config/ark-baseline.yaml
+          TIER1_RESULTS_FILE: state/ark-tier1-verify-${{ steps.when.outputs.ym }}.json
+          START_YM: ${{ steps.when.outputs.ym }}
+          TIER1_TIMEOUT: "20"
+          TIER1_MAX_CHARS: "2000"
+        run: |
+          mkdir -p state
+          python -m src.ark_tier1_verify
+
+      # ── Step 3: Run the ARK intelligence pipeline ──────────────────────────────
       - name: Generate ARK intelligence brief
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -110,11 +131,18 @@ jobs:
           START_YM: ${{ steps.when.outputs.ym }}
           END_YM: ${{ steps.when.outputs.ym }}
 
-          # Use the dynamically-updated sources file
+          # Baseline + supplementary context
+          CFG_BASELINE: config/ark-baseline.yaml
           CFG_SOURCES: config/ark-sources-current.yaml
           CFG_FILTERS: config/ark-filters.yaml
           STATE_FILE: state/ark-seen_urls.json
           OUT_DIR: out/ark
+
+          # Tier-1 results (for grounding change detection)
+          TIER1_RESULTS_FILE: state/ark-tier1-verify-${{ steps.when.outputs.ym }}.json
+
+          # Previous digest (for Changes Since Last Issue detection)
+          PREV_DIGEST_FILE: out/ark/monthly-digest-${{ steps.when.outputs.prev_ym }}.md
 
           # Content tuning
           ITEMS_PER_SECTION: "5"
@@ -127,8 +155,8 @@ jobs:
           PRIORITY_DOMAINS: "globalccsinstitute.com,arena.gov.au,cefc.com.au,dcceew.gov.au,cleanenergyregulator.gov.au,iea.org,csiro.au,calix.com.au,industry.gov.au"
 
           MODEL: "gpt-4o"
-          TEMP: "0.2"
-          OPENAI_MAX_TOKENS: "4000"
+          TEMP: "0"
+          OPENAI_MAX_TOKENS: "6000"
 
           MAX_PDF_BYTES: "5242880"
           PDF_TRUSTED: "globalccsinstitute.com,arena.gov.au,cefc.com.au,dcceew.gov.au,cleanenergyregulator.gov.au,iea.org,csiro.au,ga.gov.au,industry.gov.au,treasury.gov.au,carbonbrief.org"
@@ -151,8 +179,8 @@ jobs:
           python -m src.generate_ark
 
       # ── Hallucination guard ────────────────────────────────────────────────────
-      # Verify every Source: URL in the newsletter markdown appears in the debug-selected
-      # JSON (i.e. was actually fetched from a real source this run).
+      # Verify every Source: URL in the newsletter markdown appears in the
+      # debug-selected JSON (i.e. was actually fetched from a real source this run).
       # Any invented URL causes a hard failure — this brief goes to an external client.
       - name: Hallucination guard — verify all Source URLs are real
         env:
@@ -169,7 +197,7 @@ jobs:
           fi
 
           python - <<'PY'
-          import json, os, sys
+          import json, os, sys, re
           from pathlib import Path
 
           ym = os.environ["YM"]
@@ -178,9 +206,17 @@ jobs:
 
           allowed = {(item.get("url") or "").strip().rstrip("/").lower() for item in selected}
 
+          # Only check newsletter body — not the BASELINE_DELTA block
+          in_delta = False
           violations = []
           for line in digest.splitlines():
               s = line.strip()
+              if s == "---BASELINE_DELTA_START---":
+                  in_delta = True; continue
+              if s == "---BASELINE_DELTA_END---":
+                  in_delta = False; continue
+              if in_delta:
+                  continue
               if s.lower().startswith("source:"):
                   url = s[len("Source:"):].strip().rstrip("/").lower()
                   if url and url not in allowed:
@@ -214,7 +250,28 @@ jobs:
             exit 1
           fi
 
-      # ── Step 3: Commit outputs + updated sources ───────────────────────────────
+      # ── Step 4: Apply baseline delta ──────────────────────────────────────────
+      - name: Apply BASELINE_DELTA to ark-baseline.yaml
+        env:
+          CFG_BASELINE: config/ark-baseline.yaml
+          DIGEST_FILE: out/ark/monthly-digest-${{ steps.when.outputs.ym }}.md
+          DELTA_LOG_FILE: state/ark-delta-log-${{ steps.when.outputs.ym }}.json
+          YM: ${{ steps.when.outputs.ym }}
+        run: |
+          python -m src.ark_apply_baseline_delta
+
+      # ── Step 5: Build GG Advisory internal review report ──────────────────────
+      - name: Build internal review report
+        env:
+          CFG_BASELINE: config/ark-baseline.yaml
+          DELTA_LOG_FILE: state/ark-delta-log-${{ steps.when.outputs.ym }}.json
+          TIER1_RESULTS_FILE: state/ark-tier1-verify-${{ steps.when.outputs.ym }}.json
+          OUT_DIR: out/ark
+          YM: ${{ steps.when.outputs.ym }}
+        run: |
+          python -m src.build_ark_review_report
+
+      # ── Step 6: Commit outputs + updated sources + updated baseline ────────────
       - name: Commit outputs
         if: github.ref == 'refs/heads/main'
         shell: bash
@@ -227,14 +284,16 @@ jobs:
           YM="${{ steps.when.outputs.ym }}"
           DIGEST="out/ark/monthly-digest-${YM}.md"
           NEWSLETTER="out/ark/ark-intelligence-brief-${YM}.docx"
+          REVIEW="out/ark/ark-review-report-${YM}.docx"
 
           test -f "$DIGEST" || { echo "Digest not found: $DIGEST"; exit 1; }
 
           rm -rf src/__pycache__ || true
 
-          # Digest + newsletter
+          # Newsletter outputs
           git add -f "$DIGEST"
           [[ -f "$NEWSLETTER" ]] && git add -f "$NEWSLETTER" || true
+          [[ -f "$REVIEW"     ]] && git add -f "$REVIEW"     || true
 
           # Debug outputs
           git add -f "out/ark/debug-selected-${YM}.json" 2>/dev/null || true
@@ -244,8 +303,13 @@ jobs:
           # Updated sources (grows over time as new domains are discovered)
           git add -f "config/ark-sources-current.yaml" 2>/dev/null || true
 
+          # Updated baseline (auto-applied changes + contradiction flags)
+          git add -f "config/ark-baseline.yaml" 2>/dev/null || true
+
           # Cross-month dedup state
-          git add -f "state/ark-seen_urls.json" 2>/dev/null || true
+          git add -f "state/ark-seen_urls.json"    2>/dev/null || true
+          git add -f "state/ark-tier1-verify-${YM}.json" 2>/dev/null || true
+          git add -f "state/ark-delta-log-${YM}.json"    2>/dev/null || true
 
           shopt -s nullglob
           pool_files=(out/ark/debug-pool-*-"${YM}".json)
@@ -261,7 +325,7 @@ jobs:
           echo "---- git status (porcelain) ----"
           git status --porcelain
 
-          git commit -m "ark: intelligence brief ${YM} + source update"
+          git commit -m "ark: intelligence brief ${YM} + baseline update"
           git push origin HEAD:main
 
       - name: Prepare debug bundle
@@ -273,9 +337,12 @@ jobs:
 
           rm -rf _ark_artifact && mkdir -p _ark_artifact
 
-          cp -f "out/ark/debug-selected-${YM}.json" _ark_artifact/ 2>/dev/null || true
-          cp -f "out/ark/debug-drops-${YM}.txt"     _ark_artifact/ 2>/dev/null || true
-          cp -f "out/ark/debug-meta-${YM}.txt"      _ark_artifact/ 2>/dev/null || true
+          cp -f "out/ark/debug-selected-${YM}.json"        _ark_artifact/ 2>/dev/null || true
+          cp -f "out/ark/debug-drops-${YM}.txt"            _ark_artifact/ 2>/dev/null || true
+          cp -f "out/ark/debug-meta-${YM}.txt"             _ark_artifact/ 2>/dev/null || true
+          cp -f "state/ark-tier1-verify-${YM}.json"        _ark_artifact/ 2>/dev/null || true
+          cp -f "state/ark-delta-log-${YM}.json"           _ark_artifact/ 2>/dev/null || true
+          cp -f "out/ark/ark-review-report-${YM}.docx"     _ark_artifact/ 2>/dev/null || true
 
           shopt -s nullglob
           for f in out/ark/debug-pool-*-"${YM}".json; do
@@ -294,8 +361,8 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
-      # ── Step 4: Email the newsletter to GG Advisory ───────────────────────────
-      - name: Email ARK intelligence brief
+      # ── Step 7: Email the ARK newsletter to GG Advisory ───────────────────────
+      - name: Email ARK intelligence brief (to GG Advisory / forward to ARK)
         if: success()
         uses: dawidd6/action-send-mail@v3
         with:
@@ -311,15 +378,56 @@ jobs:
             Period: ${{ steps.when.outputs.ym }}
 
             Sections covered:
-            ▸ Grants & Funding — AU/APAC programs for CCUS and industrial decarbonisation
-            ▸ Market & Policy  — Safeguard Mechanism, CCUS regulation, policy developments
-            ▸ Competitors      — Carbon capture companies and funded projects in AU/APAC
-            ▸ Partners & Buyers — Industrial companies (steel, glass, biogas, gas-fired power)
+            ▸ Grants & Funding  — AU/APAC programmes for CCUS and industrial decarbonisation
+            ▸ Market & Policy   — Safeguard Mechanism, CCUS regulation, policy developments
+            ▸ Competitors       — Carbon capture companies and funded projects in AU/APAC
+            ▸ Partners & Buyers — Industrial companies (cement, WtE, biomass, gas-fired power)
 
-            The attached .docx is ready to forward directly to ARK.
+            Each section includes:
+              • Market Background (verified baseline, updated automatically)
+              • Updates This Month (new intelligence from monitored sources)
+              • Changes Since Last Issue (detected changes vs. prior month)
 
-            Debug / selected items: see attached JSON.
+            The attached .docx is ready to review and forward directly to ARK.
+
             Repo: https://github.com/${{ github.repository }}/tree/main/out/ark
           attachments: |
             out/ark/ark-intelligence-brief-${{ steps.when.outputs.ym }}.docx
             out/ark/debug-selected-${{ steps.when.outputs.ym }}.json
+
+      # ── Step 8: Email the internal review report to GG Advisory only ──────────
+      - name: Email internal review report (GG Advisory only — NOT for ARK)
+        if: success()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.mail.me.com
+          server_port: 587
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "GG Advisory | ARK Pipeline Review Report (${{ steps.when.outputs.ym }}) [INTERNAL]"
+          from: "GG Advisory <${{ secrets.MAIL_USERNAME }}>"
+          to: "a.demazy_de_fortet@icloud.com"
+          body: |
+            GG Advisory — ARK Intelligence Pipeline
+            Internal Review Report | Period: ${{ steps.when.outputs.ym }}
+
+            ⚠️ CONFIDENTIAL — FOR GG ADVISORY USE ONLY — DO NOT FORWARD TO ARK
+
+            This report contains:
+              • Auto-applied baseline changes (≥ 0.85 confidence)
+              • Draft entries pending your review (0.60–0.85 confidence)
+              • Flagged items that were NOT applied (< 0.60 confidence)
+              • Contradiction flags on stable entries
+              • Tier-1 fetch alerts (source URLs that could not be fetched)
+              • Staleness alerts (entries not verified in > 90 days)
+              • Clean checks summary
+
+            ACTION REQUIRED: Review draft entries and flagged items in the
+            attached .docx and update config/ark-baseline.yaml if warranted.
+
+            Baseline file: config/ark-baseline.yaml (auto-committed with this run)
+            Repo: https://github.com/${{ github.repository }}/tree/main/config
+          attachments: |
+            out/ark/ark-review-report-${{ steps.when.outputs.ym }}.docx
+            state/ark-delta-log-${{ steps.when.outputs.ym }}.json
+            state/ark-tier1-verify-${{ steps.when.outputs.ym }}.json
