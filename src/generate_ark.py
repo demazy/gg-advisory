@@ -37,6 +37,10 @@ import src.generate_monthly as _gm
 from src.ark_summarise import build_ark_digest as _ark_digest
 _gm.build_digest = _ark_digest   # replaces the name in generate_monthly's namespace
 
+# ── 2b. Suppress the Cleantech & Start-up Ecosystem section ──────────────────
+# generate_monthly appends this radar after build_digest — irrelevant for ARK.
+_gm._generate_grants_radar = lambda ym: ""  # type: ignore[attr-defined]
+
 
 # ── 3. After the pipeline writes the markdown, build the ARK newsletter ───────
 

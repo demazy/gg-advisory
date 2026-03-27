@@ -61,7 +61,7 @@ sections:
         tag: "TIME-CRITICAL"
         tag_color: "red"
         last_verified: "2026-03-27"
-        source_url: "https://business.gov.au/grants-and-programs/carbon-capture-technologies-programme-round-2"
+        source_url: "https://business.gov.au/grants-and-programs/carbon-capture-technologies-program-round-2"
         changelog: []
         bullets:
           - "Administered by DCCEEW / business.gov.au; open now, closes 5:00 pm AEST Wednesday 6 May 2026"
@@ -79,7 +79,7 @@ sections:
         tag: "OPEN | ROLLING"
         tag_color: "teal"
         last_verified: "2026-03-27"
-        source_url: "https://arena.gov.au/funding/industrial-transformation/"
+        source_url: "https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/"
         changelog: []
         bullets:
           - "Open and ongoing since September 2025; AUD $180M available; no hard deadline — applications assessed on rolling basis"
@@ -139,7 +139,7 @@ sections:
         tag: "REGULATORY DRIVER"
         tag_color: "navy"
         last_verified: "2026-03-27"
-        source_url: "https://www.cleanenergyregulator.gov.au/Safeguard/Pages/default.aspx"
+        source_url: "https://cer.gov.au/schemes/safeguard-mechanism"
         changelog: []
         bullets:
           - "Applies to 219 facilities (confirmed 2023-24; 2024-25 final data due to CER by 15 April 2026, current estimate ~220) emitting more than 100,000 tCO₂e/year"
@@ -156,7 +156,7 @@ sections:
         tag: "POLICY"
         tag_color: "navy"
         last_verified: "2026-03-27"
-        source_url: "https://www.dcceew.gov.au/climate-change/international/targets"
+        source_url: "https://www.dcceew.gov.au/climate-change/international-climate-action"
         changelog: []
         bullets:
           - "Legislated 2030 target: 43% reduction below 2005 levels; net zero by 2050"
@@ -170,7 +170,7 @@ sections:
         tag: "MARKET DRIVER"
         tag_color: "teal"
         last_verified: "2026-03-27"
-        source_url: "https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/aggregate-prices"
+        source_url: "https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/aggregated-data"
         changelog: []
         bullets:
           - "NEM wholesale average fell to approximately AUD $50/MWh in Q4 2025 (down ~44% year-on-year), driven by record renewable penetration exceeding 50% of NEM demand for the first time"
@@ -274,7 +274,7 @@ sections:
         tag: "ACTIVE R&D"
         tag_color: "navy"
         last_verified: "2026-03-27"
-        source_url: "https://www.csiro.au/en/research/natural-environment/atmosphere/carbon-capture"
+        source_url: "https://www.csiro.au/en/research/technology-space/energy/Carbon-management/Capturing-carbon"
         changelog: []
         bullets:
           - "CSIRO has developed proprietary cyclic amine absorbents with claimed lower energy requirements than conventional MEA; partnership with US-based ION Clean Energy for commercialisation"
@@ -306,7 +306,7 @@ sections:
         tag: "PRIORITY 1 | WtE"
         tag_color: "teal"
         last_verified: "2026-03-27"
-        source_url: "https://www.acciona.com.au/projects/kwinana-energy-recovery/"
+        source_url: "https://www.acciona.com/projects/kwinana-energy-conversion-plant"
         changelog: []
         bullets:
           - "Owner: ACCIONA (100% since March 2024); day-to-day operations and maintenance: Veolia (long-term O&M services contract)"
@@ -323,7 +323,7 @@ sections:
         tag: "WATCHLIST"
         tag_color: "orange"
         last_verified: "2026-03-27"
-        source_url: "https://www.kordamentha.com/creditors/east-rockingham"
+        source_url: "https://arena.gov.au/projects/east-rockingham-waste-to-energy/"
         changelog: []
         bullets:
           - "Approved capacity: 300,000 t/year; 29 MW; AUD $511M project (AUD $18M ARENA grant, AUD $57.5M CEFC debt)"
@@ -338,7 +338,7 @@ sections:
         tag: "PRIORITY 1 | CEMENT"
         tag_color: "teal"
         last_verified: "2026-03-27"
-        source_url: "https://www.boral.com.au/sustainability/climate-and-energy"
+        source_url: "https://www.boral.com.au/sustainability/net-zero"
         changelog: []
         bullets:
           - "Supplies approximately 40% of NSW and ACT cement (Boral, December 2024); combustion flue gas at approximately 14–25% CO₂"
@@ -355,7 +355,7 @@ sections:
         tag: "PRIORITY 1 | CEMENT"
         tag_color: "teal"
         last_verified: "2026-03-27"
-        source_url: "https://www.adbri.com.au/sustainability/climate-action"
+        source_url: "https://www.adbri.com.au/sustainability/net-zero/"
         changelog: []
         bullets:
           - "Majority-owned by CRH plc (acquisition completed 2024; Adbri delisted from ASX); Barro Group retains minority stake"

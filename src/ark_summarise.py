@@ -634,7 +634,19 @@ def build_ark_digest(date_label: str, items: Sequence[Any]) -> str:
                 "items":        [],
             }, ensure_ascii=False, indent=2)
             out += f"\n\n---BASELINE_DELTA_START---\n{empty_delta}\n---BASELINE_DELTA_END---"
-        elif DEBUG and delta.get("items"):
+        else:
+            # GPT-4o sometimes returns the literal placeholder string rather than
+            # filling in the timestamp — replace it unconditionally with the real value.
+            delta["generated_at"] = datetime.now(timezone.utc).isoformat()
+            fixed_delta_json = json.dumps(delta, ensure_ascii=False, indent=2)
+            out = re.sub(
+                r"---BASELINE_DELTA_START---.*?---BASELINE_DELTA_END---",
+                f"---BASELINE_DELTA_START---\n{fixed_delta_json}\n---BASELINE_DELTA_END---",
+                out,
+                flags=re.DOTALL,
+            )
+
+        if delta is not None and DEBUG and delta.get("items"):
             print(f"[ark_summarise] BASELINE_DELTA: {len(delta['items'])} item(s) detected:")
             for item in delta["items"]:
                 print(f"  [{item.get('confidence', '?'):.2f}] {item.get('action')} "
