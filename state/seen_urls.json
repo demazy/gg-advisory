@@ -1,19 +1,68 @@
 {
-  "seen": [
-    "373b1ce253df47dbd62903991114fe85c3bf52c0",
-    "4a54682bbd562e881ad845b895c81e97f38cc001",
-    "ea722038a6cafc8ca6520ac2c290e0e09dd9e835",
-    "27bb0ac48e04be011c899594edba7d1e6ea03a06",
-    "8458c3673e9737a3b617263e387258974595b96d",
-    "1fd026cd25652876db0076fc0500781163d92684",
-    "e750bcb2424d04ac63fa77bd473448c7f38446f7",
-    "edf32f48aedee68b01f74672bb8d538b05a0d29b",
-    "905d8424692bc06a8fc45db637050e627292875a",
-    "d3e9e7dc726389a28b8aec97e63a63878f493b72",
-    "b3b909c5f5970f67af0d5f562c6523532f276604",
-    "6fb64c2b72f7f284c7f58e97e25555541b53640e",
-    "44eb4075498dbb25dee7298f089e48df66080786",
-    "36139f4963acc5ad27e3063f127b409e0c514663",
-    "5f27bb8cdc044a18492828c7d93a6e8efb655620"
+  "urls": [
+    {
+      "url": "https://energyconsumersaustralia.com.au/news/media-release-eca-response-gas-networks-transition-directions-paper",
+      "ts": 1775016697.212109
+    },
+    {
+      "url": "https://energyconsumersaustralia.com.au/news/media-release-eca-statement-dmo-draft-determination-solar-sharer-offer",
+      "ts": 1775016697.212109
+    },
+    {
+      "url": "https://energyconsumersaustralia.com.au/news/media-release-seize-moment-accelerate-electrification-australian-economy",
+      "ts": 1775016697.212109
+    },
+    {
+      "url": "https://igcc.org.au/news/",
+      "ts": 1775016697.212109
+    },
+    {
+      "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-proposes-gas-network-regulatory-reforms",
+      "ts": 1775016697.212109
+    },
+    {
+      "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-proposes-new-grid-standards-data-centre-connections",
+      "ts": 1775016697.212109
+    },
+    {
+      "url": "https://www.aemc.gov.au/news-centre/speeches/stage-2-gas-reforms",
+      "ts": 1775016697.212109
+    },
+    {
+      "url": "https://www.cer.gov.au/news-and-media/media/2026/march/battery-rebates-are-changing-1-may-2026",
+      "ts": 1775016697.212109
+    },
+    {
+      "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-launches-a-call-for-expression-of-interest-on-voluntary-sustainability-reporting-by-nonsme",
+      "ts": 1775016697.212109
+    },
+    {
+      "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-launches-interactive-draft-simplified-esrs-on-the-knowledge-hub-register-now-to-explore",
+      "ts": 1775016697.212109
+    },
+    {
+      "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-update-december-2025-january-2026-edition-now-available",
+      "ts": 1775016697.212109
+    },
+    {
+      "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-march-2026.html",
+      "ts": 1775016697.212109
+    },
+    {
+      "url": "https://www.rba.gov.au/publications/fsr/",
+      "ts": 1775016697.212109
+    },
+    {
+      "url": "https://www.rba.gov.au/publications/podcast/",
+      "ts": 1775016697.212109
+    },
+    {
+      "url": "https://www.smartcompany.com.au",
+      "ts": 1775016697.212109
+    },
+    {
+      "url": "https://www.startupdaily.net",
+      "ts": 1775016697.212109
+    }
   ]
 }
