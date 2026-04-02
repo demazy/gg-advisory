@@ -87,7 +87,11 @@ sections:
       - https://www.cpaaustralia.com.au/news
 
   Sustainable Finance & Investment:
-    rss: []
+    rss:
+      # ESG Today RSS: daily ESG/sustainable finance news with reliable pub dates
+      - https://www.esgtoday.com/feed/
+      # CEFC media releases RSS
+      - https://www.cefc.com.au/feed/
     html:
       - https://arena.gov.au/funding/
       - https://arena.gov.au/news/
@@ -99,11 +103,14 @@ sections:
       - https://www.irena.org/Newsroom/Articles
       - https://www.ifrs.org/news-and-events/updates/issb/
       - https://www.apra.gov.au/news-and-publications
-      # RBA: climate-related financial stability publications
-      - https://www.rba.gov.au/publications/
+      # RBA: specific dated publication pages (not the /publications/ hub)
+      - https://www.rba.gov.au/publications/fsr/
+      - https://www.rba.gov.au/publications/smp/
       - https://tnfd.global/news/
-      # IGCC (Investor Group on Climate Change): quarterly investor briefs, policy submissions
-      - https://igcc.org.au/news/
+      # IGCC: date_resolve_fetches needed — index page has no date metadata in HTML
+      - url: https://igcc.org.au/news/
+        name: IGCC
+        date_resolve_fetches: 5
       # RIAA (Responsible Investment Association Australasia): annual benchmark + news
       - https://responsibleinvestment.org/news-and-events/
       # ASFI: peak body for Australian sustainable finance
@@ -123,6 +130,12 @@ sections:
     rss:
       # DCCEEW RSS: Rewiring the Nation, Hydrogen Headstart, Future Made in Australia news
       - https://www.dcceew.gov.au/rss-feed
+      # Startup Daily RSS: Australian startup funding rounds and cleantech news (reliable pub dates)
+      - https://www.startupdaily.net/feed/
+      # SmartCompany RSS: Australian startup and SME business news
+      - https://www.smartcompany.com.au/feed/
+      # ESG Today RSS: cleantech investment rounds and policy
+      - https://www.esgtoday.com/feed/
     html:
       # ARENA news: start-up / early-stage project and program announcements
       - https://arena.gov.au/news/

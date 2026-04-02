@@ -397,9 +397,20 @@ def is_probably_taxonomy_or_hub(url: str) -> bool:
         return True
 
     path = parsed.path or "/"
+
+    # Bare domain homepage (no meaningful path)
+    if not path.strip("/"):
+        return True
+
     # Known listing hubs that look like content URLs
     if parsed.netloc.endswith('efrag.org') and path.rstrip('/') in ('/en/news-and-calendar/news', '/en/news-and-calendar/events'):
         return True
+    # RBA publication hubs: /publications/<short-slug>/ are landing pages, not articles
+    if parsed.netloc.endswith('rba.gov.au'):
+        segs_rba = [s for s in path.split("/") if s]
+        if len(segs_rba) == 2 and segs_rba[0] == 'publications':
+            return True
+
     # nav/utility endpoints (only if the *last* segment is utility-ish)
     utility_segments = {
         "about", "contact", "privacy", "terms", "cookies", "accessibility", "sitemap",
@@ -408,6 +419,8 @@ def is_probably_taxonomy_or_hub(url: str) -> bool:
         "tag", "tags", "category", "categories", "topic", "topics",
         "author", "authors",
         "help", "support", "faq",
+        "news", "media", "media-releases", "press-releases", "podcasts", "podcast",
+        "publications", "resources", "reports",
     }
     segs = [s for s in path.split("/") if s]
     if segs and segs[-1] in utility_segments:
@@ -675,6 +688,11 @@ def _title_from_url_slug(url: str) -> str:
         if re.match(r"^[A-Z]{2,6}\d{4,}$", slug, re.I):
             return ""
         text = re.sub(r"[-_]+", " ", slug).strip()
+        # Strip common URL prefixes that are artefacts of CMS slug conventions
+        for pfx in ("media release ", "media-release ", "press release ", "press-release "):
+            if text.lower().startswith(pfx):
+                text = text[len(pfx):].strip()
+                break
         return text.title()
     except Exception:
         return ""
@@ -732,12 +750,13 @@ def fetch_rss(feed_url: str, source_name: str = "", **kwargs) -> List[Item]:
     for e in parsed.entries or []:
         link = _clean_url(getattr(e, "link", "") or "")
         # Google News RSS often points to an aggregator URL; prefer the publisher URL if provided.
+        # Only substitute if source.href has a real path (not a bare domain homepage).
         try:
             if link and "news.google.com" in urlparse(link.lower()).netloc:
                 src = getattr(e, "source", None)
                 href = getattr(src, "href", "") if src is not None else ""
                 href = _clean_url(href)
-                if href:
+                if href and urlparse(href).path.strip("/"):
                     link = href
         except Exception:
             pass
