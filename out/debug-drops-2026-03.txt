@@ -1,5 +1,4 @@
 # reason	url	title
-undated	https://www.aemc.gov.au/news-centre/media-releases	Media Releases
 undated	https://www.aemc.gov.au/about-us/chair-and-commissioners	Chair and commissioners
 undated	https://www.aemc.gov.au/about-us/executive-leadership-team	Executive leadership team
 undated	https://www.aemc.gov.au/about-us/our-governance	Our governance
@@ -44,8 +43,7 @@ undated	https://www.aemc.gov.au/news-centre	News Centre
 undated	https://www.aemc.gov.au/contact-us	Contact Us
 undated	https://www.aemc.gov.au/metering	https://www.aemc.gov.au/metering
 undated	https://www.aemc.gov.au/calendar	Calendar
-undated	https://www.aemc.gov.au/news-centre/media-releases?title=&items_per_page=10&order=title&sort=asc	Title
-undated	https://www.aemc.gov.au/news-centre/media-releases?title=&items_per_page=10&order=created&sort=asc	Date Sort ascending
+undated	https://www.aemc.gov.au/rule-changes/establishing-regulatory-framework-retail-customer-initiated-gas-abolishment	GRC0086
 undated	https://www.aemc.gov.au/rule-changes/gas-networks-transition	GRC0082
 undated	https://www.aemc.gov.au/rule-changes/improving-nem-access-standards-package-2	ERC0394
 undated	https://www.aemc.gov.au/rule-changes/improving-life-support-processes	RRC0064
@@ -58,8 +56,6 @@ undated	https://www.aemc.gov.au/rule-changes/integrating-price-responsive-resour
 out_of_range	https://www.aemc.gov.au/news-centre/media-releases/aemcs-final-rule-gives-consumers-smarter-data-options	AEMC’s final rule gives consumers smarter data options
 undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers	ERC0399
 undated	https://www.aemc.gov.au/rule-changes/real-time-data-consumers-retail	RRC0057
-out_of_range	https://www.aemc.gov.au/news-centre/media-releases/aemc-undertake-critical-review-reconsider-role-electricity-networks-transition	AEMC to undertake critical review to reconsider the role of electricity networks in the transition
-undated	https://www.aemc.gov.au/market-reviews-advice/electricity-network-regulation-review	EPR0106
 out_of_range	https://www.aemc.gov.au/news-centre/speeches/energy-security-keeping-lights-through-energy-transition-qld	Energy security: Keeping the lights on through the energy transition (QLD)
 out_of_range	https://www.aemc.gov.au/news-centre/speeches/energy-security-keeping-lights-through-energy-transition-nsw	Energy security: Keeping the lights on through the energy transition (NSW)
 out_of_range	https://www.aemc.gov.au/news-centre/speeches/watts-ahead-understanding-future-behind-bill	Watt's ahead: Understanding the future behind the bill
@@ -97,8 +93,6 @@ undated	https://www.aemc.gov.au/news-centre/speeches/looking-back-now-viewing-en
 undated	https://www.aemc.gov.au/news-centre/speeches/australian-energy-week-keynote-speech	Australian Energy Week: Keynote Speech
 undated	https://www.aemc.gov.au/news-centre/speeches/renewable-energy-integration-our-national-electricity-market	Renewable energy integration in our national electricity market
 undated	https://www.aemc.gov.au/news-centre/speeches/perspective-australias-microeconomic-reform-journey	A perspective on Australia's microeconomic reform journey
-undated	https://www.cer.gov.au/news-and-media/news	https://www.cer.gov.au/news-and-media/news
-undated	https://www.cer.gov.au/news-and-media/media-centre/media-releases	media releases
 out_of_range	https://www.cer.gov.au/news-and-media/news/2026/february/changes-to-rebate-solar-batteries-1-may	Changes To Rebate Solar Batteries 1 May
 out_of_range	https://www.cer.gov.au/news-and-media/news/2026/january/explore-q4-2025-qcmr-data-workbook	Explore Q4 2025 Qcmr Data Workbook
 out_of_range	https://www.cer.gov.au/news-and-media/news/2025/december/fifth-independent-review-hir-gateway-checks	Fifth Independent Review Hir Gateway Checks
@@ -114,14 +108,9 @@ out_of_range	https://www.cer.gov.au/news-and-media/media/2025/november/first-acc
 out_of_range	https://www.cer.gov.au/news-and-media/media/2025/september/cheaper-home-batteries-surpass-australias-biggest-battery	Cheaper Home Batteries Surpass Australias Biggest Battery
 out_of_range	https://www.cer.gov.au/news-and-media/media/2025/august/strong-solar-battery-uptake-first-month	Strong Solar Battery Uptake First Month
 undated	https://www.cer.gov.au/news-and-media	News and media
-undated	https://arena.gov.au/news/	Back to top
-undated	https://arena.gov.au/	Home
-generic_title	https://www.energynetworks.com.au/news/	News
-undated	https://www.energynetworks.com.au/news/media-releases/	See all Articles
 undated	https://www.energynetworks.com.au/news/energy-insider/	See all Articles
 undated	https://www.energynetworks.com.au/news/speeches-op-eds/	Speeches / Op Eds
 undated	https://www.energynetworks.com.au/about/energy-networks-australia/media-enquiries/	Media enquiries
-undated	https://www.energynetworks.com.au	News & Resources
 out_of_range	https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-solar-sharer-offer-next-steps/	Energy Networks Australia welcomes Solar Sharer Offer next steps
 out_of_range	https://www.energynetworks.com.au/news/media-releases/joint-statement-on-the-national-electricity-market-review/	Joint Statement on the National Electricity Market Review
 out_of_range	https://www.energynetworks.com.au/news/media-releases/energy-networks-australia-responds-to-aemc-pricing-review-released-today/	Energy Networks Australia responds to AEMC pricing review released today
@@ -130,7 +119,6 @@ out_of_range	https://www.energynetworks.com.au/news/energy-insider/what-australi
 out_of_range	https://www.energynetworks.com.au/news/the-age-of-dso/	The Age of DSO
 out_of_range	https://www.energynetworks.com.au/news/meet-new-ena-chair-andrew-bills/	Meet new ENA Chair – Andrew Bills
 out_of_range	https://www.energynetworks.com.au/news/energy-insider/why-you-cant-miss-dan-gardner-at-en26/	Why You Can’t Miss Dan Gardner at EN26
-undated	https://www.energynetworks.com.au/resources/	Resources
 undated	https://www.energynetworks.com.au/guidelines/	Guidelines
 out_of_range	https://www.energynetworks.com.au/news/media-releases/15031/	Dom van den Berg, Chief Executive Energy Networks Australia responds to AEMC’s residential price outlook
 undated	https://www.energynetworks.com.au/news/energy-networks-australia-welcomes-new-chair-and-board-directors/	Energy Networks Australia welcomes new Chair and Board Directors
@@ -189,7 +177,6 @@ out_of_range	https://www.energynetworks.com.au/news/media-releases/industry-welc
 out_of_range	https://www.energynetworks.com.au/news/media-releases/misguided-report-needs-fact-check-network-prices-lowest-in-10-years/	Misguided report needs fact check-network prices lowest in 10 years
 out_of_range	https://www.energynetworks.com.au/news/media-releases/stable-regulation-essential-to-deliver-energy-transition/	Stable regulation essential to deliver energy transition
 undated	https://www.cleanenergycouncil.org.au/news-resources	/ News and resources
-undated	https://www.cleanenergycouncil.org.au/	/ Home
 undated	https://www.cleanenergycouncil.org.au/news-resources/clean-energy-australia-2024-report	Find out more
 undated	https://www.cleanenergycouncil.org.au/news-resources/cec-response-to-energy-climate-change-ministerial-council-communique	Find out more
 undated	https://www.cleanenergycouncil.org.au/privacy-policy	Find out more
@@ -438,20 +425,14 @@ undated	https://www.cleanenergycouncil.org.au/news-resources/levelised-cost-of-e
 undated	https://www.cleanenergycouncil.org.au/news-resources/submission-to-bass-strait-proposed-offshore-wind-area	Find out more
 undated	https://www.cleanenergycouncil.org.au/news-resources/response-to-the-future-gas-strategy-consultation-paper	Find out more
 undated	https://www.cleanenergycouncil.org.au/news-resources/bridging-the-gap-to-82-renewable-electricity-generation-by-2030	Find out more
-undated	https://energyconsumersaustralia.com.au/news	https://energyconsumersaustralia.com.au/news
-undated	https://energyconsumersaustralia.com.au/news?sort_by=published_at&sort_order=DESC	Newest
-undated	https://energyconsumersaustralia.com.au/news?sort_by=published_at&sort_order=ASC	Oldest
-undated	https://energyconsumersaustralia.com.au/news?sort_by=title&sort_order=ASC	Title (A-Z)
-undated	https://energyconsumersaustralia.com.au/news?sort_by=title&sort_order=DESC	Title (Z-A)
-out_of_range	https://energyconsumersaustralia.com.au/news/what-small-businesses-telling-us-about-electrification-what-needs-change	What Small Businesses Telling Us About Electrification What Needs Change
-out_of_range	https://energyconsumersaustralia.com.au/news/smart-meter-real-time-data-decision-win-consumers-eca-says	Smart Meter Real Time Data Decision Win Consumers Eca Says
-undated	https://energyconsumersaustralia.com.au/news/media-release-gas-rule-change-significant-win-consumers-eca-says	Media Release Gas Rule Change Significant Win Consumers Eca Says
+undated	https://www.cleanenergycouncil.org.au/news-resources/australian-clean-energy-summit-2024-leads-the-nations-energy-conversation	Find out more
+undated	https://energyconsumersaustralia.com.au/news/what-small-businesses-telling-us-about-electrification-what-needs-change	What Small Businesses Telling Us About Electrification What Needs Change
+undated	https://energyconsumersaustralia.com.au/news/smart-meter-real-time-data-decision-win-consumers-eca-says	Smart Meter Real Time Data Decision Win Consumers Eca Says
+undated	https://energyconsumersaustralia.com.au/news/media-release-gas-rule-change-significant-win-consumers-eca-says	Gas Rule Change Significant Win Consumers Eca Says
 undated	https://energyconsumersaustralia.com.au/news/new-research-underlines-need-minimum-energy-efficiency-standards-australias-rental-properties	New Research Underlines Need Minimum Energy Efficiency Standards Australias Rental Properties
 undated	https://energyconsumersaustralia.com.au/news/ceo-november-2025	Ceo November 2025
 undated	https://energyconsumersaustralia.com.au/news/ceo-october-2025	Ceo October 2025
-undated	https://energyconsumersaustralia.com.au/news/new-grants-supporting-better-energy-outcomes-consumers	New Grants Supporting Better Energy Outcomes Consumers
-undated	https://energyconsumersaustralia.com.au/news/simplicity-doesnt-equal-higher-engagement	Simplicity Doesnt Equal Higher Engagement
-per_domain_cap	https://www.aemc.gov.au/news-centre/media-releases/aemc-proposes-improvements-life-support-customer-processes	AEMC proposes improvements to life support customer processes
+per_domain_cap	https://www.aemc.gov.au/news-centre/media-releases/new-version-89-national	New Version 89 of the National
 undated	https://www.ifrs.org/content/ifrs/home/groups/international-sustainability-standards-board.html	International Sustainability Standards Board
 undated	https://www.ifrs.org/content/ifrs/home/projects/work-plan.html	The work plan
 deny_title_regex	https://www.ifrs.org/news-and-events/updates/issb/	Cookie details
@@ -498,7 +479,6 @@ out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb
 out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
 out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
 deny_title_regex	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
-deny_title_regex	https://www.ifrs.org/news-and-events/news/	Cookie details
 undated	https://www.efrag.org/en	https://www.efrag.org/en
 undated	https://www.efrag.org/en/updates	the EFRAG Update
 deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-31-march-2026	EFRAG SR TEG Online Meeting 31 March 2026
@@ -521,9 +501,6 @@ out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-runs-the-20km
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-endorsement-status-report-update-59	EFRAG Endorsement Status Report - Update
 deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-26-february-2026	EFRAG FRB Online Meeting - 26 February 2026
 deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-11-february-2026	EFRAG FR TEG Online Meeting - 11 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/strengthening-global-standards-on-workers-rights-and-protection-efrags-comment-letter-to-gri-now	Strengthening global standards on workers’ rights and protection: EFRAG’s comment letter to GRI now available
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/contribute-to-europes-sme-sustainability-journey-share-your-vsme-sustainability-report-with-efrag	Contribute to Europe’s SME Sustainability Journey: Share Your VSME Sustainability Report with EFRAG
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-welcomes-a-new-friend-of-efrag-sustainability-reporting-synesgy	EFRAG Welcomes a New Friend of EFRAG - Sustainability Reporting: Synesgy
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/new-composition-of-the-efrag-user-panel	New composition of the EFRAG User Panel
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/new-efrag-update-podcast-episode-available-december-2025-january-2026-edition	New EFRAG Update Podcast Episode Available: December 2025 & January 2026 Edition
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-administrative-board-online-meeting-17-march-2026	EFRAG Administrative Board Online Meeting - 17 March 2026
@@ -573,7 +550,6 @@ out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb
 out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
 out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
 deny_title_regex	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
-deny_title_regex	https://www.ifrs.org/news-and-events/news/	Cookie details
 undated	https://www.efrag.org/en	https://www.efrag.org/en
 undated	https://www.efrag.org/en/updates	the EFRAG Update
 deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-sr-teg-online-meeting-31-march-2026	EFRAG SR TEG Online Meeting 31 March 2026
@@ -596,14 +572,10 @@ out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-runs-the-20km
 out_of_range	https://www.efrag.org/en/news-and-calendar/news/efrag-endorsement-status-report-update-59	EFRAG Endorsement Status Report - Update
 deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-frb-online-meeting-26-february-2026	EFRAG FRB Online Meeting - 26 February 2026
 deny_title_regex	https://www.efrag.org/en/news-and-calendar/news/efrag-fr-teg-online-meeting-11-february-2026	EFRAG FR TEG Online Meeting - 11 February 2026
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/strengthening-global-standards-on-workers-rights-and-protection-efrags-comment-letter-to-gri-now	Strengthening global standards on workers’ rights and protection: EFRAG’s comment letter to GRI now available
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/contribute-to-europes-sme-sustainability-journey-share-your-vsme-sustainability-report-with-efrag	Contribute to Europe’s SME Sustainability Journey: Share Your VSME Sustainability Report with EFRAG
-per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-welcomes-a-new-friend-of-efrag-sustainability-reporting-synesgy	EFRAG Welcomes a New Friend of EFRAG - Sustainability Reporting: Synesgy
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/new-composition-of-the-efrag-user-panel	New composition of the EFRAG User Panel
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/new-efrag-update-podcast-episode-available-december-2025-january-2026-edition	New EFRAG Update Podcast Episode Available: December 2025 & January 2026 Edition
 per_domain_cap	https://www.efrag.org/en/news-and-calendar/news/efrag-administrative-board-online-meeting-17-march-2026	EFRAG Administrative Board Online Meeting - 17 March 2026
 domain_deny_substring	https://arena.gov.au/funding/	Back to top
-undated	https://arena.gov.au/	Home
 undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
 evergreen_program_page	https://arenanet.arena.gov.au/s/funding-advice	here
 domain_deny_substring	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
@@ -613,7 +585,6 @@ domain_deny_substring	https://arena.gov.au/funding/future-made-in-australia-inno
 domain_deny_substring	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
 domain_deny_substring	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
 domain_deny_substring	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
-undated	https://arena.gov.au/news	Funding Opportunities
 domain_deny_substring	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
 domain_deny_substring	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
 domain_deny_substring	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
@@ -652,7 +623,6 @@ domain_deny_substring	https://arena.gov.au/funding/the-australian-centre-for-ren
 domain_deny_substring	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
 domain_deny_substring	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
 domain_deny_substring	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
-undated	https://arena.gov.au/news/	Back to top
 undated	https://about.bnef.com/insights/type/report/	All Reports
 undated	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/	REPORT Electric Vehicle Outlook
 undated	https://about.bnef.com/insights/commodities/transition-metal-outlook/	REPORT Transition Metals Outlook
@@ -708,18 +678,14 @@ out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb
 out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
 out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
 deny_title_regex	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
-out_of_range	https://www.rba.gov.au/publications/smp/	Statement on Monetary Policy
-generic_title	https://www.rba.gov.au/publications/bulletin/	Bulletin
-undated	https://www.rba.gov.au/publications/rdp/	Research Discussion Papers
-undated	https://www.rba.gov.au/publications/confs/	Conferences
-out_of_range	https://www.rba.gov.au/publications/workshops/	Workshops
-out_of_range	https://www.rba.gov.au/publications/annual-reports/rba/	RBA Annual Report
-out_of_range	https://www.rba.gov.au/publications/annual-reports/psb/	PSB Annual Report
-undated	https://www.rba.gov.au/about-rba/corporate-plan	Corporate Plan
-out_of_range	https://www.rba.gov.au/publications/technical-notes/	Technical Notes
-out_of_range	https://www.rba.gov.au/publications/submissions/	Submissions
-out_of_range	https://www.rba.gov.au/publications/consultations/	Consultations
-undated	https://www.rba.gov.au/payments-and-infrastructure/financial-market-infrastructure/assessments/	Payments and Market Infrastructure Assessments
+undated	https://www.rba.gov.au/schedules-events/calendar/	See the publishing schedule
+undated	https://www.rba.gov.au/fin-stability/about.html	Explainer: What is Financial Stability?
+undated	https://www.rba.gov.au/education/resources/in-a-nutshell/pdf/financial-stability.pdf	In a Nutshell: Financial Stability
+undated	https://www.rba.gov.au/education/resources/videos.html	Watch videos about the financial system
+out_of_range	https://www.rba.gov.au/publications/smp/2026/feb/	Read the latest Statement on Monetary Policy
+undated	https://www.rba.gov.au/schedules-events/calendar/?topics=publications	See the publishing schedule
+undated	https://www.rba.gov.au/education/resources/explainers/what-is-monetary-policy.html	Explainer: What is Monetary Policy?
+undated	https://www.rba.gov.au/education/resources/explainers/how-rba-implements-monetary-policy.html	Explainer: How the Reserve Bank Implements Monetary Policy
 undated	https://igcc.org.au/supercharging-australias-future-igccs-policy-priorities/	Supercharging Australia’s Future: IGCC’s Policy Priorities
 undated	https://igcc.org.au/market/australia/	Australia
 undated	https://igcc.org.au/workstream/policy-advocacy/	Policy & Advocacy
@@ -740,8 +706,13 @@ undated	https://igcc.org.au/working_group/climate-solutions-swg/	Climate Solutio
 undated	https://igcc.org.au/australian-cop-president-negotiations-has-potential-for-economic-wins/	Australian COP President (Negotiations) has Potential for Economic Wins
 undated	https://igcc.org.au/igccs-climate-leaders-awards-go-to-john-thwaites-alison-ewings-ros-mckay-and-rick-walters/	IGCC’s Climate Leaders’ Awards go to John Thwaites, Alison Ewings, Ros McKay and Rick Walters
 undated	https://igcc.org.au/working_group/investor-practice/	Investor Practice Working Group
+low_substance	https://www.esgtoday.com/terraspark-raises-e5-4-million-to-provide-solar-power-from-space/	TerraSpark Raises €5.4 Million to Provide Solar Power from Space
+low_substance	https://www.esgtoday.com/enervenue-raises-300-million-to-scale-lithium-free-energy-storage-solution/	EnerVenue Raises $300 Million to Scale Lithium-Free Energy Storage Solutions
+low_substance	https://www.esgtoday.com/emerald-ai-raises-25-million-to-align-data-center-energy-use-with-grid-capacity/	Emerald AI Raises $25 Million to Align Data Center Energy Use with Grid Capacity
+low_substance	https://www.esgtoday.com/eu-commission-launches-first-of-planned-ets-reforms-amid-industry-pressure/	EU Commission Launches First of Planned ETS Carbon Market Reforms Amid Industry Pressure
+per_domain_cap	https://www.esgtoday.com/google-signs-long-term-deal-with-amex-gbt-shell-saf-platform/	Google Signs Long-Term Deal with Amex GBT, Shell SAF Platform
+per_domain_cap	https://www.esgtoday.com/nestle-launches-project-to-improve-human-rights-in-coffee-supply-chain/	Nestlé Launches Project to Improve Human Rights in the Coffee Supply Chain
 domain_deny_substring	https://arena.gov.au/funding/	Back to top
-undated	https://arena.gov.au/	Home
 undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
 evergreen_program_page	https://arenanet.arena.gov.au/s/funding-advice	here
 domain_deny_substring	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
@@ -751,7 +722,6 @@ domain_deny_substring	https://arena.gov.au/funding/future-made-in-australia-inno
 domain_deny_substring	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
 domain_deny_substring	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
 domain_deny_substring	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
-undated	https://arena.gov.au/news	Funding Opportunities
 domain_deny_substring	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
 domain_deny_substring	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
 domain_deny_substring	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
@@ -790,7 +760,6 @@ domain_deny_substring	https://arena.gov.au/funding/the-australian-centre-for-ren
 domain_deny_substring	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
 domain_deny_substring	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
 domain_deny_substring	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
-undated	https://arena.gov.au/news/	Back to top
 undated	https://about.bnef.com/insights/type/report/	All Reports
 undated	https://about.bnef.com/insights/clean-transport/electric-vehicle-outlook-2024/	REPORT Electric Vehicle Outlook
 undated	https://about.bnef.com/insights/commodities/transition-metal-outlook/	REPORT Transition Metals Outlook
@@ -846,18 +815,14 @@ out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb
 out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-july-2022.html	ISSB Update July 2022
 out_of_range	https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2022/issb-update-december-2022.html	ISSB Update December 2022
 deny_title_regex	https://www.ifrs.org/content/ifrs/home/legal/privacy.html	privacy policy
-out_of_range	https://www.rba.gov.au/publications/smp/	Statement on Monetary Policy
-generic_title	https://www.rba.gov.au/publications/bulletin/	Bulletin
-undated	https://www.rba.gov.au/publications/rdp/	Research Discussion Papers
-undated	https://www.rba.gov.au/publications/confs/	Conferences
-out_of_range	https://www.rba.gov.au/publications/workshops/	Workshops
-out_of_range	https://www.rba.gov.au/publications/annual-reports/rba/	RBA Annual Report
-out_of_range	https://www.rba.gov.au/publications/annual-reports/psb/	PSB Annual Report
-undated	https://www.rba.gov.au/about-rba/corporate-plan	Corporate Plan
-out_of_range	https://www.rba.gov.au/publications/technical-notes/	Technical Notes
-out_of_range	https://www.rba.gov.au/publications/submissions/	Submissions
-out_of_range	https://www.rba.gov.au/publications/consultations/	Consultations
-undated	https://www.rba.gov.au/payments-and-infrastructure/financial-market-infrastructure/assessments/	Payments and Market Infrastructure Assessments
+undated	https://www.rba.gov.au/schedules-events/calendar/	See the publishing schedule
+undated	https://www.rba.gov.au/fin-stability/about.html	Explainer: What is Financial Stability?
+undated	https://www.rba.gov.au/education/resources/in-a-nutshell/pdf/financial-stability.pdf	In a Nutshell: Financial Stability
+undated	https://www.rba.gov.au/education/resources/videos.html	Watch videos about the financial system
+out_of_range	https://www.rba.gov.au/publications/smp/2026/feb/	Read the latest Statement on Monetary Policy
+undated	https://www.rba.gov.au/schedules-events/calendar/?topics=publications	See the publishing schedule
+undated	https://www.rba.gov.au/education/resources/explainers/what-is-monetary-policy.html	Explainer: What is Monetary Policy?
+undated	https://www.rba.gov.au/education/resources/explainers/how-rba-implements-monetary-policy.html	Explainer: How the Reserve Bank Implements Monetary Policy
 undated	https://igcc.org.au/supercharging-australias-future-igccs-policy-priorities/	Supercharging Australia’s Future: IGCC’s Policy Priorities
 undated	https://igcc.org.au/market/australia/	Australia
 undated	https://igcc.org.au/workstream/policy-advocacy/	Policy & Advocacy
@@ -878,83 +843,29 @@ undated	https://igcc.org.au/working_group/climate-solutions-swg/	Climate Solutio
 undated	https://igcc.org.au/australian-cop-president-negotiations-has-potential-for-economic-wins/	Australian COP President (Negotiations) has Potential for Economic Wins
 undated	https://igcc.org.au/igccs-climate-leaders-awards-go-to-john-thwaites-alison-ewings-ros-mckay-and-rick-walters/	IGCC’s Climate Leaders’ Awards go to John Thwaites, Alison Ewings, Ros McKay and Rick Walters
 undated	https://igcc.org.au/working_group/investor-practice/	Investor Practice Working Group
-undated	https://arena.gov.au/news/	Back to top
-undated	https://arena.gov.au/	Home
+low_substance_relaxed	https://www.esgtoday.com/terraspark-raises-e5-4-million-to-provide-solar-power-from-space/	TerraSpark Raises €5.4 Million to Provide Solar Power from Space
+low_substance_relaxed	https://www.esgtoday.com/enervenue-raises-300-million-to-scale-lithium-free-energy-storage-solution/	EnerVenue Raises $300 Million to Scale Lithium-Free Energy Storage Solutions
+low_substance_relaxed	https://www.esgtoday.com/emerald-ai-raises-25-million-to-align-data-center-energy-use-with-grid-capacity/	Emerald AI Raises $25 Million to Align Data Center Energy Use with Grid Capacity
+low_substance_relaxed	https://www.esgtoday.com/eu-commission-launches-first-of-planned-ets-reforms-amid-industry-pressure/	EU Commission Launches First of Planned ETS Carbon Market Reforms Amid Industry Pressure
+per_domain_cap	https://www.esgtoday.com/google-signs-long-term-deal-with-amex-gbt-shell-saf-platform/	Google Signs Long-Term Deal with Amex GBT, Shell SAF Platform
+per_domain_cap	https://www.esgtoday.com/nestle-launches-project-to-improve-human-rights-in-coffee-supply-chain/	Nestlé Launches Project to Improve Human Rights in the Coffee Supply Chain
+not_in_allowlist	https://www.startupdaily.net/advice/opinion/anthropic-has-come-to-copyright-epiphany-after-claude-code-leak/	Anthropic has ‘come to copyright’ epiphany after Claude code leak
+not_in_allowlist	https://www.startupdaily.net/advice/opinion/should-startup-founders-become-angel-investors/	Should startup founders become angel investors?
 undated	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
 undated	https://www.newenergynexus.com/impact/	Explore impact
 undated	https://www.newenergynexus.com/portfolio/	View our portfolio
 undated	https://www.newenergynexus.com/news-and-stories/	News & Stories
-undated	https://arena.gov.au/news/	Back to top
-undated	https://arena.gov.au/	Home
+low_substance	https://www.esgtoday.com/terraspark-raises-e5-4-million-to-provide-solar-power-from-space/	TerraSpark Raises €5.4 Million to Provide Solar Power from Space
+low_substance	https://www.esgtoday.com/enervenue-raises-300-million-to-scale-lithium-free-energy-storage-solution/	EnerVenue Raises $300 Million to Scale Lithium-Free Energy Storage Solutions
+low_substance	https://www.esgtoday.com/emerald-ai-raises-25-million-to-align-data-center-energy-use-with-grid-capacity/	Emerald AI Raises $25 Million to Align Data Center Energy Use with Grid Capacity
+low_substance	https://www.esgtoday.com/eu-commission-launches-first-of-planned-ets-reforms-amid-industry-pressure/	EU Commission Launches First of Planned ETS Carbon Market Reforms Amid Industry Pressure
+not_in_allowlist	https://www.startupdaily.net/advice/opinion/anthropic-has-come-to-copyright-epiphany-after-claude-code-leak/	Anthropic has ‘come to copyright’ epiphany after Claude code leak
+not_in_allowlist	https://www.startupdaily.net/advice/opinion/should-startup-founders-become-angel-investors/	Should startup founders become angel investors?
 undated	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
 undated	https://www.newenergynexus.com/impact/	Explore impact
 undated	https://www.newenergynexus.com/portfolio/	View our portfolio
 undated	https://www.newenergynexus.com/news-and-stories/	News & Stories
-undated	https://arena.gov.au/news/	Back to top
-undated	https://arena.gov.au/	Home
-undated	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
-undated	https://www.newenergynexus.com/impact/	Explore impact
-undated	https://www.newenergynexus.com/portfolio/	View our portfolio
-undated	https://www.newenergynexus.com/news-and-stories/	News & Stories
-undated_last_resort	https://arena.gov.au/news/	Back to top
-undated_last_resort	https://arena.gov.au/	Home
-undated_last_resort	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
-undated_last_resort	https://www.newenergynexus.com/impact/	Explore impact
-undated_last_resort	https://www.newenergynexus.com/portfolio/	View our portfolio
-undated_last_resort	https://www.newenergynexus.com/news-and-stories/	News & Stories
-too_stale_last_resort	https://www.afr.com	Why start-ups cannot get their hands on green subsidies - AFR
-too_stale_last_resort	https://www.smartcompany.com.au	Samsara Eco to Amber Electric: The 39 climate tech startups tipped to be the next Aussie unicorns - SmartCompany
-too_stale_last_resort	https://news.crunchbase.com	Innovation Policies: The Australian Lesson Focusing Startup Investments On A Few Strategic Sectors - news.crunchbase.com
-too_stale_last_resort	https://www.techinasia.com	Australian cleantech startup RayGen bags $79.8m series D - Tech in Asia
-too_stale_last_resort	https://www.smartcompany.com.au	Queensland startup funding bounces back with $417 million raised over financial year - SmartCompany
-out_of_range_last_resort	https://arena.gov.au	Don’t Miss Out on This Year’s Innovation Bay - Australian Renewable Energy Agency (ARENA)
-too_stale_last_resort	https://www.greenqueen.com.hk	Wildfire Energy: Australian Cleantech Startup Turns Waste Into Renewables - Green Queen Media
-too_stale_last_resort	https://hivelife.com	Australian Government Supports CleanTech Startup Accelerator EnergyLab with US$1.64 Million Grant - Hive Life Magazine
-too_stale_last_resort	https://investingnews.com	From Policy Shifts to Breakthroughs: Cleantech Market Update for Q1 2025 - Investing News Network
-too_stale_last_resort	https://www.energymagazine.com.au	ARENA spotlights innovative renewable startups - Energy Magazine
-too_stale_last_resort	https://www.startupdaily.net	ARENA powers up clean tech startup Orkestra with $2.77 million for EV charger plans - Startup Daily
-too_stale_last_resort	https://www.afr.com	Aussie tech’s climate crisis as start-ups face capital crunch - AFR
-too_stale_last_resort	https://www.smartcompany.com.au	Wollongong green hydrogen startup Hysata raises $172 million in Series B funding - SmartCompany
-too_stale_last_resort	https://www.startupdaily.net	Why Singapore is Australia’s Silicon Valley for climate tech founders - Startup Daily
-too_stale_last_resort	https://www.smartcompany.com.au	Australia well placed to lure US clean tech investment - SmartCompany
-too_stale_last_resort	https://www.startupdaily.net	Series A-focused climate tech VC hits $50 million for fund’s 1st close - Startup Daily
-too_stale_last_resort	https://www.smartcompany.com.au	Nine Aussie startups that raised $233.5 million this week - SmartCompany
-too_stale_last_resort	https://www.startupdaily.net	Australia's leading sustainability VCs are gathering in Melbourne for the Climate Investor Forum - Startup Daily
-too_stale_last_resort	https://www.startupdaily.net	MGA Thermal recharges pre-Series B again with $200,000 from Electrifi Ventures - Startup Daily
-too_stale_last_resort	https://www.theaustralian.com.au	Tritium co-founder takes a punt on new green finance venture - theaustralian.com.au
-too_stale_last_resort	https://www.smartcompany.com.au	Interested in crowdfunding? Here's how to identify promising eco-friendly investment opportunities - SmartCompany
-too_stale_last_resort	https://www.startupdaily.net	SaaS startup Capsifi banks $11 million from government-backed investor the Australian Business Growth Fund - Startup Daily
-too_stale_last_resort	https://www.startupdaily.net	Green hydrogen startup Hysata pockets record $172 million Series B - Startup Daily
-too_stale_last_resort	https://www.startupdaily.net	GLOBAL CHARGE: Brisbane clean tech startup EVOS Energy breaks into India with export grant - Startup Daily
-too_stale_last_resort	https://www.startupdaily.net	Melt Ventures launches $20 million Advanced Manufacturing Venture Fund - Startup Daily
-too_stale_last_resort	https://www.startupdaily.net	‘There’s huge demand’: FootprintLab seizes the fintech opportunity in India - Startup Daily
-too_stale_last_resort	https://cfotech.com.au	Hadean Energy's hydrogen tech named global New Energy finalist - CFOtech Australia
-too_stale_last_resort	https://investingnews.com	Discover the Top 10 ASX Cleantech Stocks for Sustainable Investing - Investing News Network
-too_stale_last_resort	https://www.esgtoday.com	Green Hydrogen Startup Hysata Raises $111 Million - ESG Today
-too_stale_last_resort	https://www.smartcompany.com.au	EcoJoule Energy lands $15 million to power smart grid and battery tech - SmartCompany
-too_stale_last_resort	https://reneweconomy.com.au	EnergyLab joins forces with New Energy Nexus to “set loose” Australian innovation - Renew Economy
-too_stale_last_resort	https://hivelife.com	8 Sustainability Startups in Australia to Watch - Hive Life Magazine
-too_stale_last_resort	https://www.forbes.com.au	Surprising way this clean-tech startup plans to capture a billion tonnes of CO2 by 2040 - Forbes Australia
-too_stale_last_resort	https://www.nzte.govt.nz	New Zealand Cleantech Startups Making Global Waves - NZTE
-too_stale_last_resort	https://www.startupdaily.net	Nominations for the 2024 Startup Daily Best in Tech Awards are now open - Startup Daily
-too_stale_last_resort	https://www.startupdaily.net	Flexicar founder and Wavemaker Impact investor Monique Conheady joins Hysata Board - Startup Daily
-too_stale_last_resort	https://www.canarymedia.com	The cleantech companies that didn’t make it through 2024 - Canary Media
-too_stale_last_resort	https://techcrunch.com	Australian clean tech Endua fixes renewable energy’s intermittency problem - TechCrunch
-too_stale_last_resort	https://vocal.media	Australia Venture Capital Market: Growth, Trends, and Regional Reach - vocal.media
-too_stale_last_resort	https://im-mining.com	RHI Magnesita to use MCi Carbon’s CCUS technology at refractory operations - International Mining
-too_stale_last_resort	https://agfundernews.com	The good oil: Australian innovation delivers game-changing alternatives to petroleum & palm - AgFunderNews
-too_stale_last_resort	https://www.smartcompany.com.au	Six Aussie startups that raised $56 million this week - SmartCompany
-too_stale_last_resort	https://www.smh.com.au	Charged up: Power startups say their time has come - SMH.com.au
-too_stale_last_resort	https://www.startupdaily.net	WA startup ULUU raises A$1.3M to replace plastic with a biodegradable alternative made from seaweed - Startup Daily
-too_stale_last_resort	https://reneweconomy.com.au	EnergyLab angel investor group backs Sydney IoT start-up Symbiot - Renew Economy
-too_stale_last_resort	https://www.startupdaily.net	Nothing ventured, plenty gained: EV charging startup Jolt borrows $214 million for Canada roll out - Startup Daily
-too_stale_last_resort	https://www.kedglobal.com	Shinhan, POSCO invest $20 mn in Australian hydrogen startup Hysata - KED Global
-too_stale_last_resort	https://www.afr.com	Singapore, Apple legends back $250m Aussie start up fund - AFR
-too_stale_last_resort	https://news.crunchbase.com	Hydrogen Startup Funding Continues To Boom - news.crunchbase.com
-too_stale_last_resort	https://news.crunchbase.com	Sustainability-Focused Startup Equity Funding Fell In H1 2024 - news.crunchbase.com
-too_stale_last_resort	https://anthillonline.com	The Entrepreneur vs. Venture Capitalist - - Anthill Magazine
-too_stale_last_resort	https://www.nucamp.co	Inside Australia's Thriving Tech Hub: Startups and Success Stories - nucamp.co
-too_stale_last_resort	https://news.crunchbase.com	Aerial Robotics Startup Infravision Raises $91M Series B As Funding To Sector Surges - news.crunchbase.com
-too_stale_last_resort	https://siliconcanals.com	Smart electric bike startup Cowboy breaks records, becomes Crowdcube’s most successful cleantech campaign - Silicon Canals
-too_stale_last_resort	https://www.techcircle.in	Urban Company buys Australian on-demand beauty startup Glamazon - Techcircle
-too_stale_last_resort	https://energy.economictimes.indiatimes.com	India set to attract over ₹8,000 crore investment in energy storage, EV, green hydrogen at IESW 2025 - ET EnergyWorld
+low_substance_relaxed	https://www.esgtoday.com/terraspark-raises-e5-4-million-to-provide-solar-power-from-space/	TerraSpark Raises €5.4 Million to Provide Solar Power from Space
+low_substance_relaxed	https://www.esgtoday.com/enervenue-raises-300-million-to-scale-lithium-free-energy-storage-solution/	EnerVenue Raises $300 Million to Scale Lithium-Free Energy Storage Solutions
+low_substance_relaxed	https://www.esgtoday.com/emerald-ai-raises-25-million-to-align-data-center-energy-use-with-grid-capacity/	Emerald AI Raises $25 Million to Align Data Center Energy Use with Grid Capacity
+low_substance_relaxed	https://www.esgtoday.com/eu-commission-launches-first-of-planned-ets-reforms-amid-industry-pressure/	EU Commission Launches First of Planned ETS Carbon Market Reforms Amid Industry Pressure

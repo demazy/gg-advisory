@@ -1,70 +1,77 @@
 # March 2026
 
 **Top Lines**
-- AEMC proposes new grid standards for data centres, feedback due by 7 May 2026.
-- Battery rebates change on 1 May 2026, affecting installation costs significantly.
-- EFRAG calls for interest in voluntary sustainability reporting, deadline 20 April 2026.
+- AEMC finalises national framework for gas network abolishment, effective 2027
+- New photo requirements for solar battery installations under SRES from 1 March 2026
+- EFRAG calls for SME sustainability reports by 31 July 2026
 
 ---
 
 ## Energy Transition
 
-**AEMC proposes new grid standards for data centre connections**
-Published: 12 March 2026  
-Summary: The Australian Energy Market Commission (AEMC) has proposed new technical standards for large data centres connecting to the National Electricity Market. The draft rule raises the threshold for large inverter-based loads from 5 MW to 30 MW, aligning standards with those in Texas, Ireland, and Finland. Stakeholder feedback is sought by 7 May 2026.  
-Why it matters: Data centre operators in Australia must prepare for compliance with new grid standards, impacting investment and operational strategies.  
-Signals to watch: Final rule expected mid-2026 after stakeholder feedback.  
-Source: [AEMC](https://www.aemc.gov.au/news-centre/media-releases/aemc-proposes-new-grid-standards-data-centre-connections)
+**AEMC Proposes Improvements for Life Support Customers**
+Published: 5 March 2026  
+Summary: The Australian Energy Market Commission (AEMC) has issued a draft determination to enhance registration and communication processes for life support customers. Key changes include streamlined registration managed by retailers, annual check-ins, and improved communication options. Over 225,000 Australians are registered for life support protections. Feedback on the draft is open until 16 April 2026, with a final decision expected in June 2026.  
+Why it matters: Energy retailers and networks must prepare for new compliance obligations by June 2026, affecting customer communication and data management.  
+Signals to watch: Final decision on the draft determination expected in June 2026.  
+Source: [AEMC](https://www.aemc.gov.au/news-centre/media-releases/aemc-proposes-improvements-life-support-customer-processes)
 
-**Battery Rebates Are Changing 1 May 2026**
-Published: 1 March 2026  
-Summary: The Clean Energy Regulator (CER) will adjust the Cheaper Home Batteries Program rebates based on battery size from 1 May 2026. The STC factor will vary, with 100% applied up to 14 kWh, 60% for 14-28 kWh, and 15% for 28-50 kWh. Retailers must provide accurate quotes reflecting these changes.  
-Why it matters: Retailers and installers must adjust pricing strategies and inform customers of significant cost differences due to rebate changes.  
-Signals to watch: CER will monitor compliance and safety in installations post-1 May 2026.  
-Source: [CER](https://www.cer.gov.au/news-and-media/media/2026/march/battery-rebates-are-changing-1-may-2026)
+**AEMC Finalises Rules for Gas Network Abolishment**
+Published: 2 April 2026  
+Summary: The AEMC has established Australia's first national framework for gas connection abolishment, addressing the projected 80% decline in gas demand over two decades. The rules, effective from 2027, include clear definitions, cost structures, and information requirements, ensuring cost-reflective charging for abolishment services.  
+Why it matters: Boards of energy companies must assess the financial impact of declining gas demand and prepare for phased implementation from 2027.  
+Signals to watch: Implementation phases begin 1 October 2026 for distributors, with retailers following by January 2027.  
+Source: [AEMC](https://www.aemc.gov.au/news-centre/media-releases/aemc-finalises-rules-customers-leaving-gas-network)
 
-**AEMC proposes gas network regulatory reforms**
-Published: 19 March 2026  
-Summary: The AEMC has released a Directions Paper proposing updates to the regulation of gas distribution networks. The reforms aim to address cost recovery and tariff design amidst declining gas demand. Stakeholder feedback is due by 30 April 2026.  
-Why it matters: Gas network operators and consumers must prepare for potential changes in cost structures and tariffs.  
-Signals to watch: Draft Determination and Draft Rule expected in August 2026.  
-Source: [AEMC](https://www.aemc.gov.au/news-centre/media-releases/aemc-proposes-gas-network-regulatory-reforms)
+**New Solar Battery Photo Requirements Now in Place**
+Published: 2 March 2026  
+Summary: The Clean Energy Regulator mandates photo evidence of compliant labelling for solar battery installations under the Small-scale Renewable Energy Scheme (SRES), effective 1 March 2026. Non-compliance may lead to delayed processing or rejection of certificate claims.  
+Why it matters: Solar installers must update compliance processes immediately to avoid financial penalties and ensure timely certificate processing.  
+Signals to watch: Ongoing analysis of inspection results to identify common issues and risks.  
+Source: [CER](https://www.cer.gov.au/news-and-media/news/2026/march/new-solar-battery-photo-requirements-now-place)
+
+**Phenix Trading's Registration Permanently Suspended**
+Published: 10 March 2026  
+Summary: The Clean Energy Regulator has permanently suspended Phenix Trading Pty Ltd's registration under the Renewable Energy (Electricity) Act 2000 due to non-compliance with energy efficiency schemes in NSW and Victoria. This prevents Phenix Trading from creating renewable energy certificates.  
+Why it matters: Companies participating in the SRES must ensure compliance with all regulatory requirements to avoid similar suspensions.  
+Signals to watch: Monitor CER's enforcement actions and updates on registered agents.  
+Source: [CER](https://www.cer.gov.au/news-and-media/news/2026/march/phenix-tradings-registration-permanently-suspended)
 
 ---
 
 ## ESG Reporting
 
-**ISSB Update March 2026**
-Published: 1 March 2026  
-Summary: The International Sustainability Standards Board (ISSB) discussed incremental requirements for disclosing nature-related risks and opportunities. The guidance will be specific to these risks and will be included in an upcoming exposure draft.  
-Why it matters: Australian companies should prepare for potential new disclosure requirements on nature-related risks, impacting strategy and reporting.  
-Signals to watch: ISSB to continue discussions and develop proposals for the exposure draft.  
-Source: [IFRS](https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-march-2026.html)
+**EFRAG Strengthens Global Standards on Workers’ Rights**
+Published: 19 March 2026  
+Summary: EFRAG has issued a comment letter supporting GRI's updates to labour standards, focusing on interoperability with ESRS. The letter highlights the need for alignment on definitions and the scope of the Labour Rights in Business Relationships standard.  
+Why it matters: Australian companies reporting under ESRS should anticipate potential updates aligning with GRI standards, impacting sustainability reporting practices.  
+Signals to watch: Further announcements from EFRAG on interoperability enhancements.  
+Source: [EFRAG](https://www.efrag.org/en/news-and-calendar/news/strengthening-global-standards-on-workers-rights-and-protection-efrags-comment-letter-to-gri-now)
 
-**EFRAG launches a call for expression of interest on voluntary sustainability reporting**
-Published: 24 March 2026  
-Summary: EFRAG invites non-SME companies outside the CSRD scope to participate in activities related to a new Voluntary Standard (VS). Applications are open until 20 April 2026.  
-Why it matters: Australian companies with EU operations should consider engaging with EFRAG to influence the development of voluntary sustainability standards.  
-Signals to watch: European Commission expected to issue the VS as a Delegated Act later in 2026.  
-Source: [EFRAG](https://www.efrag.org/en/news-and-calendar/news/efrag-launches-a-call-for-expression-of-interest-on-voluntary-sustainability-reporting-by-nonsme)
+**Contribute to Europe’s SME Sustainability Journey**
+Published: 6 March 2026  
+Summary: EFRAG invites SMEs to submit sustainability reports using the VSME Standard by 31 July 2026. This initiative aims to identify emerging practices and support the VSME Ecosystem 2026.  
+Why it matters: Australian SMEs with European operations should consider participating to influence future sustainability reporting standards.  
+Signals to watch: Publication of key findings from the VSME Ecosystem 2026 initiative in Autumn 2026.  
+Source: [EFRAG](https://www.efrag.org/en/news-and-calendar/news/contribute-to-europes-sme-sustainability-journey-share-your-vsme-sustainability-report-with-efrag)
 
 ---
 
 ## Sustainable Finance & Investment
 
-**Financial Stability Review**
-Published: 19 March 2026  
-Summary: The RBA's Financial Stability Review assesses global and domestic macrofinancial environments, highlighting potential risks to financial stability. It examines the resilience of households, businesses, and financial institutions.  
-Why it matters: Australian financial institutions and investors should evaluate their exposure to identified risks and adjust strategies accordingly.  
-Signals to watch: Next FSR publication on 1 October 2026.  
-Source: [RBA](https://www.rba.gov.au/publications/fsr/)
-
-**News - Investor Group on Climate Change**
+**Toyota to Join Volvo, Daimler Hydrogen Fuel Cell JV**
 Published: 31 March 2026  
-Summary: The Investor Group on Climate Change (IGCC) focuses on mobilising capital for clean energy and climate resilience. The group represents investors managing over $4.6 trillion.  
-Why it matters: Australian investors should align portfolios with IGCC's climate resilience strategies to mitigate long-term financial risks.  
-Signals to watch: IGCC's ongoing initiatives and policy engagements in the Asia Pacific region.  
-Source: [IGCC](https://igcc.org.au/news/)
+Summary: Toyota plans to join Volvo Group and Daimler Truck in a hydrogen fuel cell joint venture, aiming to accelerate the development of hydrogen-powered vehicles. This collaboration could enhance the commercial viability of hydrogen technology in the automotive sector.  
+Why it matters: Investors in automotive and hydrogen sectors should evaluate the potential impact on market dynamics and investment opportunities.  
+Signals to watch: Official confirmation and details of Toyota's involvement in the joint venture.  
+Source: [ESG Today](https://www.esgtoday.com/toyota-plans-to-join-volvo-daimler-in-hydrogen-fuel-cell-jv/)
+
+**Google Signs Long-Term Deal with Amex GBT, Shell SAF Platform**
+Published: 31 March 2026  
+Summary: Google has entered a long-term agreement with American Express Global Business Travel and Shell Aviation to support sustainable aviation fuel (SAF) initiatives. This partnership aims to reduce carbon emissions in the travel sector and promote sustainable business practices.  
+Why it matters: Companies in the travel and aviation sectors should assess the implications of increased SAF adoption on their sustainability strategies and carbon reduction targets.  
+Signals to watch: Further developments in SAF partnerships and their impact on industry standards.  
+Source: [ESG Today](https://www.esgtoday.com/google-signs-long-term-deal-with-amex-gbt-shell-saf-platform/)
 
 ## Cleantech & Start-up Ecosystem — Grants & Accelerators Radar
 

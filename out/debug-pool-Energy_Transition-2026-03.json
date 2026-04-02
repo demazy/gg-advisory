@@ -1,17 +1,5 @@
 [
   {
-    "url": "https://www.aemc.gov.au/news-centre/media-releases",
-    "title": "Media Releases",
-    "summary": "",
-    "source": "AEMC",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
-  },
-  {
     "url": "https://www.aemc.gov.au/about-us/chair-and-commissioners",
     "title": "Chair and commissioners",
     "summary": "",
@@ -540,20 +528,20 @@
     "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/media-releases?title=&items_per_page=10&order=title&sort=asc",
-    "title": "Title",
+    "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-finalises-rules-customers-leaving-gas-network",
+    "title": "AEMC finalises rules for customers leaving the gas network",
     "summary": "",
     "source": "AEMC",
     "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
+    "published_iso": "2026-04-02T00:00:00+00:00",
+    "published_ts": 1775088000.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
     "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
   },
   {
-    "url": "https://www.aemc.gov.au/news-centre/media-releases?title=&items_per_page=10&order=created&sort=asc",
-    "title": "Date Sort ascending",
+    "url": "https://www.aemc.gov.au/rule-changes/establishing-regulatory-framework-retail-customer-initiated-gas-abolishment",
+    "title": "GRC0086",
     "summary": "",
     "source": "AEMC",
     "section": "Energy Transition",
@@ -758,30 +746,6 @@
   {
     "url": "https://www.aemc.gov.au/rule-changes/real-time-data-consumers-retail",
     "title": "RRC0057",
-    "summary": "",
-    "source": "AEMC",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
-  },
-  {
-    "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-undertake-critical-review-reconsider-role-electricity-networks-transition",
-    "title": "AEMC to undertake critical review to reconsider the role of electricity networks in the transition",
-    "summary": "",
-    "source": "AEMC",
-    "section": "Energy Transition",
-    "published_iso": "2025-12-18T00:00:00+00:00",
-    "published_ts": 1766016000.0,
-    "published_source": "meta",
-    "published_confidence": 0.75,
-    "index_url": "https://www.aemc.gov.au/news-centre/media-releases"
-  },
-  {
-    "url": "https://www.aemc.gov.au/market-reviews-advice/electricity-network-regulation-review",
-    "title": "EPR0106",
     "summary": "",
     "source": "AEMC",
     "section": "Energy Transition",
@@ -1248,30 +1212,6 @@
     "index_url": "https://www.aemc.gov.au/news-centre/speeches"
   },
   {
-    "url": "https://www.cer.gov.au/news-and-media/news",
-    "title": "https://www.cer.gov.au/news-and-media/news",
-    "summary": "",
-    "source": "cer.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
-  },
-  {
-    "url": "https://www.cer.gov.au/news-and-media/media-centre/media-releases",
-    "title": "media releases",
-    "summary": "",
-    "source": "cer.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.cer.gov.au/news-and-media/news"
-  },
-  {
     "url": "https://www.cer.gov.au/news-and-media/news/2026/march/phenix-tradings-registration-permanently-suspended",
     "title": "Phenix Tradings Registration Permanently Suspended",
     "summary": "",
@@ -1512,54 +1452,6 @@
     "index_url": "https://www.cer.gov.au/news-and-media/media-centre/media-releases"
   },
   {
-    "url": "https://arena.gov.au/news/",
-    "title": "Back to top",
-    "summary": "",
-    "source": "arena.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://arena.gov.au/news/"
-  },
-  {
-    "url": "https://arena.gov.au/",
-    "title": "Home",
-    "summary": "",
-    "source": "arena.gov.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://arena.gov.au/news/"
-  },
-  {
-    "url": "https://www.energynetworks.com.au/news/",
-    "title": "News",
-    "summary": "",
-    "source": "energynetworks.com.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.energynetworks.com.au/news/"
-  },
-  {
-    "url": "https://www.energynetworks.com.au/news/media-releases/",
-    "title": "See all Articles",
-    "summary": "",
-    "source": "energynetworks.com.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.energynetworks.com.au/news/"
-  },
-  {
     "url": "https://www.energynetworks.com.au/news/energy-insider/",
     "title": "See all Articles",
     "summary": "",
@@ -1586,18 +1478,6 @@
   {
     "url": "https://www.energynetworks.com.au/about/energy-networks-australia/media-enquiries/",
     "title": "Media enquiries",
-    "summary": "",
-    "source": "energynetworks.com.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.energynetworks.com.au/news/"
-  },
-  {
-    "url": "https://www.energynetworks.com.au",
-    "title": "News & Resources",
     "summary": "",
     "source": "energynetworks.com.au",
     "section": "Energy Transition",
@@ -1702,18 +1582,6 @@
     "published_source": "meta",
     "published_confidence": 0.75,
     "index_url": "https://www.energynetworks.com.au/news/"
-  },
-  {
-    "url": "https://www.energynetworks.com.au/resources/",
-    "title": "Resources",
-    "summary": "",
-    "source": "energynetworks.com.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.energynetworks.com.au/news/media-releases/"
   },
   {
     "url": "https://www.energynetworks.com.au/guidelines/",
@@ -2402,18 +2270,6 @@
   {
     "url": "https://www.cleanenergycouncil.org.au/news-resources",
     "title": "/ News and resources",
-    "summary": "",
-    "source": "cleanenergycouncil.org.au",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://www.cleanenergycouncil.org.au/news-resources"
-  },
-  {
-    "url": "https://www.cleanenergycouncil.org.au/",
-    "title": "/ Home",
     "summary": "",
     "source": "cleanenergycouncil.org.au",
     "section": "Energy Transition",
@@ -5400,68 +5256,32 @@
     "index_url": "https://www.cleanenergycouncil.org.au/news-resources"
   },
   {
-    "url": "https://energyconsumersaustralia.com.au/news",
-    "title": "https://energyconsumersaustralia.com.au/news",
+    "url": "https://www.cleanenergycouncil.org.au/news-resources/australian-clean-energy-summit-2024-leads-the-nations-energy-conversation",
+    "title": "Find out more",
     "summary": "",
-    "source": "Energy Consumers Australia",
+    "source": "cleanenergycouncil.org.au",
     "section": "Energy Transition",
     "published_iso": null,
     "published_ts": null,
     "published_source": null,
     "published_confidence": null,
-    "index_url": "https://energyconsumersaustralia.com.au/news"
+    "index_url": "https://www.cleanenergycouncil.org.au/news-resources"
   },
   {
-    "url": "https://energyconsumersaustralia.com.au/news?sort_by=published_at&sort_order=DESC",
-    "title": "Newest",
+    "url": "https://energyconsumersaustralia.com.au/news/australians-want-fairer-energy-market-expect-providers-step-up",
+    "title": "Australians Want Fairer Energy Market Expect Providers Step Up",
     "summary": "",
     "source": "Energy Consumers Australia",
     "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://energyconsumersaustralia.com.au/news"
-  },
-  {
-    "url": "https://energyconsumersaustralia.com.au/news?sort_by=published_at&sort_order=ASC",
-    "title": "Oldest",
-    "summary": "",
-    "source": "Energy Consumers Australia",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://energyconsumersaustralia.com.au/news"
-  },
-  {
-    "url": "https://energyconsumersaustralia.com.au/news?sort_by=title&sort_order=ASC",
-    "title": "Title (A-Z)",
-    "summary": "",
-    "source": "Energy Consumers Australia",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://energyconsumersaustralia.com.au/news"
-  },
-  {
-    "url": "https://energyconsumersaustralia.com.au/news?sort_by=title&sort_order=DESC",
-    "title": "Title (Z-A)",
-    "summary": "",
-    "source": "Energy Consumers Australia",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
+    "published_iso": "2026-04-01T00:00:00+00:00",
+    "published_ts": 1775001600.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
     "index_url": "https://energyconsumersaustralia.com.au/news"
   },
   {
     "url": "https://energyconsumersaustralia.com.au/news/media-release-eca-statement-dmo-draft-determination-solar-sharer-offer",
-    "title": "Media Release Eca Statement Dmo Draft Determination Solar Sharer Offer",
+    "title": "Eca Statement Dmo Draft Determination Solar Sharer Offer",
     "summary": "",
     "source": "Energy Consumers Australia",
     "section": "Energy Transition",
@@ -5472,20 +5292,20 @@
     "index_url": "https://energyconsumersaustralia.com.au/news"
   },
   {
-    "url": "https://energyconsumersaustralia.com.au/news/media-release-eca-response-gas-networks-transition-directions-paper",
-    "title": "Media Release Eca Response Gas Networks Transition Directions Paper",
+    "url": "https://energyconsumersaustralia.com.au/news/media-release-landmark-laws-consumer-groups-welcome-unfair-trading-prohibition",
+    "title": "Landmark Laws Consumer Groups Welcome Unfair Trading Prohibition",
     "summary": "",
     "source": "Energy Consumers Australia",
     "section": "Energy Transition",
-    "published_iso": "2026-03-19T00:00:00+00:00",
-    "published_ts": 1773878400.0,
+    "published_iso": "2026-04-01T00:00:00+00:00",
+    "published_ts": 1775001600.0,
     "published_source": "meta",
     "published_confidence": 0.75,
     "index_url": "https://energyconsumersaustralia.com.au/news"
   },
   {
     "url": "https://energyconsumersaustralia.com.au/news/media-release-seize-moment-accelerate-electrification-australian-economy",
-    "title": "Media Release Seize Moment Accelerate Electrification Australian Economy",
+    "title": "Seize Moment Accelerate Electrification Australian Economy",
     "summary": "",
     "source": "Energy Consumers Australia",
     "section": "Energy Transition",
@@ -5496,15 +5316,27 @@
     "index_url": "https://energyconsumersaustralia.com.au/news"
   },
   {
+    "url": "https://energyconsumersaustralia.com.au/news/media-release-eca-response-gas-networks-transition-directions-paper",
+    "title": "Eca Response Gas Networks Transition Directions Paper",
+    "summary": "",
+    "source": "Energy Consumers Australia",
+    "section": "Energy Transition",
+    "published_iso": "2026-03-19T00:00:00+00:00",
+    "published_ts": 1773878400.0,
+    "published_source": "meta",
+    "published_confidence": 0.75,
+    "index_url": "https://energyconsumersaustralia.com.au/news"
+  },
+  {
     "url": "https://energyconsumersaustralia.com.au/news/what-small-businesses-telling-us-about-electrification-what-needs-change",
     "title": "What Small Businesses Telling Us About Electrification What Needs Change",
     "summary": "",
     "source": "Energy Consumers Australia",
     "section": "Energy Transition",
-    "published_iso": "2026-01-22T00:00:00+00:00",
-    "published_ts": 1769040000.0,
-    "published_source": "meta",
-    "published_confidence": 0.75,
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
     "index_url": "https://energyconsumersaustralia.com.au/news"
   },
   {
@@ -5513,15 +5345,15 @@
     "summary": "",
     "source": "Energy Consumers Australia",
     "section": "Energy Transition",
-    "published_iso": "2025-12-18T00:00:00+00:00",
-    "published_ts": 1766016000.0,
-    "published_source": "meta",
-    "published_confidence": 0.75,
+    "published_iso": null,
+    "published_ts": null,
+    "published_source": null,
+    "published_confidence": null,
     "index_url": "https://energyconsumersaustralia.com.au/news"
   },
   {
     "url": "https://energyconsumersaustralia.com.au/news/media-release-gas-rule-change-significant-win-consumers-eca-says",
-    "title": "Media Release Gas Rule Change Significant Win Consumers Eca Says",
+    "title": "Gas Rule Change Significant Win Consumers Eca Says",
     "summary": "",
     "source": "Energy Consumers Australia",
     "section": "Energy Transition",
@@ -5558,30 +5390,6 @@
   {
     "url": "https://energyconsumersaustralia.com.au/news/ceo-october-2025",
     "title": "Ceo October 2025",
-    "summary": "",
-    "source": "Energy Consumers Australia",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://energyconsumersaustralia.com.au/news"
-  },
-  {
-    "url": "https://energyconsumersaustralia.com.au/news/new-grants-supporting-better-energy-outcomes-consumers",
-    "title": "New Grants Supporting Better Energy Outcomes Consumers",
-    "summary": "",
-    "source": "Energy Consumers Australia",
-    "section": "Energy Transition",
-    "published_iso": null,
-    "published_ts": null,
-    "published_source": null,
-    "published_confidence": null,
-    "index_url": "https://energyconsumersaustralia.com.au/news"
-  },
-  {
-    "url": "https://energyconsumersaustralia.com.au/news/simplicity-doesnt-equal-higher-engagement",
-    "title": "Simplicity Doesnt Equal Higher Engagement",
     "summary": "",
     "source": "Energy Consumers Australia",
     "section": "Energy Transition",
