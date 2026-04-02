@@ -1,3 +1,16 @@
 {
-  "urls": []
+  "urls": [
+    {
+      "url": "https://igcc.org.au/news/",
+      "ts": 1775101903.143966
+    },
+    {
+      "url": "https://www.esgtoday.com/toyota-plans-to-join-volvo-daimler-in-hydrogen-fuel-cell-jv/",
+      "ts": 1775101903.143966
+    },
+    {
+      "url": "https://www.esgtoday.com/u-s-doe-partners-with-amazon-on-solutions-to-recover-critical-materials-from-textile-tech-waste/",
+      "ts": 1775101903.143966
+    }
+  ]
 }
