@@ -194,6 +194,8 @@ jobs:
           git add -f "out/debug-meta-${YM}.txt" 2>/dev/null || true
           # Persist cross-month deduplication state
           git add -f "state/seen_urls.json" 2>/dev/null || true
+          # Monthly digest Word document
+          git add -f "out/monthly-digest-${YM}.docx" 2>/dev/null || true
           # Grants & Accelerators Radar outputs
           git add -f "out/grants-radar-${YM}.docx" 2>/dev/null || true
           git add -f "out/grants-radar-${YM}.html" 2>/dev/null || true
@@ -262,6 +264,7 @@ jobs:
             Debug: always on
           attachments: |
             out/monthly-digest-${{ steps.when.outputs.ym }}.md
+            out/monthly-digest-${{ steps.when.outputs.ym }}.docx
             out/grants-radar-${{ steps.when.outputs.ym }}.docx
             out/debug-selected-${{ steps.when.outputs.ym }}.json
             out/debug-drops-${{ steps.when.outputs.ym }}.txt
