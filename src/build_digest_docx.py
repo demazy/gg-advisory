@@ -119,7 +119,7 @@ def add_section_heading(doc, title):
     _add_horizontal_rule(doc, color_hex="1B7A6B", thickness=8)
 
 
-def add_article(doc, title, published, summary, why, signals, source_url):
+def add_article(doc, title, published, summary, why, signals, source_url, source_display=""):
     """Render one digest article with all 6 fields."""
     # Article title — bold, slightly larger
     p_title = _add_paragraph(doc, space_before=10, space_after=2)
@@ -151,7 +151,7 @@ def add_article(doc, title, published, summary, why, signals, source_url):
         p = _add_paragraph(doc, space_before=2, space_after=6)
         r_lbl = p.add_run("Source:  ")
         _set_font(r_lbl, 10.5, bold=True, color=MID_GREY)
-        _add_hyperlink(p, source_url, source_url)
+        _add_hyperlink(p, source_url, source_display or source_url)
 
 
 # ── Parse digest markdown ────────────────────────────────────────────────────
@@ -223,7 +223,8 @@ def parse_digest(md_text):
             _flush_article()
             current_article = {
                 "title": stripped[2:-2].strip(),
-                "published": "", "summary": "", "why": "", "signals": "", "source": ""
+                "published": "", "summary": "", "why": "", "signals": "",
+                "source": "", "source_text": "",
             }
             i += 1
             continue
@@ -239,7 +240,15 @@ def parse_digest(md_text):
             elif stripped.startswith("Signals to watch:"):
                 current_article["signals"] = stripped[len("Signals to watch:"):].strip()
             elif stripped.startswith("Source:"):
-                current_article["source"] = stripped[len("Source:"):].strip()
+                raw = stripped[len("Source:"):].strip()
+                # Extract URL and display text from markdown link syntax [text](url)
+                m = re.match(r'\[([^\]]*)\]\(([^)]+)\)', raw)
+                if m:
+                    current_article["source_text"] = m.group(1)
+                    current_article["source"] = m.group(2)
+                else:
+                    current_article["source_text"] = raw
+                    current_article["source"] = raw
 
         i += 1
 
@@ -301,12 +310,13 @@ def build_docx(md_path: Path, out_path: Path):
         for art in section_data["articles"]:
             add_article(
                 doc,
-                title      = art["title"],
-                published  = art["published"],
-                summary    = art["summary"],
-                why        = art["why"],
-                signals    = art["signals"],
-                source_url = art["source"],
+                title          = art["title"],
+                published      = art["published"],
+                summary        = art["summary"],
+                why            = art["why"],
+                signals        = art["signals"],
+                source_url     = art["source"],
+                source_display = art.get("source_text", ""),
             )
 
     # ── Footer note ───────────────────────────────────────────────────────────
