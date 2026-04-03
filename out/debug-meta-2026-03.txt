@@ -1,5 +1,5 @@
 ym=2026-03
-selected_total=16
+selected_total=11
 items_per_section=7
 per_domain_cap=3
 allow_undated=False

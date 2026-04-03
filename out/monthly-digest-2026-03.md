@@ -1,77 +1,63 @@
 # March 2026
 
 **Top Lines**
-- AEMC finalises national framework for gas network abolishment, effective 2027
-- New photo requirements for solar battery installations under SRES from 1 March 2026
-- EFRAG calls for SME sustainability reports by 31 July 2026
+- Australian Energy Market Commission published version 89 of the National Gas Rules on 1 April 2026.
+- 2024–25 NGER data shows a 6.4 Mt CO2-e decrease in scope 1 emissions.
+- IGCC's policy priorities for 2026-2030 aim to unlock capital and strengthen economic resilience.
 
 ---
 
 ## Energy Transition
 
-**AEMC Proposes Improvements for Life Support Customers**
-Published: 5 March 2026  
-Summary: The Australian Energy Market Commission (AEMC) has issued a draft determination to enhance registration and communication processes for life support customers. Key changes include streamlined registration managed by retailers, annual check-ins, and improved communication options. Over 225,000 Australians are registered for life support protections. Feedback on the draft is open until 16 April 2026, with a final decision expected in June 2026.  
-Why it matters: Energy retailers and networks must prepare for new compliance obligations by June 2026, affecting customer communication and data management.  
-Signals to watch: Final decision on the draft determination expected in June 2026.  
-Source: [AEMC](https://www.aemc.gov.au/news-centre/media-releases/aemc-proposes-improvements-life-support-customer-processes)
+**National Gas Rules Version 89 Released**
+Published: 1 April 2026  
+Summary: The Australian Energy Market Commission released version 89 of the National Gas Rules on 1 April 2026. This update includes Schedule 2 of the National Gas Amendment (Extension of the DWGM Dandenong LNG interim arrangements) Rule 2025 No. 3.  
+Why it matters: Energy companies must align operations with the updated rules immediately to ensure compliance and avoid potential penalties.  
+Signals to watch: Monitor for further amendments or guidance from the AEMC regarding implementation.  
+Source: [AEMC News Release](https://www.aemc.gov.au/news-centre/media-releases/new-version-89-national)
 
-**AEMC Finalises Rules for Gas Network Abolishment**
-Published: 2 April 2026  
-Summary: The AEMC has established Australia's first national framework for gas connection abolishment, addressing the projected 80% decline in gas demand over two decades. The rules, effective from 2027, include clear definitions, cost structures, and information requirements, ensuring cost-reflective charging for abolishment services.  
-Why it matters: Boards of energy companies must assess the financial impact of declining gas demand and prepare for phased implementation from 2027.  
-Signals to watch: Implementation phases begin 1 October 2026 for distributors, with retailers following by January 2027.  
-Source: [AEMC](https://www.aemc.gov.au/news-centre/media-releases/aemc-finalises-rules-customers-leaving-gas-network)
+**Australians Demand Fairer Energy Market**
+Published: 1 April 2026  
+Summary: Research by Energy Consumers Australia highlights dissatisfaction with the "loyalty tax" in the energy market, where long-term customers pay more than new ones. The ACCC found that customers on older plans pay $317 more annually. The AEMC is considering reforms to address this issue, with further consultations planned in 2026.  
+Why it matters: Energy providers should prepare for potential regulatory changes that could mandate fair pricing practices, impacting revenue models.  
+Signals to watch: Track the AEMC's Pricing Review outcomes and any legislative changes regarding consumer duties.  
+Source: [Energy Consumers Australia](https://energyconsumersaustralia.com.au/news/australians-want-fairer-energy-market-expect-providers-step-up)
 
-**New Solar Battery Photo Requirements Now in Place**
-Published: 2 March 2026  
-Summary: The Clean Energy Regulator mandates photo evidence of compliant labelling for solar battery installations under the Small-scale Renewable Energy Scheme (SRES), effective 1 March 2026. Non-compliance may lead to delayed processing or rejection of certificate claims.  
-Why it matters: Solar installers must update compliance processes immediately to avoid financial penalties and ensure timely certificate processing.  
-Signals to watch: Ongoing analysis of inspection results to identify common issues and risks.  
-Source: [CER](https://www.cer.gov.au/news-and-media/news/2026/march/new-solar-battery-photo-requirements-now-place)
-
-**Phenix Trading's Registration Permanently Suspended**
-Published: 10 March 2026  
-Summary: The Clean Energy Regulator has permanently suspended Phenix Trading Pty Ltd's registration under the Renewable Energy (Electricity) Act 2000 due to non-compliance with energy efficiency schemes in NSW and Victoria. This prevents Phenix Trading from creating renewable energy certificates.  
-Why it matters: Companies participating in the SRES must ensure compliance with all regulatory requirements to avoid similar suspensions.  
-Signals to watch: Monitor CER's enforcement actions and updates on registered agents.  
-Source: [CER](https://www.cer.gov.au/news-and-media/news/2026/march/phenix-tradings-registration-permanently-suspended)
+**2024–25 NGER Data Shows Emissions Reduction**
+Published: 27 February 2026  
+Summary: The 2024–25 National Greenhouse and Energy Reporting data reveals a 6.4 Mt CO2-e reduction in scope 1 emissions, totaling 296.6 Mt CO2-e. This decrease is primarily due to reductions in the electricity generation and oil and gas sectors.  
+Why it matters: Boards in high-emission sectors should evaluate their emissions strategies to align with national trends and regulatory expectations.  
+Signals to watch: Future NGER data releases and policy adjustments based on emissions trends.  
+Source: [CER News](https://www.cer.gov.au/news-and-media/news/2026/february/2024-25-national-greenhouse-and-energy-reporting-data-now-available)
 
 ---
 
 ## ESG Reporting
 
-**EFRAG Strengthens Global Standards on Workers’ Rights**
-Published: 19 March 2026  
-Summary: EFRAG has issued a comment letter supporting GRI's updates to labour standards, focusing on interoperability with ESRS. The letter highlights the need for alignment on definitions and the scope of the Labour Rights in Business Relationships standard.  
-Why it matters: Australian companies reporting under ESRS should anticipate potential updates aligning with GRI standards, impacting sustainability reporting practices.  
-Signals to watch: Further announcements from EFRAG on interoperability enhancements.  
-Source: [EFRAG](https://www.efrag.org/en/news-and-calendar/news/strengthening-global-standards-on-workers-rights-and-protection-efrags-comment-letter-to-gri-now)
+**EFRAG User Panel Composition Updated**
+Published: 2 March 2026  
+Summary: EFRAG announced the new composition of its User Panel, which provides input on corporate and sustainability reporting. The panel includes 20 members from various financial and academic institutions, reflecting a strong focus on sustainability expertise.  
+Why it matters: Australian companies with European operations should consider the evolving ESG standards and reporting expectations influenced by EFRAG's activities.  
+Signals to watch: EFRAG's future guidance and standards development in sustainability reporting.  
+Source: [EFRAG News](https://www.efrag.org/en/news-and-calendar/news/new-composition-of-the-efrag-user-panel)
 
-**Contribute to Europe’s SME Sustainability Journey**
-Published: 6 March 2026  
-Summary: EFRAG invites SMEs to submit sustainability reports using the VSME Standard by 31 July 2026. This initiative aims to identify emerging practices and support the VSME Ecosystem 2026.  
-Why it matters: Australian SMEs with European operations should consider participating to influence future sustainability reporting standards.  
-Signals to watch: Publication of key findings from the VSME Ecosystem 2026 initiative in Autumn 2026.  
-Source: [EFRAG](https://www.efrag.org/en/news-and-calendar/news/contribute-to-europes-sme-sustainability-journey-share-your-vsme-sustainability-report-with-efrag)
+**IGCC's Policy Priorities for 2026-2030**
+Published: 30 March 2026  
+Summary: The Investor Group on Climate Change (IGCC) outlined policy priorities for 2026-2030, focusing on climate law, physical climate risks, emissions reduction, and investment in clean energy. These priorities aim to mobilize capital and enhance Australia's economic resilience, with potential to grow the economy by $2 trillion by 2050.  
+Why it matters: Investors should align portfolios with these priorities to capitalize on emerging opportunities and mitigate transition risks.  
+Signals to watch: Legislative developments and policy announcements that align with IGCC's priorities.  
+Source: [IGCC Policy Priorities](https://igcc.org.au/supercharging-australias-future-igccs-policy-priorities/)
 
 ---
 
 ## Sustainable Finance & Investment
 
-**Toyota to Join Volvo, Daimler Hydrogen Fuel Cell JV**
-Published: 31 March 2026  
-Summary: Toyota plans to join Volvo Group and Daimler Truck in a hydrogen fuel cell joint venture, aiming to accelerate the development of hydrogen-powered vehicles. This collaboration could enhance the commercial viability of hydrogen technology in the automotive sector.  
-Why it matters: Investors in automotive and hydrogen sectors should evaluate the potential impact on market dynamics and investment opportunities.  
-Signals to watch: Official confirmation and details of Toyota's involvement in the joint venture.  
-Source: [ESG Today](https://www.esgtoday.com/toyota-plans-to-join-volvo-daimler-in-hydrogen-fuel-cell-jv/)
-
-**Google Signs Long-Term Deal with Amex GBT, Shell SAF Platform**
-Published: 31 March 2026  
-Summary: Google has entered a long-term agreement with American Express Global Business Travel and Shell Aviation to support sustainable aviation fuel (SAF) initiatives. This partnership aims to reduce carbon emissions in the travel sector and promote sustainable business practices.  
-Why it matters: Companies in the travel and aviation sectors should assess the implications of increased SAF adoption on their sustainability strategies and carbon reduction targets.  
-Signals to watch: Further developments in SAF partnerships and their impact on industry standards.  
-Source: [ESG Today](https://www.esgtoday.com/google-signs-long-term-deal-with-amex-gbt-shell-saf-platform/)
+**IGCC 2030 Strategy Unveiled**
+Published: 19 February 2026  
+Summary: The IGCC released its 2030 strategy, emphasizing the alignment of fiduciary duties with climate action and economic growth. The strategy addresses climate-related risks and opportunities as material investment factors for institutional investors.  
+Why it matters: Institutional investors should integrate climate considerations into fiduciary duties to enhance portfolio resilience and performance.  
+Signals to watch: Updates on IGCC's strategic initiatives and their impact on investment practices.  
+Source: [IGCC 2030 Strategy](https://igcc.org.au/igcc-2030-strategy/)
 
 ## Cleantech & Start-up Ecosystem — Grants & Accelerators Radar
 

@@ -1,130 +1,90 @@
 [
   {
     "section": "Energy Transition",
-    "title": "AEMC proposes improvements to life support customer processes",
-    "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-proposes-improvements-life-support-customer-processes",
-    "publisher": "AEMC",
-    "published": "2026-03-05T00:00:00+00:00",
-    "published_ts": 1772668800.0
-  },
-  {
-    "section": "Energy Transition",
-    "title": "AEMC finalises rules for customers leaving the gas network",
-    "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-finalises-rules-customers-leaving-gas-network",
-    "publisher": "AEMC",
-    "published": "2026-04-02T00:00:00+00:00",
-    "published_ts": 1775088000.0
-  },
-  {
-    "section": "Energy Transition",
-    "title": "New Solar Battery Photo Requirements Now Place",
-    "url": "https://www.cer.gov.au/news-and-media/news/2026/march/new-solar-battery-photo-requirements-now-place",
-    "publisher": "cer.gov.au",
-    "published": "2026-03-02T00:00:00+00:00",
-    "published_ts": 1772409600.0
-  },
-  {
-    "section": "Energy Transition",
-    "title": "Phenix Tradings Registration Permanently Suspended",
-    "url": "https://www.cer.gov.au/news-and-media/news/2026/march/phenix-tradings-registration-permanently-suspended",
-    "publisher": "cer.gov.au",
-    "published": "2026-03-10T00:00:00+00:00",
-    "published_ts": 1773100800.0
-  },
-  {
-    "section": "Energy Transition",
-    "title": "New Version 244 of the National Electricity Rules",
-    "url": "https://www.aemc.gov.au/news-centre/media-releases/new-version-244-national-electricity-rules",
+    "title": "New Version 89 of the National",
+    "url": "https://www.aemc.gov.au/news-centre/media-releases/new-version-89-national",
     "publisher": "AEMC",
     "published": "2026-04-01T00:00:00+00:00",
     "published_ts": 1775001600.0
   },
   {
     "section": "Energy Transition",
-    "title": "Identity Verification Made Simpler Scheme Participants",
-    "url": "https://www.cer.gov.au/news-and-media/news/2026/march/identity-verification-made-simpler-scheme-participants",
-    "publisher": "cer.gov.au",
-    "published": "2026-03-04T00:00:00+00:00",
-    "published_ts": 1772582400.0
-  },
-  {
-    "section": "Energy Transition",
-    "title": "Landmark Laws Consumer Groups Welcome Unfair Trading Prohibition",
-    "url": "https://energyconsumersaustralia.com.au/news/media-release-landmark-laws-consumer-groups-welcome-unfair-trading-prohibition",
+    "title": "Australians Want Fairer Energy Market Expect Providers Step Up",
+    "url": "https://energyconsumersaustralia.com.au/news/australians-want-fairer-energy-market-expect-providers-step-up",
     "publisher": "Energy Consumers Australia",
     "published": "2026-04-01T00:00:00+00:00",
     "published_ts": 1775001600.0
   },
   {
-    "section": "ESG Reporting",
-    "title": "Strengthening global standards on workers’ rights and protection: EFRAG’s comment letter to GRI now available",
-    "url": "https://www.efrag.org/en/news-and-calendar/news/strengthening-global-standards-on-workers-rights-and-protection-efrags-comment-letter-to-gri-now",
-    "publisher": "efrag.org",
-    "published": "2026-03-19T12:00:00+00:00",
-    "published_ts": 1773921600.0
+    "section": "Energy Transition",
+    "title": "2024 25 National Greenhouse And Energy Reporting Data Now Available",
+    "url": "https://www.cer.gov.au/news-and-media/news/2026/february/2024-25-national-greenhouse-and-energy-reporting-data-now-available",
+    "publisher": "cer.gov.au",
+    "published": "2026-02-27T00:00:00+00:00",
+    "published_ts": 1772150400.0
   },
   {
     "section": "ESG Reporting",
-    "title": "Contribute to Europe’s SME Sustainability Journey: Share Your VSME Sustainability Report with EFRAG",
-    "url": "https://www.efrag.org/en/news-and-calendar/news/contribute-to-europes-sme-sustainability-journey-share-your-vsme-sustainability-report-with-efrag",
+    "title": "New composition of the EFRAG User Panel",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/new-composition-of-the-efrag-user-panel",
     "publisher": "efrag.org",
-    "published": "2026-03-06T12:00:00+00:00",
-    "published_ts": 1772798400.0
+    "published": "2026-03-02T12:00:00+00:00",
+    "published_ts": 1772452800.0
   },
   {
     "section": "ESG Reporting",
-    "title": "EFRAG Welcomes a New Friend of EFRAG - Sustainability Reporting: Synesgy",
-    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-welcomes-a-new-friend-of-efrag-sustainability-reporting-synesgy",
+    "title": "New EFRAG Update Podcast Episode Available: December 2025 & January 2026 Edition",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/new-efrag-update-podcast-episode-available-december-2025-january-2026-edition",
     "publisher": "efrag.org",
-    "published": "2026-03-17T12:00:00+00:00",
-    "published_ts": 1773748800.0
+    "published": "2026-03-05T12:00:00+00:00",
+    "published_ts": 1772712000.0
+  },
+  {
+    "section": "ESG Reporting",
+    "title": "Supercharging Australia’s Future: IGCC’s Policy Priorities",
+    "url": "https://igcc.org.au/supercharging-australias-future-igccs-policy-priorities/",
+    "publisher": "igcc.org.au",
+    "published": "2026-03-30T13:57:00+00:00",
+    "published_ts": 1774879020.0
+  },
+  {
+    "section": "ESG Reporting",
+    "title": "We’re Hiring: Methane Engagement and Policy Advisor",
+    "url": "https://igcc.org.au/were-hiring-special-policy-advisor-methane-initiative/",
+    "publisher": "igcc.org.au",
+    "published": "2026-03-12T22:51:45+00:00",
+    "published_ts": 1773355905.0
+  },
+  {
+    "section": "ESG Reporting",
+    "title": "EFRAG Administrative Board Online Meeting - 17 March 2026",
+    "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-administrative-board-online-meeting-17-march-2026",
+    "publisher": "efrag.org",
+    "published": "2026-03-16T12:00:00+00:00",
+    "published_ts": 1773662400.0
   },
   {
     "section": "Sustainable Finance & Investment",
-    "title": "TotalEnergies Says it Can’t Formulate Net Zero Targets as 1.5°C is “Out of Reach”",
-    "url": "https://www.esgtoday.com/totalenergies-says-it-cant-formulate-net-zero-targets-as-1-5c-is-out-of-reach/",
-    "publisher": "esgtoday.com",
-    "published": "2026-03-31T10:31:47+00:00",
-    "published_ts": 1774953107.0
-  },
-  {
-    "section": "Sustainable Finance & Investment",
-    "title": "U.S. DOE Partners with Amazon to Recover Critical Materials from Clothing, Tech Waste",
-    "url": "https://www.esgtoday.com/u-s-doe-partners-with-amazon-on-solutions-to-recover-critical-materials-from-textile-tech-waste/",
-    "publisher": "esgtoday.com",
-    "published": "2026-03-31T15:05:39+00:00",
-    "published_ts": 1774969539.0
-  },
-  {
-    "section": "Sustainable Finance & Investment",
-    "title": "Toyota Plans to Join Volvo, Daimler Hydrogen Fuel Cell JV",
-    "url": "https://www.esgtoday.com/toyota-plans-to-join-volvo-daimler-in-hydrogen-fuel-cell-jv/",
-    "publisher": "esgtoday.com",
-    "published": "2026-03-31T12:54:15+00:00",
-    "published_ts": 1774961655.0
-  },
-  {
-    "section": "Sustainable Finance & Investment",
-    "title": "Read the latest Financial Stability Review",
-    "url": "https://www.rba.gov.au/publications/fsr/2026/mar/",
-    "publisher": "rba.gov.au",
-    "published": "2026-03-01T00:00:00+00:00",
-    "published_ts": 1772323200.0
+    "title": "IGCC’s 2030 Strategy: A Clear Plan For This Decade",
+    "url": "https://igcc.org.au/igcc-2030-strategy/",
+    "publisher": "igcc.org.au",
+    "published": "2026-02-19T05:00:16+00:00",
+    "published_ts": 1771477216.0
   },
   {
     "section": "Cleantech & Start-up Ecosystem",
-    "title": "Google Signs Long-Term Deal with Amex GBT, Shell SAF Platform",
-    "url": "https://www.esgtoday.com/google-signs-long-term-deal-with-amex-gbt-shell-saf-platform/",
-    "publisher": "esgtoday.com",
-    "published": "2026-03-31T11:46:22+00:00",
-    "published_ts": 1774957582.0
+    "title": "Should startup founders become angel investors?",
+    "url": "https://www.startupdaily.net/advice/opinion/should-startup-founders-become-angel-investors/",
+    "publisher": "startupdaily.net",
+    "published": "2026-04-01T01:34:12+00:00",
+    "published_ts": 1775007252.0
   },
   {
     "section": "Cleantech & Start-up Ecosystem",
-    "title": "Nestlé Launches Project to Improve Human Rights in the Coffee Supply Chain",
-    "url": "https://www.esgtoday.com/nestle-launches-project-to-improve-human-rights-in-coffee-supply-chain/",
-    "publisher": "esgtoday.com",
-    "published": "2026-04-01T10:17:21+00:00",
-    "published_ts": 1775038641.0
+    "title": "Anthropic has ‘come to copyright’ epiphany after Claude code leak",
+    "url": "https://www.startupdaily.net/advice/opinion/anthropic-has-come-to-copyright-epiphany-after-claude-code-leak/",
+    "publisher": "startupdaily.net",
+    "published": "2026-04-02T04:04:40+00:00",
+    "published_ts": 1775102680.0
   }
 ]
