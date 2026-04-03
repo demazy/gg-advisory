@@ -75,6 +75,9 @@ allow_domains:
 - techcouncil.com.au
 - newenergynexus.com
 - smartenergy.org.au
+# Cleantech & Start-up Ecosystem RSS sources
+- startupdaily.net
+- smartcompany.com.au
 deny_domains: []
 domain_deny_substrings:
   arena.gov.au:

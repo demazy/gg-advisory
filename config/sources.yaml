@@ -56,8 +56,10 @@ sections:
 
   ESG Reporting:
     rss:
-      # ASIC RSS for media releases — primary source for Australian mandatory ESG/climate disclosure
-      - https://asic.gov.au/news-centre/media-releases/media-release-rss-feeds/media-releases-rss/
+      # TNFD RSS: nature-related disclosure, ISSB-aligned framework updates (reliable pub dates)
+      - https://tnfd.global/feed/
+      # IGCC RSS: AU investor-group climate policy submissions and net-zero finance reports
+      - https://igcc.org.au/feed/
     html:
       - https://www.ifrs.org/news-and-events/updates/issb/
       - https://www.ifrs.org/news-and-events/news/
@@ -90,8 +92,8 @@ sections:
     rss:
       # ESG Today RSS: daily ESG/sustainable finance news with reliable pub dates
       - https://www.esgtoday.com/feed/
-      # CEFC media releases RSS
-      - https://www.cefc.com.au/feed/
+      # IGCC RSS: AU investor-group climate policy and sustainable finance (reliable pub dates)
+      - https://igcc.org.au/feed/
     html:
       - https://arena.gov.au/funding/
       - https://arena.gov.au/news/
@@ -107,10 +109,7 @@ sections:
       - https://www.rba.gov.au/publications/fsr/
       - https://www.rba.gov.au/publications/smp/
       - https://tnfd.global/news/
-      # IGCC: date_resolve_fetches needed — index page has no date metadata in HTML
-      - url: https://igcc.org.au/news/
-        name: IGCC
-        date_resolve_fetches: 5
+      # IGCC: covered via RSS above (reliable pub dates); HTML scrape removed
       # RIAA (Responsible Investment Association Australasia): annual benchmark + news
       - https://responsibleinvestment.org/news-and-events/
       # ASFI: peak body for Australian sustainable finance
