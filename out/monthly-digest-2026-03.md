@@ -1,63 +1,56 @@
 # March 2026
 
 **Top Lines**
-- Australian Energy Market Commission published version 89 of the National Gas Rules on 1 April 2026.
-- 2024–25 NGER data shows a 6.4 Mt CO2-e decrease in scope 1 emissions.
-- IGCC's policy priorities for 2026-2030 aim to unlock capital and strengthen economic resilience.
+- AEMC updates market price cap to $23,200/MWh from 1 July 2026
+- AEMC draft rules propose clearer gas supply risk management
+- NAB issues $7 billion green bond to support net zero goals
 
 ---
 
 ## Energy Transition
 
-**National Gas Rules Version 89 Released**
-Published: 1 April 2026  
-Summary: The Australian Energy Market Commission released version 89 of the National Gas Rules on 1 April 2026. This update includes Schedule 2 of the National Gas Amendment (Extension of the DWGM Dandenong LNG interim arrangements) Rule 2025 No. 3.  
-Why it matters: Energy companies must align operations with the updated rules immediately to ensure compliance and avoid potential penalties.  
-Signals to watch: Monitor for further amendments or guidance from the AEMC regarding implementation.  
-Source: [AEMC News Release](https://www.aemc.gov.au/news-centre/media-releases/new-version-89-national)
+**AEMC Updates Market Price Cap for 2026-27**
+Published: 26 February 2026  
+Summary: The Australian Energy Market Commission (AEMC) has adjusted the National Electricity Market's (NEM) market price cap (MPC) to $23,200/MWh, effective from 1 July 2026. This adjustment follows a rule made on 7 December 2023 to increase the base rate of the MPC and cumulative price threshold (CPT) in line with the consumer price index. The CPT will rise to $2,225,900/MWh. These changes are part of the annual reliability settings update required by the National Electricity Rules.  
+Why it matters: CFOs in the energy sector must adjust financial models to account for increased price caps from 1 July 2026, impacting cost projections and pricing strategies.  
+Signals to watch: Monitor AEMC announcements for any further adjustments to reliability settings or market rules.  
+Source: [AEMC](https://www.aemc.gov.au/news-centre/media-releases/aemc-updates-market-price-cap-2026-27)
 
-**Australians Demand Fairer Energy Market**
-Published: 1 April 2026  
-Summary: Research by Energy Consumers Australia highlights dissatisfaction with the "loyalty tax" in the energy market, where long-term customers pay more than new ones. The ACCC found that customers on older plans pay $317 more annually. The AEMC is considering reforms to address this issue, with further consultations planned in 2026.  
-Why it matters: Energy providers should prepare for potential regulatory changes that could mandate fair pricing practices, impacting revenue models.  
-Signals to watch: Track the AEMC's Pricing Review outcomes and any legislative changes regarding consumer duties.  
-Source: [Energy Consumers Australia](https://energyconsumersaustralia.com.au/news/australians-want-fairer-energy-market-expect-providers-step-up)
-
-**2024–25 NGER Data Shows Emissions Reduction**
-Published: 27 February 2026  
-Summary: The 2024–25 National Greenhouse and Energy Reporting data reveals a 6.4 Mt CO2-e reduction in scope 1 emissions, totaling 296.6 Mt CO2-e. This decrease is primarily due to reductions in the electricity generation and oil and gas sectors.  
-Why it matters: Boards in high-emission sectors should evaluate their emissions strategies to align with national trends and regulatory expectations.  
-Signals to watch: Future NGER data releases and policy adjustments based on emissions trends.  
-Source: [CER News](https://www.cer.gov.au/news-and-media/news/2026/february/2024-25-national-greenhouse-and-energy-reporting-data-now-available)
+**AEMC Proposes Clearer Rules to Manage Gas Supply Risks**
+Published: 26 February 2026  
+Summary: The AEMC has released draft rules aimed at improving gas supply management in Australia's east coast energy system. The proposed reforms include clearer warning signals for gas supply risks and enhanced forecasting to provide more granular, region-specific forecasts. The draft rules also outline a Supplier of Last Resort (SoLR) mechanism, ensuring AEMO can only intervene after market responses have been exhausted. Public submissions on these draft rules are open until 9 April and 23 April 2026.  
+Why it matters: Energy companies should prepare to engage with the consultation process by 9 April 2026 to influence the final rules, which will affect operational strategies and risk management.  
+Signals to watch: Track the final determinations expected in mid-2026 for implications on gas supply operations.  
+Source: [AEMC](https://www.aemc.gov.au/news-centre/media-releases/aemc-proposes-clearer-rules-manage-gas-supply-risks-during-australias-energy-transition)
 
 ---
 
 ## ESG Reporting
 
-**EFRAG User Panel Composition Updated**
-Published: 2 March 2026  
-Summary: EFRAG announced the new composition of its User Panel, which provides input on corporate and sustainability reporting. The panel includes 20 members from various financial and academic institutions, reflecting a strong focus on sustainability expertise.  
-Why it matters: Australian companies with European operations should consider the evolving ESG standards and reporting expectations influenced by EFRAG's activities.  
-Signals to watch: EFRAG's future guidance and standards development in sustainability reporting.  
-Source: [EFRAG News](https://www.efrag.org/en/news-and-calendar/news/new-composition-of-the-efrag-user-panel)
+**EFRAG Adds Dutch and Irish to VSME Digital Template**
+Published: 26 February 2026  
+Summary: EFRAG has updated the VSME Digital Template to include Dutch and Irish language support and launched a Data Migration tool to facilitate upgrades. This initiative aims to enhance the accessibility of VSME reports for SMEs across the EU. The updates are part of EFRAG's ongoing efforts to support SMEs in producing compliant reports under the European Sustainability Reporting Standards (ESRS).  
+Why it matters: Australian companies with EU operations should consider leveraging these tools to ensure compliance with ESRS and streamline their reporting processes.  
+Signals to watch: Follow EFRAG updates for future enhancements to the VSME Digital Template and related tools.  
+Source: [EFRAG](https://www.efrag.org/en/news-and-calendar/news/efrag-adds-dutch-and-irish-to-vsme-digital-template-launches-data-migration-tool)
 
-**IGCC's Policy Priorities for 2026-2030**
-Published: 30 March 2026  
-Summary: The Investor Group on Climate Change (IGCC) outlined policy priorities for 2026-2030, focusing on climate law, physical climate risks, emissions reduction, and investment in clean energy. These priorities aim to mobilize capital and enhance Australia's economic resilience, with potential to grow the economy by $2 trillion by 2050.  
-Why it matters: Investors should align portfolios with these priorities to capitalize on emerging opportunities and mitigate transition risks.  
-Signals to watch: Legislative developments and policy announcements that align with IGCC's priorities.  
-Source: [IGCC Policy Priorities](https://igcc.org.au/supercharging-australias-future-igccs-policy-priorities/)
+**Help Shape Europe’s Voice on Business Conduct Reporting**
+Published: 26 February 2026  
+Summary: EFRAG is hosting workshops on 17 and 18 March 2026 to gather feedback on the GRI standards for Competition, Corruption, and Public Policy. These workshops aim to align the standards with the European Sustainability Reporting Standards (ESRS) under the Corporate Sustainability Reporting Directive (CSRD). Stakeholders, especially those involved in CSRD/ESRS reporting, are encouraged to participate.  
+Why it matters: Australian companies with European interests should participate to influence the development of standards that may impact their reporting obligations.  
+Signals to watch: Register for the workshops by the specified dates to ensure participation and stay informed on the outcomes.  
+Source: [EFRAG](https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-business-conduct-reporting-join-efrags-workshops)
 
 ---
 
 ## Sustainable Finance & Investment
 
-**IGCC 2030 Strategy Unveiled**
-Published: 19 February 2026  
-Summary: The IGCC released its 2030 strategy, emphasizing the alignment of fiduciary duties with climate action and economic growth. The strategy addresses climate-related risks and opportunities as material investment factors for institutional investors.  
-Why it matters: Institutional investors should integrate climate considerations into fiduciary duties to enhance portfolio resilience and performance.  
-Signals to watch: Updates on IGCC's strategic initiatives and their impact on investment practices.  
-Source: [IGCC 2030 Strategy](https://igcc.org.au/igcc-2030-strategy/)
+**$7 Billion Green Bond to Rally Nation’s Net Zero Goals**
+Published: 25 March 2026  
+Summary: NAB has issued a $7 billion green bond to support Australia's net zero emissions targets. This bond will fund projects in renewable energy, energy efficiency, and other climate-related initiatives. The issuance aligns with Australia's commitment to transition to a low-carbon economy and demonstrates NAB's leadership in sustainable finance.  
+Why it matters: Investors should assess the bond's impact on portfolio alignment with net zero goals and consider participation in future green finance opportunities.  
+Signals to watch: Monitor NAB's allocation reports for insights into funded projects and their environmental impact.  
+Source: [NAB](https://news.google.com/rss/articles/CBMiqAFBVV95cUxONDZXVGl1c01tZGZDQmlBVmh2Z3FXeGVwdVk4X1ZCenpPLW96ZHhhNUVFUHg0YUVjRnA0NUw1NXJrOG00WW9qNFo2R1lXZEtNR3J4MWlLNDE2cEpINkhuUzRySjN1RS11WDBKWXZQYzh2SjV4YlMwcnlfd29FUEdyWGpHMHBneGJ4ZlV6U29OczQ5Ukg4MEdiV2dOdUNXWXpPRllUUlJIM3k)
 
 ## Cleantech & Start-up Ecosystem — Grants & Accelerators Radar
 
