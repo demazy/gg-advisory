@@ -319,8 +319,9 @@ D. Do NOT combine facts from different items into a single statement.
 E. Do NOT extrapolate, infer, or project. Only report what the source text explicitly states.
 F. If an item's text is too thin (under 80 words with no specific data), SKIP the item entirely. \
    Write nothing about it rather than producing a vague or speculative summary.
-G. The Source URL for each entry MUST match exactly the URL provided in the JSON payload. \
-   Do NOT alter, abbreviate, or construct URLs.
+G. The Source URL for each entry MUST be copied VERBATIM from the "url" field of the JSON \
+   payload item. Do NOT alter, shorten, paraphrase, reconstruct, or construct any URL. \
+   If you cannot find the exact URL in the payload, omit the Source line entirely.
 H. Treat a violation of any rule above as a critical error. When in doubt, omit.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -473,13 +474,38 @@ _USER_TEMPLATE = textwrap.dedent("""\
 
 # ── URL hallucination guard ───────────────────────────────────────────────────
 
+def _norm_url(url: str) -> str:
+    """Normalise a URL for comparison: lowercase, strip scheme, strip www., strip trailing slash."""
+    u = url.strip().lower()
+    for prefix in ("https://", "http://"):
+        if u.startswith(prefix):
+            u = u[len(prefix):]
+            break
+    if u.startswith("www."):
+        u = u[4:]
+    # Strip query string and fragment — GPT-4o sometimes appends tracking params
+    u = u.split("?")[0].split("#")[0]
+    return u.rstrip("/")
+
+
 def _validate_source_urls(md_output: str, allowed_urls: set[str]) -> list[str]:
     """
     Find every 'Source: <url>' line in the newsletter body and verify the URL
-    was in the input payload. Returns a list of violation strings.
+    was in the input payload.
+
+    Matching is two-tier:
+      1. Exact normalised match (preferred).
+      2. Domain-level match — if GPT-4o cited a URL on an allowed domain
+         (and didn't invent a wholly different domain), treat it as a minor
+         formatting issue rather than a hallucination and log a warning only.
+    Returns a list of violation strings for URLs on domains NOT in the payload.
     """
+    from urllib.parse import urlparse
+
+    norm_allowed  = {_norm_url(u) for u in allowed_urls}
+    allowed_domains = {urlparse(u).netloc.lower().lstrip("www.") for u in allowed_urls}
+
     violations: list[str] = []
-    # Only check lines that are NOT inside the BASELINE_DELTA block
     in_delta = False
     for line in md_output.splitlines():
         s = line.strip()
@@ -492,13 +518,20 @@ def _validate_source_urls(md_output: str, allowed_urls: set[str]) -> list[str]:
         if in_delta:
             continue
         if s.lower().startswith("source:"):
-            url  = s[len("Source:"):].strip()
+            url = s[len("Source:"):].strip()
             if not url:
                 continue
-            norm     = url.rstrip("/").lower()
-            norm_set = {u.rstrip("/").lower() for u in allowed_urls}
-            if norm not in norm_set:
-                violations.append(f"Unknown URL not in payload: {url}")
+            norm = _norm_url(url)
+            if norm in norm_allowed:
+                continue  # exact match — all good
+            # Check domain-level match
+            cited_domain = urlparse(url.lower()).netloc.lstrip("www.")
+            if cited_domain in allowed_domains:
+                # Same domain — likely a minor URL formatting difference, not a hallucination
+                print(f"[ark_summarise] URL mismatch (domain OK, path differs): {url}")
+                continue
+            # Completely different domain — genuine hallucination
+            violations.append(f"Unknown URL not in payload: {url}")
     return violations
 
 

@@ -56,6 +56,16 @@ domain_deny_substrings:
     - /renewable-energy/
   cefc.com.au:
     - /where-we-invest/
+  # IGCC listing page produces navigation scrapes — only allow specific article URLs
+  igcc.org.au:
+    - /news/$
+    - /news/page/
+  # ESGToday: block their tag/category listing pages (article URLs are fine)
+  esgtoday.com:
+    - /category/
+    - /tag/
+    - /page/
+    - /feed/
 
 title_deny_regex:
   - (cookie|privacy|terms|subscribe|sign\s?up|login|careers|jobs)
@@ -63,6 +73,20 @@ title_deny_regex:
   # Reject purely financial results (not decarbonisation-related)
   - '^\s*(quarterly|annual|half.year)\s+(results|earnings|report)\s*$'
   - 'dividend|share\s+buyback|capital\s+raising'
+  # Reject off-topic transport / vehicle technology
+  - 'hydrogen fuel.?cell\s+(vehicle|truck|car|bus|jv|joint venture|partnership)'
+  - '(fuel.?cell\s+electric|FCEV|fuel.?cell\s+truck|fuel.?cell\s+car)'
+  - 'EV\s+charger|electric\s+vehicle\s+charg|charging\s+infrastructure'
+  # Reject off-topic materials / mining (not CCUS)
+  - 'critical\s+miner|rare.?earth|lithium\s+(mine|batter|refin)|cobalt\s+mine'
+  - 'recover\s+critical\s+materials?\s+from\s+(clothing|textile|waste|tech)'
+  # Reject off-topic US/European news with no AU/APAC angle
+  - 'U\.S\.\s+DOE\s+partners?\s+with|U\.S\.\s+Department\s+of\s+Energy\s+partners?'
+  - '(Amazon|Microsoft|Google|Apple|Meta)\s+(invest|partner|fund|launch|announc)'
+  # Reject navigation/listing page titles
+  - '^News\s*[-–—]\s+\w'
+  - '^Media\s+releases?\s*[-–—]'
+  - '^(Latest\s+)?News\s+[|&]\s+'
 
 keep_keywords:
   - carbon capture
