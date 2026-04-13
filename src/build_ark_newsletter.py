@@ -468,9 +468,11 @@ def _parse_digest(md_text: str) -> Dict:
                     break
 
         # Change lines (new format changes sub-section)
+        # Do NOT apply placeholder filter here — we need to distinguish between
+        # "inaugural issue" (_Inaugural issue..._) and "no changes this period"
+        # (_No changes detected..._) so the renderer can pick the right message.
         if cur_sec and cur_sub == "changes" and s and not s.startswith("#"):
-            if not _PLACEHOLDER_PATTERNS.search(s):
-                result["sections"][cur_sec]["changes"].append(s)
+            result["sections"][cur_sec]["changes"].append(s)
 
         i += 1
 
