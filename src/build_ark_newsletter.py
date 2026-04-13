@@ -260,11 +260,16 @@ def _article(doc, title: str, published: str, summary: str,
         _font(rv, 10, italic=True, color=MID_GREY)
 
     if summary:
-        p = _para(doc, space_before=2, space_after=3)
-        rl = p.add_run("Summary:  ")
-        _font(rl, 10.5, bold=True, color=DARK_GREY)
-        rb = p.add_run(summary)
-        _font(rb, 10.5, color=DARK_GREY)
+        # Strip any raw HTML tags that may come through from the deterministic fallback
+        clean_summary = re.sub(r"<[^>]+>", "", summary).strip()
+        clean_summary = re.sub(r"&[a-zA-Z]+;|&#\d+;", " ", clean_summary).strip()
+        clean_summary = re.sub(r"\s{2,}", " ", clean_summary)
+        if clean_summary:
+            p = _para(doc, space_before=2, space_after=3)
+            rl = p.add_run("Summary:  ")
+            _font(rl, 10.5, bold=True, color=DARK_GREY)
+            rb = p.add_run(clean_summary)
+            _font(rb, 10.5, color=DARK_GREY)
 
     if why:
         p = _para(doc, space_before=2, space_after=3)
@@ -556,7 +561,8 @@ def build_newsletter(md_path: Path, out_path: Path,
     _font(r, 10.5, bold=True, color=GG_TEAL)
 
     bullets = [b for b in brief.get("exec_summary", [])
-               if not _PLACEHOLDER_PATTERNS.search(b)]
+               if not _PLACEHOLDER_PATTERNS.search(b)
+               and not re.search(r"intelligence brief for ark|sections:.*grants|limited high-signal", b, re.IGNORECASE)]
     if bullets:
         for bt in bullets:
             pb = doc.add_paragraph(style="List Bullet")
@@ -566,7 +572,7 @@ def build_newsletter(md_path: Path, out_path: Path,
             _font(r, 10, color=DARK_GREY)
     else:
         _shaded_para(doc,
-            "— Inaugural issue. No prior newsletter to compare against. —",
+            "— No highlights available this period. —",
             italic=True)
 
     _hrule(doc, color_hex="1B7A6B", thickness=6)
@@ -609,12 +615,22 @@ def build_newsletter(md_path: Path, out_path: Path,
 
         # Changes Since Last Issue
         _subsection_heading(doc, "Changes Since Last Issue")
-        if not changes or all(
+        # Determine if this is truly the inaugural issue vs. just no changes this period
+        _is_inaugural = not changes or all(
+            re.search(r"inaugural", c, re.IGNORECASE) for c in changes
+            if c.strip()
+        )
+        _no_changes = not _is_inaugural and all(
             c.strip().startswith("_") and c.strip().endswith("_") for c in changes
-        ):
+        )
+        if _is_inaugural:
             _shaded_para(doc,
                 "— Inaugural issue. Changes section will be populated from the second issue onwards. —",
                 italic=True)
+        elif _no_changes:
+            p = _para(doc, space_before=4, space_after=4)
+            r = p.add_run("No changes detected versus the previous issue.")
+            _font(r, 10, italic=True, color=MID_GREY)
         else:
             for ch_line in changes:
                 clean = ch_line.strip().lstrip("- ").lstrip("CHANGE:").strip()
