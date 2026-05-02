@@ -1,0 +1,401 @@
+# reason	url	title
+evergreen_program_page	https://arena.gov.au/funding/	Back to top
+undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+evergreen_program_page	https://arenanet.arena.gov.au/s/funding-advice	here
+evergreen_program_page	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+out_of_range	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+out_of_range	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+out_of_range	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+evergreen_program_page	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+out_of_range	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+out_of_range	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+out_of_range	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+evergreen_program_page	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+out_of_range	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+out_of_range	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+out_of_range	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+out_of_range	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+out_of_range	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+out_of_range	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+out_of_range	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+out_of_range	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+out_of_range	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+out_of_range	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+evergreen_program_page	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+out_of_range	https://arena.gov.au/funding/research-development-program/	Research and Development
+out_of_range	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+out_of_range	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated	https://arena.gov.au/projects	Funding Opportunities
+undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
+out_of_range	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+out_of_range	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+out_of_range	https://arena.gov.au/funding/power-system-services/	System Security
+out_of_range	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+evergreen_program_page	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+evergreen_program_page	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+evergreen_program_page	https://arena.gov.au/funding/demand-response/	Demand Response
+evergreen_program_page	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+evergreen_program_page	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+out_of_range	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+evergreen_program_page	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+evergreen_program_page	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+evergreen_program_page	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+out_of_range	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+evergreen_program_page	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+evergreen_program_page	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+out_of_range	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+evergreen_program_page	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+out_of_range	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+evergreen_program_page	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+evergreen_program_page	https://arena.gov.au/funding/	Back to top
+undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+evergreen_program_page	https://arenanet.arena.gov.au/s/funding-advice	here
+evergreen_program_page	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+out_of_range	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+out_of_range	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+out_of_range	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+evergreen_program_page	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+out_of_range	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+out_of_range	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+out_of_range	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+evergreen_program_page	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+out_of_range	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+out_of_range	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+out_of_range	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+out_of_range	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+out_of_range	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+out_of_range	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+out_of_range	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+out_of_range	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+out_of_range	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+out_of_range	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+evergreen_program_page	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+out_of_range	https://arena.gov.au/funding/research-development-program/	Research and Development
+out_of_range	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+out_of_range	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated	https://arena.gov.au/projects	Funding Opportunities
+undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
+out_of_range	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+out_of_range	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+out_of_range	https://arena.gov.au/funding/power-system-services/	System Security
+out_of_range	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+evergreen_program_page	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+evergreen_program_page	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+evergreen_program_page	https://arena.gov.au/funding/demand-response/	Demand Response
+evergreen_program_page	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+evergreen_program_page	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+out_of_range	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+evergreen_program_page	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+evergreen_program_page	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+evergreen_program_page	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+out_of_range	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+evergreen_program_page	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+evergreen_program_page	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+out_of_range	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+evergreen_program_page	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+out_of_range	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+evergreen_program_page	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+evergreen_program_page	https://arena.gov.au/funding/	Back to top
+undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+evergreen_program_page	https://arenanet.arena.gov.au/s/funding-advice	here
+evergreen_program_page	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+out_of_range	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+out_of_range	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+out_of_range	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+evergreen_program_page	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+out_of_range	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+out_of_range	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+out_of_range	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+evergreen_program_page	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+out_of_range	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+out_of_range	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+out_of_range	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+out_of_range	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+out_of_range	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+out_of_range	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+out_of_range	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+out_of_range	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+out_of_range	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+out_of_range	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+evergreen_program_page	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+out_of_range	https://arena.gov.au/funding/research-development-program/	Research and Development
+out_of_range	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+out_of_range	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated	https://arena.gov.au/projects	Funding Opportunities
+undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
+out_of_range	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+out_of_range	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+out_of_range	https://arena.gov.au/funding/power-system-services/	System Security
+out_of_range	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+evergreen_program_page	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+evergreen_program_page	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+evergreen_program_page	https://arena.gov.au/funding/demand-response/	Demand Response
+evergreen_program_page	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+evergreen_program_page	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+out_of_range	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+evergreen_program_page	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+evergreen_program_page	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+evergreen_program_page	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+out_of_range	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+evergreen_program_page	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+evergreen_program_page	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+out_of_range	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+evergreen_program_page	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+out_of_range	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+evergreen_program_page	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+evergreen_program_page	https://arena.gov.au/funding/	Back to top
+undated_last_resort	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+evergreen_program_page	https://arenanet.arena.gov.au/s/funding-advice	here
+evergreen_program_page	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+out_of_range_last_resort	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+out_of_range_last_resort	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+out_of_range_last_resort	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+evergreen_program_page	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+out_of_range_last_resort	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+out_of_range_last_resort	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+out_of_range_last_resort	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+evergreen_program_page	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+out_of_range_last_resort	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+out_of_range_last_resort	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+out_of_range_last_resort	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+out_of_range_last_resort	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+out_of_range_last_resort	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+out_of_range_last_resort	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+out_of_range_last_resort	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+out_of_range_last_resort	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+out_of_range_last_resort	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+out_of_range_last_resort	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+evergreen_program_page	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+out_of_range_last_resort	https://arena.gov.au/funding/research-development-program/	Research and Development
+out_of_range_last_resort	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+out_of_range_last_resort	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated_last_resort	https://arena.gov.au/projects	Funding Opportunities
+undated_last_resort	https://arena.gov.au/knowledge-bank	Funding Opportunities
+out_of_range_last_resort	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+out_of_range_last_resort	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+out_of_range_last_resort	https://arena.gov.au/funding/power-system-services/	System Security
+out_of_range_last_resort	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+evergreen_program_page	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+evergreen_program_page	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+evergreen_program_page	https://arena.gov.au/funding/demand-response/	Demand Response
+evergreen_program_page	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+evergreen_program_page	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+out_of_range_last_resort	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+evergreen_program_page	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+evergreen_program_page	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+evergreen_program_page	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+out_of_range_last_resort	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+evergreen_program_page	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+evergreen_program_page	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+out_of_range_last_resort	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+evergreen_program_page	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+out_of_range_last_resort	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+evergreen_program_page	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+placeholder_used		Grants & Funding: no retrievable items for 2026-04
+placeholder_used		Market & Policy: no retrievable items for 2026-04
+undated	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
+undated	https://www.newenergynexus.com/impact/	Explore impact
+undated	https://www.newenergynexus.com/portfolio/	View our portfolio
+deny_title_regex	https://www.newenergynexus.com/news-and-stories/	News & Stories
+undated	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
+undated	https://www.newenergynexus.com/impact/	Explore impact
+undated	https://www.newenergynexus.com/portfolio/	View our portfolio
+deny_title_regex	https://www.newenergynexus.com/news-and-stories/	News & Stories
+undated	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
+undated	https://www.newenergynexus.com/impact/	Explore impact
+undated	https://www.newenergynexus.com/portfolio/	View our portfolio
+deny_title_regex	https://www.newenergynexus.com/news-and-stories/	News & Stories
+undated_last_resort	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
+undated_last_resort	https://www.newenergynexus.com/impact/	Explore impact
+undated_last_resort	https://www.newenergynexus.com/portfolio/	View our portfolio
+deny_title_regex	https://www.newenergynexus.com/news-and-stories/	News & Stories
+placeholder_used		Competitors: no retrievable items for 2026-04
+undated	https://www.agl.com.au/about-agl/media-centre/asx-and-media-releases	Asx And Media Releases
+undated	https://www.agl.com.au/about-agl/news-centre?giha9n=hrd26h	NSW
+undated	https://www.agl.com.au/about-agl/news-centre?zcf97o=vlx3ap	VIC
+undated	https://www.agl.com.au/about-agl/news-centre?rmxt3r=vwt06z	QLD
+undated	https://www.agl.com.au/about-agl/news-centre?7zs43y=jpts1o	SA
+undated	https://www.agl.com.au/about-agl/news-centre?rht8y8=1cfr78	WA
+undated	https://www.agl.com.au/residential	Residential Home
+undated	https://www.agl.com.au/residential/energy	Electricity & Gas Energy Alt Text
+undated	https://www.agl.com.au/residential/internet	Internet
+undated	https://www.agl.com.au/residential/mobile	Mobile
+undated	https://www.agl.com.au/residential/solar-and-batteries	Solar & Batteries
+undated	https://www.agl.com.au/residential/electric-vehicles	Electric Vehicles
+undated	https://www.agl.com.au/residential/moving-house	Moving House
+undated	https://www.agl.com.au/small-business	Business Home
+undated	https://www.agl.com.au/small-business/electricity-gas	Electricity & Gas
+undated	https://www.agl.com.au/small-business/solar-and-batteries	Solar & Batteries
+undated	https://www.agl.com.au/small-business/electric-vehicles	Electric Vehicles
+undated	https://www.agl.com.au/small-business/moving	Move Business
+undated	https://www.agl.com.au/business	Enterprise Home
+undated	https://www.agl.com.au/business/energy-supply	Energy Supply
+undated	https://www.agl.com.au/business/energy-solutions	Energy Solutions
+undated	https://www.agl.com.au/business/sustainability	Sustainability
+undated	https://www.agl.com.au/business/support-billing	Support & Billing
+undated	https://www.agl.com.au/about-agl	About AGL
+undated	https://www.agl.com.au/help-support	Help & Support
+undated	https://www.agl.com.au/about-agl/investors/shareholder-services	AGL's Shareholder Services page
+undated	https://www.agl.com.au/about-agl/investors/results-centre	Latest shareholder news
+undated	https://igcc.org.au/supercharging-australias-future-igccs-policy-priorities/	Supercharging Australia’s Future: IGCC’s Policy Priorities
+undated	https://igcc.org.au/market/australia/	Australia
+undated	https://igcc.org.au/workstream/policy-advocacy/	Policy & Advocacy
+undated	https://igcc.org.au/working_group/policy-advocacy/	Policy & Advocacy Working Group
+undated	https://igcc.org.au/were-hiring-special-policy-advisor-methane-initiative/	We’re Hiring: Methane Engagement and Policy Advisor
+undated	https://igcc.org.au/workstream/corporate-engagement/	Corporate Engagement
+undated	https://igcc.org.au/igcc-2030-strategy/	IGCC’s 2030 Strategy: A Clear Plan For This Decade
+undated	https://igcc.org.au/workstream/investor-practice/	Investor Practice
+undated	https://igcc.org.au/market/new-zealand/	New Zealand
+undated	https://igcc.org.au/annual-report-2025-investors-progress-through-a-year-of-global-turmoil/	Annual Report 2025: Investors’ Progress in a Year of Global Turmoil
+undated	https://igcc.org.au/submission-community-benefits-principles-for-fmia/	Submission: Community Benefits Principles for a Future Made in Australia
+undated	https://igcc.org.au/working_group/energy-transition/	Energy Transition Working Group
+undated	https://igcc.org.au/systems-level-engagement/	New IGCC Report: Investors Must Engage the Wider System to Tackle Climate Risks Threatening Market-Wide Returns
+undated	https://igcc.org.au/working_group/corporate-engagement/	Corporate Engagement Working Group
+undated	https://igcc.org.au/igcc-appears-before-aotearoa-new-zealand-parliamentary-committee-international-capital-wants-climate-reporting/	IGCC appears before Aotearoa New Zealand Parliamentary Committee: International capital wants climate reporting
+undated	https://igcc.org.au/australias-60bn-public-capital-system-and-the-climate-investment-opportunity-2/	Our $60bn Public Capital System and Climate
+undated	https://igcc.org.au/working_group/climate-solutions-swg/	Climate Solutions Subworking Group
+undated	https://igcc.org.au/australian-cop-president-negotiations-has-potential-for-economic-wins/	Australian COP President (Negotiations) has Potential for Economic Wins
+undated	https://igcc.org.au/igccs-climate-leaders-awards-go-to-john-thwaites-alison-ewings-ros-mckay-and-rick-walters/	IGCC’s Climate Leaders’ Awards go to John Thwaites, Alison Ewings, Ros McKay and Rick Walters
+undated	https://igcc.org.au/working_group/investor-practice/	Investor Practice Working Group
+undated	https://www.agl.com.au/about-agl/media-centre/asx-and-media-releases	Asx And Media Releases
+undated	https://www.agl.com.au/about-agl/news-centre?giha9n=hrd26h	NSW
+undated	https://www.agl.com.au/about-agl/news-centre?zcf97o=vlx3ap	VIC
+undated	https://www.agl.com.au/about-agl/news-centre?rmxt3r=vwt06z	QLD
+undated	https://www.agl.com.au/about-agl/news-centre?7zs43y=jpts1o	SA
+undated	https://www.agl.com.au/about-agl/news-centre?rht8y8=1cfr78	WA
+undated	https://www.agl.com.au/residential	Residential Home
+undated	https://www.agl.com.au/residential/energy	Electricity & Gas Energy Alt Text
+undated	https://www.agl.com.au/residential/internet	Internet
+undated	https://www.agl.com.au/residential/mobile	Mobile
+undated	https://www.agl.com.au/residential/solar-and-batteries	Solar & Batteries
+undated	https://www.agl.com.au/residential/electric-vehicles	Electric Vehicles
+undated	https://www.agl.com.au/residential/moving-house	Moving House
+undated	https://www.agl.com.au/small-business	Business Home
+undated	https://www.agl.com.au/small-business/electricity-gas	Electricity & Gas
+undated	https://www.agl.com.au/small-business/solar-and-batteries	Solar & Batteries
+undated	https://www.agl.com.au/small-business/electric-vehicles	Electric Vehicles
+undated	https://www.agl.com.au/small-business/moving	Move Business
+undated	https://www.agl.com.au/business	Enterprise Home
+undated	https://www.agl.com.au/business/energy-supply	Energy Supply
+undated	https://www.agl.com.au/business/energy-solutions	Energy Solutions
+undated	https://www.agl.com.au/business/sustainability	Sustainability
+undated	https://www.agl.com.au/business/support-billing	Support & Billing
+undated	https://www.agl.com.au/about-agl	About AGL
+undated	https://www.agl.com.au/help-support	Help & Support
+undated	https://www.agl.com.au/about-agl/investors/shareholder-services	AGL's Shareholder Services page
+undated	https://www.agl.com.au/about-agl/investors/results-centre	Latest shareholder news
+undated	https://igcc.org.au/supercharging-australias-future-igccs-policy-priorities/	Supercharging Australia’s Future: IGCC’s Policy Priorities
+undated	https://igcc.org.au/market/australia/	Australia
+undated	https://igcc.org.au/workstream/policy-advocacy/	Policy & Advocacy
+undated	https://igcc.org.au/working_group/policy-advocacy/	Policy & Advocacy Working Group
+undated	https://igcc.org.au/were-hiring-special-policy-advisor-methane-initiative/	We’re Hiring: Methane Engagement and Policy Advisor
+undated	https://igcc.org.au/workstream/corporate-engagement/	Corporate Engagement
+undated	https://igcc.org.au/igcc-2030-strategy/	IGCC’s 2030 Strategy: A Clear Plan For This Decade
+undated	https://igcc.org.au/workstream/investor-practice/	Investor Practice
+undated	https://igcc.org.au/market/new-zealand/	New Zealand
+undated	https://igcc.org.au/annual-report-2025-investors-progress-through-a-year-of-global-turmoil/	Annual Report 2025: Investors’ Progress in a Year of Global Turmoil
+undated	https://igcc.org.au/submission-community-benefits-principles-for-fmia/	Submission: Community Benefits Principles for a Future Made in Australia
+undated	https://igcc.org.au/working_group/energy-transition/	Energy Transition Working Group
+undated	https://igcc.org.au/systems-level-engagement/	New IGCC Report: Investors Must Engage the Wider System to Tackle Climate Risks Threatening Market-Wide Returns
+undated	https://igcc.org.au/working_group/corporate-engagement/	Corporate Engagement Working Group
+undated	https://igcc.org.au/igcc-appears-before-aotearoa-new-zealand-parliamentary-committee-international-capital-wants-climate-reporting/	IGCC appears before Aotearoa New Zealand Parliamentary Committee: International capital wants climate reporting
+undated	https://igcc.org.au/australias-60bn-public-capital-system-and-the-climate-investment-opportunity-2/	Our $60bn Public Capital System and Climate
+undated	https://igcc.org.au/working_group/climate-solutions-swg/	Climate Solutions Subworking Group
+undated	https://igcc.org.au/australian-cop-president-negotiations-has-potential-for-economic-wins/	Australian COP President (Negotiations) has Potential for Economic Wins
+undated	https://igcc.org.au/igccs-climate-leaders-awards-go-to-john-thwaites-alison-ewings-ros-mckay-and-rick-walters/	IGCC’s Climate Leaders’ Awards go to John Thwaites, Alison Ewings, Ros McKay and Rick Walters
+undated	https://igcc.org.au/working_group/investor-practice/	Investor Practice Working Group
+undated	https://www.agl.com.au/about-agl/media-centre/asx-and-media-releases	Asx And Media Releases
+undated	https://www.agl.com.au/about-agl/news-centre?giha9n=hrd26h	NSW
+undated	https://www.agl.com.au/about-agl/news-centre?zcf97o=vlx3ap	VIC
+undated	https://www.agl.com.au/about-agl/news-centre?rmxt3r=vwt06z	QLD
+undated	https://www.agl.com.au/about-agl/news-centre?7zs43y=jpts1o	SA
+undated	https://www.agl.com.au/about-agl/news-centre?rht8y8=1cfr78	WA
+undated	https://www.agl.com.au/residential	Residential Home
+undated	https://www.agl.com.au/residential/energy	Electricity & Gas Energy Alt Text
+undated	https://www.agl.com.au/residential/internet	Internet
+undated	https://www.agl.com.au/residential/mobile	Mobile
+undated	https://www.agl.com.au/residential/solar-and-batteries	Solar & Batteries
+undated	https://www.agl.com.au/residential/electric-vehicles	Electric Vehicles
+undated	https://www.agl.com.au/residential/moving-house	Moving House
+undated	https://www.agl.com.au/small-business	Business Home
+undated	https://www.agl.com.au/small-business/electricity-gas	Electricity & Gas
+undated	https://www.agl.com.au/small-business/solar-and-batteries	Solar & Batteries
+undated	https://www.agl.com.au/small-business/electric-vehicles	Electric Vehicles
+undated	https://www.agl.com.au/small-business/moving	Move Business
+undated	https://www.agl.com.au/business	Enterprise Home
+undated	https://www.agl.com.au/business/energy-supply	Energy Supply
+undated	https://www.agl.com.au/business/energy-solutions	Energy Solutions
+undated	https://www.agl.com.au/business/sustainability	Sustainability
+undated	https://www.agl.com.au/business/support-billing	Support & Billing
+undated	https://www.agl.com.au/about-agl	About AGL
+undated	https://www.agl.com.au/help-support	Help & Support
+undated	https://www.agl.com.au/about-agl/investors/shareholder-services	AGL's Shareholder Services page
+undated	https://www.agl.com.au/about-agl/investors/results-centre	Latest shareholder news
+undated	https://igcc.org.au/supercharging-australias-future-igccs-policy-priorities/	Supercharging Australia’s Future: IGCC’s Policy Priorities
+undated	https://igcc.org.au/market/australia/	Australia
+undated	https://igcc.org.au/workstream/policy-advocacy/	Policy & Advocacy
+undated	https://igcc.org.au/working_group/policy-advocacy/	Policy & Advocacy Working Group
+undated	https://igcc.org.au/were-hiring-special-policy-advisor-methane-initiative/	We’re Hiring: Methane Engagement and Policy Advisor
+undated	https://igcc.org.au/workstream/corporate-engagement/	Corporate Engagement
+undated	https://igcc.org.au/igcc-2030-strategy/	IGCC’s 2030 Strategy: A Clear Plan For This Decade
+undated	https://igcc.org.au/workstream/investor-practice/	Investor Practice
+undated	https://igcc.org.au/market/new-zealand/	New Zealand
+undated	https://igcc.org.au/annual-report-2025-investors-progress-through-a-year-of-global-turmoil/	Annual Report 2025: Investors’ Progress in a Year of Global Turmoil
+undated	https://igcc.org.au/submission-community-benefits-principles-for-fmia/	Submission: Community Benefits Principles for a Future Made in Australia
+undated	https://igcc.org.au/working_group/energy-transition/	Energy Transition Working Group
+undated	https://igcc.org.au/systems-level-engagement/	New IGCC Report: Investors Must Engage the Wider System to Tackle Climate Risks Threatening Market-Wide Returns
+undated	https://igcc.org.au/working_group/corporate-engagement/	Corporate Engagement Working Group
+undated	https://igcc.org.au/igcc-appears-before-aotearoa-new-zealand-parliamentary-committee-international-capital-wants-climate-reporting/	IGCC appears before Aotearoa New Zealand Parliamentary Committee: International capital wants climate reporting
+undated	https://igcc.org.au/australias-60bn-public-capital-system-and-the-climate-investment-opportunity-2/	Our $60bn Public Capital System and Climate
+undated	https://igcc.org.au/working_group/climate-solutions-swg/	Climate Solutions Subworking Group
+undated	https://igcc.org.au/australian-cop-president-negotiations-has-potential-for-economic-wins/	Australian COP President (Negotiations) has Potential for Economic Wins
+undated	https://igcc.org.au/igccs-climate-leaders-awards-go-to-john-thwaites-alison-ewings-ros-mckay-and-rick-walters/	IGCC’s Climate Leaders’ Awards go to John Thwaites, Alison Ewings, Ros McKay and Rick Walters
+undated	https://igcc.org.au/working_group/investor-practice/	Investor Practice Working Group
+undated_last_resort	https://www.agl.com.au/about-agl/media-centre/asx-and-media-releases	Asx And Media Releases
+undated_last_resort	https://www.agl.com.au/about-agl/news-centre?giha9n=hrd26h	NSW
+undated_last_resort	https://www.agl.com.au/about-agl/news-centre?zcf97o=vlx3ap	VIC
+undated_last_resort	https://www.agl.com.au/about-agl/news-centre?rmxt3r=vwt06z	QLD
+undated_last_resort	https://www.agl.com.au/about-agl/news-centre?7zs43y=jpts1o	SA
+undated_last_resort	https://www.agl.com.au/about-agl/news-centre?rht8y8=1cfr78	WA
+undated_last_resort	https://www.agl.com.au/residential	Residential Home
+undated_last_resort	https://www.agl.com.au/residential/energy	Electricity & Gas Energy Alt Text
+undated_last_resort	https://www.agl.com.au/residential/internet	Internet
+undated_last_resort	https://www.agl.com.au/residential/mobile	Mobile
+undated_last_resort	https://www.agl.com.au/residential/solar-and-batteries	Solar & Batteries
+undated_last_resort	https://www.agl.com.au/residential/electric-vehicles	Electric Vehicles
+undated_last_resort	https://www.agl.com.au/residential/moving-house	Moving House
+undated_last_resort	https://www.agl.com.au/small-business	Business Home
+undated_last_resort	https://www.agl.com.au/small-business/electricity-gas	Electricity & Gas
+undated_last_resort	https://www.agl.com.au/small-business/solar-and-batteries	Solar & Batteries
+undated_last_resort	https://www.agl.com.au/small-business/electric-vehicles	Electric Vehicles
+undated_last_resort	https://www.agl.com.au/small-business/moving	Move Business
+undated_last_resort	https://www.agl.com.au/business	Enterprise Home
+undated_last_resort	https://www.agl.com.au/business/energy-supply	Energy Supply
+undated_last_resort	https://www.agl.com.au/business/energy-solutions	Energy Solutions
+undated_last_resort	https://www.agl.com.au/business/sustainability	Sustainability
+undated_last_resort	https://www.agl.com.au/business/support-billing	Support & Billing
+undated_last_resort	https://www.agl.com.au/about-agl	About AGL
+undated_last_resort	https://www.agl.com.au/help-support	Help & Support
+undated_last_resort	https://www.agl.com.au/about-agl/investors/shareholder-services	AGL's Shareholder Services page
+undated_last_resort	https://www.agl.com.au/about-agl/investors/results-centre	Latest shareholder news
+undated_last_resort	https://igcc.org.au/supercharging-australias-future-igccs-policy-priorities/	Supercharging Australia’s Future: IGCC’s Policy Priorities
+undated_last_resort	https://igcc.org.au/market/australia/	Australia
+undated_last_resort	https://igcc.org.au/workstream/policy-advocacy/	Policy & Advocacy
+undated_last_resort	https://igcc.org.au/working_group/policy-advocacy/	Policy & Advocacy Working Group
+undated_last_resort	https://igcc.org.au/were-hiring-special-policy-advisor-methane-initiative/	We’re Hiring: Methane Engagement and Policy Advisor
+undated_last_resort	https://igcc.org.au/workstream/corporate-engagement/	Corporate Engagement
+undated_last_resort	https://igcc.org.au/igcc-2030-strategy/	IGCC’s 2030 Strategy: A Clear Plan For This Decade
+undated_last_resort	https://igcc.org.au/workstream/investor-practice/	Investor Practice
+undated_last_resort	https://igcc.org.au/market/new-zealand/	New Zealand
+undated_last_resort	https://igcc.org.au/annual-report-2025-investors-progress-through-a-year-of-global-turmoil/	Annual Report 2025: Investors’ Progress in a Year of Global Turmoil
+undated_last_resort	https://igcc.org.au/submission-community-benefits-principles-for-fmia/	Submission: Community Benefits Principles for a Future Made in Australia
+undated_last_resort	https://igcc.org.au/working_group/energy-transition/	Energy Transition Working Group
+undated_last_resort	https://igcc.org.au/systems-level-engagement/	New IGCC Report: Investors Must Engage the Wider System to Tackle Climate Risks Threatening Market-Wide Returns
+undated_last_resort	https://igcc.org.au/working_group/corporate-engagement/	Corporate Engagement Working Group
+undated_last_resort	https://igcc.org.au/igcc-appears-before-aotearoa-new-zealand-parliamentary-committee-international-capital-wants-climate-reporting/	IGCC appears before Aotearoa New Zealand Parliamentary Committee: International capital wants climate reporting
+undated_last_resort	https://igcc.org.au/australias-60bn-public-capital-system-and-the-climate-investment-opportunity-2/	Our $60bn Public Capital System and Climate
+undated_last_resort	https://igcc.org.au/working_group/climate-solutions-swg/	Climate Solutions Subworking Group
+undated_last_resort	https://igcc.org.au/australian-cop-president-negotiations-has-potential-for-economic-wins/	Australian COP President (Negotiations) has Potential for Economic Wins
+undated_last_resort	https://igcc.org.au/igccs-climate-leaders-awards-go-to-john-thwaites-alison-ewings-ros-mckay-and-rick-walters/	IGCC’s Climate Leaders’ Awards go to John Thwaites, Alison Ewings, Ros McKay and Rick Walters
+undated_last_resort	https://igcc.org.au/working_group/investor-practice/	Investor Practice Working Group
+placeholder_used		Partners & Buyers: no retrievable items for 2026-04

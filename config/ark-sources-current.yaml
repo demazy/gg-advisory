@@ -74,8 +74,6 @@ sections:
   Competitors:
     # Carbon capture companies, projects, and investment rounds in AU/APAC
     rss:
-      # ESG Today: daily coverage of CCUS deals, investment rounds, partnerships
-      - https://www.esgtoday.com/feed/
       # DCCEEW for industrial program announcements
       - https://www.dcceew.gov.au/rss-feed
     html:
@@ -90,15 +88,13 @@ sections:
       - https://www.csiro.au/en/news/all
       # IEA: CCUS project announcements globally including APAC
       - https://www.iea.org/news
-      # ESG Today: cleantech deals, CCUS investment and M&A
-      - https://www.esgtoday.com/
       # Carbon Brief: CCUS company/project news
       - https://www.carbonbrief.org/
       # Santos: CCS projects (Moomba, Darwin)
       - https://www.santos.com/news-and-media/media-releases/
       # Woodside: CCS and industrial decarbonisation projects
       - https://www.woodside.com/news-and-media/media-releases
-      # Glencore / BlueScope / OneSteel carbon capture pilots
+      # BlueScope: potential CCUS pilots
       - https://www.bluescopesteel.com/news
       # Net Zero Australia: tracks CCS/CCUS projects and entrants
       - https://www.netzeroaustralia.net.au/news/
@@ -145,7 +141,6 @@ sections:
       - https://www.netzeroaustralia.net.au/news/
       # Biogas Association: AU biogas operators — natural carbon capture opportunity
       - https://www.aibn.com.au/news
-      # ESG Today: corporate decarbonisation commitments and technology partnerships
-      - https://www.esgtoday.com/
       # IGCC: investor pressure on industrial companies to decarbonise (creates buyer urgency)
+      # Note: only specific article URLs are useful; the /news/ listing page is blocked in filters
       - https://igcc.org.au/news/
