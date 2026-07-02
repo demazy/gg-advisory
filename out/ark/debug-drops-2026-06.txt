@@ -1,0 +1,285 @@
+# reason	url	title
+evergreen_program_page	https://arena.gov.au/funding/	Back to top
+undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+evergreen_program_page	https://arenanet.arena.gov.au/s/funding-advice	here
+evergreen_program_page	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+out_of_range	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+evergreen_program_page	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+out_of_range	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+out_of_range	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+out_of_range	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+out_of_range	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+out_of_range	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+evergreen_program_page	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+out_of_range	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+out_of_range	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+out_of_range	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+out_of_range	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+out_of_range	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+out_of_range	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+out_of_range	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+out_of_range	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+out_of_range	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+out_of_range	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+evergreen_program_page	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+out_of_range	https://arena.gov.au/funding/research-development-program/	Research and Development
+out_of_range	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+out_of_range	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated	https://arena.gov.au/projects	Funding Opportunities
+undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
+out_of_range	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+out_of_range	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+out_of_range	https://arena.gov.au/funding/power-system-services/	System Security
+out_of_range	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+evergreen_program_page	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+evergreen_program_page	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+evergreen_program_page	https://arena.gov.au/funding/demand-response/	Demand Response
+evergreen_program_page	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+evergreen_program_page	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+out_of_range	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+evergreen_program_page	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+evergreen_program_page	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+evergreen_program_page	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+out_of_range	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+evergreen_program_page	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+evergreen_program_page	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+out_of_range	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+evergreen_program_page	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+out_of_range	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+evergreen_program_page	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+evergreen_program_page	https://arena.gov.au/funding/	Back to top
+undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+evergreen_program_page	https://arenanet.arena.gov.au/s/funding-advice	here
+evergreen_program_page	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+out_of_range	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+evergreen_program_page	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+out_of_range	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+out_of_range	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+out_of_range	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+out_of_range	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+out_of_range	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+evergreen_program_page	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+out_of_range	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+out_of_range	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+out_of_range	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+out_of_range	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+out_of_range	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+out_of_range	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+out_of_range	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+out_of_range	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+out_of_range	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+out_of_range	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+evergreen_program_page	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+out_of_range	https://arena.gov.au/funding/research-development-program/	Research and Development
+out_of_range	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+out_of_range	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated	https://arena.gov.au/projects	Funding Opportunities
+undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
+out_of_range	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+out_of_range	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+out_of_range	https://arena.gov.au/funding/power-system-services/	System Security
+out_of_range	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+evergreen_program_page	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+evergreen_program_page	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+evergreen_program_page	https://arena.gov.au/funding/demand-response/	Demand Response
+evergreen_program_page	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+evergreen_program_page	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+out_of_range	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+evergreen_program_page	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+evergreen_program_page	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+evergreen_program_page	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+out_of_range	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+evergreen_program_page	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+evergreen_program_page	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+out_of_range	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+evergreen_program_page	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+out_of_range	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+evergreen_program_page	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+evergreen_program_page	https://arena.gov.au/funding/	Back to top
+undated	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+evergreen_program_page	https://arenanet.arena.gov.au/s/funding-advice	here
+evergreen_program_page	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+out_of_range	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+evergreen_program_page	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+out_of_range	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+out_of_range	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+out_of_range	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+out_of_range	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+out_of_range	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+evergreen_program_page	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+out_of_range	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+out_of_range	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+out_of_range	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+out_of_range	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+out_of_range	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+out_of_range	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+out_of_range	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+out_of_range	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+out_of_range	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+out_of_range	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+evergreen_program_page	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+out_of_range	https://arena.gov.au/funding/research-development-program/	Research and Development
+out_of_range	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+out_of_range	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated	https://arena.gov.au/projects	Funding Opportunities
+undated	https://arena.gov.au/knowledge-bank	Funding Opportunities
+out_of_range	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+out_of_range	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+out_of_range	https://arena.gov.au/funding/power-system-services/	System Security
+out_of_range	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+evergreen_program_page	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+evergreen_program_page	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+evergreen_program_page	https://arena.gov.au/funding/demand-response/	Demand Response
+evergreen_program_page	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+evergreen_program_page	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+out_of_range	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+evergreen_program_page	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+evergreen_program_page	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+evergreen_program_page	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+out_of_range	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+evergreen_program_page	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+evergreen_program_page	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+out_of_range	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+evergreen_program_page	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+out_of_range	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+evergreen_program_page	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+evergreen_program_page	https://arena.gov.au/funding/	Back to top
+undated_last_resort	https://arena.gov.au/about/strategic-priorities/	ARENA's strategic priorities
+evergreen_program_page	https://arenanet.arena.gov.au/s/funding-advice	here
+evergreen_program_page	https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream/	Powering the Regions Industrial Transformation Stream
+out_of_range_last_resort	https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2	Future Made in Australia Innovation Fund
+evergreen_program_page	https://arena.gov.au/funding/solar-sunshot/	Solar Sunshot
+out_of_range_last_resort	https://arena.gov.au/funding/advancing-renewables-program/	Advancing Renewables Program (ARP)
+out_of_range_last_resort	https://arena.gov.au/funding/driving-the-nation-program/	Driving the Nation Program
+out_of_range_last_resort	https://arena.gov.au/funding/hydrogen-headstart-round2	Hydrogen Headstart Round 2
+out_of_range_last_resort	https://arena.gov.au/funding/battery-breakthrough-initiative/	Battery Breakthrough Initiative
+out_of_range_last_resort	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4/	Ultra Low-Cost Solar PV R&D Funding Round
+evergreen_program_page	https://arena.gov.au/funding/rmp/	Regional Microgrids Program
+out_of_range_last_resort	https://arena.gov.au/funding/community-batteries-funding-round-2	Community Batteries Funding Round 2
+out_of_range_last_resort	https://arena.gov.au/funding/national-industrial-transformation-program/	National Industrial Transformation Program
+out_of_range_last_resort	https://arena.gov.au/funding/hydrogen-headstart/	Hydrogen Headstart Round 1
+out_of_range_last_resort	https://arena.gov.au/funding/industrial-energy-transformation-studies-program/	Industrial Energy Transformation Studies (IETS) Program
+out_of_range_last_resort	https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative	Sustainable Aviation Fuel Funding Initiative
+out_of_range_last_resort	https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round/	Iron and Steel Research and Development Funding Round
+out_of_range_last_resort	https://arena.gov.au/funding/hydrogen-research-and-development-funding-round/	Hydrogen Research and Development Funding Round
+out_of_range_last_resort	https://arena.gov.au/funding/community-batteries-round-1	Community Batteries Funding Round 1
+out_of_range_last_resort	https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round/	Ultra Low Cost Solar PV Research and Development
+out_of_range_last_resort	https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate/	German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)
+evergreen_program_page	https://arena.gov.au/funding/future-fuels-fund/	Future Fuels Fund Round 1
+out_of_range_last_resort	https://arena.gov.au/funding/research-development-program/	Research and Development
+out_of_range_last_resort	https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round/	Renewable Hydrogen Deployment Funding Round
+out_of_range_last_resort	https://arena.gov.au/funding/venture-capital-fund/	Renewable Energy Venture Capital Fund (REVC)
+undated_last_resort	https://arena.gov.au/projects	Funding Opportunities
+undated_last_resort	https://arena.gov.au/knowledge-bank	Funding Opportunities
+out_of_range_last_resort	https://arena.gov.au/funding/large-scale-battery-storage-funding-round/	Large Scale Battery Storage
+out_of_range_last_resort	https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot/	Commercialisation of R&D Funding Initiative Pilot
+out_of_range_last_resort	https://arena.gov.au/funding/power-system-services/	System Security
+out_of_range_last_resort	https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost/	Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost
+evergreen_program_page	https://arena.gov.au/funding/short-term-forecasting-round/	Short Term Forecasting Funding Round
+evergreen_program_page	https://arena.gov.au/funding/distributed-energy-resources/	Distributed Energy Resources
+evergreen_program_page	https://arena.gov.au/funding/demand-response/	Demand Response
+evergreen_program_page	https://arena.gov.au/funding/large-scale-solar/	Large-Scale Solar
+evergreen_program_page	https://arena.gov.au/funding/hydrogen/	Renewable Hydrogen for Export
+out_of_range_last_resort	https://arena.gov.au/funding/solar-research-development/	Solar Research & Development
+evergreen_program_page	https://arena.gov.au/funding/industry-and-researcher-collaboration/	Industry and Researcher Collaboration
+evergreen_program_page	https://arena.gov.au/funding/solar-research-excellence/	Solar Research Excellence
+evergreen_program_page	https://arena.gov.au/funding/international-engagement-program/	International Engagement Program
+out_of_range_last_resort	https://arena.gov.au/funding/emerging-renewables-program/	Emerging Renewables Program
+evergreen_program_page	https://arena.gov.au/funding/regional-australias-renewables/	Regional Australia’s Renewables
+evergreen_program_page	https://arena.gov.au/funding/accelerated-step-change-initiative-asci/	Accelerated Step Change Initiative (ASCI)
+out_of_range_last_resort	https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre/	The Australian Centre for Renewable Energy (ACRE)
+evergreen_program_page	https://arena.gov.au/funding/department-of-resources-energy-and-tourism/	Department of Resources, Energy and Tourism
+out_of_range_last_resort	https://arena.gov.au/funding/australian-solar-institute/	Australian Solar Institute
+evergreen_program_page	https://arena.gov.au/funding/post-fellowship-doctorate/	Post Fellowship Doctorate
+placeholder_used		Grants & Funding: no retrievable items for 2026-06
+placeholder_used		Market & Policy: no retrievable items for 2026-06
+undated	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
+undated	https://www.newenergynexus.com/impact/	Explore impact
+undated	https://www.newenergynexus.com/portfolio/	View our portfolio
+deny_title_regex	https://www.newenergynexus.com/news-and-stories/	News & Stories
+undated	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
+undated	https://www.newenergynexus.com/impact/	Explore impact
+undated	https://www.newenergynexus.com/portfolio/	View our portfolio
+deny_title_regex	https://www.newenergynexus.com/news-and-stories/	News & Stories
+undated	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
+undated	https://www.newenergynexus.com/impact/	Explore impact
+undated	https://www.newenergynexus.com/portfolio/	View our portfolio
+deny_title_regex	https://www.newenergynexus.com/news-and-stories/	News & Stories
+undated_last_resort	https://www.newenergynexus.com/for-entrepreneurs/	Find a program
+undated_last_resort	https://www.newenergynexus.com/impact/	Explore impact
+undated_last_resort	https://www.newenergynexus.com/portfolio/	View our portfolio
+deny_title_regex	https://www.newenergynexus.com/news-and-stories/	News & Stories
+placeholder_used		Competitors: no retrievable items for 2026-06
+undated	https://igcc.org.au/media-release-improvements-to-cgt-tax-package-welcomed-but-renewables-pipeline-remains-at-risk/	Media Release: Improvements to CGT Tax Package Welcomed, but Renewables Pipeline Remains at Risk
+undated	https://igcc.org.au/market/australia/	Australia
+undated	https://igcc.org.au/workstream/policy-advocacy/	Policy & Advocacy
+undated	https://igcc.org.au/state-of-net-zero-investment-2026-now-available/	State of Net Zero Investment 2026 Now Available
+undated	https://igcc.org.au/workstream/corporate-engagement/	Corporate Engagement
+undated	https://igcc.org.au/workstream/investor-practice/	Investor Practice
+undated	https://igcc.org.au/new-resource-introducing-just-adaptation-for-institutional-investors/	New resource: Introducing just adaptation for institutional investors
+undated	https://igcc.org.au/market/new-zealand/	New Zealand
+undated	https://igcc.org.au/working_group/policy-advocacy/	Policy & Advocacy Working Group
+undated	https://igcc.org.au/beyond-commitments-a-canbury-insights-analysis-using-igccs-capital-allocation-alignment-framework/	Beyond Commitments: A Canbury Insights analysis using IGCC’s Capital Allocation Alignment Framework
+undated	https://igcc.org.au/working_group/corporate-engagement/	Corporate Engagement Working Group
+undated	https://igcc.org.au/new-guide-supports-defensible-physical-climate-risk-assessments-for-infrastructure/	New guide supports defensible physical climate risk assessments for infrastructure
+undated	https://igcc.org.au/working_group/real-assets-subworking-group/	Real Assets Subworking Group
+undated	https://igcc.org.au/working_group/energy-transition/	Energy Transition Working Group
+undated	https://igcc.org.au/2026-budget-response/	Budget Risks Investment in Clean Energy and Industry
+undated	https://igcc.org.au/submission-cca-evidence-platform-to-support-investors-on-progress-to-net-zero/	Submission: CCA Evidence Platform to Support Investors on Progress to Net Zero
+undated	https://igcc.org.au/supercharging-australias-future-igccs-policy-priorities/	Supercharging Australia’s Future: IGCC’s Policy Priorities
+undated	https://igcc.org.au/igcc-2030-strategy/	IGCC’s 2030 Strategy: A Clear Plan For This Decade
+undated	https://igcc.org.au/media-release-improvements-to-cgt-tax-package-welcomed-but-renewables-pipeline-remains-at-risk/	Media Release: Improvements to CGT Tax Package Welcomed, but Renewables Pipeline Remains at Risk
+undated	https://igcc.org.au/market/australia/	Australia
+undated	https://igcc.org.au/workstream/policy-advocacy/	Policy & Advocacy
+undated	https://igcc.org.au/state-of-net-zero-investment-2026-now-available/	State of Net Zero Investment 2026 Now Available
+undated	https://igcc.org.au/workstream/corporate-engagement/	Corporate Engagement
+undated	https://igcc.org.au/workstream/investor-practice/	Investor Practice
+undated	https://igcc.org.au/new-resource-introducing-just-adaptation-for-institutional-investors/	New resource: Introducing just adaptation for institutional investors
+undated	https://igcc.org.au/market/new-zealand/	New Zealand
+undated	https://igcc.org.au/working_group/policy-advocacy/	Policy & Advocacy Working Group
+undated	https://igcc.org.au/beyond-commitments-a-canbury-insights-analysis-using-igccs-capital-allocation-alignment-framework/	Beyond Commitments: A Canbury Insights analysis using IGCC’s Capital Allocation Alignment Framework
+undated	https://igcc.org.au/working_group/corporate-engagement/	Corporate Engagement Working Group
+undated	https://igcc.org.au/new-guide-supports-defensible-physical-climate-risk-assessments-for-infrastructure/	New guide supports defensible physical climate risk assessments for infrastructure
+undated	https://igcc.org.au/working_group/real-assets-subworking-group/	Real Assets Subworking Group
+undated	https://igcc.org.au/working_group/energy-transition/	Energy Transition Working Group
+undated	https://igcc.org.au/2026-budget-response/	Budget Risks Investment in Clean Energy and Industry
+undated	https://igcc.org.au/submission-cca-evidence-platform-to-support-investors-on-progress-to-net-zero/	Submission: CCA Evidence Platform to Support Investors on Progress to Net Zero
+undated	https://igcc.org.au/supercharging-australias-future-igccs-policy-priorities/	Supercharging Australia’s Future: IGCC’s Policy Priorities
+undated	https://igcc.org.au/igcc-2030-strategy/	IGCC’s 2030 Strategy: A Clear Plan For This Decade
+undated	https://igcc.org.au/media-release-improvements-to-cgt-tax-package-welcomed-but-renewables-pipeline-remains-at-risk/	Media Release: Improvements to CGT Tax Package Welcomed, but Renewables Pipeline Remains at Risk
+undated	https://igcc.org.au/market/australia/	Australia
+undated	https://igcc.org.au/workstream/policy-advocacy/	Policy & Advocacy
+undated	https://igcc.org.au/state-of-net-zero-investment-2026-now-available/	State of Net Zero Investment 2026 Now Available
+undated	https://igcc.org.au/workstream/corporate-engagement/	Corporate Engagement
+undated	https://igcc.org.au/workstream/investor-practice/	Investor Practice
+undated	https://igcc.org.au/new-resource-introducing-just-adaptation-for-institutional-investors/	New resource: Introducing just adaptation for institutional investors
+undated	https://igcc.org.au/market/new-zealand/	New Zealand
+undated	https://igcc.org.au/working_group/policy-advocacy/	Policy & Advocacy Working Group
+undated	https://igcc.org.au/beyond-commitments-a-canbury-insights-analysis-using-igccs-capital-allocation-alignment-framework/	Beyond Commitments: A Canbury Insights analysis using IGCC’s Capital Allocation Alignment Framework
+undated	https://igcc.org.au/working_group/corporate-engagement/	Corporate Engagement Working Group
+undated	https://igcc.org.au/new-guide-supports-defensible-physical-climate-risk-assessments-for-infrastructure/	New guide supports defensible physical climate risk assessments for infrastructure
+undated	https://igcc.org.au/working_group/real-assets-subworking-group/	Real Assets Subworking Group
+undated	https://igcc.org.au/working_group/energy-transition/	Energy Transition Working Group
+undated	https://igcc.org.au/2026-budget-response/	Budget Risks Investment in Clean Energy and Industry
+undated	https://igcc.org.au/submission-cca-evidence-platform-to-support-investors-on-progress-to-net-zero/	Submission: CCA Evidence Platform to Support Investors on Progress to Net Zero
+undated	https://igcc.org.au/supercharging-australias-future-igccs-policy-priorities/	Supercharging Australia’s Future: IGCC’s Policy Priorities
+undated	https://igcc.org.au/igcc-2030-strategy/	IGCC’s 2030 Strategy: A Clear Plan For This Decade
+undated_last_resort	https://igcc.org.au/media-release-improvements-to-cgt-tax-package-welcomed-but-renewables-pipeline-remains-at-risk/	Media Release: Improvements to CGT Tax Package Welcomed, but Renewables Pipeline Remains at Risk
+undated_last_resort	https://igcc.org.au/market/australia/	Australia
+undated_last_resort	https://igcc.org.au/workstream/policy-advocacy/	Policy & Advocacy
+undated_last_resort	https://igcc.org.au/state-of-net-zero-investment-2026-now-available/	State of Net Zero Investment 2026 Now Available
+undated_last_resort	https://igcc.org.au/workstream/corporate-engagement/	Corporate Engagement
+undated_last_resort	https://igcc.org.au/workstream/investor-practice/	Investor Practice
+undated_last_resort	https://igcc.org.au/new-resource-introducing-just-adaptation-for-institutional-investors/	New resource: Introducing just adaptation for institutional investors
+undated_last_resort	https://igcc.org.au/market/new-zealand/	New Zealand
+undated_last_resort	https://igcc.org.au/working_group/policy-advocacy/	Policy & Advocacy Working Group
+undated_last_resort	https://igcc.org.au/beyond-commitments-a-canbury-insights-analysis-using-igccs-capital-allocation-alignment-framework/	Beyond Commitments: A Canbury Insights analysis using IGCC’s Capital Allocation Alignment Framework
+undated_last_resort	https://igcc.org.au/working_group/corporate-engagement/	Corporate Engagement Working Group
+undated_last_resort	https://igcc.org.au/new-guide-supports-defensible-physical-climate-risk-assessments-for-infrastructure/	New guide supports defensible physical climate risk assessments for infrastructure
+undated_last_resort	https://igcc.org.au/working_group/real-assets-subworking-group/	Real Assets Subworking Group
+undated_last_resort	https://igcc.org.au/working_group/energy-transition/	Energy Transition Working Group
+undated_last_resort	https://igcc.org.au/2026-budget-response/	Budget Risks Investment in Clean Energy and Industry
+undated_last_resort	https://igcc.org.au/submission-cca-evidence-platform-to-support-investors-on-progress-to-net-zero/	Submission: CCA Evidence Platform to Support Investors on Progress to Net Zero
+undated_last_resort	https://igcc.org.au/supercharging-australias-future-igccs-policy-priorities/	Supercharging Australia’s Future: IGCC’s Policy Priorities
+undated_last_resort	https://igcc.org.au/igcc-2030-strategy/	IGCC’s 2030 Strategy: A Clear Plan For This Decade
+placeholder_used		Partners & Buyers: no retrievable items for 2026-06
