@@ -1,10 +1,6 @@
 {
   "urls": [
     {
-      "url": "https://energyconsumersaustralia.com.au/news/australians-want-fairer-energy-market-expect-providers-step-up",
-      "ts": 1775180675.926313
-    },
-    {
       "url": "https://energyconsumersaustralia.com.au/news/consumers-leading-clean-energy-transition-further-reform-needed-eca-responds-release-2026-isp",
       "ts": 1782883310.926407
     },
@@ -13,16 +9,20 @@
       "ts": 1780292854.192564
     },
     {
-      "url": "https://energyconsumersaustralia.com.au/news/energy-consumers-australia-statement-aemcs-enhancing-distribution-network-planning-reporting",
-      "ts": 1777610730.872548
+      "url": "https://energyconsumersaustralia.com.au/news/media-release-levelling-playing-field-eca-hails-todays-final-determination-network-planning",
+      "ts": 1785557758.34491
     },
     {
-      "url": "https://energyconsumersaustralia.com.au/news/media-release-landmark-laws-consumer-groups-welcome-unfair-trading-prohibition",
-      "ts": 1775174145.533353
+      "url": "https://energyconsumersaustralia.com.au/news/media-release-statement-response-aemc-isp-framework-discussion-paper",
+      "ts": 1785557758.34491
     },
     {
       "url": "https://energyconsumersaustralia.com.au/news/one-highest-impact-decisions-home-energy-bills-about-made-heres-why-matters",
       "ts": 1782883310.926407
+    },
+    {
+      "url": "https://energyconsumersaustralia.com.au/news/statement-response-accc-unsolicited-selling-lead-generation-report",
+      "ts": 1785557758.34491
     },
     {
       "url": "https://igcc.org.au/2026-budget-response/",
@@ -33,8 +33,8 @@
       "ts": 1780292854.192564
     },
     {
-      "url": "https://igcc.org.au/igcc-2030-strategy/",
-      "ts": 1775180675.926313
+      "url": "https://igcc.org.au/media-release-improvements-to-cgt-tax-package-welcomed-but-renewables-pipeline-remains-at-risk/",
+      "ts": 1785557758.34491
     },
     {
       "url": "https://igcc.org.au/new-guide-supports-defensible-physical-climate-risk-assessments-for-infrastructure/",
@@ -53,24 +53,8 @@
       "ts": 1780292854.192564
     },
     {
-      "url": "https://igcc.org.au/supercharging-australias-future-igccs-policy-priorities/",
-      "ts": 1775180675.926313
-    },
-    {
-      "url": "https://igcc.org.au/were-hiring-special-policy-advisor-methane-initiative/",
-      "ts": 1775180675.926313
-    },
-    {
-      "url": "https://news.google.com/rss/articles/cbmiqafbvv95cuxondzxvgl1c01tzgzdqmlbvmh2z3fxegvwdvk4x1zcenpplw96zhhhnuvfuhg0yuvjrna0nuw1nxjrog00ww9qnfo2r1lxzetnr3j4mwllnde2cepinkhuuzrysjn1rs11wdbkwxzqyzh2sjv4ylmwcnlfd29fuedywgphmhbnegj4zlv6u29oczq5ukg4mediv2dodunxwxpprlluuljim3k?oc=5",
-      "ts": 1775183547.26629
-    },
-    {
-      "url": "https://news.google.com/rss/articles/cbmiuefvx3lxtfa2cvliq1v4zxf2qzbvuhryutj0nc1tnmnjynitu1j3t1r3ujh3oxr3mglialjtwnltogtvmm5ru0dku0jxbg1hz2ktn2lnwmvz?oc=5",
-      "ts": 1775183547.26629
-    },
-    {
-      "url": "https://news.google.com/rss/articles/cbmivafbvv95cuxnywxndnhktghzymnyzej3nhjsrfnaanrzutruzjfzwjfnvuj6a19jcnrurk1qywzjmfjwm01kx0jsyvo3vdbjqnm1vvfksdzvvdfjn2h0ctbcsng3azvymde0wdrhuhk0wmd0ae9syujmddewtdjrsm1mnufnrevtyjvtekf4cuxvlvzbmhltcedznwnaav9ymknqymplswlydjjir1b6nhbudkvetulklupsvdzzr1u2mheyzg?oc=5",
-      "ts": 1775183547.26629
+      "url": "https://igcc.org.au/were-hiring-head-of-development/",
+      "ts": 1785557758.34491
     },
     {
       "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-announces-reliability-panel-appointments-0",
@@ -81,44 +65,20 @@
       "ts": 1782883310.926407
     },
     {
-      "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-finalises-rules-customers-leaving-gas-network",
-      "ts": 1775174145.533353
-    },
-    {
       "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-finalises-stage-2-gas-reforms-strengthen-east-coast-gas-system-reliability",
       "ts": 1782883310.926407
-    },
-    {
-      "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-proposes-clearer-rules-manage-gas-supply-risks-during-australias-energy-transition",
-      "ts": 1775183547.26629
-    },
-    {
-      "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-proposes-improvements-life-support-customer-processes",
-      "ts": 1775174145.533353
-    },
-    {
-      "url": "https://www.aemc.gov.au/news-centre/media-releases/aemc-updates-market-price-cap-2026-27",
-      "ts": 1775183547.26629
     },
     {
       "url": "https://www.aemc.gov.au/news-centre/media-releases/national-electricity-grid-remains-reliable-and-secure-latest-reliability-panel-review",
       "ts": 1780292854.192564
     },
     {
-      "url": "https://www.aemc.gov.au/news-centre/media-releases/network-pricing-reform-could-cut-household-electricity-bills-and-deliver-6-billion-system-savings",
-      "ts": 1777610730.872548
+      "url": "https://www.aemc.gov.au/news-centre/media-releases/new-rule-make-invisible-visible-across-distribution-network",
+      "ts": 1785557758.34491
     },
     {
-      "url": "https://www.aemc.gov.au/news-centre/media-releases/new-version-244-national-electricity-rules",
-      "ts": 1775174145.533353
-    },
-    {
-      "url": "https://www.aemc.gov.au/news-centre/media-releases/new-version-89-national",
-      "ts": 1775180675.926313
-    },
-    {
-      "url": "https://www.aemc.gov.au/news-centre/media-releases/reliability-panel-prioritises-stability-consumers-proposed-change-reliability-standard-2028-2032",
-      "ts": 1777610730.872548
+      "url": "https://www.aemc.gov.au/news-centre/media-releases/new-version-14-western-australia-gas-rules",
+      "ts": 1785557758.34491
     },
     {
       "url": "https://www.aemc.gov.au/news-centre/speeches/building-trust-transition",
@@ -129,64 +89,36 @@
       "ts": 1780292854.192564
     },
     {
-      "url": "https://www.aemc.gov.au/news-centre/speeches/data-power-navigating-policy-regulation-and-networks",
-      "ts": 1777610730.872548
+      "url": "https://www.aemc.gov.au/news-centre/speeches/reshaping-energy-market-ai-era",
+      "ts": 1785557758.34491
     },
     {
-      "url": "https://www.aemc.gov.au/news-centre/speeches/energy-security-keeping-lights-through-energy-transition-qld",
-      "ts": 1775183547.26629
+      "url": "https://www.apra.gov.au/news-and-publications/end-alternate-submission-process-adis-and-rfcs",
+      "ts": 1785557758.34491
     },
     {
       "url": "https://www.apra.gov.au/news-and-publications/monthly-authorised-deposit-taking-institution-statistics",
       "ts": 1782883310.926407
     },
     {
+      "url": "https://www.apra.gov.au/news-and-publications/private-health-insurance-annual-coverage-survey",
+      "ts": 1785557758.34491
+    },
+    {
       "url": "https://www.apra.gov.au/news-and-publications/quarterly-authorised-deposit-taking-institution-statistics",
       "ts": 1782883310.926407
     },
     {
-      "url": "https://www.cer.gov.au/news-and-media/news/2026/february/2024-25-national-greenhouse-and-energy-reporting-data-now-available",
-      "ts": 1775180675.926313
-    },
-    {
-      "url": "https://www.cer.gov.au/news-and-media/news/2026/march/identity-verification-made-simpler-scheme-participants",
-      "ts": 1775174145.533353
-    },
-    {
-      "url": "https://www.cer.gov.au/news-and-media/news/2026/march/new-solar-battery-photo-requirements-now-place",
-      "ts": 1775174145.533353
-    },
-    {
-      "url": "https://www.cer.gov.au/news-and-media/news/2026/march/phenix-tradings-registration-permanently-suspended",
-      "ts": 1775174145.533353
+      "url": "https://www.cer.gov.au/news-and-media/news/2026/july/solar-pv-installer-declared-ineligible-to-install-solar-systems-and-batteries-under-sres-sandeep",
+      "ts": 1785557758.34491
     },
     {
       "url": "https://www.cleanenergycouncil.org.au/news-resources/aemo-planning-places-renewables-in-pole-position-in-the-race-to-net-zero",
       "ts": 1780292854.192564
     },
     {
-      "url": "https://www.efrag.org/en/news-and-calendar/news/contribute-to-europes-sme-sustainability-journey-share-your-vsme-sustainability-report-with-efrag",
-      "ts": 1775174145.533353
-    },
-    {
-      "url": "https://www.efrag.org/en/news-and-calendar/news/contribute-to-the-european-views-on-the-issb-consultation-on-sasb-enhancements",
-      "ts": 1777610730.872548
-    },
-    {
       "url": "https://www.efrag.org/en/news-and-calendar/news/deadline-extended-to-8-july-esrs-for-thirdcountry-undertakings-field-test-call-for-expression-of",
       "ts": 1782883310.926407
-    },
-    {
-      "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-adds-dutch-and-irish-to-vsme-digital-template-launches-data-migration-tool",
-      "ts": 1775183547.26629
-    },
-    {
-      "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-administrative-board-online-meeting-17-march-2026",
-      "ts": 1775180675.926313
-    },
-    {
-      "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-calls-for-industry-voices-to-shape-europes-response-to-sasb-consultation",
-      "ts": 1777610730.872548
     },
     {
       "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-endorsement-status-report-update-60",
@@ -197,6 +129,14 @@
       "ts": 1780292854.192564
     },
     {
+      "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-launches-public-consultation-on-the-esrs40a-exposure-draft-for-certain-noneu-undertakings",
+      "ts": 1785557758.34491
+    },
+    {
+      "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-publishes-its-comment-letter-on-the-issb-sasb-enhancement-consultation",
+      "ts": 1785557758.34491
+    },
+    {
       "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-releases-2025-annual-review-highlighting-its-role-in-strengthening-europes-reporting",
       "ts": 1780292854.192564
     },
@@ -205,36 +145,12 @@
       "ts": 1782883310.926407
     },
     {
-      "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-srb-sr-teg-online-meeting-11-march-2026",
-      "ts": 1775183547.26629
-    },
-    {
-      "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-submits-its-sustainability-reporting-work-programme-2026-to-the-european-commission",
-      "ts": 1777610730.872548
+      "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-state-of-play-2026-report-now-available",
+      "ts": 1785557758.34491
     },
     {
       "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-update-podcast-new-may-edition-episodes-available",
       "ts": 1782883310.926407
-    },
-    {
-      "url": "https://www.efrag.org/en/news-and-calendar/news/efrag-welcomes-a-new-friend-of-efrag-sustainability-reporting-synesgy",
-      "ts": 1775174145.533353
-    },
-    {
-      "url": "https://www.efrag.org/en/news-and-calendar/news/help-shape-europes-voice-on-business-conduct-reporting-join-efrags-workshops",
-      "ts": 1775183547.26629
-    },
-    {
-      "url": "https://www.efrag.org/en/news-and-calendar/news/new-composition-of-the-efrag-user-panel",
-      "ts": 1775180675.926313
-    },
-    {
-      "url": "https://www.efrag.org/en/news-and-calendar/news/new-efrag-update-podcast-episode-available-december-2025-january-2026-edition",
-      "ts": 1775180675.926313
-    },
-    {
-      "url": "https://www.efrag.org/en/news-and-calendar/news/strengthening-global-standards-on-workers-rights-and-protection-efrags-comment-letter-to-gri-now",
-      "ts": 1775174145.533353
     },
     {
       "url": "https://www.energynetworks.com.au/news/energy-insider/2026-energy-insider/a-fair-energy-transition-must-go-hand-in-hand-with-delivery-at-scale/",
@@ -243,10 +159,6 @@
     {
       "url": "https://www.energynetworks.com.au/news/energy-insider/2026-energy-insider/australias-energy-transition/",
       "ts": 1782883310.926407
-    },
-    {
-      "url": "https://www.energynetworks.com.au/news/energy-insider/2026-energy-insider/the-aemc-pricing-review-why-higher-fixed-charges-neednt-undermine-cer/",
-      "ts": 1777610730.872548
     },
     {
       "url": "https://www.energynetworks.com.au/news/energy-insider/2026-energy-insider/the-interoperability-gap/",
@@ -273,12 +185,24 @@
       "ts": 1780292854.192564
     },
     {
+      "url": "https://www.esgtoday.com/commonwealth-raises-1-billion-to-accelerate-path-to-commercial-fusion-energy/",
+      "ts": 1785557758.34491
+    },
+    {
+      "url": "https://www.esgtoday.com/deepki-acquires-real-estate-electrification-ai-startup-camion/",
+      "ts": 1785557758.34491
+    },
+    {
+      "url": "https://www.esgtoday.com/deutsche-bank-reports-strongest-sustainable-finance-quarter-in-over-4-years/",
+      "ts": 1785557758.34491
+    },
+    {
       "url": "https://www.esgtoday.com/digitalbridge-acquires-electrification-focused-investor-arclight-for-1-billion/",
       "ts": 1780292854.192564
     },
     {
-      "url": "https://www.esgtoday.com/erm-appoints-louise-pearce-as-global-leader-of-sustainability-and-risk/",
-      "ts": 1777610730.872548
+      "url": "https://www.esgtoday.com/ecovadis-novata-partner-to-help-companies-investors-measure-scope-3-emissions/",
+      "ts": 1785557758.34491
     },
     {
       "url": "https://www.esgtoday.com/esg-today-week-in-review-263/",
@@ -289,52 +213,28 @@
       "ts": 1782883310.926407
     },
     {
-      "url": "https://www.esgtoday.com/google-signs-long-term-deal-with-amex-gbt-shell-saf-platform/",
-      "ts": 1775174145.533353
-    },
-    {
       "url": "https://www.esgtoday.com/issb-to-allow-use-of-tnfd-metrics-to-meet-nature-related-disclosure-requirements/",
       "ts": 1782883310.926407
-    },
-    {
-      "url": "https://www.esgtoday.com/nestle-launches-project-to-improve-human-rights-in-coffee-supply-chain/",
-      "ts": 1775174145.533353
     },
     {
       "url": "https://www.esgtoday.com/new-zealand-proposes-adopting-ifrs-s2-as-new-climate-reporting-standard/",
       "ts": 1782883310.926407
     },
     {
-      "url": "https://www.esgtoday.com/nyc-pension-funds-say-blackrock-fidelity-not-aligned-with-climate-expectations/",
-      "ts": 1777610730.872548
-    },
-    {
-      "url": "https://www.esgtoday.com/octopus-invests-500-million-in-u-s-reforestation-based-carbon-removal-projects/",
-      "ts": 1777610730.872548
-    },
-    {
-      "url": "https://www.esgtoday.com/pepsico-signs-10-year-clean-energy-deal-for-operations-and-suppliers-in-europe/",
-      "ts": 1777610730.872548
+      "url": "https://www.esgtoday.com/schneider-electric-acquires-grid-resilience-solutions-provider-aidash-for-350-million/",
+      "ts": 1785557758.34491
     },
     {
       "url": "https://www.esgtoday.com/sustainable-nutrition-startup-protein-brewery-raises-20-million/",
       "ts": 1782883310.926407
     },
     {
-      "url": "https://www.esgtoday.com/totalenergies-says-it-cant-formulate-net-zero-targets-as-1-5c-is-out-of-reach/",
-      "ts": 1775174145.533353
+      "url": "https://www.esgtoday.com/vast-majority-of-companies-oppose-tougher-ghg-protocol-scope-2-reporting-proposals/",
+      "ts": 1785557758.34491
     },
     {
-      "url": "https://www.esgtoday.com/toyota-plans-to-join-volvo-daimler-in-hydrogen-fuel-cell-jv/",
-      "ts": 1775174145.533353
-    },
-    {
-      "url": "https://www.esgtoday.com/u-s-doe-partners-with-amazon-on-solutions-to-recover-critical-materials-from-textile-tech-waste/",
-      "ts": 1775174145.533353
-    },
-    {
-      "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-april-2026.html",
-      "ts": 1777610730.872548
+      "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-july-2026.html",
+      "ts": 1785557758.34491
     },
     {
       "url": "https://www.ifrs.org/content/ifrs/home/news-and-events/updates/issb/2026/issb-update-june-2026.html",
@@ -345,36 +245,8 @@
       "ts": 1780292854.192564
     },
     {
-      "url": "https://www.irena.org/news/pressreleases/2026/apr/moving-from-energy-crisis-to-energy-security-with-renewables",
-      "ts": 1777610730.872548
-    },
-    {
-      "url": "https://www.irena.org/news/pressreleases/2026/apr/near-700-gw-surge-in-2025-proves-renewable-energy-resilience",
-      "ts": 1777610730.872548
-    },
-    {
-      "url": "https://www.rba.gov.au/publications/fsr/2026/mar/",
-      "ts": 1775174145.533353
-    },
-    {
       "url": "https://www.rba.gov.au/publications/smp/2026/may/",
       "ts": 1780292854.192564
-    },
-    {
-      "url": "https://www.startupdaily.net/advice/leadership/recognition-is-underrated-heres-why-its-your-most-valuable-leadership-tool/",
-      "ts": 1777610730.872548
-    },
-    {
-      "url": "https://www.startupdaily.net/advice/opinion/ai-is-already-across-your-business-and-its-carbon-impact-probably-is-too/",
-      "ts": 1777610730.872548
-    },
-    {
-      "url": "https://www.startupdaily.net/advice/opinion/anthropic-has-come-to-copyright-epiphany-after-claude-code-leak/",
-      "ts": 1775180675.926313
-    },
-    {
-      "url": "https://www.startupdaily.net/advice/opinion/should-startup-founders-become-angel-investors/",
-      "ts": 1775180675.926313
     },
     {
       "url": "https://www.startupdaily.net/advice/opinion/why-wisetech-cant-treat-employees-its-making-redundant-like-an-ex/",
@@ -385,8 +257,8 @@
       "ts": 1782883310.926407
     },
     {
-      "url": "https://www.startupdaily.net/after-hours/gaming/gaming-are-you-getting-crushed-in-pokemon-champions-too/",
-      "ts": 1777610730.872548
+      "url": "https://www.startupdaily.net/after-hours/gaming/gaming-bypassing-the-lottery/",
+      "ts": 1785557758.34491
     },
     {
       "url": "https://www.startupdaily.net/after-hours/gaming/gaming-the-steam-machines-1609-price-tag/",
@@ -403,6 +275,10 @@
     {
       "url": "https://www.startupdaily.net/after-hours/motoring/amber-scores-13-6-million-for-vehicle-to-grid-residential-energy-plan/",
       "ts": 1780292854.192564
+    },
+    {
+      "url": "https://www.startupdaily.net/partner-content/apt-brighte-bellroy-and-more-of-australias-fastest-growing-consumer-brands-share-customer-growth-secrets/",
+      "ts": 1785557758.34491
     }
   ]
 }
