@@ -1,0 +1,132 @@
+name: grants-radar
+
+on:
+  # schedule:
+  #   - cron: "10 0 1 * *" # 00:10 UTC on the 1st of each month
+
+  workflow_dispatch:
+    inputs:
+      year:
+        description: "Year to generate (e.g., 2026)"
+        required: false
+        default: ""
+      month:
+        description: "Month to generate (01..12)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: grants-radar
+  cancel-in-progress: false
+
+jobs:
+  run-grants-radar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync with main
+        if: github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git pull --rebase origin main
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Compute Radar month
+        id: when
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          IN_YEAR="${{ github.event.inputs.year || '' }}"
+          IN_MONTH="${{ github.event.inputs.month || '' }}"
+
+          if [[ -n "$IN_YEAR" && -n "$IN_MONTH" ]]; then
+            YM="$(printf "%04d-%02d" "$IN_YEAR" "$IN_MONTH")"
+          else
+            LAST_PREV=$(TZ=Australia/Melbourne date -d "$(TZ=Australia/Melbourne date +%Y-%m-01) -1 day" +%Y-%m-%d)
+            YM=$(TZ=Australia/Melbourne date -d "$LAST_PREV" +%Y-%m)
+          fi
+
+          echo "ym=$YM" >> "$GITHUB_OUTPUT"
+          echo "Radar month: $YM"
+
+      - name: Generate Grants & Accelerators Radar
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          YM="${{ steps.when.outputs.ym }}"
+
+          python src/build_grants_docx.py config/grants.yaml "$YM"
+          python src/build_grants_html.py config/grants.yaml "$YM"
+
+          test -f "out/grants-radar-${YM}.docx" || {
+            echo "ERROR: DOCX Radar was not generated"
+            exit 1
+          }
+
+          test -f "out/grants-radar-${YM}.html" || {
+            echo "ERROR: HTML Radar was not generated"
+            exit 1
+          }
+
+      - name: Commit Radar outputs
+        if: github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "content-bot"
+          git config user.email "content-bot@example.com"
+
+          YM="${{ steps.when.outputs.ym }}"
+
+          git add -f "out/grants-radar-${YM}.docx"
+          git add -f "out/grants-radar-${YM}.html"
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "grants: radar ${YM}"
+          git push origin HEAD:main
+
+      - name: Email Grants & Accelerators Radar
+        if: success()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.mail.me.com
+          server_port: 587
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "GG Advisory | Grants & Accelerators Radar (${{ steps.when.outputs.ym }})"
+          from: "GG Advisory <${{ secrets.MAIL_USERNAME }}>"
+          to: "a.demazy_de_fortet@icloud.com"
+          body: |
+            Grants & Accelerators Radar for ${{ steps.when.outputs.ym }} attached.
+
+            Repo:
+            https://github.com/${{ github.repository }}/tree/main/out
+          attachments: |
+            out/grants-radar-${{ steps.when.outputs.ym }}.docx
+            out/grants-radar-${{ steps.when.outputs.ym }}.html
