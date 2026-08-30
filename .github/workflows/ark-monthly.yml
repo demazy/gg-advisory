@@ -1,8 +1,8 @@
 name: ark-monthly-intelligence
 
 on:
-  schedule:
-    - cron: "30 0 2 * *" # 00:30 UTC on the 2nd of each month (offset from main digest)
+  #schedule:
+  #  - cron: "30 0 2 * *" # 00:30 UTC on the 2nd of each month (offset from main digest)
   workflow_dispatch:
     inputs:
       year:
