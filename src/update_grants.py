@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""Audited v3 update stage for the GG Advisory Funding Radar.
+"""Audited v5 update stage for the GG Advisory Funding Radar.
 
-Key design changes from v2:
+Key design principles:
 - completeness discovery is performed with domain-restricted web search on official/administering domains;
 - no whole-site sitemap crawl is treated as a programme universe;
 - every tracked record is freshly re-verified with live web search, even when its stored URL is stale;
@@ -10,7 +10,7 @@ Key design changes from v2:
 """
 from __future__ import annotations
 
-PIPELINE_VERSION = "3.2-web-search-required"
+PIPELINE_VERSION = "5.0-canonical-ledger-layout"
 
 import argparse
 import json
@@ -36,6 +36,7 @@ from grants_core import (
     yaml_dump,
     yaml_load,
 )
+from grants_history import apply_history, validate_history
 
 
 def _visible(entry: Dict[str, Any], verified: date) -> bool:
@@ -92,7 +93,7 @@ def _validate_web_record(
     if old:
         rec["id"] = clean(old.get("id")) or slugify(clean(rec.get("name")))
         # Preserve manual visibility controls but do not preserve stale factual content.
-        for k in ("include_in_report",):
+        for k in ("include_in_report", "history"):
             if k in old:
                 rec[k] = old[k]
     elif not clean(rec.get("id")):
@@ -110,8 +111,17 @@ def _validate_web_record(
         issues.append(f"low_extract_confidence:{conf:.3f}")
     if payload.get("unresolved_conflict"):
         issues.append("unresolved_source_conflict")
-    if payload.get("in_scope") is False:
-        issues.append("programme_out_of_scope")
+    in_scope = payload.get("in_scope") is not False
+    # For an already tracked pathway, a verified end-of-life is a valid explicit disposition,
+    # not a silent deletion. Keep the record in the canonical YAML, mark it Archived, and
+    # remove it from the current PDF. New out-of-scope discoveries are simply not added.
+    if not in_scope:
+        if old:
+            rec["status"] = "Archived"
+            rec["include_in_report"] = False
+            rec["show_until"] = verified.isoformat()
+        else:
+            issues.append("programme_out_of_scope")
 
     # Every URL written into the record/evidence must remain on the constrained official domains.
     candidate_urls: List[str] = []
@@ -148,8 +158,12 @@ def _validate_web_record(
         "tool_source_urls": result.get("tool_source_urls") or [],
         "extract_model": result.get("model"),
         "extract_response_id": result.get("response_id"),
+        "search_response_id": result.get("search_response_id"),
+        "structure_response_id": result.get("structure_response_id"),
+        "search_evidence_sha256": result.get("search_evidence_sha256"),
         "extract_confidence": conf,
         "conflict_notes": payload.get("conflict_notes") or [],
+        "in_scope": in_scope,
         "preaudit_issues": sorted(set(issues)),
     }
     return rec if rec else None, sorted(set(issues)), ledger
@@ -255,9 +269,14 @@ def main() -> None:
     evidence_ledger: Dict[str, Any] = {
         "verified_date": verified.isoformat(),
         "scope_definition": scope,
-        "pipeline": "audited-v3-web-primary",
+        "pipeline": "audited-v5-canonical-ledger-layout",
         "records": {},
         "verification_failures": [],
+        "continuity": {
+            "baseline_visible_ids": [],
+            "dispositions": [],
+            "unexplained_disappearances": [],
+        },
     }
 
     # ------------------------------------------------------------------
@@ -308,6 +327,7 @@ def main() -> None:
 
     visible = [x for x in entries if _visible(x, verified)]
     invisible = [x for x in entries if not _visible(x, verified)]
+    evidence_ledger["continuity"]["baseline_visible_ids"] = [clean(x.get("id")) for x in visible]
     verified_rows: List[Tuple[Dict[str, Any], Optional[Dict[str, Any]], List[str], Dict[str, Any]]] = []
     with ThreadPoolExecutor(max_workers=workers) as ex:
         futs = [ex.submit(verify_existing, old) for old in visible]
@@ -321,13 +341,29 @@ def main() -> None:
             continue
         _, rec, issues, ledger = by_id.get(rid, (old, old, ["verification_result_missing"], {}))
         rec = rec or old
+        rec, disposition, changed_fields, event_added = apply_history(
+            old, rec, verified_date=verified.isoformat(), source_urls=ledger.get("source_urls") or []
+        )
+        history_issues = validate_history(rec)
+        issues.extend([f"history:{x}" for x in history_issues])
         proposed_entries.append(rec)
+        ledger["continuity_disposition"] = disposition
+        ledger["changed_fields"] = changed_fields
+        ledger["history_event_added"] = event_added
         evidence_ledger["records"][rid] = ledger
+        evidence_ledger["continuity"]["dispositions"].append({
+            "id": rid,
+            "disposition": disposition,
+            "changed_fields": changed_fields,
+            "history_event_added": event_added,
+            "still_in_registry": True,
+            "include_in_report": rec.get("include_in_report") is not False and clean(rec.get("status")) != "Archived",
+        })
         if issues:
-            verification_failures.append({"id": rid, "issues": issues})
-            print(f"[verify] FAIL {rid} issues={len(issues)} first={issues[0] if issues else ''}")
+            verification_failures.append({"id": rid, "issues": sorted(set(issues))})
+            print(f"[verify] FAIL {rid} issues={len(set(issues))} first={issues[0] if issues else ''}")
         else:
-            print(f"[verify] PASS {rid}")
+            print(f"[verify] PASS {rid} disposition={disposition} changes={','.join(changed_fields) if changed_fields else '-'}")
 
     # ------------------------------------------------------------------
     # C. Reconcile source-level discovery against tracked/verified records.
@@ -466,8 +502,22 @@ def main() -> None:
             if not rec or issues:
                 candidates_out.append({**cand, "resolution": "unresolved", "reason": "new_record_verification_failed", "issues": issues})
                 continue
+            rec, disposition, changed_fields, event_added = apply_history(
+                None, rec, verified_date=verified.isoformat(), source_urls=ledger.get("source_urls") or []
+            )
+            hist_issues = validate_history(rec)
+            if hist_issues:
+                candidates_out.append({**cand, "resolution": "unresolved", "reason": "new_record_history_invalid", "issues": hist_issues})
+                continue
             proposed_entries.append(rec)
+            ledger["continuity_disposition"] = disposition
+            ledger["changed_fields"] = changed_fields
+            ledger["history_event_added"] = event_added
             evidence_ledger["records"][rec["id"]] = ledger
+            evidence_ledger["continuity"]["dispositions"].append({
+                "id": rec["id"], "disposition": "added", "changed_fields": changed_fields,
+                "history_event_added": event_added, "still_in_registry": True, "include_in_report": rec.get("include_in_report") is not False
+            })
             candidates_out.append({**cand, "resolution": "auto_added_pending_independent_audit", "record_id": rec["id"]})
             print(f"[discover] ADD {rec['id']}")
         except Exception as exc:
@@ -476,6 +526,11 @@ def main() -> None:
     # Records that source searches matched to existing but whose fresh verification failed remain failures.
     evidence_ledger["verification_failures"] = verification_failures
     evidence_ledger["unresolved_candidates"] = [x for x in candidates_out if x.get("resolution") == "unresolved"]
+    proposed_ids = {clean(x.get("id")) for x in proposed_entries}
+    disposition_ids = {clean(x.get("id")) for x in evidence_ledger["continuity"]["dispositions"]}
+    baseline_ids = set(evidence_ledger["continuity"]["baseline_visible_ids"])
+    unexplained = sorted(x for x in baseline_ids if x not in proposed_ids or x not in disposition_ids)
+    evidence_ledger["continuity"]["unexplained_disappearances"] = unexplained
 
     # Stable order: original IDs first; discoveries follow by level/name.
     historical_ids = [clean(x.get("id")) for x in entries]
@@ -487,7 +542,8 @@ def main() -> None:
     out_raw.setdefault("metadata", {})
     out_raw["metadata"].update({
         "candidate_verified_date": verified.isoformat(),
-        "verification_pipeline": "audited-v3-web-primary",
+        "verification_pipeline": "audited-v5-canonical-ledger-layout",
+        "registry_role": "canonical_source_of_truth_with_change_history",
         "verification_status": "PENDING_INDEPENDENT_AUDIT",
     })
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Independent fail-closed audit for GG Advisory Grants Radar v3.
+"""Independent fail-closed audit for GG Advisory Grants Radar v5.
 
 The updater and this auditor use separate prompts and, by default, different models.
 Both are restricted to live official/administering domains. Publication requires all
@@ -7,7 +7,7 @@ coverage, reconciliation and programme-level gates to pass.
 """
 from __future__ import annotations
 
-PIPELINE_VERSION = "3.2-web-search-required"
+PIPELINE_VERSION = "5.0-canonical-ledger-layout"
 
 import argparse
 import json
@@ -31,6 +31,7 @@ from grants_core import (
     validate_record_schema,
     yaml_load,
 )
+from grants_history import validate_history
 
 
 def _visible(entry: Dict[str, Any], verified: date) -> bool:
@@ -96,7 +97,14 @@ def _write_markdown(path: Path, audit: Dict[str, Any]) -> None:
             f"| {_md_escape(r.get('name') or r.get('id'))} | {'PASS' if r.get('pass') else 'FAIL'} | "
             f"{float(r.get('validator_confidence') or 0):.3f} | {_md_escape('; '.join(r.get('issues') or []))} |"
         )
+    continuity = audit.get("continuity") or {}
     lines += [
+        "",
+        "## Registry continuity",
+        "",
+        f"Baseline tracked programmes: {len(continuity.get('baseline_visible_ids') or [])}",
+        f"Explicit dispositions: {len(continuity.get('dispositions') or [])}",
+        f"Unexplained disappearances: {len(continuity.get('unexplained_disappearances') or [])}",
         "",
         "## Completeness statement",
         "",
@@ -146,11 +154,12 @@ def main() -> None:
     audit: Dict[str, Any] = {
         "verified_date": verified.isoformat(),
         "scope_definition": scope,
-        "pipeline": "audited-v3-web-primary",
+        "pipeline": "audited-v5-canonical-ledger-layout",
         "publishable": False,
         "gates": {},
         "records": [],
         "unresolved_candidates": [x for x in (candidates.get("candidates") or []) if x.get("resolution") == "unresolved"],
+        "continuity": evidence.get("continuity") or {},
     }
 
     # Gate A: every mandatory source-level search completed successfully.
@@ -189,8 +198,55 @@ def main() -> None:
         "detail": f"{len(pre_failures)} tracked programme extraction failures",
     }
 
-    # Gate E: independent programme-by-programme web audit.
-    visible = [dict(x) for x in (grants_raw.get("grants") or []) if isinstance(x, dict) and _visible(x, verified)]
+    # Gate E: canonical registry continuity. Every programme that was visible at the start
+    # of the refresh must still exist in grants.yaml and must have an explicit disposition.
+    continuity = evidence.get("continuity") or {}
+    baseline_ids = [clean(x) for x in (continuity.get("baseline_visible_ids") or []) if clean(x)]
+    dispositions = [x for x in (continuity.get("dispositions") or []) if isinstance(x, dict)]
+    disp_by_id = {clean(x.get("id")): x for x in dispositions if clean(x.get("id"))}
+    registry_entries = [dict(x) for x in (grants_raw.get("grants") or []) if isinstance(x, dict)]
+    registry_by_id = {clean(x.get("id")): x for x in registry_entries if clean(x.get("id"))}
+    unexplained = sorted(set(continuity.get("unexplained_disappearances") or []))
+    missing_registry = sorted(x for x in baseline_ids if x not in registry_by_id)
+    missing_disposition = sorted(x for x in baseline_ids if x not in disp_by_id)
+    bad_change_events = []
+    for rid in baseline_ids:
+        drow = disp_by_id.get(rid) or {}
+        if clean(drow.get("disposition")) != "unchanged" and not drow.get("history_event_added"):
+            bad_change_events.append(rid)
+    continuity_pass = bool(baseline_ids) and not (unexplained or missing_registry or missing_disposition or bad_change_events)
+    audit["gates"]["registry_continuity"] = {
+        "pass": continuity_pass,
+        "detail": f"{len(baseline_ids)-len(set(missing_registry+missing_disposition+bad_change_events+unexplained))}/{len(baseline_ids)} baseline programmes have explicit, preserved dispositions",
+        "missing_registry": missing_registry,
+        "missing_disposition": missing_disposition,
+        "missing_history_event": bad_change_events,
+        "unexplained_disappearances": unexplained,
+    }
+
+    # Gate F: history ledger validity for every registry record.
+    history_issues = []
+    for rec in registry_entries:
+        rid = clean(rec.get("id"))
+        for issue in validate_history(rec):
+            history_issues.append(f"{rid}:{issue}")
+    audit["gates"]["history_ledger"] = {
+        "pass": not history_issues,
+        "detail": "history ledger valid" if not history_issues else f"{len(history_issues)} history ledger issues",
+        "issues": history_issues[:100],
+    }
+
+    # Gate G: independent programme-by-programme web audit. Published records AND any
+    # baseline record archived during this run are independently checked.
+    visible = [x for x in registry_entries if _visible(x, verified)]
+    baseline_set = set(baseline_ids)
+    audit_targets = []
+    seen_target_ids = set()
+    for rec in registry_entries:
+        rid = clean(rec.get("id"))
+        if _visible(rec, verified) or rid in baseline_set:
+            audit_targets.append(rec)
+            seen_target_ids.add(rid)
     validator_min = float(thresholds.get("validator_min_confidence", 0.95))
     audit_model = clean(os.getenv("GRANTS_WEB_AUDIT_MODEL", WEB_AUDIT_MODEL)) or WEB_AUDIT_MODEL
     workers = max(1, min(5, int(os.getenv("GRANTS_WEB_AUDIT_WORKERS", "3"))))
@@ -262,25 +318,35 @@ def main() -> None:
             "validator_source_urls": sorted(set((data.get("source_urls") or []) + (validator.get("tool_source_urls") or []))),
             "validator_model": validator.get("model") or audit_model,
             "validator_response_id": validator.get("response_id"),
+            "included_in_report": _visible(rec, verified),
+            "baseline_tracked": rid in baseline_set,
         }
 
     results: List[Dict[str, Any]] = []
     with ThreadPoolExecutor(max_workers=workers) as ex:
-        futs = [ex.submit(audit_one, rec) for rec in visible]
+        futs = [ex.submit(audit_one, rec) for rec in audit_targets]
         for fut in as_completed(futs):
             row = fut.result()
             results.append(row)
             print(f"[audit] {'PASS' if row['pass'] else 'FAIL'} {row['id']} issues={len(row['issues'])}")
-    order = {clean(x.get("id")): i for i, x in enumerate(visible)}
+    order = {clean(x.get("id")): i for i, x in enumerate(audit_targets)}
     results.sort(key=lambda r: order.get(clean(r.get("id")), 999999))
     audit["records"] = results
     failed_records = [r for r in results if not r.get("pass")]
+    published_results = [r for r in results if r.get("included_in_report")]
+    failed_published = [r for r in published_results if not r.get("pass")]
+    baseline_results = [r for r in results if r.get("baseline_tracked")]
+    failed_baseline = [r for r in baseline_results if not r.get("pass")]
     audit["gates"]["all_published_records"] = {
-        "pass": bool(visible) and not failed_records,
-        "detail": f"{len(visible)-len(failed_records)}/{len(visible)} visible records passed independent live-web audit",
+        "pass": bool(visible) and len(published_results) == len(visible) and not failed_published,
+        "detail": f"{len(published_results)-len(failed_published)}/{len(visible)} visible records passed independent live-web audit",
+    }
+    audit["gates"]["baseline_continuity_audit"] = {
+        "pass": bool(baseline_ids) and len(baseline_results) == len(baseline_ids) and not failed_baseline,
+        "detail": f"{len(baseline_results)-len(failed_baseline)}/{len(baseline_ids)} previously tracked records passed independent audit, including archived transitions",
     }
 
-    # Gate F: uniqueness.
+    # Gate H: uniqueness.
     ids = [clean(x.get("id")) for x in visible]
     urls = [canonical_url(clean(x.get("url"))) for x in visible]
     dupes = sorted({x for x in ids if x and ids.count(x) > 1} | {u for u in urls if u and urls.count(u) > 1})
@@ -292,7 +358,10 @@ def main() -> None:
     audit["publishable"] = all(bool(g.get("pass")) for g in audit["gates"].values())
     audit["summary"] = {
         "visible_programmes": len(visible),
-        "programmes_passed": len(visible) - len(failed_records),
+        "programmes_passed": len(published_results) - len(failed_published),
+        "baseline_programmes": len(baseline_ids),
+        "baseline_programmes_audited": len(baseline_results) - len(failed_baseline),
+        "history_events_total": sum(len(x.get("history") or []) for x in registry_entries),
         "unresolved_candidates": len(unresolved),
         "mandatory_sources_total": len(required_rows),
         "mandatory_sources_ok": len(required_rows) - len(source_failed),

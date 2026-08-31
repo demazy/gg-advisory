@@ -1,0 +1,32 @@
+{
+  "immutable_files": {
+    ".github/workflows/grants-radar.yml": "f6e79253b314b704d3d0c758a82e440dfc32a162676922c2a6fc130e22e03c81",
+    "INSTALL.txt": "5f7e8c4e4fac0429558a902ec5bbb1fc78f93d681726affeb4153b838d485dc5",
+    "README_GRANTS_RADAR_AUDIT.md": "4eeb6d0c225219a24660870b067096397fef4fb02292756fb0460d600c1cda66",
+    "assets/gg-advisory-logo.png": "d49bd2a68eca497b4eae9465ab9aa4bae301c10e21559f9fb0ccfa12ca48f15b",
+    "assets/reference/radar-layout-reference-fallback.pdf": "78ad9ee158f3dd5aede67f263c7805e90338918f7acfe61b720144a2c7e28371",
+    "config/grants_sources.yaml": "93340aef0fc5bc3b9ec6be5ea3a77ad1d45209a12ce7cff4c28cdaa074948f2e",
+    "src/audit_grants.py": "53be47539ad48bf25216fbf47fc0d101134180907827f4e81d6a0a39d7ddb4ba",
+    "src/build_grants_pdf.py": "eedb1c57448a61ca69494e1128ad10189ba1d025a0229a0f8cfdaa01dff2fb3a",
+    "src/check_pdf_layout.py": "158764e821a2029b4e8cc2deb717e48b371462afde23999dcfdc59b234320e25",
+    "src/grants_core.py": "854cbe7c53fefb68bd154f0c6832090a48979b2e5f140fec8dba923322041aae",
+    "src/grants_history.py": "bf44494a5adec8b8094623335265c2566ba6026f4cc814ba8c9e517b35a04ca9",
+    "src/preflight_grants.py": "a3e8ac457a638530e036710d4952de7189dc02896e952fa293668881c43b99d1",
+    "src/update_grants.py": "263776357d973067e81173c4a29679bb2dcd15a0d5deb294d939d470fdeb30be",
+    "tests/test_api_contract.py": "2d5e6045f3bdc33d747d7c4e1bf705fef1e5d1666f4bce468514bb699681deba",
+    "tests/test_audit_continuity_mocked.py": "b91b371c39b55b22006d9678c903f4c0943d180002ef38d43715aa747e767b27",
+    "tests/test_grants_audit.py": "7cbc951cb9f117a7147e4955f58a4e142b65703e6d809dfde6adb72c7d16ba95",
+    "tests/test_grants_audit_strict.py": "503157fc444453341b2b058012ea111a3c089ea824a63cfda3ad83f1fe07d67b",
+    "tests/test_history_ledger.py": "7a93abd367db5933f8c3b6bc7cbc364188c0db4af39707a0a2e68db3dc6fadfe",
+    "tests/test_layout_contract.py": "28eaa7289fd6314f6e390bf3c3b3d065088525ab2e8a13ff92f656b407ddd0ec",
+    "tests/test_manifest_preflight.py": "f65ab9cdcee82148c9f6c039d4b80de16c80351e64fae0ded5611a6c3a58b333",
+    "tests/test_update_continuity.py": "ca4896f222d59473b82f5ad819d9d1f2c86c85dbfdd74f097860b91d8e3c3461",
+    "tests/test_update_end_to_end_mocked.py": "dee8274ff53727ed4f846adf76506d1d6995c44df6bfa4cd9b52025742078015",
+    "tests/test_workflow_fail_closed.py": "d97d923a8a719ce7d08516c0bb7460b2a08404fa17a28b5a2efcb9f36dbaf67c"
+  },
+  "mutable_state": [
+    "config/grants.yaml",
+    "assets/reference/radar-layout-reference.pdf"
+  ],
+  "version": "5.0-canonical-ledger-layout"
+}

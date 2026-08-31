@@ -533,14 +533,14 @@ def cover_flowables(doc: RadarDoc, entries: List[Dict[str, Any]]) -> List[Flowab
 def overview_flowables(width: float, entries: List[Dict[str, Any]], verified: date) -> List[Flowable]:
     national = sum(1 for e in entries if e["_level"] == "national")
     state = len(entries) - national
-    statuses = sorted(set(e["_status"] for e in entries))
+    statuses = ["Open now", "Rolling", "Opening soon", "Closed, monitor", "Paused", "Archived"]
     out: List[Flowable] = [
         Paragraph("OVERVIEW", P_KICKER),
         Paragraph("How to use this radar", P_H2),
         Divider(width),
         Spacer(1, 6),
         Paragraph(
-            "This radar is a curated overview of current and recurring funding pathways for Australian climate-tech founders and investors: grants, accelerators, equity funds and concessional finance. Programs are grouped by national and state or territory coverage, and each is tagged by funding type and current status. Because the funding landscape moves quickly, program status, deadlines and eligibility can change.",
+            "This radar is a curated overview of current and recurring funding pathways for Australian climate-tech founders and investors: grants, accelerators, equity funds and concessional finance. Programmes are grouped by national and state or territory coverage, and each is tagged by funding type and current status. Because the funding landscape moves quickly, programme status, deadlines and eligibility can change.",
             P,
         ),
         Spacer(1, 8),
@@ -560,7 +560,7 @@ def overview_flowables(width: float, entries: List[Dict[str, Any]], verified: da
     ]))
     out.extend([verification, Spacer(1, 11)])
 
-    stat_vals = [(len(entries), "funding pathways<br/>tracked"), (national, "national programs"), (state, "state and territory<br/>programs"), (len(statuses), "status categories")]
+    stat_vals = [(len(entries), "funding pathways<br/>tracked"), (national, "national programmes"), (state, "state and territory<br/>programmes"), (len(statuses), "status categories")]
     stat_cells = []
     stat_style = ParagraphStyle("stat_cell", fontName=FONT, fontSize=7.2, leading=9.2, textColor=MUTED, alignment=1)
     for value, label in stat_vals:
@@ -579,8 +579,6 @@ def overview_flowables(width: float, entries: List[Dict[str, Any]], verified: da
     out.append(Paragraph("<b>Status</b>", ParagraphStyle("legendhead", parent=P, fontName=FONT_BOLD, fontSize=7.5)))
     legend_items = []
     for status in ["Open now", "Rolling", "Opening soon", "Closed, monitor", "Paused", "Archived"]:
-        if status not in statuses:
-            continue
         bg, fg = STATUS_COLORS[status]
         legend_items.append(Table([[badge(status, bg, fg)]], colWidths=[None]))
     if legend_items:
@@ -601,7 +599,7 @@ def overview_flowables(width: float, entries: List[Dict[str, Any]], verified: da
 
     for heading, text in [
         ("READING THE FUNDING TYPES", "Grants are generally non-dilutive but competitive and milestone-based. Accelerators may be non-dilutive or equity-linked. Equity investment requires investor fit and negotiation. Debt and equity facilities are typically for larger, bankable or near-bankable projects. Each card also lists a best-fit stage and a source link. Figures are indicative: verify current deadlines, amounts and eligibility directly with the administrator before applying."),
-        ("READING THE AMOUNTS", "Funding figures may refer to a total program pool, a per-project grant, an accelerator investment, or a fund size. Co-contribution means the applicant must contribute eligible cash or matched funding. TRL refers to technology readiness level, from proof-of-concept through to demonstration and deployment."),
+        ("READING THE AMOUNTS", "Funding figures may refer to a total programme pool, a per-project grant, an accelerator investment, or a fund size. Co-contribution means the applicant must contribute eligible cash or matched funding. TRL refers to technology readiness level, from proof-of-concept through to demonstration and deployment."),
     ]:
         tbl = Table([[Paragraph(f'<font color="#177772"><b>{heading}</b></font><br/><br/>{text}', ParagraphStyle("info", parent=P, fontSize=7.6, leading=10.2))]], colWidths=[width])
         tbl.setStyle(TableStyle([
@@ -621,7 +619,8 @@ def sources_page(width: float, month: str, verified: date, audit: Dict[str, Any]
         f"Automated audit gate: <b>PASS</b>. {summary.get('programmes_passed', 0)}/{summary.get('visible_programmes', 0)} "
         f"published programmes passed independent primary-source verification; "
         f"{summary.get('mandatory_sources_ok', 0)}/{summary.get('mandatory_sources_total', 0)} mandatory discovery sources were scanned; "
-        f"{summary.get('unresolved_candidates', 0)} discovery candidates remained unresolved."
+        f"{summary.get('unresolved_candidates', 0)} discovery candidates remained unresolved; "
+        f"{summary.get('baseline_programmes_audited', 0)}/{summary.get('baseline_programmes', 0)} previously tracked pathways received an explicit audited disposition."
     )
     return [
         Paragraph("Sources and verification", P_H2),
@@ -630,12 +629,12 @@ def sources_page(width: float, month: str, verified: date, audit: Dict[str, Any]
         Paragraph(audit_note, P),
         Spacer(1, 8),
         Paragraph(
-            f"Program details in this report were checked against live primary or administering-body sources current to {verified.day} {calendar.month_name[verified.month]} {verified.year}. Completeness is audited against the mandatory discovery universe configured for national, state and territory sources; an unannounced or unindexed programme outside that universe cannot be ruled out absolutely. Fast-moving items should still be confirmed with the administering body before acting.",
+            f"Programme details in this report were checked against live primary or administering-body sources current to {verified.day} {calendar.month_name[verified.month]} {verified.year}. Completeness is audited against the mandatory discovery universe configured for national, state and territory sources; an unannounced or unindexed programme outside that universe cannot be ruled out absolutely. Fast-moving items should still be confirmed with the administering body before acting.",
             P,
         ),
         Spacer(1, 12),
         Paragraph(
-            f"© GG Advisory Pty Ltd · gg-advisory.com.au · {month}. Information last verified {verified.day} {calendar.month_name[verified.month]} {verified.year}. This radar is general information only and is not legal, financial or investment advice. GG Advisory is not affiliated with, endorsed by, or acting on behalf of the programs listed. Information is indicative: verify deadlines, amounts and eligibility directly with each administering body before acting.",
+            f"© GG Advisory Pty Ltd · gg-advisory.com.au · {month}. Information last verified {verified.day} {calendar.month_name[verified.month]} {verified.year}. This radar is general information only and is not legal, financial or investment advice. GG Advisory is not affiliated with, endorsed by, or acting on behalf of the programmes listed. Information is indicative: verify deadlines, amounts and eligibility directly with each administering body before acting.",
             P_SMALL,
         ),
     ]
@@ -663,13 +662,13 @@ def build_report(yaml_path: Path, output: Path, ym: str, verified: date, logo: O
     story.extend(cover_flowables(doc, entries))
     story.extend(overview_flowables(width, entries, verified))
 
-    story.append(SectionHeader("SECTION 1", "National programs", width))
+    story.append(SectionHeader("SECTION 1", "National programmes", width))
     story.append(Spacer(1, 4))
     for e in national:
         story.append(_card(e, width))
 
     story.append(Spacer(1, 4))
-    story.append(SectionHeader("SECTION 2", "State & territory programs", width))
+    story.append(SectionHeader("SECTION 2", "State & territory programmes", width))
     story.append(Spacer(1, 4))
     for state in STATE_ORDER:
         group = states.get(state) or []
@@ -682,7 +681,7 @@ def build_report(yaml_path: Path, output: Path, ym: str, verified: date, logo: O
     # Work with us block, matching the reference report.
     work = Table([[Paragraph(
         '<font color="#177772"><b>WORK WITH US</b></font><br/><font size="16"><b>How GG Advisory can help</b></font><br/><br/>'
-        'GG Advisory helps climate-tech founders and investors match to the right funding, structure competitive applications, and build the grant, incentive and investor pathways behind a credible growth plan. If a program here fits your venture, we can help you assess eligibility, prepare the funding narrative and structure the application.<br/><br/>'
+        'GG Advisory helps climate-tech founders and investors match to the right funding, structure competitive applications, and build the grant, incentive and investor pathways behind a credible growth plan. If a programme here fits your venture, we can help you assess eligibility, prepare the funding narrative and structure the application.<br/><br/>'
         '<font color="#177772"><b>START A CONVERSATION</b></font><br/>www.gg-advisory.com.au · antonin@gg-advisory.com.au · linkedin.com/in/antonindemazy',
         ParagraphStyle("work", parent=P, fontSize=8.2, leading=11.4, textColor=BODY)
     )]], colWidths=[width])
@@ -720,7 +719,10 @@ def cli() -> None:
     cand_date = clean((meta.get("metadata") or {}).get("candidate_verified_date"))
     if cand_date and cand_date != verified.isoformat():
         raise SystemExit(f"Audit/config verification date mismatch: audit={verified.isoformat()} config={cand_date}")
-    audited_ids = {clean(x.get("id")) for x in (audit.get("records") or []) if x.get("pass")}
+    audited_ids = {
+        clean(x.get("id")) for x in (audit.get("records") or [])
+        if x.get("pass") and x.get("included_in_report", True)
+    }
     _, visible_entries = load_entries(args.yaml_path, verified)
     visible_ids = {clean(x.get("id")) for x in visible_entries}
     if visible_ids != audited_ids:

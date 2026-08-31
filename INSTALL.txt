@@ -1,0 +1,13 @@
+INSTALLATION - COMPLETE REPLACEMENT
+
+1. Keep your existing config/grants.yaml. Do not overwrite or delete it.
+2. Copy every other file/folder from this package into the repository root, preserving paths.
+3. Commit all replacements in ONE commit to main.
+4. Start a brand-new workflow_dispatch run. Do not re-run an older Actions run.
+
+Expected early markers:
+- Audited package preflight PASS: 5.0-canonical-ledger-layout
+- all deterministic tests pass
+- Two-stage web search smoke test PASS: 5.0-canonical-ledger-layout
+
+A factual audit failure or layout audit failure intentionally produces no emailed PDF.
