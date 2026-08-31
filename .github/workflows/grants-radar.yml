@@ -17,6 +17,7 @@ concurrency:
 jobs:
   verify-audit-publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 75
 
     steps:
       - name: Checkout exact workflow commit
@@ -65,8 +66,9 @@ jobs:
       - name: Discover and verify funding pathways
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          GRANTS_MODEL: "gpt-4o"
-          GRANTS_VALIDATOR_MODEL: "gpt-4o"
+          GRANTS_WEB_MODEL: "gpt-5.6-luna"
+          GRANTS_WEB_AUDIT_MODEL: "gpt-5.6-terra"
+          GRANTS_WEB_WORKERS: "3"
         shell: bash
         run: |
           set -euo pipefail
@@ -85,8 +87,9 @@ jobs:
         continue-on-error: true
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          GRANTS_MODEL: "gpt-4o"
-          GRANTS_VALIDATOR_MODEL: "gpt-4o"
+          GRANTS_WEB_MODEL: "gpt-5.6-luna"
+          GRANTS_WEB_AUDIT_MODEL: "gpt-5.6-terra"
+          GRANTS_WEB_AUDIT_WORKERS: "3"
         shell: bash
         run: |
           set -euo pipefail
@@ -208,7 +211,8 @@ jobs:
 
             Publication gate passed:
             - all published programme records independently verified against live primary/administering-body sources
-            - all mandatory discovery sources scanned
+            - all mandatory official-domain source searches completed
+            - every jurisdiction independently cross-checked
             - zero unresolved discovery candidates
             - zero unresolved source contradictions
           attachments: |
