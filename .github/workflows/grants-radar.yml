@@ -31,6 +31,44 @@ jobs:
           python-version: "3.11"
           cache: "pip"
 
+      - name: Preflight audited package version
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          expected = "3.1-web-search"
+          checks = {
+              "src/grants_core.py": [f'PIPELINE_VERSION = "{expected}"', '"type": "web_search"', '"allowed_domains": allowed', 'web_search_call.action.sources'],
+              "src/update_grants.py": [f'PIPELINE_VERSION = "{expected}"', "discover_programmes_via_web", "extract_program_via_web", "discovery=responses-web-search"],
+              "src/audit_grants.py": [f'PIPELINE_VERSION = "{expected}"', "independent_validate_via_web", "audit=independent-responses-web-search"],
+              "tests/test_workflow_fail_closed.py": ["test_workflow_uses_separate_web_discovery_and_audit_models"],
+          }
+          failures = []
+          for name, markers in checks.items():
+              p = Path(name)
+              if not p.exists():
+                  failures.append(f"missing:{name}")
+                  continue
+              text = p.read_text(encoding="utf-8")
+              for marker in markers:
+                  if marker not in text:
+                      failures.append(f"wrong_version_or_missing_marker:{name}:{marker}")
+          if failures:
+              raise SystemExit("AUDITED PACKAGE PREFLIGHT FAILED\n" + "\n".join(failures))
+          print(f"Audited package preflight PASS: {expected}")
+          PY
+          echo "Critical file fingerprints:"
+          sha256sum \
+            src/grants_core.py \
+            src/update_grants.py \
+            src/audit_grants.py \
+            config/grants_sources.yaml \
+            tests/test_grants_audit.py \
+            tests/test_grants_audit_strict.py \
+            tests/test_workflow_fail_closed.py
+
       - name: Install verification and PDF dependencies
         run: |
           python -m pip install --upgrade pip
