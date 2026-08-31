@@ -1,17 +1,21 @@
 name: grants-radar
 
 on:
+  # Manual only for now. Uncomment the schedule block when you want it automatic.
   # schedule:
   #   - cron: "10 0 1 * *" # 00:10 UTC on the 1st of each month
-
   workflow_dispatch:
     inputs:
       year:
-        description: "Year to generate (e.g., 2026)"
+        description: "Report year (e.g. 2026)"
         required: false
         default: ""
       month:
-        description: "Month to generate (01..12)"
+        description: "Report month (01..12)"
+        required: false
+        default: ""
+      verified:
+        description: "Optional verification date YYYY-MM-DD"
         required: false
         default: ""
 
@@ -23,7 +27,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  run-grants-radar:
+  build-radar:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,25 +36,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Sync with main
-        if: github.ref == 'refs/heads/main'
-        shell: bash
-        run: |
-          set -euo pipefail
-          git pull --rebase origin main
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: "pip"
 
-      - name: Install dependencies
+      - name: Install Radar dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install pyyaml reportlab
 
-      - name: Compute Radar month
+      - name: Resolve report month
         id: when
         shell: bash
         run: |
@@ -58,60 +54,71 @@ jobs:
 
           IN_YEAR="${{ github.event.inputs.year || '' }}"
           IN_MONTH="${{ github.event.inputs.month || '' }}"
+          IN_VERIFIED="${{ github.event.inputs.verified || '' }}"
 
           if [[ -n "$IN_YEAR" && -n "$IN_MONTH" ]]; then
             YM="$(printf "%04d-%02d" "$IN_YEAR" "$IN_MONTH")"
           else
-            LAST_PREV=$(TZ=Australia/Melbourne date -d "$(TZ=Australia/Melbourne date +%Y-%m-01) -1 day" +%Y-%m-%d)
-            YM=$(TZ=Australia/Melbourne date -d "$LAST_PREV" +%Y-%m)
+            YM="$(TZ=Australia/Melbourne date +%Y-%m)"
           fi
 
-          echo "ym=$YM" >> "$GITHUB_OUTPUT"
-          echo "Radar month: $YM"
+          if [[ -n "$IN_VERIFIED" ]]; then
+            VERIFIED="$IN_VERIFIED"
+          else
+            VERIFIED="$(TZ=Australia/Melbourne date +%Y-%m-%d)"
+          fi
 
-      - name: Generate Grants & Accelerators Radar
+          MONTH_NAME="$(TZ=Australia/Melbourne date -d "${YM}-01" +%B-%Y)"
+          OUT="out/Australia-Climate-Tech-Funding-Radar-${MONTH_NAME}-GG-Advisory.pdf"
+
+          echo "ym=$YM" >> "$GITHUB_OUTPUT"
+          echo "verified=$VERIFIED" >> "$GITHUB_OUTPUT"
+          echo "out=$OUT" >> "$GITHUB_OUTPUT"
+
+          echo "Report month: $YM"
+          echo "Verification date: $VERIFIED"
+          echo "Output: $OUT"
+
+      - name: Build Grants & Accelerators Radar PDF
         shell: bash
         run: |
           set -euo pipefail
+          mkdir -p out
 
-          YM="${{ steps.when.outputs.ym }}"
+          python src/build_grants_pdf.py \
+            config/grants.yaml \
+            "${{ steps.when.outputs.ym }}" \
+            --verified "${{ steps.when.outputs.verified }}" \
+            --output "${{ steps.when.outputs.out }}" \
+            --logo assets/gg-advisory-logo.png
 
-          python src/build_grants_docx.py config/grants.yaml "$YM"
-          python src/build_grants_html.py config/grants.yaml "$YM"
+          test -s "${{ steps.when.outputs.out }}"
 
-          test -f "out/grants-radar-${YM}.docx" || {
-            echo "ERROR: DOCX Radar was not generated"
-            exit 1
-          }
+      - name: Upload Radar artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: grants-radar-${{ steps.when.outputs.ym }}
+          path: ${{ steps.when.outputs.out }}
+          if-no-files-found: error
+          retention-days: 30
 
-          test -f "out/grants-radar-${YM}.html" || {
-            echo "ERROR: HTML Radar was not generated"
-            exit 1
-          }
-
-      - name: Commit Radar outputs
+      - name: Commit Radar PDF
         if: github.ref == 'refs/heads/main'
         shell: bash
         run: |
           set -euo pipefail
-
           git config user.name "content-bot"
           git config user.email "content-bot@example.com"
-
-          YM="${{ steps.when.outputs.ym }}"
-
-          git add -f "out/grants-radar-${YM}.docx"
-          git add -f "out/grants-radar-${YM}.html"
+          git add -f "${{ steps.when.outputs.out }}"
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
-            exit 0
+          else
+            git commit -m "grants: funding radar ${{ steps.when.outputs.ym }}"
+            git push origin HEAD:main
           fi
 
-          git commit -m "grants: radar ${YM}"
-          git push origin HEAD:main
-
-      - name: Email Grants & Accelerators Radar
+      - name: Email Grants & Accelerators Radar PDF
         if: success()
         uses: dawidd6/action-send-mail@v3
         with:
@@ -125,8 +132,6 @@ jobs:
           body: |
             Grants & Accelerators Radar for ${{ steps.when.outputs.ym }} attached.
 
-            Repo:
-            https://github.com/${{ github.repository }}/tree/main/out
+            This workflow generates the branded PDF only.
           attachments: |
-            out/grants-radar-${{ steps.when.outputs.ym }}.docx
-            out/grants-radar-${{ steps.when.outputs.ym }}.html
+            ${{ steps.when.outputs.out }}
