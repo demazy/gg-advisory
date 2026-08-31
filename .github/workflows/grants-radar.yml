@@ -38,9 +38,9 @@ jobs:
           python - <<'PY'
           from pathlib import Path
 
-          expected = "3.1-web-search"
+          expected = "3.2-web-search-required"
           checks = {
-              "src/grants_core.py": [f'PIPELINE_VERSION = "{expected}"', '"type": "web_search"', '"allowed_domains": allowed', 'web_search_call.action.sources'],
+              "src/grants_core.py": [f'PIPELINE_VERSION = "{expected}"', '"type": "web_search"', '"allowed_domains": allowed', 'web_search_call.action.sources', '"tool_choice": "required"', '_has_web_search_call'],
               "src/update_grants.py": [f'PIPELINE_VERSION = "{expected}"', "discover_programmes_via_web", "extract_program_via_web", "discovery=responses-web-search"],
               "src/audit_grants.py": [f'PIPELINE_VERSION = "{expected}"', "independent_validate_via_web", "audit=independent-responses-web-search"],
               "tests/test_workflow_fail_closed.py": ["test_workflow_uses_separate_web_discovery_and_audit_models"],
@@ -82,6 +82,31 @@ jobs:
       - name: Run deterministic audit unit tests
         run: pytest -q tests
 
+      - name: Smoke-test mandatory Responses API web search
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GRANTS_WEB_MODEL: "gpt-5.6-terra"
+          GRANTS_WEB_REASONING_EFFORT: "low"
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=src python - <<'PY'
+          import os
+          from grants_core import web_search_json
+
+          res = web_search_json(
+              prompt='Search business.gov.au for the current Industry Growth Program page. Return JSON only as {"found": true}.',
+              allowed_domains=['business.gov.au'],
+              model=os.environ['GRANTS_WEB_MODEL'],
+              search_context_size='low',
+              max_output_tokens=300,
+          )
+          if not res.get('tool_source_urls'):
+              raise SystemExit('WEB SEARCH SMOKE TEST FAILED: no official web-search sources returned')
+          print('Web search smoke test PASS')
+          print('Official sources:', res['tool_source_urls'][:5])
+          PY
+
       - name: Resolve current Melbourne report date
         id: when
         shell: bash
@@ -104,9 +129,10 @@ jobs:
       - name: Discover and verify funding pathways
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          GRANTS_WEB_MODEL: "gpt-5.6-luna"
-          GRANTS_WEB_AUDIT_MODEL: "gpt-5.6-terra"
+          GRANTS_WEB_MODEL: "gpt-5.6-terra"
+          GRANTS_WEB_AUDIT_MODEL: "gpt-5.6-sol"
           GRANTS_WEB_WORKERS: "3"
+          GRANTS_WEB_REASONING_EFFORT: "medium"
         shell: bash
         run: |
           set -euo pipefail
@@ -125,9 +151,10 @@ jobs:
         continue-on-error: true
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          GRANTS_WEB_MODEL: "gpt-5.6-luna"
-          GRANTS_WEB_AUDIT_MODEL: "gpt-5.6-terra"
+          GRANTS_WEB_MODEL: "gpt-5.6-terra"
+          GRANTS_WEB_AUDIT_MODEL: "gpt-5.6-sol"
           GRANTS_WEB_AUDIT_WORKERS: "3"
+          GRANTS_WEB_REASONING_EFFORT: "medium"
         shell: bash
         run: |
           set -euo pipefail
