@@ -1,91 +1,125 @@
-# GG Advisory Grants & Accelerators Radar — audited pipeline
+# GG Advisory Grants Radar audit pipeline v3.1
 
-This patch replaces the old `grants-radar` workflow with a **fail-closed, PDF-only** funding-radar pipeline.
+**v3.1 adds a fail-fast package-version preflight.** It prevents a new workflow file from accidentally running older v2 crawler code. The workflow must print `Audited package preflight PASS: 3.1-web-search` before any research begins.
 
-## Publication rule
+# GG Advisory Grants Radar — audited v3
 
-The workflow creates and emails the branded PDF **only when every audit gate passes**. If any source cannot be scanned, any programme cannot be verified, any factual field lacks live primary-source evidence, any contradiction remains, or any discovery candidate remains unresolved, the run fails **before PDF generation and email**.
+## Purpose
 
-## What a PASS means
+This pipeline produces the branded **Grants & Accelerators Radar PDF only**. It does not run the former monthly intelligence digest.
 
-A PASS means, for the verification date of that run:
+The publication rule is fail-closed: **no PDF, commit or email is allowed unless every audit gate passes**.
 
-1. **100% of report-visible programmes** passed schema, source-provenance and independent validation checks.
-2. **100% of structured factual fields** shown in the report have literal evidence on a live primary/administering-body source.
-3. **100% of factual sentences in `description` and `signals`** have an explicit evidence mapping to a literal source quote.
-4. **100% of mandatory discovery sources** in `config/grants_sources.yaml` were successfully scanned without truncation or candidate fetch failures.
-5. **100% of discovered candidate URLs** in the configured directory/sitemap universe are explicitly reconciled as matched to an existing record, independently excluded as out of scope, or verified and added; there are zero silent drops and zero unresolved candidates.
-6. There are no unresolved source contradictions, duplicate programme IDs/URLs, stale verification dates, or inconsistent open-status/past-deadline combinations.
-7. The final PDF is built from the exact candidate YAML that passed the audit, and the audit hash is written into `config/grants.yaml`.
+## Why v3 replaced v2
 
-A PASS deliberately **does not claim mathematical omniscience**. No system can prove that an unannounced, private, unindexed, or newly-created opportunity outside the monitored universe does not exist. Completeness is therefore measured against an explicit, auditable source universe. The core scope is national, state and territory pathways plus major Australian climate-tech/deep-tech accelerators and investment routes. Local-government-only micro-grants are outside the core scope unless surfaced by a mandatory national/state catalogue or explicitly added to the source universe.
+The v2 trial on 31 August 2026 correctly blocked publication, but it exposed two design problems:
 
-## Pipeline
+1. Whole-site sitemap crawling treated hundreds of news, case-study and unrelated pages as possible funding programmes. The run surfaced 506 unresolved candidates and took almost an hour. That does not improve completeness; it creates a noisy universe that cannot be meaningfully adjudicated.
+2. The v2 extractor demanded literal snippets for derived labels such as jurisdiction, funding type and best-fit stage. Those labels can be factually supported without appearing verbatim on an official page, so the gate produced systematic false failures.
 
-```text
-mandatory official/program source universe
-        ↓
-full discovery scan (indexes + selected sitemaps)
-        ↓
-verify every existing programme against live sources
-        ↓
-dual independent classification of every untracked discovered candidate
-        ↓
-proposed config + evidence ledger + candidate ledger + coverage ledger
-        ↓
-independent adversarial audit
-        ↓
-PASS? ── no → upload audit artefacts only; NO PDF; NO EMAIL
-  │
- yes
-  ↓
-replace config/grants.yaml with audited candidate
-        ↓
-build branded PDF
-        ↓
-commit audited data + audit report + PDF
-        ↓
-email PDF only
+v3 keeps the strict publication gate but changes the evidence architecture.
+
+## v3 audit architecture
+
+### 1. Mandatory official-domain source searches
+
+Every configured source group is searched using the OpenAI Responses API `web_search` tool with an `allowed_domains` filter. The model cannot search arbitrary third-party sites for the programme facts used by the Radar.
+
+Each mandatory source must complete successfully and meet the configured coverage-confidence threshold.
+
+### 2. Fresh verification of every tracked programme
+
+Every currently visible tracked programme is re-searched on its official/administering domains. The stored YAML record is treated as potentially stale.
+
+The updater must produce:
+
+- current programme name and administrator;
+- current status;
+- funding amount;
+- deadline and deadline type;
+- target stage;
+- current primary URL;
+- concise description and signals;
+- field-level official-source evidence;
+- no unresolved source conflict;
+- extraction confidence at or above the hard threshold.
+
+The updater does not publish anything.
+
+### 3. Independent jurisdiction cross-check
+
+After source-by-source discovery, a separate search is run for each jurisdiction:
+
+- national
+- ACT
+- NSW
+- NT
+- QLD
+- SA
+- TAS
+- VIC
+- WA
+
+This second search is given the programmes already found and is explicitly instructed to look for successor rounds, renamed programmes and omissions.
+
+Any additional candidate must be reconciled, verified and either added, matched to an existing programme, or explicitly excluded. An unresolved candidate blocks publication.
+
+### 4. Independent adversarial programme audit
+
+A second model, using a separate prompt and fresh live web search, re-checks every programme that would appear in the PDF. It is instructed to try to disprove the proposed record and detect newer rounds, closures, pauses, revised amounts or revised deadlines.
+
+Publication fails if:
+
+- the independent auditor rejects any programme;
+- any material field is unsupported;
+- the auditor finds a different current value for a material field;
+- confidence is below the hard threshold;
+- any source URL falls outside the allowed official/administering domains;
+- any contradiction remains unresolved.
+
+### 5. Hard publication gate
+
+Only after all source, jurisdiction, candidate and programme gates pass can the workflow:
+
+1. replace `config/grants.yaml` with the verified candidate file;
+2. write the PASS audit hash into the configuration;
+3. generate the branded PDF;
+4. commit the verified data, audit and PDF;
+5. email the PDF.
+
+## Completeness claim
+
+No automated or manual process can mathematically prove that an unannounced, private, unindexed or newly published programme outside its search universe does not exist.
+
+A v3 **PASS** therefore means something specific and auditable:
+
+- every configured mandatory official/administering source group completed a restricted live-web completeness search;
+- every Australian jurisdiction completed an independent cross-check search;
+- every candidate surfaced by those searches was reconciled;
+- every published programme passed a second independent live-web audit;
+- no unresolved candidate or contradiction remained.
+
+That is the strongest defensible completeness claim for a recurring automated Radar. The PDF itself states this limitation rather than claiming impossible absolute omniscience.
+
+## Models
+
+The workflow defaults to:
+
+- discovery/extraction: `gpt-5.6-luna`
+- independent audit: `gpt-5.6-terra`
+
+Both can be overridden with `GRANTS_WEB_MODEL` and `GRANTS_WEB_AUDIT_MODEL`.
+
+## Test suite
+
+Run:
+
+```bash
+PYTHONPATH=src pytest -q tests
 ```
 
-## Files in this patch
+The v3 package currently contains 16 deterministic tests covering schema rules, canonical URL matching, source-domain restrictions, jurisdiction coverage and hard confidence thresholds.
 
-- `.github/workflows/grants-radar.yml` — audited PDF-only GitHub Action, manual-only initially.
-- `config/grants_sources.yaml` — mandatory completeness/discovery universe and scope.
-- `src/grants_core.py` — fetching, provenance, evidence, classification and validation primitives.
-- `src/update_grants.py` — discovery and first-pass verification/update stage.
-- `src/audit_grants.py` — independent fail-closed audit.
-- `src/build_grants_pdf.py` — branded PDF generator, gated by a passing audit JSON.
-- `tests/` — deterministic audit tests.
-- `assets/gg-advisory-logo.png` — report logo.
+## First run
 
-The existing `config/grants.yaml` is included only as the starting baseline. The workflow updates it **only after audit PASS**.
-
-## GitHub setup
-
-Replace/add the files at the same paths in the repository, commit to `main`, then create a **new** workflow run from:
-
-**Actions → grants-radar-audited → Run workflow → main**
-
-Do not use **Re-run jobs** on an old workflow run, because GitHub re-runs the workflow definition from the old commit.
-
-Required repository secrets:
-
-- `OPENAI_API_KEY`
-- `MAIL_USERNAME`
-- `MAIL_PASSWORD`
-
-The workflow is manual-only. Its monthly cron remains commented until you are satisfied with the audit behaviour.
-
-## Expected first-run behaviour
-
-The first audited run may fail. That is intentional. A failure means the pipeline found something it could not verify or adjudicate with the required confidence. Download the `grants-radar-audit-YYYY-MM-DD` artefact from the GitHub run. It contains:
-
-- `grants-verified-candidate.yaml`
-- `grants-evidence.json`
-- `grants-candidates.json`
-- `grants-source-coverage.json`
-- `grants-audit-YYYY-MM-DD.json`
-- `grants-audit-YYYY-MM-DD.md`
-
-Do **not** weaken the gate merely to make the report publish. Resolve the source, classification or provenance issue instead.
+Keep the workflow manual while validating it. A FAIL is a valid outcome and should not be bypassed. Download the `grants-radar-audit-YYYY-MM-DD` artifact to inspect the failed sources, unresolved candidates and programme-level issues.
