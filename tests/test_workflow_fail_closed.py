@@ -19,8 +19,8 @@ def test_workflow_has_hard_audit_gate_before_pdf():
 
 
 def test_workflow_uses_separate_web_discovery_and_audit_models():
-    assert 'GRANTS_WEB_MODEL: "gpt-5.6-luna"' in WF
-    assert 'GRANTS_WEB_AUDIT_MODEL: "gpt-5.6-terra"' in WF
+    assert 'GRANTS_WEB_MODEL: "gpt-5.6-terra"' in WF
+    assert 'GRANTS_WEB_AUDIT_MODEL: "gpt-5.6-sol"' in WF
 
 
 def test_pdf_builder_refuses_missing_or_failed_audit():
@@ -28,8 +28,20 @@ def test_pdf_builder_refuses_missing_or_failed_audit():
     assert 'Audit report is not publishable' in BUILDER
 
 
-def test_v31_pipeline_markers_present():
+def test_v32_pipeline_markers_present():
     root = Path(__file__).resolve().parents[1]
-    assert 'PIPELINE_VERSION = "3.1-web-search"' in (root / "src" / "grants_core.py").read_text()
+    assert 'PIPELINE_VERSION = "3.2-web-search-required"' in (root / "src" / "grants_core.py").read_text()
     assert 'discovery=responses-web-search' in (root / "src" / "update_grants.py").read_text()
     assert 'audit=independent-responses-web-search' in (root / "src" / "audit_grants.py").read_text()
+
+
+def test_web_search_is_forced_not_optional():
+    core = (ROOT / 'src' / 'grants_core.py').read_text()
+    assert '"tool_choice": "required"' in core
+    assert '_has_web_search_call' in core
+    assert 'Responses API returned no web_search_call despite tool_choice=required' in core
+
+
+def test_workflow_has_live_web_search_smoke_test():
+    assert 'Smoke-test mandatory Responses API web search' in WF
+    assert 'Web search smoke test PASS' in WF

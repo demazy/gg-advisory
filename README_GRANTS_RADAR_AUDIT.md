@@ -123,3 +123,7 @@ The v3 package currently contains 16 deterministic tests covering schema rules, 
 ## First run
 
 Keep the workflow manual while validating it. A FAIL is a valid outcome and should not be bypassed. Download the `grants-radar-audit-YYYY-MM-DD` artifact to inspect the failed sources, unresolved candidates and programme-level issues.
+
+## v3.2 hardening
+
+The Responses API web-search tool is now forced with `tool_choice: "required"`. The pipeline also verifies that an actual `web_search_call` occurred, requires official source URLs for coverage/record validation, runs a live smoke test before the expensive audit, and prints the first real API/verification error instead of only `coverage_ok=False`. The default research model is GPT-5.6 Terra and the independent adversarial audit model is GPT-5.6 Sol.

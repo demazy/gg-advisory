@@ -14,7 +14,7 @@ explicit mandatory discovery universe in config/grants_sources.yaml.
 """
 from __future__ import annotations
 
-PIPELINE_VERSION = "3.1-web-search"
+PIPELINE_VERSION = "3.2-web-search-required"
 
 import hashlib
 import html
@@ -685,8 +685,8 @@ def scope_text(scope_cfg: Dict[str, Any]) -> str:
 # ---------------------------------------------------------------------------
 # Audited v3: official-domain web-search verification
 # ---------------------------------------------------------------------------
-WEB_MODEL = os.getenv("GRANTS_WEB_MODEL", "gpt-5.6-luna").strip()
-WEB_AUDIT_MODEL = os.getenv("GRANTS_WEB_AUDIT_MODEL", "gpt-5.6-terra").strip()
+WEB_MODEL = os.getenv("GRANTS_WEB_MODEL", "gpt-5.6-terra").strip()
+WEB_AUDIT_MODEL = os.getenv("GRANTS_WEB_AUDIT_MODEL", "gpt-5.6-sol").strip()
 WEB_TIMEOUT = float(os.getenv("GRANTS_WEB_TIMEOUT", "180"))
 
 
@@ -722,6 +722,17 @@ def url_on_allowed_domain(url: str, allowed_domains: Sequence[str]) -> bool:
     return bool(d and any(d == a or d.endswith("." + a) for a in allowed))
 
 
+def _has_web_search_call(obj: Any) -> bool:
+    """Return True only when the Responses payload contains an actual hosted web-search call."""
+    if isinstance(obj, dict):
+        if obj.get("type") == "web_search_call":
+            return True
+        return any(_has_web_search_call(v) for v in obj.values())
+    if isinstance(obj, list):
+        return any(_has_web_search_call(v) for v in obj)
+    return False
+
+
 def web_search_json(
     *,
     prompt: str,
@@ -749,9 +760,13 @@ def web_search_json(
             "search_context_size": search_context_size,
         }],
         "input": prompt,
+        # This pipeline is audit-critical: web search is mandatory, not optional.
+        # OpenAI's Responses API otherwise defaults to tool_choice=auto.
+        "tool_choice": "required",
         "include": ["web_search_call.action.sources"],
         "text": {"format": {"type": "json_object"}},
         "max_output_tokens": max_output_tokens,
+        "reasoning": {"effort": os.getenv("GRANTS_WEB_REASONING_EFFORT", "low")},
         "store": False,
     }
     r = None
@@ -769,6 +784,8 @@ def web_search_json(
         time.sleep(2 ** attempt)
     assert r is not None
     raw = r.json()
+    if not _has_web_search_call(raw):
+        raise RuntimeError("Responses API returned no web_search_call despite tool_choice=required")
     text = _extract_response_output_text(raw)
     try:
         parsed = json.loads(text)

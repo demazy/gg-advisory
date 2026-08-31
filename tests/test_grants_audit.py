@@ -55,3 +55,20 @@ def test_exact_canonical_url_is_duplicate():
 
 def test_canonical_url_strips_fragment_and_www():
     assert canonical_url("https://www.example.gov.au/grants/test/#apply") == "https://example.gov.au/grants/test"
+
+from grants_core import url_on_allowed_domain, _extract_response_output_text
+
+
+def test_official_domain_guard_allows_subdomain_but_blocks_other_domain():
+    assert url_on_allowed_domain("https://sub.example.gov.au/grants/x", ["example.gov.au"])
+    assert not url_on_allowed_domain("https://example.com/grants/x", ["example.gov.au"])
+
+
+def test_responses_output_text_extraction():
+    payload = {
+        "output": [
+            {"type": "web_search_call", "action": {"type": "search"}},
+            {"type": "message", "content": [{"type": "output_text", "text": '{"ok":true}'}]},
+        ]
+    }
+    assert _extract_response_output_text(payload) == '{"ok":true}'

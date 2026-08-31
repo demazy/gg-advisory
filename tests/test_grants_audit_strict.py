@@ -66,3 +66,24 @@ def test_audit_thresholds_are_fail_closed():
     assert t["validator_min_confidence"] >= 0.98
     assert t["auto_add_confidence"] >= 0.98
     assert t["auto_exclude_confidence"] >= 0.98
+
+
+def test_v3_completeness_thresholds_present():
+    cfg = yaml.safe_load((ROOT / "config" / "grants_sources.yaml").read_text())
+    t = cfg["thresholds"]
+    assert t["discovery_candidate_min_confidence"] >= 0.90
+    assert t["jurisdiction_coverage_min_confidence"] >= 0.90
+    assert t["match_similarity"] >= 0.90
+
+
+def test_every_mandatory_source_has_domain_restriction():
+    cfg = yaml.safe_load((ROOT / "config" / "grants_sources.yaml").read_text())
+    required = [s for s in cfg["sources"] if s.get("required")]
+    assert required
+    assert all(s.get("allowed_domains") for s in required)
+
+
+def test_tracked_specialist_provider_domains_are_in_source_universe():
+    cfg = yaml.safe_load((ROOT / "config" / "grants_sources.yaml").read_text())
+    domains = {d for s in cfg["sources"] for d in (s.get("allowed_domains") or [])}
+    assert {"unswfounders.com", "newcastle.edu.au", "chiefscientist.smartygrants.com.au"} <= domains

@@ -10,7 +10,7 @@ Key design changes from v2:
 """
 from __future__ import annotations
 
-PIPELINE_VERSION = "3.1-web-search"
+PIPELINE_VERSION = "3.2-web-search-required"
 
 import argparse
 import json
@@ -104,6 +104,8 @@ def _validate_web_record(
 
     issues.extend(validate_record_schema(rec))
     conf = float(payload.get("overall_confidence") or 0)
+    if not result.get("tool_source_urls"):
+        issues.append("no_official_web_search_sources")
     if conf < min_confidence:
         issues.append(f"low_extract_confidence:{conf:.3f}")
     if payload.get("unresolved_conflict"):
@@ -196,9 +198,12 @@ def _discover_one_source(
             "response_id": res.get("response_id"),
         })
         threshold = float(s.get("coverage_min_confidence", 0.90))
-        row["ok"] = conf >= threshold
-        if not row["ok"]:
+        tool_sources = list(res.get("tool_source_urls") or [])
+        row["ok"] = conf >= threshold and bool(tool_sources)
+        if conf < threshold:
             row["errors"].append(f"coverage_confidence:{conf:.3f}<{threshold:.3f}")
+        if not tool_sources:
+            row["errors"].append("no_official_web_search_sources")
     except Exception as exc:
         row["errors"].append(f"web_discovery_error:{clean(exc)}")
     return row
@@ -267,7 +272,8 @@ def main() -> None:
         for fut in as_completed(futs):
             row = fut.result()
             coverage_rows.append(row)
-            print(f"[discovery] {row['source_id']}: coverage_ok={row['ok']} programmes={sum(len(p.get('programmes') or []) for p in row['passes'])}")
+            extra = f" errors={' | '.join(row.get('errors') or [])}" if row.get('errors') else ""
+            print(f"[discovery] {row['source_id']}: coverage_ok={row['ok']} programmes={sum(len(p.get('programmes') or []) for p in row['passes'])}{extra}")
     coverage_rows.sort(key=lambda r: clean(r.get("source_id")))
 
     # ------------------------------------------------------------------
@@ -319,7 +325,7 @@ def main() -> None:
         evidence_ledger["records"][rid] = ledger
         if issues:
             verification_failures.append({"id": rid, "issues": issues})
-            print(f"[verify] FAIL {rid} issues={len(issues)}")
+            print(f"[verify] FAIL {rid} issues={len(issues)} first={issues[0] if issues else ''}")
         else:
             print(f"[verify] PASS {rid}")
 
@@ -408,9 +414,11 @@ def main() -> None:
                 "model": res.get("model"), "response_id": res.get("response_id"),
             })
             threshold = float(thresholds.get("jurisdiction_coverage_min_confidence", 0.90))
-            row["ok"] = row["coverage_confidence"] >= threshold
-            if not row["ok"]:
+            row["ok"] = row["coverage_confidence"] >= threshold and bool(row.get("tool_source_urls"))
+            if row["coverage_confidence"] < threshold:
                 row["errors"].append(f"coverage_confidence:{row['coverage_confidence']:.3f}<{threshold:.3f}")
+            if not row.get("tool_source_urls"):
+                row["errors"].append("no_official_web_search_sources")
         except Exception as exc:
             row["errors"].append(f"crosscheck_error:{clean(exc)}")
         return row
@@ -420,7 +428,8 @@ def main() -> None:
         for fut in as_completed(futs):
             row = fut.result()
             jurisdiction_rows.append(row)
-            print(f"[crosscheck] {row['jurisdiction']}: coverage_ok={row['ok']} programmes={len(row.get('programmes') or [])}")
+            extra = f" errors={' | '.join(row.get('errors') or [])}" if row.get('errors') else ""
+            print(f"[crosscheck] {row['jurisdiction']}: coverage_ok={row['ok']} programmes={len(row.get('programmes') or [])}{extra}")
     jurisdiction_rows.sort(key=lambda r: clean(r.get("jurisdiction")))
 
     for row in jurisdiction_rows:

@@ -7,7 +7,7 @@ coverage, reconciliation and programme-level gates to pass.
 """
 from __future__ import annotations
 
-PIPELINE_VERSION = "3.1-web-search"
+PIPELINE_VERSION = "3.2-web-search-required"
 
 import argparse
 import json
@@ -224,6 +224,8 @@ def main() -> None:
         except Exception as exc:
             issues.append(f"validator_error:{clean(exc)}")
         data = dict(validator.get("data") or {})
+        if not validator.get("tool_source_urls"):
+            issues.append("independent_validator_no_official_web_search_sources")
         conf = float(data.get("confidence") or 0)
         if not data.get("supported"):
             issues.append("independent_validator_rejected")
