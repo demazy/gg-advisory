@@ -1,0 +1,551 @@
+scope:
+  definition: Australian national, state and territory funding pathways materially relevant to climate-tech founders, technology
+    developers, research spin-outs, clean-energy and industrial-decarbonisation ventures, clean manufacturing, circular-economy
+    technology businesses and investors. Include grants, commercialisation programmes, accelerators, equity investment and
+    concessional debt/equity pathways that are current, opening soon, recurring, or recently closed but materially worth monitoring.
+    General deep-tech/start-up programmes are included only when they provide direct cash/equity or substantial structured
+    commercialisation support and have explicit climate-tech, clean-energy, sustainability, advanced-manufacturing or research-commercialisation
+    fit. Exclude household/consumer rebates, ordinary procurement/tenders, awards or competitions without material venture
+    funding, generic training, community-only grants, academic fellowships without a venture-commercialisation pathway, routine
+    energy-efficiency rebates for standard equipment, and old historical rounds with no explicit recurrence or successor relevance.
+    Local-government-only grants are outside the core radar unless they are surfaced by a mandatory national/state discovery
+    catalogue or are material enough to be explicitly added to the monitored source universe.
+  funding_terms:
+  - grant
+  - funding
+  - accelerator
+  - incubator
+  - investment
+  - equity
+  - concessional
+  - tax offset
+  - commercialisation
+  - co-investment
+  - venture
+  climate_terms:
+  - climate
+  - clean energy
+  - renewable
+  - net zero
+  - low emissions
+  - decarbonisation
+  - circular economy
+  - recycling
+  - hydrogen
+  - battery
+  - solar
+  - green metals
+  - sustainable fuel
+  - energy transition
+  - critical minerals
+  - energytech
+  - cleantech
+  venture_terms:
+  - startup
+  - start-up
+  - SME
+  - business
+  - venture
+  - technology
+  - research
+  - commercialisation
+  - manufacturer
+  - founder
+  - scaleup
+  - spin-out
+thresholds:
+  extract_min_confidence: 0.97
+  validator_min_confidence: 0.98
+  auto_add_confidence: 0.98
+  auto_exclude_confidence: 0.98
+sources:
+- id: arena
+  jurisdiction: national
+  required: true
+  allowed_domains:
+  - arena.gov.au
+  index_urls:
+  - https://arena.gov.au/funding/
+  sitemaps:
+  - https://arena.gov.au/sitemap_index.xml
+  max_candidate_pages: 140
+  min_url_score: 2
+  min_text_score: 4
+  exclude_url_terms:
+  - privacy
+  - terms
+  - contact
+  - about
+  - careers
+  - events
+  - recipient
+  - alumni
+  min_candidate_urls: 5
+- id: business-gov-au
+  jurisdiction: national
+  required: true
+  allowed_domains:
+  - business.gov.au
+  index_urls:
+  - https://business.gov.au/grants-and-programs
+  sitemaps:
+  - https://business.gov.au/sitemap.xml
+  max_candidate_pages: 180
+  min_url_score: 4
+  min_text_score: 5
+  url_terms:
+  - climate
+  - clean
+  - energy
+  - renewable
+  - net zero
+  - low emission
+  - decarbon
+  - circular
+  - hydrogen
+  - battery
+  - solar
+  - critical mineral
+  - manufactur
+  - research development
+  - commercialisation
+  - innovation
+  - green
+  - sustainable fuel
+  min_candidate_urls: 3
+- id: nrf
+  jurisdiction: national
+  required: true
+  allowed_domains:
+  - nrf.gov.au
+  index_urls:
+  - https://www.nrf.gov.au/what-we-do/investment-sub-funds
+  - https://www.nrf.gov.au/what-we-do/investment-sub-funds/net-zero-fund
+  sitemaps:
+  - https://www.nrf.gov.au/sitemap.xml
+  max_candidate_pages: 25
+  min_url_score: 2
+  min_text_score: 4
+- id: csiro-innovation
+  jurisdiction: national
+  required: true
+  allowed_domains:
+  - csiro.au
+  index_urls:
+  - https://www.csiro.au/en/work-with-us/funding-programs
+  - https://www.csiro.au/en/work-with-us/funding-programs/innovation-programs/on-accelerate
+  sitemaps:
+  - https://www.csiro.au/sitemap.xml
+  max_candidate_pages: 45
+  min_url_score: 3
+  min_text_score: 5
+- id: aea
+  jurisdiction: national
+  required: true
+  allowed_domains:
+  - aea.gov.au
+  index_urls:
+  - https://www.aea.gov.au/
+  - https://www.aea.gov.au/australias-economic-accelerator-program-update
+  max_candidate_pages: 20
+  min_url_score: 1
+  min_text_score: 4
+- id: energylab
+  jurisdiction: national
+  required: true
+  allowed_domains:
+  - energylab.org.au
+  index_urls:
+  - https://energylab.org.au/programs/
+  sitemaps:
+  - https://energylab.org.au/sitemap_index.xml
+  max_candidate_pages: 50
+  min_url_score: 2
+  min_text_score: 4
+  min_candidate_urls: 5
+- id: startmate
+  jurisdiction: national
+  required: true
+  allowed_domains:
+  - startmate.com
+  index_urls:
+  - https://www.startmate.com/accelerator/program
+  max_candidate_pages: 20
+  min_url_score: 1
+  min_text_score: 4
+- id: virescent
+  jurisdiction: national
+  required: true
+  allowed_domains:
+  - virescent.vc
+  index_urls:
+  - https://www.virescent.vc/
+  max_candidate_pages: 20
+  min_url_score: 1
+  min_text_score: 4
+- id: cefc-climate-tech
+  jurisdiction: national
+  required: true
+  allowed_domains:
+  - cefc.com.au
+  index_urls:
+  - https://www.cefc.com.au/where-we-invest/
+  - https://www.cefc.com.au/where-we-invest/special-investment-programs/powering-australia-technology-fund/
+  - https://www.cefc.com.au/where-we-invest/special-investment-programs/clean-energy-innovation-fund/
+  max_candidate_pages: 35
+  min_url_score: 1
+  min_text_score: 4
+  url_terms:
+  - technology fund
+  - innovation fund
+  - climate tech
+  - investment
+  - fund
+  - venture
+  - growth capital
+  - hydrogen
+  exclude_url_terms:
+  - household
+  - home energy
+  - media
+  - news
+  - case study
+  - insights
+  - privacy
+  - terms
+  - contact
+  - about
+  - careers
+- id: main-sequence
+  jurisdiction: national
+  required: true
+  allowed_domains:
+  - mseq.vc
+  index_urls:
+  - https://www.mseq.vc/
+  max_candidate_pages: 20
+  min_url_score: 1
+  min_text_score: 4
+- id: brinc-artesian
+  jurisdiction: national
+  required: true
+  allowed_domains:
+  - brinc.io
+  index_urls:
+  - https://web.brinc.io/climate-tech-program/
+  max_candidate_pages: 20
+  min_url_score: 1
+  min_text_score: 4
+- id: act-energy
+  jurisdiction: act
+  required: true
+  allowed_domains:
+  - climatechoices.act.gov.au
+  index_urls:
+  - https://www.climatechoices.act.gov.au/policy-programs/energy-innovation-fund
+  max_candidate_pages: 20
+  min_url_score: 1
+  min_text_score: 4
+- id: act-cbrin
+  jurisdiction: act
+  required: true
+  allowed_domains:
+  - cbrin.com.au
+  index_urls:
+  - https://cbrin.com.au/icon/
+  max_candidate_pages: 20
+  min_url_score: 1
+  min_text_score: 4
+- id: nsw-energy
+  jurisdiction: nsw
+  required: true
+  allowed_domains:
+  - energy.nsw.gov.au
+  - nsw.gov.au
+  index_urls:
+  - https://www.nsw.gov.au/grants-and-funding
+  - https://www.energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/clean-technology-innovation/clean-technology-innovation-grants
+  - https://www.energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing
+  sitemaps:
+  - https://www.energy.nsw.gov.au/sitemap.xml
+  max_candidate_pages: 130
+  min_url_score: 3
+  min_text_score: 5
+  url_terms:
+  - clean
+  - climate
+  - energy
+  - net zero
+  - low carbon
+  - renewable
+  - manufactur
+  - technology
+  - innovation
+  - decarbon
+  - critical mineral
+  - hydrogen
+  - circular
+  - battery
+  - solar
+  min_candidate_urls: 2
+- id: nsw-chief-scientist
+  jurisdiction: nsw
+  required: true
+  allowed_domains:
+  - chiefscientist.nsw.gov.au
+  index_urls:
+  - https://www.chiefscientist.nsw.gov.au/industry-development/commercialisation-grants/emerging-technologies-commercialisation-fund
+  max_candidate_pages: 20
+  min_url_score: 1
+  min_text_score: 4
+- id: vic-deeca
+  jurisdiction: vic
+  required: true
+  allowed_domains:
+  - vic.gov.au
+  - energy.vic.gov.au
+  - deeca.vic.gov.au
+  index_urls:
+  - https://www.vic.gov.au/grants-and-programs
+  - https://www.energy.vic.gov.au/grants
+  max_candidate_pages: 90
+  min_url_score: 3
+  min_text_score: 5
+  url_terms:
+  - energy
+  - climate
+  - clean
+  - renewable
+  - innovation
+  - energytech
+  - decarbon
+  - circular
+  - manufactur
+  - hydrogen
+  - battery
+  - solar
+  min_candidate_urls: 1
+- id: breakthrough-victoria
+  jurisdiction: vic
+  required: true
+  allowed_domains:
+  - breakthroughvictoria.com
+  index_urls:
+  - https://breakthroughvictoria.com/growth-sectors/clean-economy/
+  max_candidate_pages: 20
+  min_url_score: 1
+  min_text_score: 4
+- id: advance-queensland
+  jurisdiction: qld
+  required: true
+  allowed_domains:
+  - advance.qld.gov.au
+  index_urls:
+  - https://advance.qld.gov.au/grants-and-programs
+  sitemaps:
+  - https://advance.qld.gov.au/sitemap.xml
+  max_candidate_pages: 90
+  min_url_score: 2
+  min_text_score: 4
+  url_terms:
+  - green tech
+  - energy
+  - renewable
+  - hydrogen
+  - sustainability
+  - innovation
+  - research
+  - commercialisation
+  - startup
+  - female founders
+  - manufactur
+  - climate
+  - decarbon
+  - circular
+  min_candidate_urls: 2
+- id: green-industries-sa
+  jurisdiction: sa
+  required: true
+  allowed_domains:
+  - greenindustries.sa.gov.au
+  index_urls:
+  - https://www.greenindustries.sa.gov.au/funding
+  max_candidate_pages: 30
+  min_url_score: 1
+  min_text_score: 4
+- id: sa-business-programs
+  jurisdiction: sa
+  required: true
+  allowed_domains:
+  - business.sa.gov.au
+  - statedevelopment.sa.gov.au
+  index_urls:
+  - https://business.sa.gov.au/programs/grant-programs
+  - https://business.sa.gov.au/programs
+  - https://statedevelopment.sa.gov.au/science-and-research-excellence/rif/stream-2/go2gov-program
+  max_candidate_pages: 80
+  min_url_score: 2
+  min_text_score: 4
+  url_terms:
+  - innovation
+  - research
+  - seed
+  - venture
+  - startup
+  - energy
+  - climate
+  - clean
+  - sustainab
+  - commercialisation
+  - manufactur
+  - growth
+  min_candidate_urls: 2
+- id: tas-recfit
+  jurisdiction: tas
+  required: true
+  allowed_domains:
+  - recfit.tas.gov.au
+  index_urls:
+  - https://www.recfit.tas.gov.au/grants_programs
+  - https://www.recfit.tas.gov.au/grants_programs/climate-change
+  max_candidate_pages: 75
+  min_url_score: 2
+  min_text_score: 4
+  min_candidate_urls: 2
+- id: wa-clean-energy
+  jurisdiction: wa
+  required: true
+  allowed_domains:
+  - wa.gov.au
+  index_urls:
+  - https://www.wa.gov.au/service/environment/environment-information-services/clean-energy-future-fund
+  - https://www.wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-and-innovation-fund-grants
+  sitemaps:
+  - https://www.wa.gov.au/sitemap.xml
+  max_candidate_pages: 100
+  min_url_score: 3
+  min_text_score: 4
+  url_terms:
+  - clean energy
+  - innovation
+  - booster
+  - new industries
+  - fund
+  - grant
+  - renewable
+  - climate
+  - energy
+  - commercialisation
+  - startup
+  - technology
+  min_candidate_urls: 1
+- id: wa-founders-factory
+  jurisdiction: wa
+  required: true
+  allowed_domains:
+  - foundersfactory.com
+  index_urls:
+  - https://foundersfactory.com/western-australia-government-nature-tech-accelerator/
+  max_candidate_pages: 20
+  min_url_score: 1
+  min_text_score: 4
+- id: nt-innovation
+  jurisdiction: nt
+  required: true
+  allowed_domains:
+  - innovation.nt.gov.au
+  - nt.gov.au
+  index_urls:
+  - https://innovation.nt.gov.au/ecosystem/funding
+  - https://innovation.nt.gov.au/news/2026/igniting-support-for-territory-innovators
+  max_candidate_pages: 45
+  min_url_score: 1
+  min_text_score: 4
+  exclude_url_terms:
+  - privacy
+  - terms
+  - contact
+  - about
+  - events
+  - careers
+  min_candidate_urls: 1
+- id: innovation-victoria-programs
+  jurisdiction: vic
+  required: true
+  allowed_domains:
+  - launchvic.org
+  - innovationvictoria.com
+  index_urls:
+  - https://launchvic.org/programs/
+  - https://www.innovationvictoria.com/
+  url_terms:
+  - climate
+  - energy
+  - circular
+  - deep tech
+  - deeptech
+  - accelerator
+  - fund
+  - investment
+  - co-invest
+  - startup
+  - venture
+  exclude_url_terms:
+  - privacy
+  - terms
+  - contact
+  - news
+  - events
+  - case study
+  - success story
+  - investor education
+  max_candidate_pages: 100
+  min_url_score: 2
+  min_text_score: 4
+  min_candidate_urls: 2
+- id: melbourne-accelerator-program
+  jurisdiction: vic
+  required: true
+  allowed_domains:
+  - themap.co
+  index_urls:
+  - https://www.themap.co/accelerator
+  max_candidate_pages: 12
+  min_url_score: 1
+  min_text_score: 4
+- id: climate-salad
+  jurisdiction: national
+  required: true
+  allowed_domains:
+  - climatesalad.com
+  index_urls:
+  - https://www.climatesalad.com/
+  url_terms:
+  - program
+  - accelerator
+  - growth
+  - climate
+  - funding
+  - investment
+  exclude_url_terms:
+  - news
+  - blog
+  - event
+  - jobs
+  - member
+  - directory
+  - privacy
+  - terms
+  max_candidate_pages: 35
+  min_url_score: 2
+  min_text_score: 4
+- id: climate-kic-australia
+  jurisdiction: national
+  required: true
+  allowed_domains:
+  - climate-kic.org.au
+  index_urls:
+  - https://climate-kic.org.au/work/projects/launchpad/
+  max_candidate_pages: 15
+  min_url_score: 1
+  min_text_score: 4

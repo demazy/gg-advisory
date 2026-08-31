@@ -21,6 +21,8 @@ from __future__ import annotations
 
 import argparse
 import calendar
+import html as html_lib
+import json
 import re
 from datetime import date, datetime
 from pathlib import Path
@@ -120,6 +122,11 @@ _register_fonts()
 
 def clean(v: Any) -> str:
     return re.sub(r"\s+", " ", str(v or "")).strip()
+
+
+def esc(v: Any) -> str:
+    """Escape source/config text before passing it to ReportLab Paragraph XML."""
+    return html_lib.escape(clean(v), quote=False)
 
 
 def parse_date(v: Any) -> Optional[date]:
@@ -332,7 +339,7 @@ def _card(entry: Dict[str, Any], width: float) -> KeepTogether:
     ]))
 
     title_row = Table(
-        [[Paragraph(clean(entry.get("name")), P_TITLE), badges]],
+        [[Paragraph(esc(entry.get("name")), P_TITLE), badges]],
         colWidths=[width * 0.66, width * 0.30],
     )
     title_row.setStyle(TableStyle([
@@ -345,10 +352,10 @@ def _card(entry: Dict[str, Any], width: float) -> KeepTogether:
     ]))
 
     meta = Table([
-        [Paragraph("FUNDING", P_LABEL), Paragraph(clean(entry.get("amount")), P_VALUE),
-         Paragraph("DEADLINE", P_LABEL), Paragraph(clean(entry.get("deadline_label")) or "Verify with administrator", P_VALUE)],
-        [Paragraph("STAGE", P_LABEL), Paragraph(clean(entry.get("target_stage")), P_VALUE),
-         Paragraph("ADMINISTERED<br/>BY", P_LABEL), Paragraph(clean(entry.get("admin")), P_VALUE)],
+        [Paragraph("FUNDING", P_LABEL), Paragraph(esc(entry.get("amount")), P_VALUE),
+         Paragraph("DEADLINE", P_LABEL), Paragraph(esc(entry.get("deadline_label")) or "Verify with administrator", P_VALUE)],
+        [Paragraph("STAGE", P_LABEL), Paragraph(esc(entry.get("target_stage")), P_VALUE),
+         Paragraph("ADMINISTERED<br/>BY", P_LABEL), Paragraph(esc(entry.get("admin")), P_VALUE)],
     ], colWidths=[width * .13, width * .34, width * .15, width * .38])
     meta.setStyle(TableStyle([
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
@@ -365,19 +372,19 @@ def _card(entry: Dict[str, Any], width: float) -> KeepTogether:
     signals = clean(entry.get("signals"))
     url = clean(entry.get("url"))
     if description:
-        body.append(Paragraph(f"<b>Overview.</b> {description}", P_CARD))
+        body.append(Paragraph(f"<b>Overview.</b> {esc(description)}", P_CARD))
         body.append(Spacer(1, 4))
     if why:
-        body.append(Paragraph(f"<b>Why it matters.</b> {why}", P_CARD))
+        body.append(Paragraph(f"<b>Why it matters.</b> {esc(why)}", P_CARD))
         body.append(Spacer(1, 4))
     if best:
-        body.append(Paragraph(f'<font color="#177772"><b>Best fit:</b></font> {best}', P_CARD))
+        body.append(Paragraph(f'<font color="#177772"><b>Best fit:</b></font> {esc(best)}', P_CARD))
         body.append(Spacer(1, 4))
     if signals:
-        body.append(Paragraph(f'<font color="#177772"><b>Signals to watch:</b></font> {signals}', P_SMALL))
+        body.append(Paragraph(f'<font color="#177772"><b>Signals to watch:</b></font> {esc(signals)}', P_SMALL))
         body.append(Spacer(1, 5))
     if url:
-        body.append(Paragraph(url, P_URL))
+        body.append(Paragraph(esc(url), P_URL))
 
     inner = Table([[body]], colWidths=[width], hAlign="LEFT")
     inner.setStyle(TableStyle([
@@ -607,13 +614,22 @@ def overview_flowables(width: float, entries: List[Dict[str, Any]], verified: da
     return out
 
 
-def sources_page(width: float, month: str, verified: date) -> List[Flowable]:
+def sources_page(width: float, month: str, verified: date, audit: Dict[str, Any]) -> List[Flowable]:
+    summary = audit.get("summary") or {}
+    audit_note = (
+        f"Automated audit gate: <b>PASS</b>. {summary.get('programmes_passed', 0)}/{summary.get('visible_programmes', 0)} "
+        f"published programmes passed independent primary-source verification; "
+        f"{summary.get('mandatory_sources_ok', 0)}/{summary.get('mandatory_sources_total', 0)} mandatory discovery sources were scanned; "
+        f"{summary.get('unresolved_candidates', 0)} discovery candidates remained unresolved."
+    )
     return [
         Paragraph("Sources and verification", P_H2),
         Divider(width),
         Spacer(1, 10),
+        Paragraph(audit_note, P),
+        Spacer(1, 8),
         Paragraph(
-            f"Program details in this report are drawn from the source URLs recorded in the grants configuration and should be checked against official government, agency and administering-body pages current to {verified.day} {calendar.month_name[verified.month]} {verified.year}. Fast-moving items such as deadlines, funding levels and open or closed status should be re-checked with the administering body before acting.",
+            f"Program details in this report were checked against live primary or administering-body sources current to {verified.day} {calendar.month_name[verified.month]} {verified.year}. Completeness is audited against the mandatory discovery universe configured for national, state and territory sources; an unannounced or unindexed programme outside that universe cannot be ruled out absolutely. Fast-moving items should still be confirmed with the administering body before acting.",
             P,
         ),
         Spacer(1, 12),
@@ -624,7 +640,7 @@ def sources_page(width: float, month: str, verified: date) -> List[Flowable]:
     ]
 
 
-def build_report(yaml_path: Path, output: Path, ym: str, verified: date, logo: Optional[Path]) -> None:
+def build_report(yaml_path: Path, output: Path, ym: str, verified: date, logo: Optional[Path], audit: Dict[str, Any]) -> None:
     _, entries = load_entries(yaml_path, verified)
     if not entries:
         raise SystemExit("No grant entries are visible for the selected verification date.")
@@ -676,7 +692,7 @@ def build_report(yaml_path: Path, output: Path, ym: str, verified: date, logo: O
         ("TOPPADDING", (0, 0), (-1, -1), 12), ("BOTTOMPADDING", (0, 0), (-1, -1), 12),
     ]))
     story.extend([Spacer(1, 8), work, PageBreak()])
-    story.extend(sources_page(width, month, verified))
+    story.extend(sources_page(width, month, verified, audit))
 
     doc.build(story)
     print(f"[write] {output}")
@@ -687,20 +703,34 @@ def cli() -> None:
     p.add_argument("yaml_path", type=Path)
     p.add_argument("ym", help="Report month in YYYY-MM format")
     p.add_argument("--output", type=Path, default=None)
-    p.add_argument("--verified", default=None, help="Verification date YYYY-MM-DD (default: today)")
+    p.add_argument("--audit-report", type=Path, required=True, help="PASS audit JSON from src.audit_grants")
     p.add_argument("--logo", type=Path, default=Path("assets/gg-advisory-logo.png"))
     args = p.parse_args()
 
     if not re.fullmatch(r"\d{4}-\d{2}", args.ym):
         raise SystemExit("ym must be YYYY-MM")
-    verified = parse_date(args.verified) if args.verified else date.today()
+    audit = json.loads(args.audit_report.read_text(encoding="utf-8"))
+    if not audit.get("publishable"):
+        raise SystemExit("Audit report is not publishable; refusing to build Radar PDF")
+    verified = parse_date(audit.get("verified_date"))
     if not verified:
-        raise SystemExit("--verified must be YYYY-MM-DD")
+        raise SystemExit("Audit report has no valid verified_date")
+    meta = yaml.safe_load(args.yaml_path.read_text(encoding="utf-8")) or {}
+    cand_date = clean((meta.get("metadata") or {}).get("candidate_verified_date"))
+    if cand_date and cand_date != verified.isoformat():
+        raise SystemExit(f"Audit/config verification date mismatch: audit={verified.isoformat()} config={cand_date}")
+    audited_ids = {clean(x.get("id")) for x in (audit.get("records") or []) if x.get("pass")}
+    _, visible_entries = load_entries(args.yaml_path, verified)
+    visible_ids = {clean(x.get("id")) for x in visible_entries}
+    if visible_ids != audited_ids:
+        missing = sorted(visible_ids - audited_ids)
+        extra = sorted(audited_ids - visible_ids)
+        raise SystemExit(f"Audit/config record mismatch; unaudited={missing} unexpected_audit={extra}")
     out = args.output
     if out is None:
         label = month_label(args.ym).replace(" ", "-")
         out = Path("out") / f"Australia-Climate-Tech-Funding-Radar-{label}-GG-Advisory.pdf"
-    build_report(args.yaml_path, out, args.ym, verified, args.logo)
+    build_report(args.yaml_path, out, args.ym, verified, args.logo, audit)
 
 
 if __name__ == "__main__":
