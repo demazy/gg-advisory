@@ -58,6 +58,9 @@ thresholds:
   validator_min_confidence: 0.98
   auto_add_confidence: 0.98
   auto_exclude_confidence: 0.98
+  discovery_candidate_min_confidence: 0.9
+  jurisdiction_coverage_min_confidence: 0.9
+  match_similarity: 0.93
 sources:
 - id: arena
   jurisdiction: national
@@ -549,3 +552,29 @@ sources:
   max_candidate_pages: 15
   min_url_score: 1
   min_text_score: 4
+- id: nsw-etcf-portal
+  jurisdiction: nsw
+  required: true
+  allowed_domains:
+  - chiefscientist.nsw.gov.au
+  - chiefscientist.smartygrants.com.au
+  index_urls:
+  - https://www.chiefscientist.nsw.gov.au/industry-development/commercialisation-grants
+  - https://chiefscientist.smartygrants.com.au/ETCF2026
+  coverage_min_confidence: 0.88
+- id: unsw-founders
+  jurisdiction: nsw
+  required: true
+  allowed_domains:
+  - unswfounders.com
+  index_urls:
+  - https://unswfounders.com/accelerators
+  coverage_min_confidence: 0.9
+- id: newcastle-i2n
+  jurisdiction: nsw
+  required: true
+  allowed_domains:
+  - newcastle.edu.au
+  index_urls:
+  - https://www.newcastle.edu.au/engage/business-and-industry/integrated-innovation-network-i2n/programs/accelerators
+  coverage_min_confidence: 0.9
