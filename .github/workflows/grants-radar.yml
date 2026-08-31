@@ -1,10 +1,9 @@
 name: grants-radar-audited
 
 on:
-  # Manual only while the audit pipeline is being validated.
-  # Uncomment later if you want an automatic run on the 1st of each month.
+  # Manual only until the first full production run is approved.
   # schedule:
-  #   - cron: "10 0 1 * *" # 00:10 UTC on the 1st
+  #   - cron: "10 0 1 * *"
   workflow_dispatch:
 
 permissions:
@@ -17,7 +16,7 @@ concurrency:
 jobs:
   verify-audit-publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 75
+    timeout-minutes: 180
 
     steps:
       - name: Checkout exact workflow commit
@@ -31,81 +30,27 @@ jobs:
           python-version: "3.11"
           cache: "pip"
 
-      - name: Preflight audited package version
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          from pathlib import Path
-
-          expected = "3.2-web-search-required"
-          checks = {
-              "src/grants_core.py": [f'PIPELINE_VERSION = "{expected}"', '"type": "web_search"', '"allowed_domains": allowed', 'web_search_call.action.sources', '"tool_choice": "required"', '_has_web_search_call'],
-              "src/update_grants.py": [f'PIPELINE_VERSION = "{expected}"', "discover_programmes_via_web", "extract_program_via_web", "discovery=responses-web-search"],
-              "src/audit_grants.py": [f'PIPELINE_VERSION = "{expected}"', "independent_validate_via_web", "audit=independent-responses-web-search"],
-              "tests/test_workflow_fail_closed.py": ["test_workflow_uses_separate_web_discovery_and_audit_models"],
-          }
-          failures = []
-          for name, markers in checks.items():
-              p = Path(name)
-              if not p.exists():
-                  failures.append(f"missing:{name}")
-                  continue
-              text = p.read_text(encoding="utf-8")
-              for marker in markers:
-                  if marker not in text:
-                      failures.append(f"wrong_version_or_missing_marker:{name}:{marker}")
-          if failures:
-              raise SystemExit("AUDITED PACKAGE PREFLIGHT FAILED\n" + "\n".join(failures))
-          print(f"Audited package preflight PASS: {expected}")
-          PY
-          echo "Critical file fingerprints:"
-          sha256sum \
-            src/grants_core.py \
-            src/update_grants.py \
-            src/audit_grants.py \
-            config/grants_sources.yaml \
-            tests/test_grants_audit.py \
-            tests/test_grants_audit_strict.py \
-            tests/test_workflow_fail_closed.py
-
-      - name: Install verification and PDF dependencies
+      - name: Install verification, audit and PDF dependencies
         run: |
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4 trafilatura PyYAML pymupdf reportlab pytest
-          python -m py_compile \
-            src/grants_core.py \
-            src/update_grants.py \
-            src/audit_grants.py \
-            src/build_grants_pdf.py
 
-      - name: Run deterministic audit unit tests
-        run: pytest -q tests
-
-      - name: Smoke-test mandatory Responses API web search
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          GRANTS_WEB_MODEL: "gpt-5.6-terra"
-          GRANTS_WEB_REASONING_EFFORT: "low"
+      - name: Verify complete audited package manifest and mutable state
         shell: bash
         run: |
           set -euo pipefail
-          PYTHONPATH=src python - <<'PY'
-          import os
-          from grants_core import web_search_json
+          python src/preflight_grants.py
+          python -m py_compile \
+            src/grants_core.py \
+            src/grants_history.py \
+            src/update_grants.py \
+            src/audit_grants.py \
+            src/build_grants_pdf.py \
+            src/check_pdf_layout.py \
+            src/preflight_grants.py
 
-          res = web_search_json(
-              prompt='Search business.gov.au for the current Industry Growth Program page. Return JSON only as {"found": true}.',
-              allowed_domains=['business.gov.au'],
-              model=os.environ['GRANTS_WEB_MODEL'],
-              search_context_size='low',
-              max_output_tokens=300,
-          )
-          if not res.get('tool_source_urls'):
-              raise SystemExit('WEB SEARCH SMOKE TEST FAILED: no official web-search sources returned')
-          print('Web search smoke test PASS')
-          print('Official sources:', res['tool_source_urls'][:5])
-          PY
+      - name: Run deterministic audit unit tests
+        run: pytest -q tests
 
       - name: Resolve current Melbourne report date
         id: when
@@ -118,19 +63,51 @@ jobs:
           PDF="out/Australia-Climate-Tech-Funding-Radar-${MONTH_NAME}-GG-Advisory.pdf"
           AUDIT_JSON="out/grants-audit-${VERIFIED}.json"
           AUDIT_MD="out/grants-audit-${VERIFIED}.md"
+          LAYOUT_JSON="out/grants-layout-audit-${VERIFIED}.json"
           echo "ym=$YM" >> "$GITHUB_OUTPUT"
           echo "verified=$VERIFIED" >> "$GITHUB_OUTPUT"
           echo "pdf=$PDF" >> "$GITHUB_OUTPUT"
           echo "audit_json=$AUDIT_JSON" >> "$GITHUB_OUTPUT"
           echo "audit_md=$AUDIT_MD" >> "$GITHUB_OUTPUT"
+          echo "layout_json=$LAYOUT_JSON" >> "$GITHUB_OUTPUT"
           echo "Report month: $YM"
           echo "Verification date: $VERIFIED"
 
-      - name: Discover and verify funding pathways
+      - name: Smoke-test mandatory two-stage web search
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GRANTS_WEB_MODEL: "gpt-5.6-terra"
-          GRANTS_WEB_AUDIT_MODEL: "gpt-5.6-sol"
+          GRANTS_WEB_REASONING_EFFORT: "low"
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=src python - <<'PY'
+          import os
+          from grants_core import PIPELINE_VERSION, web_search_json
+
+          res = web_search_json(
+              prompt='Search business.gov.au for the current Industry Growth Program page. Return JSON only as {"found": true}.',
+              allowed_domains=['business.gov.au'],
+              model=os.environ['GRANTS_WEB_MODEL'],
+              search_context_size='low',
+              max_output_tokens=500,
+          )
+          if not res.get('tool_source_urls'):
+              raise SystemExit('WEB SEARCH SMOKE TEST FAILED: no official web-search sources returned')
+          if not res.get('search_response_id') or not res.get('structure_response_id'):
+              raise SystemExit('WEB SEARCH SMOKE TEST FAILED: two-stage response IDs missing')
+          if res.get('data', {}).get('found') is not True:
+              raise SystemExit(f"WEB SEARCH SMOKE TEST FAILED: unexpected structured result {res.get('data')!r}")
+          print(f'Two-stage web search smoke test PASS: {PIPELINE_VERSION}')
+          print('Official sources:', res['tool_source_urls'][:5])
+          print('Search response:', res['search_response_id'])
+          print('Structure response:', res['structure_response_id'])
+          PY
+
+      - name: Discover, reverify and update canonical grants registry candidate
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GRANTS_WEB_MODEL: "gpt-5.6-terra"
           GRANTS_WEB_WORKERS: "3"
           GRANTS_WEB_REASONING_EFFORT: "medium"
         shell: bash
@@ -151,7 +128,6 @@ jobs:
         continue-on-error: true
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          GRANTS_WEB_MODEL: "gpt-5.6-terra"
           GRANTS_WEB_AUDIT_MODEL: "gpt-5.6-sol"
           GRANTS_WEB_AUDIT_WORKERS: "3"
           GRANTS_WEB_REASONING_EFFORT: "medium"
@@ -168,8 +144,8 @@ jobs:
             --output-json "${{ steps.when.outputs.audit_json }}" \
             --output-md "${{ steps.when.outputs.audit_md }}"
 
-      - name: Upload audit evidence even when audit fails
-        if: always()
+      - name: Upload research and audit evidence even when audit fails
+        if: always() && steps.when.outputs.verified != '' && hashFiles('out/**') != ''
         uses: actions/upload-artifact@v4
         with:
           name: grants-radar-audit-${{ steps.when.outputs.verified }}
@@ -183,7 +159,7 @@ jobs:
           if-no-files-found: warn
           retention-days: 90
 
-      - name: Hard publication gate
+      - name: Hard factual publication gate
         shell: bash
         run: |
           set -euo pipefail
@@ -198,11 +174,11 @@ jobs:
           d = json.loads(p.read_text())
           if not d.get("publishable"):
               raise SystemExit("ERROR: audit JSON is not publishable")
-          print("Audit gate PASS")
+          print("Factual audit gate PASS")
           print(d.get("summary", {}))
           PY
 
-      - name: Finalise verified grants configuration
+      - name: Finalise audited canonical grants registry
         shell: bash
         run: |
           set -euo pipefail
@@ -215,11 +191,30 @@ jobs:
           p = Path("config/grants.yaml")
           d = yaml.safe_load(p.read_text()) or {}
           d.setdefault("metadata", {})
-          d["metadata"]["verification_status"] = "PASS"
-          d["metadata"]["verified_date"] = audit["verified_date"]
-          d["metadata"]["audit_sha256"] = hashlib.sha256(audit_path.read_bytes()).hexdigest()
+          d["metadata"].update({
+              "verification_status": "PASS",
+              "verified_date": audit["verified_date"],
+              "audit_sha256": hashlib.sha256(audit_path.read_bytes()).hexdigest(),
+              "registry_role": "canonical_source_of_truth_with_change_history",
+          })
           p.write_text(yaml.safe_dump(d, allow_unicode=True, sort_keys=False, width=120), encoding="utf-8")
           PY
+
+      - name: Select approved Radar layout reference
+        id: layoutref
+        shell: bash
+        run: |
+          set -euo pipefail
+          APPROVED="assets/reference/radar-layout-reference.pdf"
+          FALLBACK="assets/reference/radar-layout-reference-fallback.pdf"
+          if test -s "$APPROVED"; then
+            REF="$APPROVED"
+          else
+            REF="$FALLBACK"
+          fi
+          test -s "$REF"
+          echo "reference=$REF" >> "$GITHUB_OUTPUT"
+          echo "Layout reference: $REF"
 
       - name: Build audited Grants & Accelerators Radar PDF
         shell: bash
@@ -233,34 +228,50 @@ jobs:
             --logo assets/gg-advisory-logo.png
           test -s "${{ steps.when.outputs.pdf }}"
 
-      - name: Upload final Radar PDF
+      - name: Hard PDF layout continuity gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python src/check_pdf_layout.py \
+            --reference "${{ steps.layoutref.outputs.reference }}" \
+            --candidate "${{ steps.when.outputs.pdf }}" \
+            --output-json "${{ steps.when.outputs.layout_json }}"
+
+      - name: Upload final Radar PDF and layout audit
         uses: actions/upload-artifact@v4
         with:
           name: grants-radar-${{ steps.when.outputs.ym }}
-          path: ${{ steps.when.outputs.pdf }}
+          path: |
+            ${{ steps.when.outputs.pdf }}
+            ${{ steps.when.outputs.layout_json }}
           if-no-files-found: error
           retention-days: 90
 
-      - name: Commit verified data, audit and PDF
+      - name: Promote PDF as next approved layout reference and commit audited state
         if: github.ref == 'refs/heads/main'
         shell: bash
         run: |
           set -euo pipefail
+          mkdir -p assets/reference
+          cp "${{ steps.when.outputs.pdf }}" assets/reference/radar-layout-reference.pdf
+
           git config user.name "content-bot"
           git config user.email "content-bot@example.com"
           git add -f config/grants.yaml
+          git add -f assets/reference/radar-layout-reference.pdf
           git add -f "${{ steps.when.outputs.audit_json }}"
           git add -f "${{ steps.when.outputs.audit_md }}"
+          git add -f "${{ steps.when.outputs.layout_json }}"
           git add -f "${{ steps.when.outputs.pdf }}"
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "grants: verified radar ${{ steps.when.outputs.ym }}"
+            git commit -m "grants: audited radar ${{ steps.when.outputs.ym }}"
             git push origin HEAD:main
           fi
 
-      - name: Email audited Grants & Accelerators Radar PDF
+      - name: Email audited Grants & Accelerators Radar PDF only
         if: success()
         uses: dawidd6/action-send-mail@v3
         with:
@@ -274,11 +285,12 @@ jobs:
           body: |
             Audited Grants & Accelerators Radar for ${{ steps.when.outputs.ym }} attached.
 
-            Publication gate passed:
-            - all published programme records independently verified against live primary/administering-body sources
-            - all mandatory official-domain source searches completed
-            - every jurisdiction independently cross-checked
+            Publication gates passed:
+            - every previously tracked current pathway received an explicit audited disposition
+            - material changes were recorded in config/grants.yaml history
+            - all published programme facts passed independent live official-source verification
+            - all mandatory source and jurisdiction completeness searches passed
             - zero unresolved discovery candidates
-            - zero unresolved source contradictions
+            - PDF layout continuity passed against the previous approved Radar
           attachments: |
             ${{ steps.when.outputs.pdf }}
