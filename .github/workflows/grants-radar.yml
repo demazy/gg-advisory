@@ -129,7 +129,8 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GRANTS_WEB_AUDIT_MODEL: "gpt-5.6-sol"
-          GRANTS_WEB_AUDIT_WORKERS: "3"
+          GRANTS_WEB_AUDIT_WORKERS: "2"
+          GRANTS_WEB_AUDIT_BATCH_SIZE: "6"
           GRANTS_WEB_REASONING_EFFORT: "medium"
         shell: bash
         run: |
@@ -289,7 +290,7 @@ jobs:
             - every previously tracked current pathway received an explicit audited disposition
             - material changes were recorded in config/grants.yaml history
             - all published programme facts passed independent live official-source verification
-            - all mandatory source and jurisdiction completeness searches passed
+            - all mandatory source searches and jurisdiction coverage checks passed
             - zero unresolved discovery candidates
             - PDF layout continuity passed against the previous approved Radar
           attachments: |

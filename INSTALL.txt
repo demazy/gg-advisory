@@ -1,13 +1,21 @@
-INSTALLATION - COMPLETE REPLACEMENT
+INSTALLATION - V5.1 PATCH / COMPLETE CODE REPLACEMENT
 
-1. Keep your existing config/grants.yaml. Do not overwrite or delete it.
-2. Copy every other file/folder from this package into the repository root, preserving paths.
-3. Commit all replacements in ONE commit to main.
-4. Start a brand-new workflow_dispatch run. Do not re-run an older Actions run.
+1. Keep your existing config/grants.yaml byte-for-byte. Do not overwrite or delete it.
+2. Replace the code/config/workflow/test files from this package in one transaction.
+3. Keep the existing GG Advisory logo and approved/fallback layout-reference PDFs.
+4. Commit all replacements in ONE commit to main.
+5. Ensure the OpenAI API project behind OPENAI_API_KEY has available API credits.
+6. Start a brand-new workflow_dispatch run. Do not re-run an older Actions run.
 
 Expected early markers:
-- Audited package preflight PASS: 5.0-canonical-ledger-layout
-- all deterministic tests pass
-- Two-stage web search smoke test PASS: 5.0-canonical-ledger-layout
+- Audited package preflight PASS: 5.1-batched-source-audit
+- 46 deterministic tests pass
+- Two-stage web search smoke test PASS: 5.1-batched-source-audit
 
-A factual audit failure or layout audit failure intentionally produces no emailed PDF.
+Expected update marker:
+- discovery=single-search-per-mandatory-source
+
+Expected independent audit marker:
+- audit=independent-batched-responses-web-search
+
+A factual audit failure, API quota failure or layout audit failure intentionally produces no emailed PDF.

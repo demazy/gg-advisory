@@ -1,32 +1,33 @@
 {
   "immutable_files": {
-    ".github/workflows/grants-radar.yml": "f6e79253b314b704d3d0c758a82e440dfc32a162676922c2a6fc130e22e03c81",
-    "INSTALL.txt": "5f7e8c4e4fac0429558a902ec5bbb1fc78f93d681726affeb4153b838d485dc5",
-    "README_GRANTS_RADAR_AUDIT.md": "4eeb6d0c225219a24660870b067096397fef4fb02292756fb0460d600c1cda66",
+    ".github/workflows/grants-radar.yml": "8d21d01f2c30b61254e0b0758bc95f752a1741059234bdd78e02b55de50880a1",
+    "INSTALL.txt": "4a6d23c8dfd956ed35383a4ac0b2dabd354b36eaeb268195231b66fa0122e622",
+    "README_GRANTS_RADAR_AUDIT.md": "23508044a801d19227805ab0b877f638736d32e92a83b49d46bce2ff461bc4f5",
     "assets/gg-advisory-logo.png": "d49bd2a68eca497b4eae9465ab9aa4bae301c10e21559f9fb0ccfa12ca48f15b",
     "assets/reference/radar-layout-reference-fallback.pdf": "78ad9ee158f3dd5aede67f263c7805e90338918f7acfe61b720144a2c7e28371",
-    "config/grants_sources.yaml": "93340aef0fc5bc3b9ec6be5ea3a77ad1d45209a12ce7cff4c28cdaa074948f2e",
-    "src/audit_grants.py": "53be47539ad48bf25216fbf47fc0d101134180907827f4e81d6a0a39d7ddb4ba",
+    "config/grants_sources.yaml": "9bf21a5f03444deeb25805ab3adbc3fbc06c574083bbe5a6a4ca3f29ef54e611",
+    "src/audit_grants.py": "a58559adeb35b0231729ece4bed2bb6f9c5512fdc8330bbac0bc8441609f435a",
     "src/build_grants_pdf.py": "eedb1c57448a61ca69494e1128ad10189ba1d025a0229a0f8cfdaa01dff2fb3a",
-    "src/check_pdf_layout.py": "158764e821a2029b4e8cc2deb717e48b371462afde23999dcfdc59b234320e25",
-    "src/grants_core.py": "854cbe7c53fefb68bd154f0c6832090a48979b2e5f140fec8dba923322041aae",
-    "src/grants_history.py": "bf44494a5adec8b8094623335265c2566ba6026f4cc814ba8c9e517b35a04ca9",
+    "src/check_pdf_layout.py": "c506595d9b316591b53918d2ff6af905e15d5787c4f9bd69fe7f386005e10488",
+    "src/grants_core.py": "418410801ad67ea0ceb572d5dce3c21893b4c41d32bf11628f72f9c3096a5265",
+    "src/grants_history.py": "25eea2a2d263b56014fe93cd325a896378d3037f82b395a78d1245959f389004",
     "src/preflight_grants.py": "a3e8ac457a638530e036710d4952de7189dc02896e952fa293668881c43b99d1",
-    "src/update_grants.py": "263776357d973067e81173c4a29679bb2dcd15a0d5deb294d939d470fdeb30be",
+    "src/update_grants.py": "aed932c79a59fa29846fad48bfa044d2bc6499226217b693b4ff7f7119f19dfb",
     "tests/test_api_contract.py": "2d5e6045f3bdc33d747d7c4e1bf705fef1e5d1666f4bce468514bb699681deba",
-    "tests/test_audit_continuity_mocked.py": "b91b371c39b55b22006d9678c903f4c0943d180002ef38d43715aa747e767b27",
+    "tests/test_audit_continuity_mocked.py": "ab8edfbf4914221597991c3c11ceaaf9a07062ec5d2ed2c0401994783ad2acf5",
     "tests/test_grants_audit.py": "7cbc951cb9f117a7147e4955f58a4e142b65703e6d809dfde6adb72c7d16ba95",
-    "tests/test_grants_audit_strict.py": "503157fc444453341b2b058012ea111a3c089ea824a63cfda3ad83f1fe07d67b",
+    "tests/test_grants_audit_strict.py": "cf10ce5b57397758896498caecb83c286ce5314c912041cbf3ff83bef6e4d4d0",
     "tests/test_history_ledger.py": "7a93abd367db5933f8c3b6bc7cbc364188c0db4af39707a0a2e68db3dc6fadfe",
     "tests/test_layout_contract.py": "28eaa7289fd6314f6e390bf3c3b3d065088525ab2e8a13ff92f656b407ddd0ec",
-    "tests/test_manifest_preflight.py": "f65ab9cdcee82148c9f6c039d4b80de16c80351e64fae0ded5611a6c3a58b333",
-    "tests/test_update_continuity.py": "ca4896f222d59473b82f5ad819d9d1f2c86c85dbfdd74f097860b91d8e3c3461",
+    "tests/test_manifest_preflight.py": "abe9fd46585917c7aa23f3da6f5a9c6acad9a435b3b42e6e1b387c43558bfb6a",
+    "tests/test_update_continuity.py": "0ca7426632a59ab90d800a203bb3e0fabf424269aa1d1dd3d64454ce5a8fd747",
     "tests/test_update_end_to_end_mocked.py": "dee8274ff53727ed4f846adf76506d1d6995c44df6bfa4cd9b52025742078015",
-    "tests/test_workflow_fail_closed.py": "d97d923a8a719ce7d08516c0bb7460b2a08404fa17a28b5a2efcb9f36dbaf67c"
+    "tests/test_v51_production_regressions.py": "97935de386734f8de8a654201bec61fb5cb32f6480d5e51e1751c2e08b215fa0",
+    "tests/test_workflow_fail_closed.py": "51db4d189e6a868e522056675bf8f76c1134154f3a3953a0ba4f1a2c77cf5425"
   },
   "mutable_state": [
     "config/grants.yaml",
     "assets/reference/radar-layout-reference.pdf"
   ],
-  "version": "5.0-canonical-ledger-layout"
+  "version": "5.1-batched-source-audit"
 }

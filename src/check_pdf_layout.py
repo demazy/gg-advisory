@@ -20,7 +20,7 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 import fitz  # PyMuPDF
 
-PIPELINE_VERSION = "5.0-canonical-ledger-layout"
+PIPELINE_VERSION = "5.1-batched-source-audit"
 
 
 def clean(v: Any) -> str:
@@ -124,10 +124,12 @@ def check(reference: Path, candidate: Path) -> Dict[str, Any]:
     cand_sizes = {(round(p.rect.width, 2), round(p.rect.height, 2)) for p in cand}
     add("page_geometry", cand_sizes == {ref_size}, f"reference={ref_size}; candidate_sizes={sorted(cand_sizes)}")
 
-    # 2. Page count can change with programme count, but not radically.
-    tolerance = max(3, math.ceil(len(ref) * 0.30))
-    delta = abs(len(cand) - len(ref))
-    add("page_count_continuity", len(cand) >= 5 and delta <= tolerance, f"reference={len(ref)} candidate={len(cand)} delta={delta} tolerance={tolerance}")
+    # 2. Page count is content-driven. A completeness refresh may legitimately add many
+    # programmes, so page-count delta is not a brand/layout failure by itself. Keep only a
+    # broad sanity bound; geometry, anchors, cover treatment and off-page checks enforce the
+    # actual layout contract.
+    max_pages = max(30, len(ref) * 4)
+    add("page_count_sanity", 5 <= len(cand) <= max_pages, f"reference={len(ref)} candidate={len(cand)} allowed=5..{max_pages}")
 
     # 3. Required branded/structural anchors.
     text = _doc_text(cand)

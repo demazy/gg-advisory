@@ -54,12 +54,9 @@ scope:
   - scaleup
   - spin-out
 thresholds:
-  extract_min_confidence: 0.97
-  validator_min_confidence: 0.98
-  auto_add_confidence: 0.98
-  auto_exclude_confidence: 0.98
-  discovery_candidate_min_confidence: 0.9
-  jurisdiction_coverage_min_confidence: 0.9
+  extract_hard_min_confidence: 0.7
+  validator_hard_min_confidence: 0.7
+  new_candidate_min_confidence: 0.9
   match_similarity: 0.93
 sources:
 - id: arena

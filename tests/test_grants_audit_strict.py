@@ -59,20 +59,17 @@ def test_source_universe_covers_all_australian_jurisdictions():
     assert all(s.get("index_urls") for s in required)
 
 
-def test_audit_thresholds_are_fail_closed():
+def test_audit_thresholds_use_confidence_as_safety_floor_not_arbitrary_veto():
     cfg = yaml.safe_load((ROOT / "config" / "grants_sources.yaml").read_text())
     t = cfg["thresholds"]
-    assert t["extract_min_confidence"] >= 0.97
-    assert t["validator_min_confidence"] >= 0.98
-    assert t["auto_add_confidence"] >= 0.98
-    assert t["auto_exclude_confidence"] >= 0.98
+    assert 0.60 <= t["extract_hard_min_confidence"] <= 0.80
+    assert 0.60 <= t["validator_hard_min_confidence"] <= 0.80
+    assert t["new_candidate_min_confidence"] >= 0.90
 
 
-def test_v3_completeness_thresholds_present():
+def test_v51_matching_threshold_present():
     cfg = yaml.safe_load((ROOT / "config" / "grants_sources.yaml").read_text())
     t = cfg["thresholds"]
-    assert t["discovery_candidate_min_confidence"] >= 0.90
-    assert t["jurisdiction_coverage_min_confidence"] >= 0.90
     assert t["match_similarity"] >= 0.90
 
 

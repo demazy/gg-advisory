@@ -49,7 +49,7 @@ def test_existing_out_of_scope_pathway_is_archived_not_silently_deleted():
         'search_evidence_sha256': 'abc',
     }
     rec, issues, ledger = _validate_web_record(
-        old=old, result=result, allowed_domains=['example.gov.au'], verified=date(2026, 8, 31), min_confidence=0.93
+        old=old, result=result, allowed_domains=['example.gov.au'], verified=date(2026, 8, 31), hard_min_confidence=0.70
     )
     assert rec is not None
     assert rec['id'] == old['id']

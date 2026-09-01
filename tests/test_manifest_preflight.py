@@ -8,7 +8,7 @@ def test_manifest_exists_and_declares_final_pipeline():
     p = ROOT / 'config' / 'grants_pipeline_manifest.json'
     assert p.exists()
     data = json.loads(p.read_text())
-    assert data['version'] == '5.0-canonical-ledger-layout'
+    assert data['version'] == '5.1-batched-source-audit'
     assert 'src/grants_core.py' in data['immutable_files']
     assert 'src/grants_history.py' in data['immutable_files']
     assert 'src/check_pdf_layout.py' in data['immutable_files']

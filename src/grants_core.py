@@ -18,7 +18,7 @@ explicit mandatory discovery universe in config/grants_sources.yaml.
 """
 from __future__ import annotations
 
-PIPELINE_VERSION = "5.0-canonical-ledger-layout"
+PIPELINE_VERSION = "5.1-batched-source-audit"
 
 import hashlib
 import html
@@ -749,8 +749,21 @@ def _post_responses(payload: Dict[str, Any]) -> Dict[str, Any]:
         )
         if r.status_code < 400:
             break
+        body = r.text or ""
+        # Billing/quota/spend-limit 429s cannot recover on retry. Fail immediately with a
+        # stable marker so the workflow does not burn more requests after a hard billing stop.
+        nonrecoverable_429_codes = (
+            "credit_balance_exhausted",
+            "organization_usage_limit_exceeded",
+            "organization_spend_limit_exceeded",
+            "project_spend_limit_exceeded",
+        )
+        if r.status_code == 429 and (
+            "insufficient_quota" in body or any(code in body for code in nonrecoverable_429_codes)
+        ):
+            raise RuntimeError(f"OPENAI_API_QUOTA_OR_SPEND_LIMIT: {body[:1000]}")
         if r.status_code not in {408, 409, 429, 500, 502, 503, 504} or attempt == 3:
-            raise RuntimeError(f"OpenAI Responses HTTP {r.status_code}: {r.text[:1200]}")
+            raise RuntimeError(f"OpenAI Responses HTTP {r.status_code}: {body[:1200]}")
         time.sleep(2 ** attempt)
     assert r is not None
     try:
@@ -899,30 +912,40 @@ def discover_programmes_via_web(
     pass_name: str = "primary",
     model: Optional[str] = None,
 ) -> Dict[str, Any]:
+    """Search one mandatory source group once and return complete, citable programme snapshots.
+
+    v5.1 deliberately folds *discovery* and *fresh verification of known records* into the
+    same official-domain search. This avoids paying for a second live-search call for every
+    known record and, more importantly, avoids a separate search for every new candidate.
+    """
     known = [
-        {"id": clean(x.get("id")), "name": clean(x.get("name")), "url": clean(x.get("url"))}
+        {
+            "id": clean(x.get("id")),
+            "name": clean(x.get("name")),
+            "url": clean(x.get("url")),
+            "level": clean(x.get("level") or jurisdiction),
+        }
         for x in known_programmes
         if clean(x.get("name"))
     ]
-    framing = (
-        "Search positively for every in-scope programme, including successor rounds and newly opened programmes."
-        if pass_name == "primary" else
-        "Act as a sceptical completeness reviewer. Look specifically for eligible programmes that a first search could miss: successor rounds, renamed funds, paused/reopened schemes, accelerators, co-investment funds and concessional finance."
-    )
     prompt = f"""
-You are performing an auditable funding-programme completeness search as at {verified.isoformat()}.
-Use web search ONLY on the allowed official/administering domains supplied by the tool.
+You are performing one auditable source-group verification and completeness search for the GG Advisory climate-tech Funding Radar.
+Verification date: {verified.isoformat()} in Australia/Melbourne. If UTC is still the previous calendar day, that timezone difference is NOT a factual conflict; use the latest official information available at run time and do not invent future changes.
+Use live web search ONLY on the allowed official/administering domains supplied by the tool.
 
 RADAR SCOPE:
 {scope_text}
 
 JURISDICTION: {jurisdiction}
 SOURCE GROUP: {source_id}
-SEARCH PASS: {pass_name}
-KNOWN PROGRAMMES (may be stale or incomplete):
+KNOWN PROGRAMMES ON THIS SOURCE GROUP (may be stale, renamed, superseded, paused or archived):
 {json.dumps(known, ensure_ascii=False)}
 
-{framing}
+TASKS:
+1. Explicitly account for EVERY known programme above. Preserve its `baseline_id` even if its current name or URL changed.
+2. Search the same official domains for genuinely NEW or successor pathways that are materially in scope.
+3. For every in-scope pathway you return, provide a current record plus source-grounded evidence in this SAME response.
+4. Do not list generic business/start-up/research programmes as new candidates merely because a climate company could technically apply. A NEW candidate needs an explicit climate-tech, clean-energy, net-zero, sustainability, circular-economy, low-emissions, renewable-energy, critical-minerals/clean-manufacturing, energy-transition or equivalent thematic/priority fit on the official source. Existing baseline programmes are allowed to remain as explicit baseline exceptions if still current and materially useful.
 
 Return JSON only with this exact top-level structure:
 {{
@@ -930,28 +953,72 @@ Return JSON only with this exact top-level structure:
   "search_notes": "",
   "programmes": [
     {{
-      "name": "current official programme/fund/accelerator name",
-      "url": "current primary official/administering page URL",
+      "baseline_id": "matching known id, or empty for a new discovery",
+      "name": "current official name",
+      "url": "current primary official/administering programme URL",
       "in_scope": true,
       "confidence": 0.0,
-      "reason": "brief scope reason"
+      "reason": "brief inclusion/exclusion reason",
+      "scope_basis": "baseline_exception|climate_specific|explicit_priority_fit|out_of_scope",
+      "scope_evidence": {{"source_url":"","support":""}},
+      "record": {{
+        "id": "baseline id when supplied, otherwise a stable slug may be left empty",
+        "name": "",
+        "admin": "",
+        "level": "national|act|nsw|nt|qld|sa|tas|vic|wa",
+        "type": "grant|repayable_grant|accelerator|incubator|equity|debt_equity",
+        "status": "Open now|Rolling|Opening soon|Closed, monitor|Paused|Archived",
+        "amount": "",
+        "deadline": "YYYY-MM-DD or null",
+        "deadline_type": "fixed|rolling|tbc",
+        "deadline_label": "",
+        "target_stage": "",
+        "url": "",
+        "description": "2-4 concise factual sentences",
+        "why_it_matters": "1-2 concise editorial sentences with no new unsupported factual claims",
+        "signals": "optional current factual watch item or empty string",
+        "show_from": null,
+        "show_until": null,
+        "last_verified": "{verified.isoformat()}"
+      }},
+      "field_evidence": {{
+        "name": {{"source_url":"","support":""}},
+        "admin": {{"source_url":"","support":""}},
+        "status": {{"source_url":"","support":""}},
+        "amount": {{"source_url":"","support":""}},
+        "deadline": {{"source_url":"","support":""}},
+        "deadline_label": {{"source_url":"","support":""}},
+        "target_stage": {{"source_url":"","support":""}}
+      }},
+      "claim_evidence": [
+        {{"path":"description:1","claim":"exact sentence from description","source_url":"","support":"short source-grounded support"}}
+      ],
+      "source_urls": ["official URLs actually used"],
+      "unresolved_conflict": false,
+      "conflict_notes": [],
+      "overall_confidence": 0.0
     }}
   ]
 }}
 
-Rules:
-- Include only funding pathways materially in scope: grants, accelerators/incubators with material venture support, equity/co-investment, or concessional finance.
-- Exclude news articles, media releases, recipient/case-study pages, ordinary tenders/procurement, household rebates, awards without material funding, generic training, and historical rounds with no successor/monitoring relevance.
-- Use the CURRENT official primary programme page where possible, not a news story.
-- If there are genuinely no in-scope programmes on these domains, return an empty programmes list rather than inventing one.
-- Search broadly enough that coverage_confidence represents your confidence that you found all in-scope programmes on the allowed domains as at the verification date.
+RULES:
+- Never invent amount, deadline, status, eligibility, recurrence or successor status.
+- A fixed public deadline before {verified.isoformat()} cannot be `Open now`.
+- `Archived` means no current or monitor-worthy successor remains. `Closed, monitor` means the public round is closed but a recurring/successor pathway is materially worth monitoring.
+- For a programme whose public application is closed but shortlisted applicants are still completing later stages, use `Closed, monitor` unless the public can still enter.
+- When later official evidence supersedes an older funding amount or status, use the latest dated official evidence and explain it in `signals`; that is not an unresolved conflict when chronology resolves it.
+- Do not set `unresolved_conflict=true` merely because the run date in Melbourne is one day ahead of UTC, because an official page lacks the exact word `rolling`, or because a programme has multiple components whose accessibility can be described precisely.
+- Set `unresolved_conflict=true` only for a MATERIAL contradiction that cannot be resolved by chronology, scope/component distinction, or explicit supersession language.
+- Every emitted source URL must be on an allowed official/administering domain surfaced by the web-search tool.
+- Every known baseline id must appear exactly once in `programmes`, even if `in_scope=false` or archived.
+- For new discoveries, return only materially plausible in-scope pathways. Do not enumerate obvious generic or excluded programmes just to prove you saw them.
 """
     return web_search_json(
         prompt=prompt,
         allowed_domains=allowed_domains,
         model=model or WEB_MODEL,
         search_context_size="high",
-        max_output_tokens=5000,
+        max_output_tokens=12000,
     )
 
 
@@ -964,10 +1031,12 @@ def extract_program_via_web(
     scope_text: str,
     model: Optional[str] = None,
 ) -> Dict[str, Any]:
+    """Targeted fallback for a known record missing from its mandatory source-group batch."""
     current_json = json.dumps(current or {}, ensure_ascii=False, indent=2)
     prompt = f"""
-You are a forensic funding-programme verifier. Verify the CURRENT state of exactly one programme as at {verified.isoformat()}.
-Use web search ONLY on the allowed official/administering domains supplied by the tool. Do not rely on model memory.
+You are a forensic funding-programme verifier. Verify the CURRENT state of exactly one programme as at {verified.isoformat()} Australia/Melbourne.
+Use live web search ONLY on the allowed official/administering domains supplied by the tool. Do not rely on model memory.
+If UTC is still the previous date, do not treat that timezone difference itself as a conflict.
 
 RADAR SCOPE:
 {scope_text}
@@ -975,64 +1044,38 @@ JURISDICTION HINT: {jurisdiction_hint}
 CURRENT RECORD (may be stale, renamed, superseded or closed):
 {current_json}
 
-Find the current official programme page and any current official page needed to resolve status, amount, deadlines or successor status.
-If the old programme has ended permanently, say so. If it has a successor or a new round, use the current programme/round name and page.
-
 Return JSON only:
 {{
   "record": {{
     "id": "preserve current id when supplied",
-    "name": "",
-    "admin": "",
-    "level": "national|act|nsw|nt|qld|sa|tas|vic|wa",
+    "name": "", "admin": "", "level": "national|act|nsw|nt|qld|sa|tas|vic|wa",
     "type": "grant|repayable_grant|accelerator|incubator|equity|debt_equity",
     "status": "Open now|Rolling|Opening soon|Closed, monitor|Paused|Archived",
-    "amount": "",
-    "deadline": "YYYY-MM-DD or null",
-    "deadline_type": "fixed|rolling|tbc",
-    "deadline_label": "",
-    "target_stage": "",
-    "url": "current primary official/administering programme URL",
+    "amount": "", "deadline": "YYYY-MM-DD or null", "deadline_type": "fixed|rolling|tbc",
+    "deadline_label": "", "target_stage": "", "url": "",
     "description": "2-4 concise factual sentences",
     "why_it_matters": "1-2 concise editorial sentences without new unsupported factual claims",
     "signals": "optional current factual watch item or empty string",
-    "show_from": null,
-    "show_until": null,
-    "last_verified": "{verified.isoformat()}"
+    "show_from": null, "show_until": null, "last_verified": "{verified.isoformat()}"
   }},
   "field_evidence": {{
-    "name": {{"source_url":"","support":""}},
-    "admin": {{"source_url":"","support":""}},
-    "status": {{"source_url":"","support":""}},
-    "amount": {{"source_url":"","support":""}},
-    "deadline": {{"source_url":"","support":""}},
-    "deadline_label": {{"source_url":"","support":""}},
+    "name": {{"source_url":"","support":""}}, "admin": {{"source_url":"","support":""}},
+    "status": {{"source_url":"","support":""}}, "amount": {{"source_url":"","support":""}},
+    "deadline": {{"source_url":"","support":""}}, "deadline_label": {{"source_url":"","support":""}},
     "target_stage": {{"source_url":"","support":""}}
   }},
-  "claim_evidence": [
-    {{"path":"description:1","claim":"exact sentence from description","source_url":"","support":"short support from source"}}
-  ],
-  "source_urls": ["official URLs actually used"],
-  "unresolved_conflict": false,
-  "conflict_notes": [],
-  "overall_confidence": 0.0,
-  "in_scope": true
+  "claim_evidence": [], "source_urls": [], "unresolved_conflict": false,
+  "conflict_notes": [], "overall_confidence": 0.0, "in_scope": true
 }}
 
-Rules:
-- Never invent a funding amount, deadline, status, eligibility criterion or programme recurrence.
-- A fixed deadline before {verified.isoformat()} cannot be Open now.
-- "Archived" means no current or monitor-worthy future pathway remains. "Closed, monitor" means the current round is closed but a recurring/successor pathway is materially worth monitoring.
-- Every source_url must be an official/administering-domain URL surfaced by the web search.
-- `support` should be a short source-grounded fragment sufficient to justify the field. Exact verbatim wording is preferred, but semantic support is allowed because some official pages are dynamically rendered.
-- If evidence is insufficient or contradictory, set unresolved_conflict=true and lower confidence rather than guessing.
+Use chronology and component distinctions to resolve apparent conflicts. Set unresolved_conflict only for a material contradiction that remains unresolved.
 """
     return web_search_json(
         prompt=prompt,
         allowed_domains=allowed_domains,
         model=model or WEB_MODEL,
         search_context_size="high",
-        max_output_tokens=6000,
+        max_output_tokens=6500,
     )
 
 
@@ -1044,45 +1087,87 @@ def independent_validate_via_web(
     scope_text: str,
     model: Optional[str] = None,
 ) -> Dict[str, Any]:
+    """Single-record compatibility wrapper used by tests or targeted debugging."""
+    batch = independent_validate_batch_via_web(
+        records=[record], allowed_domains=allowed_domains, verified=verified, scope_text=scope_text, model=model
+    )
+    data = dict(batch.get("data") or {})
+    rows = [x for x in (data.get("records") or []) if isinstance(x, dict)]
+    first = rows[0] if rows else {"id": clean(record.get("id")), "supported": False, "confidence": 0.0, "field_checks": {}, "material_issues": ["missing_batch_result"]}
+    out = dict(batch)
+    out["data"] = first
+    return out
+
+
+def independent_validate_batch_via_web(
+    *,
+    records: Sequence[Dict[str, Any]],
+    allowed_domains: Sequence[str],
+    verified: date,
+    scope_text: str,
+    model: Optional[str] = None,
+) -> Dict[str, Any]:
+    """Independently re-search and adversarially validate a small batch of records.
+
+    Batching preserves the second live-web verification while reducing web/API calls by an
+    order of magnitude compared with one search per record.
+    """
+    slim = []
+    for rec in records:
+        slim.append({k: rec.get(k) for k in (
+            "id", "name", "admin", "level", "type", "status", "amount", "deadline",
+            "deadline_type", "deadline_label", "target_stage", "url", "description",
+            "why_it_matters", "signals"
+        )})
     prompt = f"""
-You are the SECOND, independent adversarial auditor of a climate-tech funding radar record.
-You did not create the record. Re-search the live web as at {verified.isoformat()} using ONLY the allowed official/administering domains supplied by the tool.
-Try actively to disprove the record, find a newer round, detect a closure/pause, or find a conflicting amount/deadline.
+You are the SECOND, independent adversarial auditor of a climate-tech funding radar.
+Re-search the live web as at {verified.isoformat()} Australia/Melbourne using ONLY the allowed official/administering domains supplied by the tool.
+If UTC is still the previous calendar day, that timezone difference is not itself a conflict. Use the latest official information available at run time.
+Try actively to disprove each record, identify a newer round, detect closure/pause, or find a superseding amount/deadline.
 
 RADAR SCOPE:
 {scope_text}
 
-RECORD TO AUDIT:
-{json.dumps(record, ensure_ascii=False, indent=2)}
+RECORDS TO AUDIT:
+{json.dumps(slim, ensure_ascii=False, indent=2)}
 
 Return JSON only:
 {{
-  "supported": true,
-  "confidence": 0.0,
-  "field_checks": {{
-    "name": {{"supported":true,"current_value":"","reason":"","source_url":""}},
-    "admin": {{"supported":true,"current_value":"","reason":"","source_url":""}},
-    "type": {{"supported":true,"current_value":"","reason":"","source_url":""}},
-    "status": {{"supported":true,"current_value":"","reason":"","source_url":""}},
-    "amount": {{"supported":true,"current_value":"","reason":"","source_url":""}},
-    "deadline": {{"supported":true,"current_value":"YYYY-MM-DD or null","reason":"","source_url":""}},
-    "deadline_label": {{"supported":true,"current_value":"","reason":"","source_url":""}},
-    "target_stage": {{"supported":true,"current_value":"","reason":"","source_url":""}},
-    "description": {{"supported":true,"reason":"","source_url":""}},
-    "why_it_matters": {{"supported":true,"reason":"","source_url":""}},
-    "signals": {{"supported":true,"reason":"","source_url":""}}
-  }},
-  "contradictions": [],
-  "material_issues": [],
-  "source_urls": ["official URLs actually used"]
+  "records": [
+    {{
+      "id": "exact supplied id",
+      "supported": true,
+      "confidence": 0.0,
+      "field_checks": {{
+        "name": {{"supported":true,"current_value":"","reason":"","source_url":""}},
+        "admin": {{"supported":true,"current_value":"","reason":"","source_url":""}},
+        "type": {{"supported":true,"current_value":"","reason":"","source_url":""}},
+        "status": {{"supported":true,"current_value":"","reason":"","source_url":""}},
+        "amount": {{"supported":true,"current_value":"","reason":"","source_url":""}},
+        "deadline": {{"supported":true,"current_value":"YYYY-MM-DD or null","reason":"","source_url":""}},
+        "deadline_label": {{"supported":true,"current_value":"","reason":"","source_url":""}},
+        "target_stage": {{"supported":true,"current_value":"","reason":"","source_url":""}},
+        "description": {{"supported":true,"reason":"","source_url":""}},
+        "why_it_matters": {{"supported":true,"reason":"","source_url":""}},
+        "signals": {{"supported":true,"reason":"","source_url":""}}
+      }},
+      "contradictions": [], "material_issues": [], "source_urls": []
+    }}
+  ]
 }}
 
-Fail `supported` if any material current fact is wrong, stale, misleading or unsupported. Treat minor editorial wording as non-material only if it does not add facts. If the official source is ambiguous, fail rather than guess.
+Rules:
+- Return exactly one result for every supplied id.
+- Fail `supported` only for a material wrong, stale, misleading or unsupported claim, not for stylistic differences.
+- A lower self-reported confidence is NOT by itself a reason to reject a record; use `supported=false` when evidence is materially insufficient.
+- Resolve apparently conflicting official statements by chronology, public-vs-shortlisted application stage, and programme-component distinctions where justified.
+- `why_it_matters` is editorial; reject it only if it introduces a factual claim unsupported by official evidence.
+- Every source_url must be an official/administering-domain URL surfaced by the live search.
 """
     return web_search_json(
         prompt=prompt,
         allowed_domains=allowed_domains,
         model=model or WEB_AUDIT_MODEL,
         search_context_size="high",
-        max_output_tokens=4500,
+        max_output_tokens=max(7000, min(18000, 3500 + 2200 * len(slim))),
     )

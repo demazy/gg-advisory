@@ -25,15 +25,23 @@ def rec(rid, status='Rolling', include=True):
     return r
 
 
-def validator_for(record, **kwargs):
-    checks = {}
-    for f in ['name', 'admin', 'type', 'status', 'amount', 'deadline_label', 'target_stage']:
-        checks[f] = {'supported': True, 'current_value': record.get(f), 'reason': '', 'source_url': record['url']}
-    checks['description'] = {'supported': True, 'reason': '', 'source_url': record['url']}
-    checks['why_it_matters'] = {'supported': True, 'reason': '', 'source_url': record['url']}
+def validator_for(records, **kwargs):
+    rows = []
+    urls = []
+    for record in records:
+        checks = {}
+        for f in ['name', 'admin', 'type', 'status', 'amount', 'deadline_label', 'target_stage']:
+            checks[f] = {'supported': True, 'current_value': record.get(f), 'reason': '', 'source_url': record['url']}
+        checks['description'] = {'supported': True, 'reason': '', 'source_url': record['url']}
+        checks['why_it_matters'] = {'supported': True, 'reason': '', 'source_url': record['url']}
+        rows.append({
+            'id': record['id'], 'supported': True, 'confidence': 0.90, 'field_checks': checks,
+            'contradictions': [], 'material_issues': [], 'source_urls': [record['url']]
+        })
+        urls.append(record['url'])
     return {
-        'data': {'supported': True, 'confidence': 0.99, 'field_checks': checks, 'contradictions': [], 'material_issues': [], 'source_urls': [record['url']]},
-        'tool_source_urls': [record['url']], 'model': 'mock-audit', 'response_id': 'v',
+        'data': {'records': rows}, 'tool_source_urls': urls,
+        'model': 'mock-audit', 'response_id': 'v',
     }
 
 
@@ -50,7 +58,7 @@ def test_audit_passes_with_explicit_archived_transition_kept_in_registry(monkeyp
     sources = tmp_path / 'sources.yaml'
     sources.write_text(yaml.safe_dump({
         'scope': {'definition': 'Australian climate-tech funding pathways.'},
-        'thresholds': {'validator_min_confidence': 0.95},
+        'thresholds': {'validator_hard_min_confidence': 0.70},
         'sources': [{'id': 'example', 'jurisdiction': 'national', 'required': True, 'allowed_domains': ['example.gov.au']}],
     }, sort_keys=False))
     evidence = tmp_path / 'evidence.json'
@@ -76,7 +84,7 @@ def test_audit_passes_with_explicit_archived_transition_kept_in_registry(monkeyp
     }))
     outj = tmp_path / 'audit.json'; outm = tmp_path / 'audit.md'
 
-    monkeypatch.setattr(audit_grants, 'independent_validate_via_web', validator_for)
+    monkeypatch.setattr(audit_grants, 'independent_validate_batch_via_web', validator_for)
     monkeypatch.setenv('GRANTS_WEB_AUDIT_WORKERS', '1')
     monkeypatch.setattr(sys, 'argv', [
         'audit_grants.py', '--grants', str(grants), '--sources', str(sources), '--evidence', str(evidence),

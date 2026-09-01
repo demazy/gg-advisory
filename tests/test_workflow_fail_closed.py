@@ -41,7 +41,7 @@ def test_pdf_builder_refuses_missing_or_failed_audit_and_only_uses_published_aud
 
 
 def test_pipeline_markers_present():
-    marker = 'PIPELINE_VERSION = "5.0-canonical-ledger-layout"'
+    marker = 'PIPELINE_VERSION = "5.1-batched-source-audit"'
     assert marker in CORE
     assert marker in UPDATE
     assert marker in AUDIT
