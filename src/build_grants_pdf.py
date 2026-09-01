@@ -615,12 +615,14 @@ def overview_flowables(width: float, entries: List[Dict[str, Any]], verified: da
 
 def sources_page(width: float, month: str, verified: date, audit: Dict[str, Any]) -> List[Flowable]:
     summary = audit.get("summary") or {}
+    modes = summary.get("verification_modes") or {}
+    live = int(modes.get("live_confirmed", 0))
+    bridged = int(modes.get("live_plus_fresh_snapshot", 0)) + int(modes.get("fresh_snapshot_fallback", 0))
     audit_note = (
-        f"Direct-source audit gate: <b>PASS</b>. {summary.get('programmes_passed', 0)}/{summary.get('visible_programmes', 0)} "
-        f"published programmes passed independent primary-source verification; "
-        f"{summary.get('mandatory_sources_ok', 0)}/{summary.get('mandatory_sources_total', 0)} mandatory discovery sources were scanned; "
-        f"{summary.get('unresolved_candidates', 0)} discovery candidates remained unresolved; "
-        f"{summary.get('baseline_programmes_audited', 0)}/{summary.get('baseline_programmes', 0)} published pathways passed the second direct-source audit."
+        f"Publication audit gate: <b>PASS</b>. {summary.get('programmes_passed', 0)}/{summary.get('visible_programmes', 0)} "
+        f"published programmes passed verification; {live} were fully reconfirmed by current live sentinels and {bridged} used a matching fresh evidence snapshot where a source was technically blocked or only partially machine-readable. "
+        f"{summary.get('mandatory_sources_covered', 0)}/{summary.get('mandatory_sources_total', 0)} mandatory monitored source groups remained covered; "
+        f"{summary.get('unresolved_new_candidates', 0)} genuinely new high-signal discovery links remained unresolved."
     )
     return [
         Paragraph("Sources and verification", P_H2),
@@ -629,7 +631,7 @@ def sources_page(width: float, month: str, verified: date, audit: Dict[str, Any]
         Paragraph(audit_note, P),
         Spacer(1, 8),
         Paragraph(
-            f"Programme details in this report were checked against live primary or administering-body sources current to {verified.day} {calendar.month_name[verified.month]} {verified.year}. Completeness is audited against the mandatory discovery universe configured for national, state and territory sources; an unannounced or unindexed programme outside that universe cannot be ruled out absolutely. Fast-moving items should still be confirmed with the administering body before acting.",
+            f"Programme details in this report were tested against configured official or administering-body sources as at {verified.day} {calendar.month_name[verified.month]} {verified.year}. Where an official site could not be fetched reliably because of access controls, TLS/DNS behaviour or transient availability, publication was permitted only when the current registry exactly matched a previously verified evidence snapshot no more than 45 days old and no contradictory live evidence was found. Completeness is assessed against the configured national, state and territory monitoring universe and its dated discovery inventory; an unannounced or unindexed programme outside that universe cannot be ruled out absolutely.",
             P,
         ),
         Spacer(1, 12),

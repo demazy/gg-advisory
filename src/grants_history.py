@@ -13,7 +13,7 @@ import re
 from copy import deepcopy
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
-PIPELINE_VERSION = "6.0-zero-api-official-source"
+PIPELINE_VERSION = "7.0-snapshot-sentinel"
 
 # Only fields that describe the programme/pathway itself are versioned. Editorial prose is
 # intentionally excluded so harmless rewriting does not create fake historical events.

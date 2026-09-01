@@ -1,0 +1,2280 @@
+{
+  "source_run_pipeline": "6.0-zero-api-official-source",
+  "visible_record_ids": [
+    "csiro-on-accelerate-cohort12",
+    "arena-fmia-innovation-fund",
+    "arena-advancing-renewables",
+    "industry-growth-program",
+    "cefc-virescent-fund2",
+    "vic-breakthrough-victoria",
+    "wa-founders-factory-nature-tech",
+    "qld-advance-ignite-ideas",
+    "sa-green-industries-grants",
+    "tas-recfit-climate-grants",
+    "nsw-unsw-climate-10x",
+    "rd-tax-incentive",
+    "nrf-net-zero-fund",
+    "hydrogen-headstart-round2",
+    "startmate-accelerator",
+    "brinc-artesian-cleantech",
+    "mseq-fund3",
+    "nsw-nzmi",
+    "act-energy-innovation-fund",
+    "i2n-cleantech-accelerator",
+    "clean-technology-innovation-grant",
+    "emerging-technology-commercialisation-fund",
+    "powering-australia-technology-fund",
+    "battery-breakthrough-initiative",
+    "first-nations-clean-energy-projects-pilot-grants",
+    "energy-innovation-fund",
+    "cleaner-fuels-program"
+  ],
+  "unresolved_candidates": [
+    {
+      "url": "https://arena.gov.au/funding",
+      "anchor": "Back to top",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/accelerated-step-change-initiative-asci",
+      "anchor": "Accelerated Step Change Initiative (ASCI)",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost",
+      "anchor": "Addressing Solar PV End-of-Life Issues and Lowering Solar PV Cost",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/advancing-renewables-program",
+      "anchor": "Advancing Renewables Program (ARP)",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/australian-solar-institute",
+      "anchor": "Australian Solar Institute",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot",
+      "anchor": "Commercialisation of R&D Funding Initiative Pilot",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/community-batteries-funding-round-2",
+      "anchor": "Community Batteries Funding Round 2",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/community-batteries-round-1",
+      "anchor": "Community Batteries Funding Round 1",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/demand-response",
+      "anchor": "Demand Response",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/department-of-resources-energy-and-tourism",
+      "anchor": "Department of Resources, Energy and Tourism",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/distributed-energy-resources",
+      "anchor": "Distributed Energy Resources",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/driving-the-nation-program",
+      "anchor": "Driving the Nation Program",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/emerging-renewables-program",
+      "anchor": "Emerging Renewables Program",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/future-fuels-fund",
+      "anchor": "Future Fuels Fund Round 1",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2",
+      "anchor": "Future Made in Australia Innovation Fund",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate",
+      "anchor": "German-Australian Hydrogen Innovation and Technology Incubator (HyGATE)",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/hydrogen",
+      "anchor": "Renewable Hydrogen for Export",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/hydrogen-headstart",
+      "anchor": "Hydrogen Headstart Round 1",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/hydrogen-headstart-round2",
+      "anchor": "Hydrogen Headstart Round 2",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/hydrogen-research-and-development-funding-round",
+      "anchor": "Hydrogen Research and Development Funding Round",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/industrial-energy-transformation-studies-program",
+      "anchor": "Industrial Energy Transformation Studies (IETS) Program",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/industry-and-researcher-collaboration",
+      "anchor": "Industry and Researcher Collaboration",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/international-engagement-program",
+      "anchor": "International Engagement Program",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round",
+      "anchor": "Iron and Steel Research and Development Funding Round",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/large-scale-battery-storage-funding-round",
+      "anchor": "Large Scale Battery Storage",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/large-scale-solar",
+      "anchor": "Large-Scale Solar",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/national-industrial-transformation-program",
+      "anchor": "National Industrial Transformation Program",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/post-fellowship-doctorate",
+      "anchor": "Post Fellowship Doctorate",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/power-system-services",
+      "anchor": "System Security",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream",
+      "anchor": "Powering the Regions Industrial Transformation Stream",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/regional-australias-renewables",
+      "anchor": "Regional Australia\u2019s Renewables",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round",
+      "anchor": "Renewable Hydrogen Deployment Funding Round",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/research-development-program",
+      "anchor": "Research and Development",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/rmp",
+      "anchor": "Regional Microgrids Program",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/short-term-forecasting-round",
+      "anchor": "Short Term Forecasting Funding Round",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/solar-research-development",
+      "anchor": "Solar Research & Development",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/solar-research-excellence",
+      "anchor": "Solar Research Excellence",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/solar-sunshot",
+      "anchor": "Solar Sunshot",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative",
+      "anchor": "Sustainable Aviation Fuel Funding Initiative",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre",
+      "anchor": "The Australian Centre for Renewable Energy (ACRE)",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round",
+      "anchor": "Ultra Low Cost Solar PV Research and Development",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4",
+      "anchor": "Ultra Low-Cost Solar PV R&D Funding Round",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/funding/venture-capital-fund",
+      "anchor": "Renewable Energy Venture Capital Fund (REVC)",
+      "score": 5,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/battery-storage",
+      "anchor": "Battery storage",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/bioenergy",
+      "anchor": "Bioenergy / Energy from waste",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/community-electrification",
+      "anchor": "Community electrification",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/concentrated-solar-thermal",
+      "anchor": "Concentrated solar thermal",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/demand-response",
+      "anchor": "Demand response",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/distributed-energy-resources",
+      "anchor": "Distributed energy resources",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/electric-vehicles",
+      "anchor": "Electric vehicles",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/geothermal",
+      "anchor": "Geothermal",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/hybrid",
+      "anchor": "Hybrid",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/hydrogen",
+      "anchor": "Hydrogen",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/large-scale-solar",
+      "anchor": "Large-scale solar",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/ocean",
+      "anchor": "Ocean",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/off-grid",
+      "anchor": "Off grid",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/pumped-hydro-energy-storage",
+      "anchor": "Hydropower / Pumped Hydro Energy Storage",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/renewables-for-industry",
+      "anchor": "Renewables for industry",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/renewables-in-buildings",
+      "anchor": "Renewables in buildings",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/solar",
+      "anchor": "Solar overview",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/solar-pv-rd",
+      "anchor": "Solar PV R&D",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/system-security-reliability",
+      "anchor": "System security and reliability",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/renewable-energy/wind",
+      "anchor": "Wind",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arena.gov.au/what-is-renewable-energy",
+      "anchor": "Renewable Energy overview",
+      "score": 3,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://arenanet.arena.gov.au/s/funding-advice",
+      "anchor": "here",
+      "score": 2,
+      "source_id": "arena",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://csiro.au/en/news/All/Articles/2025/September/H2EX",
+      "anchor": "H2EX Perth startup H2EX is on a mission to turn white (gold) hydrogen into a viable clean energy opportunity.",
+      "score": 3,
+      "source_id": "csiro-innovation",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://csiro.au/en/research/environmental-impacts/climate-change",
+      "anchor": "Climate change",
+      "score": 3,
+      "source_id": "csiro-innovation",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://energylab.org.au/about/get-involved-in-climate-tech-startup-innovation",
+      "anchor": "How we support the climate tech startup ecosystem",
+      "score": 3,
+      "source_id": "energylab",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://energylab.org.au/angel-group/climate-solutions-accelerator-fund-managed-by-impact-ventures",
+      "anchor": "Climate Solutions Accelerator Fund, managed by Impact Ventures",
+      "score": 5,
+      "source_id": "energylab",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/",
+      "anchor": "Clean Energy Finance Corporation Clean Energy Finance Corporation",
+      "score": 3,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/case-studies/agile-energy-accelerates-solar-and-battery-solutions-for-commercial-and-industrial-businesses",
+      "anchor": "Read more",
+      "score": 3,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/case-studies/ip-group-climate-catalyst-fund-backs-decarbonisation-innovators",
+      "anchor": "Read more",
+      "score": 4,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/case-studies/relectrify-technology-transforms-battery-storage-performance",
+      "anchor": "Read more",
+      "score": 3,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/case-studies/sundrive-solar-innovation-creates-next-generation-panels",
+      "anchor": "Read more",
+      "score": 3,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/where-we-invest/investment-focus-areas/alternative-fuels",
+      "anchor": "Alternative fuels",
+      "score": 3,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/where-we-invest/investment-focus-areas/asset-finance",
+      "anchor": "Asset finance",
+      "score": 3,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/where-we-invest/investment-focus-areas/energy-storage",
+      "anchor": "Energy storage",
+      "score": 3,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/where-we-invest/investment-focus-areas/growth-capital",
+      "anchor": "Growth capital",
+      "score": 4,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/where-we-invest/investment-focus-areas/industry-resources",
+      "anchor": "Industry, resources",
+      "score": 3,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/where-we-invest/investment-focus-areas/infrastructure",
+      "anchor": "Infrastructure",
+      "score": 3,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/where-we-invest/investment-focus-areas/natural-capital",
+      "anchor": "Natural capital",
+      "score": 3,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/where-we-invest/investment-focus-areas/property",
+      "anchor": "Property",
+      "score": 3,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/where-we-invest/investment-focus-areas/renewable-energy",
+      "anchor": "Renewable energy",
+      "score": 6,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/where-we-invest/investment-focus-areas/rewiring-the-nation-fund",
+      "anchor": "Rewiring the Nation Fund",
+      "score": 4,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/where-we-invest/investment-focus-areas/transport",
+      "anchor": "Transport",
+      "score": 3,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://cefc.com.au/who-we-are/governance/policies-and-procedures",
+      "anchor": "CEFC Investment policies",
+      "score": 3,
+      "source_id": "cefc-climate-tech",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/guides/net-zero-business-guide",
+      "anchor": "Net Zero Business Guide",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/guides/technology-guides/battery-storage-guide",
+      "anchor": "Battery storage guide",
+      "score": 6,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/guides/technology-guides/renewable-energy-guides-farmers",
+      "anchor": "Renewable energy guides for farmers",
+      "score": 6,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/clean-technology-innovation",
+      "anchor": "Clean technology innovation east",
+      "score": 6,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/clean-technology-innovation/about-our-clean",
+      "anchor": "About clean technology innovation",
+      "score": 6,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/clean-technology-innovation/clean-technology-innovation-grants",
+      "anchor": "Clean technology innovation grants",
+      "score": 6,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/clean-technology-innovation/product-development",
+      "anchor": "The product development lifecycle",
+      "score": 6,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/green-hydrogen-electricity-concessions/green-hydrogen-form",
+      "anchor": "Green hydrogen concessions - apply now east",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/green-hydrogen-electricity-concessions/green-hydrogen-form/thank-you",
+      "anchor": "Thank you - Green hydrogen concession application form",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/hydrogen-nsw",
+      "anchor": "Hydrogen in NSW east",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/hydrogen-nsw/green-hydrogen-electricity",
+      "anchor": "Green hydrogen electricity concessions east",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/hydrogen-nsw/hydrogen-hubs-nsw",
+      "anchor": "Hydrogen hubs in NSW",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/hydrogen-nsw/hydrogen-refuelling-network",
+      "anchor": "Hydrogen refuelling network",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/hydrogen-nsw/hydrogen-resources",
+      "anchor": "Hydrogen resources",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/industrial-decarbonisation-initiative",
+      "anchor": "Industrial Decarbonisation Initiative east",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/industrial-decarbonisation-initiative/low-emissions-industry-program",
+      "anchor": "Low Emissions Industry Program east",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/industrial-decarbonisation-initiative/low-emissions-industry-program/faqs",
+      "anchor": "Low Emissions Industry Program FAQs",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/industrial-decarbonisation-initiative/renewable-gas-production-program/faqs",
+      "anchor": "Renewable Gas Production Program FAQs",
+      "score": 8,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/low-emissions-specifications",
+      "anchor": "Low emissions specifications east",
+      "score": 6,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-buildings",
+      "anchor": "Net zero buildings",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing",
+      "anchor": "Net Zero Manufacturing Initiative",
+      "score": 8,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/clean-technology-innovation-grant",
+      "anchor": "Clean technology innovation grant",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/clean-technology-innovation-grant/faqs",
+      "anchor": "Clean technology innovation grant FAQs",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/low-carbon-product-manufacturing-grant/faqs",
+      "anchor": "Low carbon product manufacturing grant FAQs",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/renewable-manufacturing-grant",
+      "anchor": "Renewable manufacturing grant",
+      "score": 8,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/renewable-manufacturing-grant/faqs",
+      "anchor": "Renewable manufacturing grant FAQs",
+      "score": 8,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/nsw-skills-net-zero",
+      "anchor": "NSW skills for net zero",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/supporting-your-business-decarbonise",
+      "anchor": "Business decarbonisation support east",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/stories-success-business/zero-sustainable-leaders/partnering-make-solar",
+      "anchor": "Partnering to make solar simple",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/stories-success-business/zero-sustainable-leaders/why-declarations-are-first",
+      "anchor": "Why declarations are the first step to decarbonisation",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/business-and-industry/ways-get-started-business/net-zero-industry-and-innovation",
+      "anchor": "Net zero industry and innovation",
+      "score": 6,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/energy-security-safeguard/residential-apartments-battery-certificates",
+      "anchor": "Install a new battery for apartments - certificates",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/energy-security-safeguard/residential-apartments-battery-eligibility",
+      "anchor": "Install a new battery for apartments - eligibility",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/energy-security-safeguard/residential-battery-demand-response-eligibility",
+      "anchor": "Battery - eligibility",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/government-and-local-organisations/choose-circular/nsw-government-agencies-taking-circular-economy",
+      "anchor": "NSW Government agencies taking circular economy action",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/government-and-local-organisations/guides-and-helpful-advice-local/net-zero-emissions-guide-nsw",
+      "anchor": "Net zero emissions guide for NSW councils",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/government-and-local-organisations/guides-and-helpful-advice-local/net-zero-emissions-insights",
+      "anchor": "Net Zero emissions insights webinar series",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/government-and-local-organisations/programs-grants-and-schemes/far-south-coast-community-solar",
+      "anchor": "Far South Coast community solar and battery grants east",
+      "score": 8,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/government-and-local-organisations/programs-grants-and-schemes/far-south-coast-solar-faqs",
+      "anchor": "Frequently asked questions",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/government-and-local-organisations/stories-success-local/clean-energy-knowledge-sharing",
+      "anchor": "Clean energy knowledge sharing",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/government-and-local-organisations/stories-success-local/kempsey-shire-council-goes-solar",
+      "anchor": "Kempsey Shire Council goes solar",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/government-and-local-organisations/ways-get-started-local/climate-action-councils",
+      "anchor": "Climate action for councils east",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/government-and-local-organisations/ways-get-started-local/climate-action-councils/local-councils",
+      "anchor": "Local councils help shape a resilient NSW",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/government-and-local-organisations/ways-get-started-local/plan-your-net-zero-emissions-journey",
+      "anchor": "Plan your net zero emissions journey",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/households/action",
+      "anchor": "Renewable energy and net zero explained",
+      "score": 6,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/households/action/net-zero-guide",
+      "anchor": "It all adds up to net zero east",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/households/action/net-zero-guide/businesses",
+      "anchor": "Net zero and businesses",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/households/action/net-zero-guide/net-zero",
+      "anchor": "Net zero explained",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/households/action/net-zero-guide/together",
+      "anchor": "Together towards net zero",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/households/action/net-zero-guide/you",
+      "anchor": "Net zero and you",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/households/grants-rebates/household-energy-saving-upgrades/install-battery",
+      "anchor": "Install a battery",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/households/grants-rebates/solar-for-apartment-residents",
+      "anchor": "Solar for apartment residents east",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/households/grants-rebates/solar-for-apartment-residents/faqs",
+      "anchor": "FAQs: Solar for apartment residents grants",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/households/upgrades/battery",
+      "anchor": "Residential batteries east",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/households/upgrades/battery/guide",
+      "anchor": "Guide to owning a battery",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/households/upgrades/solar",
+      "anchor": "Solar",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/households/upgrades/solar-water-heaters",
+      "anchor": "Solar water heaters",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/climate-change-net-zero-future-act-2023",
+      "anchor": "The Climate Change (Net Zero Future) Act 2023",
+      "score": 6,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/net-zero-commission",
+      "anchor": "Net Zero Commission east",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/net-zero-commission/response",
+      "anchor": "NSW Government Response to the Net Zero Commission Annual Report",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/nsw-hydrogen-strategy",
+      "anchor": "NSW Hydrogen Strategy",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/nsw-renewable-fuel-strategy",
+      "anchor": "NSW Renewable Fuel Strategy",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/reaching-net-zero-emissions",
+      "anchor": "Reaching net zero emissions east",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/reaching-net-zero-emissions/net-zero",
+      "anchor": "Net Zero Plan east",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/reaching-net-zero-emissions/net-zero-0",
+      "anchor": "Net Zero Emissions and Clean Economy Board",
+      "score": 6,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/reaching-net-zero-emissions/net-zero-futures-forum",
+      "anchor": "Net Zero Futures Policy Forum",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/reaching-net-zero-emissions/net-zero-plan/net-zero-plan-stage1",
+      "anchor": "Net Zero Plan Stage 1: 2020-30 implementation update east",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/taking-action-climate-change",
+      "anchor": "Taking action on climate change east",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/taking-action-climate-change/evaluation",
+      "anchor": "Climate Change Fund Evaluation of Programs",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/taking-action-climate-change/nsw",
+      "anchor": "NSW Climate Change Fund east",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/taking-action-climate-change/nsw/report",
+      "anchor": "NSW Climate Change Fund Annual Reports",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/electricity-infrastructure-roadmap/roadmap-entities/sector-board",
+      "anchor": "Renewable Energy Sector Board",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables",
+      "anchor": "The shift to renewables east",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/bioenergy",
+      "anchor": "Bioenergy",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/emerging-energy-program",
+      "anchor": "Emerging Energy program",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/financing-and-assistance-projects",
+      "anchor": "Financing and assistance projects",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/geothermal-energy",
+      "anchor": "Geothermal energy",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/hydro-energy",
+      "anchor": "Hydro energy",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/investment-opportunities",
+      "anchor": "Investment opportunities",
+      "score": 7,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/mapping-resources",
+      "anchor": "Mapping resources",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/nsw-renewable-energy-project-pipeline",
+      "anchor": "The NSW renewable energy project pipeline",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/ocean-energy",
+      "anchor": "Ocean energy",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/pumped-hydro-roadmap",
+      "anchor": "Pumped Hydro Roadmap",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/solar-energy",
+      "anchor": "Solar energy",
+      "score": 6,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/wind-energy",
+      "anchor": "Wind energy",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/delivering-gas-decarbonisation-roadmap",
+      "anchor": "Delivering a Gas Decarbonisation Roadmap",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/battery-certificates-landing",
+      "anchor": "Battery certificates landing",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/battery-eligibility-landing",
+      "anchor": "Battery eligibility landing",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/renewable-fuel-scheme",
+      "anchor": "Renewable Fuel Scheme east",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/renewable-fuel-scheme-faqs",
+      "anchor": "Renewable Fuel Scheme FAQs",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-battery-demand-response-certificates",
+      "anchor": "Battery - certificates",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-small-business-electric-to-solar-water-heater-certificates",
+      "anchor": "Electric water heater replacement with a solar electric boosted water heater - certificates",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-small-business-electric-to-solar-water-heater-eligibility",
+      "anchor": "Electric water heater replacement with a solar electric boosted water heater - eligibility",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-small-business-gas-to-solar-water-heater-certificates",
+      "anchor": "Gas water heater replacement with a solar electric boosted water heater - certificates",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-small-business-gas-to-solar-water-heater-eligibility",
+      "anchor": "Gas water heater replacement with a solar electric boosted water heater - eligibility",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-solar-battery-certificates",
+      "anchor": "Solar battery - certificates",
+      "score": 6,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-solar-battery-eligibility",
+      "anchor": "Solar battery - eligibility",
+      "score": 6,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/public-consultations/building-thriving-renewable-fuel",
+      "anchor": "Scaling up a thriving renewable fuel industry in NSW",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/public-consultations/going-circular-clean-energy",
+      "anchor": "Going circular in clean energy",
+      "score": 6,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/public-consultations/solar-emergency-backstop",
+      "anchor": "Solar emergency backstop",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/sustainability-government/net-zero-government",
+      "anchor": "The Net Zero Government Operations Policy east",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://nsw.gov.au/departments-and-agencies/dcceew",
+      "anchor": "Climate Change, Energy, the Environment and Water",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://nsw.gov.au/grants-and-funding/clean-technology-innovation-cti-commercial-readiness-stream/recipients",
+      "anchor": "Read more about our successful projects",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://nsw.gov.au/grants-and-funding/clean-technology-innovation-cti-project-development-stream/recipients",
+      "anchor": "Read more about our successful projects",
+      "score": 5,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://nsw.gov.au/grants-and-funding/climate-resilience-inclusive-design-resources",
+      "anchor": "Climate resilience and inclusive design resources",
+      "score": 6,
+      "source_id": "nsw-energy",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://vic.gov.au/environment-energy-and-climate",
+      "anchor": "Environment, energy and climate",
+      "score": 5,
+      "source_id": "vic-deeca",
+      "jurisdiction": "vic"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/circular-economy-benefits",
+      "anchor": "Circular economy benefits",
+      "score": 3,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/circular-economy-in-action-in-sa",
+      "anchor": "Circular economy in action in SA",
+      "score": 3,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/circular-impact-accelerator",
+      "anchor": "Circular Impact Accelerator",
+      "score": 2,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/driving-the-circular-economy",
+      "anchor": "Circular economy transition",
+      "score": 3,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/funding",
+      "anchor": "Back To Top",
+      "score": 2,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/funding/ce-market-development-funding",
+      "anchor": "Read More",
+      "score": 2,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/funding/charitable-recyclers-subsidy-program",
+      "anchor": "Read More",
+      "score": 2,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/funding/council-modernisation-grants",
+      "anchor": "Read More",
+      "score": 2,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/funding/food-waste-diversion-incentives",
+      "anchor": "Read More",
+      "score": 2,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/funding/recycling-infrastructure-grants",
+      "anchor": "Recycling Infrastructure Grants",
+      "score": 5,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/funding/regional-transport-subsidies",
+      "anchor": "Read More",
+      "score": 2,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/funding/wice-leadership-scholarship",
+      "anchor": "Read More",
+      "score": 2,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/recycling-and-bin-signage",
+      "anchor": "Recycling signage",
+      "score": 3,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/sarecycling",
+      "anchor": "SA's recycling activity",
+      "score": 3,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/strategy",
+      "anchor": "SA's circular economy strategy 2025\u20132030",
+      "score": 3,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/waste-recycling-resources",
+      "anchor": "Waste Recycling Resources",
+      "score": 3,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://greenindustries.sa.gov.au/women-in-ce-leadership-scholarship",
+      "anchor": "Women in Circular Economy Leadership Scholarship",
+      "score": 3,
+      "source_id": "green-industries-sa",
+      "jurisdiction": "sa"
+    },
+    {
+      "url": "https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-and-innovation-fund-commercialisation-bridge-grant",
+      "anchor": "Commercialisation Bridge Grant",
+      "score": 7,
+      "source_id": "wa-clean-energy",
+      "jurisdiction": "wa"
+    },
+    {
+      "url": "https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-and-innovation-fund-grants",
+      "anchor": "Print this page",
+      "score": 6,
+      "source_id": "wa-clean-energy",
+      "jurisdiction": "wa"
+    },
+    {
+      "url": "https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-and-innovation-fund-innovation-booster-grant",
+      "anchor": "Innovation Booster Grant",
+      "score": 7,
+      "source_id": "wa-clean-energy",
+      "jurisdiction": "wa"
+    },
+    {
+      "url": "https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-and-innovation-fund-innovation-pathways-program",
+      "anchor": "Innovation Pathways Program",
+      "score": 3,
+      "source_id": "wa-clean-energy",
+      "jurisdiction": "wa"
+    },
+    {
+      "url": "https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-fund",
+      "anchor": "New Industries and Innovation Fund",
+      "score": 4,
+      "source_id": "wa-clean-energy",
+      "jurisdiction": "wa"
+    },
+    {
+      "url": "https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-fund-grants",
+      "anchor": "NIIF Grants",
+      "score": 5,
+      "source_id": "wa-clean-energy",
+      "jurisdiction": "wa"
+    },
+    {
+      "url": "https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-fund-wa-venture-support-waves-program",
+      "anchor": "WA Venture Support (WAVES) program",
+      "score": 4,
+      "source_id": "wa-clean-energy",
+      "jurisdiction": "wa"
+    },
+    {
+      "url": "https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/the-western-australian-renewable-hydrogen-industry",
+      "anchor": "Renewable Hydrogen Unit",
+      "score": 5,
+      "source_id": "wa-clean-energy",
+      "jurisdiction": "wa"
+    },
+    {
+      "url": "https://wa.gov.au/organisation/department-of-jobs-tourism-science-and-innovation/new-industries-fund",
+      "anchor": "New Industries and Innovation Fund",
+      "score": 3,
+      "source_id": "wa-clean-energy",
+      "jurisdiction": "wa"
+    },
+    {
+      "url": "https://wa.gov.au/service/building-utilities-and-essential-services/waste-management/remade-wa-advancing-solar-panel-recovery-and-recycling-western-australia",
+      "anchor": "Remade in WA: advancing solar panel recovery and recycling in Western Australia",
+      "score": 3,
+      "source_id": "wa-clean-energy",
+      "jurisdiction": "wa"
+    },
+    {
+      "url": "https://wa.gov.au/service/community-services/grants-and-subsidies",
+      "anchor": "Grants and subsidies",
+      "score": 3,
+      "source_id": "wa-clean-energy",
+      "jurisdiction": "wa"
+    },
+    {
+      "url": "https://wa.gov.au/service/environment/environment-information-services/clean-energy-future-fund-round-4-documents",
+      "anchor": "Clean Energy Future Fund - Round 4 documents",
+      "score": 6,
+      "source_id": "wa-clean-energy",
+      "jurisdiction": "wa"
+    },
+    {
+      "url": "https://wa.gov.au/service/immigration/migrant-services",
+      "anchor": "Migrant services",
+      "score": 3,
+      "source_id": "wa-clean-energy",
+      "jurisdiction": "wa"
+    },
+    {
+      "url": "https://darwin.nt.gov.au/community/programs/grants-sponsorship",
+      "anchor": "More information",
+      "score": 2,
+      "source_id": "nt-innovation",
+      "jurisdiction": "nt"
+    },
+    {
+      "url": "https://innovation.nt.gov.au/ecosystem/funding",
+      "anchor": "Back to top",
+      "score": 2,
+      "source_id": "nt-innovation",
+      "jurisdiction": "nt"
+    },
+    {
+      "url": "https://innovation.nt.gov.au/ecosystem/void(0)",
+      "anchor": "Grant Funding City of Darwin grants City of Darwin provides over $350,000 funding annually to the...",
+      "score": 2,
+      "source_id": "nt-innovation",
+      "jurisdiction": "nt"
+    },
+    {
+      "url": "https://innovation.nt.gov.au/news/2023/advanced-manufacturing-growth-centre-delivering-investment-in-the-territory",
+      "anchor": "Advanced manufacturing Funding Gov program 18/07/2023 Advanced Manufacturing Growth Centre delivering investment in the Territory",
+      "score": 2,
+      "source_id": "nt-innovation",
+      "jurisdiction": "nt"
+    },
+    {
+      "url": "https://nt.gov.au/industry/business-grants-funding/ignite-program",
+      "anchor": "Northern Territory Government website",
+      "score": 2,
+      "source_id": "nt-innovation",
+      "jurisdiction": "nt"
+    },
+    {
+      "url": "https://climatesalad.com/",
+      "anchor": "",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/1-percent-pledge-for-climate-tech-australia",
+      "anchor": "Pledge 1%",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/2023-australian-climate-tech-festival-gallery",
+      "anchor": "2023 Festival & Awards Gallery",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/2024-australian-climate-tech-connect-awards-gallery",
+      "anchor": "2024 Connect & Awards Gallery",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/about/about",
+      "anchor": "About Us",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/about/ai-rehearsal-coach",
+      "anchor": "Pitch Coaching",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/about/partner",
+      "anchor": "partners",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/about/services",
+      "anchor": "Our Services",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/about/team",
+      "anchor": "Our Team",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/australian-climate-tech-festival-2022",
+      "anchor": "2022 Climate Tech Festival & Awards",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/australian-climate-tech-festival-2023",
+      "anchor": "2023 Climate Tech Festival & Awards",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/charter",
+      "anchor": "Community Charter",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/climate-tech-adoption",
+      "anchor": "Innovation Adoption Study",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/climate-tech-companies-in-australia",
+      "anchor": "entrepreneurs",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/climate-tech-ecosystem-supporters",
+      "anchor": "supporters",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/climate-tech-industry-report",
+      "anchor": "Australian Climate Tech Industry Report",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/climate-tech-investors-australia",
+      "anchor": "investors",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/climate-tech-mentors-australia",
+      "anchor": "mentors",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/contact",
+      "anchor": "Contact Us",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/global-growth-program",
+      "anchor": "Global Growth Program",
+      "score": 6,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/international-trade-missions",
+      "anchor": "International Trade Missions",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/join",
+      "anchor": "Join our community",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/letter-to-government-may-2026",
+      "anchor": "Letter To Government",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/nsw-programs",
+      "anchor": "NSW Programs",
+      "score": 5,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/posts/5-years-for-climate-salad",
+      "anchor": "5 Years for Climate Salad",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/posts/economic-potential-of-decarbonisation",
+      "anchor": "Economic Potential of Decarbonisation",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/posts/founders-factorys-wa-based-accelerators-announces-next-batch-of-startups",
+      "anchor": "Founders Factory's WA-based accelerators announces next batch of startups",
+      "score": 7,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/posts/intro-to-accessing-government-funding-to-scale-australian-climate-innovation",
+      "anchor": "Intro to Accessing Government Funding to Scale Australian Climate Innovation",
+      "score": 7,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/posts/introducing-the-2025-australian-climate-tech-industry-report",
+      "anchor": "Introducing the 2025 Australian Climate Tech Industry Report",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/posts/julien-piegay---unravel-carbon",
+      "anchor": "Julien Piegay - Unravel Carbon",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/posts/review-of-climate-tech-report-by-startup-muster-2025",
+      "anchor": "Review of Climate Tech Report by Startup Muster, 2025",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/posts/solving-50-billion-wasted-plastic-pallet-wraps-with-bearhug",
+      "anchor": "Interview: Solving 50 billion wasted plastic pallet wraps with Bearhug",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/posts/tom-kline---climate-tech-partners",
+      "anchor": "Tom Kline - Climate Tech Partners",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/products",
+      "anchor": "products",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/queensland-opportunities",
+      "anchor": "Queensland Opportunities",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/team/evan-lim",
+      "anchor": "Evan Lim",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/team/mick-liubinskas",
+      "anchor": "Mick Liubinskas",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/team/shravya-sunkugari",
+      "anchor": "Shravya Sunkugari",
+      "score": 4,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://climatesalad.com/victorian-programs",
+      "anchor": "Victorian Programs",
+      "score": 5,
+      "source_id": "climate-salad",
+      "jurisdiction": "national"
+    },
+    {
+      "url": "https://chiefscientist.smartygrants.com.au/",
+      "anchor": "Current Rounds",
+      "score": 2,
+      "source_id": "nsw-etcf-portal",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://chiefscientist.smartygrants.com.au/ETCF2026",
+      "anchor": "Skip to main content",
+      "score": 2,
+      "source_id": "nsw-etcf-portal",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://chiefscientist.smartygrants.com.au/applicant/login",
+      "anchor": "Log in",
+      "score": 2,
+      "source_id": "nsw-etcf-portal",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://unswfounders.com/10x-accelerator",
+      "anchor": "Learn more",
+      "score": 2,
+      "source_id": "unsw-founders",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://unswfounders.com/accelerators",
+      "anchor": "Accelerators",
+      "score": 2,
+      "source_id": "unsw-founders",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://unswfounders.com/climate-10x-accelerator",
+      "anchor": "Learn more",
+      "score": 5,
+      "source_id": "unsw-founders",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://unswfounders.com/health10x-accelerator",
+      "anchor": "Learn more",
+      "score": 2,
+      "source_id": "unsw-founders",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://unswfounders.com/newsletter/unsw-amp-westpac-join-forces-to-grow-women-led-startupshttps:/unswfounders.com/newsletter/unsw-amp-westpac-join-forces-to-grow-women-led-startups",
+      "anchor": "Eligibility to Westpac Accelerator Scholarships:",
+      "score": 2,
+      "source_id": "unsw-founders",
+      "jurisdiction": "nsw"
+    },
+    {
+      "url": "https://unswfounders.com/pre-accelerator",
+      "anchor": "Pre Accelerator",
+      "score": 2,
+      "source_id": "unsw-founders",
+      "jurisdiction": "nsw"
+    }
+  ],
+  "unresolved_candidate_urls": [
+    "https://arena.gov.au/funding",
+    "https://arena.gov.au/funding/accelerated-step-change-initiative-asci",
+    "https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost",
+    "https://arena.gov.au/funding/advancing-renewables-program",
+    "https://arena.gov.au/funding/australian-solar-institute",
+    "https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot",
+    "https://arena.gov.au/funding/community-batteries-funding-round-2",
+    "https://arena.gov.au/funding/community-batteries-round-1",
+    "https://arena.gov.au/funding/demand-response",
+    "https://arena.gov.au/funding/department-of-resources-energy-and-tourism",
+    "https://arena.gov.au/funding/distributed-energy-resources",
+    "https://arena.gov.au/funding/driving-the-nation-program",
+    "https://arena.gov.au/funding/emerging-renewables-program",
+    "https://arena.gov.au/funding/future-fuels-fund",
+    "https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2",
+    "https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate",
+    "https://arena.gov.au/funding/hydrogen",
+    "https://arena.gov.au/funding/hydrogen-headstart",
+    "https://arena.gov.au/funding/hydrogen-headstart-round2",
+    "https://arena.gov.au/funding/hydrogen-research-and-development-funding-round",
+    "https://arena.gov.au/funding/industrial-energy-transformation-studies-program",
+    "https://arena.gov.au/funding/industry-and-researcher-collaboration",
+    "https://arena.gov.au/funding/international-engagement-program",
+    "https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round",
+    "https://arena.gov.au/funding/large-scale-battery-storage-funding-round",
+    "https://arena.gov.au/funding/large-scale-solar",
+    "https://arena.gov.au/funding/national-industrial-transformation-program",
+    "https://arena.gov.au/funding/post-fellowship-doctorate",
+    "https://arena.gov.au/funding/power-system-services",
+    "https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream",
+    "https://arena.gov.au/funding/regional-australias-renewables",
+    "https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round",
+    "https://arena.gov.au/funding/research-development-program",
+    "https://arena.gov.au/funding/rmp",
+    "https://arena.gov.au/funding/short-term-forecasting-round",
+    "https://arena.gov.au/funding/solar-research-development",
+    "https://arena.gov.au/funding/solar-research-excellence",
+    "https://arena.gov.au/funding/solar-sunshot",
+    "https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative",
+    "https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre",
+    "https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round",
+    "https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4",
+    "https://arena.gov.au/funding/venture-capital-fund",
+    "https://arena.gov.au/renewable-energy/battery-storage",
+    "https://arena.gov.au/renewable-energy/bioenergy",
+    "https://arena.gov.au/renewable-energy/community-electrification",
+    "https://arena.gov.au/renewable-energy/concentrated-solar-thermal",
+    "https://arena.gov.au/renewable-energy/demand-response",
+    "https://arena.gov.au/renewable-energy/distributed-energy-resources",
+    "https://arena.gov.au/renewable-energy/electric-vehicles",
+    "https://arena.gov.au/renewable-energy/geothermal",
+    "https://arena.gov.au/renewable-energy/hybrid",
+    "https://arena.gov.au/renewable-energy/hydrogen",
+    "https://arena.gov.au/renewable-energy/large-scale-solar",
+    "https://arena.gov.au/renewable-energy/ocean",
+    "https://arena.gov.au/renewable-energy/off-grid",
+    "https://arena.gov.au/renewable-energy/pumped-hydro-energy-storage",
+    "https://arena.gov.au/renewable-energy/renewables-for-industry",
+    "https://arena.gov.au/renewable-energy/renewables-in-buildings",
+    "https://arena.gov.au/renewable-energy/solar",
+    "https://arena.gov.au/renewable-energy/solar-pv-rd",
+    "https://arena.gov.au/renewable-energy/system-security-reliability",
+    "https://arena.gov.au/renewable-energy/wind",
+    "https://arena.gov.au/what-is-renewable-energy",
+    "https://arenanet.arena.gov.au/s/funding-advice",
+    "https://csiro.au/en/news/All/Articles/2025/September/H2EX",
+    "https://csiro.au/en/research/environmental-impacts/climate-change",
+    "https://energylab.org.au/about/get-involved-in-climate-tech-startup-innovation",
+    "https://energylab.org.au/angel-group/climate-solutions-accelerator-fund-managed-by-impact-ventures",
+    "https://cefc.com.au/",
+    "https://cefc.com.au/case-studies/agile-energy-accelerates-solar-and-battery-solutions-for-commercial-and-industrial-businesses",
+    "https://cefc.com.au/case-studies/ip-group-climate-catalyst-fund-backs-decarbonisation-innovators",
+    "https://cefc.com.au/case-studies/relectrify-technology-transforms-battery-storage-performance",
+    "https://cefc.com.au/case-studies/sundrive-solar-innovation-creates-next-generation-panels",
+    "https://cefc.com.au/where-we-invest/investment-focus-areas/alternative-fuels",
+    "https://cefc.com.au/where-we-invest/investment-focus-areas/asset-finance",
+    "https://cefc.com.au/where-we-invest/investment-focus-areas/energy-storage",
+    "https://cefc.com.au/where-we-invest/investment-focus-areas/growth-capital",
+    "https://cefc.com.au/where-we-invest/investment-focus-areas/industry-resources",
+    "https://cefc.com.au/where-we-invest/investment-focus-areas/infrastructure",
+    "https://cefc.com.au/where-we-invest/investment-focus-areas/natural-capital",
+    "https://cefc.com.au/where-we-invest/investment-focus-areas/property",
+    "https://cefc.com.au/where-we-invest/investment-focus-areas/renewable-energy",
+    "https://cefc.com.au/where-we-invest/investment-focus-areas/rewiring-the-nation-fund",
+    "https://cefc.com.au/where-we-invest/investment-focus-areas/transport",
+    "https://cefc.com.au/who-we-are/governance/policies-and-procedures",
+    "https://energy.nsw.gov.au/business-and-industry/guides/net-zero-business-guide",
+    "https://energy.nsw.gov.au/business-and-industry/guides/technology-guides/battery-storage-guide",
+    "https://energy.nsw.gov.au/business-and-industry/guides/technology-guides/renewable-energy-guides-farmers",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/clean-technology-innovation",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/clean-technology-innovation/about-our-clean",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/clean-technology-innovation/clean-technology-innovation-grants",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/clean-technology-innovation/product-development",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/green-hydrogen-electricity-concessions/green-hydrogen-form",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/green-hydrogen-electricity-concessions/green-hydrogen-form/thank-you",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/hydrogen-nsw",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/hydrogen-nsw/green-hydrogen-electricity",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/hydrogen-nsw/hydrogen-hubs-nsw",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/hydrogen-nsw/hydrogen-refuelling-network",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/hydrogen-nsw/hydrogen-resources",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/industrial-decarbonisation-initiative",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/industrial-decarbonisation-initiative/low-emissions-industry-program",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/industrial-decarbonisation-initiative/low-emissions-industry-program/faqs",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/industrial-decarbonisation-initiative/renewable-gas-production-program/faqs",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/low-emissions-specifications",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-buildings",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/clean-technology-innovation-grant",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/clean-technology-innovation-grant/faqs",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/low-carbon-product-manufacturing-grant/faqs",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/renewable-manufacturing-grant",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/renewable-manufacturing-grant/faqs",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/nsw-skills-net-zero",
+    "https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/supporting-your-business-decarbonise",
+    "https://energy.nsw.gov.au/business-and-industry/stories-success-business/zero-sustainable-leaders/partnering-make-solar",
+    "https://energy.nsw.gov.au/business-and-industry/stories-success-business/zero-sustainable-leaders/why-declarations-are-first",
+    "https://energy.nsw.gov.au/business-and-industry/ways-get-started-business/net-zero-industry-and-innovation",
+    "https://energy.nsw.gov.au/energy-security-safeguard/residential-apartments-battery-certificates",
+    "https://energy.nsw.gov.au/energy-security-safeguard/residential-apartments-battery-eligibility",
+    "https://energy.nsw.gov.au/energy-security-safeguard/residential-battery-demand-response-eligibility",
+    "https://energy.nsw.gov.au/government-and-local-organisations/choose-circular/nsw-government-agencies-taking-circular-economy",
+    "https://energy.nsw.gov.au/government-and-local-organisations/guides-and-helpful-advice-local/net-zero-emissions-guide-nsw",
+    "https://energy.nsw.gov.au/government-and-local-organisations/guides-and-helpful-advice-local/net-zero-emissions-insights",
+    "https://energy.nsw.gov.au/government-and-local-organisations/programs-grants-and-schemes/far-south-coast-community-solar",
+    "https://energy.nsw.gov.au/government-and-local-organisations/programs-grants-and-schemes/far-south-coast-solar-faqs",
+    "https://energy.nsw.gov.au/government-and-local-organisations/stories-success-local/clean-energy-knowledge-sharing",
+    "https://energy.nsw.gov.au/government-and-local-organisations/stories-success-local/kempsey-shire-council-goes-solar",
+    "https://energy.nsw.gov.au/government-and-local-organisations/ways-get-started-local/climate-action-councils",
+    "https://energy.nsw.gov.au/government-and-local-organisations/ways-get-started-local/climate-action-councils/local-councils",
+    "https://energy.nsw.gov.au/government-and-local-organisations/ways-get-started-local/plan-your-net-zero-emissions-journey",
+    "https://energy.nsw.gov.au/households/action",
+    "https://energy.nsw.gov.au/households/action/net-zero-guide",
+    "https://energy.nsw.gov.au/households/action/net-zero-guide/businesses",
+    "https://energy.nsw.gov.au/households/action/net-zero-guide/net-zero",
+    "https://energy.nsw.gov.au/households/action/net-zero-guide/together",
+    "https://energy.nsw.gov.au/households/action/net-zero-guide/you",
+    "https://energy.nsw.gov.au/households/grants-rebates/household-energy-saving-upgrades/install-battery",
+    "https://energy.nsw.gov.au/households/grants-rebates/solar-for-apartment-residents",
+    "https://energy.nsw.gov.au/households/grants-rebates/solar-for-apartment-residents/faqs",
+    "https://energy.nsw.gov.au/households/upgrades/battery",
+    "https://energy.nsw.gov.au/households/upgrades/battery/guide",
+    "https://energy.nsw.gov.au/households/upgrades/solar",
+    "https://energy.nsw.gov.au/households/upgrades/solar-water-heaters",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/climate-change-net-zero-future-act-2023",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/net-zero-commission",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/net-zero-commission/response",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/nsw-hydrogen-strategy",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/nsw-renewable-fuel-strategy",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/reaching-net-zero-emissions",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/reaching-net-zero-emissions/net-zero",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/reaching-net-zero-emissions/net-zero-0",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/reaching-net-zero-emissions/net-zero-futures-forum",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/reaching-net-zero-emissions/net-zero-plan/net-zero-plan-stage1",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/taking-action-climate-change",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/taking-action-climate-change/evaluation",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/taking-action-climate-change/nsw",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/taking-action-climate-change/nsw/report",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/electricity-infrastructure-roadmap/roadmap-entities/sector-board",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/bioenergy",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/emerging-energy-program",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/financing-and-assistance-projects",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/geothermal-energy",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/hydro-energy",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/investment-opportunities",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/mapping-resources",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/nsw-renewable-energy-project-pipeline",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/ocean-energy",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/pumped-hydro-roadmap",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/solar-energy",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/wind-energy",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/delivering-gas-decarbonisation-roadmap",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/battery-certificates-landing",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/battery-eligibility-landing",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/renewable-fuel-scheme",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/renewable-fuel-scheme-faqs",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-battery-demand-response-certificates",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-small-business-electric-to-solar-water-heater-certificates",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-small-business-electric-to-solar-water-heater-eligibility",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-small-business-gas-to-solar-water-heater-certificates",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-small-business-gas-to-solar-water-heater-eligibility",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-solar-battery-certificates",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-solar-battery-eligibility",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/public-consultations/building-thriving-renewable-fuel",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/public-consultations/going-circular-clean-energy",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/public-consultations/solar-emergency-backstop",
+    "https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/sustainability-government/net-zero-government",
+    "https://nsw.gov.au/departments-and-agencies/dcceew",
+    "https://nsw.gov.au/grants-and-funding/clean-technology-innovation-cti-commercial-readiness-stream/recipients",
+    "https://nsw.gov.au/grants-and-funding/clean-technology-innovation-cti-project-development-stream/recipients",
+    "https://nsw.gov.au/grants-and-funding/climate-resilience-inclusive-design-resources",
+    "https://vic.gov.au/environment-energy-and-climate",
+    "https://greenindustries.sa.gov.au/circular-economy-benefits",
+    "https://greenindustries.sa.gov.au/circular-economy-in-action-in-sa",
+    "https://greenindustries.sa.gov.au/circular-impact-accelerator",
+    "https://greenindustries.sa.gov.au/driving-the-circular-economy",
+    "https://greenindustries.sa.gov.au/funding",
+    "https://greenindustries.sa.gov.au/funding/ce-market-development-funding",
+    "https://greenindustries.sa.gov.au/funding/charitable-recyclers-subsidy-program",
+    "https://greenindustries.sa.gov.au/funding/council-modernisation-grants",
+    "https://greenindustries.sa.gov.au/funding/food-waste-diversion-incentives",
+    "https://greenindustries.sa.gov.au/funding/recycling-infrastructure-grants",
+    "https://greenindustries.sa.gov.au/funding/regional-transport-subsidies",
+    "https://greenindustries.sa.gov.au/funding/wice-leadership-scholarship",
+    "https://greenindustries.sa.gov.au/recycling-and-bin-signage",
+    "https://greenindustries.sa.gov.au/sarecycling",
+    "https://greenindustries.sa.gov.au/strategy",
+    "https://greenindustries.sa.gov.au/waste-recycling-resources",
+    "https://greenindustries.sa.gov.au/women-in-ce-leadership-scholarship",
+    "https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-and-innovation-fund-commercialisation-bridge-grant",
+    "https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-and-innovation-fund-grants",
+    "https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-and-innovation-fund-innovation-booster-grant",
+    "https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-and-innovation-fund-innovation-pathways-program",
+    "https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-fund",
+    "https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-fund-grants",
+    "https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-fund-wa-venture-support-waves-program",
+    "https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/the-western-australian-renewable-hydrogen-industry",
+    "https://wa.gov.au/organisation/department-of-jobs-tourism-science-and-innovation/new-industries-fund",
+    "https://wa.gov.au/service/building-utilities-and-essential-services/waste-management/remade-wa-advancing-solar-panel-recovery-and-recycling-western-australia",
+    "https://wa.gov.au/service/community-services/grants-and-subsidies",
+    "https://wa.gov.au/service/environment/environment-information-services/clean-energy-future-fund-round-4-documents",
+    "https://wa.gov.au/service/immigration/migrant-services",
+    "https://darwin.nt.gov.au/community/programs/grants-sponsorship",
+    "https://innovation.nt.gov.au/ecosystem/funding",
+    "https://innovation.nt.gov.au/ecosystem/void(0)",
+    "https://innovation.nt.gov.au/news/2023/advanced-manufacturing-growth-centre-delivering-investment-in-the-territory",
+    "https://nt.gov.au/industry/business-grants-funding/ignite-program",
+    "https://climatesalad.com/",
+    "https://climatesalad.com/1-percent-pledge-for-climate-tech-australia",
+    "https://climatesalad.com/2023-australian-climate-tech-festival-gallery",
+    "https://climatesalad.com/2024-australian-climate-tech-connect-awards-gallery",
+    "https://climatesalad.com/about/about",
+    "https://climatesalad.com/about/ai-rehearsal-coach",
+    "https://climatesalad.com/about/partner",
+    "https://climatesalad.com/about/services",
+    "https://climatesalad.com/about/team",
+    "https://climatesalad.com/australian-climate-tech-festival-2022",
+    "https://climatesalad.com/australian-climate-tech-festival-2023",
+    "https://climatesalad.com/charter",
+    "https://climatesalad.com/climate-tech-adoption",
+    "https://climatesalad.com/climate-tech-companies-in-australia",
+    "https://climatesalad.com/climate-tech-ecosystem-supporters",
+    "https://climatesalad.com/climate-tech-industry-report",
+    "https://climatesalad.com/climate-tech-investors-australia",
+    "https://climatesalad.com/climate-tech-mentors-australia",
+    "https://climatesalad.com/contact",
+    "https://climatesalad.com/global-growth-program",
+    "https://climatesalad.com/international-trade-missions",
+    "https://climatesalad.com/join",
+    "https://climatesalad.com/letter-to-government-may-2026",
+    "https://climatesalad.com/nsw-programs",
+    "https://climatesalad.com/posts/5-years-for-climate-salad",
+    "https://climatesalad.com/posts/economic-potential-of-decarbonisation",
+    "https://climatesalad.com/posts/founders-factorys-wa-based-accelerators-announces-next-batch-of-startups",
+    "https://climatesalad.com/posts/intro-to-accessing-government-funding-to-scale-australian-climate-innovation",
+    "https://climatesalad.com/posts/introducing-the-2025-australian-climate-tech-industry-report",
+    "https://climatesalad.com/posts/julien-piegay---unravel-carbon",
+    "https://climatesalad.com/posts/review-of-climate-tech-report-by-startup-muster-2025",
+    "https://climatesalad.com/posts/solving-50-billion-wasted-plastic-pallet-wraps-with-bearhug",
+    "https://climatesalad.com/posts/tom-kline---climate-tech-partners",
+    "https://climatesalad.com/products",
+    "https://climatesalad.com/queensland-opportunities",
+    "https://climatesalad.com/team/evan-lim",
+    "https://climatesalad.com/team/mick-liubinskas",
+    "https://climatesalad.com/team/shravya-sunkugari",
+    "https://climatesalad.com/victorian-programs",
+    "https://chiefscientist.smartygrants.com.au/",
+    "https://chiefscientist.smartygrants.com.au/ETCF2026",
+    "https://chiefscientist.smartygrants.com.au/applicant/login",
+    "https://unswfounders.com/10x-accelerator",
+    "https://unswfounders.com/accelerators",
+    "https://unswfounders.com/climate-10x-accelerator",
+    "https://unswfounders.com/health10x-accelerator",
+    "https://unswfounders.com/newsletter/unsw-amp-westpac-join-forces-to-grow-women-led-startupshttps:/unswfounders.com/newsletter/unsw-amp-westpac-join-forces-to-grow-women-led-startups",
+    "https://unswfounders.com/pre-accelerator"
+  ],
+  "failed_required_source_ids": [
+    "nrf",
+    "aea",
+    "brinc-artesian",
+    "act-energy",
+    "act-cbrin",
+    "nsw-chief-scientist",
+    "advance-queensland",
+    "tas-recfit",
+    "newcastle-i2n"
+  ],
+  "source_jurisdictions": {
+    "arena": "national",
+    "business-gov-au": "national",
+    "nrf": "national",
+    "csiro-innovation": "national",
+    "aea": "national",
+    "energylab": "national",
+    "startmate": "national",
+    "virescent": "national",
+    "cefc-climate-tech": "national",
+    "main-sequence": "national",
+    "brinc-artesian": "national",
+    "act-energy": "act",
+    "act-cbrin": "act",
+    "nsw-energy": "nsw",
+    "nsw-chief-scientist": "nsw",
+    "vic-deeca": "vic",
+    "breakthrough-victoria": "vic",
+    "advance-queensland": "qld",
+    "green-industries-sa": "sa",
+    "sa-business-programs": "sa",
+    "tas-recfit": "tas",
+    "wa-clean-energy": "wa",
+    "wa-founders-factory": "wa",
+    "nt-innovation": "nt",
+    "innovation-victoria-programs": "vic",
+    "melbourne-accelerator-program": "vic",
+    "climate-salad": "national",
+    "climate-kic-australia": "national",
+    "nsw-etcf-portal": "nsw",
+    "unsw-founders": "nsw",
+    "newcastle-i2n": "nsw"
+  }
+}

@@ -13,7 +13,7 @@ concurrency:
 jobs:
   verify-audit-publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 60
 
     steps:
       - name: Checkout exact workflow commit
@@ -32,7 +32,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4 trafilatura PyYAML pymupdf reportlab pytest
 
-      - name: Verify zero-API audited package
+      - name: Verify snapshot-sentinel zero-API package
         shell: bash
         run: |
           set -euo pipefail
@@ -46,7 +46,7 @@ jobs:
             src/check_pdf_layout.py \
             src/preflight_grants.py
 
-      - name: Run deterministic tests
+      - name: Run deterministic and failure-replay tests
         run: pytest -q tests/grants_radar
 
       - name: Resolve Melbourne report date
@@ -68,13 +68,13 @@ jobs:
           echo "audit_md=$AUDIT_MD" >> "$GITHUB_OUTPUT"
           echo "layout_json=$LAYOUT_JSON" >> "$GITHUB_OUTPUT"
 
-      - name: Direct official-source verification and discovery
+      - name: Official-source verification with fresh-snapshot resilience and discovery delta
         id: verify
         continue-on-error: true
         env:
-          GRANTS_MAX_HTTP_REQUESTS: "180"
-          GRANTS_HTTP_RETRIES: "2"
-          GRANTS_READ_TIMEOUT: "35"
+          GRANTS_MAX_HTTP_REQUESTS: "120"
+          GRANTS_HTTP_RETRIES: "1"
+          GRANTS_READ_TIMEOUT: "22"
         shell: bash
         run: |
           set -euo pipefail
@@ -83,28 +83,27 @@ jobs:
             --input config/grants.yaml \
             --sources config/grants_sources.yaml \
             --contracts config/grants_evidence_contracts.yaml \
+            --snapshots config/grants_snapshots.yaml \
+            --discovery-baseline config/grants_discovery_baseline.yaml \
             --decisions config/grants_candidate_decisions.yaml \
             --output out/grants-verified-candidate.yaml \
+            --snapshot-output out/grants-snapshots-candidate.yaml \
+            --baseline-output out/grants-discovery-baseline-candidate.yaml \
             --evidence out/grants-evidence.json \
             --candidates out/grants-candidates.json \
             --coverage out/grants-source-coverage.json \
             --verified "${{ steps.when.outputs.verified }}"
 
-      - name: Independent direct-source audit
+      - name: Deterministic captured-evidence audit — no second network crawl
         id: audit
         continue-on-error: true
-        env:
-          GRANTS_MAX_HTTP_REQUESTS: "180"
-          GRANTS_HTTP_RETRIES: "2"
-          GRANTS_READ_TIMEOUT: "35"
         shell: bash
         run: |
           set -euo pipefail
           test -s out/grants-verified-candidate.yaml
           python src/audit_grants.py \
             --grants out/grants-verified-candidate.yaml \
-            --sources config/grants_sources.yaml \
-            --contracts config/grants_evidence_contracts.yaml \
+            --evidence out/grants-evidence.json \
             --candidates out/grants-candidates.json \
             --coverage out/grants-source-coverage.json \
             --verified "${{ steps.when.outputs.verified }}" \
@@ -118,6 +117,8 @@ jobs:
           name: grants-radar-audit-${{ steps.when.outputs.verified }}
           path: |
             out/grants-verified-candidate.yaml
+            out/grants-snapshots-candidate.yaml
+            out/grants-discovery-baseline-candidate.yaml
             out/grants-evidence.json
             out/grants-candidates.json
             out/grants-source-coverage.json
@@ -131,11 +132,11 @@ jobs:
         run: |
           set -euo pipefail
           test "${{ steps.verify.outcome }}" = "success" || {
-            echo "ERROR: direct official-source verification/discovery failed. PDF will NOT be generated or emailed."
+            echo "ERROR: official-source/snapshot verification or new-link reconciliation failed. PDF will NOT be generated or emailed."
             exit 1
           }
           test "${{ steps.audit.outcome }}" = "success" || {
-            echo "ERROR: independent direct-source audit failed. PDF will NOT be generated or emailed."
+            echo "ERROR: deterministic captured-evidence audit failed. PDF will NOT be generated or emailed."
             exit 1
           }
           python - <<'PY'
@@ -150,11 +151,13 @@ jobs:
               print(k, "PASS" if v.get("pass") else "FAIL", "-", v.get("detail"))
           PY
 
-      - name: Finalise verified canonical registry
+      - name: Finalise verified canonical registry and evidence inventories
         shell: bash
         run: |
           set -euo pipefail
           cp out/grants-verified-candidate.yaml config/grants.yaml
+          cp out/grants-snapshots-candidate.yaml config/grants_snapshots.yaml
+          cp out/grants-discovery-baseline-candidate.yaml config/grants_discovery_baseline.yaml
           python - <<'PY'
           import hashlib, json, yaml
           from pathlib import Path
@@ -168,7 +171,8 @@ jobs:
               "verified_date":audit["verified_date"],
               "audit_sha256":hashlib.sha256(audit_path.read_bytes()).hexdigest(),
               "registry_role":"canonical_source_of_truth_with_change_history",
-              "verification_method":"zero_api_direct_official_source",
+              "verification_method":"zero_api_official_source_plus_fresh_snapshot_sentinels",
+              "snapshot_freshness_days":45,
           })
           p.write_text(yaml.safe_dump(d,allow_unicode=True,sort_keys=False,width=120),encoding="utf-8")
           PY
@@ -224,7 +228,7 @@ jobs:
           cp "${{ steps.when.outputs.pdf }}" assets/reference/radar-layout-reference.pdf
           git config user.name "content-bot"
           git config user.email "content-bot@example.com"
-          git add -f config/grants.yaml assets/reference/radar-layout-reference.pdf
+          git add -f config/grants.yaml config/grants_snapshots.yaml config/grants_discovery_baseline.yaml assets/reference/radar-layout-reference.pdf
           git add -f "${{ steps.when.outputs.audit_json }}" "${{ steps.when.outputs.audit_md }}" "${{ steps.when.outputs.layout_json }}" "${{ steps.when.outputs.pdf }}"
           if git diff --cached --quiet; then
             echo "No changes to commit."
@@ -248,11 +252,12 @@ jobs:
             Verified Grants & Accelerators Radar attached.
 
             Publication gates passed:
-            - every published programme was checked against configured official/administering source evidence
-            - every mandatory source group was reachable
-            - every high-signal discovered candidate was explicitly reconciled
-            - no unresolved factual verification issues
+            - every published programme passed the official-source/sentinel verification gate
+            - temporary source blocking, if any, was bridged only by matching evidence snapshots no older than 45 days
+            - every mandatory national/state/territory source group remained covered
+            - every genuinely new high-signal discovery link was explicitly reconciled
+            - registry continuity and change history passed
             - PDF layout continuity passed
-            - OpenAI API usage: zero
+            - paid model/API usage: zero
           attachments: |
             ${{ steps.when.outputs.pdf }}

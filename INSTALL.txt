@@ -1,11 +1,6 @@
-Install with the self-contained PATCH_GRANTS_RADAR_ZERO_API.sh script.
+GG Advisory Grants Radar 7.0-snapshot-sentinel
 
-The installer:
-1. verifies the target repository;
-2. backs up every replaced file;
-3. verifies the current canonical grants.yaml hash;
-4. installs the complete v6 package including the hidden GitHub workflow;
-5. migrates the known canonical baseline to the verified 2026-09-01 bootstrap registry;
-6. verifies that no OpenAI/API-key dependency remains;
-7. runs syntax checks, preflight and tests when local dependencies are present;
-8. prints Git changes but does not commit automatically.
+Install the package into the gg-advisory repository without replacing config/grants.yaml.
+The package contains the verification contracts, fresh evidence snapshots, dated discovery baseline, zero-API runtime, tests, PDF builder and GitHub workflow.
+
+The installer validates that the current visible canonical registry still matches the supplied evidence snapshots before it reports PASS.

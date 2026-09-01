@@ -1,10 +1,10 @@
-version: 6.0-zero-api-official-source
+version: 7.0-snapshot-sentinel
 as_of: '2026-09-01'
 decisions:
   https://climatesalad.com/help-fund-innovation:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: 'NRMA Insurance Help Fund: Innovation'
     source_id: climate-salad
   https://www.nsw.gov.au/grants-and-funding/clean-technology-innovation-cti-grant:
@@ -19,14 +19,14 @@ decisions:
     source_id: cefc-climate-tech
   https://energylab.org.au/programs/acceleration:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Climate Solutions Accelerator
     source_id: energylab
   https://energylab.org.au/programs/charge:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Climate Tech Charge Program
     source_id: energylab
   ? https://chiefscientist.nsw.gov.au/industry-development/commercialisation-grants/emerging-technologies-commercialisation-fund
@@ -36,8 +36,8 @@ decisions:
     source_id: nsw-chief-scientist
   ? https://www.chiefscientist.nsw.gov.au/industry-development/commercialisation-grants/critical-minerals-processing-and-advanced-materials-innovation-program
   : action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Critical Minerals Processing and Advanced Materials Innovation Program – Phase 1 Proof-of-Concept
     source_id: nsw-etcf-portal
   https://business.gov.au/grants-and-programs/first-nations-clean-energy-project-grants:
@@ -47,38 +47,38 @@ decisions:
     source_id: business-gov-au
   https://business.gov.au/grants-and-programs/net-zero-manufacturing-initiative-clean-technology-innovation-nsw:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: 'Net Zero Manufacturing Initiative: Clean Technology Innovation NSW'
     source_id: business-gov-au
   https://climate-kic.org.au/work/projects/launchpad:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: ClimateLaunchpad
     source_id: climate-kic-australia
   https://energylab.org.au/angel-group/startups:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: EnergyLab Angels
     source_id: energylab
   https://energylab.org.au/programs/investment-ready-program-queensland:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Investment Ready Program (Queensland)
     source_id: energylab
   ? https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/low-carbon-product-manufacturing-grant
   : action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Low Carbon Product Manufacturing Grant
     source_id: nsw-energy
   https://wa.gov.au/service/environment/environment-information-services/clean-energy-future-fund:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Clean Energy Future Fund
     source_id: wa-clean-energy
   https://arena.gov.au/funding/battery-breakthrough-initiative:
@@ -88,14 +88,14 @@ decisions:
     source_id: arena
   https://energylab.org.au/programs/lab-to-market:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Climate Tech Lab to Market Program
     source_id: energylab
   https://themap.co/accelerator:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: MAP Accelerator Program
     source_id: melbourne-accelerator-program
   ? https://www.chiefscientist.nsw.gov.au/industry-development/commercialisation-grants/emerging-technologies-commercialisation-fund
@@ -105,14 +105,14 @@ decisions:
     source_id: nsw-etcf-portal
   https://business.sa.gov.au/programs/powering-business-grants:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Powering Business Grants
     source_id: sa-business-programs
   https://breakthroughvictoria.com/breakthrough-victoria-challenge:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Breakthrough Victoria Challenge — Solar PV recycling
     source_id: breakthrough-victoria
   https://business.gov.au/grants-and-programs/advancing-renewables-program:
@@ -127,50 +127,50 @@ decisions:
     source_id: business-gov-au
   https://cefc.com.au/where-we-invest/special-investment-programs/advancing-hydrogen-fund:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Advancing Hydrogen Fund
     source_id: cefc-climate-tech
   https://cefc.com.au/where-we-invest/special-investment-programs/clean-energy-innovation-fund:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Clean Energy Innovation Fund
     source_id: cefc-climate-tech
   https://energylab.org.au/programs/going-international-bootcamp:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Going International Bootcamp
     source_id: energylab
   https://energylab.org.au/programs/supercharge-australia-incubator:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Supercharge Australia Incubator
     source_id: energylab
   https://greenindustries.sa.gov.au/funding/circular-infrastructure-grants:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Circular Infrastructure Grants
     source_id: green-industries-sa
   https://innovationvictoria.com/submit-a-pitch:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Direct Investment from Innovation Victoria
     source_id: innovation-victoria-programs
   https://mseq.vc/atmosphere:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Atmosphere
     source_id: main-sequence
   ? https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/supporting-your-business-decarbonise/net-zero-planning-grant
   : action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Net Zero Planning Grant round 2
     source_id: nsw-energy
   https://energy.vic.gov.au/grants/energy-innovation-fund:
@@ -180,14 +180,14 @@ decisions:
     source_id: vic-deeca
   https://wa.gov.au/service/community-services/grants-and-subsidies/carbon-innovation-grants-program:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Carbon Innovation Grants Program
     source_id: wa-clean-energy
   https://cbrin.com.au/programs/acet:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Accelerating Canberra's Energy Transition (ACET)
     source_id: act-cbrin
   https://arena.gov.au/funding/cleaner-fuels-program:
@@ -197,62 +197,62 @@ decisions:
     source_id: arena
   https://business.gov.au/grants-and-programs/future-fuels-program:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Driving the Nation Program
     source_id: business-gov-au
   https://csiro.au/en/work-with-us/funding-programs/SME/Graphite-Research-and-Development-Grant:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Graphite Research and Development Grant
     source_id: csiro-innovation
   https://energylab.org.au/programs/scaleup:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Energy Scaleup Program
     source_id: energylab
   ? https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/industrial-decarbonisation-initiative/renewable-gas-production-program
   : action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Renewable Gas Production Program
     source_id: nsw-energy
   https://foundersfactory.com/rio-tinto-mining-tech-accelerator:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Rio Tinto & Founders Factory Mining Tech Program
     source_id: wa-founders-factory
   https://business.gov.au/grants-and-programs/national-reconstruction-fund:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: National Reconstruction Fund
     source_id: business-gov-au
   https://climatesalad.com/global-growth-program-eoi-closed:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Climate Salad Global Growth Program
     source_id: climate-salad
   https://launchvic.org/programs/civvic-labs:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: CivVic Labs Circular Agriculture Challenge
     source_id: innovation-victoria-programs
   https://cefc.com.au/media/media-release/ip-group-australia-and-cefc-launch-the-climate-catalyst-fund:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Climate Catalyst Fund
     source_id: cefc-climate-tech
   https://vic.gov.au/energytech-market-ready-support-emrs-2026:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: EnergyTech Market Ready Support (EMRS) 2026
     source_id: vic-deeca
   https://cefc.com.au/case-studies/virescent-ventures-fund-ii-injects-new-climate-tech-capital:
@@ -262,20 +262,20 @@ decisions:
     source_id: cefc-climate-tech
   https://climate-kic.org.au/work/projects/climate-kickstarter:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Climate KickStarter
     source_id: climate-kic-australia
   https://energylab.org.au/programs/wicef:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Women in Climate and Energy Fellowship
     source_id: energylab
   https://greenindustries.sa.gov.au/funding/recycling-modernisation-fund:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Recycling Modernisation Fund
     source_id: green-industries-sa
   https://innovationvictoria.com/funding/venture-capital-funds:
@@ -285,127 +285,127 @@ decisions:
     source_id: innovation-victoria-programs
   https://nrf.gov.au/what-we-do/investment-guidance:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: General Portfolio
     source_id: nrf
   https://energylab.org.au/programs/ignite:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Climate Tech Ignite Program
     source_id: energylab
   https://dtbar.nt.gov.au/news/2024/sustainable-business-solutions-grant-available:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Sustainable Business Solutions Grant Program
     source_id: nt-innovation
   https://statedevelopment.sa.gov.au/manufacturing/manufacturing-growth-accelerator:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Manufacturing Growth Accelerator
     source_id: sa-business-programs
   https://mriwa.wa.gov.au/research-funding/financial-assistance-applications/amc-research-program-application-information:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Accelerated Mineral Carbonation Research Program
     source_id: wa-clean-energy
   ? https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/made-wa-energy-affordability-investment-program
   : action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Made in WA Energy Affordability Investment Program
     source_id: wa-clean-energy
   https://cefc.com.au/case-studies/climate-tech-partners-backs-innovative-early-stage-high-impact-companies:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Climate Tech Partners Fund I
     source_id: cefc-climate-tech
   https://greenindustries.sa.gov.au/funding/aim-grants:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Assess-Implement-Monitor (AIM) Grants
     source_id: green-industries-sa
   https://recfit.tas.gov.au/grants_programs/future-industries/hydrogen_industry_development_fund:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Tasmanian Renewable Hydrogen Industry Development Fund
     source_id: tas-recfit
   https://wa.gov.au/government/publications/investment-attraction-fund-new-energies-industries-funding-stream:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: 'Investment Attraction Fund: New Energies Industries Funding Stream'
     source_id: wa-clean-energy
   https://greenindustries.sa.gov.au/funding/leap-grants:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Lead-Educate-Assist-Promote (LEAP) Grants
     source_id: green-industries-sa
   https://virescent.vc:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Clean Energy Innovation Fund
     source_id: virescent
   https://csiro.au/en/work-with-us/funding-programs/funding/Funding-finder/India-Australia-RISE-Accelerator:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: India Australia RISE Accelerator Program
     source_id: csiro-innovation
   https://www.chiefscientist.nsw.gov.au/industry-development/commercialisation-grants/biosciences-fund:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Biosciences Fund
     source_id: nsw-etcf-portal
   https://statedevelopment.sa.gov.au/trade-international-investment/global-expansion-program:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Global Expansion Program
     source_id: sa-business-programs
   https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/greentech-hub:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: GreenTech Hub
     source_id: wa-clean-energy
   https://mseq.vc/invest:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Main Sequence Fund 4
     source_id: main-sequence
   https://nrf.gov.au/what-we-do/investment-sub-funds/forestry-growth-fund:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Forestry Growth Fund
     source_id: nrf
   https://cefc.com.au/case-studies/climate-10x-accelerator-backs-startups-in-race-to-net-zero:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Climate 10x Accelerator
     source_id: cefc-climate-tech
   https://invest.nt.gov.au/here-to-help/financing:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Territory Growth Initiative
     source_id: nt-innovation
   https://csiro.au/en/work-with-us/funding-programs/funding:
     action: monitor_not_core
-    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope
-      threshold. Reconsider if funding, intake status or materiality changes.
+    reason: Reviewed in the 2026-09-01 discovery pass; not selected for the core Radar under the curated materiality/scope threshold. Reconsider
+      if funding, intake status or materiality changes.
     name: Main Sequence
     source_id: csiro-innovation

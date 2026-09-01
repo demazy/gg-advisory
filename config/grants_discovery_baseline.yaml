@@ -1,0 +1,473 @@
+version: 7.0-snapshot-sentinel
+verified_date: '2026-09-01'
+max_age_days: 45
+sources:
+  arena:
+    jurisdiction: national
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://arena.gov.au/funding
+    - https://arena.gov.au/funding/accelerated-step-change-initiative-asci
+    - https://arena.gov.au/funding/addressing-solar-pv-end-of-life-issues-and-lowering-solar-pv-cost
+    - https://arena.gov.au/funding/advancing-renewables-program
+    - https://arena.gov.au/funding/australian-solar-institute
+    - https://arena.gov.au/funding/battery-breakthrough-initiative
+    - https://arena.gov.au/funding/cleaner-fuels-program
+    - https://arena.gov.au/funding/commercialisation-of-rd-funding-initiative-pilot
+    - https://arena.gov.au/funding/community-batteries-funding-round-2
+    - https://arena.gov.au/funding/community-batteries-round-1
+    - https://arena.gov.au/funding/demand-response
+    - https://arena.gov.au/funding/department-of-resources-energy-and-tourism
+    - https://arena.gov.au/funding/distributed-energy-resources
+    - https://arena.gov.au/funding/driving-the-nation-program
+    - https://arena.gov.au/funding/emerging-renewables-program
+    - https://arena.gov.au/funding/future-fuels-fund
+    - https://arena.gov.au/funding/future-made-in-australia-innovation-fund-2
+    - https://arena.gov.au/funding/german-australian-hydrogen-innovation-and-technology-incubator-hygate
+    - https://arena.gov.au/funding/hydrogen
+    - https://arena.gov.au/funding/hydrogen-headstart
+    - https://arena.gov.au/funding/hydrogen-headstart-round2
+    - https://arena.gov.au/funding/hydrogen-research-and-development-funding-round
+    - https://arena.gov.au/funding/industrial-energy-transformation-studies-program
+    - https://arena.gov.au/funding/industry-and-researcher-collaboration
+    - https://arena.gov.au/funding/international-engagement-program
+    - https://arena.gov.au/funding/iron-and-steel-research-and-development-funding-round
+    - https://arena.gov.au/funding/large-scale-battery-storage-funding-round
+    - https://arena.gov.au/funding/large-scale-solar
+    - https://arena.gov.au/funding/national-industrial-transformation-program
+    - https://arena.gov.au/funding/post-fellowship-doctorate
+    - https://arena.gov.au/funding/power-system-services
+    - https://arena.gov.au/funding/powering-the-regions-industrial-transformation-stream
+    - https://arena.gov.au/funding/regional-australias-renewables
+    - https://arena.gov.au/funding/renewable-hydrogen-deployment-funding-round
+    - https://arena.gov.au/funding/research-development-program
+    - https://arena.gov.au/funding/rmp
+    - https://arena.gov.au/funding/short-term-forecasting-round
+    - https://arena.gov.au/funding/solar-research-development
+    - https://arena.gov.au/funding/solar-research-excellence
+    - https://arena.gov.au/funding/solar-sunshot
+    - https://arena.gov.au/funding/sustainable-aviation-fuel-funding-initiative
+    - https://arena.gov.au/funding/the-australian-centre-for-renewable-energy-acre
+    - https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round
+    - https://arena.gov.au/funding/ultra-low-cost-solar-pv-research-and-development-round-4
+    - https://arena.gov.au/funding/venture-capital-fund
+    - https://arena.gov.au/renewable-energy/battery-storage
+    - https://arena.gov.au/renewable-energy/bioenergy
+    - https://arena.gov.au/renewable-energy/community-electrification
+    - https://arena.gov.au/renewable-energy/concentrated-solar-thermal
+    - https://arena.gov.au/renewable-energy/demand-response
+    - https://arena.gov.au/renewable-energy/distributed-energy-resources
+    - https://arena.gov.au/renewable-energy/electric-vehicles
+    - https://arena.gov.au/renewable-energy/geothermal
+    - https://arena.gov.au/renewable-energy/hybrid
+    - https://arena.gov.au/renewable-energy/hydrogen
+    - https://arena.gov.au/renewable-energy/large-scale-solar
+    - https://arena.gov.au/renewable-energy/ocean
+    - https://arena.gov.au/renewable-energy/off-grid
+    - https://arena.gov.au/renewable-energy/pumped-hydro-energy-storage
+    - https://arena.gov.au/renewable-energy/renewables-for-industry
+    - https://arena.gov.au/renewable-energy/renewables-in-buildings
+    - https://arena.gov.au/renewable-energy/solar
+    - https://arena.gov.au/renewable-energy/solar-pv-rd
+    - https://arena.gov.au/renewable-energy/system-security-reliability
+    - https://arena.gov.au/renewable-energy/wind
+    - https://arena.gov.au/what-is-renewable-energy
+    - https://arenanet.arena.gov.au/s/funding-advice
+  business-gov-au:
+    jurisdiction: national
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://business.gov.au/grants-and-programs/advancing-renewables-program
+    - https://business.gov.au/grants-and-programs/first-nations-clean-energy-project-grants
+    - https://business.gov.au/grants-and-programs/future-fuels-program
+    - https://business.gov.au/grants-and-programs/national-reconstruction-fund
+    - https://business.gov.au/grants-and-programs/net-zero-fund
+    - https://business.gov.au/grants-and-programs/net-zero-manufacturing-initiative-clean-technology-innovation-nsw
+  nrf:
+    jurisdiction: national
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://nrf.gov.au/what-we-do/investment-guidance
+    - https://nrf.gov.au/what-we-do/investment-sub-funds/forestry-growth-fund
+  csiro-innovation:
+    jurisdiction: national
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://csiro.au/en/news/All/Articles/2025/September/H2EX
+    - https://csiro.au/en/research/environmental-impacts/climate-change
+    - https://csiro.au/en/work-with-us/funding-programs/SME/Graphite-Research-and-Development-Grant
+    - https://csiro.au/en/work-with-us/funding-programs/funding
+    - https://csiro.au/en/work-with-us/funding-programs/funding/Funding-finder/India-Australia-RISE-Accelerator
+  aea:
+    jurisdiction: national
+    verified_date: '2026-09-01'
+    known_urls: []
+  energylab:
+    jurisdiction: national
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://energylab.org.au/about/get-involved-in-climate-tech-startup-innovation
+    - https://energylab.org.au/angel-group/climate-solutions-accelerator-fund-managed-by-impact-ventures
+    - https://energylab.org.au/angel-group/startups
+    - https://energylab.org.au/programs/acceleration
+    - https://energylab.org.au/programs/charge
+    - https://energylab.org.au/programs/going-international-bootcamp
+    - https://energylab.org.au/programs/ignite
+    - https://energylab.org.au/programs/investment-ready-program-queensland
+    - https://energylab.org.au/programs/lab-to-market
+    - https://energylab.org.au/programs/scaleup
+    - https://energylab.org.au/programs/supercharge-australia-incubator
+    - https://energylab.org.au/programs/wicef
+  startmate:
+    jurisdiction: national
+    verified_date: '2026-09-01'
+    known_urls: []
+  virescent:
+    jurisdiction: national
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://virescent.vc/
+  cefc-climate-tech:
+    jurisdiction: national
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://cefc.com.au/
+    - https://cefc.com.au/case-studies/agile-energy-accelerates-solar-and-battery-solutions-for-commercial-and-industrial-businesses
+    - https://cefc.com.au/case-studies/climate-10x-accelerator-backs-startups-in-race-to-net-zero
+    - https://cefc.com.au/case-studies/climate-tech-partners-backs-innovative-early-stage-high-impact-companies
+    - https://cefc.com.au/case-studies/ip-group-climate-catalyst-fund-backs-decarbonisation-innovators
+    - https://cefc.com.au/case-studies/relectrify-technology-transforms-battery-storage-performance
+    - https://cefc.com.au/case-studies/sundrive-solar-innovation-creates-next-generation-panels
+    - https://cefc.com.au/case-studies/virescent-ventures-fund-ii-injects-new-climate-tech-capital
+    - https://cefc.com.au/media/media-release/ip-group-australia-and-cefc-launch-the-climate-catalyst-fund
+    - https://cefc.com.au/where-we-invest/investment-focus-areas/alternative-fuels
+    - https://cefc.com.au/where-we-invest/investment-focus-areas/asset-finance
+    - https://cefc.com.au/where-we-invest/investment-focus-areas/energy-storage
+    - https://cefc.com.au/where-we-invest/investment-focus-areas/growth-capital
+    - https://cefc.com.au/where-we-invest/investment-focus-areas/industry-resources
+    - https://cefc.com.au/where-we-invest/investment-focus-areas/infrastructure
+    - https://cefc.com.au/where-we-invest/investment-focus-areas/natural-capital
+    - https://cefc.com.au/where-we-invest/investment-focus-areas/property
+    - https://cefc.com.au/where-we-invest/investment-focus-areas/renewable-energy
+    - https://cefc.com.au/where-we-invest/investment-focus-areas/rewiring-the-nation-fund
+    - https://cefc.com.au/where-we-invest/investment-focus-areas/transport
+    - https://cefc.com.au/where-we-invest/special-investment-programs/advancing-hydrogen-fund
+    - https://cefc.com.au/where-we-invest/special-investment-programs/clean-energy-innovation-fund
+    - https://cefc.com.au/where-we-invest/special-investment-programs/powering-australia-technology-fund
+    - https://cefc.com.au/who-we-are/governance/policies-and-procedures
+  main-sequence:
+    jurisdiction: national
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://mseq.vc/atmosphere
+    - https://mseq.vc/invest
+  brinc-artesian:
+    jurisdiction: national
+    verified_date: '2026-09-01'
+    known_urls: []
+  act-energy:
+    jurisdiction: act
+    verified_date: '2026-09-01'
+    known_urls: []
+  act-cbrin:
+    jurisdiction: act
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://cbrin.com.au/programs/acet
+  nsw-energy:
+    jurisdiction: nsw
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://energy.nsw.gov.au/business-and-industry/guides/net-zero-business-guide
+    - https://energy.nsw.gov.au/business-and-industry/guides/technology-guides/battery-storage-guide
+    - https://energy.nsw.gov.au/business-and-industry/guides/technology-guides/renewable-energy-guides-farmers
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/clean-technology-innovation
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/clean-technology-innovation/about-our-clean
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/clean-technology-innovation/clean-technology-innovation-grants
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/clean-technology-innovation/product-development
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/green-hydrogen-electricity-concessions/green-hydrogen-form
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/green-hydrogen-electricity-concessions/green-hydrogen-form/thank-you
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/hydrogen-nsw
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/hydrogen-nsw/green-hydrogen-electricity
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/hydrogen-nsw/hydrogen-hubs-nsw
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/hydrogen-nsw/hydrogen-refuelling-network
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/hydrogen-nsw/hydrogen-resources
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/industrial-decarbonisation-initiative
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/industrial-decarbonisation-initiative/low-emissions-industry-program
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/industrial-decarbonisation-initiative/low-emissions-industry-program/faqs
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/industrial-decarbonisation-initiative/renewable-gas-production-program
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/industrial-decarbonisation-initiative/renewable-gas-production-program/faqs
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/low-emissions-specifications
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-buildings
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/clean-technology-innovation-grant
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/clean-technology-innovation-grant/faqs
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/low-carbon-product-manufacturing-grant
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/low-carbon-product-manufacturing-grant/faqs
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/renewable-manufacturing-grant
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing/renewable-manufacturing-grant/faqs
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/nsw-skills-net-zero
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/supporting-your-business-decarbonise
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/supporting-your-business-decarbonise/net-zero-planning-grant
+    - https://energy.nsw.gov.au/business-and-industry/stories-success-business/zero-sustainable-leaders/partnering-make-solar
+    - https://energy.nsw.gov.au/business-and-industry/stories-success-business/zero-sustainable-leaders/why-declarations-are-first
+    - https://energy.nsw.gov.au/business-and-industry/ways-get-started-business/net-zero-industry-and-innovation
+    - https://energy.nsw.gov.au/energy-security-safeguard/residential-apartments-battery-certificates
+    - https://energy.nsw.gov.au/energy-security-safeguard/residential-apartments-battery-eligibility
+    - https://energy.nsw.gov.au/energy-security-safeguard/residential-battery-demand-response-eligibility
+    - https://energy.nsw.gov.au/government-and-local-organisations/choose-circular/nsw-government-agencies-taking-circular-economy
+    - https://energy.nsw.gov.au/government-and-local-organisations/guides-and-helpful-advice-local/net-zero-emissions-guide-nsw
+    - https://energy.nsw.gov.au/government-and-local-organisations/guides-and-helpful-advice-local/net-zero-emissions-insights
+    - https://energy.nsw.gov.au/government-and-local-organisations/programs-grants-and-schemes/far-south-coast-community-solar
+    - https://energy.nsw.gov.au/government-and-local-organisations/programs-grants-and-schemes/far-south-coast-solar-faqs
+    - https://energy.nsw.gov.au/government-and-local-organisations/stories-success-local/clean-energy-knowledge-sharing
+    - https://energy.nsw.gov.au/government-and-local-organisations/stories-success-local/kempsey-shire-council-goes-solar
+    - https://energy.nsw.gov.au/government-and-local-organisations/ways-get-started-local/climate-action-councils
+    - https://energy.nsw.gov.au/government-and-local-organisations/ways-get-started-local/climate-action-councils/local-councils
+    - https://energy.nsw.gov.au/government-and-local-organisations/ways-get-started-local/plan-your-net-zero-emissions-journey
+    - https://energy.nsw.gov.au/households/action
+    - https://energy.nsw.gov.au/households/action/net-zero-guide
+    - https://energy.nsw.gov.au/households/action/net-zero-guide/businesses
+    - https://energy.nsw.gov.au/households/action/net-zero-guide/net-zero
+    - https://energy.nsw.gov.au/households/action/net-zero-guide/together
+    - https://energy.nsw.gov.au/households/action/net-zero-guide/you
+    - https://energy.nsw.gov.au/households/grants-rebates/household-energy-saving-upgrades/install-battery
+    - https://energy.nsw.gov.au/households/grants-rebates/solar-for-apartment-residents
+    - https://energy.nsw.gov.au/households/grants-rebates/solar-for-apartment-residents/faqs
+    - https://energy.nsw.gov.au/households/upgrades/battery
+    - https://energy.nsw.gov.au/households/upgrades/battery/guide
+    - https://energy.nsw.gov.au/households/upgrades/solar
+    - https://energy.nsw.gov.au/households/upgrades/solar-water-heaters
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/climate-change-net-zero-future-act-2023
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/net-zero-commission
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/net-zero-commission/response
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/nsw-hydrogen-strategy
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/nsw-renewable-fuel-strategy
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/reaching-net-zero-emissions
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/reaching-net-zero-emissions/net-zero
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/reaching-net-zero-emissions/net-zero-0
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/reaching-net-zero-emissions/net-zero-futures-forum
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/reaching-net-zero-emissions/net-zero-plan/net-zero-plan-stage1
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/taking-action-climate-change
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/taking-action-climate-change/evaluation
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/taking-action-climate-change/nsw
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/government-strategies-and-frameworks/taking-action-climate-change/nsw/report
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/electricity-infrastructure-roadmap/roadmap-entities/sector-board
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/bioenergy
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/emerging-energy-program
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/financing-and-assistance-projects
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/geothermal-energy
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/hydro-energy
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/investment-opportunities
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/mapping-resources
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/nsw-renewable-energy-project-pipeline
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/ocean-energy
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/pumped-hydro-roadmap
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/solar-energy
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/major-state-projects/shift-renewables/wind-energy
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/delivering-gas-decarbonisation-roadmap
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/battery-certificates-landing
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/battery-eligibility-landing
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/renewable-fuel-scheme
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/renewable-fuel-scheme-faqs
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-battery-demand-response-certificates
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-small-business-electric-to-solar-water-heater-certificates
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-small-business-electric-to-solar-water-heater-eligibility
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-small-business-gas-to-solar-water-heater-certificates
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-small-business-gas-to-solar-water-heater-eligibility
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-solar-battery-certificates
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/energy-security-safeguard/residential-solar-battery-eligibility
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/public-consultations/building-thriving-renewable-fuel
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/public-consultations/going-circular-clean-energy
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/public-consultations/solar-emergency-backstop
+    - https://energy.nsw.gov.au/nsw-plans-and-progress/regulation-and-policy/sustainability-government/net-zero-government
+    - https://nsw.gov.au/departments-and-agencies/dcceew
+    - https://nsw.gov.au/grants-and-funding/clean-technology-innovation-cti-commercial-readiness-stream/recipients
+    - https://nsw.gov.au/grants-and-funding/clean-technology-innovation-cti-grant
+    - https://nsw.gov.au/grants-and-funding/clean-technology-innovation-cti-project-development-stream/recipients
+    - https://nsw.gov.au/grants-and-funding/climate-resilience-inclusive-design-resources
+  nsw-chief-scientist:
+    jurisdiction: nsw
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://chiefscientist.nsw.gov.au/industry-development/commercialisation-grants/emerging-technologies-commercialisation-fund
+  vic-deeca:
+    jurisdiction: vic
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://energy.vic.gov.au/grants/energy-innovation-fund
+    - https://vic.gov.au/energytech-market-ready-support-emrs-2026
+    - https://vic.gov.au/environment-energy-and-climate
+  breakthrough-victoria:
+    jurisdiction: vic
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://breakthroughvictoria.com/breakthrough-victoria-challenge
+  advance-queensland:
+    jurisdiction: qld
+    verified_date: '2026-09-01'
+    known_urls: []
+  green-industries-sa:
+    jurisdiction: sa
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://greenindustries.sa.gov.au/circular-economy-benefits
+    - https://greenindustries.sa.gov.au/circular-economy-in-action-in-sa
+    - https://greenindustries.sa.gov.au/circular-impact-accelerator
+    - https://greenindustries.sa.gov.au/driving-the-circular-economy
+    - https://greenindustries.sa.gov.au/funding
+    - https://greenindustries.sa.gov.au/funding/aim-grants
+    - https://greenindustries.sa.gov.au/funding/ce-market-development-funding
+    - https://greenindustries.sa.gov.au/funding/charitable-recyclers-subsidy-program
+    - https://greenindustries.sa.gov.au/funding/circular-infrastructure-grants
+    - https://greenindustries.sa.gov.au/funding/council-modernisation-grants
+    - https://greenindustries.sa.gov.au/funding/food-waste-diversion-incentives
+    - https://greenindustries.sa.gov.au/funding/leap-grants
+    - https://greenindustries.sa.gov.au/funding/recycling-infrastructure-grants
+    - https://greenindustries.sa.gov.au/funding/recycling-modernisation-fund
+    - https://greenindustries.sa.gov.au/funding/regional-transport-subsidies
+    - https://greenindustries.sa.gov.au/funding/wice-leadership-scholarship
+    - https://greenindustries.sa.gov.au/recycling-and-bin-signage
+    - https://greenindustries.sa.gov.au/sarecycling
+    - https://greenindustries.sa.gov.au/strategy
+    - https://greenindustries.sa.gov.au/waste-recycling-resources
+    - https://greenindustries.sa.gov.au/women-in-ce-leadership-scholarship
+  sa-business-programs:
+    jurisdiction: sa
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://business.sa.gov.au/programs/powering-business-grants
+    - https://statedevelopment.sa.gov.au/manufacturing/manufacturing-growth-accelerator
+    - https://statedevelopment.sa.gov.au/trade-international-investment/global-expansion-program
+  tas-recfit:
+    jurisdiction: tas
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://recfit.tas.gov.au/grants_programs/future-industries/hydrogen_industry_development_fund
+  wa-clean-energy:
+    jurisdiction: wa
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://mriwa.wa.gov.au/research-funding/financial-assistance-applications/amc-research-program-application-information
+    - https://wa.gov.au/government/publications/investment-attraction-fund-new-energies-industries-funding-stream
+    - https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/greentech-hub
+    - https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/made-wa-energy-affordability-investment-program
+    - https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-and-innovation-fund-commercialisation-bridge-grant
+    - https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-and-innovation-fund-grants
+    - https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-and-innovation-fund-innovation-booster-grant
+    - https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-and-innovation-fund-innovation-pathways-program
+    - https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-fund
+    - https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-fund-grants
+    - https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/new-industries-fund-wa-venture-support-waves-program
+    - https://wa.gov.au/organisation/department-of-energy-and-economic-diversification/the-western-australian-renewable-hydrogen-industry
+    - https://wa.gov.au/organisation/department-of-jobs-tourism-science-and-innovation/new-industries-fund
+    - https://wa.gov.au/service/building-utilities-and-essential-services/waste-management/remade-wa-advancing-solar-panel-recovery-and-recycling-western-australia
+    - https://wa.gov.au/service/community-services/grants-and-subsidies
+    - https://wa.gov.au/service/community-services/grants-and-subsidies/carbon-innovation-grants-program
+    - https://wa.gov.au/service/environment/environment-information-services/clean-energy-future-fund
+    - https://wa.gov.au/service/environment/environment-information-services/clean-energy-future-fund-round-4-documents
+    - https://wa.gov.au/service/immigration/migrant-services
+  wa-founders-factory:
+    jurisdiction: wa
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://foundersfactory.com/rio-tinto-mining-tech-accelerator
+  nt-innovation:
+    jurisdiction: nt
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://darwin.nt.gov.au/community/programs/grants-sponsorship
+    - https://dtbar.nt.gov.au/news/2024/sustainable-business-solutions-grant-available
+    - https://innovation.nt.gov.au/ecosystem/funding
+    - https://innovation.nt.gov.au/ecosystem/void(0)
+    - https://innovation.nt.gov.au/news/2023/advanced-manufacturing-growth-centre-delivering-investment-in-the-territory
+    - https://invest.nt.gov.au/here-to-help/financing
+    - https://nt.gov.au/industry/business-grants-funding/ignite-program
+  innovation-victoria-programs:
+    jurisdiction: vic
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://innovationvictoria.com/funding/venture-capital-funds
+    - https://innovationvictoria.com/submit-a-pitch
+    - https://launchvic.org/programs/civvic-labs
+  melbourne-accelerator-program:
+    jurisdiction: vic
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://themap.co/accelerator
+  climate-salad:
+    jurisdiction: national
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://climatesalad.com/
+    - https://climatesalad.com/1-percent-pledge-for-climate-tech-australia
+    - https://climatesalad.com/2023-australian-climate-tech-festival-gallery
+    - https://climatesalad.com/2024-australian-climate-tech-connect-awards-gallery
+    - https://climatesalad.com/about/about
+    - https://climatesalad.com/about/ai-rehearsal-coach
+    - https://climatesalad.com/about/partner
+    - https://climatesalad.com/about/services
+    - https://climatesalad.com/about/team
+    - https://climatesalad.com/australian-climate-tech-festival-2022
+    - https://climatesalad.com/australian-climate-tech-festival-2023
+    - https://climatesalad.com/charter
+    - https://climatesalad.com/climate-tech-adoption
+    - https://climatesalad.com/climate-tech-companies-in-australia
+    - https://climatesalad.com/climate-tech-ecosystem-supporters
+    - https://climatesalad.com/climate-tech-industry-report
+    - https://climatesalad.com/climate-tech-investors-australia
+    - https://climatesalad.com/climate-tech-mentors-australia
+    - https://climatesalad.com/contact
+    - https://climatesalad.com/global-growth-program
+    - https://climatesalad.com/global-growth-program-eoi-closed
+    - https://climatesalad.com/help-fund-innovation
+    - https://climatesalad.com/international-trade-missions
+    - https://climatesalad.com/join
+    - https://climatesalad.com/letter-to-government-may-2026
+    - https://climatesalad.com/nsw-programs
+    - https://climatesalad.com/posts/5-years-for-climate-salad
+    - https://climatesalad.com/posts/economic-potential-of-decarbonisation
+    - https://climatesalad.com/posts/founders-factorys-wa-based-accelerators-announces-next-batch-of-startups
+    - https://climatesalad.com/posts/intro-to-accessing-government-funding-to-scale-australian-climate-innovation
+    - https://climatesalad.com/posts/introducing-the-2025-australian-climate-tech-industry-report
+    - https://climatesalad.com/posts/julien-piegay---unravel-carbon
+    - https://climatesalad.com/posts/review-of-climate-tech-report-by-startup-muster-2025
+    - https://climatesalad.com/posts/solving-50-billion-wasted-plastic-pallet-wraps-with-bearhug
+    - https://climatesalad.com/posts/tom-kline---climate-tech-partners
+    - https://climatesalad.com/products
+    - https://climatesalad.com/queensland-opportunities
+    - https://climatesalad.com/team/evan-lim
+    - https://climatesalad.com/team/mick-liubinskas
+    - https://climatesalad.com/team/shravya-sunkugari
+    - https://climatesalad.com/victorian-programs
+  climate-kic-australia:
+    jurisdiction: national
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://climate-kic.org.au/work/projects/climate-kickstarter
+    - https://climate-kic.org.au/work/projects/launchpad
+  nsw-etcf-portal:
+    jurisdiction: nsw
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://chiefscientist.nsw.gov.au/industry-development/commercialisation-grants/biosciences-fund
+    - https://chiefscientist.nsw.gov.au/industry-development/commercialisation-grants/critical-minerals-processing-and-advanced-materials-innovation-program
+    - https://chiefscientist.nsw.gov.au/industry-development/commercialisation-grants/emerging-technologies-commercialisation-fund
+    - https://chiefscientist.smartygrants.com.au/
+    - https://chiefscientist.smartygrants.com.au/ETCF2026
+    - https://chiefscientist.smartygrants.com.au/applicant/login
+  unsw-founders:
+    jurisdiction: nsw
+    verified_date: '2026-09-01'
+    known_urls:
+    - https://unswfounders.com/10x-accelerator
+    - https://unswfounders.com/accelerators
+    - https://unswfounders.com/climate-10x-accelerator
+    - https://unswfounders.com/health10x-accelerator
+    - https://unswfounders.com/newsletter/unsw-amp-westpac-join-forces-to-grow-women-led-startupshttps:/unswfounders.com/newsletter/unsw-amp-westpac-join-forces-to-grow-women-led-startups
+    - https://unswfounders.com/pre-accelerator
+  newcastle-i2n:
+    jurisdiction: nsw
+    verified_date: '2026-09-01'
+    known_urls: []

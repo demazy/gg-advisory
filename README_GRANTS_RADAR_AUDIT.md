@@ -1,31 +1,25 @@
-# GG Advisory Grants & Accelerators Radar - zero-API production pipeline
+# GG Advisory Grants Radar - snapshot-sentinel pipeline
 
-Pipeline: `6.0-zero-api-official-source`
+Pipeline: `7.0-snapshot-sentinel`
 
-## Production principle
+This package produces only the GG Advisory Grants & Accelerators Radar PDF. It does not run a monthly news digest and does not create DOCX or HTML outputs.
 
-`config/grants.yaml` is the canonical factual registry and history ledger. The normal Radar run uses no OpenAI API and no other paid model API.
+## Editorial model
 
-Publication requires:
-- direct re-fetch of every published programme's configured official/administering source evidence;
-- field-level evidence-contract support for name, administrator, status, amount, deadline information and target stage;
-- an independent second direct-source fetch/audit;
-- all 31 configured source groups reachable;
-- every high-signal discovered URL reconciled by an explicit decision;
-- zero unresolved candidates;
-- no duplicate IDs/URLs;
-- the branded PDF layout continuity gate to pass.
+- `config/grants.yaml` remains the canonical programme registry and change-history ledger.
+- Current official/administering-body pages are checked directly with deterministic identity, status, amount and deadline sentinels.
+- If an official site is temporarily inaccessible or only partly machine-readable, a matching evidence snapshot may bridge the check for at most 45 days. The snapshot fingerprint must exactly match the current canonical factual fields.
+- Explicit live contradictions always block publication.
+- Discovery compares monitored official index links with a dated baseline inventory. Historical links already present in that inventory are not reclassified as new every run; genuinely new high-signal links must be explicitly reconciled before publication.
+- The audit stage performs no second HTTP crawl. It independently validates the captured evidence, source/jurisdiction coverage, registry continuity, history, candidate reconciliation and uniqueness.
+- There is no OpenAI API or other paid model dependency.
 
-The workflow is fail-closed. If a page changes materially or a new high-signal programme appears, the PDF is not published until the registry/evidence contract is reviewed.
+## Publication gate
 
-## Completeness statement
+A PDF is generated only when every visible record passes verification, every mandatory source group and jurisdiction remains covered, no genuinely new discovery candidate is unresolved, registry continuity/history/uniqueness pass, and the resulting PDF passes the layout-continuity audit.
 
-Completeness is defined against the configured monitored official/source universe and curated Radar scope. It is not a mathematical claim that no unannounced, private or unindexed programme exists.
+The workflow is manual-only (`workflow_dispatch`). On success it emails only the PDF.
 
-## Bootstrap
+## Regression replay
 
-The installer contains a 2026-09-01 bootstrap registry built from the successful v5.1 primary official-source verification (31/31 source searches and zero tracked-programme extraction failures), with corrections from the independent audit results that completed before the prior API balance was exhausted.
-
-The installer replaces `config/grants.yaml` only when its SHA-256 is the known pre-v6 canonical baseline:
-`0b6172c3295bdc0dadc64356aca68770de8daa24f63cf47a9258265fae06b6c0`.
-Otherwise it stops rather than overwrite an unknown registry state.
+The deterministic test suite includes the captured 2026-09-01 v6 failure set: 27 visible programme failures, 275 links that v6 incorrectly treated as unresolved, and 9 technically blocked required source groups. The replay must resolve those catalogue links through the dated inventory, bridge the technical source blocks only through fresh matching snapshots, preserve NT jurisdiction coverage through its monitored source group, and reach a publishable audit without a second network crawl.
