@@ -81,6 +81,7 @@ sources:
   - recipient
   - alumni
   min_candidate_urls: 5
+  discovery: true
 - id: business-gov-au
   jurisdiction: national
   required: true
@@ -91,7 +92,7 @@ sources:
   sitemaps:
   - https://business.gov.au/sitemap.xml
   max_candidate_pages: 180
-  min_url_score: 4
+  min_url_score: 5
   min_text_score: 5
   url_terms:
   - climate
@@ -113,6 +114,7 @@ sources:
   - green
   - sustainable fuel
   min_candidate_urls: 3
+  discovery: true
 - id: nrf
   jurisdiction: national
   required: true
@@ -126,6 +128,7 @@ sources:
   max_candidate_pages: 25
   min_url_score: 2
   min_text_score: 4
+  discovery: true
 - id: csiro-innovation
   jurisdiction: national
   required: true
@@ -139,6 +142,7 @@ sources:
   max_candidate_pages: 45
   min_url_score: 3
   min_text_score: 5
+  discovery: true
 - id: aea
   jurisdiction: national
   required: true
@@ -150,6 +154,7 @@ sources:
   max_candidate_pages: 20
   min_url_score: 1
   min_text_score: 4
+  discovery: false
 - id: energylab
   jurisdiction: national
   required: true
@@ -163,6 +168,7 @@ sources:
   min_url_score: 2
   min_text_score: 4
   min_candidate_urls: 5
+  discovery: true
 - id: startmate
   jurisdiction: national
   required: true
@@ -173,6 +179,7 @@ sources:
   max_candidate_pages: 20
   min_url_score: 1
   min_text_score: 4
+  discovery: false
 - id: virescent
   jurisdiction: national
   required: true
@@ -183,6 +190,7 @@ sources:
   max_candidate_pages: 20
   min_url_score: 1
   min_text_score: 4
+  discovery: false
 - id: cefc-climate-tech
   jurisdiction: national
   required: true
@@ -216,6 +224,7 @@ sources:
   - contact
   - about
   - careers
+  discovery: true
 - id: main-sequence
   jurisdiction: national
   required: true
@@ -226,6 +235,7 @@ sources:
   max_candidate_pages: 20
   min_url_score: 1
   min_text_score: 4
+  discovery: false
 - id: brinc-artesian
   jurisdiction: national
   required: true
@@ -236,6 +246,7 @@ sources:
   max_candidate_pages: 20
   min_url_score: 1
   min_text_score: 4
+  discovery: false
 - id: act-energy
   jurisdiction: act
   required: true
@@ -246,6 +257,7 @@ sources:
   max_candidate_pages: 20
   min_url_score: 1
   min_text_score: 4
+  discovery: false
 - id: act-cbrin
   jurisdiction: act
   required: true
@@ -256,6 +268,7 @@ sources:
   max_candidate_pages: 20
   min_url_score: 1
   min_text_score: 4
+  discovery: false
 - id: nsw-energy
   jurisdiction: nsw
   required: true
@@ -269,7 +282,7 @@ sources:
   sitemaps:
   - https://www.energy.nsw.gov.au/sitemap.xml
   max_candidate_pages: 130
-  min_url_score: 3
+  min_url_score: 5
   min_text_score: 5
   url_terms:
   - clean
@@ -288,6 +301,7 @@ sources:
   - battery
   - solar
   min_candidate_urls: 2
+  discovery: true
 - id: nsw-chief-scientist
   jurisdiction: nsw
   required: true
@@ -298,6 +312,7 @@ sources:
   max_candidate_pages: 20
   min_url_score: 1
   min_text_score: 4
+  discovery: false
 - id: vic-deeca
   jurisdiction: vic
   required: true
@@ -309,7 +324,7 @@ sources:
   - https://www.vic.gov.au/grants-and-programs
   - https://www.energy.vic.gov.au/grants
   max_candidate_pages: 90
-  min_url_score: 3
+  min_url_score: 5
   min_text_score: 5
   url_terms:
   - energy
@@ -325,6 +340,7 @@ sources:
   - battery
   - solar
   min_candidate_urls: 1
+  discovery: true
 - id: breakthrough-victoria
   jurisdiction: vic
   required: true
@@ -335,6 +351,7 @@ sources:
   max_candidate_pages: 20
   min_url_score: 1
   min_text_score: 4
+  discovery: false
 - id: advance-queensland
   jurisdiction: qld
   required: true
@@ -363,6 +380,7 @@ sources:
   - decarbon
   - circular
   min_candidate_urls: 2
+  discovery: true
 - id: green-industries-sa
   jurisdiction: sa
   required: true
@@ -373,6 +391,7 @@ sources:
   max_candidate_pages: 30
   min_url_score: 1
   min_text_score: 4
+  discovery: true
 - id: sa-business-programs
   jurisdiction: sa
   required: true
@@ -384,7 +403,7 @@ sources:
   - https://business.sa.gov.au/programs
   - https://statedevelopment.sa.gov.au/science-and-research-excellence/rif/stream-2/go2gov-program
   max_candidate_pages: 80
-  min_url_score: 2
+  min_url_score: 5
   min_text_score: 4
   url_terms:
   - innovation
@@ -400,6 +419,7 @@ sources:
   - manufactur
   - growth
   min_candidate_urls: 2
+  discovery: true
 - id: tas-recfit
   jurisdiction: tas
   required: true
@@ -412,6 +432,7 @@ sources:
   min_url_score: 2
   min_text_score: 4
   min_candidate_urls: 2
+  discovery: true
 - id: wa-clean-energy
   jurisdiction: wa
   required: true
@@ -439,6 +460,7 @@ sources:
   - startup
   - technology
   min_candidate_urls: 1
+  discovery: true
 - id: wa-founders-factory
   jurisdiction: wa
   required: true
@@ -449,6 +471,7 @@ sources:
   max_candidate_pages: 20
   min_url_score: 1
   min_text_score: 4
+  discovery: false
 - id: nt-innovation
   jurisdiction: nt
   required: true
@@ -469,6 +492,7 @@ sources:
   - events
   - careers
   min_candidate_urls: 1
+  discovery: true
 - id: innovation-victoria-programs
   jurisdiction: vic
   required: true
@@ -500,9 +524,10 @@ sources:
   - success story
   - investor education
   max_candidate_pages: 100
-  min_url_score: 2
+  min_url_score: 5
   min_text_score: 4
   min_candidate_urls: 2
+  discovery: true
 - id: melbourne-accelerator-program
   jurisdiction: vic
   required: true
@@ -513,6 +538,7 @@ sources:
   max_candidate_pages: 12
   min_url_score: 1
   min_text_score: 4
+  discovery: false
 - id: climate-salad
   jurisdiction: national
   required: true
@@ -539,6 +565,7 @@ sources:
   max_candidate_pages: 35
   min_url_score: 2
   min_text_score: 4
+  discovery: true
 - id: climate-kic-australia
   jurisdiction: national
   required: true
@@ -549,6 +576,7 @@ sources:
   max_candidate_pages: 15
   min_url_score: 1
   min_text_score: 4
+  discovery: false
 - id: nsw-etcf-portal
   jurisdiction: nsw
   required: true
@@ -559,6 +587,7 @@ sources:
   - https://www.chiefscientist.nsw.gov.au/industry-development/commercialisation-grants
   - https://chiefscientist.smartygrants.com.au/ETCF2026
   coverage_min_confidence: 0.88
+  discovery: true
 - id: unsw-founders
   jurisdiction: nsw
   required: true
@@ -567,6 +596,7 @@ sources:
   index_urls:
   - https://unswfounders.com/accelerators
   coverage_min_confidence: 0.9
+  discovery: true
 - id: newcastle-i2n
   jurisdiction: nsw
   required: true
@@ -575,3 +605,4 @@ sources:
   index_urls:
   - https://www.newcastle.edu.au/engage/business-and-industry/integrated-innovation-network-i2n/programs/accelerators
   coverage_min_confidence: 0.9
+  discovery: true

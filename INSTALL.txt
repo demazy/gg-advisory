@@ -1,21 +1,11 @@
-INSTALLATION - V5.1 PATCH / COMPLETE CODE REPLACEMENT
+Install with the self-contained PATCH_GRANTS_RADAR_ZERO_API.sh script.
 
-1. Keep your existing config/grants.yaml byte-for-byte. Do not overwrite or delete it.
-2. Replace the code/config/workflow/test files from this package in one transaction.
-3. Keep the existing GG Advisory logo and approved/fallback layout-reference PDFs.
-4. Commit all replacements in ONE commit to main.
-5. Ensure the OpenAI API project behind OPENAI_API_KEY has available API credits.
-6. Start a brand-new workflow_dispatch run. Do not re-run an older Actions run.
-
-Expected early markers:
-- Audited package preflight PASS: 5.1-batched-source-audit
-- 46 deterministic tests pass
-- Two-stage web search smoke test PASS: 5.1-batched-source-audit
-
-Expected update marker:
-- discovery=single-search-per-mandatory-source
-
-Expected independent audit marker:
-- audit=independent-batched-responses-web-search
-
-A factual audit failure, API quota failure or layout audit failure intentionally produces no emailed PDF.
+The installer:
+1. verifies the target repository;
+2. backs up every replaced file;
+3. verifies the current canonical grants.yaml hash;
+4. installs the complete v6 package including the hidden GitHub workflow;
+5. migrates the known canonical baseline to the verified 2026-09-01 bootstrap registry;
+6. verifies that no OpenAI/API-key dependency remains;
+7. runs syntax checks, preflight and tests when local dependencies are present;
+8. prints Git changes but does not commit automatically.

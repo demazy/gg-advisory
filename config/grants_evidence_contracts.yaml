@@ -1,0 +1,781 @@
+version: 6.0-zero-api-official-source
+verified_baseline: '2026-09-01'
+records:
+  csiro-on-accelerate-cohort12:
+    record_url: https://csiro.au/en/work-with-us/funding-programs/innovation-programs/on-accelerate
+    fields:
+      name:
+        source_url: https://csiro.au/en/work-with-us/funding-programs/innovation-programs/on-accelerate
+        support: The official page title and application portal identify the programme as ON Accelerate.
+      admin:
+        source_url: https://csiro.au/en/work-with-us/funding-programs/innovation-programs/on-accelerate
+        support: The programme is published and operated on CSIRO's ON Innovation Program pages.
+      status:
+        source_url: https://csiro.au/en/work-with-us/funding-programs/innovation-programs/on-accelerate
+        support: “Applications are now open!” and “Applications for ON Accelerate 11 are open from 27 July to 6 September
+          2026.”
+      amount:
+        source_url: https://csiro.au/en/work-with-us/funding-programs/innovation-programs/on-accelerate
+        support: The page states participation is valued at over $150,000 and lists $20,000 per team to TTOs plus up to $400,000
+          across high-performing cohort teams, with a maximum of $80,000 per team.
+      deadline_label:
+        source_url: https://csiro.au/en/work-with-us/funding-programs/innovation-programs/on-accelerate
+        support: CSIRO says the 6 September 2026 deadline was extended from 31 August.
+      target_stage:
+        source_url: https://csiro.au/en/work-with-us/funding-programs/innovation-programs/on-accelerate
+        support: Eligibility requires Australian-based teams with a researcher at an Australian university/PFRO or a relevant
+          PhD student/recent graduate; eligible startups/SMEs must have licensed or acquired university/PFRO IP and retain
+          an originating-institution member.
+      deadline:
+        source_url: https://csiro.au/en/work-with-us/funding-programs/innovation-programs/on-accelerate
+        support: Applications for ON Accelerate 11 are open through 6 September 2026.
+    audit_urls:
+    - https://csiro.au/en/work-with-us/funding-programs/innovation-programs/on-accelerate
+    min_support_score: 0.62
+  arena-fmia-innovation-fund:
+    record_url: https://arena.gov.au/funding
+    fields:
+      name:
+        source_url: https://arena.gov.au/funding
+        support: The supplied live-search evidence identifies this programme as the Future Made in Australia Innovation Fund
+          in ARENA's current funding review.
+      admin:
+        source_url: https://arena.gov.au/funding
+        support: ARENA's official Funding Opportunities catalogue is the administering-source catalogue reviewed in the supplied
+          evidence.
+      status:
+        source_url: https://arena.gov.au/funding
+        support: The supplied live-search evidence states that the fund is ongoing and remains open until funding is exhausted
+          or ARENA closes it.
+      amount:
+        source_url: https://arena.gov.au/funding
+        support: The supplied live-search evidence states that the programme will provide up to $1.5 billion in grant funding.
+      deadline_label:
+        source_url: https://arena.gov.au/funding
+        support: The supplied live-search evidence states the programme remains open until funding is exhausted or ARENA closes
+          it.
+      target_stage:
+        source_url: https://arena.gov.au/funding
+        support: The supplied live-search evidence states that the fund supports pre-commercial innovation, demonstration
+          and deployment.
+    audit_urls:
+    - https://arena.gov.au/funding
+    min_support_score: 0.62
+  arena-advancing-renewables:
+    record_url: https://arena.gov.au/funding/advancing-renewables-program
+    fields:
+      name:
+        source_url: https://arena.gov.au/funding/advancing-renewables-program
+        support: ARENA identifies the programme as the Advancing Renewables Program (ARP).
+      admin:
+        source_url: https://arena.gov.au/funding/advancing-renewables-program
+        support: The official ARENA funding page directs applications through ARENA's process.
+      status:
+        source_url: https://arena.gov.au/funding/advancing-renewables-program
+        support: ARENA states ARP is an open, ongoing program.
+      amount:
+        source_url: https://arena.gov.au/funding/advancing-renewables-program
+        support: The current public programme page does not state a single total funding allocation or per-project amount.
+      deadline_label:
+        source_url: https://arena.gov.au/funding/advancing-renewables-program
+        support: ARENA states the program will run until funds are exhausted or it is otherwise terminated or extended at
+          ARENA's discretion.
+      target_stage:
+        source_url: https://arena.gov.au/funding
+        support: The supplied live-search evidence says ARENA's funding catalogue describes ARP as supporting development,
+          demonstration and pre-commercial deployment projects.
+    audit_urls:
+    - https://arena.gov.au/funding/advancing-renewables-program
+    - https://arena.gov.au/funding
+    min_support_score: 0.62
+  industry-growth-program:
+    record_url: https://business.gov.au/grants-and-programs/industry-growth-program
+    fields:
+      name:
+        source_url: https://business.gov.au/grants-and-programs/industry-growth-program
+        support: The official program page heading names the programme “Industry Growth Program”.
+      admin:
+        source_url: https://business.gov.au/-/media/grants-and-programs/industry-growth-program/cg/industry-growth-program-commercialisation-and-growth-grant-opportunity-guidelines-pdf.pdf
+        support: The Commercialisation and Growth grant opportunity guidelines state that the opportunity and process are
+          administered by the Department of Industry, Science and Resources.
+      status:
+        source_url: https://business.gov.au/grants-and-programs/industry-growth-program
+        support: 'The current official page states: “This program is currently paused to new applications.”'
+      amount:
+        source_url: https://business.gov.au/grants-and-programs/industry-growth-program
+        support: The current page lists grants of $50,000–$250,000 for early-stage commercialisation and $100,000–$5 million
+          for commercialisation and growth.
+      deadline_label:
+        source_url: https://business.gov.au/grants-and-programs/industry-growth-program
+        support: The explicit current status is paused to new applications; no new-application reopening date appears on the
+          current program page.
+      target_stage:
+        source_url: https://business.gov.au/grants-and-programs/industry-growth-program
+        support: The page describes Early-Stage Commercialisation as feasibility study, proof-of-concept and prototyping (TRL
+          3–6 guide), and Commercialisation and Growth as prototyping through market-readiness (TRL 4–9 guide).
+    audit_urls:
+    - https://business.gov.au/grants-and-programs/industry-growth-program
+    - https://business.gov.au/-/media/grants-and-programs/industry-growth-program/cg/industry-growth-program-commercialisation-and-growth-grant-opportunity-guidelines-pdf.pdf
+    min_support_score: 0.62
+  cefc-virescent-fund2:
+    record_url: https://virescent.vc/
+    fields:
+      name:
+        source_url: https://virescent.vc/
+        support: The homepage states Virescent manages 'Virescent Ventures Fund II,' launched in August 2024.
+      admin:
+        source_url: https://virescent.vc/
+        support: The homepage presents Virescent Ventures as the climate venture-capital manager and says it manages Virescent
+          Ventures Fund II.
+      status:
+        source_url: https://virescent.vc/category/fund-ii
+        support: The Fund II category contains investment updates through July 14, 2026, including MAKO, DryFlow Magnetics
+          and IND Technology; the homepage also invites founders to get in touch.
+      amount:
+        source_url: https://virescent.vc/virescent-ventures-announces-100-million-first-close-of-new-climate-technology-fund-backed-by-westpac-and-the-cefc
+        support: The Fund II announcement says the new fund aims to deploy $200 million into climate technologies.
+      deadline_label:
+        source_url: https://virescent.vc/
+        support: 'The homepage asks: ''Are you our next ambitious founder with a bold vision to reduce emissions?'' followed
+          by ''Get in touch.'''
+      target_stage:
+        source_url: https://virescent.vc/
+        support: 'Virescent states: ''We invest from pre-seed to late-stage growth capital.'''
+    audit_urls:
+    - https://virescent.vc/
+    - https://virescent.vc/category/fund-ii
+    - https://virescent.vc/virescent-ventures-announces-100-million-first-close-of-new-climate-technology-fund-backed-by-westpac-and-the-cefc
+    min_support_score: 0.62
+  vic-breakthrough-victoria:
+    record_url: https://breakthroughvictoria.com/growth-sectors/clean-economy
+    fields:
+      name:
+        source_url: https://breakthroughvictoria.com/growth-sectors/clean-economy
+        support: 'Page title: Clean economy.'
+      admin:
+        source_url: https://breakthroughvictoria.com/submit-your-pitch
+        support: The official page describes Breakthrough Victoria's investment process and invites applicants to pitch their
+          innovation.
+      status:
+        source_url: https://breakthroughvictoria.com/submit-your-pitch
+        support: The page says, 'Take the leap and submit your proposal to us now' and provides an active submission process.
+      amount:
+        source_url: https://breakthroughvictoria.com/growth-stages/fund-investment
+        support: Current programme summary lists typical investment sizes of $150,000 for Research Translation & Pre-Seed,
+          $1–5 million for Venture Capital, and $10–15 million for Growth Capital.
+      deadline_label:
+        source_url: https://breakthroughvictoria.com/growth-sectors/clean-economy
+        support: 'The page states: ''If so, submit your proposal to us today.'''
+      target_stage:
+        source_url: https://breakthroughvictoria.com/growth-sectors/clean-economy
+        support: The page states that Breakthrough Victoria supports innovators 'across all stages of development' to take
+          technologies from lab to market.
+    audit_urls:
+    - https://breakthroughvictoria.com/growth-sectors/clean-economy
+    - https://breakthroughvictoria.com/submit-your-pitch
+    - https://breakthroughvictoria.com/growth-stages/fund-investment
+    min_support_score: 0.62
+  wa-founders-factory-nature-tech:
+    record_url: https://foundersfactory.com/western-australia-government-nature-tech-accelerator
+    fields:
+      name:
+        source_url: https://foundersfactory.com/western-australia-government-nature-tech-accelerator
+        support: 'Page heading: "Western Australia Government & Founders Factory Nature Tech Program."'
+      admin:
+        source_url: https://foundersfactory.com/western-australia-government-nature-tech-accelerator
+        support: The page states that the programme was launched in partnership with the Western Australian Government.
+      status:
+        source_url: https://foundersfactory.com/western-australia-government-nature-tech-accelerator
+        support: The current page displays "Applications open" and an "Apply now" link.
+      amount:
+        source_url: https://foundersfactory.com/western-australia-government-nature-tech-accelerator
+        support: The page says participants "Receive capital" but does not state a public cash amount.
+      deadline_label:
+        source_url: https://foundersfactory.com/western-australia-government-nature-tech-accelerator
+        support: Displayed application status is "Applications open"; no deadline label or date is shown.
+      target_stage:
+        source_url: https://foundersfactory.com/western-australia-government-nature-tech-accelerator
+        support: The programme states it backs early-stage startups "(pre-seed to seed)" and seeks "pre/seed stage companies."
+    audit_urls:
+    - https://foundersfactory.com/western-australia-government-nature-tech-accelerator
+    min_support_score: 0.62
+  qld-advance-ignite-ideas:
+    record_url: https://advance.qld.gov.au/grants-and-programs/ignite-ideas-fund
+    fields:
+      name:
+        source_url: https://advance.qld.gov.au/grants-and-programs/ignite-ideas-fund
+        support: The page heading and programme overview identify the programme as the Ignite Ideas Fund.
+      admin:
+        source_url: https://advance.qld.gov.au/grants-and-programs/ignite-ideas-fund
+        support: The live page footer identifies the Queensland Government Department of the Environment, Tourism, Science
+          and Innovation.
+      status:
+        source_url: https://advance.qld.gov.au/grants-and-programs/ignite-ideas-fund
+        support: 'The application section states: "Applications for this fund are currently closed."'
+      amount:
+        source_url: https://advance.qld.gov.au/grants-and-programs/ignite-ideas-fund
+        support: Tier 1 is up to $100,000 excluding GST for projects up to 12 months; Tier 2 is greater than $100,000 and
+          up to $200,000 excluding GST for projects up to 24 months.
+      deadline_label:
+        source_url: https://advance.qld.gov.au/grants-and-programs/ignite-ideas-fund
+        support: 'The application section states: "Applications for this fund are currently closed."'
+      target_stage:
+        source_url: https://advance.qld.gov.au/grants-and-programs/ignite-ideas-fund
+        support: The page specifies Queensland SMEs with high-growth potential for commercialisation projects and describes
+          an innovative product or service at the viable-product stage.
+    audit_urls:
+    - https://advance.qld.gov.au/grants-and-programs/ignite-ideas-fund
+    min_support_score: 0.62
+  sa-green-industries-grants:
+    record_url: https://greenindustries.sa.gov.au/funding/ce-market-development-funding
+    fields:
+      name:
+        source_url: https://greenindustries.sa.gov.au/funding/ce-market-development-funding
+        support: 'Page heading: Circular Business and Market Development Grants.'
+      admin:
+        source_url: https://greenindustries.sa.gov.au/funding
+        support: The Funding page states that Green Industries SA provides this funding and lists the programme.
+      status:
+        source_url: https://greenindustries.sa.gov.au/funding/ce-market-development-funding
+        support: The page's 'When does it close?' section states CLOSED.
+      amount:
+        source_url: https://greenindustries.sa.gov.au/funding/ce-market-development-funding
+        support: 'The page states: Up to $100,000 (GST exclusive) per project.'
+      deadline_label:
+        source_url: https://greenindustries.sa.gov.au/news/circular-business-market-development-grants-2025-26
+        support: Applications close at 5 pm on Friday 28 November.
+      target_stage:
+        source_url: https://greenindustries.sa.gov.au/funding/ce-market-development-funding
+        support: Eligible applicants include businesses and research institutions seeking to design, apply and scale-up innovative
+          circular-economy models or produce, manufacture, sell or promote recycled-content, refurbished or repaired products.
+      deadline:
+        source_url: https://greenindustries.sa.gov.au/news/circular-business-market-development-grants-2025-26
+        support: The dated 2025–26 announcement states applications close at 5 pm on Friday 28 November; the current programme
+          page subsequently states CLOSED.
+    audit_urls:
+    - https://greenindustries.sa.gov.au/funding/ce-market-development-funding
+    - https://greenindustries.sa.gov.au/funding
+    - https://greenindustries.sa.gov.au/news/circular-business-market-development-grants-2025-26
+    min_support_score: 0.62
+  tas-recfit-climate-grants:
+    record_url: https://recfit.tas.gov.au/grants_programs/climate-change/climate-change-business-innovation-grants
+    fields:
+      name:
+        source_url: https://recfit.tas.gov.au/grants_programs/climate-change/climate-change-business-innovation-grants/grant-guidelines-climate-change-business-innovation
+        support: Programme overview names the programme "Climate Change Business Innovation Grant Program."
+      admin:
+        source_url: https://recfit.tas.gov.au/grants_programs/climate-change/climate-change-business-innovation-grants/grant-guidelines-climate-change-business-innovation
+        support: The guidelines state that the programme is administered by the Climate Change Office in ReCFIT, Department
+          of State Growth.
+      status:
+        source_url: https://recfit.tas.gov.au/get_involved/news/climate-change-business-innovation-grants-now-available
+        support: The official notice is headed "Climate Change Business Innovation Grants (now closed)" and states that applications
+          closed on Sunday 30 November 2025.
+      amount:
+        source_url: https://recfit.tas.gov.au/grants_programs/climate-change/climate-change-business-innovation-grants/grant-guidelines-climate-change-business-innovation
+        support: Programme overview specifies total funding of $550,000 and grant amounts between $25,000 and $100,000.
+      deadline_label:
+        source_url: https://recfit.tas.gov.au/get_involved/news/climate-change-business-innovation-grants-now-available
+        support: 'The official programme notice states: "Grant applications closed on Sunday 30 November 2025."'
+      target_stage:
+        source_url: https://recfit.tas.gov.au/grants_programs/climate-change/climate-change-business-innovation-grants/grant-guidelines-climate-change-business-innovation
+        support: Eligibility required an active ABN, Tasmanian operations, annual turnover greater than $500,000 and less
+          than $55 million, and at least a 30% cash co-contribution.
+      deadline:
+        source_url: https://recfit.tas.gov.au/grants_programs/climate-change/climate-change-business-innovation-grants/grant-guidelines-climate-change-business-innovation
+        support: The published timeframe says the programme closed on 30 November 2025 at 11:59 pm AEST.
+    audit_urls:
+    - https://recfit.tas.gov.au/grants_programs/climate-change/climate-change-business-innovation-grants
+    - https://recfit.tas.gov.au/grants_programs/climate-change/climate-change-business-innovation-grants/grant-guidelines-climate-change-business-innovation
+    - https://recfit.tas.gov.au/get_involved/news/climate-change-business-innovation-grants-now-available
+    min_support_score: 0.62
+  nsw-unsw-climate-10x:
+    record_url: https://unswfounders.com/climate-10x-accelerator
+    fields:
+      name:
+        source_url: https://unswfounders.com/climate-10x-accelerator
+        support: 'Page title: "Climate 10x Accelerator."'
+      admin:
+        source_url: https://unswfounders.com/climate-10x-accelerator
+        support: The page says Climate 10x operates "in collaboration with the Trailblazer for Recycling & Clean Energy (TRaCE)"
+          and presents UNSW Founders as the programme host.
+      status:
+        source_url: https://unswfounders.com/climate-10x-accelerator
+        support: 'The page states: "Applications for 2026 have closed" and invites founders to "Express Your Interest for
+          2027."'
+      amount:
+        source_url: https://unswfounders.com/climate-10x-accelerator
+        support: 'Under Investment, the page states: "Startups will receive investment of 100k AUD via an uncapped SAFE note."'
+      deadline_label:
+        source_url: https://unswfounders.com/climate-10x-accelerator
+        support: The same page provides the 18 May 2026 application-close date and separately states that 2026 applications
+          have closed and 2027 expressions of interest are available.
+      target_stage:
+        source_url: https://unswfounders.com/climate-10x-accelerator
+        support: Eligibility requires an operating Australian startup, Australian Pty Ltd for the accelerator phase, early-stage
+          climate technology and clean IP ownership. The suitability guidance specifies climate or clean-energy solutions
+          at TRL 3+ that have raised less than approximately A$3–5 million.
+      deadline:
+        source_url: https://unswfounders.com/climate-10x-accelerator
+        support: 'The 2026 key dates state: "10x Applications close: 18 May."'
+    audit_urls:
+    - https://unswfounders.com/climate-10x-accelerator
+    min_support_score: 0.62
+  rd-tax-incentive:
+    record_url: https://business.gov.au/grants-and-programs/research-and-development-tax-incentive/overview-of-rd-tax-incentive
+    fields:
+      name:
+        source_url: https://business.gov.au/grants-and-programs/research-and-development-tax-incentive/overview-of-rd-tax-incentive
+        support: The page title is 'Overview of the R&D Tax Incentive'.
+      admin:
+        source_url: https://business.gov.au/grants-and-programs/research-and-development-tax-incentive/overview-of-rd-tax-incentive
+        support: The page states that the R&DTI is jointly administered by the Department of Industry, Science and Resources
+          on behalf of Industry Innovation and Science Australia, and the ATO.
+      status:
+        source_url: https://business.gov.au/grants-and-programs/research-and-development-tax-incentive/overview-of-rd-tax-incentive
+        support: The programme page is marked 'Open'.
+      amount:
+        source_url: https://business.gov.au/grants-and-programs/research-and-development-tax-incentive/overview-of-rd-tax-incentive
+        support: The page states a tax offset for R&D expenditure of up to $150 million and gives the refundable and non-refundable
+          offset-rate structure.
+      deadline_label:
+        source_url: https://business.gov.au/grants-and-programs/research-and-development-tax-incentive/overview-of-rd-tax-incentive
+        support: The official 'When to apply' section gives the statutory 10-month registration timing.
+      target_stage:
+        source_url: https://business.gov.au/grants-and-programs/research-and-development-tax-incentive/overview-of-rd-tax-incentive
+        support: The R&DTI is open to all industry sectors and company sizes where the company meets the definition of an
+          R&D entity and has eligible activities.
+    audit_urls:
+    - https://business.gov.au/grants-and-programs/research-and-development-tax-incentive/overview-of-rd-tax-incentive
+    min_support_score: 0.62
+  nrf-net-zero-fund:
+    record_url: https://nrf.gov.au/what-we-do/investment-sub-funds/net-zero-fund
+    fields:
+      name:
+        source_url: https://nrf.gov.au/what-we-do/investment-sub-funds/net-zero-fund
+        support: 'Page heading: Net Zero Fund.'
+      admin:
+        source_url: https://nrf.gov.au/what-we-do/investment-guidance
+        support: The guidance states that the National Reconstruction Fund Corporation invests through the General Portfolio
+          and three sub-funds, including the Net Zero Fund.
+      status:
+        source_url: https://nrf.gov.au/what-we-do/investment-sub-funds/net-zero-fund
+        support: The Net Zero Fund is now open for applications.
+      amount:
+        source_url: https://nrf.gov.au/what-we-do/investment-sub-funds
+        support: $5 billion in concessional finance to support large industrial facilities to transition to net zero and support
+          manufacturing of low emissions technologies.
+      deadline_label:
+        source_url: https://nrf.gov.au/what-we-do/investment-sub-funds/net-zero-fund
+        support: Open for applications. Register your interest through the Net Zero Fund webform.
+      target_stage:
+        source_url: https://nrf.gov.au/what-we-do/investment-sub-funds/net-zero-fund
+        support: The fund supports large industrial firms and low-emissions manufacturing scale-up; it can enable investment
+          in earlier-stage proposals, first-of-a-kind projects, and projects with large upfront capital requirements or longer
+          repayment periods.
+    audit_urls:
+    - https://nrf.gov.au/what-we-do/investment-sub-funds/net-zero-fund
+    - https://nrf.gov.au/what-we-do/investment-guidance
+    - https://nrf.gov.au/what-we-do/investment-sub-funds
+    min_support_score: 0.62
+  hydrogen-headstart-round2:
+    record_url: https://arena.gov.au/funding/hydrogen-headstart-round2
+    fields:
+      name:
+        source_url: https://arena.gov.au/funding/hydrogen-headstart-round2
+        support: The page heading identifies Hydrogen Headstart Round 2.
+      admin:
+        source_url: https://arena.gov.au/funding/hydrogen-headstart-round2
+        support: ARENA states that Round 2 will be delivered by ARENA.
+      status:
+        source_url: https://arena.gov.au/funding
+        support: ARENA's current Funding Opportunities catalogue lists Hydrogen Headstart Round 2 under Closed.
+      amount:
+        source_url: https://arena.gov.au/news/arena-shortlists-major-projects-to-scale-australias-renewable-hydrogen-industry
+        support: ARENA's 13 May 2026 announcement says the 2026 Federal Budget revised funding allocated to the program to
+          $1 billion.
+      deadline_label:
+        source_url: https://arena.gov.au/funding/hydrogen-headstart-round2
+        support: The programme page states that EOIs were due 8 December 2025; the later ARENA announcement describes the
+          shortlisted Full Application phase.
+      target_stage:
+        source_url: https://arena.gov.au/funding/hydrogen-headstart-round2
+        support: ARENA describes the program as funding large-scale hydrogen production projects and renewable-hydrogen production
+          at scale.
+    audit_urls:
+    - https://arena.gov.au/funding/hydrogen-headstart-round2
+    - https://arena.gov.au/funding
+    - https://arena.gov.au/news/arena-shortlists-major-projects-to-scale-australias-renewable-hydrogen-industry
+    min_support_score: 0.62
+  startmate-accelerator:
+    record_url: https://startmate.com/accelerator/program
+    fields:
+      name:
+        source_url: https://startmate.com/accelerator/program
+        support: The page heading identifies the programme as the Startmate Accelerator.
+      admin:
+        source_url: https://startmate.com/accelerator/program
+        support: The official Startmate programme page presents the Accelerator as a Startmate offering and describes Startmate's
+          investment terms.
+      status:
+        source_url: https://startmate.com/accelerator/program
+        support: Applications close 8 November 2026 for the 25 January-29 April 2027 cohort.
+      amount:
+        source_url: https://startmate.com/accelerator/program
+        support: $120,000 investment
+      deadline_label:
+        source_url: https://startmate.com/accelerator/program
+        support: Applications close 8 November 2026 for the 25 January-29 April 2027 cohort.
+      target_stage:
+        source_url: https://startmate.com/accelerator/program
+        support: At least one co-founder must work full time and at least one founder must be based in Australia or New Zealand.
+      deadline:
+        source_url: https://startmate.com/accelerator/program
+        support: Applications close 8 November 2026.
+    audit_urls:
+    - https://startmate.com/accelerator/program
+    min_support_score: 0.58
+  brinc-artesian-cleantech:
+    record_url: https://web.brinc.io/climate-tech-program/
+    fields:
+      name:
+        source_url: https://web.brinc.io/climate-tech-program/
+        support: 'Official page title: Climate Tech Accelerator Program; page heading: Climate Technology.'
+      admin:
+        source_url: https://web.brinc.io/climate-tech-program/
+        support: The programme is published on Brinc's official website and describes Brinc's programme offering.
+      status:
+        source_url: https://web.brinc.io/climate-tech-program/
+        support: Applications are reviewed on a rolling basis.
+      amount:
+        source_url: https://web.brinc.io/climate-tech-program/
+        support: up to US$100,000
+      deadline_label:
+        source_url: https://web.brinc.io/climate-tech-program/
+        support: Applications are reviewed on a rolling basis.
+      target_stage:
+        source_url: https://web.brinc.io/climate-tech-program/
+        support: TRL 4+ incorporated entities with at least two full-time founders
+    audit_urls:
+    - https://web.brinc.io/climate-tech-program/
+    min_support_score: 0.58
+  mseq-fund3:
+    record_url: https://mseq.vc/pitch
+    fields:
+      name:
+        source_url: https://mseq.vc/about
+        support: “A successful $450 million Main Sequence Fund 3 raise” and “Fund 3 commenced investment in 2023.”
+      admin:
+        source_url: https://mseq.vc/about
+        support: The page describes Main Sequence as the investment firm founded by CSIRO and describes its Fund 3 raise and
+          investment activity.
+      status:
+        source_url: https://mseq.vc/about
+        support: “Fund 3 commenced investment in 2023 and continues to build its investment portfolio.”
+      amount:
+        source_url: https://mseq.vc/about
+        support: “A successful $450 million Main Sequence Fund 3 raise.”
+      deadline_label:
+        source_url: https://mseq.vc/pitch
+        support: The page invites founders to submit company and pitch-deck information through its current “Pitch to Main
+          Sequence” form.
+      target_stage:
+        source_url: https://mseq.vc/pitch
+        support: Main Sequence says it invests “in company foundation through Seed, Series A and Series B” and “in pre-seed
+          companies through to mature companies”; investments must have a connection to Australian publicly funded research.
+    audit_urls:
+    - https://mseq.vc/pitch
+    - https://mseq.vc/about
+    min_support_score: 0.62
+  nsw-nzmi:
+    record_url: https://business.gov.au/grants-and-programs/net-zero-manufacturing-initiative-low-carbon-product-manufacturing-nsw
+    fields:
+      name:
+        source_url: https://business.gov.au/grants-and-programs/net-zero-manufacturing-initiative-low-carbon-product-manufacturing-nsw
+        support: 'The page title identifies ''Net Zero Manufacturing Initiative: Low Carbon Product Manufacturing NSW''.'
+      admin:
+        source_url: https://business.gov.au/grants-and-programs/net-zero-manufacturing-initiative-low-carbon-product-manufacturing-nsw
+        support: The page is a NSW programme listing and supplies an environment.nsw.gov.au contact address.
+      status:
+        source_url: https://business.gov.au/grants-and-programs/net-zero-manufacturing-initiative-low-carbon-product-manufacturing-nsw
+        support: The page is marked 'Closed' and states that the grant is currently closed to applications.
+      amount:
+        source_url: https://business.gov.au/grants-and-programs/net-zero-manufacturing-initiative-low-carbon-product-manufacturing-nsw
+        support: The official amount field says 'Funding amounts vary.'
+      deadline_label:
+        source_url: https://business.gov.au/grants-and-programs/net-zero-manufacturing-initiative-low-carbon-product-manufacturing-nsw
+        support: The official status wording is 'This grant is currently closed to applications.'
+      target_stage:
+        source_url: https://business.gov.au/grants-and-programs/net-zero-manufacturing-initiative-low-carbon-product-manufacturing-nsw
+        support: The target audience is innovators and manufacturers looking to produce low carbon products at commercial
+          scale.
+    audit_urls:
+    - https://business.gov.au/grants-and-programs/net-zero-manufacturing-initiative-low-carbon-product-manufacturing-nsw
+    min_support_score: 0.62
+  act-energy-innovation-fund:
+    record_url: https://climatechoices.act.gov.au/policy-programs/energy-innovation-fund
+    fields:
+      name:
+        source_url: https://climatechoices.act.gov.au/policy-programs/energy-innovation-fund
+        support: The current primary page heading is "Energy Innovation Fund" and states that it was formerly known as the
+          Renewable Energy Innovation Fund (REIF).
+      admin:
+        source_url: https://climatechoices.act.gov.au/__data/assets/pdf_file/0004/2407936/energy-innovation-fund-guidelines-2025.pdf
+        support: The guidelines state that the Fund is administered by the ACT Government through the City and Environment
+          Directorate (CED).
+      status:
+        source_url: https://climatechoices.act.gov.au/policy-programs/energy-innovation-fund
+        support: 'The current primary page states: "While the Fund is typically open year-round, it is currently undergoing
+          an evaluation to identify opportunities to strengthen the program and outcomes for the ACT." No current application
+          date or form is presented on that page.'
+      amount:
+        source_url: https://climatechoices.act.gov.au/policy-programs/energy-innovation-fund/questions-and-answers-energy-innovation-fund
+        support: The Q&A gives per-grant ranges of $50,000–$1,000,000 for Stream 1, $20,000–$500,000 for Stream 2, and $30,000–$300,000
+          for Stream 3, excluding GST. The primary Fund page states that up to $17 million is provided over five years.
+      deadline_label:
+        source_url: https://climatechoices.act.gov.au/policy-programs/energy-innovation-fund
+        support: The Fund page says it is currently undergoing an evaluation; no reopening or assessment date is stated.
+      target_stage:
+        source_url: https://climatechoices.act.gov.au/__data/assets/pdf_file/0004/2407936/energy-innovation-fund-guidelines-2025.pdf
+        support: The guidelines state that the Fund may support early-stage and exploratory applied research, development
+          and deployment and emerging ventures; Stream 1 supports technology research, development and demonstrations, while
+          Stream 3 supports commercialisation and access to consumers.
+    audit_urls:
+    - https://climatechoices.act.gov.au/policy-programs/energy-innovation-fund
+    - https://climatechoices.act.gov.au/__data/assets/pdf_file/0004/2407936/energy-innovation-fund-guidelines-2025.pdf
+    - https://climatechoices.act.gov.au/policy-programs/energy-innovation-fund/questions-and-answers-energy-innovation-fund
+    min_support_score: 0.62
+  i2n-cleantech-accelerator:
+    record_url: https://newcastle.edu.au/engage/business-and-industry/integrated-innovation-network-i2n/programs/accelerators/i2n-cleantech-accelerator
+    fields:
+      name:
+        source_url: https://newcastle.edu.au/engage/business-and-industry/integrated-innovation-network-i2n/programs/accelerators/i2n-cleantech-accelerator
+        support: 'Page title: I2N Cleantech Accelerator.'
+      admin:
+        source_url: https://newcastle.edu.au/engage/business-and-industry/integrated-innovation-network-i2n/programs/accelerators/i2n-cleantech-accelerator
+        support: The page sits within the University of Newcastle's Integrated Innovation Network (I2N) programme pages.
+      status:
+        source_url: https://newcastle.edu.au/engage/business-and-industry/integrated-innovation-network-i2n/programs/accelerators/i2n-cleantech-accelerator
+        support: 'The official page states: Applications for 2026 I2N Accelerator have now closed.'
+      amount:
+        source_url: https://newcastle.edu.au/engage/business-and-industry/integrated-innovation-network-i2n/programs/accelerators/i2n-cleantech-accelerator
+        support: The page states that TRaCE's $1.7M Early-Stage Seed Fund backs clean-energy and recycling startups, while
+          describing I2N participants as having an option to apply; it does not state a per-participant accelerator award
+          amount.
+      deadline_label:
+        source_url: https://newcastle.edu.au/engage/business-and-industry/integrated-innovation-network-i2n/programs/accelerators/i2n-cleantech-accelerator
+        support: 'Important dates list: Applications close: Sunday 7 June 11:59PM.'
+      target_stage:
+        source_url: https://newcastle.edu.au/engage/business-and-industry/integrated-innovation-network-i2n/programs/accelerators/i2n-cleantech-accelerator
+        support: Eligibility specifies a Hunter or Central Coast headquartered pre-startup/startup, Australian registered
+          Pty Ltd companies seeking the accelerator phase, and companies at pre-Series A stage. The FAQ says the programme
+          supports founders from pre-startup through early-stage startup.
+      deadline:
+        source_url: https://newcastle.edu.au/engage/business-and-industry/integrated-innovation-network-i2n/programs/accelerators/i2n-cleantech-accelerator
+        support: 'Important dates list: Applications close: Sunday 7 June 11:59PM. The same page identifies this as the 2026
+          I2N Accelerator round.'
+    audit_urls:
+    - https://newcastle.edu.au/engage/business-and-industry/integrated-innovation-network-i2n/programs/accelerators/i2n-cleantech-accelerator
+    min_support_score: 0.62
+  clean-technology-innovation-grant:
+    record_url: https://www.nsw.gov.au/grants-and-funding/clean-technology-innovation-cti-grant
+    fields:
+      name:
+        source_url: https://www.nsw.gov.au/grants-and-funding/clean-technology-innovation-cti-grant
+        support: 'Page title: Clean Technology Innovation (CTI) Grant.'
+      admin:
+        source_url: https://www.nsw.gov.au/grants-and-funding/clean-technology-innovation-cti-grant
+        support: The program is administered by the Department of Climate Change, Energy, the Environment and Water.
+      status:
+        source_url: https://www.nsw.gov.au/grants-and-funding/clean-technology-innovation-cti-grant
+        support: 'Key information lists Status: Open.'
+      amount:
+        source_url: https://www.nsw.gov.au/grants-and-funding/clean-technology-innovation-cti-grant
+        support: Key information lists grant funding from $500,000 to $5,000,000; the programme page states up to 50% of total
+          eligible project costs.
+      deadline_label:
+        source_url: https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing
+        support: The initiative page states applications close on 8 September 2026 at 12:00 pm AEST.
+      target_stage:
+        source_url: https://www.nsw.gov.au/grants-and-funding/clean-technology-innovation-cti-grant
+        support: Eligible projects must have TRL 6-9 and CRI below 4; expected project outcome is to pilot lab-proven technology
+          and demonstrate commercial readiness.
+      deadline:
+        source_url: https://www.nsw.gov.au/grants-and-funding/clean-technology-innovation-cti-grant
+        support: 'Key information lists application close: 8 September 2026, 12:00 pm.'
+    audit_urls:
+    - https://www.nsw.gov.au/grants-and-funding/clean-technology-innovation-cti-grant
+    - https://energy.nsw.gov.au/business-and-industry/programs-grants-and-schemes/net-zero-manufacturing
+    min_support_score: 0.62
+  emerging-technology-commercialisation-fund:
+    record_url: https://chiefscientist.nsw.gov.au/industry-development/commercialisation-grants/emerging-technologies-commercialisation-fund
+    fields:
+      name:
+        source_url: https://chiefscientist.nsw.gov.au/industry-development/commercialisation-grants/emerging-technologies-commercialisation-fund
+        support: Page title and programme heading identify the Emerging Technology Commercialisation Fund.
+      admin:
+        source_url: https://chiefscientist.nsw.gov.au/__data/assets/pdf_file/0007/6010/ETCF-Grant-Guidelines-2026-FINAL_V2.pdf
+        support: The guidelines identify the NSW Government agency as the Office of the Chief Scientist & Engineer, Premier’s
+          Department.
+      status:
+        source_url: https://chiefscientist.nsw.gov.au/industry-development/commercialisation-grants/emerging-technologies-commercialisation-fund
+        support: 'The page states: ''The 2026 Round of the ETCF is now closed.'' Its important-dates table shows full applications
+          in July 2026, interviews in September 2026 if required, and successful applicants notified in October 2026.'
+      amount:
+        source_url: https://chiefscientist.nsw.gov.au/__data/assets/pdf_file/0007/6010/ETCF-Grant-Guidelines-2026-FINAL_V2.pdf
+        support: The guidelines state a funding pool of up to $7 million for grants between $500,000 and $2 million excluding
+          GST.
+      deadline_label:
+        source_url: https://chiefscientist.nsw.gov.au/industry-development/commercialisation-grants/emerging-technologies-commercialisation-fund
+        support: The official timetable gives preliminary opening on 6 March 2026, preliminary closing on 29 April 2026, invited
+          full applications in July 2026, possible interviews in September 2026 and notifications in October 2026.
+      target_stage:
+        source_url: https://chiefscientist.nsw.gov.au/industry-development/commercialisation-grants/emerging-technologies-commercialisation-fund
+        support: The programme focuses on innovations in TRL 3 to 7, from proof of concept toward demonstration in relevant
+          environments and early commercial deployment.
+      deadline:
+        source_url: https://chiefscientist.nsw.gov.au/industry-development/commercialisation-grants/emerging-technologies-commercialisation-fund
+        support: Important dates state preliminary applications closed at 10:00 am AEST on 29 April 2026.
+    audit_urls:
+    - https://chiefscientist.nsw.gov.au/industry-development/commercialisation-grants/emerging-technologies-commercialisation-fund
+    - https://chiefscientist.nsw.gov.au/__data/assets/pdf_file/0007/6010/ETCF-Grant-Guidelines-2026-FINAL_V2.pdf
+    min_support_score: 0.62
+  powering-australia-technology-fund:
+    record_url: https://cefc.com.au/where-we-invest/special-investment-programs/powering-australia-technology-fund
+    fields:
+      name:
+        source_url: https://cefc.com.au/where-we-invest/special-investment-programs/powering-australia-technology-fund
+        support: 'Page title: Powering Australia Technology Fund.'
+      admin:
+        source_url: https://cefc.com.au/where-we-invest/special-investment-programs/powering-australia-technology-fund
+        support: The official CEFC programme page describes the CEFC Investment Mandate and CEFC investment approach.
+      status:
+        source_url: https://cefc.com.au/where-we-invest/special-investment-programs/powering-australia-technology-fund
+        support: Investment decisions are made on a case-by-case basis. The first PATF Funds Program application round has
+          closed, while future rounds will be updated on the page.
+      amount:
+        source_url: https://cefc.com.au/where-we-invest/special-investment-programs/powering-australia-technology-fund
+        support: The CEFC Investment Mandate requires the Board to make available up to $500 million through PATF.
+      deadline_label:
+        source_url: https://cefc.com.au/where-we-invest/special-investment-programs/powering-australia-technology-fund
+        support: The page says investment decisions are made case by case and that future PATF Funds Program rounds will be
+          announced at the relevant time.
+      target_stage:
+        source_url: https://cefc.com.au/where-we-invest/special-investment-programs/powering-australia-technology-fund
+        support: Direct investments target Australian climate-tech businesses developing, commercialising and/or enabling
+          uptake of clean-energy technologies; indirect investments target eligible specialist funds.
+    audit_urls:
+    - https://cefc.com.au/where-we-invest/special-investment-programs/powering-australia-technology-fund
+    min_support_score: 0.62
+  battery-breakthrough-initiative:
+    record_url: https://arena.gov.au/funding/battery-breakthrough-initiative
+    fields:
+      name:
+        source_url: https://arena.gov.au/funding/battery-breakthrough-initiative
+        support: The page heading identifies the Battery Breakthrough Initiative.
+      admin:
+        source_url: https://arena.gov.au/funding/battery-breakthrough-initiative
+        support: ARENA hosts the programme page and directs prospective applicants to contact ARENA.
+      status:
+        source_url: https://arena.gov.au/funding/battery-breakthrough-initiative
+        support: ARENA states it is no longer accepting new applications, subject to further notice.
+      amount:
+        source_url: https://arena.gov.au/funding/battery-breakthrough-initiative
+        support: ARENA states that the 2026 Federal Budget reduced BBI funding to $142.32 million.
+      deadline_label:
+        source_url: https://arena.gov.au/funding/battery-breakthrough-initiative
+        support: ARENA's current status update provides the applicable public-access condition.
+      target_stage:
+        source_url: https://arena.gov.au/funding/battery-breakthrough-initiative
+        support: ARENA identifies battery manufacturing capability and commercialisation of battery manufacturing processes
+          and technologies as programme outcomes.
+    audit_urls:
+    - https://arena.gov.au/funding/battery-breakthrough-initiative
+    min_support_score: 0.62
+  first-nations-clean-energy-projects-pilot-grants:
+    record_url: https://business.gov.au/grants-and-programs/first-nations-clean-energy-project-grants
+    fields:
+      name:
+        source_url: https://business.gov.au/grants-and-programs/first-nations-clean-energy-project-grants
+        support: The page title identifies First Nations Clean Energy Projects – Pilot Grants.
+      admin:
+        source_url: https://business.gov.au/grants-and-programs/first-nations-clean-energy-project-grants
+        support: The page says the program was announced as part of implementation of the Government's First Nations Clean
+          Energy Strategy.
+      status:
+        source_url: https://business.gov.au/grants-and-programs/first-nations-clean-energy-project-grants
+        support: The programme page is marked 'Open'.
+      amount:
+        source_url: https://business.gov.au/grants-and-programs/first-nations-clean-energy-project-grants
+        support: The page states grants from $1 million to $10 million, up to 100% of eligible expenditure, with total programme
+          funding up to $10 million.
+      deadline_label:
+        source_url: https://business.gov.au/grants-and-programs/first-nations-clean-energy-project-grants
+        support: The official listing says 'Closes in 27 days' and provides the fixed date and time.
+      target_stage:
+        source_url: https://business.gov.au/grants-and-programs/first-nations-clean-energy-project-grants
+        support: Projects must progress a First Nations clean-energy project beyond feasibility towards financial close and
+          have at least $1 million in eligible expenditure.
+      deadline:
+        source_url: https://business.gov.au/grants-and-programs/first-nations-clean-energy-project-grants
+        support: The displayed closing date is Monday 28 September 2026 at 5:00 pm AEST.
+    audit_urls:
+    - https://business.gov.au/grants-and-programs/first-nations-clean-energy-project-grants
+    min_support_score: 0.62
+  energy-innovation-fund:
+    record_url: https://energy.vic.gov.au/grants/energy-innovation-fund
+    fields:
+      name:
+        source_url: https://energy.vic.gov.au/grants/energy-innovation-fund
+        support: 'Official page title: Energy Innovation Fund.'
+      admin:
+        source_url: https://energy.vic.gov.au/grants/energy-innovation-fund
+        support: The official fund contact is the DEECA Energy Innovation Fund team at energy.innovation@deeca.vic.gov.au.
+      status:
+        source_url: https://energy.vic.gov.au/grants/energy-innovation-fund
+        support: The page labels the fund Closed and states Round 3 applications closed at 1:00 pm on 12 December 2025.
+      amount:
+        source_url: https://energy.vic.gov.au/grants/energy-innovation-fund
+        support: Round 3 had a total funding pool of $10 million, with grants capped at up to $2 million per submission; exceptions
+          could be considered for exceptional value.
+      deadline_label:
+        source_url: https://energy.vic.gov.au/grants/energy-innovation-fund
+        support: 'The page states: Applications for Round 3 closed at 1pm, 12 December 2025.'
+      target_stage:
+        source_url: https://energy.vic.gov.au/grants/energy-innovation-fund
+        support: The fund supports commercialisation of innovative, emerging renewable-energy technologies; Round 3 objectives
+          include development, demonstration and scaling of emerging technologies.
+      deadline:
+        source_url: https://energy.vic.gov.au/grants/energy-innovation-fund
+        support: Round 3 applications closed on 12 December 2025.
+    audit_urls:
+    - https://energy.vic.gov.au/grants/energy-innovation-fund
+    min_support_score: 0.62
+  cleaner-fuels-program:
+    record_url: https://arena.gov.au/funding/cleaner-fuels-program
+    fields:
+      name:
+        source_url: https://arena.gov.au/funding/cleaner-fuels-program
+        support: The page heading identifies the Cleaner Fuels Program.
+      admin:
+        source_url: https://arena.gov.au/funding/cleaner-fuels-program
+        support: ARENA states that it was named delivery agency for the program in May 2026.
+      status:
+        source_url: https://arena.gov.au/funding/cleaner-fuels-program
+        support: ARENA states it is developing programme guidelines, including eligibility and merit criteria, and is registering
+          stakeholder interest.
+      amount:
+        source_url: https://arena.gov.au/funding
+        support: The supplied live-search evidence says ARENA's Funding Opportunities catalogue states the program will provide
+          up to $1.1 billion in grant funding.
+      deadline_label:
+        source_url: https://arena.gov.au/funding/cleaner-fuels-program
+        support: ARENA invites stakeholders to register interest while it develops the guidelines.
+      target_stage:
+        source_url: https://arena.gov.au/funding/cleaner-fuels-program
+        support: ARENA says support will target LCLF projects advanced in development, approaching FID and targeting production
+          in the near future.
+    audit_urls:
+    - https://arena.gov.au/funding/cleaner-fuels-program
+    - https://arena.gov.au/funding
+    min_support_score: 0.62

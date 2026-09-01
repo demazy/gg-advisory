@@ -20,7 +20,7 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 import fitz  # PyMuPDF
 
-PIPELINE_VERSION = "5.1-batched-source-audit"
+PIPELINE_VERSION = "6.0-zero-api-official-source"
 
 
 def clean(v: Any) -> str:

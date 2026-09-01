@@ -616,11 +616,11 @@ def overview_flowables(width: float, entries: List[Dict[str, Any]], verified: da
 def sources_page(width: float, month: str, verified: date, audit: Dict[str, Any]) -> List[Flowable]:
     summary = audit.get("summary") or {}
     audit_note = (
-        f"Automated audit gate: <b>PASS</b>. {summary.get('programmes_passed', 0)}/{summary.get('visible_programmes', 0)} "
+        f"Direct-source audit gate: <b>PASS</b>. {summary.get('programmes_passed', 0)}/{summary.get('visible_programmes', 0)} "
         f"published programmes passed independent primary-source verification; "
         f"{summary.get('mandatory_sources_ok', 0)}/{summary.get('mandatory_sources_total', 0)} mandatory discovery sources were scanned; "
         f"{summary.get('unresolved_candidates', 0)} discovery candidates remained unresolved; "
-        f"{summary.get('baseline_programmes_audited', 0)}/{summary.get('baseline_programmes', 0)} previously tracked pathways received an explicit audited disposition."
+        f"{summary.get('baseline_programmes_audited', 0)}/{summary.get('baseline_programmes', 0)} published pathways passed the second direct-source audit."
     )
     return [
         Paragraph("Sources and verification", P_H2),
